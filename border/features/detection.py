@@ -21,15 +21,14 @@ def work(border_boxes: str, border_pages: str) -> str:
     boxes = load_boundingboxes(border_boxes)
     _, border = load_pageborders(border_pages)
 
-    border = most_boundingbox(boxes)
+    border = most_boundingbox(border)
 
     def boxprovider(page: int):  # pylint:disable=unused-argument
         # TODO: Differentiate between left and right side
         return border
 
     hits = hit_the_box(boxes, boxprovider)
-
-    dumped = dump(hits)
+    dumped = dump_hits(border, hits)
     return dumped
 
 
@@ -54,6 +53,19 @@ def most_boundingbox(boundingboxes: List[Tuple[float]]) -> Tuple[float]:
 
     result = (x0, y0, x1, y1)
     return result
+
+
+def dump_hits(border, content):
+    # page, index, current
+    result = [
+        '%d %d %.2f %.2f %.2f %.2f' % (page, index, *current)
+        for page, index, current in content
+    ]
+    raw = {
+        'border': '%.2f %.2f %.2f %.2f' % border,
+        'hits': result,
+    }
+    return dump(raw)
 
 
 def name():
