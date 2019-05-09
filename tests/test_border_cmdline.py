@@ -7,9 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-from sys import argv
-
 from utila import SUCCESS
+from utila import file_read
 
 from border.command import PROCESS_NAME
 from border.command import main
@@ -17,9 +16,13 @@ from tests import RAWMAKER_RESULT
 
 
 def test_main(testdir, monkeypatch):
-    command = ['-i', RAWMAKER_RESULT, '-o', str(testdir), '-V']
+    """Run decider with rawmaker_result to get hits output"""
+    outputpath = str(testdir)
+    command = ['-i', RAWMAKER_RESULT, '-o', outputpath, '-V']
     result = None
     with monkeypatch.context() as context:
         context.setattr('sys.argv', [PROCESS_NAME] + command)
         result = main()
     assert result == SUCCESS, result
+    dumped = file_read(outputpath + '/hitthebox__hits.yaml')
+    assert len(dumped) > 100  # result contains some content
