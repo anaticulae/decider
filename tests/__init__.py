@@ -6,3 +6,13 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
+from os.path import exists
+from os.path import join
+
+from decider import ROOT
+
+TEST_DATA = join(ROOT, 'tests/data')
+assert exists(TEST_DATA), TEST_DATA
+
+RAWMAKER_RESULT = join(TEST_DATA, 'rawmaker')
+assert exists(RAWMAKER_RESULT), RAWMAKER_RESULT
