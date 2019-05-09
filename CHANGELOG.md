@@ -2,5 +2,23 @@
 
 Every noteable change is logged here.
 
+## v0.0.1
+
+### Feature
+
+* dump hits to yaml to display the in `feedback` (101f89f2518f)
+* filter pages without border - ignore None entries (6f96e6b4a267)
+* extend interface - load page border form source (c28d125b4fa4)
+* add border judger to verify that object violates page border (7d385322f9cd)
+* add mechanism simply add data flow from source to dest (5778a4070bcd)
+* add basic `decider_border` package (12bc8ceac960)
+
+### Fix
+
+* determine hits for given page, not for whole feature list (ddd49b972337)
+* use test data with correct order of x0,y0,x1,y1 (4a792c2a260d)
+* add missing reference to test data (6731b18f1ac1)
+* run border when running __main__ manually (62e795349565)
+
 ## v0.0.0 Initial release
 
