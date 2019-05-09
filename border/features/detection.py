@@ -34,11 +34,13 @@ def work(border_boxes: str, border_pages: str) -> str:
 
 def hit_the_box(boxes, border: callable):
     failures = []
+    # x0 y0 x1 y1
     for page, box in enumerate(boxes):
         border_box = border(page)
-        if box[0] < border_box[0] or box[1] < border_box[1] or\
-           box[2] > border_box[2] or box[3] > border_box[3]:
-            failures.append(page, box)
+        for index, current in box:
+            if current[0] < border_box[0] or current[1] < border_box[1] or\
+               current[2] > border_box[2] or current[3] > border_box[3]:
+                failures.append((page, index, current))
     return failures
 
 

@@ -22,5 +22,4 @@ def test_main(testdir, monkeypatch):
     with monkeypatch.context() as context:
         context.setattr('sys.argv', [PROCESS_NAME] + command)
         result = main()
-        assert 0
     assert result == SUCCESS, result
