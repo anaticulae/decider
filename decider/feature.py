@@ -88,7 +88,8 @@ def process(
         try:
             hook = step[HOOK]
             result = hook()
-
+            if isinstance(result, str):
+                result = [result]
             for path, content in zip(step[OUTPUT], result):
                 if verbose:
                     logging('write: %s' % path)
