@@ -46,10 +46,11 @@ def hit_the_box(boxes, border: callable):
 def most_boundingbox(boundingboxes: List[Tuple[float]]) -> Tuple[float]:
     # TODO: Think about right and left, maybe search for the top 2 borders?
 
-    x0 = median([item[0] for item in boundingboxes])
-    y0 = median([item[1] for item in boundingboxes])
-    x1 = median([item[2] for item in boundingboxes])
-    y1 = median([item[3] for item in boundingboxes])
+    # Filter None entries
+    x0 = median([item[0] for item in boundingboxes if item[0]])
+    y0 = median([item[1] for item in boundingboxes if item[1]])
+    x1 = median([item[2] for item in boundingboxes if item[2]])
+    y1 = median([item[3] for item in boundingboxes if item[3]])
 
     result = (x0, y0, x1, y1)
     return result
