@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.0.2
+
+### Fix
+
+* support single return value (f76cc45016a6)
+
 ## v0.0.1
 
 ### Feature
