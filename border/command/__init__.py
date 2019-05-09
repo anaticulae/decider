@@ -33,7 +33,10 @@ WORKPLAN = [
     create_step(
         FEATURE_NAME,
         work,
-        [('rawmaker', 'border_boxes')],
+        [
+            ('rawmaker', 'border_boxes'),
+            ('rawmaker', 'border_pages'),
+        ],
         ('hits',),
     )
 ]

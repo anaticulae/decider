@@ -12,12 +12,14 @@ from typing import List
 from typing import Tuple
 
 from serializeraw import load_boundingboxes
+from serializeraw import load_pageborders
 from utila import Flag
 from yaml import dump
 
 
-def work(path: str) -> str:
-    boxes = load_boundingboxes(path)
+def work(border_boxes: str, border_pages: str) -> str:
+    boxes = load_boundingboxes(border_boxes)
+    _, border = load_pageborders(border_pages)
 
     border = most_boundingbox(boxes)
 
