@@ -29,6 +29,5 @@ def test_main(testdir, monkeypatch):
         monkeypatch=monkeypatch,
         success=True,
     )
-
-    dumped = file_read(join(outputpath, '/hitthebox__hits.yaml'))
+    dumped = file_read(join(outputpath, 'hitthebox__hits.yaml'))
     assert len(dumped) > 100  # result contains some content
