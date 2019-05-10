@@ -7,8 +7,10 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-from utila import SUCCESS
+from os.path import join
+
 from utila import file_read
+from utila import run_command
 
 from border.command import PROCESS_NAME
 from border.command import main
@@ -19,10 +21,14 @@ def test_main(testdir, monkeypatch):
     """Run decider with rawmaker_result to get hits output"""
     outputpath = str(testdir)
     command = ['-i', RAWMAKER_RESULT, '-o', outputpath, '-V']
-    result = None
-    with monkeypatch.context() as context:
-        context.setattr('sys.argv', [PROCESS_NAME] + command)
-        result = main()
-    assert result == SUCCESS, result
-    dumped = file_read(outputpath + '/hitthebox__hits.yaml')
+
+    run_command(
+        command,
+        process=PROCESS_NAME,
+        main=main,
+        monkeypatch=monkeypatch,
+        success=True,
+    )
+
+    dumped = file_read(join(outputpath, '/hitthebox__hits.yaml'))
     assert len(dumped) > 100  # result contains some content
