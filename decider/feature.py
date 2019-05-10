@@ -25,8 +25,10 @@ from utila import logging
 from utila import logging_error
 from utila import logging_stacktrace
 from utila import parse
-from utila import saveme
 from utila import sources
+
+# TODO: Remove after utila upgrade
+from decider.utils import saveme
 
 NAME = 'name'
 INPUT = 'input'
@@ -42,6 +44,7 @@ HOOK = 'hook'
 #     )
 
 
+@saveme(systemexit=True)
 def featurepack(
         workplan,
         feature_path: str,

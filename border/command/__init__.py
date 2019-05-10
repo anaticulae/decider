@@ -44,12 +44,11 @@ FEATURE_PATH = join(ROOT, 'border/features')
 
 
 def main():
-    completed = featurepack(
-        WORKPLAN,
-        FEATURE_PATH,
-        'border.features',
-        NAME,
-        DESCRIPTION,
-        __version__,
+    featurepack(
+        workplan=WORKPLAN,
+        feature_path=FEATURE_PATH,
+        feature_package='border.features',
+        name=NAME,
+        description=DESCRIPTION,
+        version=__version__,
     )
-    return completed
