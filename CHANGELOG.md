@@ -2,6 +2,17 @@
 
 Every noteable change is logged here.
 
+## v0.1.2
+
+### Feature
+
+* use new saveme-wrapper form utila (53abf71f6ff6)
+
+### Fix
+
+* fixed crashed version id (3c31763bd41a)
+* remove slash error introduces while refactoring (f2ad074ecdc2)
+
 ## v0.0.2
 
 ### Fix
