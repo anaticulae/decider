@@ -12,9 +12,9 @@ from typing import List
 from typing import Tuple
 
 from serializeraw import load_boundingboxes
+from serializeraw import dump_hits
 from serializeraw import load_pageborders
 from utila import Flag
-from yaml import dump
 
 
 def work(border_boxes: str, border_pages: str) -> str:
@@ -55,19 +55,6 @@ def most_boundingbox(boundingboxes: List[Tuple[float]]) -> Tuple[float]:
 
     result = (x0, y0, x1, y1)
     return result
-
-
-def dump_hits(border, content):
-    # page, index, current
-    result = [
-        '%d %d %.2f %.2f %.2f %.2f' % (page, index, *current)
-        for page, index, current in content
-    ]
-    raw = {
-        'border': '%.2f %.2f %.2f %.2f' % border,
-        'hits': result,
-    }
-    return dump(raw)
 
 
 def name():
