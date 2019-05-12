@@ -70,8 +70,8 @@ if __name__ == "__main__":
             'decider.command',
             'fonts',
             'fonts.command',
+            'fonts.config',
             'fonts.features',
-            'fonts.features.config',
         ],
         entry_points={
             'console_scripts': [
