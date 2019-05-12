@@ -68,11 +68,16 @@ if __name__ == "__main__":
             'border.features',
             'decider',
             'decider.command',
+            'fonts',
+            'fonts.command',
+            'fonts.features',
+            'fonts.features.config',
         ],
         entry_points={
             'console_scripts': [
                 'decider = decider.command:main',
                 'decider_border = border.command:main',
+                'decider_fonts = fonts.command:main',
             ],
         },
     )

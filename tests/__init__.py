@@ -16,3 +16,6 @@ assert exists(TEST_DATA), TEST_DATA
 
 RAWMAKER_RESULT = join(TEST_DATA, 'rawmaker')
 assert exists(RAWMAKER_RESULT), RAWMAKER_RESULT
+
+DECIDER_FONTS = join(TEST_DATA, 'decider_fonts')
+assert exists(DECIDER_FONTS), DECIDER_FONTS
