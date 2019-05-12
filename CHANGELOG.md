@@ -2,6 +2,18 @@
 
 Every noteable change is logged here.
 
+## v0.1.3
+
+### Feature
+
+* include process name to result filename (7d8754f9e56e)
+* add feature to detect ugly fonts and warn user of using it (3b59e46dd841)
+
+### Fix
+
+* add missing __init__ into fonts package (4c0f237fdf01)
+* use correct PROCESS_NAME and remove unused code (f1b8d359d0d6)
+
 ## v0.1.2
 
 ### Feature
