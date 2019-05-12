@@ -71,7 +71,13 @@ def featurepack(
         parser.print_usage()
         return FAILURE
 
-    workplan = read_workplan(workplan, inputpath, outputpath, verify=True)
+    workplan = read_workplan(
+        workplan,
+        inputpath,
+        outputpath,
+        process=name,
+        verify=True,
+    )
 
     # Ensure to have output folder
     makedirs(outputpath, exist_ok=True)
@@ -168,7 +174,13 @@ def create_step(
     return step
 
 
-def read_workplan(plan, inspace, outspace=None, verify: bool = False):
+def read_workplan(
+        plan,
+        inspace,
+        outspace=None,
+        process=None,
+        verify: bool = False,
+):
     outspace = outspace if outspace else inspace
 
     result = []
@@ -180,7 +192,7 @@ def read_workplan(plan, inspace, outspace=None, verify: bool = False):
         inputs = ['%s__%s.yaml' % item for item in inputs]
         inputs = [join(inspace, item) for item in inputs]
 
-        outputs = ['%s__%s.yaml' % (name, item) for item in outputs]
+        outputs = ['%s_%s__%s.yaml' % (process, name, item) for item in outputs]
         outputs = [join(outspace, item) for item in outputs]
 
         verify_interface(inputs, outputs, caller)
