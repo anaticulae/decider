@@ -12,6 +12,7 @@ from os.path import join
 from utila import file_read
 from utila import run_command
 
+from border.command import FEATURE_NAME
 from border.command import PROCESS_NAME
 from border.command import main
 from tests import RAWMAKER_RESULT
@@ -29,5 +30,6 @@ def test_main(testdir, monkeypatch):
         monkeypatch=monkeypatch,
         success=True,
     )
-    dumped = file_read(join(outputpath, 'hitthebox__hits.yaml'))
+    outputfile = '%s_%s__hits.yaml' % (PROCESS_NAME, FEATURE_NAME)
+    dumped = file_read(join(outputpath, outputfile))
     assert len(dumped) > 100  # result contains some content

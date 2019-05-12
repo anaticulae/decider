@@ -17,10 +17,6 @@ from utila import sources
 from border.features.detection import work
 from decider import ROOT
 from decider import __version__
-from decider.feature import HOOK
-from decider.feature import INPUT
-from decider.feature import NAME
-from decider.feature import OUTPUT
 from decider.feature import create_step
 from decider.feature import featurepack
 
@@ -48,7 +44,7 @@ def main():
         workplan=WORKPLAN,
         feature_path=FEATURE_PATH,
         feature_package='border.features',
-        name=NAME,
+        name=PROCESS_NAME,
         description=DESCRIPTION,
         version=__version__,
     )
