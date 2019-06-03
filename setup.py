@@ -32,13 +32,24 @@ with open(join(ROOT, "requirements.txt"), mode='rt', encoding=UTF8) as fp:
 
 
 def datafiles():
-    return [('.', [
-        'BUGS.md',
-        'CHANGELOG.md',
-        'README.md',
-        'TODO.md',
-        'requirements.txt',
-    ])]
+    return [
+        (
+            '.',
+            [
+                'BUGS.md',
+                'CHANGELOG.md',
+                'README.md',
+                'TODO.md',
+                'requirements.txt',
+            ],
+        ),
+        (
+            'fonts/config',
+            [
+                'fonts/config/decider_fonts__ugly_fonts.yaml',
+            ],
+        ),
+    ]
 
 
 if __name__ == "__main__":
