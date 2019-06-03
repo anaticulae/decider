@@ -41,8 +41,6 @@ FEATURE_PATH = join(ROOT, 'fonts/features')
 
 
 def main():
-    print("MAIN")
-    print(WORKPLAN)
     featurepack(
         workplan=WORKPLAN,
         feature_path=FEATURE_PATH,

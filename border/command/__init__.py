@@ -23,7 +23,7 @@ from decider.feature import featurepack
 PROCESS_NAME = 'decider_border'
 
 FEATURE_NAME = 'hitthebox'
-DESCRIPTION = 'determine overlapping cotent'
+DESCRIPTION = 'determine overlapping content'
 
 WORKPLAN = [
     create_step(
