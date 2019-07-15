@@ -7,10 +7,10 @@
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
 from utila import SUCCESS
-from utila import create_parser
 from utila import parse
 from utila import saveme
 from utila import sources
+from utila.cmdline import create_parser
 
 from decider import __version__
 
@@ -26,6 +26,6 @@ def main():
         inputparameter=True,
     )
     args = parse(parser)
-    inputpath, output = sources(args)
+    inputpath, output, _ = sources(args)
 
     return SUCCESS

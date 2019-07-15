@@ -9,7 +9,6 @@
 from os.path import join
 
 from utila import SUCCESS
-from utila import create_parser
 from utila import parse
 from utila import saveme
 from utila import sources

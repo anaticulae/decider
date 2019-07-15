@@ -19,13 +19,13 @@ from typing import Tuple
 
 from utila import FAILURE
 from utila import SUCCESS
-from utila import create_parser
 from utila import file_create
 from utila import logging
 from utila import logging_error
 from utila import logging_stacktrace
 from utila import parse
 from utila import sources
+from utila.cmdline import create_parser
 
 # TODO: Remove after utila upgrade
 from decider.utils import saveme
@@ -66,7 +66,7 @@ def featurepack(
     args = parse(parser)
 
     # evaluate the verbose flag
-    inputpath, outputpath, verbose = sources(args, verbose=True)
+    inputpath, outputpath, _, verbose = sources(args, verbose=True)
     if not inputpath or not outputpath:
         parser.print_usage()
         return FAILURE

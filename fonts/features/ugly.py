@@ -10,8 +10,8 @@
 
 from typing import Set
 
-from serializeraw import load_fonts
-from serializeraw import load_fontstore
+from serializeraw import load_font_content
+from serializeraw import load_font_header
 from utila import Flag
 from utila import file_read
 from yaml import dump
@@ -21,8 +21,8 @@ def work(uglypath: str, header: str, content: str) -> str:
     """Determine ugly fonts based on a conifguration file `uglypath` which
     contains the font types which are `known` as ugly"""
     uglyfonts = load_ugly(uglypath)
-    header = load_fontstore(header)
-    content = load_fonts(content)
+    header = load_font_header(header)
+    content = load_font_content(content)
 
     result = ugly(header, uglyfonts)
     dumped = dump(result)
