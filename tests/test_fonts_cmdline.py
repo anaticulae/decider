@@ -13,8 +13,8 @@ from utila import copy_content
 from utila import file_read
 from utila import run_command
 
-from fonts.command import PROCESS_NAME
-from fonts.command import main
+from fonts.cli import PROCESS_NAME
+from fonts.cli import main
 from tests import DECIDER_FONTS
 from tests import RAWMAKER_RESULT
 
