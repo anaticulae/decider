@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.1.5
+
+### Documentation
+
+* extend readme with basic information (5b02bd341886)
+
 ## v0.1.4
 
 ## v0.1.3
