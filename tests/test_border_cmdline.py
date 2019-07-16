@@ -21,7 +21,7 @@ from tests import RAWMAKER_RESULT
 def test_main(testdir, monkeypatch):
     """Run decider with rawmaker_result to get hits output"""
     outputpath = str(testdir)
-    command = ['-i', RAWMAKER_RESULT, '-o', outputpath, '-V']
+    command = ['-i', RAWMAKER_RESULT, '-o', outputpath, '-V', '--hitthebox']
 
     run_command(
         command,
@@ -30,6 +30,6 @@ def test_main(testdir, monkeypatch):
         monkeypatch=monkeypatch,
         success=True,
     )
-    outputfile = '%s_%s__hits.yaml' % (PROCESS_NAME, FEATURE_NAME)
+    outputfile = '%s__%s_hits.yaml' % (PROCESS_NAME, FEATURE_NAME)
     dumped = file_read(join(outputpath, outputfile))
     assert len(dumped) > 100  # result contains some content

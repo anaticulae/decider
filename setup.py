@@ -75,20 +75,17 @@ if __name__ == "__main__":
         ],
         packages=[
             'border',
-            'border.command',
             'border.features',
             'decider',
-            'decider.command',
             'fonts',
-            'fonts.command',
             'fonts.config',
             'fonts.features',
         ],
         entry_points={
             'console_scripts': [
-                'decider = decider.command:main',
-                'decider_border = border.command:main',
-                'decider_fonts = fonts.command:main',
+                'decider = decider.cli:main',
+                'decider_border = border.cli:main',
+                'decider_fonts = fonts.cli:main',
             ],
         },
     )

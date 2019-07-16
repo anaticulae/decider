@@ -59,7 +59,7 @@ def load_ugly(path: str):
 
 
 def name():
-    return 'uglyfonts'
+    return 'ugly'
 
 
 def commandline():

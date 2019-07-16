@@ -11,8 +11,8 @@ from statistics import median
 from typing import List
 from typing import Tuple
 
-from serializeraw import load_boundingboxes
 from serializeraw import dump_hits
+from serializeraw import load_boundingboxes
 from serializeraw import load_pageborders
 from utila import Flag
 

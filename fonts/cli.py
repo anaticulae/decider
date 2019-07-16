@@ -6,44 +6,43 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
-from os.path import join
 
-from utila import SUCCESS
-from utila import parse
-from utila import saveme
-from utila import sources
+from utila import ResultFile as RF
+from utila import create_step as step
+from utila import featurepack
 
 from decider import ROOT
 from decider import __version__
-from decider.feature import create_step
-from decider.feature import featurepack
-from fonts.features.ugly import work
 
+PROCESS_NAME = 'decider_border'
+
+FEATURE_NAME = 'hitthebox'
+DESCRIPTION = 'determine overlapping content'
 PROCESS_NAME = 'decider_fonts'
 
-FEATURE_NAME = 'iamugly'
+FEATURE_NAME = 'ugly'
 DESCRIPTION = 'determine ugly fonts'
 
+ResultFile = lambda producer, name: RF(producer=producer, name=name)
+
 WORKPLAN = [
-    create_step(
+    step(
         FEATURE_NAME,
-        work,
         [
-            ('decider_fonts', 'ugly_fonts'),
-            ('rawmaker', 'fonts_header'),
-            ('rawmaker', 'fonts_content'),
+            ResultFile('decider_fonts', 'ugly_fonts'),
+            ResultFile('rawmaker', 'fonts_header'),
+            ResultFile('rawmaker', 'fonts_content'),
         ],
         ('ugly',),
     )
 ]
-FEATURE_PATH = join(ROOT, 'fonts/features')
 
 
 def main():
     featurepack(
         workplan=WORKPLAN,
-        feature_path=FEATURE_PATH,
-        feature_package='fonts.features',
+        root=ROOT,
+        featurepackage='fonts.features',
         name=PROCESS_NAME,
         description=DESCRIPTION,
         version=__version__,
