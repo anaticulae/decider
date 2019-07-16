@@ -6,6 +6,6 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
-from border.command import main
+from border.cli import main
 
 main()

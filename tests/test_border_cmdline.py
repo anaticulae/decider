@@ -12,9 +12,9 @@ from os.path import join
 from utila import file_read
 from utila import run_command
 
-from border.command import FEATURE_NAME
-from border.command import PROCESS_NAME
-from border.command import main
+from border.cli import FEATURE_NAME
+from border.cli import PROCESS_NAME
+from border.cli import main
 from tests import RAWMAKER_RESULT
 
 
