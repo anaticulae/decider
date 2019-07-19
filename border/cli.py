@@ -25,7 +25,7 @@ WORKPLAN = [
     step(
         FEATURE_NAME,
         [
-            ResultFile('rawmaker', 'border_boxes'),
+            ResultFile('rawmaker', 'border_boundingboxes'),
             ResultFile('rawmaker', 'border_pages'),
         ],
         ('hits',),
