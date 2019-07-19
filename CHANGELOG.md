@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.1.7
+
+### Fix
+
+* fix input to new rawmaker naming (7651d41e4317)
+
 ## v0.1.6
 
 ## v0.1.5
