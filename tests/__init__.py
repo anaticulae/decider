@@ -11,7 +11,7 @@ from os.path import join
 
 from decider import ROOT
 
-TEST_DATA = join(ROOT, 'tests/data')
+TEST_DATA = join(ROOT, 'tests/resources')
 assert exists(TEST_DATA), TEST_DATA
 
 RAWMAKER_RESULT = join(TEST_DATA, 'rawmaker')
