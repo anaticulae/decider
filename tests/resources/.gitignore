@@ -1,0 +1,3 @@
+# ignore generated test data , use -f if you want to add one
+*.pdf
+
