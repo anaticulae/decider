@@ -15,20 +15,28 @@ from serializeraw import dump_hits
 from serializeraw import load_boundingboxes
 from serializeraw import load_pageborders
 from utila import Flag
+from utila import call
+from utila import debug
+from utila import info
 
 
 def work(border_boxes: str, border_pages: str) -> str:
+    call('work: border detection')
     boxes = load_boundingboxes(border_boxes)
     _, border = load_pageborders(border_pages)
 
     border = most_boundingbox(border)
+
+    info('%s' % str(border))
 
     def boxprovider(page: int):  # pylint:disable=unused-argument
         # TODO: Differentiate between left and right side
         return border
 
     hits = hit_the_box(boxes, boxprovider)
+    debug(hits)
     dumped = dump_hits(border, hits)
+
     return dumped
 
 
@@ -37,14 +45,19 @@ def hit_the_box(boxes, border: callable):
     # x0 y0 x1 y1
     for page, box in enumerate(boxes):
         border_box = border(page)
-        for index, current in box:
-            if current[0] < border_box[0] or current[1] < border_box[1] or\
-               current[2] > border_box[2] or current[3] > border_box[3]:
-                failures.append((page, index, current))
+        for index, bounding in box:
+            # BOUNDING:     'left, top,  right, bottom'
+            # BORDER:       'left  right top    bottom'
+            if bounding[0] < border_box[0] or\
+               bounding[2] > border_box[1] or\
+               bounding[1] < border_box[2] or\
+               bounding[3] > border_box[3]:
+                failures.append((page, index, bounding))
     return failures
 
 
 def most_boundingbox(boundingboxes: List[Tuple[float]]) -> Tuple[float]:
+    """Extract bounding box of most common occurence for every side"""
     # TODO: Think about right and left, maybe search for the top 2 borders?
 
     # Filter None entries

@@ -19,7 +19,7 @@ from border.cli import main
 from tests.fixtures import rawmaker
 
 
-def test_main(testdir, monkeypatch, rawmaker):  # # pylint:disable=W0621
+def test_cli_decider_border(testdir, monkeypatch, rawmaker):  # # pylint:disable=W0621
     """Run decider with rawmaker_result to get hits output"""
     root = str(testdir)
     command = '-i %s -o %s -V --hitthebox' % (rawmaker, root)
