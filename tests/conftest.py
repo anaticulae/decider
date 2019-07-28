@@ -16,7 +16,7 @@ from border.cli import PROCESS_NAME as BORDER_PROCESS_NAME
 from decider import PACKAGE
 from decider import ROOT
 from fonts.cli import PROCESS_NAME as FONTS_PROCESS_NAME
-from tests import TEST_DATA
+from tests.resources import TEST_DATA
 
 
 # TODO: MOVE TO UTILA->TEST

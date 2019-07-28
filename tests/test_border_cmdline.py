@@ -15,13 +15,14 @@ from utila import run_command
 from border.cli import FEATURE_NAME
 from border.cli import PROCESS_NAME
 from border.cli import main
-from tests import RAWMAKER_RESULT
+# pylint:disable=W0611
+from tests.fixtures import rawmaker
 
 
-def test_main(testdir, monkeypatch):
+def test_main(testdir, monkeypatch, rawmaker):  # # pylint:disable=W0621
     """Run decider with rawmaker_result to get hits output"""
-    outputpath = str(testdir)
-    command = ['-i', RAWMAKER_RESULT, '-o', outputpath, '-V', '--hitthebox']
+    root = str(testdir)
+    command = '-i %s -o %s -V --hitthebox' % (rawmaker, root)
 
     run_command(
         command,
@@ -30,6 +31,9 @@ def test_main(testdir, monkeypatch):
         monkeypatch=monkeypatch,
         success=True,
     )
+
     outputfile = '%s__%s_hits.yaml' % (PROCESS_NAME, FEATURE_NAME)
-    dumped = file_read(join(outputpath, outputfile))
+    outputfile = join(root, outputfile)
+
+    dumped = file_read(outputfile)
     assert len(dumped) > 100  # result contains some content

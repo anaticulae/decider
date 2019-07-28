@@ -15,16 +15,18 @@ from utila import run_command
 
 from fonts.cli import PROCESS_NAME
 from fonts.cli import main
-from tests import DECIDER_FONTS
-from tests import RAWMAKER_RESULT
+# # pylint:disable=W0611
+from tests.fixtures import rawmaker
+from tests.resources import DECIDER_FONTS
 
 
-def test_main_fonts(testdir, monkeypatch):
+def test_main_fonts(testdir, monkeypatch, rawmaker):  ## pylint:disable=W0621
     """Run decider with rawmaker_result to get hits output"""
 
     workspace = str(testdir)
+    # copy ugly font config
     copy_content(DECIDER_FONTS, workspace)
-    copy_content(RAWMAKER_RESULT, workspace)
+    copy_content(rawmaker, workspace)
 
     command = ['-i', workspace, '-o', workspace]
     run_command(
@@ -34,5 +36,7 @@ def test_main_fonts(testdir, monkeypatch):
         monkeypatch=monkeypatch,
         success=True,
     )
-    dumped = file_read(join(workspace, 'decider_fonts__ugly_fonts.yaml'))
+    outpath = join(workspace, 'decider_fonts__ugly_fonts.yaml')
+
+    dumped = file_read(outpath)
     assert len(dumped) > 10  # result contains some content
