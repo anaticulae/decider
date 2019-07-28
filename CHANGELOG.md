@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.2.0
+
+### Feature
+
+* add test data provider and rawmaker for dynamic test data (e63ec54d2b0e)
+
 ## v0.1.9
 
 ## v0.1.8
