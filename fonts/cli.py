@@ -18,6 +18,7 @@ PROCESS_NAME = 'decider_fonts'
 FEATURE_NAME = 'ugly'
 DESCRIPTION = 'determine ugly fonts'
 
+# pylint:disable=C0103
 ResultFile = lambda producer, name: RF(producer=producer, name=name)
 
 WORKPLAN = [

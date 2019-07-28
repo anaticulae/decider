@@ -8,7 +8,6 @@
 # =============================================================================
 
 from utila import SUCCESS
-from utila import install_and_run
 from utila import run
 from utila.test import LONGRUN
 
@@ -31,8 +30,8 @@ def install_and_run(root, package, executable=None):
     install = 'python setup.py install && %s ' % executable
 
     clean_and_run = uninstall + ' && ' + install
-    completed = run(clean_and_run, cwd=root)
-    assert completed.returncode == SUCCESS, completed.stdout + completed.stderr
+    result = run(clean_and_run, cwd=root)
+    assert result.returncode == SUCCESS, result.stdout + result.stderr
 
 
 if LONGRUN:  # skip with --test=fast

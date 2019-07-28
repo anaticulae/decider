@@ -30,7 +30,3 @@ def test_most_boundingbox():
 
     result = most_boundingbox(vim_diff_example)
     assert result == expected
-
-
-def test_hitting_the_box():
-    pass

@@ -19,6 +19,7 @@ PROCESS_NAME = 'decider_border'
 FEATURE_NAME = 'hitthebox'
 DESCRIPTION = 'determine overlapping content'
 
+# pylint:disable=C0103
 ResultFile = lambda producer, name: RF(producer=producer, name=name)
 
 WORKPLAN = [
