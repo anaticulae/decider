@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.2.1
+
+### Fix
+
+* fix bounding box detection after changing `Border`-order (086762000594)
+
 ## v0.2.0
 
 ### Feature
