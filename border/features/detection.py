@@ -23,9 +23,9 @@ from utila import info
 def work(border_boxes: str, border_pages: str) -> str:
     call('work: border detection')
     boxes = load_boundingboxes(border_boxes)
-    _, border = load_pageborders(border_pages)
+    sizeandborder = load_pageborders(border_pages)
 
-    border = most_boundingbox(border)
+    border = most_boundingbox([item.border for item in sizeandborder])
 
     info('%s' % str(border))
 
@@ -35,24 +35,25 @@ def work(border_boxes: str, border_pages: str) -> str:
 
     hits = hit_the_box(boxes, boxprovider)
     debug(hits)
-    dumped = dump_hits(border, hits)
 
+    dumped = dump_hits(border, hits)
     return dumped
 
 
 def hit_the_box(boxes, border: callable):
     failures = []
     # x0 y0 x1 y1
-    for page, box in enumerate(boxes):
-        border_box = border(page)
-        for index, bounding in box:
+    for page in boxes:
+        pagenumber = page.page
+        border_box = border(page.boundings)
+        for index, bounding in page.boundings:
             # BOUNDING:     'left, top,  right, bottom'
             # BORDER:       'left  right top    bottom'
             if bounding[0] < border_box[0] or\
                bounding[2] > border_box[1] or\
                bounding[1] < border_box[2] or\
                bounding[3] > border_box[3]:
-                failures.append((page, index, bounding))
+                failures.append((pagenumber, index, bounding))
     return failures
 
 
