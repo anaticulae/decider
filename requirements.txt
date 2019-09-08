@@ -2,11 +2,11 @@
 PyYAML==5.1
 
 # Internal packages
-iamraw==1.7.3
-utila==1.2.5
+iamraw==1.8.0
+utila==1.2.8
 
 # ensure the right test data
-rawmaker==1.2.6
+rawmaker==1.2.10
 
 # add test data provider
-power==0.4.6
+power==0.5.3
