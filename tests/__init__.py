@@ -6,3 +6,17 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
+
+import utila
+
+import decider
+
+
+def run_decider(cmd: str, monkeypatch):
+    utila.run_command(
+        cmd,
+        decider.cli.PROCESS,
+        decider.cli.main,
+        success=True,
+        monkeypatch=monkeypatch,
+    )

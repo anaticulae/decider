@@ -14,6 +14,7 @@ import utila
 from detector.feature.title import RAWMAKER_CONFIGURATION
 
 import decider
+import tests
 from tests.resources import MASTER_HUGE
 
 
@@ -30,12 +31,11 @@ def titlepage(testdir):
     return root
 
 
-def test_titlepage_extraction(titlepage):  # pylint:disable=W0621
+def test_titlepage_extraction(titlepage, monkeypatch):  # pylint:disable=W0621
     root = str(titlepage)
 
     result = os.path.join(root, 'result')
     todo = f'--{decider.cli.TITLEPAGE}'
-    cmd = f'decider -i {root} -o {result} {todo}'
+    cmd = f'-i {root} -o {result} {todo}'
 
-    decider__ = utila.run(cmd)
-    assert decider__.returncode == utila.SUCCESS, str(decider__)
+    tests.run_decider(cmd, monkeypatch)
