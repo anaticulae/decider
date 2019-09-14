@@ -15,11 +15,15 @@ assert os.path.exists(RESOURCES), RESOURCES
 
 TEST_CONFIG_DATA = os.path.join(decider.ROOT, 'tests/config')
 
+MASTER = os.path.join(RESOURCES, 'master')
+
 DECIDER_FONTS = os.path.join(TEST_CONFIG_DATA, 'decider_fonts')
 assert os.path.exists(DECIDER_FONTS), DECIDER_FONTS
 
 DOCU = os.path.join(RESOURCES, 'docu')
 DOCU_TWINE = os.path.join(DOCU, 'twine.pdf')
 
-for item in [DOCU, DOCU_TWINE]:
+MASTER_HUGE = os.path.join(MASTER, 'page_116_images_toc_formular.pdf')
+
+for item in [DOCU, DOCU_TWINE, MASTER_HUGE]:
     assert os.path.exists(item), str(item)
