@@ -6,21 +6,20 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
-from os.path import exists
-from os.path import join
+import os
 
-from decider import ROOT
+import decider
 
-TEST_DATA = join(ROOT, 'tests/resources')
-assert exists(TEST_DATA), TEST_DATA
+RESOURCES = os.path.join(decider.ROOT, 'tests/resources')
+assert os.path.exists(RESOURCES), RESOURCES
 
-TEST_CONFIG_DATA = join(ROOT, 'tests/config')
+TEST_CONFIG_DATA = os.path.join(decider.ROOT, 'tests/config')
 
-DECIDER_FONTS = join(TEST_CONFIG_DATA, 'decider_fonts')
-assert exists(DECIDER_FONTS), DECIDER_FONTS
+DECIDER_FONTS = os.path.join(TEST_CONFIG_DATA, 'decider_fonts')
+assert os.path.exists(DECIDER_FONTS), DECIDER_FONTS
 
-DOCU = join(TEST_DATA, 'docu')
-DOCU_TWINE = join(DOCU, 'twine.pdf')
+DOCU = os.path.join(RESOURCES, 'docu')
+DOCU_TWINE = os.path.join(DOCU, 'twine.pdf')
 
 for item in [DOCU, DOCU_TWINE]:
-    assert exists(item), str(item)
+    assert os.path.exists(item), str(item)

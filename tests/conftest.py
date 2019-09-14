@@ -15,7 +15,7 @@ from border.cli import PROCESS_NAME as BORDER_PROCESS_NAME
 from decider import PACKAGE
 from decider import ROOT
 from fonts.cli import PROCESS_NAME as FONTS_PROCESS_NAME
-from tests.resources import TEST_DATA
+from tests.resources import RESOURCES
 
 
 # TODO: MOVE TO UTILA->TEST
@@ -35,7 +35,7 @@ def install_and_run(root, package, executable=None):
 
 
 if LONGRUN:  # skip with --test=fast
-    completed = run('power --all', TEST_DATA)  # pylint:disable=C0103
+    completed = run('power --all', RESOURCES)  # pylint:disable=C0103
     assert completed.returncode == SUCCESS, str(completed)
 
     install_and_run(
