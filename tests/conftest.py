@@ -7,14 +7,12 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-from utila import SUCCESS
-from utila import run
-from utila.test import LONGRUN
+import utila
 
-from border.cli import PROCESS_NAME as BORDER_PROCESS_NAME
-from decider import PACKAGE
-from decider import ROOT
-from fonts.cli import PROCESS_NAME as FONTS_PROCESS_NAME
+import border.cli
+import decider
+import decider.cli
+import fonts.cli
 from tests.resources import RESOURCES
 
 
@@ -30,20 +28,22 @@ def install_and_run(root, package, executable=None):
     install = 'python setup.py install && %s ' % executable
 
     clean_and_run = uninstall + ' && ' + install
-    result = run(clean_and_run, cwd=root)
-    assert result.returncode == SUCCESS, result.stdout + result.stderr
+    result = utila.run(clean_and_run, cwd=root)
+    assert result.returncode == utila.SUCCESS, result.stdout + result.stderr
 
 
-if LONGRUN:  # skip with --test=fast
-    completed = run('power --all', RESOURCES)  # pylint:disable=C0103
-    assert completed.returncode == SUCCESS, str(completed)
+if utila.LONGRUN:  # skip with --test=fast
+    completed = utila.run('power --all', RESOURCES)  # pylint:disable=C0103
+    assert completed.returncode == utila.SUCCESS, str(completed)
 
     install_and_run(
-        ROOT,
-        PACKAGE,
+        decider.ROOT,
+        decider.PACKAGE,
         [
-            BORDER_PROCESS_NAME,
-            FONTS_PROCESS_NAME,
+            border.cli.PROCESS,
+            decider.cli.PROCESS,
+            fonts.cli.PROCESS,
         ],
     )
+
 pytest_plugins = 'pytester'  # pylint: disable=invalid-name

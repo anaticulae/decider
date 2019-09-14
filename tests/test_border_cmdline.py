@@ -13,7 +13,7 @@ from utila import file_read
 from utila import run_command
 
 from border.cli import FEATURE_NAME
-from border.cli import PROCESS_NAME
+from border.cli import PROCESS
 from border.cli import main
 # pylint:disable=W0611
 from tests.fixtures import rawmaker
@@ -26,13 +26,13 @@ def test_cli_decider_border(testdir, monkeypatch, rawmaker):  # # pylint:disable
 
     run_command(
         command,
-        process=PROCESS_NAME,
+        process=PROCESS,
         main=main,
         monkeypatch=monkeypatch,
         success=True,
     )
 
-    outputfile = '%s__%s_hits.yaml' % (PROCESS_NAME, FEATURE_NAME)
+    outputfile = '%s__%s_hits.yaml' % (PROCESS, FEATURE_NAME)
     outputfile = join(root, outputfile)
 
     dumped = file_read(outputfile)

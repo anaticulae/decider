@@ -14,7 +14,7 @@ from utila import featurepack
 from decider import ROOT
 from decider import __version__
 
-PROCESS_NAME = 'decider_border'
+PROCESS = 'decider_border'
 
 FEATURE_NAME = 'hitthebox'
 DESCRIPTION = 'determine overlapping content'
@@ -39,7 +39,7 @@ def main():
         workplan=WORKPLAN,
         root=ROOT,
         featurepackage='border.features',
-        name=PROCESS_NAME,
+        name=PROCESS,
         description=DESCRIPTION,
         version=__version__,
     )

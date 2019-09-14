@@ -8,6 +8,7 @@
 #==============================================================================
 import utila
 
+import detector.cli
 from decider import ROOT
 from decider import __version__
 

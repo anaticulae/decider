@@ -13,7 +13,7 @@ from utila import copy_content
 from utila import file_read
 from utila import run_command
 
-from fonts.cli import PROCESS_NAME
+from fonts.cli import PROCESS
 from fonts.cli import main
 # # pylint:disable=W0611
 from tests.fixtures import rawmaker
@@ -31,7 +31,7 @@ def test_main_fonts(testdir, monkeypatch, rawmaker):  ## pylint:disable=W0621
     command = ['-i', workspace, '-o', workspace]
     run_command(
         command,
-        process=PROCESS_NAME,
+        process=PROCESS,
         main=main,
         monkeypatch=monkeypatch,
         success=True,

@@ -14,7 +14,7 @@ from utila import featurepack
 from decider import ROOT
 from decider import __version__
 
-PROCESS_NAME = 'decider_fonts'
+PROCESS = 'decider_fonts'
 FEATURE_NAME = 'ugly'
 DESCRIPTION = 'determine ugly fonts'
 
@@ -39,7 +39,7 @@ def main():
         workplan=WORKPLAN,
         root=ROOT,
         featurepackage='fonts.features',
-        name=PROCESS_NAME,
+        name=PROCESS,
         description=DESCRIPTION,
         version=__version__,
     )
