@@ -6,26 +6,33 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
-from utila import SUCCESS
-from utila import parse
-from utila import saveme
-from utila import sources
-from utila.cli import create_parser
+import utila
 
+from decider import ROOT
 from decider import __version__
 
-COMMANDS = []  # add additonal commands here
+PROCESS = 'decider'
+DESCRIPTION = ''
 
+TITLEPAGE = 'titlepage'
 
-@saveme
-def main():
-    parser = create_parser(
-        COMMANDS,
-        version=__version__,
-        outputparameter=True,
-        inputparameter=True,
+WORKPLAN = [
+    utila.create_step(
+        TITLEPAGE,
+        [
+            utila.ResultFile('detector', 'title_page_detected'),
+        ],
+        ('user', 'developer'),
     )
-    args = parse(parser)
-    inputpath, output, _ = sources(args)
+]
 
-    return SUCCESS
+
+def main():
+    utila.featurepack(
+        workplan=WORKPLAN,
+        root=ROOT,
+        featurepackage='decider.features',
+        name=PROCESS,
+        description=DESCRIPTION,
+        version=__version__,
+    )
