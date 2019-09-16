@@ -21,7 +21,10 @@ WORKPLAN = [
     utila.create_step(
         TITLEPAGE,
         [
-            utila.ResultFile('detector', 'title_page_detected'),
+            utila.ResultFile(
+                detector.cli.PROCESS,
+                f'{detector.cli.TITLEPAGE_STEP}_{detector.cli.TITLEPAGE_OUTPUT}'
+            ),
         ],
         ('user', 'developer'),
     )
