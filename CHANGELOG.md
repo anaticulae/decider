@@ -2,6 +2,19 @@
 
 Every noteable change is logged here.
 
+## v0.3.0
+
+### Feature
+
+* add public API and cleanup cli (1a6bb683784f)
+* add 3 checks to titlepage linter (2e3df12953c9)
+* add feature `titlepage` to lint errors in `TitlePage`-extraction (13026bbaceb7)
+
+### Fix
+
+* rename source file (5eff1a51c69e)
+* fix outdated import (777f73645a59)
+
 ## v0.2.6
 
 ## v0.2.5
