@@ -24,6 +24,7 @@ DOCU = os.path.join(RESOURCES, 'docu')
 DOCU_TWINE = os.path.join(DOCU, 'twine.pdf')
 
 MASTER_HUGE = os.path.join(MASTER, 'page_116_images_toc_formular.pdf')
+MASTER_72PAGES_NOIMAGES = os.path.join(MASTER, 'page_72_noimages_toc.pdf')
 
-for item in [DOCU, DOCU_TWINE, MASTER_HUGE]:
+for item in [DOCU, DOCU_TWINE, MASTER_HUGE, MASTER_72PAGES_NOIMAGES]:
     assert os.path.exists(item), str(item)
