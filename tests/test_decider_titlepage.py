@@ -11,18 +11,19 @@ import os
 
 import pytest
 import utila
-from detector.feature.title import RAWMAKER_CONFIGURATION
 
 import decider
+import detector.feature.titlepage
 import tests
-from tests.resources import MASTER_HUGE
+import tests.resources
 
 
 @pytest.fixture
 def titlepage(testdir):
     root = str(testdir)
 
-    cmd = f'rawmaker -i {MASTER_HUGE} -o {root} {RAWMAKER_CONFIGURATION} --page=0'
+    cmd = (f'rawmaker -i {tests.resources.MASTER_HUGE} -o {root} '
+           f'{detector.feature.titlepage.RAWMAKER_CONFIGURATION} --page=0')
     rawmaker__ = utila.run(cmd)
     assert rawmaker__.returncode == utila.SUCCESS, str(rawmaker__)
     cmd = f'detector -i {root} -o {root}'
