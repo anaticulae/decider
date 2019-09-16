@@ -8,14 +8,16 @@
 #==============================================================================
 import utila
 
+import decider
 import detector.cli
-from decider import ROOT
-from decider import __version__
 
 PROCESS = 'decider'
 DESCRIPTION = ''
 
 TITLEPAGE = 'titlepage'
+
+USER = 'user'
+DEVELOPER = 'developer'
 
 WORKPLAN = [
     utila.create_step(
@@ -26,17 +28,20 @@ WORKPLAN = [
                 f'{detector.cli.TITLEPAGE_STEP}_{detector.cli.TITLEPAGE_OUTPUT}'
             ),
         ],
-        ('user', 'developer'),
+        (USER, DEVELOPER),
     )
 ]
+
+USER_LINT_OUTPUT = f'{PROCESS}__{TITLEPAGE}_{USER}.yaml'
+DEVELOPER_LINT_OUTPUT = f'{PROCESS}__{TITLEPAGE}_{DEVELOPER}.yaml'
 
 
 def main():
     utila.featurepack(
         workplan=WORKPLAN,
-        root=ROOT,
+        root=decider.ROOT,
         featurepackage='decider.features',
         name=PROCESS,
         description=DESCRIPTION,
-        version=__version__,
+        version=decider.__version__,
     )

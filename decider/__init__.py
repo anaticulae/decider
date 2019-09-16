@@ -6,9 +6,23 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
+"""Decider judges different features based on previous feature extraction.
+
+Currently `decider` supports:
+
+    - titlepage validation
+
+"""
+
 import os
 
 __version__ = '0.2.6'
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 PACKAGE = 'decider'
+
+# public API for further processing steps to gather correct file names and
+# configuration.
+# pylint:disable=wrong-import-position
+from decider.cli import DEVELOPER_LINT_OUTPUT  # isort:skip
+from decider.cli import USER_LINT_OUTPUT  # isort:skip
