@@ -9,13 +9,13 @@
 
 import os
 
+import detector.feature.titlepage
 import pytest
 import utila
 import yaml
 
 import decider
 import decider.features.titlepage
-import detector.feature.titlepage
 import tests
 import tests.resources
 
@@ -25,13 +25,15 @@ import tests.resources
         # (tests.resources.MASTER_HUGE, [
         #     decider.features.titlepage.MISSING_THESIS_TYPE_ID,
         # ]),
-        (tests.resources.MASTER_72PAGES_NOIMAGES, [
+        (tests.resources.MASTER_72_PAGES_NOIMAGES, [
             decider.features.titlepage.MISSING_AUTHOR_MATRIKEL_ID,
         ]),
+        (tests.resources.MASTER_78_PAGES_IMAGES, []),
     ],
     ids=[
         # 'MASTER_HUGE',
-        'MASTER_72PAGES',
+        'MASTER_72_PAGES',
+        'MASTER_78_PAGES',
     ])
 def titlepage(request, testdir):
     root = str(testdir)
