@@ -41,7 +41,7 @@ if utila.LONGRUN:  # skip with --test=fast
         decider.PACKAGE,
         [
             border.cli.PROCESS,
-            decider.cli.PROCESS,
+            decider.PROCESS,
             fonts.cli.PROCESS,
         ],
     )

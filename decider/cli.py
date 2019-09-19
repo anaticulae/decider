@@ -11,7 +11,6 @@ import utila
 
 import decider
 
-PROCESS = 'decider'
 DESCRIPTION = ''
 
 TITLEPAGE = 'titlepage'
@@ -24,7 +23,7 @@ WORKPLAN = [
         TITLEPAGE,
         [
             utila.ResultFile(
-                detector.cli.PROCESS,
+                detector.PROCESS,
                 f'{detector.cli.TITLEPAGE_STEP}_{detector.cli.TITLEPAGE_OUTPUT}'
             ),
         ],
@@ -32,8 +31,8 @@ WORKPLAN = [
     )
 ]
 
-USER_LINT_OUTPUT = f'{PROCESS}__{TITLEPAGE}_{USER}.yaml'
-DEVELOPER_LINT_OUTPUT = f'{PROCESS}__{TITLEPAGE}_{DEVELOPER}.yaml'
+USER_LINT_OUTPUT = f'{decider.PROCESS}__{TITLEPAGE}_{USER}.yaml'
+DEVELOPER_LINT_OUTPUT = f'{decider.PROCESS}__{TITLEPAGE}_{DEVELOPER}.yaml'
 
 
 def main():
@@ -41,7 +40,7 @@ def main():
         workplan=WORKPLAN,
         root=decider.ROOT,
         featurepackage='decider.features',
-        name=PROCESS,
+        name=decider.PROCESS,
         description=DESCRIPTION,
         version=decider.__version__,
     )

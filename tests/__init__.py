@@ -15,7 +15,7 @@ import decider
 def run_decider(cmd: str, monkeypatch):
     utila.run_command(
         cmd,
-        decider.cli.PROCESS,
+        decider.PROCESS,
         decider.cli.main,
         success=True,
         monkeypatch=monkeypatch,

@@ -19,10 +19,13 @@ import os
 __version__ = '0.3.1'
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-PACKAGE = 'decider'
 
 # public API for further processing steps to gather correct file names and
 # configuration.
 # pylint:disable=wrong-import-position
+
+PACKAGE = 'decider'
+PROCESS = 'decider'
+
 from decider.cli import DEVELOPER_LINT_OUTPUT  # isort:skip
 from decider.cli import USER_LINT_OUTPUT  # isort:skip

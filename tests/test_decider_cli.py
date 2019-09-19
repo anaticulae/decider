@@ -10,8 +10,7 @@
 import pytest
 import utila
 
-from decider.cli import PROCESS
-from decider.cli import main
+import decider
 
 
 @pytest.mark.parametrize('cmd', [
@@ -21,8 +20,8 @@ def test_cli_decider(cmd, testdir, monkeypatch):
     """Run decider"""
     utila.run_command(
         cmd,
-        process=PROCESS,
-        main=main,
+        process=decider.PROCESS,
+        main=decider.cli.main,
         monkeypatch=monkeypatch,
         success=True,
     )
