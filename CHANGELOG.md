@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.3.2
+
+### Feature
+
+* add PROCESS-name to public API (ca5c44482ee9)
+
 ## v0.3.1
 
 ## v0.3.0
