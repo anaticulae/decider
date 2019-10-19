@@ -7,33 +7,30 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-from os.path import join
+import os
 
-from utila import file_read
-from utila import run_command
+import utila
 
-from border.cli import FEATURE_NAME
-from border.cli import PROCESS
-from border.cli import main
+import border.cli
 # pylint:disable=W0611
 from tests.fixtures import rawmaker
 
 
-def test_cli_decider_border(testdir, monkeypatch, rawmaker):  # # pylint:disable=W0621
+def test_cli_decider_border(testdir, monkeypatch, rawmaker):  # pylint:disable=W0621
     """Run decider with rawmaker_result to get hits output"""
     root = str(testdir)
     command = '-i %s -o %s -V --hitthebox' % (rawmaker, root)
 
-    run_command(
+    utila.run_command(
         command,
-        process=PROCESS,
-        main=main,
+        process=border.cli.PROCESS,
+        main=border.cli.main,
         monkeypatch=monkeypatch,
         success=True,
     )
 
-    outputfile = '%s__%s_hits.yaml' % (PROCESS, FEATURE_NAME)
-    outputfile = join(root, outputfile)
+    outputfile = f'{border.cli.PROCESS}__{border.cli.FEATURE_NAME}_hits.yaml'
+    outputfile = os.path.join(root, outputfile)
 
-    dumped = file_read(outputfile)
+    dumped = utila.file_read(outputfile)
     assert len(dumped) > 100  # result contains some content
