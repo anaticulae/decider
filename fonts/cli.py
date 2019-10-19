@@ -25,13 +25,15 @@ WORKPLAN = [
     step(
         FEATURE_NAME,
         [
-            ResultFile('decider_fonts', 'ugly_fonts'),
+            ResultFile('decider_fonts_config', 'ugly_fonts'),
             ResultFile('rawmaker', 'fonts_header'),
             ResultFile('rawmaker', 'fonts_content'),
         ],
         ('ugly',),
     )
 ]
+
+UGLY_STEP_OUTPUT_FILE = f'{PROCESS}__{FEATURE_NAME}_ugly.yaml'
 
 
 def main():

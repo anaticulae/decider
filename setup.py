@@ -46,7 +46,7 @@ def datafiles():
         (
             'fonts/config',
             [
-                'fonts/config/decider_fonts__ugly_fonts.yaml',
+                'fonts/config/decider_fonts_config__ugly_fonts.yaml',
             ],
         ),
     ]

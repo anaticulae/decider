@@ -7,14 +7,11 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-from os.path import join
+import os
 
-from utila import copy_content
-from utila import file_read
-from utila import run_command
+import utila
 
-from fonts.cli import PROCESS
-from fonts.cli import main
+import fonts.cli
 # # pylint:disable=W0611
 from tests.fixtures import rawmaker
 from tests.resources import DECIDER_FONTS
@@ -22,21 +19,21 @@ from tests.resources import DECIDER_FONTS
 
 def test_main_fonts(testdir, monkeypatch, rawmaker):  ## pylint:disable=W0621
     """Run decider with rawmaker_result to get hits output"""
-
-    workspace = str(testdir)
+    root = str(testdir)
     # copy ugly font config
-    copy_content(DECIDER_FONTS, workspace)
-    copy_content(rawmaker, workspace)
+    utila.copy_content(DECIDER_FONTS, root)
+    utila.copy_content(rawmaker, root)
 
-    command = ['-i', workspace, '-o', workspace]
-    run_command(
+    command = ['-i', root, '-o', root]
+    utila.run_command(
         command,
-        process=PROCESS,
-        main=main,
+        process=fonts.cli.PROCESS,
+        main=fonts.cli.main,
         monkeypatch=monkeypatch,
         success=True,
     )
-    outpath = join(workspace, 'decider_fonts__ugly_fonts.yaml')
+    outpath = os.path.join(root, fonts.cli.UGLY_STEP_OUTPUT_FILE)
+    assert os.path.exists(outpath), outpath
 
-    dumped = file_read(outpath)
+    dumped = utila.file_read(outpath)
     assert len(dumped) > 10  # result contains some content
