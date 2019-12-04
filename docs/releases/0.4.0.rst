@@ -3,12 +3,26 @@
 RP 0.4.0
 =========
 
+maintenance
+-----------
+
+* [ ] automate test data generation
+
 header
 ------
 
 * [ ] add linter to verify extracted header
 
 * [ ] add linter to verify foot notes
+
+table of content
+----------------
+
+* [ ] add linter to verify toc structure / chapter structure
+
+* [ ] add linter to verify ascending pages
+
+* [ ] add linter to verify page count on table of content
 
 code quality
 ------------
