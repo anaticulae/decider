@@ -26,6 +26,13 @@ DOCU = os.path.join(RESOURCES, 'docu')
 DOCU_TWINE = os.path.join(DOCU, 'twine.pdf')
 DOCU_TWINE_GENERATED = os.path.join(GENERATED, 'docu_twine')
 
+TECHNICAL = os.path.join(RESOURCES, 'technical')
+TECHNICAL_24PAGES = os.path.join(TECHNICAL, 'page_24_color_figures_images.pdf')
+TECHNICAL_24PAGES_GENERATED = os.path.join(
+    GENERATED,
+    'technical_page_24_color_figures_images',
+)
+
 MASTER_HUGE = os.path.join(MASTER, 'page_116_images_toc_formular.pdf')
 
 MASTER_72_PAGES_NOIMAGES = os.path.join(MASTER, 'page_72_noimages_toc.pdf')
@@ -40,11 +47,21 @@ MASTER_78_PAGES_IMAGES_GENERATED = os.path.join(
     'master_page_78_images_toc',
 )
 
+TODO = [
+    DOCU_TWINE,
+    MASTER_72_PAGES_NOIMAGES,
+    MASTER_78_PAGES_IMAGES,
+    TECHNICAL_24PAGES,
+]
+
 REQURIED_RESOURCES = [
     DOCU_TWINE,
+    DOCU_TWINE_GENERATED,
     MASTER_72_PAGES_NOIMAGES,
     MASTER_72_PAGES_NOIMAGES_GENERATED,
     MASTER_78_PAGES_IMAGES,
     MASTER_78_PAGES_IMAGES_GENERATED,
     MASTER_HUGE,
+    TECHNICAL_24PAGES,
+    TECHNICAL_24PAGES_GENERATED,
 ]

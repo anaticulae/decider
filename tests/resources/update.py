@@ -34,11 +34,7 @@ def sync_resources():
 
 
 def extract_examples():
-    files = [
-        tests.resources.DOCU_TWINE,
-        tests.resources.MASTER_72_PAGES_NOIMAGES,
-        tests.resources.MASTER_78_PAGES_IMAGES,
-    ]
+    files = tests.resources.TODO
     destination = tests.resources.GENERATED
     hey.example.extract(files, destination, pages=None)
 
