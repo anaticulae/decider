@@ -7,43 +7,36 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import os
+
 import utila
 
-import border.cli
-import decider
-import decider.cli
-import fonts.cli
-from tests.resources import RESOURCES
+from tests.resources import REQURIED_RESOURCES
+from tests.resources.update import extract_examples
+from tests.resources.update import install_requirements
+from tests.resources.update import sync_resources
 
+pytest_plugins = ['pytester', 'xdist']  # pylint: disable=invalid-name
 
-# TODO: MOVE TO UTILA->TEST
-def install_and_run(root, package, executable=None):
-    """Install and run --help to ensure basic function"""
-    executable = executable if executable else package
-    if isinstance(executable, str):
-        executable = executable.split()
-    uninstall = 'pip uninstall %s -y' % package
+# TODO: Ensure that tests waits before this process is ready
 
-    executable = ' && '.join(['%s --help' % item for item in executable])
-    install = 'python setup.py install && %s ' % executable
+if not 'PYTEST_XDIST_WORKER' in os.environ:
+    # master process only
+    # ensure to avoid race condition if more than one thread tries to
+    # install or use rawmaker
 
-    clean_and_run = uninstall + ' && ' + install
-    result = utila.run(clean_and_run, cwd=root)
-    assert result.returncode == utila.SUCCESS, result.stdout + result.stderr
+    if 'GENERATE' in os.environ or utila.test.LONGRUN:
+        utila.log('install requirements')
+        install_requirements()
 
+        # ensure that all test resources exists
+        utila.log('synchronize test resources')
+        sync_resources()
 
-if utila.LONGRUN:  # skip with --test=fast
-    completed = utila.run('power --all', RESOURCES)  # pylint:disable=C0103
-    assert completed.returncode == utila.SUCCESS, str(completed)
+        utila.log('extract resources')
+        extract_examples()
 
-    install_and_run(
-        decider.ROOT,
-        decider.PACKAGE,
-        [
-            border.cli.PROCESS,
-            decider.PROCESS,
-            fonts.cli.PROCESS,
-        ],
-    )
-
-pytest_plugins = 'pytester'  # pylint: disable=invalid-name
+for item in REQURIED_RESOURCES:
+    advice = 'run `baw --test=generate` to generate test data'
+    msg = f'required test path does not exists: {item}, {advice}'
+    assert os.path.exists(item), msg

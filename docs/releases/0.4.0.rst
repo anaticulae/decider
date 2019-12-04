@@ -6,7 +6,7 @@ RP 0.4.0
 maintenance
 -----------
 
-* [ ] automate test data generation
+* [x] automate test data generation
 
 header
 ------
