@@ -12,19 +12,16 @@ import os
 import utila
 
 import fonts.cli
-# # pylint:disable=W0611
-from tests.fixtures import rawmaker
-from tests.resources import DECIDER_FONTS
+import tests.resources
 
 
-def test_main_fonts(testdir, monkeypatch, rawmaker):  ## pylint:disable=W0621
+def test_main_fonts(testdir, monkeypatch):  ## pylint:disable=W0621
     """Run decider with rawmaker_result to get hits output"""
     root = str(testdir)
     # copy ugly font config
-    utila.copy_content(DECIDER_FONTS, root)
-    utila.copy_content(rawmaker, root)
+    utila.copy_content(tests.resources.DECIDER_FONTS, root)
 
-    command = ['-i', root, '-o', root]
+    command = ['-i', tests.resources.DOCU_TWINE_GENERATED, '-o', root]
     utila.run_command(
         command,
         process=fonts.cli.PROCESS,

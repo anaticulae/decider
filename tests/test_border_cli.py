@@ -12,14 +12,14 @@ import os
 import utila
 
 import border.cli
-# pylint:disable=W0611
-from tests.fixtures import rawmaker
+import tests.resources
 
 
-def test_cli_decider_border(testdir, monkeypatch, rawmaker):  # pylint:disable=W0621
+def test_cli_decider_border(testdir, monkeypatch):  # pylint:disable=W0621
     """Run decider with rawmaker_result to get hits output"""
     root = str(testdir)
-    command = '-i %s -o %s -V --hitthebox' % (rawmaker, root)
+    source = tests.resources.DOCU_TWINE_GENERATED
+    command = f'-i {source} -o {root} -V --hitthebox'
 
     utila.run_command(
         command,

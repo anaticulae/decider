@@ -9,7 +9,6 @@
 
 import os
 
-import detector.feature.titlepage
 import pytest
 import utila
 import yaml
@@ -25,10 +24,10 @@ import tests.resources
         # (tests.resources.MASTER_HUGE, [
         #     decider.features.titlepage.MISSING_THESIS_TYPE_ID,
         # ]),
-        (tests.resources.MASTER_72_PAGES_NOIMAGES, [
+        (tests.resources.MASTER_72_PAGES_NOIMAGES_GENERATED, [
             decider.features.titlepage.MISSING_AUTHOR_MATRIKEL_ID,
         ]),
-        (tests.resources.MASTER_78_PAGES_IMAGES, []),
+        (tests.resources.MASTER_78_PAGES_IMAGES_GENERATED, []),
     ],
     ids=[
         # 'MASTER_HUGE',
@@ -38,13 +37,10 @@ import tests.resources
 def titlepage(request, testdir):
     root = str(testdir)
     source, expected_failures = request.param
-    cmd = (f'rawmaker -i {source} -o {root} --page=0 '
-           f'{detector.feature.titlepage.RAWMAKER_CONFIGURATION}')
-    rawmaker__ = utila.run(cmd)
-    assert rawmaker__.returncode == utila.SUCCESS, str(rawmaker__)
-    cmd = f'detector -i {root} -o {root}'
-    detector__ = utila.run(cmd)
-    assert detector__.returncode == utila.SUCCESS, str(detector__)
+
+    cmd = f'detector -i {source} -o {root}'
+    completed = utila.run(cmd)
+    assert completed.returncode == utila.SUCCESS, str(completed)
     return root, expected_failures
 
 

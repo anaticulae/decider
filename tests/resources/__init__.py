@@ -24,14 +24,27 @@ assert os.path.exists(DECIDER_FONTS), DECIDER_FONTS
 
 DOCU = os.path.join(RESOURCES, 'docu')
 DOCU_TWINE = os.path.join(DOCU, 'twine.pdf')
+DOCU_TWINE_GENERATED = os.path.join(GENERATED, 'docu_twine')
 
 MASTER_HUGE = os.path.join(MASTER, 'page_116_images_toc_formular.pdf')
+
 MASTER_72_PAGES_NOIMAGES = os.path.join(MASTER, 'page_72_noimages_toc.pdf')
+MASTER_72_PAGES_NOIMAGES_GENERATED = os.path.join(
+    GENERATED,
+    'master_page_72_noimages_toc',
+)
+
 MASTER_78_PAGES_IMAGES = os.path.join(MASTER, 'page_78_images_toc.pdf')
+MASTER_78_PAGES_IMAGES_GENERATED = os.path.join(
+    GENERATED,
+    'master_page_78_images_toc',
+)
 
 REQURIED_RESOURCES = [
     DOCU_TWINE,
     MASTER_72_PAGES_NOIMAGES,
+    MASTER_72_PAGES_NOIMAGES_GENERATED,
     MASTER_78_PAGES_IMAGES,
+    MASTER_78_PAGES_IMAGES_GENERATED,
     MASTER_HUGE,
 ]
