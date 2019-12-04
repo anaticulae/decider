@@ -1,0 +1,23 @@
+.. _0_4_0:
+
+RP 0.4.0
+=========
+
+header
+------
+
+* [ ] add linter to verify extracted header
+
+* [ ] add linter to verify foot notes
+
+code quality
+------------
+
+before
+~~~~~~
+
+* Your code has been rated at 9.86/10
+* Total coverage: 95.73%
+
+after
+~~~~~

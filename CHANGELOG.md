@@ -1,4 +1,4 @@
-# Changelog
+# changelog
 
 Every noteable change is logged here.
 
@@ -113,4 +113,3 @@ Every noteable change is logged here.
 * run border when running __main__ manually (62e795349565)
 
 ## v0.0.0 Initial release
-
