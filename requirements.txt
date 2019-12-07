@@ -12,3 +12,6 @@ rawmaker==1.6.11
 
 # add test data provider
 power==0.6.5
+
+# modify test data
+jam==0.1.0
