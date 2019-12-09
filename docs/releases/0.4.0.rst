@@ -24,7 +24,7 @@ table of content
 
 * [ ] add linter to verify page count on table of content
 
-* [ ] add linter to check that toc exists
+* [x] add linter to check that toc exists
 
 title page
 ----------
