@@ -16,6 +16,7 @@ assert os.path.exists(RESOURCES), RESOURCES
 GENERATED = os.path.join(RESOURCES, 'generated')
 
 NO_TITLE_PAGE = os.path.join(GENERATED, 'no_titlepage')
+NO_TOC = os.path.join(GENERATED, 'no_toc')
 
 TEST_CONFIG_DATA = os.path.join(decider.ROOT, 'tests/config')
 
@@ -50,6 +51,7 @@ MASTER_78_PAGES_IMAGES_GENERATED = os.path.join(
 )
 
 TWINE_NOTITLE_PAGE = os.path.join(NO_TITLE_PAGE, 'docu_twine')
+TWINE_NOTOC = os.path.join(NO_TOC, 'docu_twine')
 
 TODO = [
     DOCU_TWINE,
@@ -70,4 +72,5 @@ REQURIED_RESOURCES = [
     TECHNICAL_24PAGES,
     TECHNICAL_24PAGES_GENERATED,
     TWINE_NOTITLE_PAGE,
+    TWINE_NOTOC,
 ]

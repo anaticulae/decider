@@ -47,6 +47,7 @@ def extract_examples():
     )
 
     extract_without_titlepage()
+    extract_without_toc()
 
 
 def install_and_run(root, package, executable=None):
@@ -73,6 +74,20 @@ def extract_without_titlepage():
     ]
     for inpath, outpath in zip(files, without_titlepage):
         completed = utila.run(f'jam -i {inpath} -o {outpath} --remove=0')
+        assert completed.returncode == utila.SUCCESS, str(completed)
+
+    hey.example.extract(without_titlepage, destination, pages='0:20')
+
+
+def extract_without_toc():
+    destination = tests.resources.NO_TOC
+    files = tests.resources.TODO
+    without_titlepage = [
+        os.path.join(destination, f'{item}.pdf')
+        for item in hey.example.output_names(files)
+    ]
+    for inpath, outpath in zip(files, without_titlepage):
+        completed = utila.run(f'jam -i {inpath} -o {outpath} --remove=1:5')
         assert completed.returncode == utila.SUCCESS, str(completed)
 
     hey.example.extract(without_titlepage, destination, pages='0:20')
