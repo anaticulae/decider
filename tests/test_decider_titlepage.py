@@ -28,11 +28,15 @@ import tests.resources
             decider.features.titlepage.MISSING_AUTHOR_MATRIKEL_ID,
         ]),
         (tests.resources.MASTER_78_PAGES_IMAGES_GENERATED, []),
+        (tests.resources.TWINE_NOTITLE_PAGE, [
+            decider.features.titlepage.MISSING_TITLEPAGE_ID,
+        ]),
     ],
     ids=[
         # 'MASTER_HUGE',
         'MASTER_72_PAGES',
         'MASTER_78_PAGES',
+        'TWINE_NOTITLE',
     ])
 def titlepage(request, testdir):
     root = str(testdir)

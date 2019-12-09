@@ -49,6 +49,8 @@ MASTER_78_PAGES_IMAGES_GENERATED = os.path.join(
     'master_page_78_images_toc',
 )
 
+TWINE_NOTITLE_PAGE = os.path.join(NO_TITLE_PAGE, 'docu_twine')
+
 TODO = [
     DOCU_TWINE,
     MASTER_72_PAGES_NOIMAGES,
@@ -67,4 +69,5 @@ REQURIED_RESOURCES = [
     NO_TITLE_PAGE,
     TECHNICAL_24PAGES,
     TECHNICAL_24PAGES_GENERATED,
+    TWINE_NOTITLE_PAGE,
 ]

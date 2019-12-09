@@ -24,6 +24,13 @@ table of content
 
 * [ ] add linter to verify page count on table of content
 
+* [ ] add linter to check that toc exists
+
+title page
+----------
+
+* [x] add linter to check that tilepage exists
+
 code quality
 ------------
 

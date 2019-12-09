@@ -21,7 +21,6 @@ def work(titlepage_path: str) -> typing.Tuple[str, str]:
     linter = create_linter()
 
     titlepage: iamraw.TitlePage = serializeraw.load_titlepage(titlepage_path)
-    assert titlepage, str(titlepage)
 
     # run linter
     linting(titlepage, linter)
@@ -46,15 +45,18 @@ def create_linter() -> protocol.Linter:
     return linter
 
 
-MISSING_AUTHOR_ID = 'E1200'
-MISSING_AUTHOR_MATRIKEL_ID = 'E1201'
+# feature existence checker
+MISSING_TITLEPAGE_ID = 'E1200'
 
-MISSING_THESIS_TYPE_ID = 'E1221'
+MISSING_THESIS_TYPE_ID = 'E1210'
 
-MISSING_EXAMINER_ID = 'E1210'
+MISSING_AUTHOR_ID = 'E1220'
+MISSING_AUTHOR_MATRIKEL_ID = 'E1221'
+
+MISSING_EXAMINER_ID = 'E1230'
 
 
-def linting(titlepage: iamraw.TitlePage, linter: protocol.Linter):
+def linting(titlepage: iamraw.TitlePage, linter: protocol.Linter):  # pylint:disable=too-complex
 
     def add_problem(msgid, location):
         linter.add_finding(
@@ -62,6 +64,11 @@ def linting(titlepage: iamraw.TitlePage, linter: protocol.Linter):
             msgid=msgid,
             confidence=1.0,
         )
+
+    def check_existence():
+        if titlepage is not None:
+            return
+        add_problem(MISSING_TITLEPAGE_ID, protocol.Location.frompage(0))
 
     def check_author():
         if titlepage.author:
@@ -83,6 +90,12 @@ def linting(titlepage: iamraw.TitlePage, linter: protocol.Linter):
             return
         add_problem(MISSING_THESIS_TYPE_ID, protocol.Location.frompage(0))
 
+    check_existence()
+
+    if titlepage is None:
+        # if there is no title page, the other checkers make no sence
+        return
+
     check_author()
     check_author_matrikel()
     check_examiner()
@@ -100,6 +113,12 @@ def create_solution(title: str, msgid: str, description: str):
 
 
 SOLUTION = [
+    create_solution(
+        title='Dokument enhaelt keine Titelseite',
+        msgid=MISSING_TITLEPAGE_ID,
+        description=('Das Dokument enthaelt keine Titelseite. \n\n'
+                     'Fuegen Sie eine Titelseite zum Dokument hinzu.'),
+    ),
     create_solution(
         title='Titleseite enthaelt keinen Author',
         msgid=MISSING_AUTHOR_ID,
@@ -133,6 +152,10 @@ SOLUTION = [
 ]
 
 MSG_STATUS = [
+    protocol.MessageStatus(
+        MISSING_TITLEPAGE_ID,
+        active=True,
+    ),
     protocol.MessageStatus(
         MISSING_AUTHOR_ID,
         active=True,
