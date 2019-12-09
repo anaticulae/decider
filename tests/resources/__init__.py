@@ -15,6 +15,8 @@ assert os.path.exists(RESOURCES), RESOURCES
 
 GENERATED = os.path.join(RESOURCES, 'generated')
 
+NO_TITLE_PAGE = os.path.join(GENERATED, 'no_titlepage')
+
 TEST_CONFIG_DATA = os.path.join(decider.ROOT, 'tests/config')
 
 MASTER = os.path.join(RESOURCES, 'master')
@@ -62,6 +64,7 @@ REQURIED_RESOURCES = [
     MASTER_78_PAGES_IMAGES,
     MASTER_78_PAGES_IMAGES_GENERATED,
     MASTER_HUGE,
+    NO_TITLE_PAGE,
     TECHNICAL_24PAGES,
     TECHNICAL_24PAGES_GENERATED,
 ]

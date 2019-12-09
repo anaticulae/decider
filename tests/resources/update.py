@@ -7,6 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import os
+
 import hey.example
 import utila
 
@@ -34,9 +36,17 @@ def sync_resources():
 
 
 def extract_examples():
-    files = tests.resources.TODO
     destination = tests.resources.GENERATED
-    hey.example.extract(files, destination, pages=None)
+    if os.path.exists(destination):
+        return
+
+    hey.example.extract(
+        tests.resources.TODO,
+        destination,
+        pages=None,
+    )
+
+    extract_without_titlepage()
 
 
 def install_and_run(root, package, executable=None):
@@ -52,3 +62,17 @@ def install_and_run(root, package, executable=None):
     clean_and_run = uninstall + ' && ' + install
     result = utila.run(clean_and_run, cwd=root)
     assert result.returncode == utila.SUCCESS, result.stdout + result.stderr
+
+
+def extract_without_titlepage():
+    destination = tests.resources.NO_TITLE_PAGE
+    files = tests.resources.TODO
+    without_titlepage = [
+        os.path.join(destination, f'{item}.pdf')
+        for item in hey.example.output_names(files)
+    ]
+    for inpath, outpath in zip(files, without_titlepage):
+        completed = utila.run(f'jam -i {inpath} -o {outpath} --remove=0')
+        assert completed.returncode == utila.SUCCESS, str(completed)
+
+    hey.example.extract(without_titlepage, destination, pages='0:20')
