@@ -28,7 +28,7 @@ import tests.resources
             decider.features.titlepage.MISSING_AUTHOR_MATRIKEL_ID,
         ]),
         (tests.resources.MASTER_78_PAGES_IMAGES_GENERATED, []),
-        (tests.resources.TWINE_NOTITLE_PAGE, [
+        (tests.resources.TWINE_NO_TITLE_PAGE, [
             decider.features.titlepage.MISSING_TITLEPAGE_ID,
         ]),
     ],
@@ -36,7 +36,7 @@ import tests.resources
         # 'MASTER_HUGE',
         'MASTER_72_PAGES',
         'MASTER_78_PAGES',
-        'TWINE_NOTITLE',
+        'TWINE_NO_TITLE',
     ])
 def titlepage(request, testdir):
     root = str(testdir)

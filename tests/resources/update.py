@@ -40,11 +40,7 @@ def extract_examples():
     if os.path.exists(destination):
         return
 
-    hey.example.extract(
-        tests.resources.TODO,
-        destination,
-        pages=None,
-    )
+    hey.example.extract(tests.resources.TODO, destination, pages=None)
 
     extract_without_titlepage()
     extract_without_toc()
