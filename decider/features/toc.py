@@ -10,6 +10,8 @@
 import iamraw
 import protocol
 
+import decider.toc.level as dtl
+
 
 def work() -> str:
     pass
@@ -18,6 +20,9 @@ def work() -> str:
 TITLEPAGE_CHECKER_ID = 13
 
 MISSING_TOC_ID = 1300
+
+SINGLE_CHILDREN_ID = 1350
+LEVEL_TOO_DEEP_ID = 1351
 
 
 def linting(toc: iamraw.Toc, linter: protocol.Linter):  # pylint:disable=too-complex
@@ -34,10 +39,22 @@ def linting(toc: iamraw.Toc, linter: protocol.Linter):  # pylint:disable=too-com
             return
         add_problem(MISSING_TOC_ID, protocol.Location.from_page(0))
 
-
     check_existence()
     if not toc.children:
         return
+
+    level_result: dtl.TocValidationResult = dtl.validate(toc)
+
+    def check_level():
+        for _ in level_result.level_to_deep:  # pylint:disable=E1133
+            add_problem(LEVEL_TOO_DEEP_ID, protocol.Location.from_page(1))
+
+    def check_children():
+        for _ in level_result.too_few_children:  # pylint:disable=E1133
+            add_problem(SINGLE_CHILDREN_ID, protocol.Location.from_page(1))
+
+    check_level()
+    check_children()
 
 
 def create_linter() -> protocol.Linter:
@@ -73,7 +90,11 @@ SOLUTION = [
 
 MSG_STATUS = [
     protocol.MessageStatus(
-        MISSING_TOC_ID,
+        item,
         active=True,
-    ),
+    ) for item in [
+        LEVEL_TOO_DEEP_ID,
+        MISSING_TOC_ID,
+        SINGLE_CHILDREN_ID,
+    ]
 ]
