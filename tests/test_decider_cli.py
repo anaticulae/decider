@@ -11,6 +11,7 @@ import pytest
 import utila
 
 import decider
+import tests.resources
 
 
 @pytest.mark.parametrize('cmd', [
@@ -25,3 +26,30 @@ def test_cli_decider(cmd, testdir, monkeypatch):
         monkeypatch=monkeypatch,
         success=True,
     )
+
+
+@pytest.mark.parametrize('source', [
+    pytest.param(
+        tests.resources.TECHNICAL_24PAGES_GENERATED,
+        id='technical24',
+    ),
+    pytest.param(
+        tests.resources.MASTER_78_PAGES_IMAGES_GENERATED,
+        id='master78',
+    ),
+    pytest.param(
+        tests.resources.MASTER_72_PAGES_NOIMAGES_GENERATED,
+        id='master72',
+    ),
+])
+@utila.skip_longrun
+def test_cli_detector_and_decider(source, testdir):
+    """Run decider"""
+    root = str(testdir)
+    cmd = f'detector -i {source} -o {root}'
+    completed = utila.run(cmd)
+    assert completed.returncode == utila.SUCCESS, str(completed)
+
+    cmd = f'decider -i {root} -i {source} -o {root}'
+    completed = utila.run(cmd)
+    assert completed.returncode == utila.SUCCESS, str(completed)

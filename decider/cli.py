@@ -9,6 +9,7 @@
 import detector
 import detector.cli
 import groupme
+import groupme.cli
 import utila
 
 import decider
