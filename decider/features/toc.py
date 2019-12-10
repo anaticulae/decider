@@ -32,7 +32,8 @@ def linting(toc: iamraw.Toc, linter: protocol.Linter):  # pylint:disable=too-com
     def check_existence():
         if toc.children:
             return
-        add_problem(MISSING_TOC_ID, protocol.Location.frompage(0))
+        add_problem(MISSING_TOC_ID, protocol.Location.from_page(0))
+
 
     check_existence()
     if not toc.children:

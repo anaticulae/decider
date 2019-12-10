@@ -68,27 +68,27 @@ def linting(titlepage: iamraw.TitlePage, linter: protocol.Linter):  # pylint:dis
     def check_existence():
         if titlepage is not None:
             return
-        add_problem(MISSING_TITLEPAGE_ID, protocol.Location.frompage(0))
+        add_problem(MISSING_TITLEPAGE_ID, protocol.Location.from_page(0))
 
     def check_author():
         if titlepage.author:
             return
-        add_problem(MISSING_AUTHOR_ID, protocol.Location.frompage(0))
+        add_problem(MISSING_AUTHOR_ID, protocol.Location.from_page(0))
 
     def check_author_matrikel():
         if titlepage.matrikel:
             return
-        add_problem(MISSING_AUTHOR_MATRIKEL_ID, protocol.Location.frompage(0))
+        add_problem(MISSING_AUTHOR_MATRIKEL_ID, protocol.Location.from_page(0))
 
     def check_examiner():
         if titlepage.examiner:
             return
-        add_problem(MISSING_EXAMINER_ID, protocol.Location.frompage(0))
+        add_problem(MISSING_EXAMINER_ID, protocol.Location.from_page(0))
 
     def check_thesis_type():
         if titlepage.thesis:
             return
-        add_problem(MISSING_THESIS_TYPE_ID, protocol.Location.frompage(0))
+        add_problem(MISSING_THESIS_TYPE_ID, protocol.Location.from_page(0))
 
     check_existence()
 
