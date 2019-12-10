@@ -15,6 +15,7 @@ import border.cli
 import tests.resources
 
 
+@utila.skip_longrun
 def test_cli_decider_border(testdir, monkeypatch):  # pylint:disable=W0621
     """Run decider with rawmaker_result to get hits output"""
     root = str(testdir)

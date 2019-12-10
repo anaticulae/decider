@@ -48,6 +48,7 @@ def titlepage(request, testdir):
     return root, expected_failures
 
 
+@utila.skip_longrun
 def test_titlepage_extraction(titlepage, monkeypatch):  # pylint:disable=W0621
     root, expected_failures = titlepage
 
