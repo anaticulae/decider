@@ -2,6 +2,19 @@
 
 Every noteable change is logged here.
 
+## v0.4.0
+
+### Feature
+
+* add first draft for page order validator (5e899912d02e)
+* add toc working step (cb03d76d84a9)
+* forward validated results to linter (aa701f9eaee5)
+* summarize validation result (760cdd7e0b37)
+* add validator to validate toc level and toc children count (381234023cdd)
+* add linter to validate table of content (0629299a91b8)
+* add missing title page checker (31b8e6b81c3c)
+* automate test data creation (280c14a7afb8)
+
 ## v0.3.2
 
 ### Feature
