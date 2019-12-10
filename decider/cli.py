@@ -8,6 +8,7 @@
 #==============================================================================
 import detector
 import detector.cli
+import groupme
 import utila
 
 import decider
@@ -15,6 +16,7 @@ import decider
 DESCRIPTION = ''
 
 TITLEPAGE = 'titlepage'
+TOC = 'toc'
 
 USER = 'user'
 DEVELOPER = 'developer'
@@ -27,6 +29,13 @@ WORKPLAN = [
                 detector.PROCESS,
                 f'{detector.cli.TITLEPAGE_STEP}_{detector.cli.TITLEPAGE_OUTPUT}'
             ),
+        ],
+        (USER, DEVELOPER),
+    ),
+    utila.create_step(
+        TOC,
+        [
+            utila.ResultFile(groupme.PROCESS, 'toc_toc'),
         ],
         (USER, DEVELOPER),
     )

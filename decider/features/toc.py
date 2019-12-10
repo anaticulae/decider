@@ -7,14 +7,30 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import typing
+
 import iamraw
 import protocol
+import serializeraw
+import yaml
 
 import decider.toc.level as dtl
 
 
-def work() -> str:
-    pass
+def work(tableofcontent: str) -> typing.Tuple[str, str]:
+    linter = create_linter()
+
+    tableofcontent: iamraw.Toc = serializeraw.load_toc(tableofcontent)
+
+    # run linter
+    linting(tableofcontent, linter)
+
+    result = linter.result(unique=False)
+
+    # dump linter result
+    user_dumped = yaml.dump(result[0])
+    developer_dumped = yaml.dump(result[1])
+    return user_dumped, developer_dumped
 
 
 TITLEPAGE_CHECKER_ID = 13
