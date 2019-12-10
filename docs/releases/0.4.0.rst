@@ -8,21 +8,10 @@ maintenance
 
 * [x] automate test data generation
 
-header
-------
-
-* [ ] add linter to verify extracted header
-
-* [ ] add linter to verify foot notes
-
 table of content
 ----------------
 
 * [x] add linter to verify toc structure / chapter structure
-
-* [ ] add linter to verify ascending pages
-
-* [ ] add linter to verify page count on table of content
 
 * [x] add linter to check that toc exists
 
@@ -42,3 +31,6 @@ before
 
 after
 ~~~~~
+
+* Your code has been rated at 9.92/10
+* Total coverage: 95.88%

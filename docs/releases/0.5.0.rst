@@ -1,0 +1,30 @@
+.. _0_5_0:
+
+RP 0.5.0
+=========
+
+header
+------
+
+* [ ] add linter to verify extracted header
+
+* [ ] add linter to verify foot notes
+
+table of content
+----------------
+
+* [ ] add linter to verify ascending pages
+
+* [ ] add linter to verify page count on table of content
+
+code quality
+------------
+
+before
+~~~~~~
+
+* Your code has been rated at 9.92/10
+* Total coverage: 95.88%
+
+after
+~~~~~
