@@ -8,15 +8,23 @@
 # =============================================================================
 
 import groupme.path
+import iamraw
+import pytest
 import serializeraw
 
 import decider.features.toc as dft
+import decider.toc.level as dtl
 import tests.resources
 
 
+def tableofcontent(path: str) -> iamraw.Toc:
+    path = groupme.path.toc(path)
+    result = serializeraw.load_toc(path)
+    return result
+
+
 def lint(path: str):
-    toc = groupme.path.toc(path)
-    toc = serializeraw.load_toc(toc)
+    toc = tableofcontent(path)
     linter = dft.create_linter()
     dft.linting(toc=toc, linter=linter)
     user, _ = linter.result(unique=True)
@@ -43,3 +51,47 @@ def test_toc_extraction():  # pylint:disable=W0621
 def messageids(items):
     result = [item.msgid for item in items]
     return result
+
+
+@pytest.mark.parametrize('source, invalids', [
+    pytest.param(
+        tests.resources.TECHNICAL_24PAGES_GENERATED,
+        1,
+        id='technical24',
+    ),
+    pytest.param(
+        tests.resources.MASTER_78_PAGES_IMAGES_GENERATED,
+        3,
+        marks=pytest.mark.xfail(reason='fix toc parser'),
+        id='master78',
+    ),
+    pytest.param(
+        tests.resources.MASTER_72_PAGES_NOIMAGES_GENERATED,
+        0,
+        id='master72',
+    ),
+])
+def test_toc_validate_children(source, invalids):
+    toc = tableofcontent(source)
+    validated = dtl.validate_children(toc)
+    assert len(validated) == invalids, str(len(validated))
+
+
+@pytest.mark.parametrize('source, todeep', [
+    pytest.param(
+        tests.resources.TECHNICAL_24PAGES_GENERATED,
+        14,
+        id='technical24',
+    ),
+    pytest.param(
+        tests.resources.MASTER_72_PAGES_NOIMAGES_GENERATED,
+        6,
+        id='master72',
+    ),
+])
+def test_toc_validate_deepness(source, todeep):
+    toc = tableofcontent(source)
+    maxdeep = 2
+    validated = dtl.validate_deepness(toc, maxdeep=maxdeep)
+    # `todeep` items with 1.2.3
+    assert len(validated) == todeep
