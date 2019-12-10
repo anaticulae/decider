@@ -7,24 +7,16 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import groupme.path
-import iamraw
 import pytest
-import serializeraw
 
 import decider.features.toc as dft
 import decider.toc.level as dtl
+import tests
 import tests.resources
 
 
-def tableofcontent(path: str) -> iamraw.Toc:
-    path = groupme.path.toc(path)
-    result = serializeraw.load_toc(path)
-    return result
-
-
 def lint(path: str):
-    toc = tableofcontent(path)
+    toc = tests.tableofcontent(path)
     linter = dft.create_linter()
     dft.linting(toc=toc, linter=linter)
     user, _ = linter.result(unique=False)
@@ -81,7 +73,7 @@ TECHNICAL_24PAGES_TOO_DEEP = 14
     ),
 ])
 def test_toc_validate_children(source, invalids):
-    toc = tableofcontent(source)
+    toc = tests.tableofcontent(source)
     validated = dtl.validate_children(toc)
     assert len(validated) == invalids, str(len(validated))
 
@@ -99,7 +91,7 @@ def test_toc_validate_children(source, invalids):
     ),
 ])
 def test_toc_validate_deepness(source, too_deep):
-    toc = tableofcontent(source)
+    toc = tests.tableofcontent(source)
     maxdeep = 2
     validated = dtl.validate_deepness(toc, maxdeep=maxdeep)
     # `too_deep` items with 1.2.3
