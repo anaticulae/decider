@@ -27,8 +27,8 @@ def lint(path: str):
     toc = tableofcontent(path)
     linter = dft.create_linter()
     dft.linting(toc=toc, linter=linter)
-    user, _ = linter.result(unique=True)
-    failures = messageids(user)
+    user, _ = linter.result(unique=False)
+    failures = sorted(messageids(user))
     return failures
 
 
