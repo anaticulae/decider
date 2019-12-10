@@ -7,7 +7,9 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 import collections
+import dataclasses
 
+import configo
 import iamraw
 
 
@@ -19,30 +21,53 @@ class LevelToDeep(collections.UserList):  # pylint:disable=too-many-ancestors
     pass
 
 
+MAX_TOC_DEEPNESS = configo.HV_INT_PLUS(default=3).value
+
+
+@dataclasses.dataclass
+class TocValidationResult:
+    level_to_deep: LevelToDeep = None
+    too_few_children: TooFewChildren = None
+
+
+def validate(toc: iamraw.Toc) -> TocValidationResult:
+    children = validate_children(toc)
+    deepness = validate_deepness(toc)
+
+    result = TocValidationResult(
+        level_to_deep=deepness,
+        too_few_children=children,
+    )
+    return result
+
+
 def validate_children(toc: iamraw.Toc) -> TooFewChildren:
-    tofewchildren = TooFewChildren()
+    result = TooFewChildren()
 
     def godown(item: iamraw.toc.TocLinkMixin):
         if len(item.children) == 1:
             # If subpoint has only one children, it is not a subpoint.
-            tofewchildren.append(item)
+            result.append(item)
         for children in item:
             godown(children)
 
     for item in toc:
         godown(item)
-    return tofewchildren
+    return result
 
 
-def validate_deepness(toc: iamraw.Toc, maxdeep: int = 2) -> LevelToDeep:
-    todeep = LevelToDeep()
+def validate_deepness(toc: iamraw.Toc, maxdeep: int = None) -> LevelToDeep:
+    if maxdeep is None:
+        maxdeep = MAX_TOC_DEEPNESS
+
+    result = LevelToDeep()
 
     def godown(item: iamraw.toc.TocLinkMixin):
         if item.level > maxdeep:
-            todeep.append(item)
+            result.append(item)
         for children in item:
             godown(children)
 
     for item in toc:
         godown(item)
-    return todeep
+    return result

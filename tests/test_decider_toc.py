@@ -89,9 +89,9 @@ def test_toc_validate_children(source, invalids):
         id='master72',
     ),
 ])
-def test_toc_validate_deepness(source, todeep):
+def test_toc_validate_deepness(source, too_deep):
     toc = tableofcontent(source)
     maxdeep = 2
     validated = dtl.validate_deepness(toc, maxdeep=maxdeep)
-    # `todeep` items with 1.2.3
-    assert len(validated) == todeep
+    # `too_deep` items with 1.2.3
+    assert len(validated) == too_deep

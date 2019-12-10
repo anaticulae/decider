@@ -7,6 +7,9 @@ utila==1.10.0
 protocol==0.4.8
 hey==1.14.4
 
+# define holy values
+configo==0.4.0
+
 # ensure the right test data
 rawmaker==1.6.12
 
