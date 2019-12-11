@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.4.1
+
+### Feature
+
+* use multiprocessing to improve decision speed (fb95208aff29)
+
 ## v0.4.0
 
 ### Feature
