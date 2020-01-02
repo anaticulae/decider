@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.4.3
+
+### Documentation
+
+* Happy New Year! (131a538ea5be)
+
 ## v0.4.2
 
 ## v0.4.1
