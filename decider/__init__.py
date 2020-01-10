@@ -16,7 +16,7 @@ Currently `decider` supports:
 
 import os
 
-__version__ = '0.4.3'
+__version__ = '0.4.4'
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
