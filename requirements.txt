@@ -5,7 +5,7 @@ PyYAML==5.1
 iamraw==1.12.9
 utila==1.11.3
 protocol==0.5.1
-hey==1.14.8
+hey==1.14.9
 
 # define holy values
 configo==0.4.1
