@@ -8,7 +8,7 @@ header
 
 * [ ] add linter to verify extracted header
 
-* [ ] add linter to verify foot notes
+* [x] add linter to verify foot notes
 
 table of content
 ----------------
