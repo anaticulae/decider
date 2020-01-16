@@ -42,11 +42,12 @@ NO_DOT_AT_END = 2002
 
 def linting(validated, page: int, linter: protocol.Linter):
 
-    def add_problem(msgid, location):
+    def add_problem(msgid, location, number):
         linter.add_finding(
             location=location,
             msgid=msgid,
             confidence=1.0,
+            number=number,
         )
 
     location = protocol.Location.from_page(page)
@@ -56,14 +57,22 @@ def linting(validated, page: int, linter: protocol.Linter):
         for item in validated:
             if item.uppercase:
                 continue
-            add_problem(NO_UPPERCASE_AT_START, location)
+            add_problem(
+                NO_UPPERCASE_AT_START,
+                location,
+                number=item.content.number,
+            )
 
     def check_end():
         # item : decider.footnotes.Validated
         for item in validated:
             if item.ends:
                 continue
-            add_problem(NO_DOT_AT_END, location)
+            add_problem(
+                NO_DOT_AT_END,
+                location,
+                number=item.content.number,
+            )
 
     check_start()
     check_end()
@@ -93,15 +102,16 @@ def create_solution(title: str, msgid: str, description: str):
 
 SOLUTION = [
     create_solution(
-        title='Die Fussnote beginnt nicht mit einem Grossbuchstaben',
+        title='Die Fussnote {%number%} beginnt nicht mit einem Grossbuchstaben',
         msgid=NO_UPPERCASE_AT_START,
         description=('Ersetzen Sie den ersten Buchstaben der '
-                     'Fussnote mit einem Grossbuchstaben'),
+                     'Fussnote {%number%} mit einem Grossbuchstaben.'),
     ),
     create_solution(
-        title='Die Fussnote endet nicht mit einem Punkt',
+        title='Die Fussnote {%number%} endet nicht mit einem Punkt',
         msgid=NO_DOT_AT_END,
-        description='Fuegen Sie einen Punkt am Ende der Fussnote hinzu.',
+        description=('Fuegen Sie einen Punkt am Ende'
+                     ' der Fussnote {%number%} hinzu.'),
     ),
 ]
 

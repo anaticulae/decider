@@ -49,4 +49,5 @@ def test_decider_cli_footnotes(testdir, monkeypatch):  ## pylint:disable=W0621
     assert os.path.exists(outpath), outpath
 
     dumped = utila.file_read(outpath)
-    assert len(dumped) > 10  # result contains some content
+    assert len(dumped) > 1000  # result contains some content
+    assert '{%number%}' not in dumped, dumped  # ensure that template is replaced
