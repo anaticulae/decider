@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v0.4.6
+
+### Feature
+
+* use template {%number%} to specify error message (3940f6146517)
+* add feature footnotes (2ad32d25af57)
+
 ## v0.4.5
 
 ## v0.4.4
