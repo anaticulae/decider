@@ -18,7 +18,7 @@ import tests.resources
 @pytest.fixture
 def example():
     loaded = decider.footnotes.load_frompath(
-        tests.resources.MASTER_72_PAGES_NOIMAGES_GENERATED,
+        tests.resources.MASTER72_GENERATED,
         pages=(3),
     )
     return loaded[0]
@@ -41,7 +41,7 @@ def test_decider_footnotes_validate(example):  # pylint:disable=W0621
 def test_decider_cli_footnotes(testdir, monkeypatch):  ## pylint:disable=W0621
     root = str(testdir)
 
-    cmd = ['-i', tests.resources.MASTER_72_PAGES_NOIMAGES_GENERATED, '-o', root]
+    cmd = ['-i', tests.resources.MASTER72_GENERATED, '-o', root]
     tests.run_decider(cmd, monkeypatch)
 
     outpath = os.path.join(root, 'decider__footnotes_user.yaml')

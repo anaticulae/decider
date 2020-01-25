@@ -67,7 +67,7 @@ TECHNICAL_24PAGES_TOO_DEEP = 14
         id='master78',
     ),
     pytest.param(
-        tests.resources.MASTER_72_PAGES_NOIMAGES_GENERATED,
+        tests.resources.MASTER72_GENERATED,
         0,
         id='master72',
     ),
@@ -85,7 +85,7 @@ def test_toc_validate_children(source, invalids):
         id='technical24',
     ),
     pytest.param(
-        tests.resources.MASTER_72_PAGES_NOIMAGES_GENERATED,
+        tests.resources.MASTER72_GENERATED,
         6,
         id='master72',
     ),

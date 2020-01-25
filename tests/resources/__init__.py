@@ -38,8 +38,8 @@ TECHNICAL_24PAGES_GENERATED = os.path.join(
 
 MASTER_HUGE = os.path.join(MASTER, 'page_116_images_toc_formular.pdf')
 
-MASTER_72_PAGES_NOIMAGES = os.path.join(MASTER, 'page_72_noimages_toc.pdf')
-MASTER_72_PAGES_NOIMAGES_GENERATED = os.path.join(
+MASTER72 = os.path.join(MASTER, 'page_72_noimages_toc.pdf')
+MASTER72_GENERATED = os.path.join(
     GENERATED,
     'master_page_72_noimages_toc',
 )
@@ -55,7 +55,7 @@ TWINE_NO_TOC = os.path.join(NO_TOC, 'docu_twine')
 
 TODO = [
     DOCU_TWINE,
-    MASTER_72_PAGES_NOIMAGES,
+    MASTER72,
     MASTER_78_PAGES_IMAGES,
     TECHNICAL_24PAGES,
 ]
@@ -63,8 +63,8 @@ TODO = [
 REQURIED_RESOURCES = [
     DOCU_TWINE,
     DOCU_TWINE_GENERATED,
-    MASTER_72_PAGES_NOIMAGES,
-    MASTER_72_PAGES_NOIMAGES_GENERATED,
+    MASTER72,
+    MASTER72_GENERATED,
     MASTER_78_PAGES_IMAGES,
     MASTER_78_PAGES_IMAGES_GENERATED,
     MASTER_HUGE,

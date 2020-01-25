@@ -38,7 +38,7 @@ def test_cli_decider(cmd, testdir, monkeypatch):
         id='master78',
     ),
     pytest.param(
-        tests.resources.MASTER_72_PAGES_NOIMAGES_GENERATED,
+        tests.resources.MASTER72_GENERATED,
         id='master72',
     ),
 ])

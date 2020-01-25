@@ -24,7 +24,7 @@ import tests.resources
         # (tests.resources.MASTER_HUGE, [
         #     decider.features.titlepage.MISSING_THESIS_TYPE_ID,
         # ]),
-        (tests.resources.MASTER_72_PAGES_NOIMAGES_GENERATED, [
+        (tests.resources.MASTER72_GENERATED, [
             decider.features.titlepage.MISSING_AUTHOR_MATRIKEL_ID,
         ]),
         (tests.resources.MASTER_78_PAGES_IMAGES_GENERATED, []),
