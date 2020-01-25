@@ -6,11 +6,15 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
+import contextlib
 import os
 
+import hey.path
+import protocol
 import pytest
 import utila
 
+import decider.features.footnotes
 import decider.footnotes
 import tests.resources
 
@@ -57,3 +61,64 @@ def test_footnotes_most_common_font(example):  # pylint:disable=W0621
     fontconfig = decider.footnotes.most_common_font(data)
     collected = [item is not None for item in vars(fontconfig).values()]
     assert all(collected), fontconfig
+
+
+@contextlib.contextmanager
+def active_ids(monkeypatch, ids=None):
+    if ids is None:
+        ids = []
+    with monkeypatch.context() as context:
+        disable_all = enable(decider.features.footnotes.IDS, active=ids)
+        context.setattr(decider.features.footnotes, 'MSG_STATUS', disable_all)
+        yield context
+
+
+def enable(items, active=None):
+    if active is None:
+        active = {}
+    result = [
+        protocol.MessageStatus(item, active=item in active) for item in items
+    ]
+    return result
+
+
+def empty(result):
+    return result == '[]\n'
+
+
+def test_footnotes_work_disable_all(monkeypatch):
+    footerheader = hey.path.headerfooters(tests.resources.MASTER72_GENERATED)
+    with active_ids(monkeypatch, ids=[]):
+        user, _ = decider.features.footnotes.work(footerheader)
+    assert empty(user), f'not all events are disabled:\n {user}'
+
+
+def test_footnotes_work_highnote_rise(monkeypatch):
+    footerheader = hey.path.headerfooters(tests.resources.MASTER72_GENERATED)
+    with active_ids(
+            monkeypatch,
+            ids=[decider.features.footnotes.INVALID_HIGHNOTE_RISE],
+    ) as context:
+        context.setattr(
+            decider.features.footnotes,
+            'MAX_HIGHNOTE_RISE_DIFF',
+            0.0,
+        )
+        user, _ = decider.features.footnotes.work(footerheader)
+    assert not empty(user)
+
+
+def test_footnotes_work_highnote_size(monkeypatch):
+    # TODO: LOOK FOR AN EXAMPLE WITH WRONG HIGHNOTE SIZE
+    footerheader = hey.path.headerfooters(tests.resources.MASTER72_GENERATED)
+    with active_ids(
+            monkeypatch,
+            ids=[decider.features.footnotes.INVALID_HIGHNOTE_SIZE],
+    ) as context:
+        context.setattr(
+            decider.features.footnotes,
+            'MAX_HIGHNOTE_SIZE_DIFF',
+            0.0,
+        )
+        user, _ = decider.features.footnotes.work(footerheader)
+    assert empty(user), user

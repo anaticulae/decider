@@ -121,6 +121,8 @@ def validate(note: iamraw.FootNote) -> Validated:
 def most_common_font(items: iamraw.FootNotes) -> FootNoteStyle:
     """Compute general footer font family and font size to judge single
     foot note."""
+    if not items:
+        return None
     # font_size
     # font_rise
     # font_id

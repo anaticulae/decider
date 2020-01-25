@@ -6,24 +6,32 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
+import math
 import typing
 
+import configo
 import protocol
+import utila
 import yaml
 
 import decider.footnotes
+
+MAX_HIGHNOTE_RISE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
+MAX_HIGHNOTE_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
 
 
 def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
     linter = create_linter()
 
     headerfooters = decider.footnotes.load(footerheader, pages)
+    footnotes = utila.flatten([item.content for item in headerfooters if item])
+    fontconfig = decider.footnotes.most_common_font(footnotes)
     for footer in headerfooters:
         footnotes = [
             decider.footnotes.validate(item) for item in footer.content
         ]
         # run linter
-        linting(footnotes, footer.page, linter)
+        linting(footnotes, fontconfig, footer.page, linter)
 
     result = linter.result(unique=True)
 
@@ -38,16 +46,24 @@ FOOTER_CHECKER_ID = 20
 
 NO_UPPERCASE_AT_START = 2001
 NO_DOT_AT_END = 2002
+INVALID_HIGHNOTE_RISE = 2003
+INVALID_HIGHNOTE_SIZE = 2004
 
 
-def linting(validated, page: int, linter: protocol.Linter):
+def linting(
+        validated,
+        fontconfig: decider.footnotes.FootNoteStyle,
+        page: int,
+        linter: protocol.Linter,
+):
 
-    def add_problem(msgid, location, number):
+    def add_problem(msgid, location, number, **kwargs):
         linter.add_finding(
             location=location,
             msgid=msgid,
             confidence=1.0,
             number=number,
+            **kwargs,
         )
 
     location = protocol.Location.from_page(page)
@@ -74,8 +90,43 @@ def linting(validated, page: int, linter: protocol.Linter):
                 number=item.content.number,
             )
 
+    def check_highnote_rise():
+        for item in validated:
+            current = item.content.style[0].rise
+            expected = fontconfig.highnote_rise
+            if equal(current, expected, MAX_HIGHNOTE_RISE_DIFF):
+                continue
+            add_problem(
+                INVALID_HIGHNOTE_RISE,
+                location,
+                number=item.content.number,
+                current=current,
+                expected=expected,
+            )
+
+    def check_highnote_size():
+        for item in validated:
+            current = item.content.style[0].size
+            expected = fontconfig.highnote_size
+            if equal(current, expected, MAX_HIGHNOTE_SIZE_DIFF):
+                continue
+            add_problem(
+                INVALID_HIGHNOTE_SIZE,
+                location,
+                number=item.content.number,
+                current=current,
+                expected=expected,
+            )
+
     check_start()
     check_end()
+
+    if not fontconfig:
+        return
+
+    # validation requires valid font config
+    check_highnote_rise()
+    check_highnote_size()
 
 
 def create_linter() -> protocol.Linter:
@@ -113,14 +164,28 @@ SOLUTION = [
         description=('Fuegen Sie einen Punkt am Ende'
                      ' der Fussnote {%number%} hinzu.'),
     ),
+    create_solution(
+        title='Fussnote {%number%}: invalid highnote rise',
+        msgid=INVALID_HIGHNOTE_RISE,
+        description='Expected: {%expected%} != Current: {%current%}',
+    ),
+    create_solution(
+        title='Fussnote {%number%}: invalid highnote size',
+        msgid=INVALID_HIGHNOTE_SIZE,
+        description='Expected: {%expected%} != Current: {%current%}',
+    ),
 ]
 
-MSG_STATUS = [
-    protocol.MessageStatus(
-        item,
-        active=True,
-    ) for item in [
-        NO_DOT_AT_END,
-        NO_UPPERCASE_AT_START,
-    ]
+IDS = [
+    INVALID_HIGHNOTE_RISE,
+    INVALID_HIGHNOTE_SIZE,
+    NO_DOT_AT_END,
+    NO_UPPERCASE_AT_START,
 ]
+
+MSG_STATUS = [protocol.MessageStatus(item, active=True) for item in IDS]
+
+
+def equal(current, expected, max_diff: float = 0.0001):
+    diff = math.fabs(expected - current)
+    return diff <= max_diff
