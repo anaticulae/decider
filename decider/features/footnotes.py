@@ -19,6 +19,8 @@ import decider.footnotes
 MAX_HIGHNOTE_RISE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
 MAX_HIGHNOTE_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
 
+MAX_CONTENT_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
+
 
 def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
     linter = create_linter()
@@ -49,6 +51,8 @@ NO_DOT_AT_END = 2002
 INVALID_HIGHNOTE_RISE = 2003
 INVALID_HIGHNOTE_SIZE = 2004
 INVALID_HIGHNOTE_FONT_FAMILY = 2005
+
+INVALID_CONTENT_SIZE = 2010
 
 
 def linting(
@@ -133,6 +137,23 @@ def linting(
                 expected=expected,
             )
 
+    def check_content_size():
+        expected = fontconfig.content_size
+        for item in validated:
+            sizes = [item.size for item in item.content.style[1].content]
+            sizes_equal = [
+                equal(item, expected, MAX_CONTENT_SIZE_DIFF) for item in sizes
+            ]
+            if all(sizes_equal):
+                continue
+            add_problem(
+                INVALID_CONTENT_SIZE,
+                location,
+                number=item.content.number,
+                current=sizes,
+                expected=expected,
+            )
+
     check_start()
     check_end()
 
@@ -143,6 +164,7 @@ def linting(
     check_highnote_font_family()
     check_highnote_rise()
     check_highnote_size()
+    check_content_size()
 
 
 def create_linter() -> protocol.Linter:
@@ -180,6 +202,7 @@ SOLUTION = [
         description=('Fuegen Sie einen Punkt am Ende'
                      ' der Fussnote {%number%} hinzu.'),
     ),
+    # highnote/number
     create_solution(
         title='Fussnote {%number%}: invalid highnote rise',
         msgid=INVALID_HIGHNOTE_RISE,
@@ -195,9 +218,16 @@ SOLUTION = [
         msgid=INVALID_HIGHNOTE_FONT_FAMILY,
         description='Expected: {%expected%} != Current: {%current%}',
     ),
+    # content
+    create_solution(
+        title='Fussnote {%number%}: invalid content size',
+        msgid=INVALID_CONTENT_SIZE,
+        description='Expected: {%expected%} != Current: {%current%}',
+    ),
 ]
 
 IDS = [
+    INVALID_CONTENT_SIZE,
     INVALID_HIGHNOTE_FONT_FAMILY,
     INVALID_HIGHNOTE_RISE,
     INVALID_HIGHNOTE_SIZE,
