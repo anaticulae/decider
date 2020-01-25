@@ -1,0 +1,15 @@
+.. _0_6_0:
+
+RP 0.6.0
+=========
+
+border
+------
+
+* [ ] add border validator
+
+code quality
+------------
+
+before
+~~~~~~
