@@ -122,3 +122,13 @@ def test_footnotes_work_highnote_size(monkeypatch):
         )
         user, _ = decider.features.footnotes.work(footerheader)
     assert empty(user), user
+
+
+def test_footnotes_work_highnote_font_family(monkeypatch):
+    footerheader = hey.path.headerfooters(tests.resources.MASTER72_GENERATED)
+    with active_ids(
+            monkeypatch,
+            ids=[decider.features.footnotes.INVALID_HIGHNOTE_FONT_FAMILY],
+    ):
+        user, _ = decider.features.footnotes.work(footerheader)
+    assert not empty(user), 'no invalid font detection'

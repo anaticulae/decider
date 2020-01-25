@@ -48,6 +48,7 @@ NO_UPPERCASE_AT_START = 2001
 NO_DOT_AT_END = 2002
 INVALID_HIGHNOTE_RISE = 2003
 INVALID_HIGHNOTE_SIZE = 2004
+INVALID_HIGHNOTE_FONT_FAMILY = 2005
 
 
 def linting(
@@ -118,6 +119,20 @@ def linting(
                 expected=expected,
             )
 
+    def check_highnote_font_family():
+        for item in validated:
+            current = item.content.style[0].font
+            expected = fontconfig.highnote_fontid
+            if current == expected:
+                continue
+            add_problem(
+                INVALID_HIGHNOTE_FONT_FAMILY,
+                location,
+                number=item.content.number,
+                current=current,
+                expected=expected,
+            )
+
     check_start()
     check_end()
 
@@ -125,6 +140,7 @@ def linting(
         return
 
     # validation requires valid font config
+    check_highnote_font_family()
     check_highnote_rise()
     check_highnote_size()
 
@@ -174,9 +190,15 @@ SOLUTION = [
         msgid=INVALID_HIGHNOTE_SIZE,
         description='Expected: {%expected%} != Current: {%current%}',
     ),
+    create_solution(
+        title='Fussnote {%number%}: invalid font family',
+        msgid=INVALID_HIGHNOTE_FONT_FAMILY,
+        description='Expected: {%expected%} != Current: {%current%}',
+    ),
 ]
 
 IDS = [
+    INVALID_HIGHNOTE_FONT_FAMILY,
     INVALID_HIGHNOTE_RISE,
     INVALID_HIGHNOTE_SIZE,
     NO_DOT_AT_END,
