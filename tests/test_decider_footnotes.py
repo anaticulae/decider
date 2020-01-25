@@ -35,7 +35,6 @@ def test_decider_footnotes_validate(example):  # pylint:disable=W0621
     valid = [item.valid for item in result]
 
     expected = [True, False, False, False, False, False]
-    expected[0] = False  #TODO: REMOVE AFTER FIXING PARSER
     assert valid == expected
 
 
