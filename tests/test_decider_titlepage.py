@@ -27,7 +27,7 @@ import tests.resources
         (tests.resources.MASTER72_GENERATED, [
             decider.features.titlepage.MISSING_AUTHOR_MATRIKEL_ID,
         ]),
-        (tests.resources.MASTER_78_PAGES_IMAGES_GENERATED, []),
+        (tests.resources.MASTER78_GENERATED, []),
         (tests.resources.TWINE_NO_TITLE_PAGE, [
             decider.features.titlepage.MISSING_TITLEPAGE_ID,
         ]),

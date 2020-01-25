@@ -13,6 +13,5 @@ import tests.resources
 
 
 def test_toc_pages_validate():
-    toc = tests.tableofcontent(tests.resources.TECHNICAL_24PAGES_GENERATED) # yapf:disable
-
-    validated = dtp.validate(toc)
+    toc = tests.tableofcontent(tests.resources.TECHNICAL24_GENERATED)
+    validated = dtp.validate(toc)  # pylint:disable=W0612

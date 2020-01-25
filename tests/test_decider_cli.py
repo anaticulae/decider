@@ -30,11 +30,11 @@ def test_cli_decider(cmd, testdir, monkeypatch):
 
 @pytest.mark.parametrize('source', [
     pytest.param(
-        tests.resources.TECHNICAL_24PAGES_GENERATED,
+        tests.resources.TECHNICAL24_GENERATED,
         id='technical24',
     ),
     pytest.param(
-        tests.resources.MASTER_78_PAGES_IMAGES_GENERATED,
+        tests.resources.MASTER78_GENERATED,
         id='master78',
     ),
     pytest.param(

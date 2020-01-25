@@ -34,13 +34,13 @@ def test_toc_extraction_no_toc():  # pylint:disable=W0621
 
 def test_toc_extraction(monkeypatch):  # pylint:disable=W0621
     expected_failures = sum([
-        TECHNICAL_24PAGES_INVALID_CHILDREN,
-        TECHNICAL_24PAGES_TOO_DEEP,
+        TECHNICAL24_INVALID_CHILDREN,
+        TECHNICAL24_TOO_DEEP,
     ])
 
     with monkeypatch.context() as context:
         context.setattr(dtl, 'MAX_TOC_DEEPNESS', 2)
-        failures = lint(tests.resources.TECHNICAL_24PAGES_GENERATED)
+        failures = lint(tests.resources.TECHNICAL24_GENERATED)
     failures = len(failures)
     assert failures == expected_failures, str(failures)
 
@@ -50,18 +50,18 @@ def messageids(items):
     return result
 
 
-TECHNICAL_24PAGES_INVALID_CHILDREN = 1
-TECHNICAL_24PAGES_TOO_DEEP = 14
+TECHNICAL24_INVALID_CHILDREN = 1
+TECHNICAL24_TOO_DEEP = 14
 
 
 @pytest.mark.parametrize('source, invalids', [
     pytest.param(
-        tests.resources.TECHNICAL_24PAGES_GENERATED,
-        TECHNICAL_24PAGES_INVALID_CHILDREN,
+        tests.resources.TECHNICAL24_GENERATED,
+        TECHNICAL24_INVALID_CHILDREN,
         id='technical24',
     ),
     pytest.param(
-        tests.resources.MASTER_78_PAGES_IMAGES_GENERATED,
+        tests.resources.MASTER78_GENERATED,
         3,
         marks=pytest.mark.xfail(reason='fix toc parser'),
         id='master78',
@@ -80,8 +80,8 @@ def test_toc_validate_children(source, invalids):
 
 @pytest.mark.parametrize('source, too_deep', [
     pytest.param(
-        tests.resources.TECHNICAL_24PAGES_GENERATED,
-        TECHNICAL_24PAGES_TOO_DEEP,
+        tests.resources.TECHNICAL24_GENERATED,
+        TECHNICAL24_TOO_DEEP,
         id='technical24',
     ),
     pytest.param(

@@ -30,8 +30,8 @@ DOCU_TWINE = os.path.join(DOCU, 'twine.pdf')
 DOCU_TWINE_GENERATED = os.path.join(GENERATED, 'docu_twine')
 
 TECHNICAL = os.path.join(RESOURCES, 'technical')
-TECHNICAL_24PAGES = os.path.join(TECHNICAL, 'page_24_color_figures_images.pdf')
-TECHNICAL_24PAGES_GENERATED = os.path.join(
+TECHNICAL24 = os.path.join(TECHNICAL, 'page_24_color_figures_images.pdf')
+TECHNICAL24_GENERATED = os.path.join(
     GENERATED,
     'technical_page_24_color_figures_images',
 )
@@ -44,8 +44,8 @@ MASTER72_GENERATED = os.path.join(
     'master_page_72_noimages_toc',
 )
 
-MASTER_78_PAGES_IMAGES = os.path.join(MASTER, 'page_78_images_toc.pdf')
-MASTER_78_PAGES_IMAGES_GENERATED = os.path.join(
+MASTER78 = os.path.join(MASTER, 'page_78_images_toc.pdf')
+MASTER78_GENERATED = os.path.join(
     GENERATED,
     'master_page_78_images_toc',
 )
@@ -56,8 +56,8 @@ TWINE_NO_TOC = os.path.join(NO_TOC, 'docu_twine')
 TODO = [
     DOCU_TWINE,
     MASTER72,
-    MASTER_78_PAGES_IMAGES,
-    TECHNICAL_24PAGES,
+    MASTER78,
+    TECHNICAL24,
 ]
 
 REQURIED_RESOURCES = [
@@ -65,12 +65,12 @@ REQURIED_RESOURCES = [
     DOCU_TWINE_GENERATED,
     MASTER72,
     MASTER72_GENERATED,
-    MASTER_78_PAGES_IMAGES,
-    MASTER_78_PAGES_IMAGES_GENERATED,
+    MASTER78,
+    MASTER78_GENERATED,
     MASTER_HUGE,
     NO_TITLE_PAGE,
-    TECHNICAL_24PAGES,
-    TECHNICAL_24PAGES_GENERATED,
+    TECHNICAL24,
+    TECHNICAL24_GENERATED,
     TWINE_NO_TITLE_PAGE,
     TWINE_NO_TOC,
 ]
