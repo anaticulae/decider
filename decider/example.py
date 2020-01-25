@@ -19,7 +19,7 @@ def extract(
         files: list,
         destination: str,
         pages: str = '0:10',
-        worker: int = 5,
+        worker: int = 12,
 ):
     """Run rawmaker, groupme, sections, words, detector, decider for
     given `files` and write result to `destination`.

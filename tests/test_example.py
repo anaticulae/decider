@@ -21,7 +21,7 @@ def test_decider_example_extract(testdir):
     generated = os.path.join(root, 'generated')
     pdfs = [
         tests.resources.DOCU_TWINE,
-        tests.resources.MASTER72,
+        tests.resources.TECHNICAL_24PAGES,
     ]
     decider.example.extract(pdfs, generated)
 
