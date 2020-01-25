@@ -19,20 +19,34 @@
 import collections
 import dataclasses
 import os
+import statistics
 import typing
 
 import hey.path
 import iamraw
 import serializeraw
+import utila
 
 # TODO: REPLACE AFTER UPGRADING IAMRAW
 FootNotes = typing.List[iamraw.FootNote]
+iamraw.FootNotes = FootNotes
 
 PageContentFootnote = collections.namedtuple(
     'PageContentFootnotes',
     'content, page',
 )
 PageContentFootnotes = typing.List[PageContentFootnote]
+
+
+@dataclasses.dataclass
+class FootNoteStyle:
+
+    content_fontid: int = None
+    content_size: float = None
+
+    highnote_fontid: int = None
+    highnote_rise: float = None
+    highnote_size: float = None
 
 
 @dataclasses.dataclass
@@ -100,5 +114,43 @@ def validate(note: iamraw.FootNote) -> Validated:
         content=note,
         uppercase=start_with_uppercase,
         ends=ends_with_dot,
+    )
+    return result
+
+
+def most_common_font(items: iamraw.FootNotes) -> FootNoteStyle:
+    """Compute general footer font family and font size to judge single
+    foot note."""
+    # font_size
+    # font_rise
+    # font_id
+    highnote_size = []
+    highnote_rise = []
+    highnote_fontid = []
+    content_size = []
+    content_fontid = []
+    for item in items:
+        highnote, content = item.style
+        highnote_size.append(highnote.size)
+        highnote_rise.append(highnote.rise)
+        highnote_fontid.append(highnote.font)
+        content_size.extend(
+            utila.flatten([[item.size] * (item.end - item.start)
+                           for item in content.content]))
+        content_fontid.extend(
+            utila.flatten([[item.font] * (item.end - item.start)
+                           for item in content.content]))
+    highnote_size = statistics.mode(highnote_size)
+    highnote_rise = statistics.mode(highnote_rise)
+    highnote_fontid = statistics.mode(highnote_fontid)
+    content_size = statistics.mode(content_size)
+    content_fontid = statistics.mode(content_fontid)
+
+    result = FootNoteStyle(
+        content_fontid=content_fontid,
+        content_size=content_size,
+        highnote_fontid=highnote_fontid,
+        highnote_rise=highnote_rise,
+        highnote_size=highnote_size,
     )
     return result

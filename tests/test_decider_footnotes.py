@@ -50,3 +50,10 @@ def test_decider_cli_footnotes(testdir, monkeypatch):  ## pylint:disable=W0621
     dumped = utila.file_read(outpath)
     assert len(dumped) > 1000  # result contains some content
     assert '{%number%}' not in dumped, dumped  # ensure that template is replaced
+
+
+def test_footnotes_most_common_font(example):  # pylint:disable=W0621
+    data = example.content
+    fontconfig = decider.footnotes.most_common_font(data)
+    collected = [item is not None for item in vars(fontconfig).values()]
+    assert all(collected), fontconfig
