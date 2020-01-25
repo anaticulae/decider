@@ -21,6 +21,7 @@ import dataclasses
 import os
 import typing
 
+import hey.path
 import iamraw
 import serializeraw
 
@@ -62,16 +63,30 @@ def footnotes(headerfooters: iamraw.PageContentFooterHeaders,
     return result
 
 
-def loads(path: str, pages: tuple = None) -> PageContentFootnotes:
+def load(path: str, pages: tuple = None) -> PageContentFootnotes:
+    """Load list of `PageContentFootnote` from given `path`
+
+    Args:
+        path: path to content file
+        pages: tuple of pages to process
+    Returns:
+        loaded list of PageContentFootnote
+    """
     loaded = serializeraw.load_headerfooter(path, pages=pages)
     selected = footnotes(loaded)
     return selected
 
 
-def load(path: str, pages: tuple = None) -> PageContentFootnotes:
+def load_frompath(
+        path: str,
+        prefix: str = '',
+        pages: tuple = None,
+) -> PageContentFootnotes:
+    """Determine path to footer file from given directory `path` and
+    optional `prefix`."""
     assert os.path.isdir(path), f'invalid result directory {path}'
-    source = os.path.join(path, 'groupme__footer_footerheader.yaml')
-    loaded = loads(source, pages=pages)
+    source = hey.path.headerfooters(path, prefix=prefix)
+    loaded = load(source, pages=pages)
     return loaded
 
 

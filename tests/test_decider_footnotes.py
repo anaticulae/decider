@@ -17,7 +17,7 @@ import tests.resources
 
 @pytest.fixture
 def example():
-    loaded = decider.footnotes.load(
+    loaded = decider.footnotes.load_frompath(
         tests.resources.MASTER_72_PAGES_NOIMAGES_GENERATED,
         pages=(3),
     )

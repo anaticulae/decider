@@ -17,7 +17,7 @@ import decider.footnotes
 def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
     linter = create_linter()
 
-    headerfooters = decider.footnotes.loads(footerheader, pages)
+    headerfooters = decider.footnotes.load(footerheader, pages)
     for footer in headerfooters:
         footnotes = [
             decider.footnotes.validate(item) for item in footer.content
