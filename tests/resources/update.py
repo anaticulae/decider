@@ -35,12 +35,20 @@ def sync_resources():
     assert completed.returncode == utila.SUCCESS, str(completed)
 
 
+WORKER = 12
+
+
 def extract_examples():
     destination = tests.resources.GENERATED
     if os.path.exists(destination):
         return
 
-    hey.example.extract(tests.resources.TODO, destination, pages=None)
+    hey.example.extract(
+        tests.resources.TODO,
+        destination,
+        pages=None,
+        worker=WORKER,
+    )
 
     extract_without_titlepage()
     extract_without_toc()
@@ -72,7 +80,12 @@ def extract_without_titlepage():
         completed = utila.run(f'jam -i {inpath} -o {outpath} --remove=0')
         assert completed.returncode == utila.SUCCESS, str(completed)
 
-    hey.example.extract(without_titlepage, destination, pages='0:20')
+    hey.example.extract(
+        without_titlepage,
+        destination,
+        pages='0:20',
+        worker=WORKER,
+    )
 
 
 def extract_without_toc():
@@ -86,4 +99,9 @@ def extract_without_toc():
         completed = utila.run(f'jam -i {inpath} -o {outpath} --remove=1:5')
         assert completed.returncode == utila.SUCCESS, str(completed)
 
-    hey.example.extract(without_titlepage, destination, pages='0:20')
+    hey.example.extract(
+        without_titlepage,
+        destination,
+        pages='0:20',
+        worker=WORKER,
+    )
