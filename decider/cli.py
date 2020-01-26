@@ -18,14 +18,14 @@ DESCRIPTION = ''
 
 TITLEPAGE = 'titlepage'
 TOC = 'toc'
-FOOTNOTES = 'footnotes'
+FOOTNOTE = 'footnote'
 
 USER = 'user'
 DEVELOPER = 'developer'
 
 WORKPLAN = [
     utila.create_step(
-        FOOTNOTES,
+        FOOTNOTE,
         [
             utila.ResultFile(groupme.PROCESS, 'footer_footerheader'),
         ],

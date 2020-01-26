@@ -16,7 +16,7 @@ import tests.resources
 
 
 @utila.skip_longrun
-def test_decider_example_extract(testdir):
+def test_example_extract(testdir):
     root = str(testdir)
     generated = os.path.join(root, 'generated')
     pdfs = [

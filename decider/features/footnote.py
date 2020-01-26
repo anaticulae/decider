@@ -14,7 +14,7 @@ import protocol
 import utila
 import yaml
 
-import decider.footnotes
+import decider.footnote
 
 MAX_HIGHNOTE_RISE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
 MAX_HIGHNOTE_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
@@ -25,13 +25,11 @@ MAX_CONTENT_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
 def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
     linter = create_linter()
 
-    headerfooters = decider.footnotes.load(footerheader, pages)
+    headerfooters = decider.footnote.load(footerheader, pages)
     footnotes = utila.flatten([item.content for item in headerfooters if item])
-    fontconfig = decider.footnotes.most_common_font(footnotes)
+    fontconfig = decider.footnote.most_common_font(footnotes)
     for footer in headerfooters:
-        footnotes = [
-            decider.footnotes.validate(item) for item in footer.content
-        ]
+        footnotes = [decider.footnote.validate(item) for item in footer.content]
         # run linter
         linting(footnotes, fontconfig, footer.page, linter)
 
@@ -57,7 +55,7 @@ INVALID_CONTENT_SIZE = 2010
 
 def linting(
         validated,
-        fontconfig: decider.footnotes.FootNoteStyle,
+        fontconfig: decider.footnote.FootNoteStyle,
         page: int,
         linter: protocol.Linter,
 ):
@@ -74,7 +72,7 @@ def linting(
     location = protocol.Location.from_page(page)
 
     def check_start():
-        # item : decider.footnotes.Validated
+        # item : decider.footnote.Validated
         for item in validated:
             if item.uppercase:
                 continue
@@ -85,7 +83,7 @@ def linting(
             )
 
     def check_end():
-        # item : decider.footnotes.Validated
+        # item : decider.footnote.Validated
         for item in validated:
             if item.ends:
                 continue
