@@ -6,6 +6,7 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
+import collections
 import math
 import typing
 
@@ -52,6 +53,13 @@ INVALID_HIGHNOTE_FONT_FAMILY = 2005
 INVALID_CONTENT_SIZE = 2010
 
 
+def data_driver(**kwargs):
+    # TODO: THERE MUST BE A BETTER WAY. PYTHONIC WAY.
+    Driver = collections.namedtuple('Driver', kwargs.keys())
+    driver = Driver(**kwargs)
+    return driver
+
+
 def linting(
         items,
         fontconfig: decider.footnote.FootNoteStyle,
@@ -60,100 +68,110 @@ def linting(
 ):
     location = protocol.Location.from_page(page)
 
-    def check_2001_no_uppercase_at_start():
-        # item : decider.footnote.Validated
-        for item in items:
-            text = item.text.strip()
-            if text[0].isupper():
-                continue
-            linter.add_finding(
-                location=location,
-                msgid=NO_UPPERCASE_AT_START,
-                number=item.number,
-            )
-
-    def check_2002_no_dot_at_end():
-        # item : decider.footnote.Validated
-        for item in items:
-            text = item.text.strip()
-            if text[-1] == '.':
-                continue
-            linter.add_finding(
-                location,
-                NO_DOT_AT_END,
-                number=item.number,
-            )
-
-    def check_2003_invalid_highnote_rise():
-        for item in items:
-            current = item.style[0].rise
-            expected = fontconfig.highnote_rise
-            if equal(current, expected, MAX_HIGHNOTE_RISE_DIFF):
-                continue
-            linter.add_finding(
-                location,
-                INVALID_HIGHNOTE_RISE,
-                number=item.number,
-                current=current,
-                expected=expected,
-            )
-
-    def check_2004_invalid_hignote_size():
-        for item in items:
-            current = item.style[0].size
-            expected = fontconfig.highnote_size
-            if equal(current, expected, MAX_HIGHNOTE_SIZE_DIFF):
-                continue
-            linter.add_finding(
-                location,
-                INVALID_HIGHNOTE_SIZE,
-                number=item.number,
-                current=current,
-                expected=expected,
-            )
-
-    def check_2005_invalid_highnote_fontfamily():
-        for item in items:
-            current = item.style[0].font
-            expected = fontconfig.highnote_fontid
-            if current == expected:
-                continue
-            linter.add_finding(
-                location,
-                INVALID_HIGHNOTE_FONT_FAMILY,
-                number=item.number,
-                current=current,
-                expected=expected,
-            )
-
-    def check_2010_invalid_content_fontsize():
-        expected = fontconfig.content_size
-        for item in items:
-            sizes = [item.size for item in item.style[1].content]
-            sizes_equal = [
-                equal(item, expected, MAX_CONTENT_SIZE_DIFF) for item in sizes
-            ]
-            if all(sizes_equal):
-                continue
-            linter.add_finding(
-                location,
-                INVALID_CONTENT_SIZE,
-                number=item.number,
-                current=sizes,
-                expected=expected,
-            )
-
-    check_2001_no_uppercase_at_start()
-    check_2002_no_dot_at_end()
+    datum = data_driver(location=location)
+    for item in items:
+        check_2001_no_uppercase_at_start(linter, item, data=datum)
+        check_2002_no_dot_at_end(linter, item, data=datum)
 
     if not fontconfig:
+        # validation requires valid font config
         return
 
-    # validation requires valid font config
-    check_2005_invalid_highnote_fontfamily()
-    check_2003_invalid_highnote_rise()
-    check_2004_invalid_hignote_size()
-    check_2010_invalid_content_fontsize()
+    extended_datum = data_driver(location=location, fontconfig=fontconfig)
+    for item in items:
+        check_2003_invalid_highnote_rise(linter, item, extended_datum)
+        check_2004_invalid_hignote_size(linter, item, extended_datum)
+        check_2005_invalid_highnote_fontfamily(linter, item, extended_datum)
+        check_2010_invalid_content_fontsize(linter, item, extended_datum)
+
+
+def check_2001_no_uppercase_at_start(linter, item, data):
+    text = item.text.strip()
+
+    if text[0].isupper():
+        return
+
+    linter.add_finding(
+        location=data.location,
+        msgid=NO_UPPERCASE_AT_START,
+        number=item.number,
+    )
+
+
+def check_2002_no_dot_at_end(linter, item, data):
+    text = item.text.strip()
+
+    if text[-1] == '.':
+        return
+
+    linter.add_finding(
+        data.location,
+        NO_DOT_AT_END,
+        number=item.number,
+    )
+
+
+def check_2003_invalid_highnote_rise(linter, item, data):
+    current = item.style[0].rise
+    expected = data.fontconfig.highnote_rise
+
+    if equal(current, expected, MAX_HIGHNOTE_RISE_DIFF):
+        return
+
+    linter.add_finding(
+        data.location,
+        INVALID_HIGHNOTE_RISE,
+        number=item.number,
+        current=current,
+        expected=expected,
+    )
+
+
+def check_2004_invalid_hignote_size(linter, item, data):
+    current = item.style[0].size
+    expected = data.fontconfig.highnote_size
+
+    if equal(current, expected, MAX_HIGHNOTE_SIZE_DIFF):
+        return
+
+    linter.add_finding(
+        data.location,
+        INVALID_HIGHNOTE_SIZE,
+        number=item.number,
+        current=current,
+        expected=expected,
+    )
+
+
+def check_2005_invalid_highnote_fontfamily(linter, item, data):
+    current = item.style[0].font
+    expected = data.fontconfig.highnote_fontid
+    if current == expected:
+        return
+    linter.add_finding(
+        data.location,
+        INVALID_HIGHNOTE_FONT_FAMILY,
+        number=item.number,
+        current=current,
+        expected=expected,
+    )
+
+
+def check_2010_invalid_content_fontsize(linter, item, data):
+    expected = data.fontconfig.content_size
+    sizes = [item.size for item in item.style[1].content]
+    sizes_equal = [
+        equal(item, expected, MAX_CONTENT_SIZE_DIFF) for item in sizes
+    ]
+    if all(sizes_equal):
+        return
+    linter.add_finding(
+        data.location,
+        INVALID_CONTENT_SIZE,
+        number=item.number,
+        current=sizes,
+        expected=expected,
+    )
 
 
 SOLUTION = [
