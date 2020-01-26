@@ -63,6 +63,11 @@ def test_footnotes_most_common_font(example):  # pylint:disable=W0621
     assert all(collected), fontconfig
 
 
+def test_footnotes_most_common_font_empty():
+    fontconfig = decider.footnotes.most_common_font(items=[])
+    assert fontconfig is None
+
+
 @contextlib.contextmanager
 def active_ids(monkeypatch, ids=None):
     if ids is None:
