@@ -60,7 +60,7 @@ def linting(
 ):
     location = protocol.Location.from_page(page)
 
-    def check_start():
+    def check_2001_no_uppercase_at_start():
         # item : decider.footnote.Validated
         for item in validated:
             if item.uppercase:
@@ -71,7 +71,7 @@ def linting(
                 number=item.content.number,
             )
 
-    def check_end():
+    def check_2002_no_dot_at_end():
         # item : decider.footnote.Validated
         for item in validated:
             if item.ends:
@@ -82,7 +82,7 @@ def linting(
                 number=item.content.number,
             )
 
-    def check_highnote_rise():
+    def check_2003_invalid_highnote_rise():
         for item in validated:
             current = item.content.style[0].rise
             expected = fontconfig.highnote_rise
@@ -96,7 +96,7 @@ def linting(
                 expected=expected,
             )
 
-    def check_highnote_size():
+    def check_2004_invalid_hignote_size():
         for item in validated:
             current = item.content.style[0].size
             expected = fontconfig.highnote_size
@@ -110,7 +110,7 @@ def linting(
                 expected=expected,
             )
 
-    def check_highnote_font_family():
+    def check_2005_invalid_highnote_fontfamily():
         for item in validated:
             current = item.content.style[0].font
             expected = fontconfig.highnote_fontid
@@ -124,7 +124,7 @@ def linting(
                 expected=expected,
             )
 
-    def check_content_size():
+    def check_2010_invalid_content_fontsize():
         expected = fontconfig.content_size
         for item in validated:
             sizes = [item.size for item in item.content.style[1].content]
@@ -141,17 +141,17 @@ def linting(
                 expected=expected,
             )
 
-    check_start()
-    check_end()
+    check_2001_no_uppercase_at_start()
+    check_2002_no_dot_at_end()
 
     if not fontconfig:
         return
 
     # validation requires valid font config
-    check_highnote_font_family()
-    check_highnote_rise()
-    check_highnote_size()
-    check_content_size()
+    check_2005_invalid_highnote_fontfamily()
+    check_2003_invalid_highnote_rise()
+    check_2004_invalid_hignote_size()
+    check_2010_invalid_content_fontsize()
 
 
 SOLUTION = [
