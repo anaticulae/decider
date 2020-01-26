@@ -11,6 +11,7 @@ import pytest
 import utila
 
 import decider
+import tests
 import tests.resources
 
 
@@ -43,13 +44,12 @@ def test_cli_decider(cmd, testdir, monkeypatch):
     ),
 ])
 @utila.skip_longrun
-def test_cli_detector_and_decider(source, testdir):
+def test_cli_detector_and_decider(source, testdir, monkeypatch):
     """Run decider"""
     root = str(testdir)
     cmd = f'detector -i {source} -o {root}'
     completed = utila.run(cmd)
     assert completed.returncode == utila.SUCCESS, str(completed)
 
-    cmd = f'decider -i {root} -i {source} -o {root}'
-    completed = utila.run(cmd)
-    assert completed.returncode == utila.SUCCESS, str(completed)
+    cmd = f'-i {root} -i {source} -o {root}'
+    tests.run_decider(cmd, monkeypatch)
