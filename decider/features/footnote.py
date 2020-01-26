@@ -12,9 +12,9 @@ import typing
 import configo
 import protocol
 import utila
-import yaml
 
 import decider.footnote
+import decider.utils
 
 MAX_HIGHNOTE_RISE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
 MAX_HIGHNOTE_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
@@ -23,7 +23,7 @@ MAX_CONTENT_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
 
 
 def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
-    linter = create_linter()
+    linter = decider.utils.from_module(__name__)
 
     headerfooters = decider.footnote.load(footerheader, pages)
     footnotes = utila.flatten([item.content for item in headerfooters if item])
@@ -33,12 +33,11 @@ def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
         # run linter
         linting(footnotes, fontconfig, footer.page, linter)
 
-    result = linter.result(unique=True)
-
-    # dump linter result
-    user_dumped = yaml.dump(result[0])
-    developer_dumped = yaml.dump(result[1])
-    return user_dumped, developer_dumped
+    # TODO: FIX RETURN TYPE AFTER UPGRADING UTILA
+    # TODO: FIX AFTER UPGRADING PROTOCOL
+    dumped = protocol.dump_result(linter.result, unique=True)
+    # TODO: FIX AFTER UPGRADING PROTOCOL
+    return dumped[0], dumped[1]
 
 
 # TODO: ADD GENERAL PACKAGE TO DEFINE UNIQUE IDS
@@ -59,16 +58,6 @@ def linting(
         page: int,
         linter: protocol.Linter,
 ):
-
-    def add_problem(msgid, location, number, **kwargs):
-        linter.add_finding(
-            location=location,
-            msgid=msgid,
-            confidence=1.0,
-            number=number,
-            **kwargs,
-        )
-
     location = protocol.Location.from_page(page)
 
     def check_start():
@@ -76,9 +65,9 @@ def linting(
         for item in validated:
             if item.uppercase:
                 continue
-            add_problem(
-                NO_UPPERCASE_AT_START,
-                location,
+            linter.add_finding(
+                location=location,
+                msgid=NO_UPPERCASE_AT_START,
                 number=item.content.number,
             )
 
@@ -87,9 +76,9 @@ def linting(
         for item in validated:
             if item.ends:
                 continue
-            add_problem(
-                NO_DOT_AT_END,
+            linter.add_finding(
                 location,
+                NO_DOT_AT_END,
                 number=item.content.number,
             )
 
@@ -99,9 +88,9 @@ def linting(
             expected = fontconfig.highnote_rise
             if equal(current, expected, MAX_HIGHNOTE_RISE_DIFF):
                 continue
-            add_problem(
-                INVALID_HIGHNOTE_RISE,
+            linter.add_finding(
                 location,
+                INVALID_HIGHNOTE_RISE,
                 number=item.content.number,
                 current=current,
                 expected=expected,
@@ -113,9 +102,9 @@ def linting(
             expected = fontconfig.highnote_size
             if equal(current, expected, MAX_HIGHNOTE_SIZE_DIFF):
                 continue
-            add_problem(
-                INVALID_HIGHNOTE_SIZE,
+            linter.add_finding(
                 location,
+                INVALID_HIGHNOTE_SIZE,
                 number=item.content.number,
                 current=current,
                 expected=expected,
@@ -127,9 +116,9 @@ def linting(
             expected = fontconfig.highnote_fontid
             if current == expected:
                 continue
-            add_problem(
-                INVALID_HIGHNOTE_FONT_FAMILY,
+            linter.add_finding(
                 location,
+                INVALID_HIGHNOTE_FONT_FAMILY,
                 number=item.content.number,
                 current=current,
                 expected=expected,
@@ -144,9 +133,9 @@ def linting(
             ]
             if all(sizes_equal):
                 continue
-            add_problem(
-                INVALID_CONTENT_SIZE,
+            linter.add_finding(
                 location,
+                INVALID_CONTENT_SIZE,
                 number=item.content.number,
                 current=sizes,
                 expected=expected,
@@ -165,59 +154,37 @@ def linting(
     check_content_size()
 
 
-def create_linter() -> protocol.Linter:
-    solver = protocol.Solver()
-    for item in SOLUTION:
-        solver.add_solution(item.msgid, item)
-
-    linter = protocol.Linter(
-        active=MSG_STATUS,
-        solver=solver,
-    )
-    return linter
-
-
-def create_solution(title: str, msgid: str, description: str):
-    result = protocol.Text(
-        title=title,
-        description=description,
-        status=protocol.ProblemStatus.OPEN,
-        msgid=msgid,
-    )
-    return result
-
-
 SOLUTION = [
-    create_solution(
+    protocol.Text(
         title='Die Fussnote {%number%} beginnt nicht mit einem Grossbuchstaben',
         msgid=NO_UPPERCASE_AT_START,
         description=('Ersetzen Sie den ersten Buchstaben der '
                      'Fussnote {%number%} mit einem Grossbuchstaben.'),
     ),
-    create_solution(
+    protocol.Text(
         title='Die Fussnote {%number%} endet nicht mit einem Punkt',
         msgid=NO_DOT_AT_END,
         description=('Fuegen Sie einen Punkt am Ende'
                      ' der Fussnote {%number%} hinzu.'),
     ),
     # highnote/number
-    create_solution(
+    protocol.Text(
         title='Fussnote {%number%}: invalid highnote rise',
         msgid=INVALID_HIGHNOTE_RISE,
         description='Expected: {%expected%} != Current: {%current%}',
     ),
-    create_solution(
+    protocol.Text(
         title='Fussnote {%number%}: invalid highnote size',
         msgid=INVALID_HIGHNOTE_SIZE,
         description='Expected: {%expected%} != Current: {%current%}',
     ),
-    create_solution(
+    protocol.Text(
         title='Fussnote {%number%}: invalid font family',
         msgid=INVALID_HIGHNOTE_FONT_FAMILY,
         description='Expected: {%expected%} != Current: {%current%}',
     ),
     # content
-    create_solution(
+    protocol.Text(
         title='Fussnote {%number%}: invalid content size',
         msgid=INVALID_CONTENT_SIZE,
         description='Expected: {%expected%} != Current: {%current%}',
@@ -233,7 +200,7 @@ IDS = [
     NO_UPPERCASE_AT_START,
 ]
 
-MSG_STATUS = [protocol.MessageStatus(item, active=True) for item in IDS]
+STATUS = [protocol.MessageStatus(item, active=True) for item in IDS]
 
 
 def equal(current, expected, max_diff: float = 0.0001):

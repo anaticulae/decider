@@ -78,7 +78,7 @@ def active_ids(monkeypatch, ids=None):
         ids = []
     with monkeypatch.context() as context:
         disable_all = enable(decider.features.footnote.IDS, active=ids)
-        context.setattr(decider.features.footnote, 'MSG_STATUS', disable_all)
+        context.setattr(decider.features.footnote, 'STATUS', disable_all)
         yield context
 
 

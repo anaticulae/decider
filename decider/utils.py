@@ -7,3 +7,23 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 """Store experimental code here"""
+import importlib
+
+import protocol
+import utila
+
+
+# TODO: MOVE TO PROTOCOL PACKAGE
+def from_module(name: str) -> protocol.Linter:
+    module = importlib.import_module(name)
+    try:
+        solution = module.SOLUTION
+    except AttributeError:
+        raise ValueError(f'could not create solver, no SOLUTION: {name}')
+    try:
+        status = module.STATUS
+    except AttributeError:
+        utila.debug(f'no `STATUS` provided in {name}')
+        status = []
+    result = protocol.from_solution(solution, status)
+    return result
