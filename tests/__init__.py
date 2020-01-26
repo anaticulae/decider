@@ -15,14 +15,15 @@ import utila
 import decider
 
 
-def run_decider(cmd: str, monkeypatch):
-    utila.run_command(
+def run_decider(cmd: str, monkeypatch) -> int:
+    returncode = utila.run_command(
         cmd,
         decider.PROCESS,
         decider.cli.main,
         success=True,
         monkeypatch=monkeypatch,
     )
+    return returncode
 
 
 def tableofcontent(path: str) -> iamraw.Toc:
