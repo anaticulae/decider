@@ -104,20 +104,6 @@ def load_frompath(
     return loaded
 
 
-def validate(note: iamraw.FootNote) -> Validated:
-    text = note.text.strip()
-
-    start_with_uppercase = text[0].isupper()
-    ends_with_dot = text[-1] == '.'
-
-    result = Validated(
-        content=note,
-        uppercase=start_with_uppercase,
-        ends=ends_with_dot,
-    )
-    return result
-
-
 def most_common_font(items: iamraw.FootNotes) -> FootNoteStyle:
     """Compute general footer font family and font size to judge single
     foot note."""

@@ -28,10 +28,10 @@ def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
     headerfooters = decider.footnote.load(footerheader, pages)
     footnotes = utila.flatten([item.content for item in headerfooters if item])
     fontconfig = decider.footnote.most_common_font(footnotes)
+
     for footer in headerfooters:
-        footnotes = [decider.footnote.validate(item) for item in footer.content]
         # run linter
-        linting(footnotes, fontconfig, footer.page, linter)
+        linting(footer.content, fontconfig, footer.page, linter)
 
     # TODO: FIX RETURN TYPE AFTER UPGRADING UTILA
     # TODO: FIX AFTER UPGRADING PROTOCOL
@@ -53,7 +53,7 @@ INVALID_CONTENT_SIZE = 2010
 
 
 def linting(
-        validated,
+        items,
         fontconfig: decider.footnote.FootNoteStyle,
         page: int,
         linter: protocol.Linter,
@@ -62,72 +62,74 @@ def linting(
 
     def check_2001_no_uppercase_at_start():
         # item : decider.footnote.Validated
-        for item in validated:
-            if item.uppercase:
+        for item in items:
+            text = item.text.strip()
+            if text[0].isupper():
                 continue
             linter.add_finding(
                 location=location,
                 msgid=NO_UPPERCASE_AT_START,
-                number=item.content.number,
+                number=item.number,
             )
 
     def check_2002_no_dot_at_end():
         # item : decider.footnote.Validated
-        for item in validated:
-            if item.ends:
+        for item in items:
+            text = item.text.strip()
+            if text[-1] == '.':
                 continue
             linter.add_finding(
                 location,
                 NO_DOT_AT_END,
-                number=item.content.number,
+                number=item.number,
             )
 
     def check_2003_invalid_highnote_rise():
-        for item in validated:
-            current = item.content.style[0].rise
+        for item in items:
+            current = item.style[0].rise
             expected = fontconfig.highnote_rise
             if equal(current, expected, MAX_HIGHNOTE_RISE_DIFF):
                 continue
             linter.add_finding(
                 location,
                 INVALID_HIGHNOTE_RISE,
-                number=item.content.number,
+                number=item.number,
                 current=current,
                 expected=expected,
             )
 
     def check_2004_invalid_hignote_size():
-        for item in validated:
-            current = item.content.style[0].size
+        for item in items:
+            current = item.style[0].size
             expected = fontconfig.highnote_size
             if equal(current, expected, MAX_HIGHNOTE_SIZE_DIFF):
                 continue
             linter.add_finding(
                 location,
                 INVALID_HIGHNOTE_SIZE,
-                number=item.content.number,
+                number=item.number,
                 current=current,
                 expected=expected,
             )
 
     def check_2005_invalid_highnote_fontfamily():
-        for item in validated:
-            current = item.content.style[0].font
+        for item in items:
+            current = item.style[0].font
             expected = fontconfig.highnote_fontid
             if current == expected:
                 continue
             linter.add_finding(
                 location,
                 INVALID_HIGHNOTE_FONT_FAMILY,
-                number=item.content.number,
+                number=item.number,
                 current=current,
                 expected=expected,
             )
 
     def check_2010_invalid_content_fontsize():
         expected = fontconfig.content_size
-        for item in validated:
-            sizes = [item.size for item in item.content.style[1].content]
+        for item in items:
+            sizes = [item.size for item in item.style[1].content]
             sizes_equal = [
                 equal(item, expected, MAX_CONTENT_SIZE_DIFF) for item in sizes
             ]
@@ -136,7 +138,7 @@ def linting(
             linter.add_finding(
                 location,
                 INVALID_CONTENT_SIZE,
-                number=item.content.number,
+                number=item.number,
                 current=sizes,
                 expected=expected,
             )

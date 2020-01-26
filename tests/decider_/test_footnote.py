@@ -34,13 +34,13 @@ def test_footnotes_example(example):  # pylint:disable=W0621
     assert len(example.content) == 6
 
 
-def test_footnotes_validate(example):  # pylint:disable=W0621
-    result = [decider.footnote.validate(item) for item in example.content]
+# def test_footnotes_validate(example):  # pylint:disable=W0621
+#     result = [decider.footnote.validate(item) for item in example.content]
 
-    valid = [item.valid for item in result]
+#     valid = [item.valid for item in result]
 
-    expected = [True, False, False, False, False, False]
-    assert valid == expected
+#     expected = [True, False, False, False, False, False]
+#     assert valid == expected
 
 
 def test_cli_footnotes(testdir, monkeypatch):  ## pylint:disable=W0621
