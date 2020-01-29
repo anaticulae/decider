@@ -21,5 +21,5 @@ def test_parsing_solution_definition():
 
 
 def test_parsing_validators_definition():
-    parsed = decider.utils.parse_validators(decider.features.footnote)
+    parsed = decider.utils.parse_checkers(decider.features.footnote)
     assert len(parsed) >= 6, parsed

@@ -19,7 +19,7 @@ Validators = typing.List[callable]
 
 # TODO: MOVE TO PROTOCOL PACKAGE
 def from_module(name: str) -> protocol.Linter:
-    module = importlib.import_module(name)
+    module = module_fromname(name)
     solution = parse_solutions(module)
     try:
         status = module.STATUS
@@ -28,6 +28,11 @@ def from_module(name: str) -> protocol.Linter:
         status = []
     result = protocol.from_solution(solution, status)
     return result
+
+
+def module_fromname(name: str):
+    module = importlib.import_module(name)
+    return module
 
 
 SOLUTION = r'^SOLUTION_(?P<type>[A-Z]{0,1})(?P<number>\d{2,5})$'
@@ -49,7 +54,7 @@ def parse_solutions(module) -> protocol.Solutions:
 VALIDATOR = r'^check_(?P<number>\d{2,5})_'
 
 
-def parse_validators(module) -> Validators:
+def parse_checkers(module) -> Validators:
     result = []
     for name, value in vars(module).items():
         matched = re.match(VALIDATOR, name)

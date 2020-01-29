@@ -69,20 +69,18 @@ def linting(
     location = protocol.Location.from_page(page)
 
     datum = data_driver(location=location)
-    for item in items:
-        check_2001_no_uppercase_at_start(linter, item, data=datum)
-        check_2002_no_dot_at_end(linter, item, data=datum)
-
-    if not fontconfig:
+    if fontconfig:
         # validation requires valid font config
-        return
+        datum = data_driver(location=location, fontconfig=fontconfig)
 
-    extended_datum = data_driver(location=location, fontconfig=fontconfig)
-    for item in items:
-        check_2003_invalid_highnote_rise(linter, item, extended_datum)
-        check_2004_invalid_hignote_size(linter, item, extended_datum)
-        check_2005_invalid_highnote_fontfamily(linter, item, extended_datum)
-        check_2010_invalid_content_fontsize(linter, item, extended_datum)
+    module = decider.utils.module_fromname(__name__)
+    checkers = decider.utils.parse_checkers(module)
+    for checker in checkers:
+        for item in items:
+            try:
+                checker(linter, item, datum)
+            except AttributeError:
+                utila.log(f'could not run {checker} on {item}')
 
 
 SOLUTION_2001 = """\
