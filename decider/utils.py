@@ -39,6 +39,8 @@ SOLUTION = r'^SOLUTION_(?P<type>[A-Z]{0,1})(?P<number>\d{2,5})$'
 
 
 def parse_solutions(module) -> protocol.Solutions:
+    if isinstance(module, str):
+        module = module_fromname(module)
     result = []
     for name, value in vars(module).items():
         matched = re.match(SOLUTION, name)
@@ -55,6 +57,8 @@ VALIDATOR = r'^check_(?P<number>\d{2,5})_'
 
 
 def parse_checkers(module) -> Validators:
+    if isinstance(module, str):
+        module = module_fromname(module)
     result = []
     for name, value in vars(module).items():
         matched = re.match(VALIDATOR, name)

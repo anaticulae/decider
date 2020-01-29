@@ -73,8 +73,7 @@ def linting(
         # validation requires valid font config
         datum = data_driver(location=location, fontconfig=fontconfig)
 
-    module = decider.utils.module_fromname(__name__)
-    checkers = decider.utils.parse_checkers(module)
+    checkers = decider.utils.parse_checkers(__name__)
     for checker in checkers:
         for item in items:
             try:
