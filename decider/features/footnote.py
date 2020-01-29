@@ -106,6 +106,13 @@ def check_2001_no_uppercase_at_start(linter, item, data):
     )
 
 
+SOLUTION_2002 = """\
+Die Fussnote {%number%} endet nicht mit einem Punkt
+
+Fuegen Sie einen Punkt am Ende der Fussnote {%number%} hinzu.
+"""
+
+
 def check_2002_no_dot_at_end(linter, item, data):
     text = item.text.strip()
 
@@ -117,6 +124,13 @@ def check_2002_no_dot_at_end(linter, item, data):
         NO_DOT_AT_END,
         number=item.number,
     )
+
+
+SOLUTION_2003 = """\
+Fussnote {%number%}: invalid highnote rise
+
+Expected: {%expected%} != Current: {%current%}
+"""
 
 
 def check_2003_invalid_highnote_rise(linter, item, data):
@@ -135,6 +149,13 @@ def check_2003_invalid_highnote_rise(linter, item, data):
     )
 
 
+SOLUTION_2004 = """\
+Fussnote {%number%}: invalid highnote size
+
+Expected: {%expected%} != Current: {%current%}
+"""
+
+
 def check_2004_invalid_hignote_size(linter, item, data):
     current = item.style[0].size
     expected = data.fontconfig.highnote_size
@@ -151,6 +172,13 @@ def check_2004_invalid_hignote_size(linter, item, data):
     )
 
 
+SOLUTION_2005 = """\
+Fussnote {%number%}: invalid font family
+
+Expected: {%expected%} != Current: {%current%}
+"""
+
+
 def check_2005_invalid_highnote_fontfamily(linter, item, data):
     current = item.style[0].font
     expected = data.fontconfig.highnote_fontid
@@ -163,6 +191,13 @@ def check_2005_invalid_highnote_fontfamily(linter, item, data):
         current=current,
         expected=expected,
     )
+
+
+SOLUTION_2010 = """\
+Fussnote {%number%}: invalid content size
+
+Expected: {%expected%} != Current: {%current%}
+"""
 
 
 def check_2010_invalid_content_fontsize(linter, item, data):
@@ -181,43 +216,6 @@ def check_2010_invalid_content_fontsize(linter, item, data):
         expected=expected,
     )
 
-
-SOLUTION = [
-    protocol.Text(
-        title='Die Fussnote {%number%} beginnt nicht mit einem Grossbuchstaben',
-        msgid=NO_UPPERCASE_AT_START,
-        description=('Ersetzen Sie den ersten Buchstaben der '
-                     'Fussnote {%number%} mit einem Grossbuchstaben.'),
-    ),
-    protocol.Text(
-        title='Die Fussnote {%number%} endet nicht mit einem Punkt',
-        msgid=NO_DOT_AT_END,
-        description=('Fuegen Sie einen Punkt am Ende'
-                     ' der Fussnote {%number%} hinzu.'),
-    ),
-    # highnote/number
-    protocol.Text(
-        title='Fussnote {%number%}: invalid highnote rise',
-        msgid=INVALID_HIGHNOTE_RISE,
-        description='Expected: {%expected%} != Current: {%current%}',
-    ),
-    protocol.Text(
-        title='Fussnote {%number%}: invalid highnote size',
-        msgid=INVALID_HIGHNOTE_SIZE,
-        description='Expected: {%expected%} != Current: {%current%}',
-    ),
-    protocol.Text(
-        title='Fussnote {%number%}: invalid font family',
-        msgid=INVALID_HIGHNOTE_FONT_FAMILY,
-        description='Expected: {%expected%} != Current: {%current%}',
-    ),
-    # content
-    protocol.Text(
-        title='Fussnote {%number%}: invalid content size',
-        msgid=INVALID_CONTENT_SIZE,
-        description='Expected: {%expected%} != Current: {%current%}',
-    ),
-]
 
 IDS = [
     INVALID_CONTENT_SIZE,

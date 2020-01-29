@@ -17,10 +17,7 @@ import utila
 # TODO: MOVE TO PROTOCOL PACKAGE
 def from_module(name: str) -> protocol.Linter:
     module = importlib.import_module(name)
-    try:
-        solution = module.SOLUTION
-    except AttributeError:
-        raise ValueError(f'could not create solver, no SOLUTION: {name}')
+    solution = parse_solutions(module)
     try:
         status = module.STATUS
     except AttributeError:
