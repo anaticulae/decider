@@ -85,6 +85,14 @@ def linting(
         check_2010_invalid_content_fontsize(linter, item, extended_datum)
 
 
+SOLUTION_2001 = """\
+Fussnote {%number%}: beginnt nicht mit einem Grossbuchstaben
+
+Ersetzen Sie den ersten Buchstaben der Fussnote {%number%} mit einem
+Grossbuchstaben.
+"""
+
+
 def check_2001_no_uppercase_at_start(linter, item, data):
     text = item.text.strip()
 
