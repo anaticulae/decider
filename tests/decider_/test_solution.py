@@ -18,3 +18,8 @@ def test_parsing_solution_definition():
     assert len(first.title) > 50, first.title
     assert '\n' not in first.title, first
     assert first.description
+
+
+def test_parsing_validators_definition():
+    parsed = decider.utils.parse_validators(decider.features.footnote)
+    assert len(parsed) >= 6, parsed

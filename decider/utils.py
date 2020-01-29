@@ -9,9 +9,12 @@
 """Store experimental code here"""
 import importlib
 import re
+import typing
 
 import protocol
 import utila
+
+Validators = typing.List[callable]
 
 
 # TODO: MOVE TO PROTOCOL PACKAGE
@@ -40,4 +43,17 @@ def parse_solutions(module) -> protocol.Solutions:
         title, message = value.split('\n\n', maxsplit=1)
         item = protocol.Text(title=title, msgid=number, description=message)
         result.append(item)
+    return result
+
+
+VALIDATOR = r'^check_(?P<number>\d{2,5})_'
+
+
+def parse_validators(module) -> Validators:
+    result = []
+    for name, value in vars(module).items():
+        matched = re.match(VALIDATOR, name)
+        if not matched:
+            continue
+        result.append(value)
     return result
