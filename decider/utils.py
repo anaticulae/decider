@@ -13,6 +13,7 @@ import re
 import typing
 
 import protocol
+import utila
 
 Validators = typing.List[callable]
 
@@ -42,8 +43,12 @@ def parse_solutions(module) -> protocol.Solutions:
         matched = re.match(SOLUTION, name)
         if not matched:
             continue
-        typ, number = matched['type'], matched['number']  # pylint:disable=W0612
-        title, message = value.split('\n\n', maxsplit=1)
+        typ, number = matched['type'], int(matched['number'])  # pylint:disable=W0612
+        try:
+            title, message = value.split('\n\n', maxsplit=1)
+        except ValueError:
+            utila.error(f'{name} requires newline between headline and content')
+            raise
         item = protocol.Text(title=title, msgid=number, description=message)
         result.append(item)
     return result
