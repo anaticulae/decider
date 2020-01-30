@@ -6,7 +6,7 @@ RP 0.5.0
 header
 ------
 
-* [ ] add linter to verify extracted header
+* [x] add linter to verify extracted header
 
 * [x] add linter to verify foot notes
 
