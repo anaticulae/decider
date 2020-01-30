@@ -67,10 +67,30 @@ def check_1300_toc_existence(linter, toc: iamraw.Toc):
     linter()
 
 
+SOLUTION_1350 = """\
+Kapitel enthaelt zu wenige Sektionen
+
+Ein Kapitel oder eine Sektion benoetigt mindestens zwei
+Teilueberschriften. Falls dies nicht moeglich ist, sollte das
+Unterkapitel in den Text eingeplfegt werden.
+"""
+
+
 def check_1350_toc_level_to_few_children(linter, toc: iamraw.Toc):
     level_result: dtl.TocValidationResult = dtl.validate(toc)
     for _ in level_result.too_few_children:  # pylint:disable=E1133
         linter()
+
+
+SOLUTION_1351 = """
+Der Unterpunkt weist eine zu tiefe Gliederung auf
+
+Das Dokument weist eine zu detaillierte Untergliederung auf. Eine zu
+feingliedrige Gliederung reduziert die Uebersichtlichkeit und verhindert
+das schnelle Navigieren im Text.
+
+Begrenzen Sie die Gliederung auf maximal 3 Sektionen.
+"""
 
 
 def check_1351_toc_level_to_deep(linter, toc: iamraw.Toc):
