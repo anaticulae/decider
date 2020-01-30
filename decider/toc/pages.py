@@ -38,20 +38,37 @@ InvalidPages = typing.List[InvalidPage]
 
 def validate(toc: iamraw.Toc) -> InvalidPages:
     toc = flat(toc)
+    items = [(item.page, item.title) for item in toc]
+    result = validate_pageorder(items)
+    return result
+
+
+def validate_pageorder(items) -> InvalidPages:
+    """Validate list of (page number, page number raw/description). The
+    number can contain roman and arabic numbers."""
+    # TODO: MOVE TO A MORE GENERAL PLACE/NAME
     result = []
     arabic = 0
     roman = 'I'
-    for item in toc:
+    for item in items:
         try:
-            current_arabic = int(item.page)
+            current_arabic = int(item[0])
             if current_arabic < arabic:
                 # invald
-                result.append(InvalidPage(current_arabic, arabic, item.title))
+                result.append(InvalidPage(
+                    current_arabic,
+                    arabic,
+                    item[1],
+                ))
             arabic = current_arabic
         except ValueError:
-            current_roman = decider.toc.utils.roman_to_arabic(item.page)
-            if current_roman < decider.toc.utils.roman_to_arabic(item.page):
-                result.append(InvalidPage(current_roman, roman, item.title))
+            current_roman = decider.toc.utils.roman_to_arabic(item[0])
+            if current_roman < decider.toc.utils.roman_to_arabic(item[0]):
+                result.append(InvalidPage(
+                    current_roman,
+                    roman,
+                    item[1],
+                ))
             roman = current_roman
     return result
 
