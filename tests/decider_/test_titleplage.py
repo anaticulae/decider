@@ -24,13 +24,22 @@ import tests.resources
         # (tests.resources.MASTER_HUGE, [
         #     decider.features.titlepage.MISSING_THESIS_TYPE_ID,
         # ]),
-        (tests.resources.MASTER72_GENERATED, [
-            decider.features.titlepage.MISSING_AUTHOR_MATRIKEL_ID,
-        ]),
-        (tests.resources.MASTER78_GENERATED, []),
-        (tests.resources.TWINE_NO_TITLE_PAGE, [
-            decider.features.titlepage.MISSING_TITLEPAGE_ID,
-        ]),
+        (
+            tests.resources.MASTER72_GENERATED,
+            [
+                1221,
+            ],
+        ),
+        (
+            tests.resources.MASTER78_GENERATED,
+            [],
+        ),
+        (
+            tests.resources.TWINE_NO_TITLE_PAGE,
+            [
+                1200,
+            ],
+        ),
     ],
     ids=[
         # 'MASTER_HUGE',
