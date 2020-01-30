@@ -16,6 +16,7 @@ import serializeraw
 import yaml
 
 import decider.toc.level as dtl
+import decider.toc.pages as dtp
 import decider.utils
 
 
@@ -76,3 +77,22 @@ def check_1351_toc_level_to_deep(linter, toc: iamraw.Toc):
     level_result: dtl.TocValidationResult = dtl.validate(toc)
     for _ in level_result.level_to_deep:  # pylint:disable=E1133
         linter()
+
+
+SOLUTION_1360 = """\
+Das Inhaltsverzeichnis enthaellt nicht nur aufsteigende Seitenzahlen
+
+Korrigieren Sie das Inhaltsverzeichnis.
+
+Zeile: {%text%}
+
+Seite {%current%} folgt auf {%before%}.
+"""
+
+
+def check_1360_toc_ascending_pages(linter, toc: iamraw.Toc):
+    if not toc:
+        return
+    page_result: dtp.InvalidPages = dtp.validate(toc)
+    for item in page_result:
+        linter(current=item.current, before=item.before, text=item.text)

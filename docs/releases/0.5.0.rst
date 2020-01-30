@@ -15,7 +15,7 @@ table of content
 
 * [ ] add linter to verify ascending pages
 
-* [ ] add linter to verify page count on table of content
+* [x] add linter to verify page count on table of content
 
 code quality
 ------------

@@ -6,26 +6,59 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
-"""Validate page order
+"""Page order validator
+====================
 
-Support:
-    arabic numbers
-    roman numbers
+There are two different types of page numbers. The common **Arabic
+Numbers (0,1,3,...)** and **Roman Numbers (I, II, III, ...)**. Arabic
+numbers are mainly used for page content and Roman numbers for tables
+etc.
 
+In some works Roman numbers are nor used anymore cause there are a
+relict of old times. Arabic numbers are used for the whole document.
 """
+import dataclasses
+import typing
+
 import iamraw
 import iamraw.toc
 
+import decider.toc.utils
 
-def validate(toc: iamraw.Toc):
+
+@dataclasses.dataclass
+class InvalidPage:
+    current: str
+    before: str
+    text: str
+
+
+InvalidPages = typing.List[InvalidPage]
+
+
+def validate(toc: iamraw.Toc) -> InvalidPages:
     toc = flat(toc)
-    for item in toc:
-        print(item.page)
     result = []
+    arabic = 0
+    roman = 'I'
+    for item in toc:
+        try:
+            current_arabic = int(item.page)
+            if current_arabic < arabic:
+                # invald
+                result.append(InvalidPage(current_arabic, arabic, item.title))
+            arabic = current_arabic
+        except ValueError:
+            current_roman = decider.toc.utils.roman_to_arabic(item.page)
+            if current_roman < decider.toc.utils.roman_to_arabic(item.page):
+                result.append(InvalidPage(current_roman, roman, item.title))
+            roman = current_roman
     return result
 
 
 def flat(toc: iamraw.Toc):
+    """Remove nested order and deliver a top down list of pages and
+    sections."""
     result = []
 
     def godown(item: iamraw.toc.TocLinkMixin):

@@ -15,3 +15,15 @@ import tests.resources
 def test_toc_pages_validate():
     toc = tests.tableofcontent(tests.resources.TECHNICAL24_GENERATED)
     validated = dtp.validate(toc)  # pylint:disable=W0612
+
+    assert validated == [], validated
+
+
+def test_toc_pages_validate_with_errors():
+    toc = tests.tableofcontent(tests.resources.TECHNICAL24_GENERATED)
+
+    # introduce some errors
+    toc.children[1].page = 10
+    toc.children[5].page = 20
+    validated = dtp.validate(toc)  # pylint:disable=W0612
+    assert len(validated) == 2, validated
