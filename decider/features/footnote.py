@@ -6,7 +6,7 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
-import collections
+import functools
 import math
 import typing
 
@@ -44,21 +44,6 @@ def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
 # TODO: ADD GENERAL PACKAGE TO DEFINE UNIQUE IDS
 FOOTER_CHECKER_ID = 20
 
-NO_UPPERCASE_AT_START = 2001
-NO_DOT_AT_END = 2002
-INVALID_HIGHNOTE_RISE = 2003
-INVALID_HIGHNOTE_SIZE = 2004
-INVALID_HIGHNOTE_FONT_FAMILY = 2005
-
-INVALID_CONTENT_SIZE = 2010
-
-
-def data_driver(**kwargs):
-    # TODO: THERE MUST BE A BETTER WAY. PYTHONIC WAY.
-    Driver = collections.namedtuple('Driver', kwargs.keys())
-    driver = Driver(**kwargs)
-    return driver
-
 
 def linting(
         items,
@@ -68,18 +53,28 @@ def linting(
 ):
     location = protocol.Location.from_page(page)
 
-    datum = data_driver(location=location)
     if fontconfig:
         # validation requires valid font config
-        datum = data_driver(location=location, fontconfig=fontconfig)
+        datum = decider.utils.data_driver(
+            location=location,
+            fontconfig=fontconfig,
+        )
+    else:
+        datum = decider.utils.data_driver(location=location)
 
     checkers = decider.utils.parse_checkers(__name__)
     for checker in checkers:
+        call = functools.partial(
+            linter.add_finding,
+            msgid=checker.msgid,
+            location=location,
+        )
         for item in items:
             try:
-                checker(linter, item, datum)
-            except AttributeError:
-                utila.log(f'could not run {checker} on {item}')
+                checker(call, item, datum)
+            except TypeError:
+                # no `datum` required
+                checker(call, item)
 
 
 SOLUTION_2001 = """\
@@ -90,17 +85,13 @@ Grossbuchstaben.
 """
 
 
-def check_2001_no_uppercase_at_start(linter, item, data):
+def check_2001_no_uppercase_at_start(linter, item):
     text = item.text.strip()
 
     if text[0].isupper():
         return
 
-    linter.add_finding(
-        location=data.location,
-        msgid=NO_UPPERCASE_AT_START,
-        number=item.number,
-    )
+    linter(number=item.number)
 
 
 SOLUTION_2002 = """\
@@ -110,17 +101,13 @@ Fuegen Sie einen Punkt am Ende der Fussnote {%number%} hinzu.
 """
 
 
-def check_2002_no_dot_at_end(linter, item, data):
+def check_2002_no_dot_at_end(linter, item):
     text = item.text.strip()
 
     if text[-1] == '.':
         return
 
-    linter.add_finding(
-        data.location,
-        NO_DOT_AT_END,
-        number=item.number,
-    )
+    linter(number=item.number)
 
 
 SOLUTION_2003 = """\
@@ -137,9 +124,7 @@ def check_2003_invalid_highnote_rise(linter, item, data):
     if equal(current, expected, MAX_HIGHNOTE_RISE_DIFF):
         return
 
-    linter.add_finding(
-        data.location,
-        INVALID_HIGHNOTE_RISE,
+    linter(
         number=item.number,
         current=current,
         expected=expected,
@@ -160,9 +145,7 @@ def check_2004_invalid_hignote_size(linter, item, data):
     if equal(current, expected, MAX_HIGHNOTE_SIZE_DIFF):
         return
 
-    linter.add_finding(
-        data.location,
-        INVALID_HIGHNOTE_SIZE,
+    linter(
         number=item.number,
         current=current,
         expected=expected,
@@ -179,11 +162,11 @@ Expected: {%expected%} != Current: {%current%}
 def check_2005_invalid_highnote_fontfamily(linter, item, data):
     current = item.style[0].font
     expected = data.fontconfig.highnote_fontid
+
     if current == expected:
         return
-    linter.add_finding(
-        data.location,
-        INVALID_HIGHNOTE_FONT_FAMILY,
+
+    linter(
         number=item.number,
         current=current,
         expected=expected,
@@ -203,27 +186,15 @@ def check_2010_invalid_content_fontsize(linter, item, data):
     sizes_equal = [
         equal(item, expected, MAX_CONTENT_SIZE_DIFF) for item in sizes
     ]
+
     if all(sizes_equal):
         return
-    linter.add_finding(
-        data.location,
-        INVALID_CONTENT_SIZE,
+
+    linter(
         number=item.number,
         current=sizes,
         expected=expected,
     )
-
-
-IDS = [
-    INVALID_CONTENT_SIZE,
-    INVALID_HIGHNOTE_FONT_FAMILY,
-    INVALID_HIGHNOTE_RISE,
-    INVALID_HIGHNOTE_SIZE,
-    NO_DOT_AT_END,
-    NO_UPPERCASE_AT_START,
-]
-
-STATUS = [protocol.MessageStatus(item, active=True) for item in IDS]
 
 
 def equal(current, expected, max_diff: float = 0.0001):

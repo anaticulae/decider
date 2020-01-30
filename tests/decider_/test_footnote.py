@@ -77,8 +77,13 @@ def active_ids(monkeypatch, ids=None):
     if ids is None:
         ids = []
     with monkeypatch.context() as context:
-        disable_all = enable(decider.features.footnote.IDS, active=ids)
-        context.setattr(decider.features.footnote, 'STATUS', disable_all)
+        parsed = decider.utils.parse_checkers(decider.features.footnote)
+        for item in parsed:
+            msgid = decider.utils.msgid(item.__name__)
+            if msgid in ids:
+                item.confidence = 1.0
+            else:
+                item.confidence = 0.0
         yield context
 
 
@@ -106,7 +111,7 @@ def test_footnotes_work_highnote_rise(monkeypatch):
     footerheader = hey.path.headerfooters(tests.resources.MASTER72_GENERATED)
     with active_ids(
             monkeypatch,
-            ids=[decider.features.footnote.INVALID_HIGHNOTE_RISE],
+            ids=[2003],
     ) as context:
         context.setattr(
             decider.features.footnote,
@@ -122,7 +127,7 @@ def test_footnotes_work_highnote_size(monkeypatch):
     footerheader = hey.path.headerfooters(tests.resources.MASTER72_GENERATED)
     with active_ids(
             monkeypatch,
-            ids=[decider.features.footnote.INVALID_HIGHNOTE_SIZE],
+            ids=[2004],
     ) as context:
         context.setattr(
             decider.features.footnote,
@@ -137,7 +142,7 @@ def test_footnotes_work_highnote_font_family(monkeypatch):
     footerheader = hey.path.headerfooters(tests.resources.MASTER72_GENERATED)
     with active_ids(
             monkeypatch,
-            ids=[decider.features.footnote.INVALID_HIGHNOTE_FONT_FAMILY],
+            ids=[2005],
     ):
         user, _ = decider.features.footnote.work(footerheader)
     assert not empty(user), 'no invalid font detection'
