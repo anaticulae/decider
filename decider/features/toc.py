@@ -7,6 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import functools
 import typing
 
 import iamraw
@@ -15,10 +16,11 @@ import serializeraw
 import yaml
 
 import decider.toc.level as dtl
+import decider.utils
 
 
 def work(tableofcontent: str) -> typing.Tuple[str, str]:
-    linter = create_linter()
+    linter = decider.utils.from_module(__name__)
 
     tableofcontent: iamraw.Toc = serializeraw.load_toc(tableofcontent)
 
@@ -33,84 +35,44 @@ def work(tableofcontent: str) -> typing.Tuple[str, str]:
     return user_dumped, developer_dumped
 
 
-TITLEPAGE_CHECKER_ID = 13
-
-MISSING_TOC_ID = 1300
-
-SINGLE_CHILDREN_ID = 1350
-LEVEL_TOO_DEEP_ID = 1351
+TOC_CHECKER_ID = 13
 
 
-def linting(toc: iamraw.Toc, linter: protocol.Linter):  # pylint:disable=too-complex
-
-    def add_problem(msgid, location):
-        linter.add_finding(
+def linting(
+        toc,
+        linter: protocol.Linter,
+):
+    location = protocol.Location.from_page(1)
+    checkers = decider.utils.parse_checkers(__name__)
+    for checker in checkers:
+        call = functools.partial(
+            linter.add_finding,
+            msgid=checker.msgid,
             location=location,
-            msgid=msgid,
-            confidence=1.0,
         )
+        checker(call, toc)
 
-    def check_existence():
-        if toc.children:
-            return
-        add_problem(MISSING_TOC_ID, protocol.Location.from_page(0))
 
-    check_existence()
-    if not toc.children:
+SOLUTION_1300 = """\
+Dokument enhaelt kein Inhaltsverzeichnis
+
+Fuegen Sie ein Inhaltsverzeichnis zum Dokument hinzu.
+"""
+
+
+def check_1300_toc_existence(linter, toc: iamraw.Toc):
+    if toc.children:
         return
+    linter()
 
+
+def check_1350_toc_level_to_few_children(linter, toc: iamraw.Toc):
     level_result: dtl.TocValidationResult = dtl.validate(toc)
-
-    def check_level():
-        for _ in level_result.level_to_deep:  # pylint:disable=E1133
-            add_problem(LEVEL_TOO_DEEP_ID, protocol.Location.from_page(1))
-
-    def check_children():
-        for _ in level_result.too_few_children:  # pylint:disable=E1133
-            add_problem(SINGLE_CHILDREN_ID, protocol.Location.from_page(1))
-
-    check_level()
-    check_children()
+    for _ in level_result.too_few_children:  # pylint:disable=E1133
+        linter()
 
 
-def create_linter() -> protocol.Linter:
-    solver = protocol.Solver()
-    for item in SOLUTION:
-        solver.add_solution(item.msgid, item)
-
-    linter = protocol.Linter(
-        active=MSG_STATUS,
-        solver=solver,
-    )
-    return linter
-
-
-def create_solution(title: str, msgid: str, description: str):
-    result = protocol.Text(
-        title=title,
-        description=description,
-        status=protocol.ProblemStatus.OPEN,
-        msgid=msgid,
-    )
-    return result
-
-
-SOLUTION = [
-    create_solution(
-        title='Dokument enhaelt kein Inhaltsverzeichnis',
-        msgid=MISSING_TOC_ID,
-        description=('Das Dokument enthaelt kein Inhaltsverzeichnis. \n\n'
-                     'Fuegen Sie ein Inhaltsverzeichnis zum Dokument hinzu.'),
-    ),
-]
-
-MSG_STATUS = [
-    protocol.MessageStatus(
-        item,
-        active=True,
-    ) for item in [
-        LEVEL_TOO_DEEP_ID,
-        MISSING_TOC_ID,
-        SINGLE_CHILDREN_ID,
-    ]
-]
+def check_1351_toc_level_to_deep(linter, toc: iamraw.Toc):
+    level_result: dtl.TocValidationResult = dtl.validate(toc)
+    for _ in level_result.level_to_deep:  # pylint:disable=E1133
+        linter()

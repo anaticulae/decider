@@ -11,13 +11,14 @@ import pytest
 
 import decider.features.toc as dft
 import decider.toc.level as dtl
+import decider.utils
 import tests
 import tests.resources
 
 
 def lint(path: str):
     toc = tests.tableofcontent(path)
-    linter = dft.create_linter()
+    linter = decider.utils.from_module(dft.__name__)
     dft.linting(toc=toc, linter=linter)
     user, _ = linter.result(unique=False)
     failures = sorted(messageids(user))
@@ -25,7 +26,7 @@ def lint(path: str):
 
 
 def test_toc_extraction_no_toc():  # pylint:disable=W0621
-    expected_failures = [dft.MISSING_TOC_ID]
+    expected_failures = [1300]
 
     failures = lint(tests.resources.TWINE_NO_TOC)
 
