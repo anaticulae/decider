@@ -2,6 +2,29 @@
 
 Every noteable change is logged here.
 
+## v0.5.0
+
+### Feature
+
+* add page validator to validate page number of document (3ab005eafa15)
+* add solution to describe fixes for table of content (2eb16c69f2b5)
+* add linter to verify ascending pages (3db11490e148)
+* add linter to verify repeating header content (f779c0b175a6)
+* add error message that template does not fit requirements (b4c9741e3dd2)
+* improve solution result finder (35e95b99d104)
+* extend interface to use module name directly (7d6f2e15a881)
+* use automate checker to run footnote validation (cc5c57cd968c)
+* add method to parse validator function (a946f168c9e4)
+* add Solutions parser to ease defining SOLUTIONS (eaf45c2098ed)
+* add method to verify size of foot note content (9c5a1c3d0aa4)
+* add linter to verify linter font family (2b67c888c296)
+* add highnote rise and size checker (10a9ec4a16af)
+* add method to determine most common style of FootNotes (ec2c42ef3ada)
+
+### Documentation
+
+* add overview of decider features (213b855f71ec)
+
 ## v0.4.7
 
 ## v0.4.6
