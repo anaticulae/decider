@@ -7,7 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-from border.features.detection import most_boundingbox
+import border.features.detection
 
 
 def test_most_boundingbox():
@@ -28,5 +28,5 @@ def test_most_boundingbox():
     ]
     expected = (50.4, 41.15, 544.88, 807.93)
 
-    result = most_boundingbox(vim_diff_example)
+    result = border.features.detection.most_boundingbox(vim_diff_example)
     assert result == expected
