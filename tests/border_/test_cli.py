@@ -20,7 +20,7 @@ import tests.resources
     pytest.param(tests.resources.DOCU_TWINE_GENERATED, id='twine'),
 ])
 @utila.skip_longrun
-def test_cli_decider_border(source, testdir, monkeypatch):  # pylint:disable=W0621
+def test_border_cli_decider(source, testdir, monkeypatch):  # pylint:disable=W0621
     """Run `border` to extract common BoundingBox and check pages
     against this common box."""
     root = str(testdir)

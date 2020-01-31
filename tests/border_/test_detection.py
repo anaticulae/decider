@@ -10,7 +10,7 @@
 import border.features.detection
 
 
-def test_most_boundingbox():
+def test_border_most_boundingbox():
     vim_diff_example = [
         (194.37, 72.0, 400.9, 648.34),
         (50.4, 40.18, 544.88, 700.13),
