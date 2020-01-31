@@ -13,7 +13,7 @@ header
 table of content
 ----------------
 
-* [ ] add linter to verify ascending pages
+* [x] add linter to verify ascending pages
 
 * [x] add linter to verify page count on table of content
 
