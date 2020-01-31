@@ -9,21 +9,25 @@
 
 import os
 
+import pytest
 import utila
 
 import border.cli
 import tests.resources
 
 
+@pytest.mark.parametrize('source', [
+    pytest.param(tests.resources.DOCU_TWINE_GENERATED, id='twine'),
+])
 @utila.skip_longrun
-def test_cli_decider_border(testdir, monkeypatch):  # pylint:disable=W0621
-    """Run decider with rawmaker_result to get hits output"""
+def test_cli_decider_border(source, testdir, monkeypatch):  # pylint:disable=W0621
+    """Run `border` to extract common BoundingBox and check pages
+    against this common box."""
     root = str(testdir)
-    source = tests.resources.DOCU_TWINE_GENERATED
-    command = f'-i {source} -o {root} -V --hitthebox'
 
+    cmd = f'-i {source} -o {root}'
     utila.run_command(
-        command,
+        cmd,
         process=border.cli.PROCESS,
         main=border.cli.main,
         monkeypatch=monkeypatch,
