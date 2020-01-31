@@ -6,7 +6,11 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
+""".. _decider_features_toc:
 
+Table of content
+================
+"""
 import functools
 import typing
 
@@ -53,6 +57,9 @@ def linting(
         )
         checker(call, toc)
 
+
+# TODO: ADD SOLUTION_1300_MS to link how to create table of content in word
+# TODO: ADD SOLUTION_1300_LATEX to link how to create table of content in LATEX
 
 SOLUTION_1300 = """\
 Dokument enhaelt kein Inhaltsverzeichnis

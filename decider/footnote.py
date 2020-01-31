@@ -106,7 +106,7 @@ def load_frompath(
 
 def most_common_font(items: iamraw.FootNotes) -> FootNoteStyle:
     """Compute general footer font family and font size to judge single
-    foot note."""
+    footnote."""
     if not items:
         return None
     # font_size

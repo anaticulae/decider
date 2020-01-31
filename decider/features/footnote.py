@@ -6,6 +6,11 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
+""".. _decider_features_footnote:
+
+Footnotes
+=========
+"""
 import functools
 import math
 import typing
@@ -86,6 +91,7 @@ Grossbuchstaben.
 
 
 def check_2001_no_uppercase_at_start(linter, item):
+    """Ensure that footnote starts with uppercase letter."""
     text = item.text.strip()
 
     if text[0].isupper():
@@ -102,6 +108,7 @@ Fuegen Sie einen Punkt am Ende der Fussnote {%number%} hinzu.
 
 
 def check_2002_no_dot_at_end(linter, item):
+    """Ensure that footnote is closed with an dot '.'."""
     text = item.text.strip()
 
     if text[-1] == '.':
@@ -118,6 +125,7 @@ Expected: {%expected%} != Current: {%current%}
 
 
 def check_2003_invalid_highnote_rise(linter, item, data):
+    """Ensure that footnote fits to `common` footnote highnote numer rise."""
     current = item.style[0].rise
     expected = data.fontconfig.highnote_rise
 
@@ -139,6 +147,7 @@ Expected: {%expected%} != Current: {%current%}
 
 
 def check_2004_invalid_hignote_size(linter, item, data):
+    """Ensure correct font size of highnote."""
     current = item.style[0].size
     expected = data.fontconfig.highnote_size
 
@@ -160,6 +169,7 @@ Expected: {%expected%} != Current: {%current%}
 
 
 def check_2005_invalid_highnote_fontfamily(linter, item, data):
+    """Ensure correct font family of highnote."""
     current = item.style[0].font
     expected = data.fontconfig.highnote_fontid
 
@@ -181,6 +191,7 @@ Expected: {%expected%} != Current: {%current%}
 
 
 def check_2010_invalid_content_fontsize(linter, item, data):
+    """Ensure correct font size of footnote content."""
     expected = data.fontconfig.content_size
     sizes = [item.size for item in item.style[1].content]
     sizes_equal = [

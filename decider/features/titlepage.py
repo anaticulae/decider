@@ -6,7 +6,11 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
+""".. _decider_features_titlepage:
 
+Titlepage
+=========
+"""
 import functools
 import typing
 
