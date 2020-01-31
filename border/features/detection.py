@@ -58,10 +58,11 @@ def most_boundingbox(boxes: Rectangles) -> Rectangle:
     """Extract bounding box of most common occurence for every side"""
     # TODO: Think about right and left, maybe search for the top 2 borders?
     # Filter None entries
-    x0 = statistics.median([item[0] for item in boundingboxes if item[0]])
-    y0 = statistics.median([item[1] for item in boundingboxes if item[1]])
-    x1 = statistics.median([item[2] for item in boundingboxes if item[2]])
-    y1 = statistics.median([item[3] for item in boundingboxes if item[3]])
+
+    x0 = statistics.median([item[0] for item in boxes if item[0] is not None])
+    y0 = statistics.median([item[1] for item in boxes if item[1] is not None])
+    x1 = statistics.median([item[2] for item in boxes if item[2] is not None])
+    y1 = statistics.median([item[3] for item in boxes if item[3] is not None])
 
     result = (x0, y0, x1, y1)
     return result
