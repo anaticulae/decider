@@ -41,7 +41,7 @@ def boxes_outside_border(boxes, border: callable):
     result = []
     # x0 y0 x1 y1
     for page in boxes:
-        border_box = border(page.boundings)
+        border_box = border(page.page)
         for index, bounding in page.boundings:
             # BOUNDING:     'left, top,  right, bottom'
             # BORDER:       'left  right top    bottom'
