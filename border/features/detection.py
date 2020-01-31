@@ -64,11 +64,3 @@ def most_boundingbox(
 
     result = (x0, y0, x1, y1)
     return result
-
-
-def name():
-    return 'hitthebox'
-
-
-def commandline():
-    return Flag(longcut=name(), message='Extract border for every page')

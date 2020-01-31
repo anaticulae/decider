@@ -16,7 +16,7 @@ from decider import __version__
 
 PROCESS = 'decider_border'
 
-FEATURE_NAME = 'hitthebox'
+FEATURE_NAME = 'detection'
 DESCRIPTION = 'determine overlapping content'
 
 # pylint:disable=C0103
