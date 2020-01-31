@@ -23,8 +23,11 @@ code quality
 before
 ~~~~~~
 
-* Your code has been rated at 9.92/10
 * Total coverage: 95.88%
+* Your code has been rated at 9.92/10
 
 after
 ~~~~~
+
+* Total coverage: 95.23%
+* Your code has been rated at 9.77/10
