@@ -29,28 +29,32 @@ def work(border_boxes: str, border_pages: str, pages: tuple = None) -> str:
         # TODO: Differentiate between left and right side
         return border
 
-    hits = hit_the_box(boxes, boxprovider)
+    hits = boxes_outside_border(boxes, boxprovider)
     utila.debug(hits)
 
     dumped = serializeraw.dump_hits(border, hits)
     return dumped
 
 
-def hit_the_box(boxes, border: callable):
-    failures = []
+def boxes_outside_border(boxes, border: callable):
+    """Determine `boxes` which are outside out of `border`."""
+    result = []
     # x0 y0 x1 y1
     for page in boxes:
-        pagenumber = page.page
         border_box = border(page.boundings)
         for index, bounding in page.boundings:
             # BOUNDING:     'left, top,  right, bottom'
             # BORDER:       'left  right top    bottom'
-            if bounding[0] < border_box[0] or\
-               bounding[2] > border_box[1] or\
-               bounding[1] < border_box[2] or\
-               bounding[3] > border_box[3]:
-                failures.append((pagenumber, index, bounding))
-    return failures
+            if not any([
+                    bounding[0] < border_box[0],
+                    bounding[2] > border_box[1],
+                    bounding[1] < border_box[2],
+                    bounding[3] > border_box[3],
+            ]):
+                # all items in the box
+                continue
+            result.append((page.page, index, bounding))
+    return result
 
 
 def most_boundingbox(boxes: Rectangles) -> Rectangle:
