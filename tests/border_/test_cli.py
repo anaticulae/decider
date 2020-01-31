@@ -25,7 +25,7 @@ def test_border_cli_decider(source, testdir, monkeypatch):  # pylint:disable=W06
     against this common box."""
     root = str(testdir)
 
-    cmd = f'-i {source} -o {root}'
+    cmd = f'-i {source} -o {root} --pages=0:10'
     utila.run_command(
         cmd,
         process=border.cli.PROCESS,

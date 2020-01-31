@@ -17,14 +17,13 @@ Rectangle = typing.Tuple[float, float, float, float]
 Rectangles = typing.List[Rectangle]
 
 
-def work(border_boxes: str, border_pages: str) -> str:
+def work(border_boxes: str, border_pages: str, pages: tuple = None) -> str:
     utila.call('work: border detection')
-    boxes = serializeraw.load_boundingboxes(border_boxes)
-    sizeandborder = serializeraw.load_pageborders(border_pages)
+    boxes = serializeraw.load_boundingboxes(border_boxes, pages=pages)
+    sizeandborder = serializeraw.load_pageborders(border_pages, pages=pages)
 
     border = most_boundingbox([item.border for item in sizeandborder])
-
-    utila.info('%s' % str(border))
+    utila.info(f'{border}')
 
     def boxprovider(page: int):  # pylint:disable=unused-argument
         # TODO: Differentiate between left and right side

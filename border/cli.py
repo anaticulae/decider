@@ -36,10 +36,11 @@ WORKPLAN = [
 
 def main():
     featurepack(
-        workplan=WORKPLAN,
-        root=ROOT,
+        description=DESCRIPTION,
         featurepackage='border.features',
         name=PROCESS,
-        description=DESCRIPTION,
+        pages=True,
+        root=ROOT,
         version=__version__,
+        workplan=WORKPLAN,
     )
