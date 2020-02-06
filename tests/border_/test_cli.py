@@ -18,6 +18,8 @@ import tests.resources
 
 @pytest.mark.parametrize('source', [
     pytest.param(tests.resources.DOCU_TWINE_GENERATED, id='twine'),
+    pytest.param(tests.resources.TECHNICAL24_GENERATED, id='technical24'),
+    pytest.param(tests.resources.MASTER78_GENERATED, id='master78'),
 ])
 @utila.skip_longrun
 def test_border_cli_decider(source, testdir, monkeypatch):  # pylint:disable=W0621

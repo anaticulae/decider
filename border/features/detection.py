@@ -27,6 +27,8 @@ import typing
 import serializeraw
 import utila
 
+import decider.utils
+
 Rectangle = typing.Tuple[float, float, float, float]
 Rectangles = typing.List[Rectangle]
 
@@ -57,8 +59,8 @@ def boxes_outside_border(boxes, border: callable):
     for page in boxes:
         border_box = border(page.page)
         for index, bounding in page.boundings:
-            # BOUNDING:     'left, top,  right, bottom'
-            # BORDER:       'left  right top    bottom'
+            # BOUNDING:     'left, top,   right, bottom'
+            # BORDER:       'left, right, top,   bottom'
 
             # move bounding to center of page to make approach more robust
             rounded_bounding = round_bounding(bounding)
@@ -105,7 +107,10 @@ def most_boundingbox(boxes: Rectangles, roundme: bool = False) -> Rectangle:
         # round to have a more robust grouping
         rounded = [method(item) for item in filtered] if roundme else filtered
         # determine most occured border to determine them as required border
-        mode = statistics.mode(rounded)
+        # support multiple border options.
+        minimize = method is math.floor
+        # TODO: REQUIRE A BETTER TY-BREAKER
+        mode = decider.utils.multi_mode(rounded, minimize=minimize)
         result.append(mode)
     # (x0, y0, x1, y1)
     return tuple(result)
