@@ -33,7 +33,11 @@ Rectangle = typing.Tuple[float, float, float, float]
 Rectangles = typing.List[Rectangle]
 
 
-def work(border_boxes: str, border_pages: str, pages: tuple = None) -> str:
+def work(
+        border_boxes: str,
+        border_pages: str,
+        pages: tuple = None,
+) -> typing.Tuple[str, str, str]:
     utila.call('work: border detection')
     boxes = serializeraw.load_boundingboxes(border_boxes, pages=pages)
     sizeandborder = serializeraw.load_pageborders(border_pages, pages=pages)
@@ -49,7 +53,9 @@ def work(border_boxes: str, border_pages: str, pages: tuple = None) -> str:
     utila.debug(hits)
 
     dumped = serializeraw.dump_hits(border, hits)
-    return dumped
+
+    user, developer = '', ''
+    return dumped, user, developer
 
 
 def boxes_outside_border(boxes, border: callable):

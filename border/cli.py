@@ -29,7 +29,7 @@ WORKPLAN = [
             ResultFile('rawmaker', 'border_boundingboxes'),
             ResultFile('rawmaker', 'border_pages'),
         ],
-        ('hits',),
+        ('hits', 'user', 'developer'),
     )
 ]
 
