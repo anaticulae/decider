@@ -21,6 +21,7 @@ NO_TOC = os.path.join(GENERATED, 'no_toc')
 TEST_CONFIG_DATA = os.path.join(decider.ROOT, 'tests/config')
 
 MASTER = os.path.join(RESOURCES, 'master')
+BOOK = os.path.join(RESOURCES, 'book')
 
 DECIDER_FONTS = os.path.join(TEST_CONFIG_DATA, 'decider_fonts')
 assert os.path.exists(DECIDER_FONTS), DECIDER_FONTS
@@ -50,19 +51,29 @@ MASTER78_GENERATED = os.path.join(
     'master_page_78_images_toc',
 )
 
+LEFTRIGHT = os.path.join(BOOK, 'leftright.pdf')
+LEFTRIGHT_GENERATED = os.path.join(
+    GENERATED,
+    'book_leftright',
+)
+
 TWINE_NO_TITLE_PAGE = os.path.join(NO_TITLE_PAGE, 'docu_twine')
 TWINE_NO_TOC = os.path.join(NO_TOC, 'docu_twine')
 
 TODO = [
     DOCU_TWINE,
+    LEFTRIGHT,
     MASTER72,
     MASTER78,
     TECHNICAL24,
 ]
 
 REQURIED_RESOURCES = [
+    BOOK,
     DOCU_TWINE,
     DOCU_TWINE_GENERATED,
+    LEFTRIGHT,
+    LEFTRIGHT_GENERATED,
     MASTER72,
     MASTER72_GENERATED,
     MASTER78,
