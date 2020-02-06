@@ -7,12 +7,9 @@
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
 
-from utila import ResultFile as RF
-from utila import create_step as step
-from utila import featurepack
+import utila
 
-from decider import ROOT
-from decider import __version__
+import decider
 
 PROCESS = 'decider_border'
 
@@ -28,15 +25,12 @@ border. There are four types of border.
 4. The footer border excludes the area of the footer.
 """
 
-# pylint:disable=C0103
-ResultFile = lambda producer, name: RF(producer=producer, name=name)
-
 WORKPLAN = [
-    step(
+    utila.create_step(
         FEATURE_NAME,
         [
-            ResultFile('rawmaker', 'border_boundingboxes'),
-            ResultFile('rawmaker', 'border_pages'),
+            utila.ResultFile('rawmaker', 'border_boundingboxes'),
+            utila.ResultFile('rawmaker', 'border_pages'),
         ],
         ('hits', 'user', 'developer'),
     )
@@ -44,12 +38,12 @@ WORKPLAN = [
 
 
 def main():
-    featurepack(
+    utila.featurepack(
         description=DESCRIPTION,
         featurepackage='border.features',
         name=PROCESS,
         pages=True,
-        root=ROOT,
-        version=__version__,
+        root=decider.ROOT,
+        version=decider.__version__,
         workplan=WORKPLAN,
     )
