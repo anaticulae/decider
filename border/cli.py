@@ -38,7 +38,7 @@ WORKPLAN = [
 
 
 def main():
-    utila.featurepack(
+    ret = utila.featurepack(
         description=DESCRIPTION,
         featurepackage='border.features',
         name=PROCESS,
@@ -47,3 +47,4 @@ def main():
         version=decider.__version__,
         workplan=WORKPLAN,
     )
+    return ret
