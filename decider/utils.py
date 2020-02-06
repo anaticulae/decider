@@ -7,10 +7,10 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 """Store experimental code here"""
+
 import collections
 import importlib
 import re
-import statistics
 import typing
 
 import protocol
@@ -109,20 +109,3 @@ def confidence(value=1.0):
         return user_function
 
     return decorating_function
-
-
-def multi_mode(data, minimize: bool = True):
-    """Return the most common data point from discrete or nominal data.
-
-    See: statistics.mode
-    """
-    if not data:
-        raise statistics.StatisticsError('no mode for empty data')
-    # TODO: MOVE TO UTILA
-    table = statistics._counts(data)  # pylint:disable=W0212
-    if len(table) == 1:
-        return table[0][0]
-    current = sorted([item[0] for item in table])
-    if minimize:
-        return current[0]
-    return current[-1]

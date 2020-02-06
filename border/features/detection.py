@@ -27,10 +27,9 @@ import typing
 import serializeraw
 import utila
 
-import decider.utils
-
-Rectangle = typing.Tuple[float, float, float, float]
-Rectangles = typing.List[Rectangle]
+import border.data
+import border.most
+import border.utils
 
 
 def work(
@@ -42,28 +41,28 @@ def work(
     boxes = serializeraw.load_boundingboxes(border_boxes, pages=pages)
     sizeandborder = serializeraw.load_pageborders(border_pages, pages=pages)
 
-    border = most_boundingbox([item.border for item in sizeandborder])
-    utila.info(f'{border}')
+    cur = border.most.most_boundingbox([item.border for item in sizeandborder])
+    utila.info(f'{cur}')
 
     def boxprovider(page: int):  # pylint:disable=unused-argument
         # TODO: Differentiate between left and right side
-        return border
+        return cur
 
     hits = boxes_outside_border(boxes, boxprovider)
     utila.debug(hits)
 
-    dumped = serializeraw.dump_hits(border, hits)
+    dumped = serializeraw.dump_hits(cur, hits)
 
     user, developer = '', ''
     return dumped, user, developer
 
 
-def boxes_outside_border(boxes, border: callable):
+def boxes_outside_border(boxes, expected_border: callable):
     """Determine `boxes` which are outside out of `border`."""
     result = []
     # x0 y0 x1 y1
     for page in boxes:
-        border_box = border(page.page)
+        border_box = expected_border(page.page)
         for index, bounding in page.boundings:
             # BOUNDING:     'left, top,   right, bottom'
             # BORDER:       'left, right, top,   bottom'
@@ -82,7 +81,7 @@ def boxes_outside_border(boxes, border: callable):
     return result
 
 
-def round_bounding(item: Rectangle) -> Rectangle:
+def round_bounding(item: border.data.Rectangle) -> border.data.Rectangle:
     """Round border in direction to the center of the rectangle to get a
     `smaller` rectangle which fit in more parent rectangles."""
     # round to move coordinate in center direction of page
@@ -93,30 +92,4 @@ def round_bounding(item: Rectangle) -> Rectangle:
         math.floor,  # y1
     ]
     result = [method(item[index]) for index, method in enumerate(rounding)]
-    return tuple(result)
-
-
-def most_boundingbox(boxes: Rectangles, roundme: bool = False) -> Rectangle:
-    """Extract bounding box of most common occurence for every side.
-
-    Round detected boundingbox to full number to make approach more
-    robust. Round numbers in direction to the border end to increase the
-    detected rectangle that fit more items in it.
-    """
-    # TODO: Think about right and left, maybe search for the top 2 borders?
-    # Filter None entries
-    rounding = [math.floor, math.floor, math.ceil, math.ceil]
-    result = []
-    for index, method in enumerate(rounding):
-        # remove None items
-        filtered = [item[index] for item in boxes if item[index] is not None]
-        # round to have a more robust grouping
-        rounded = [method(item) for item in filtered] if roundme else filtered
-        # determine most occured border to determine them as required border
-        # support multiple border options.
-        minimize = method is math.floor
-        # TODO: REQUIRE A BETTER TY-BREAKER
-        mode = decider.utils.multi_mode(rounded, minimize=minimize)
-        result.append(mode)
-    # (x0, y0, x1, y1)
     return tuple(result)

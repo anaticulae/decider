@@ -1,0 +1,27 @@
+# =============================================================================
+# C O P Y R I G H T
+# -----------------------------------------------------------------------------
+# Copyright (c) 2020 by Helmut Konrad Fahrendholz. All rights reserved.
+# This file is property of Helmut Konrad Fahrendholz. Any unauthorized copy,
+# use or distribution is an offensive act against international law and may
+# be prosecuted under federal law. Its content is company confidential.
+# =============================================================================
+
+import statistics
+
+
+def multi_mode(data, minimize: bool = True):
+    """Return the most common data point from discrete or nominal data.
+
+    See: statistics.mode
+    """
+    if not data:
+        raise statistics.StatisticsError('no mode for empty data')
+    # TODO: MOVE TO UTILA
+    table = statistics._counts(data)  # pylint:disable=W0212
+    if len(table) == 1:
+        return table[0][0]
+    current = sorted([item[0] for item in table])
+    if minimize:
+        return current[0]
+    return current[-1]
