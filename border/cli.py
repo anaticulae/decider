@@ -17,7 +17,16 @@ from decider import __version__
 PROCESS = 'decider_border'
 
 FEATURE_NAME = 'detection'
-DESCRIPTION = 'determine overlapping content'
+DESCRIPTION = """\
+The border_decider detects overlapping content to different extracted
+border. There are four types of border.
+
+1. The crop-border which contains the every element in the document.
+2. The left-right border describes the border in books which is different
+   for the left page and the right page.
+3. The page border excludes page number on the bottom of the page.
+4. The footer border excludes the area of the footer.
+"""
 
 # pylint:disable=C0103
 ResultFile = lambda producer, name: RF(producer=producer, name=name)
