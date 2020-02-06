@@ -7,10 +7,16 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import pytest
+
 import border.features.detection
 
 
-def test_border_most_boundingbox():
+@pytest.mark.parametrize('roundme, expected', [
+    (True, (50, 41, 545, 808)),
+    (False, (50.4, 41.15, 544.88, 807.93)),
+])
+def test_border_most_boundingbox(roundme, expected):
     vim_diff_example = [
         (194.37, 72.0, 400.9, 648.34),
         (50.4, 40.18, 544.88, 700.13),
@@ -26,7 +32,8 @@ def test_border_most_boundingbox():
         (50.4, 41.15, 544.89, 807.93),
         (50.4, 41.15, 544.88, 807.93),
     ]
-    expected = (50.4, 41.15, 544.88, 807.93)
-
-    result = border.features.detection.most_boundingbox(vim_diff_example)
+    result = border.features.detection.most_boundingbox(
+        vim_diff_example,
+        roundme=roundme,
+    )
     assert result == expected

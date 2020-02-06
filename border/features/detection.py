@@ -6,8 +6,22 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
+"""common border validator
+=======================
+Detect the common border of selected `pages` as a expected correct page
+border. Validate every page against this common border. Keep in mind to
+decide between left and right page. In some printings there are two
+different border **We do not support them yet**.
 
-import statistics
+Some pdf-writer produces a massive amout of empty strings as a result of
+miss-using `what you see is what you get`-editors. In some cases there
+are a lot of `hit the box` errors.
+
+* TODO: SUPPORT DIFFERENT LEFT AND RIGHT PAGE
+* TODO: MARK EMPTY STRING LAYOUT ERRORS.
+"""
+
+import math
 import typing
 
 import serializeraw
@@ -45,11 +59,14 @@ def boxes_outside_border(boxes, border: callable):
         for index, bounding in page.boundings:
             # BOUNDING:     'left, top,  right, bottom'
             # BORDER:       'left  right top    bottom'
+
+            # move bounding to center of page to make approach more robust
+            rounded_bounding = round_bounding(bounding)
             if not any([
-                    bounding[0] < border_box[0],
-                    bounding[2] > border_box[1],
-                    bounding[1] < border_box[2],
-                    bounding[3] > border_box[3],
+                    rounded_bounding[0] < border_box[0],
+                    rounded_bounding[2] > border_box[1],
+                    rounded_bounding[1] < border_box[2],
+                    rounded_bounding[3] > border_box[3],
             ]):
                 # all items in the box
                 continue
@@ -57,15 +74,38 @@ def boxes_outside_border(boxes, border: callable):
     return result
 
 
-def most_boundingbox(boxes: Rectangles) -> Rectangle:
-    """Extract bounding box of most common occurence for every side"""
+def round_bounding(item: Rectangle) -> Rectangle:
+    """Round border in direction to the center of the rectangle to get a
+    `smaller` rectangle which fit in more parent rectangles."""
+    # round to move coordinate in center direction of page
+    rounding = [
+        math.ceil,  # x0
+        math.ceil,  # y0
+        math.floor,  # x1
+        math.floor,  # y1
+    ]
+    result = [method(item[index]) for index, method in enumerate(rounding)]
+    return tuple(result)
+
+
+def most_boundingbox(boxes: Rectangles, roundme: bool = False) -> Rectangle:
+    """Extract bounding box of most common occurence for every side.
+
+    Round detected boundingbox to full number to make approach more
+    robust. Round numbers in direction to the border end to increase the
+    detected rectangle that fit more items in it.
+    """
     # TODO: Think about right and left, maybe search for the top 2 borders?
     # Filter None entries
-
-    x0 = statistics.median([item[0] for item in boxes if item[0] is not None])
-    y0 = statistics.median([item[1] for item in boxes if item[1] is not None])
-    x1 = statistics.median([item[2] for item in boxes if item[2] is not None])
-    y1 = statistics.median([item[3] for item in boxes if item[3] is not None])
-
-    result = (x0, y0, x1, y1)
-    return result
+    rounding = [math.floor, math.floor, math.ceil, math.ceil]
+    result = []
+    for index, method in enumerate(rounding):
+        # remove None items
+        filtered = [item[index] for item in boxes if item[index] is not None]
+        # round to have a more robust grouping
+        rounded = [method(item) for item in filtered] if roundme else filtered
+        # determine most occured border to determine them as required border
+        mode = statistics.mode(rounded)
+        result.append(mode)
+    # (x0, y0, x1, y1)
+    return tuple(result)
