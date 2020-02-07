@@ -23,6 +23,5 @@ def test_example_extract(testdir):
         tests.resources.DOCU_TWINE,
         tests.resources.TECHNICAL24,
     ]
-    decider.example.extract(pdfs, generated)
-
+    decider.example.extract(pdfs, generated, pages='0:3')
     assert os.path.exists(generated), str(generated)
