@@ -8,6 +8,10 @@ border
 
 * [ ] add border validator
 
+* [ ] extract left and right page
+
+* [ ] extract most common border
+
 code quality
 ------------
 
