@@ -28,7 +28,7 @@ import serializeraw
 import utila
 
 import border.data
-import border.most
+import border.detection.most
 import border.utils
 
 
@@ -41,7 +41,8 @@ def work(
     boxes = serializeraw.load_boundingboxes(border_boxes, pages=pages)
     sizeandborder = serializeraw.load_pageborders(border_pages, pages=pages)
 
-    cur = border.most.most_boundingbox([item.border for item in sizeandborder])
+    cur = border.detection.most.most_boundingbox(
+        [item.border for item in sizeandborder])
     utila.info(f'{cur}')
 
     def boxprovider(page: int):  # pylint:disable=unused-argument

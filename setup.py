@@ -74,6 +74,7 @@ if __name__ == "__main__":
         packages=[
             'border',
             'border.features',
+            'border.detection',
             'decider',
             'decider.features',
             'decider.toc',

@@ -47,7 +47,7 @@ def test_cli_decider(cmd, testdir, monkeypatch):
 def test_cli_detector_and_decider(source, testdir, monkeypatch):
     """Run decider"""
     root = str(testdir)
-    cmd = f'detector -i {source} -o {root}'
+    cmd = f'detector -i {source} -o {root} --pages=0:5'
     completed = utila.run(cmd)
     assert completed.returncode == utila.SUCCESS, str(completed)
 
