@@ -8,7 +8,7 @@ border
 
 * [ ] add border validator
 
-* [ ] extract left and right page
+* [x] extract left and right page
 
 * [ ] extract most common border
 

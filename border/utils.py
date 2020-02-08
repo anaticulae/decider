@@ -7,7 +7,11 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import math
 import statistics
+import typing
+
+Numbers = typing.List  # pylint:disable=C0103
 
 
 def multi_mode(data, minimize: bool = True):
@@ -25,3 +29,18 @@ def multi_mode(data, minimize: bool = True):
     if minimize:
         return current[0]
     return current[-1]
+
+
+def diff_mode(items: Numbers, max_diff: float = 2.0) -> Numbers:
+    """Compute mode auf `item` and determine matched `items` which does
+    not more differ than `max_diff` from mode.
+
+    Args:
+        items(Numbers): items to filter
+        max_diff(float): max difference to mode which matches the classifier
+    Returns:
+        matched items
+    """
+    mode = multi_mode(items)
+    matched = [item for item in items if math.fabs(item - mode) <= max_diff]
+    return matched
