@@ -69,7 +69,7 @@ def boxes_outside_border(boxes, expected_border: callable):
             # BORDER:       'left, right, top,   bottom'
 
             # move bounding to center of page to make approach more robust
-            rounded_bounding = round_bounding(bounding)
+            rounded_bounding = round_small(bounding)
             if not any([
                     rounded_bounding[0] < border_box[0],
                     rounded_bounding[2] > border_box[1],
@@ -82,7 +82,7 @@ def boxes_outside_border(boxes, expected_border: callable):
     return result
 
 
-def round_bounding(item: border.data.Rectangle) -> border.data.Rectangle:
+def round_small(item: border.data.Rectangle) -> border.data.Rectangle:
     """Round border in direction to the center of the rectangle to get a
     `smaller` rectangle which fit in more parent rectangles."""
     # round to move coordinate in center direction of page
