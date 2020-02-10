@@ -45,6 +45,7 @@ import typing
 
 import configo
 import hey.classificator
+import hey.utils
 import iamraw
 import utila
 
@@ -89,10 +90,8 @@ def run(
 ) -> LeftRightDetected:
     """Run LeftRight-Stategy to determine that document contains special
     leftright-border or a normal equal border for every page."""
-    assert len(textpositions) == len(pagesizes), 'could not sync iterator'
-
     left, right = determine_pageborder(textpositions, pagesizes)
-
+    left, right = handle_emptypage(left, right)
     result = simple(left, right)
     if result:
         return result
@@ -108,6 +107,18 @@ def run(
         right=rightborder,
         confidence=1.0,
     )
+
+
+def handle_emptypage(left, right):
+    # TODO: THINK ABOUT IF THIS IS ENOUGH
+    # ignore empty pages
+    left_none = 0.0
+    left = [item if item is not None else left_none for item in left]
+    right_none = max([item for item in right if item is not None])
+    # NOTE: Determine more pages as large than it realy are - is this a
+    # problem?
+    right = [item if item is not None else right_none for item in right]
+    return left, right
 
 
 def simple(
@@ -187,6 +198,10 @@ def raising(
     longest_left = longest_two(left)
     longest_right = longest_two(right)
 
+    if longest_left is None or longest_right is None:
+        # single page document which does not contain left-right-pages
+        return None
+
     first_left = statistics.mean(longest_left[0])
     second_left = statistics.mean(longest_left[1])
     edge = math.fabs(first_left - second_left)
@@ -230,9 +245,14 @@ def raising(
 def determine_pageborder(textpositions, pagesizes):
     left = []
     right = []
-    # TODO: ENSURE THAT PAGE NUMBERS ARE SYNCED
-    for page, size in zip(textpositions, pagesizes):
-        # remove index
+    before = -1
+    for current, (page, size) in hey.utils.sync([textpositions, pagesizes]):
+        assert current > before, f'{before} < {current}'
+        before = current
+        if not page or not size:
+            left.append(None)
+            right.append(None)
+            continue
         leftright = maximize_leftright(page.content.values(), size)
         left.append(leftright[0])
         right.append(leftright[1])
@@ -265,8 +285,15 @@ def maximize_leftright(
     left = [item[0] for item in boundings if item[0] <= left_max]
     right = [item[2] for item in boundings if item[2] >= right_min]
 
-    left = border.utils.multi_mode(left)
-    right = border.utils.multi_mode(right, minimize=False)
+    # TODO: DO WE RELAY NEED THIS?
+    if not left:
+        left = 0.0
+    else:
+        left = border.utils.multi_mode(left)
+    if not right:
+        right = size.size.width
+    else:
+        right = border.utils.multi_mode(right, minimize=False)
     return left, right
 
 
