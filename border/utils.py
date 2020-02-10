@@ -44,3 +44,24 @@ def diff_mode(items: Numbers, max_diff: float = 2.0) -> Numbers:
     mode = multi_mode(items)
     matched = [item for item in items if math.fabs(item - mode) <= max_diff]
     return matched
+
+
+def lookup(value, table):
+    # TODO: VERY SLOW
+    current, result = table[0]
+    for count, returnvalue in table:
+        if current <= value <= count:
+            return returnvalue
+        current, result = count, returnvalue
+    return result
+
+
+def diffs(items):
+    assert len(items) >= 2, f'no enough items: {len(items)}'
+    result = [
+        math.fabs(first - second) for first, second in zip(
+            items[1:],
+            items[0:-1],
+        )
+    ]
+    return result

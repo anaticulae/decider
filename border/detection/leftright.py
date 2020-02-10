@@ -24,9 +24,12 @@ TODO: MOVE TO HEY PACKAGE LATER
 """
 
 import dataclasses
+import math
+import statistics
 import typing
 
 import configo
+import hey.classificator
 import iamraw
 import utila
 
@@ -43,6 +46,10 @@ MIN_MIXED_ERROR = configo.HV_PERCENT_PLUS(default=15)
 LEFT_PERCENT = configo.HV_PERCENT_PLUS(default=30)
 # area where right border can be located.
 RIGHT_PERCENT = configo.HV_PERCENT_PLUS(default=30)
+
+MIN_RAISING_EDGE = configo.HV_PERCENT_PLUS(default=75)
+
+FAILRATE = ((5, 0), (7, 0.2), (10, 0.3), (40, 0.1))
 
 LeftRight = typing.Tuple[float, float]
 
@@ -69,9 +76,13 @@ def run(
 
     left, right = determine_pageborder(textpositions, pagesizes)
 
-    simple_result = simple(left, right)
-    if simple_result:
-        return simple_result
+    result = simple(left, right)
+    if result:
+        return result
+
+    result = raising(left, right)
+    if result:
+        return result
 
     leftborder = border.utils.multi_mode(left)
     rightborder = border.utils.multi_mode(right, minimize=False)
@@ -82,19 +93,7 @@ def run(
     )
 
 
-def determine_pageborder(textpositions, pagesizes):
-    left = []
-    right = []
-    # TODO: ENSURE THAT PAGE NUMBERS ARE SYNCED
-    for page, size in zip(textpositions, pagesizes):
-        # remove index
-        leftright = maximize_leftright(page.content.values(), size)
-        left.append(leftright[0])
-        right.append(leftright[1])
-    return left, right
-
-
-def simple(left, right):
+def simple(left, right) -> LeftRightDetected:
     mixed = border.utils.diff_mode(left, max_diff=MAX_SIDE_DIFF.value)
     # first side
     first = left[::2]
@@ -133,6 +132,62 @@ def simple(left, right):
     return None
 
 
+def raising(left, right) -> LeftRightDetected:
+    longest_left = longest_two(left)
+    longest_right = longest_two(right)
+
+    first_left = statistics.mean(longest_left[0])
+    second_left = statistics.mean(longest_left[1])
+    edge = math.fabs(first_left - second_left)
+
+    first_right = statistics.mean(longest_right[0])
+    second_right = statistics.mean(longest_right[1])
+
+    edges = border.utils.diffs(left)
+    failures = [
+        index for index, item in enumerate(edges)
+        if item < edge * MIN_RAISING_EDGE.value
+    ]
+    failrate = len(failures) / len(edges)
+    max_failrate = border.utils.lookup(len(edges), FAILRATE)
+
+    if failrate > max_failrate:
+        return None
+
+    first_left = utila.roundme(first_left)
+    second_left = utila.roundme(second_left)
+
+    first_right = utila.roundme(first_right)
+    second_right = utila.roundme(second_right)
+
+    leftborder = (
+        min([first_left, second_left]),
+        max([first_left, second_left]),
+    )
+    rightborder = (
+        min([first_right, second_right]),
+        max([first_right, second_right]),
+    )
+
+    return LeftRightDetected(
+        left=leftborder,
+        right=rightborder,
+        confidence=1.0,
+    )
+
+
+def determine_pageborder(textpositions, pagesizes):
+    left = []
+    right = []
+    # TODO: ENSURE THAT PAGE NUMBERS ARE SYNCED
+    for page, size in zip(textpositions, pagesizes):
+        # remove index
+        leftright = maximize_leftright(page.content.values(), size)
+        left.append(leftright[0])
+        right.append(leftright[1])
+    return left, right
+
+
 def maximize_leftright(
         boundings: border.data.Rectangles,
         size: iamraw.PageSizeBorder,
@@ -162,3 +217,16 @@ def maximize_leftright(
     left = border.utils.multi_mode(left)
     right = border.utils.multi_mode(right, minimize=False)
     return left, right
+
+
+def longest_two(items):
+
+    def close(candidat, clusteritem):
+        # TODO: HOLY VALUE
+        return math.fabs(candidat - clusteritem) < 2.0
+
+    clustered = hey.classificator.determine_cluster(items, close)
+    result = sorted(clustered, key=len, reverse=True)
+    if len(result) < 2:
+        return None
+    return result[0], result[1]

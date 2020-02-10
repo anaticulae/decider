@@ -51,17 +51,29 @@ def test_leftright_run_noleftright():
     assert result.left < result.right, result
 
 
-@pytest.mark.xfail(reason='current approach is not strong enough')
-def test_leftright_two_errorpages():
+def test_leftright_one_error():
     """Introduce error to challenge algorithm."""
-    textpositions, pagesizes = load_example(tests.resources.LEFTRIGHT_GENERATED)
+    left, right = load_leftright(tests.resources.LEFTRIGHT_GENERATED)
     # introduce an error
-    textpositions[1] = textpositions[0]
-    pagesizes[1] = pagesizes[0]
-    # introduce second error
-    textpositions[4] = textpositions[5]
-    pagesizes[4] = pagesizes[5]
-    result = border.detection.leftright.run(textpositions, pagesizes)
+    left.append(left.pop(3))
+    right.append(right.pop(3))
+
+    result = border.detection.leftright.raising(left, right)
+    assert result, result
+    assert result.valid, result
+    assert isinstance(result.left, tuple), result
+    assert isinstance(result.right, tuple), result
+
+
+def test_leftright_strategy_witherror():
+    """Run left right strategy with example which contains an error."""
+    left, right = load_example(tests.resources.LEFTRIGHT_GENERATED)
+    # introduce an error
+    left.append(left.pop(3))
+    right.append(right.pop(3))
+
+    result = border.detection.leftright.run(left, right)
+    assert result, result
     assert result.valid, result
     assert isinstance(result.left, tuple), result
     assert isinstance(result.right, tuple), result
