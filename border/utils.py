@@ -11,7 +11,9 @@ import math
 import statistics
 import typing
 
-Numbers = typing.List  # pylint:disable=C0103
+# TODO: MOVE TO UTILA
+Number = typing.TypeVar('Number', int, float)  # pylint:disable=C0103
+Numbers = typing.List[Number]  # pylint:disable=C0103
 
 
 def multi_mode(data, minimize: bool = True):
@@ -46,9 +48,19 @@ def diff_mode(items: Numbers, max_diff: float = 2.0) -> Numbers:
     return matched
 
 
-def lookup(value, table):
+def lookup(value: Number, table: typing.List) -> Number:
+    """Use table lookup to determine holy value.
+
+    Args:
+        value: selector to determine holy value
+        table: contains holy values to determine on given `value`.
+    Returns:
+        selected HolyValue.
+    """
     # TODO: VERY SLOW
+    # TODO: MOVE TO CONFIGO
     current, result = table[0]
+    assert value >= current, f'value is to small {value} >= {current}'
     for count, returnvalue in table:
         if current <= value <= count:
             return returnvalue
@@ -56,7 +68,7 @@ def lookup(value, table):
     return result
 
 
-def diffs(items):
+def diffs(items: Numbers) -> Numbers:
     assert len(items) >= 2, f'no enough items: {len(items)}'
     result = [
         math.fabs(first - second) for first, second in zip(

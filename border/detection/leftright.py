@@ -16,9 +16,24 @@ width for left and right page.
 As a result of different left-right borders there are alternating border
 widths which we detect. On single pages there are no alternating border.
 
+Currently there are two strategies to detect different page border:
+
+* simple approach
+* raising edge
+
+Simple Approach
+~~~~~~~~~~~~~~~
+
 Some documents have exceptions on some pages. We handle this via allowed
 errors defined with the HolyValues `MAX_FIRSTSECOND_ERROR` and
 `MIN_MIXED_ERROR`.
+
+Raising Edge
+~~~~~~~~~~~~
+
+The change of the text feed creates an raising edge between pages. This
+approach detects these edges to determine left and right page border
+width.
 
 TODO: MOVE TO HEY PACKAGE LATER
 """
@@ -49,16 +64,18 @@ RIGHT_PERCENT = configo.HV_PERCENT_PLUS(default=30)
 
 MIN_RAISING_EDGE = configo.HV_PERCENT_PLUS(default=75)
 
-FAILRATE = ((5, 0), (7, 0.2), (10, 0.3), (40, 0.1))
+# TODO: REPLACE WITH CONFIGO TABLE
+RAISING_FAILRATE = ((5, 0), (7, 0.2), (10, 0.3), (40, 0.1))
 
 LeftRight = typing.Tuple[float, float]
+
+DetectedBorder = typing.TypeVar('DetectedBorder', typing.Tuple[float], float)
 
 
 @dataclasses.dataclass
 class LeftRightDetected:
-    # TODO: SUPPORT FLOAT AND TUPLE OF FLOAT
-    left: tuple = None
-    right: tuple = None
+    left: DetectedBorder = None
+    right: DetectedBorder = None
     confidence: float = 0.0
 
     @property
@@ -93,7 +110,24 @@ def run(
     )
 
 
-def simple(left, right) -> LeftRightDetected:
+def simple(
+        left: border.utils.Numbers,
+        right: border.utils.Numbers,
+) -> LeftRightDetected:
+    """Determine LeftRight border based on changing text feed. We use
+    the even numbers to determine the left page and the odd numbers to
+    determine the right text feed.
+
+    This appraoch is limited when one page was missing and therefore
+    these pages are mixed and therefore wrong classified.
+
+    Args:
+        left: ordered list of left text feed
+        right: ending of right text content border
+    Returns:
+        None if no valid LeftRightDetected was detected
+        LeftRightDetected if failrate is not to hight
+    """
     mixed = border.utils.diff_mode(left, max_diff=MAX_SIDE_DIFF.value)
     # first side
     first = left[::2]
@@ -132,7 +166,24 @@ def simple(left, right) -> LeftRightDetected:
     return None
 
 
-def raising(left, right) -> LeftRightDetected:
+def raising(
+        left: border.utils.Numbers,
+        right: border.utils.Numbers,
+) -> LeftRightDetected:
+    """Determine border depending on changing text feed on left page
+    border.
+
+    This approach has no problems when one or more leftright pages are
+    missing. The limit of problems is defined in lookup table
+    `RAISING_FAILRATE`.
+
+    Args:
+        left: ordered list of left text feed
+        right: ending of right text content border
+    Returns:
+        None if no valid LeftRightDetected was detected
+        LeftRightDetected if `failrate` is not to high
+    """
     longest_left = longest_two(left)
     longest_right = longest_two(right)
 
@@ -149,7 +200,7 @@ def raising(left, right) -> LeftRightDetected:
         if item < edge * MIN_RAISING_EDGE.value
     ]
     failrate = len(failures) / len(edges)
-    max_failrate = border.utils.lookup(len(edges), FAILRATE)
+    max_failrate = border.utils.lookup(len(edges), RAISING_FAILRATE)
 
     if failrate > max_failrate:
         return None
@@ -219,7 +270,7 @@ def maximize_leftright(
     return left, right
 
 
-def longest_two(items):
+def longest_two(items: border.utils.Numbers) -> typing.Tuple[float, float]:
 
     def close(candidat, clusteritem):
         # TODO: HOLY VALUE
