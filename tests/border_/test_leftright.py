@@ -8,7 +8,6 @@
 # =============================================================================
 
 import hey.path
-import pytest
 import serializeraw
 
 import border.detection.leftright
@@ -54,7 +53,7 @@ def test_leftright_run_noleftright():
 def test_leftright_one_error():
     """Introduce error to challenge algorithm."""
     left, right = load_leftright(tests.resources.LEFTRIGHT_GENERATED)
-    # introduce an error
+
     left.append(left.pop(3))
     right.append(right.pop(3))
 
@@ -68,12 +67,25 @@ def test_leftright_one_error():
 def test_leftright_strategy_witherror():
     """Run left right strategy with example which contains an error."""
     left, right = load_example(tests.resources.LEFTRIGHT_GENERATED)
-    # introduce an error
-    left.append(left.pop(3))
-    right.append(right.pop(3))
+
+    left, right = introduce_error(left, right)
 
     result = border.detection.leftright.run(left, right)
     assert result, result
     assert result.valid, result
     assert isinstance(result.left, tuple), result
     assert isinstance(result.right, tuple), result
+
+
+def introduce_error(left, right):
+    left, right = left[:], right[:]
+    # introduce an error
+    left.append(left.pop(3))
+    right.append(right.pop(3))
+
+    lresult, rresult = [], []
+    # fix page number - ensure to have ascending page numbers
+    for page, (first, second) in enumerate(zip(left, right)):
+        lresult.append(first._replace(page=page))  # pylint:disable=W0212
+        rresult.append(second._replace(page=page))  # pylint:disable=W0212
+    return lresult, rresult
