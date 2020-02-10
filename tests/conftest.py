@@ -8,6 +8,7 @@
 # =============================================================================
 
 import os
+import sys
 
 import utila
 
@@ -21,7 +22,9 @@ if not 'PYTEST_XDIST_WORKER' in os.environ:
     # ensure to avoid race condition if more than one thread tries to
     # install or use `decider`.
 
-    if 'GENERATE' in os.environ or utila.test.LONGRUN:
+    SINGLE_TEST = '-k' in sys.argv
+    if not SINGLE_TEST and ('GENERATE' in os.environ or utila.test.LONGRUN):
+
         utila.log('install requirements')
         tests.resources.update.install_requirements()
 
