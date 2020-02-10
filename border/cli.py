@@ -31,6 +31,7 @@ WORKPLAN = [
         [
             utila.ResultFile('rawmaker', 'border_boundingboxes'),
             utila.ResultFile('rawmaker', 'border_pages'),
+            utila.ResultFile('rawmaker', 'text_positions'),
         ],
         ('hits', 'user', 'developer'),
     )

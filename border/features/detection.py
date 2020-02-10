@@ -28,6 +28,7 @@ import serializeraw
 import utila
 
 import border.data
+import border.detection
 import border.detection.most
 import border.utils
 
@@ -35,24 +36,22 @@ import border.utils
 def work(
         border_boxes: str,
         border_pages: str,
+        textpositions: str,
         pages: tuple = None,
 ) -> typing.Tuple[str, str, str]:
     utila.call('work: border detection')
     boxes = serializeraw.load_boundingboxes(border_boxes, pages=pages)
     sizeandborder = serializeraw.load_pageborders(border_pages, pages=pages)
+    textpositions = serializeraw.load_textpositions(textpositions, pages=pages)
 
-    cur = border.detection.most.most_boundingbox(
-        [item.border for item in sizeandborder])
-    utila.info(f'{cur}')
+    expected = border.detection.determine_border(textpositions, sizeandborder)
 
-    def boxprovider(page: int):  # pylint:disable=unused-argument
-        # TODO: Differentiate between left and right side
-        return cur
-
-    hits = boxes_outside_border(boxes, boxprovider)
+    hits = boxes_outside_border(boxes, expected)
     utila.debug(hits)
 
-    dumped = serializeraw.dump_hits(cur, hits)
+    # TODO: REPLACE WITH CURRENT BORDER
+    none = (0, 0, 0, 0)
+    dumped = serializeraw.dump_hits(none, hits)
 
     user, developer = '', ''
     return dumped, user, developer

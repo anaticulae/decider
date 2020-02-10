@@ -7,10 +7,34 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import dataclasses
 import math
+
+import iamraw
 
 import border.data
 import border.utils
+
+
+@dataclasses.dataclass
+class MostBoundingDetected:
+    left: float = None
+    right: float = None
+    top: float = None
+    bottom: float = None
+    confidence: float = 0.0
+
+
+def run(sizeandborder: iamraw.PageSizeBorderList) -> MostBoundingDetected:
+    most = most_boundingbox([item.border for item in sizeandborder])
+    # x0, y0, x1, y1
+    result = MostBoundingDetected(
+        left=most[0],
+        right=most[2],
+        top=most[1],
+        bottom=most[3],
+    )
+    return result
 
 
 def most_boundingbox(
