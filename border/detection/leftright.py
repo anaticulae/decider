@@ -59,7 +59,7 @@ class LeftRightDetected:
         return isinstance(self.left, tuple)
 
 
-def run(  # pylint:disable=too-many-locals
+def run(
         textpositions: iamraw.PageContentTextPositions,
         pagesizes: iamraw.PageSizeBorderList,
 ) -> LeftRightDetected:
@@ -67,14 +67,34 @@ def run(  # pylint:disable=too-many-locals
     leftright-border or a normal equal border for every page."""
     assert len(textpositions) == len(pagesizes), 'could not sync iterator'
 
+    left, right = determine_pageborder(textpositions, pagesizes)
+
+    simple_result = simple(left, right)
+    if simple_result:
+        return simple_result
+
+    leftborder = border.utils.multi_mode(left)
+    rightborder = border.utils.multi_mode(right, minimize=False)
+    return LeftRightDetected(
+        left=leftborder,
+        right=rightborder,
+        confidence=1.0,
+    )
+
+
+def determine_pageborder(textpositions, pagesizes):
     left = []
     right = []
+    # TODO: ENSURE THAT PAGE NUMBERS ARE SYNCED
     for page, size in zip(textpositions, pagesizes):
         # remove index
         leftright = maximize_leftright(page.content.values(), size)
         left.append(leftright[0])
         right.append(leftright[1])
+    return left, right
 
+
+def simple(left, right):
     mixed = border.utils.diff_mode(left, max_diff=MAX_SIDE_DIFF.value)
     # first side
     first = left[::2]
@@ -110,13 +130,7 @@ def run(  # pylint:disable=too-many-locals
             right=rightborder,
             confidence=1.0,
         )
-    leftborder = border.utils.multi_mode(left)
-    rightborder = border.utils.multi_mode(right, minimize=False)
-    return LeftRightDetected(
-        left=leftborder,
-        right=rightborder,
-        confidence=1.0,
-    )
+    return None
 
 
 def maximize_leftright(
