@@ -87,6 +87,10 @@ def run(  # pylint:disable=too-many-locals
     first_error = 1 - len(first_matched) / len(first)
     second_error = 1 - len(second_matched) / len(second)
 
+    utila.debug(f'mixed: {mixed_error}')
+    utila.debug(f'first: {first_error}')
+    utila.debug(f'second: {second_error}')
+
     # left right
     # TODO: DEFINE BETTER CONFIDENCE APPROACH
     if mixed_error > MIN_MIXED_ERROR.value and all([
