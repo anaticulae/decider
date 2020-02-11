@@ -88,10 +88,11 @@ def run(
         textpositions: iamraw.PageContentTextPositions,
         pagesizes: iamraw.PageSizeBorderList,
 ) -> LeftRightDetected:
-    """Run LeftRight-Stategy to determine that document contains special
-    leftright-border or a normal equal border for every page."""
+    """Run LeftRight-Strategy to determine that document contains
+    special leftright-border or a normal equal border for every page."""
     left, right = determine_pageborder(textpositions, pagesizes)
     left, right = handle_emptypage(left, right)
+
     result = simple(left, right)
     if result:
         return result
@@ -107,18 +108,6 @@ def run(
         right=rightborder,
         confidence=1.0,
     )
-
-
-def handle_emptypage(left, right):
-    # TODO: THINK ABOUT IF THIS IS ENOUGH
-    # ignore empty pages
-    left_none = 0.0
-    left = [item if item is not None else left_none for item in left]
-    right_none = max([item for item in right if item is not None])
-    # NOTE: Determine more pages as large than it realy are - is this a
-    # problem?
-    right = [item if item is not None else right_none for item in right]
-    return left, right
 
 
 def simple(
@@ -193,7 +182,7 @@ def raising(
         right: ending of right text content border
     Returns:
         None if no valid LeftRightDetected was detected
-        LeftRightDetected if `failrate` is not to high
+        LeftRightDetected if `failrate` is not too high
     """
     longest_left = longest_two(left)
     longest_right = longest_two(right)
@@ -240,6 +229,20 @@ def raising(
         right=rightborder,
         confidence=1.0,
     )
+
+
+def handle_emptypage(left, right):
+    # TODO: THINK ABOUT IF THIS IS ENOUGH
+    # ignore empty pages
+    left_none = 0.0
+    left = [item if item is not None else left_none for item in left]
+
+    right_none = max([item for item in right if item is not None])
+    # NOTE: Determine more pages as large than it realy are - is this a
+    # problem?
+    right = [item if item is not None else right_none for item in right]
+
+    return left, right
 
 
 def determine_pageborder(textpositions, pagesizes):
