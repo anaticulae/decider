@@ -13,7 +13,7 @@ import border.detection.most
 
 
 @pytest.mark.parametrize('roundme, expected', [
-    (True, (50, 41, 545, 808)),
+    (True, (50, 42, 544, 808)),
     (False, (50.4, 41.15, 544.88, 807.93)),
 ])
 def test_border_most_boundingbox(roundme, expected):
