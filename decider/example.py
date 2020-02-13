@@ -92,6 +92,7 @@ def create_job(path: str, pages: tuple = None) -> str:
     return todo
 
 
+# TODO: REPLACE WITH UTILA TEST/ MOVE
 def output_names(files):
     files = [utila.forward_slash(item) for item in files]
     prefix = utila.forward_slash(os.path.commonpath(files))
@@ -101,5 +102,4 @@ def output_names(files):
     files = [item.replace('.pdf', '') for item in files]
     files = [item.replace('/', '_') for item in files]
 
-    files = sorted(files)
     return files
