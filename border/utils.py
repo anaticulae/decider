@@ -8,28 +8,10 @@
 # =============================================================================
 
 import math
-import statistics
 import typing
 
 import utila
 import utila.math
-
-
-def multi_mode(data, minimize: bool = True):
-    """Return the most common data point from discrete or nominal data.
-
-    See: statistics.mode
-    """
-    if not data:
-        raise statistics.StatisticsError('no mode for empty data')
-    # TODO: MOVE TO UTILA
-    table = statistics._counts(data)  # pylint:disable=W0212
-    if len(table) == 1:
-        return table[0][0]
-    current = sorted([item[0] for item in table])
-    if minimize:
-        return current[0]
-    return current[-1]
 
 
 def diff_mode(items: utila.Numbers, max_diff: float = 2.0) -> utila.Numbers:
@@ -42,7 +24,7 @@ def diff_mode(items: utila.Numbers, max_diff: float = 2.0) -> utila.Numbers:
     Returns:
         matched items
     """
-    mode = multi_mode(items)
+    mode = utila.modes(items)
     matched = [item for item in items if math.fabs(item - mode) <= max_diff]
     return matched
 

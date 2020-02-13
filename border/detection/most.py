@@ -70,7 +70,7 @@ def most_boundingbox(
         # support multiple border options.
         minimize = method is math.floor
         # TODO: REQUIRE A BETTER TY-BREAKER
-        mode = border.utils.multi_mode(rounded, minimize=minimize)
+        mode = utila.modes(rounded, minimize=minimize)
         result.append(mode)
     # (x0, y0, x1, y1)
     return tuple(result)
