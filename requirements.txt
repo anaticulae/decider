@@ -2,15 +2,15 @@
 PyYAML==5.1
 
 # Internal packages
-iamraw==1.15.1
 utila==1.13.1
 protocol==0.7.2
+iamraw==1.15.1
 hey==1.15.7
 
 # define holy values
 configo==0.5.1
 
-# ensure the right test data
+# test data converter
 rawmaker==1.9.5
 
 # add test data provider
