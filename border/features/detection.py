@@ -21,10 +21,12 @@ are a lot of `hit the box` errors.
 * TODO: MARK EMPTY STRING LAYOUT ERRORS.
 """
 
+import functools
 import math
 import typing
 
 import iamraw
+import protocol
 import serializeraw
 import utila
 
@@ -32,6 +34,7 @@ import border.data
 import border.detection
 import border.detection.most
 import border.utils
+import decider.utils
 
 
 def work(
@@ -52,8 +55,44 @@ def work(
 
     dumped = serializeraw.dump_hits(hits)
 
-    user, developer = '', ''
+    linter = decider.utils.from_module(__name__)
+    linting(hits, linter)
+
+    user, developer = protocol.dump_result(linter.result, unique=True)
     return dumped, user, developer
+
+
+def linting(
+        hits,
+        linter: protocol.Linter,
+):
+    checkers = decider.utils.parse_checkers(__name__)
+    for checker in checkers:
+        for page in hits:
+            location = protocol.Location.from_page(page.page)
+            call = functools.partial(
+                linter.add_finding,
+                msgid=checker.msgid,
+                location=location,
+            )
+            for hit in page.hits:
+                checker(call, hit)
+
+
+# TODO: ADD DIFFERENT BORDER CHECKER LINTER FOR DIFFRENT AREAS, footenote,
+# pagecontent, cropbox, etc.
+
+SOLUTION_2020 = """\
+Objekt beschreibt Seitenrand
+
+Passen Sie die Formatierung an, so dass der Inhalt nicht mehr in den
+Seitenrad ragt.
+"""
+
+
+def check_2020_content_inside_box(linter, item):  # pylint:disable=W0613
+    """Ensure that content fits in detected content box."""
+    linter()
 
 
 def boxes_outside_border(

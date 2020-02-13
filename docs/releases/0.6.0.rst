@@ -6,11 +6,11 @@ RP 0.6.0
 border
 ------
 
-* [ ] add border validator
+* [x] add border validator
 
 * [x] extract left and right page
 
-* [ ] extract most common border
+* [x] extract most common border
 
 code quality
 ------------
