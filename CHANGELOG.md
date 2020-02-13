@@ -2,6 +2,38 @@
 
 Every noteable change is logged here.
 
+## v0.6.0
+
+### Feature
+
+* add linter to verify and print hits on printing border (1a80cb813550)
+* make simple error page count dependent (a34fa70af878)
+* fix bounding detector (50b6b4b83976)
+* use new border detection algorithm to determine border (cb1fbf7a494c)
+* handle empty pages and ensure ascending page order (f6c702387385)
+* add strategy to detect left right on raising edges (c108a1383d0c)
+* add debugging information to verify algorithm result (87e1c6420c01)
+* add method to detect left-right document border (e72400f38f75)
+* return value of featurepack to caller (12d9daf7513c)
+* extend tool --help documentation (1bbb0c3b2f89)
+* write result of linting as border detection step output (236b016fee5c)
+* add mechanism to judge equal border detection (f1b399ac5b3f)
+* round border and use mode to determine border (296df6c05458)
+* add --pages flag to shrink selected pages (dacf94e874b5)
+* improve interface definition (d767c1f64421)
+* rename border bounding detection to feature name (0b366511671b)
+
+### Fix
+
+* ensure that pages are sorted ascendantly (0b55c39268c9)
+* determine required border depending on page number (3f58edf70a3d)
+* handle None as special value (3f3653870d67)
+
+### Documentation
+
+* fix intention of rawmaker package (6b95f5796c15)
+* extend interface documentation (b066550d719d)
+
 ## v0.5.0
 
 ### Feature
