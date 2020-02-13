@@ -55,7 +55,8 @@ import border.utils
 # max diff to match in common group.
 MAX_SIDE_DIFF = configo.HV_INT_PLUS(default=2.0)
 # exceptions which are allowed cause of user defined error.
-MAX_FIRSTSECOND_ERROR = configo.HV_PERCENT_PLUS(default=5)
+# TODO: REPLACE WITH HOLY VALUE CONFIGO APPROACH
+MAX_FIRSTSECOND_ERROR = ((3, 0.35), (5, 0.26), (10, .21), (15, 0.05))
 # errors which are a result of handle alternating border as single border.
 MIN_MIXED_ERROR = configo.HV_PERCENT_PLUS(default=15)
 # area where left border can be located.
@@ -146,9 +147,13 @@ def simple(
 
     # left right
     # TODO: DEFINE BETTER CONFIDENCE APPROACH
+    max_firstsecond_error = border.utils.lookup(
+        len(first),
+        MAX_FIRSTSECOND_ERROR,
+    )
     if mixed_error > MIN_MIXED_ERROR.value and all([
-            first_error < MAX_FIRSTSECOND_ERROR.value,
-            second_error < MAX_FIRSTSECOND_ERROR.value,
+            first_error < max_firstsecond_error,
+            second_error < max_firstsecond_error,
     ]):
         leftborder = (
             border.utils.multi_mode(first),
