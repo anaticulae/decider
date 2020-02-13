@@ -214,11 +214,8 @@ def raising(
     if failrate > max_failrate:
         return None
 
-    first_left = utila.roundme(first_left)
-    second_left = utila.roundme(second_left)
-
-    first_right = utila.roundme(first_right)
-    second_right = utila.roundme(second_right)
+    first_left, second_left = utila.roundme(first_left, second_left)
+    first_right, second_right = utila.roundme(first_right, second_right)
 
     leftborder = (
         min([first_left, second_left]),
@@ -287,7 +284,7 @@ def maximize_leftright(
     left_max = size.size.width * LEFT_PERCENT.value
     right_min = size.size.width * (1 - RIGHT_PERCENT.value)
     # TODO: REPLACE AFTER UPGRADING UTILA
-    left_max, right_min = utila.roundme(left_max), utila.roundme(right_min)
+    left_max, right_min = utila.roundme(left_max, right_min)
     assert left_max <= right_min, 'left and right bounds are flipped'
 
     left = [item[0] for item in boundings if item[0] <= left_max]
