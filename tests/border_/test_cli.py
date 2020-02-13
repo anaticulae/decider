@@ -24,6 +24,8 @@ def validate_leftright(hits):
     # symbol at right top
     # TODO: reduce after extracting symbol as one
     expected_hits.extend([0] * 16)
+
+    hits = utila.flatten(item.hits for item in hits)
     assert len(hits) >= len(expected_hits), (
         f'expected hits: {expected_hits}\n current: {len(hits)}\n')
 
@@ -63,8 +65,7 @@ def test_border_cli_decider(
 
     dumped = utila.file_read(outputfile)
     assert len(dumped) > 100  # result contains some content
-    detected_border, detected_hits = serializeraw.load_hits(outputfile)
-
+    detected_hits = serializeraw.load_hits(outputfile)
     if validate is None:
         return
     if isinstance(validate, list):

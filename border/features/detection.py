@@ -24,6 +24,7 @@ are a lot of `hit the box` errors.
 import math
 import typing
 
+import iamraw
 import serializeraw
 import utila
 
@@ -49,19 +50,21 @@ def work(
     hits = boxes_outside_border(boxes, expected)
     utila.debug(hits)
 
-    # TODO: REPLACE WITH CURRENT BORDER
-    none = (0, 0, 0, 0)
-    dumped = serializeraw.dump_hits(none, hits)
+    dumped = serializeraw.dump_hits(hits)
 
     user, developer = '', ''
     return dumped, user, developer
 
 
-def boxes_outside_border(boxes, expected_border: callable):
+def boxes_outside_border(
+        boxes,
+        expected_border: callable,
+) -> iamraw.PageContentHits:
     """Determine `boxes` which are outside out of `border`."""
     result = []
     # x0 y0 x1 y1
     for page in boxes:
+        hits = []
         border_box = expected_border(page.page)
         for index, bounding in page.boundings:
             # BOUNDING:     'left, top,   right, bottom'
@@ -77,7 +80,13 @@ def boxes_outside_border(boxes, expected_border: callable):
             ]):
                 # all items in the box
                 continue
-            result.append((page.page, index, bounding))
+            hits.append((index, bounding))
+        result.append(
+            iamraw.PageContentHit(
+                border=border_box,
+                hits=hits,
+                page=page.page,
+            ))
     return result
 
 
