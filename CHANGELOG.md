@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.6.1
+
+### Fix
+
+* move generated data to correct folder (4a5c6a4093f7)
+
 ## v0.6.0
 
 ### Feature
