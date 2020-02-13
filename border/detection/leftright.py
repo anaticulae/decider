@@ -112,8 +112,8 @@ def run(
 
 
 def simple(
-        left: border.utils.Numbers,
-        right: border.utils.Numbers,
+        left: utila.Numbers,
+        right: utila.Numbers,
 ) -> LeftRightDetected:
     """Determine LeftRight border based on changing text feed. We use
     the even numbers to determine the left page and the odd numbers to
@@ -172,8 +172,8 @@ def simple(
 
 
 def raising(
-        left: border.utils.Numbers,
-        right: border.utils.Numbers,
+        left: utila.Numbers,
+        right: utila.Numbers,
 ) -> LeftRightDetected:
     """Determine border depending on changing text feed on left page
     border.
@@ -305,7 +305,7 @@ def maximize_leftright(
     return left, right
 
 
-def longest_two(items: border.utils.Numbers) -> typing.Tuple[float, float]:
+def longest_two(items: utila.Numbers) -> typing.Tuple[float, float]:
 
     def close(candidat, clusteritem):
         # TODO: HOLY VALUE

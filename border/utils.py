@@ -11,9 +11,8 @@ import math
 import statistics
 import typing
 
-# TODO: MOVE TO UTILA
-Number = typing.TypeVar('Number', int, float)  # pylint:disable=C0103
-Numbers = typing.List[Number]  # pylint:disable=C0103
+import utila
+import utila.math
 
 
 def multi_mode(data, minimize: bool = True):
@@ -33,7 +32,7 @@ def multi_mode(data, minimize: bool = True):
     return current[-1]
 
 
-def diff_mode(items: Numbers, max_diff: float = 2.0) -> Numbers:
+def diff_mode(items: utila.Numbers, max_diff: float = 2.0) -> utila.Numbers:
     """Compute mode auf `item` and determine matched `items` which does
     not more differ than `max_diff` from mode.
 
@@ -48,7 +47,7 @@ def diff_mode(items: Numbers, max_diff: float = 2.0) -> Numbers:
     return matched
 
 
-def lookup(value: Number, table: typing.List) -> Number:
+def lookup(value: utila.math.Number, table: typing.List) -> utila.math.Number:
     """Use table lookup to determine holy value.
 
     Args:
@@ -68,7 +67,7 @@ def lookup(value: Number, table: typing.List) -> Number:
     return result
 
 
-def diffs(items: Numbers) -> Numbers:
+def diffs(items: utila.Numbers) -> utila.Numbers:
     assert len(items) >= 2, f'no enough items: {len(items)}'
     result = [
         math.fabs(first - second) for first, second in zip(
