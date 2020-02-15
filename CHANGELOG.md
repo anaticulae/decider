@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v0.7.0
+
+### Feature
+
+* extend linter message to include hit location (4805db04befc)
+* add BoundingLocation to describe rectangles to highlight (4aadbe1e4f01)
+
 ## v0.6.1
 
 ### Fix
