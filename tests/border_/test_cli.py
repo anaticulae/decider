@@ -9,6 +9,7 @@
 
 import os
 
+import protocol
 import pytest
 import serializeraw
 import utila
@@ -75,3 +76,10 @@ def test_border_cli_decider(
             f'hits: {detected_hits}')
         return
     validate(detected_hits)
+
+    linterfile = f'{border.cli.PROCESS}__{border.cli.FEATURE_NAME}_user.yaml'
+    # ensure that dumped findings can be loaded properly
+    # test to load results
+    # TODO: split this complex test
+    loaded = protocol.load_result(linterfile)
+    assert loaded
