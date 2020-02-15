@@ -1,0 +1,21 @@
+.. _0_7_0:
+
+RP 0.7.0
+=========
+
+* [ ] add BoundingLocation to `protocol` to describe highlighted
+  rectangles in `feedback`.
+
+* [ ] use BoundingLocation to describe location of `border` linter results
+
+code quality
+------------
+
+before
+~~~~~~
+
+* Total coverage: 96.16%
+* Your code has been rated: 9.66/10
+
+after
+~~~~~
