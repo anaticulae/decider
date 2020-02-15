@@ -72,6 +72,6 @@ def test_border_cli_decider(
         # validated
         assert len(detected_hits) >= len(validate), (
             f'expected hits: {validate}\ncurrent: {len(detected_hits)}\n'
-            f'border: {detected_border}\nhits: {detected_hits}')
+            f'hits: {detected_hits}')
         return
     validate(detected_hits)
