@@ -2,6 +2,16 @@
 
 Every noteable change is logged here.
 
+## v0.7.2
+
+### Feature
+
+* add border decider to test data generator (62f2c99fc29e)
+
+### Fix
+
+* support small examples (f6666131164b)
+
 ## v0.7.1
 
 ### Fix
