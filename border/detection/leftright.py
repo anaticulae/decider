@@ -56,7 +56,7 @@ import border.utils
 MAX_SIDE_DIFF = configo.HV_INT_PLUS(default=2.0)
 # exceptions which are allowed cause of user defined error.
 # TODO: REPLACE WITH HOLY VALUE CONFIGO APPROACH
-MAX_FIRSTSECOND_ERROR = ((3, 0.35), (5, 0.26), (10, .21), (15, 0.05))
+MAX_FIRSTSECOND_ERROR = ((2, 0.5), (3, 0.35), (5, 0.26), (10, .21), (15, 0.05))
 # errors which are a result of handle alternating border as single border.
 MIN_MIXED_ERROR = configo.HV_PERCENT_PLUS(default=15)
 # area where left border can be located.
