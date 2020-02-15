@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.7.1
+
+### Fix
+
+* fix loader (98c4de82db77)
+
 ## v0.7.0
 
 ### Feature
