@@ -3,7 +3,7 @@
 RP 0.7.0
 =========
 
-* [ ] add BoundingLocation to `protocol` to describe highlighted
+* [x] add BoundingLocation to `protocol` to describe highlighted
   rectangles in `feedback`.
 
 * [ ] use BoundingLocation to describe location of `border` linter results
