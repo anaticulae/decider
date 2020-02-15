@@ -87,6 +87,7 @@ def create_job(path: str, pages: tuple = None) -> str:
     task = [
         f'detector -j 8 -i {path} -o {path} {pages}',
         f'decider -j 8 -i {path} -o {path}',
+        f'decider_border -i {path} -o {path} {pages}',
     ]
     todo = ' && '.join(task)
     return todo
