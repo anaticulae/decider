@@ -19,3 +19,8 @@ before
 
 after
 ~~~~~
+
+.. note:: Todos are excluded out of rating, now.
+
+* Total coverage: 96.19%
+* Your code has been rated at 10.00/10
