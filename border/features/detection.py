@@ -69,14 +69,12 @@ def linting(
     checkers = decider.utils.parse_checkers(__name__)
     for checker in checkers:
         for page in hits:
-            location = protocol.Location.from_page(page.page)
             call = functools.partial(
                 linter.add_finding,
                 msgid=checker.msgid,
-                location=location,
             )
             for hit in page.hits:
-                checker(call, hit)
+                checker(call, hit, page=page)
 
 
 # TODO: ADD DIFFERENT BORDER CHECKER LINTER FOR DIFFRENT AREAS, footenote,
@@ -90,9 +88,15 @@ Seitenrad ragt.
 """
 
 
-def check_2020_content_inside_box(linter, item):  # pylint:disable=W0613
+def check_2020_content_inside_box(linter, item, page):  # pylint:disable=W0613
     """Ensure that content fits in detected content box."""
-    linter()
+    _, bounding = item
+    # bounding =
+    location = decider.utils.BoundingLocation.fromtuple(
+        bounding=bounding,
+        page=page,
+    )
+    linter(location=location)
 
 
 def boxes_outside_border(
