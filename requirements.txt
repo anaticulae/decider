@@ -5,13 +5,13 @@ PyYAML==5.1
 utila==1.13.1
 protocol==0.7.2
 iamraw==1.15.1
-hey==1.15.8
+hey==1.15.9
 
 # define holy values
 configo==0.5.1
 
 # test data converter
-rawmaker==1.9.5
+rawmaker==1.10.0
 
 # add test data provider
 power==0.6.11
