@@ -20,7 +20,6 @@ import protocol
 import utila
 
 import decider.footnote
-import decider.utils
 
 MAX_HIGHNOTE_RISE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
 MAX_HIGHNOTE_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
@@ -29,7 +28,7 @@ MAX_CONTENT_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
 
 
 def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
-    linter = decider.utils.from_module(__name__)
+    linter = protocol.from_module(__name__)
 
     headerfooters = decider.footnote.load(footerheader, pages)
     footnotes = utila.flatten([item.content for item in headerfooters if item])
@@ -39,11 +38,9 @@ def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
         # run linter
         linting(footer.content, fontconfig, footer.page, linter)
 
-    # TODO: FIX RETURN TYPE AFTER UPGRADING UTILA
-    # TODO: FIX AFTER UPGRADING PROTOCOL
-    dumped = protocol.dump_result(linter.result, unique=True)
-    # TODO: FIX AFTER UPGRADING PROTOCOL
-    return dumped[0], dumped[1]
+    result = linter.result(unique=True)
+    user, developer = protocol.dump_result(result)
+    return user, developer
 
 
 # TODO: ADD GENERAL PACKAGE TO DEFINE UNIQUE IDS
@@ -60,14 +57,14 @@ def linting(
 
     if fontconfig:
         # validation requires valid font config
-        datum = decider.utils.data_driver(
+        datum = protocol.driver(
             location=location,
             fontconfig=fontconfig,
         )
     else:
-        datum = decider.utils.data_driver(location=location)
+        datum = protocol.driver(location=location)
 
-    checkers = decider.utils.parse_checkers(__name__)
+    checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
         call = functools.partial(
             linter.add_finding,

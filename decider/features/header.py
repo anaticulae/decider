@@ -19,30 +19,26 @@ import configo
 import protocol
 import serializeraw
 
-import decider.utils
-
 MAX_REPEATING_ITEM_RATIO = configo.HV_PERCENT_PLUS(default=30).value
 
 
 def work(headerfooter: str, pages: tuple = None) -> typing.Tuple[str, str]:
-    linter = decider.utils.from_module(__name__)
+    linter = protocol.from_module(__name__)
 
     loaded = serializeraw.load_headerfooter(headerfooter, pages=pages)
     headers = [item.header for item in loaded]
 
     linting(headers, linter)
-    # TODO: FIX RETURN TYPE AFTER UPGRADING UTILA
-    # TODO: FIX AFTER UPGRADING PROTOCOL
-    dumped = protocol.dump_result(linter.result, unique=True)
-    # TODO: FIX AFTER UPGRADING PROTOCOL
-    return dumped[0], dumped[1]
+    result = linter.result(unique=True)
+    user, developer = protocol.dump_result(result)
+    return user, developer
 
 
 def linting(
         headers,
         linter: protocol.Linter,
 ):
-    checkers = decider.utils.parse_checkers(__name__)
+    checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
         call = functools.partial(
             linter.add_finding,

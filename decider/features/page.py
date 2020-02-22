@@ -20,7 +20,6 @@ import serializeraw
 
 import decider
 import decider.page
-import decider.utils
 
 # TODO: ADD PROCESS TO CHECK THAT PAGE NUMER IS LOCATED ONLY IN HEADER OR
 # FOOTER, NOT MIXED OR BOTH
@@ -29,8 +28,8 @@ import decider.utils
 def work(headerfooter: str, pages: tuple = None) -> typing.Tuple[str, str]:
     headerfooter = serializeraw.load_headerfooter(headerfooter, pages=pages)
 
-    linter = decider.utils.from_module(__name__)
-    checkers = decider.utils.parse_checkers(__name__)
+    linter = protocol.from_module(__name__)
+    checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
         call = functools.partial(
             linter.add_finding,
@@ -39,12 +38,9 @@ def work(headerfooter: str, pages: tuple = None) -> typing.Tuple[str, str]:
         checker(call, headerfooter)
     # TODO: ADD PROCESS TO VALIDATE PAGE NUMBERS IN HEADER
 
-    # linting(headers, linter)
-    # TODO: FIX RETURN TYPE AFTER UPGRADING UTILA
-    # TODO: FIX AFTER UPGRADING PROTOCOL
-    dumped = protocol.dump_result(linter.result, unique=True)
-    # TODO: FIX AFTER UPGRADING PROTOCOL
-    return dumped[0], dumped[1]
+    result = linter.result(unique=True)
+    user, developer = protocol.dump_result(result)
+    return user, developer
 
 
 SOLUTION_1960 = """\

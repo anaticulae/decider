@@ -34,7 +34,6 @@ import border.data
 import border.detection
 import border.detection.most
 import border.utils
-import decider.utils
 
 
 def work(
@@ -55,10 +54,11 @@ def work(
 
     dumped = serializeraw.dump_hits(hits)
 
-    linter = decider.utils.from_module(__name__)
+    linter = protocol.from_module(__name__)
     linting(hits, linter)
 
-    user, developer = protocol.dump_result(linter.result, unique=True)
+    result = linter.result(unique=True)
+    user, developer = protocol.dump_result(result)
     return dumped, user, developer
 
 
@@ -66,7 +66,7 @@ def linting(
         hits,
         linter: protocol.Linter,
 ):
-    checkers = decider.utils.parse_checkers(__name__)
+    checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
         for page in hits:
             call = functools.partial(
@@ -93,7 +93,7 @@ def check_2020_content_inside_box(linter, item, page):  # pylint:disable=W0613
     assert isinstance(page, int), type(page)
     _, bounding = item
     assert isinstance(bounding, tuple), type(bounding)
-    location = decider.utils.BoundingLocation.fromtuple(
+    location = protocol.BoundingLocation.fromtuple(
         bounding=bounding,
         page=page,
     )

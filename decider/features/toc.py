@@ -17,15 +17,13 @@ import typing
 import iamraw
 import protocol
 import serializeraw
-import yaml
 
 import decider.toc.level as dtl
 import decider.toc.pages as dtp
-import decider.utils
 
 
 def work(tableofcontent: str) -> typing.Tuple[str, str]:
-    linter = decider.utils.from_module(__name__)
+    linter = protocol.from_module(__name__)
 
     tableofcontent: iamraw.Toc = serializeraw.load_toc(tableofcontent)
 
@@ -35,9 +33,8 @@ def work(tableofcontent: str) -> typing.Tuple[str, str]:
     result = linter.result(unique=False)
 
     # dump linter result
-    user_dumped = yaml.dump(result[0])
-    developer_dumped = yaml.dump(result[1])
-    return user_dumped, developer_dumped
+    user, developer = protocol.dump_result(result)
+    return user, developer
 
 
 TOC_CHECKER_ID = 13
@@ -48,7 +45,7 @@ def linting(
         linter: protocol.Linter,
 ):
     location = protocol.Location.from_page(1)
-    checkers = decider.utils.parse_checkers(__name__)
+    checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
         call = functools.partial(
             linter.add_finding,

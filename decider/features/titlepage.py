@@ -11,21 +11,19 @@
 Titlepage
 =========
 """
+
 import functools
 import typing
 
 import iamraw
 import protocol
 import serializeraw
-import yaml
-
-import decider.utils
 
 TITLEPAGE_CHECKER_ID = 12
 
 
 def work(titlepage_path: str) -> typing.Tuple[str, str]:
-    linter = decider.utils.from_module(__name__)
+    linter = protocol.from_module(__name__)
 
     titlepage: iamraw.TitlePage = serializeraw.load_titlepage(titlepage_path)
 
@@ -33,11 +31,9 @@ def work(titlepage_path: str) -> typing.Tuple[str, str]:
     linting(titlepage, linter)
 
     result = linter.result(unique=True)
+    user, developer = protocol.dump_result(result, unique=True)
 
-    # dump linter result
-    user_dumped = yaml.dump(result[0])
-    developer_dumped = yaml.dump(result[1])
-    return user_dumped, developer_dumped
+    return user, developer
 
 
 def linting(
@@ -45,7 +41,7 @@ def linting(
         linter: protocol.Linter,
 ):
     location = protocol.Location.from_page(0)
-    checkers = decider.utils.parse_checkers(__name__)
+    checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
         call = functools.partial(
             linter.add_finding,

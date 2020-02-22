@@ -7,21 +7,21 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import protocol
 import pytest
 
 import decider.features.toc as dft
 import decider.toc.level as dtl
-import decider.utils
 import tests
 import tests.resources
 
 
 def lint(path: str):
     toc = tests.tableofcontent(path)
-    linter = decider.utils.from_module(dft.__name__)
+    linter = protocol.from_module(dft.__name__)
     dft.linting(toc=toc, linter=linter)
-    user, _ = linter.result(unique=False)
-    failures = sorted(messageids(user))
+    result = linter.result(unique=False)
+    failures = sorted(messageids(result))
     return failures
 
 

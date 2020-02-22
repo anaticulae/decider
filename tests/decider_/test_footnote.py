@@ -77,9 +77,9 @@ def active_ids(monkeypatch, ids=None):
     if ids is None:
         ids = []
     with monkeypatch.context() as context:
-        parsed = decider.utils.parse_checkers(decider.features.footnote)
+        parsed = protocol.parse_checkers(decider.features.footnote)
         for item in parsed:
-            msgid = decider.utils.msgid(item.__name__)
+            msgid = protocol.parse_msgid(item.__name__)
             if msgid in ids:
                 item.confidence = 1.0
             else:

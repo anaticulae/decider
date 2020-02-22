@@ -7,11 +7,13 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import protocol
+
 import decider.features.footnote
 
 
 def test_parsing_solution_definition():
-    parsed = decider.utils.parse_solutions(decider.features.footnote)
+    parsed = protocol.parse_solutions(decider.features.footnote)
     assert len(parsed) >= 1, parsed
 
     first = parsed[0]
@@ -21,5 +23,5 @@ def test_parsing_solution_definition():
 
 
 def test_parsing_validators_definition():
-    parsed = decider.utils.parse_checkers(decider.features.footnote)
+    parsed = protocol.parse_checkers(decider.features.footnote)
     assert len(parsed) >= 6, parsed
