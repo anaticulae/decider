@@ -51,6 +51,12 @@ MASTER78_GENERATED = os.path.join(
     'master_page_78_images_toc',
 )
 
+PYPORTING = os.path.join(DOCU, 'howto_pyporting.pdf')
+PYPORTING_GENERATED = os.path.join(
+    GENERATED,
+    'docu_howto_pyporting',
+)
+
 LEFTRIGHT = os.path.join(BOOK, 'leftright.pdf')
 LEFTRIGHT_GENERATED = os.path.join(
     GENERATED,
@@ -65,6 +71,7 @@ TODO = [
     LEFTRIGHT,
     MASTER72,
     MASTER78,
+    PYPORTING,
     TECHNICAL24,
 ]
 
