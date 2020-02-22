@@ -27,6 +27,14 @@ border. There are four types of border.
 
 WORKPLAN = [
     utila.create_step(
+        'distance',
+        [
+            utila.ResultFile('groupme', 'area_area'),
+            utila.ResultFile('groupme', 'distance_distance'),
+        ],
+        ('user', 'developer'),
+    ),
+    utila.create_step(
         FEATURE_NAME,
         [
             utila.ResultFile('rawmaker', 'border_boundingboxes'),
