@@ -7,6 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
 
+import utila
 from utila import ResultFile as RF
 from utila import create_step as step
 from utila import featurepack
@@ -41,7 +42,9 @@ def main():
         workplan=WORKPLAN,
         root=ROOT,
         featurepackage='fonts.features',
-        name=PROCESS,
-        description=DESCRIPTION,
-        version=__version__,
+        config=utila.FeaturePackConfig(
+            name=PROCESS,
+            description=DESCRIPTION,
+            version=__version__,
+        ),
     )

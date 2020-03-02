@@ -2,19 +2,19 @@
 PyYAML==5.1
 
 # Internal packages
-utila==1.14.0
-protocol==0.8.0
-iamraw==1.16.0
-hey==1.16.1
+utila==1.15.1
+protocol==0.8.2
+iamraw==1.17.8
+hey==1.17.2
 
 # define holy values
-configo==0.5.2
+configo==0.5.5
 
 # test data converter
-rawmaker==1.11.2
+rawmaker==1.13.7
 
 # add test data provider
-power==0.6.12
+power==0.6.14
 
 # modify test data
-jam==0.1.6
+jam==0.1.8

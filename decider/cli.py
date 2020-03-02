@@ -56,11 +56,13 @@ DEVELOPER_LINT_OUTPUT = f'{decider.PROCESS}__{TITLEPAGE}_{DEVELOPER}.yaml'
 
 def main():
     utila.featurepack(
-        description=DESCRIPTION,
-        featurepackage='decider.features',
-        name=decider.PROCESS,
-        root=decider.ROOT,
-        version=decider.__version__,
         workplan=WORKPLAN,
-        multiprocessed=True,
+        root=decider.ROOT,
+        featurepackage='decider.features',
+        config=utila.FeaturePackConfig(
+            description=DESCRIPTION,
+            multiprocessed=True,
+            name=decider.PROCESS,
+            version=decider.__version__,
+        ),
     )
