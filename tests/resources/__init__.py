@@ -20,6 +20,7 @@ NO_TOC = os.path.join(GENERATED, 'no_toc')
 
 TEST_CONFIG_DATA = os.path.join(decider.ROOT, 'tests/config')
 
+BACHELOR = os.path.join(RESOURCES, 'bachelor')
 MASTER = os.path.join(RESOURCES, 'master')
 BOOK = os.path.join(RESOURCES, 'book')
 
@@ -63,10 +64,17 @@ LEFTRIGHT_GENERATED = os.path.join(
     'book_leftright',
 )
 
+BACHELOR37 = os.path.join(BACHELOR, 'page_37_tables.pdf')
+BACHELOR37_GENERATED = os.path.join(
+    GENERATED,
+    'bachelor_page_37_tables',
+)
+
 TWINE_NO_TITLE_PAGE = os.path.join(NO_TITLE_PAGE, 'docu_twine')
 TWINE_NO_TOC = os.path.join(NO_TOC, 'docu_twine')
 
 TODO = [
+    BACHELOR37,
     DOCU_TWINE,
     LEFTRIGHT,
     MASTER72,
@@ -76,6 +84,8 @@ TODO = [
 ]
 
 REQURIED_RESOURCES = [
+    BACHELOR,
+    BACHELOR37,
     BOOK,
     DOCU_TWINE,
     DOCU_TWINE_GENERATED,
