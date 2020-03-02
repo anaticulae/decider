@@ -83,7 +83,7 @@ def extract_without_titlepage():
     hey.example.extract(
         without_titlepage,
         destination,
-        pages='0:20',
+        pages='0:10',
         worker=WORKER,
     )
 
@@ -102,6 +102,6 @@ def extract_without_toc():
     hey.example.extract(
         without_titlepage,
         destination,
-        pages='0:20',
+        pages='0:10',
         worker=WORKER,
     )
