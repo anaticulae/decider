@@ -76,6 +76,7 @@ if __name__ == "__main__":
             'decider',
             'decider.features',
             'decider.toc',
+            'decider.utils',
             'fonts',
             'fonts.config',
             'fonts.features',
