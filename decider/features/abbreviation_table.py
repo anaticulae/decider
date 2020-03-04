@@ -1,0 +1,65 @@
+# =============================================================================
+# C O P Y R I G H T
+# -----------------------------------------------------------------------------
+# Copyright (c) 2020 by Helmut Konrad Fahrendholz. All rights reserved.
+# This file is property of Helmut Konrad Fahrendholz. Any unauthorized copy,
+# use or distribution is an offensive act against international law and may
+# be prosecuted under federal law. Its content is company confidential.
+# =============================================================================
+
+import functools
+
+import groupme.abbreviation
+import protocol
+import utila
+
+
+def work(abbreviations: str) -> str:
+    pass
+
+
+def linting(
+        abbreviations: groupme.abbreviation.AbbreviationResult,
+        linter: protocol.Linter,
+):
+    location = protocol.Location.from_page(0)
+    checkers = protocol.parse_checkers(__name__)
+    for checker in checkers:
+        call = functools.partial(
+            linter.add_finding,
+            msgid=checker.msgid,
+            location=location,
+        )
+        checker(call, abbreviations)
+
+
+SOLUTION_5000 = """\
+Abkuerzungsverzeichnis is nicht alphabetisch sortiert
+
+Sortieren Sie das Abkuerzungsverzeichis
+
+Gefunden:
+---------
+{%current%}
+
+Erwartet:
+---------
+{%expected%}
+"""
+
+
+def check_5000_not_sorted_alphabetically(
+        table: groupme.abbreviation.AbbreviationResult,
+        linter,
+):
+    current = [item for item in table]
+
+    if sorted(current) == current:
+        return
+
+    expected = [f' * {item.short}' for item in sorted(current)]
+    current = [f' * {item.short}' for item in current]
+    linter(
+        current=utila.NEWLINE.join(current),
+        expected=utila.NEWLINE.join(expected),
+    )

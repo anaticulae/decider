@@ -6,7 +6,7 @@ RP 0.9.0
 abbreviation
 ------------
 
-* [ ] verfiy that abbreviations are sorted alphabetical
+* [x] verify that abbreviations are sorted alphabetical
 
 * [ ] check that no common examples which are standard in "Duden" like z.B:
 
