@@ -283,7 +283,6 @@ def maximize_leftright(
     """
     left_max = size.size.width * LEFT_PERCENT.value
     right_min = size.size.width * (1 - RIGHT_PERCENT.value)
-    # TODO: REPLACE AFTER UPGRADING UTILA
     left_max, right_min = utila.roundme(left_max, right_min)
     assert left_max <= right_min, 'left and right bounds are flipped'
 
