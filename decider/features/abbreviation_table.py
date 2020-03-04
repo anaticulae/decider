@@ -8,14 +8,21 @@
 # =============================================================================
 
 import functools
+import typing
 
 import groupme.abbreviation
+import groupme.abbreviation.dumper as gad
 import protocol
 import utila
 
 
-def work(abbreviations: str) -> str:
-    pass
+def work(abbreviations: str) -> typing.Tuple[str, str]:
+    abbreviations = gad.load_abbreviation_table(abbreviations)
+    linter = protocol.from_module(__name__)
+    linting(abbreviations, linter)
+    result = linter.result(unique=True)
+    user, developer = protocol.dump_result(result)
+    return user, developer
 
 
 def linting(
@@ -49,8 +56,8 @@ Erwartet:
 
 
 def check_5000_not_sorted_alphabetically(
+        linter: callable,
         table: groupme.abbreviation.AbbreviationResult,
-        linter,
 ):
     current = [item for item in table]
 

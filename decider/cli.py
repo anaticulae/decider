@@ -25,6 +25,13 @@ DEVELOPER = 'developer'
 
 WORKPLAN = [
     utila.create_step(
+        'abbreviation_table',
+        [
+            utila.ResultFile(groupme.PROCESS, 'abbreviation_abbreviation'),
+        ],
+        (USER, DEVELOPER),
+    ),
+    utila.create_step(
         FOOTNOTE,
         [
             utila.ResultFile(groupme.PROCESS, 'footer_footerheader'),

@@ -44,8 +44,8 @@ def test_linter_abbreviation_table_sorted():
 
     linter = protocol.Linter()
     decider.features.abbreviation_table.check_5000_not_sorted_alphabetically(
-        table,
         linter.add_finding,
+        table,
     )
     assert linter.findings == []
 
@@ -83,8 +83,8 @@ def test_linter_abbreviation_table_unsorted():
     linter = abbreviation_linter(decider.features.abbreviation_table.
                                  check_5000_not_sorted_alphabetically)
     decider.features.abbreviation_table.check_5000_not_sorted_alphabetically(
-        table,
         linter.add_finding,
+        table,
     )
     assert len(linter.findings) == 1, str(linter.findings)
     description = linter.findings[0].solution.description
