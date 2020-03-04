@@ -15,6 +15,8 @@ import groupme.abbreviation.dumper as gad
 import protocol
 import utila
 
+import decider.utils.abbreviation
+
 
 def work(abbreviations: str) -> typing.Tuple[str, str]:
     abbreviations = gad.load_abbreviation_table(abbreviations)
@@ -43,7 +45,7 @@ def linting(
 SOLUTION_5000 = """\
 Abkuerzungsverzeichnis is nicht alphabetisch sortiert
 
-Sortieren Sie das Abkuerzungsverzeichis
+Sortieren Sie das Abkuerzungsverzeichis.
 
 Gefunden:
 ---------
@@ -70,3 +72,25 @@ def check_5000_not_sorted_alphabetically(
         current=utila.NEWLINE.join(current),
         expected=utila.NEWLINE.join(expected),
     )
+
+
+SOLUTION_5001 = """\
+Abkuerzung allgemein bekannt
+
+Die Abkuerzung {%short%}({%description%}) muss nicht separat geklaert
+werden, da diese Algemeingueltigkeit besitzt.
+
+Tipp: Entfernen, um das Verzeichnis nicht aufzublaehen.
+"""
+
+
+def check_5001_german_default(
+        linter: callable,
+        table: groupme.abbreviation.AbbreviationResult,
+):
+    for item in table:
+        try:
+            description = decider.utils.abbreviation.DUDEN[item.short]
+        except KeyError:
+            continue
+        linter(short=item.short, description=description)
