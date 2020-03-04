@@ -11,30 +11,8 @@ import functools
 
 import groupme.abbreviation
 import protocol
-import pytest
-import utila
 
 import decider.features.abbreviation_table
-import tests
-import tests.resources
-
-
-@pytest.mark.parametrize('source, pages', [
-    pytest.param(
-        tests.resources.BACHELOR37_GENERATED,
-        '1',
-        id='bachelor37',
-    ),
-])
-def test_cli_groupme_abbreviation_table(source, pages, testdir, monkeypatch):
-    """Run decider"""
-    root = testdir.tmpdir
-    cmd = f'groupme -i {source} -o {root} --abbreviation --pages={pages}'
-    completed = utila.run(cmd)
-    assert completed.returncode == utila.SUCCESS, str(completed)
-
-    cmd = f'-i {root} -i {source} -o {root} --abbreviation'
-    tests.run_decider(cmd, monkeypatch)
 
 
 def test_linter_abbreviation_table_sorted():
