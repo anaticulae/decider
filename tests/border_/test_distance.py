@@ -10,15 +10,20 @@
 import groupme.feature.distance
 import groupme.path
 import protocol
+import pytest
 
 import border.features.distance
 import tests.resources
 
 
-def test_border_distances_linting():
+@pytest.mark.parametrize('page, expected', [
+    (0, 0),
+    (5, 6),
+])
+def test_border_distances_linting(page, expected):
     area = groupme.path.area(tests.resources.PYPORTING_GENERATED)
     distance = groupme.path.distance(tests.resources.PYPORTING_GENERATED)
 
-    dumped_findings = border.features.distance.work(area, distance)
+    dumped_findings = border.features.distance.work(area, distance, pages=page)
     findings = protocol.load_result(dumped_findings[0])
-    assert len(findings) >= 6, findings
+    assert len(findings) == expected, findings

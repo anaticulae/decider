@@ -18,7 +18,7 @@ abbreviation
 distances
 ---------
 
-* [ ] add further tests to verify behavior
+* [x] add further tests to verify behavior
 
 maintenance
 -----------
