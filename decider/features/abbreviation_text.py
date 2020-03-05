@@ -6,8 +6,22 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
+"""Abbreviation Text Behavior
+==========================
 
-import contextlib
+This module verifies the described abbreviation in textual flow.
+
+TODO:
+
+* No abbreviation at sentence start
+* Insert `Festabstand` between characters
+* No Linebreak inside abbreviation
+* Ensure no artikel before abbreviation: " S.5. Bd. 6" but "die Seite 5,
+  der Band 8"
+
+[Source DUDEN]
+"""
+
 import functools
 import itertools
 import typing
