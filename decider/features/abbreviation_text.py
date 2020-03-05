@@ -73,7 +73,7 @@ Definieren Sie die Abkuerzung an der ersten Stelle des Gebrauchs.
 
 def check_5100_used_before_defined(
         linter: callable,
-        table: groupme.abbreviation.AbbreviationResult,
+        table: groupme.abbreviation.AbbreviationResult,  # pylint:disable=W0613
         text: words.abbreviation.loader.ExtractedTextAbbreviations,
 ):
     # TODO: Use table to verify lintings?
