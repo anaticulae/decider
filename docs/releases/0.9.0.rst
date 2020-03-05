@@ -10,7 +10,7 @@ abbreviation
 
 * [x] check that no common examples which are standard in "Duden" like z.B:
 
-* [ ] verify abbreviation order in extracted text: abbreviation is not
+* [x] verify abbreviation order in extracted text: abbreviation is not
   used before described.
 
 * [ ] list unused abbreviations

@@ -27,5 +27,23 @@ def test_cli_groupme_abbreviation_table(source, pages, testdir, monkeypatch):
     completed = utila.run(cmd)
     assert completed.returncode == utila.SUCCESS, str(completed)
 
-    cmd = f'-i {root} -i {source} -o {root} --abbreviation'
+    cmd = f'-i {root} -i {source} -o {root} --abbreviation_table'
+    tests.run_decider(cmd, monkeypatch)
+
+
+@pytest.mark.parametrize('source, pages', [
+    pytest.param(
+        tests.resources.BACHELOR37_GENERATED,
+        '1',
+        id='bachelor37',
+    ),
+])
+def test_cli_groupme_abbreviation_text(source, pages, testdir, monkeypatch):
+    """Run decider"""
+    root = testdir.tmpdir
+    cmd = f'groupme -i {source} -o {root} --abbreviation --pages={pages}'
+    completed = utila.run(cmd)
+    assert completed.returncode == utila.SUCCESS, str(completed)
+
+    cmd = f'-i {root} -i {source} -o {root} --abbreviation_text'
     tests.run_decider(cmd, monkeypatch)

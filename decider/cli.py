@@ -11,6 +11,7 @@ import detector.cli
 import groupme
 import groupme.cli
 import utila
+import words
 
 import decider
 
@@ -28,6 +29,14 @@ WORKPLAN = [
         'abbreviation_table',
         [
             utila.ResultFile(groupme.PROCESS, 'abbreviation_abbreviation'),
+        ],
+        (USER, DEVELOPER),
+    ),
+    utila.create_step(
+        'abbreviation_text',
+        [
+            utila.ResultFile(groupme.PROCESS, 'abbreviation_abbreviation'),
+            utila.ResultFile(words.PROCESS, 'abbreviation_detected'),
         ],
         (USER, DEVELOPER),
     ),
