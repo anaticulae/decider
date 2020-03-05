@@ -30,3 +30,13 @@ def tableofcontent(path: str) -> iamraw.Toc:
     path = groupme.path.toc(path)
     result = serializeraw.load_toc(path)
     return result
+
+
+def template_replaced(description: str):
+    # TODO: MOVE TO UTILA_TEST
+    # template is replaced correctly
+    if '{%' in description:
+        return False
+    if '%}' in description:
+        return False
+    return True

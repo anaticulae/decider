@@ -14,6 +14,7 @@ import protocol
 import words.abbreviation.loader as wal
 
 import decider.features.abbreviation_text as dfa
+import tests
 
 TABLE = groupme.abbreviation.AbbreviationResult(abbreviations=[
     groupme.abbreviation.Abbreviation(
@@ -79,6 +80,9 @@ def test_linter_abbreviation_text_before_used():
     )
     assert linter.findings, str(linter.findings)
     assert len(linter.findings) == 1
-    msgid = linter.findings[0].msgid
+
     expected_msgid = protocol.parse_msgid(check_before_used.__name__)
+    msgid = linter.findings[0].msgid
+    description = linter.findings[0].solution.description
     assert msgid == expected_msgid
+    assert tests.template_replaced(description), description

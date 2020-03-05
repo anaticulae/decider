@@ -13,6 +13,7 @@ import groupme.abbreviation
 import protocol
 
 import decider.features.abbreviation_table
+import tests
 
 
 def test_linter_abbreviation_table_sorted():
@@ -65,9 +66,6 @@ def test_linter_abbreviation_table_unsorted():
         table,
     )
     assert len(linter.findings) == 1, str(linter.findings)
+
     description = linter.findings[0].solution.description
-    # TODO: REPLACE WITH MORE GENERAL METHOD
-    # template is replaced correctly
-    assert '%' not in description, description
-    assert '[' not in description, description
-    assert '(' not in description, description
+    assert tests.template_replaced(description), description

@@ -71,7 +71,6 @@ def test_titlepage_extraction(titlepage, monkeypatch):  # pylint:disable=W0621
     user = yaml.load(utila.file_read(userpath), Loader=yaml.FullLoader)
 
     failures = messageids(user)
-
     assert failures == expected_failures, str(failures)
 
 
