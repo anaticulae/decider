@@ -68,6 +68,9 @@ Abstand vor dem Object zu gering
 
 Der Abstand nach dem Text und vor dem Objekt is zu gering.
 
+Erkannter Abstand: {%distance%}
+Mindestabstand: {%min_distance%}
+
 # IF WORD
 # TODO: SHOW DISTANCE AND MINDISTANCE
 # IF LATEX
@@ -84,13 +87,20 @@ def check_3030_text_before_to_near(linter, item, bound, page):  # pylint:disable
         # page starts with object, no text before object
         return
     if math.fabs(item.before) <= MIN_DISTANCE_BEFORE:
-        linter(location=location)
+        linter(
+            location=location,
+            distance=item.before,
+            min_distance=MIN_DISTANCE_AFTER.value,
+        )
 
 
 SOLUTION_3031 = """\
 Abstand nach dem Objekt zu gering
 
 Der Abstand nach dem Objekt und vor dem Text ist zu gering.
+
+Erkannter Abstand: {%distance%}
+Mindestabstand: {%min_distance%}
 """
 
 
@@ -104,4 +114,8 @@ def check_3031_text_after_to_near(linter, item, bound, page):  # pylint:disable=
         # page ends with object, no text after object
         return
     if math.fabs(item.after) <= MIN_DISTANCE_AFTER:
-        linter(location=location)
+        linter(
+            location=location,
+            distance=item.after,
+            min_distance=MIN_DISTANCE_AFTER.value,
+        )
