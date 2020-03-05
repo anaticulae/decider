@@ -23,9 +23,9 @@ distances
 maintenance
 -----------
 
-* [ ] clean up linter messages
+* [/] clean up linter messages
 
-* [ ] solve 3 todos
+* [x] solve 3 todos
 
 code quality
 ------------

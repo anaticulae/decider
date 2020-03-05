@@ -78,7 +78,7 @@ SOLUTION_5001 = """\
 Abkuerzung allgemein bekannt
 
 Die Abkuerzung {%short%}({%description%}) muss nicht separat geklaert
-werden, da diese Algemeingueltigkeit besitzt.
+werden, da diese Allgemeingueltigkeit besitzt.
 
 Tipp: Entfernen, um das Verzeichnis nicht aufzublaehen.
 """

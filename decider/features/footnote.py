@@ -80,7 +80,7 @@ def linting(
 
 
 SOLUTION_2001 = """\
-Fussnote {%number%}: beginnt nicht mit einem Grossbuchstaben
+Fussnote {%number%} beginnt nicht mit einem Grossbuchstaben
 
 Ersetzen Sie den ersten Buchstaben der Fussnote {%number%} mit einem
 Grossbuchstaben.
@@ -115,7 +115,7 @@ def check_2002_no_dot_at_end(linter, item):
 
 
 SOLUTION_2003 = """\
-Fussnote {%number%}: invalid highnote rise
+Fussnote {%number%} invalid highnote rise
 
 Expected: {%expected%} != Current: {%current%}
 """
