@@ -2,6 +2,24 @@
 
 Every noteable change is logged here.
 
+## v0.9.0
+
+### Feature
+
+* add module to determine path of linter result (18aeb1176489)
+* add expected and current distance in linter message (6ac72bafbc82)
+* extend linter to display unused abbreviations (fe81928f3903)
+* add abbreviation-text step to cli (6bfec2c0e2b1)
+* add abbreviation to judge abbreviations out of text flow (a595f7b034c9)
+* linter: do not describe German default abbreviations (adca5413e2e0)
+* add abbreviation table judger to command line interface (a1895b668274)
+* add linter to check that abbreviations are sorted alphabetically (fa0be3d22ffa)
+
+### Documentation
+
+* add description and todo for abbreviation-text step (a8462619b6e4)
+* remove useless todo - use backlog instead (4271b9cc8da3)
+
 ## v0.8.0
 
 ### Feature
