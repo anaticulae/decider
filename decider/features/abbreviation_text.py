@@ -7,6 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import contextlib
 import functools
 import itertools
 import typing
@@ -92,3 +93,23 @@ def flat_abbreviation(items):
     for item in items:
         result.extend(item.content)
     return result
+
+
+SOLUTION_5110 = """\
+Abkuerzung wurde nicht im Text verwerdet
+
+Die Abkuerzung "{%short%}" konnte nicht im Text gefunden werden.
+"""
+
+
+def check_5110_unused_abbreviation(
+        linter: callable,
+        table: groupme.abbreviation.AbbreviationResult,
+        text: words.abbreviation.loader.ExtractedTextAbbreviations,
+):
+    flat = flat_abbreviation(text)
+    unique = {item.short for item in flat}
+    for item in table:
+        if item.short in unique:
+            continue
+        linter(short=item.short)

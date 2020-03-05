@@ -13,7 +13,7 @@ abbreviation
 * [x] verify abbreviation order in extracted text: abbreviation is not
   used before described.
 
-* [ ] list unused abbreviations
+* [x] list unused abbreviations
 
 distances
 ---------
