@@ -9,12 +9,14 @@
 
 import os
 
+import iamraw
 import protocol
 import pytest
 import serializeraw
 import utila
 
 import border.cli
+import border.path
 import tests.resources
 
 
@@ -31,27 +33,11 @@ def validate_leftright(hits):
         f'expected hits: {expected_hits}\n current: {len(hits)}\n')
 
 
-@pytest.mark.parametrize('source, validate', [
-    pytest.param(tests.resources.DOCU_TWINE_GENERATED, [4, 4], id='twine'),
-    pytest.param(tests.resources.TECHNICAL24_GENERATED, None, id='technical24'),
-    pytest.param(tests.resources.MASTER78_GENERATED, [6, 8], id='master78'),
-    pytest.param(
-        tests.resources.LEFTRIGHT_GENERATED,
-        validate_leftright,
-        id='leftright',
-    ),
-])
-@utila.skip_longrun
-def test_border_cli_decider(
-        source,
-        validate,
-        testdir,
+def run_border_detector(
+        root: str,
+        source: str,
         monkeypatch,
-):  # pylint:disable=W0621
-    """Run `border` to extract common BoundingBox and check pages
-    against this common box."""
-    root = str(testdir)
-
+) -> iamraw.PageContentHits:
     cmd = f'-i {source} -o {root} --pages=0:10'
     utila.run_command(
         cmd,
@@ -60,26 +46,66 @@ def test_border_cli_decider(
         monkeypatch=monkeypatch,
         success=True,
     )
-
     outputfile = f'{border.cli.PROCESS}__{border.cli.FEATURE_NAME}_hits.yaml'
     outputfile = os.path.join(root, outputfile)
 
     dumped = utila.file_read(outputfile)
     assert len(dumped) > 100  # result contains some content
-    detected_hits = serializeraw.load_hits(outputfile)
-    if validate is None:
-        return
-    if isinstance(validate, list):
-        # validated
-        assert len(detected_hits) >= len(validate), (
-            f'expected hits: {validate}\ncurrent: {len(detected_hits)}\n'
-            f'hits: {detected_hits}')
-        return
-    validate(detected_hits)
+    detected_hits = serializeraw.load_hits(dumped)
+    return detected_hits
 
-    linterfile = f'{border.cli.PROCESS}__{border.cli.FEATURE_NAME}_user.yaml'
-    # ensure that dumped findings can be loaded properly
-    # test to load results
-    # TODO: split this complex test
-    loaded = protocol.load_result(linterfile)
+
+@pytest.mark.parametrize('source', [
+    pytest.param(tests.resources.TECHNICAL24_GENERATED, id='technical24'),
+])
+def test_border_cli_decider_simple(source, testdir, monkeypatch):
+    root = testdir.tmpdir
+    detected = run_border_detector(root, source, monkeypatch)
+    assert detected
+    loaded = protocol.load_result(border.path.border_user(testdir.tmpdir))
+    assert loaded
+
+
+@pytest.mark.parametrize('source, validate', [
+    pytest.param(tests.resources.DOCU_TWINE_GENERATED, [4, 4], id='twine'),
+    pytest.param(tests.resources.MASTER78_GENERATED, [6, 8], id='master78'),
+])
+@utila.skip_longrun
+def test_border_cli_decider_list(
+        source,
+        validate,
+        testdir,
+        monkeypatch,
+):  # pylint:disable=W0621
+    """Run `border` to extract common BoundingBox and check pages
+    against this common box."""
+    detected_hits = run_border_detector(testdir.tmpdir, source, monkeypatch)
+    assert detected_hits
+    # validated
+    assert len(detected_hits) >= len(validate), (
+        f'expected hits: {validate}\ncurrent: {len(detected_hits)}\n'
+        f'hits: {detected_hits}')
+    loaded = protocol.load_result(border.path.border_user(testdir.tmpdir))
+    assert loaded
+
+
+@pytest.mark.parametrize('source, validate', [
+    pytest.param(
+        tests.resources.LEFTRIGHT_GENERATED,
+        validate_leftright,
+        id='leftright',
+    ),
+])
+@utila.skip_longrun
+def test_border_cli_decider_complex_validation(
+        source,
+        validate,
+        testdir,
+        monkeypatch,
+):  # pylint:disable=W0621
+    """Ensure to run border detection and load linter result later."""
+    root = testdir.tmpdir
+    detected = run_border_detector(root, source, monkeypatch)
+    validate(detected)
+    loaded = protocol.load_result(border.path.border_user(testdir.tmpdir))
     assert loaded
