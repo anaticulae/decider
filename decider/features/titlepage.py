@@ -55,6 +55,8 @@ SOLUTION_1200 = """\
 Dokument enhaelt keine Titelseite
 
 Fuegen Sie eine Titelseite zum Dokument hinzu.
+
+{elemente/deckblatt#zwingend-notwendige-angaben}
 """
 
 
@@ -68,6 +70,8 @@ SOLUTION_1220 = """\
 Titleseite enthaelt keinen Author
 
 Fuegen Sie ihren Namen und eventuellen akademischen Grad hinzu.
+
+{elemente/deckblatt#zwingend-notwendige-angaben}
 """
 
 
@@ -83,6 +87,8 @@ SOLUTION_1221 = """\
 Titleseite enthaelt keine Matrikelnummer des Authors
 
 Fuegen Sie ihre Matrikelnummer hinzu.
+
+{elemente/deckblatt#zwingend-notwendige-angaben}
 """
 
 
@@ -99,6 +105,8 @@ Titleseite enthaelt keinen Pruefer
 
 Fuegen Sie die Namen und die akademischen Gerade der Pruefer auf der
 Titelseite hinzu.
+
+{elemente/deckblatt#zwingend-notwendige-angaben}
 """
 
 
@@ -114,6 +122,8 @@ SOLUTION_1210 = """\
 Die Titleseite enthaelt keinen Thesistyp
 
 Fuegen Sie den Typ(Bachelor, Master, Doktor) auf der Titelseite hinzu.
+
+{elemente/deckblatt#zwingend-notwendige-angaben}
 """
 
 
