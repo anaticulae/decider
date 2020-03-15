@@ -13,8 +13,10 @@ configo==0.5.5
 # test data converter
 rawmaker==1.13.8
 
+# docs
+writers==0.2.8
+
 # add test data provider
 power==0.6.14
-
 # modify test data
 jam==0.1.8
