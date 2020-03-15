@@ -1,0 +1,32 @@
+.. _0_10_0:
+
+RP 0.10.0
+=========
+
+messages
+--------
+
+* [ ] add links to all linter messages
+
+* [ ] add verifier to check existence of links
+
+maintenance
+-----------
+
+* [ ] check spelling of every message
+
+* [ ] increase code coverage
+
+refactor
+--------
+
+* [ ] move leftright to hey
+
+code quality
+------------
+
+before
+~~~~~~
+
+* Total coverage: 97.09%
+* Your code has been rated at 10.00/10
