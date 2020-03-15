@@ -8,7 +8,7 @@ messages
 
 * [ ] add links to all linter messages
 
-* [ ] add verifier to check existence of links
+* [x] add verifier to check existence of links
 
 maintenance
 -----------
