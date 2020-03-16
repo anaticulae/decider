@@ -11,6 +11,7 @@ import os
 
 import hey.example
 import utila
+import writers
 
 import border.cli
 import decider
@@ -28,6 +29,10 @@ def install_requirements():
             fonts.cli.PROCESS,
         ],
     )
+
+    # TODO: AUTOMATE THIS
+    # generate docs
+    writers.generate()
 
 
 def sync_resources():
