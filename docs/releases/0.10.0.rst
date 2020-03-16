@@ -6,7 +6,7 @@ RP 0.10.0
 messages
 --------
 
-* [ ] add links to all linter messages
+* [x] add links to all linter messages
 
 * [x] add verifier to check existence of links
 

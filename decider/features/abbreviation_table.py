@@ -54,6 +54,8 @@ Gefunden:
 Erwartet:
 ---------
 {%expected%}
+
+{elemente/abkuerzungsverzeichnis#alphabetische-sortierung}
 """
 
 
@@ -81,6 +83,8 @@ Die Abkuerzung {%short%}({%description%}) muss nicht separat geklaert
 werden, da diese Allgemeingueltigkeit besitzt.
 
 Tipp: Entfernen, um das Verzeichnis nicht aufzublaehen.
+
+{elemente/abkuerzungsverzeichnis#abkurzungsverzeichnis}
 """
 
 

@@ -84,6 +84,8 @@ Fussnote {%number%} beginnt nicht mit einem Grossbuchstaben
 
 Ersetzen Sie den ersten Buchstaben der Fussnote {%number%} mit einem
 Grossbuchstaben.
+
+{text/fussnote#struktur}
 """
 
 
@@ -101,6 +103,8 @@ SOLUTION_2002 = """\
 Die Fussnote {%number%} endet nicht mit einem Punkt
 
 Fuegen Sie einen Punkt am Ende der Fussnote {%number%} hinzu.
+
+{text/abkuerzung#abkurzung}
 """
 
 
@@ -118,6 +122,8 @@ SOLUTION_2003 = """\
 Fussnote {%number%} invalid highnote rise
 
 Expected: {%expected%} != Current: {%current%}
+
+{text/fussnote#formatierung}
 """
 
 
@@ -140,6 +146,8 @@ SOLUTION_2004 = """\
 Fussnote {%number%}: invalid highnote size
 
 Expected: {%expected%} != Current: {%current%}
+
+{text/fussnote#formatierung}
 """
 
 
@@ -162,6 +170,8 @@ SOLUTION_2005 = """\
 Fussnote {%number%}: invalid font family
 
 Expected: {%expected%} != Current: {%current%}
+
+{text/fussnote#formatierung}
 """
 
 
@@ -184,6 +194,8 @@ SOLUTION_2010 = """\
 Fussnote {%number%}: invalid content size
 
 Expected: {%expected%} != Current: {%current%}
+
+{text/fussnote#formatierung}
 """
 
 

@@ -51,6 +51,8 @@ Ueberpruefen Sie die Seitenzaehlung.
 Zeile: {%text%}
 
 Seite {%current%} folgt auf {%before%}.
+
+{darstellung/seitenzahlen}
 """
 
 

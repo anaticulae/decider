@@ -68,6 +68,8 @@ benutzt bevor sie auf Seite {%definition_page%}, Satz {%definition_sentence%}
 definiert wurde.
 
 Definieren Sie die Abkuerzung an der ersten Stelle des Gebrauchs.
+
+{text/abkuerzung#abkurzung}
 """
 
 
