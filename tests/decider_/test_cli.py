@@ -29,25 +29,36 @@ def test_cli_decider(cmd, testdir, monkeypatch):
     )
 
 
-@pytest.mark.parametrize('source', [
+@pytest.mark.parametrize('source, pages', [
     pytest.param(
         tests.resources.TECHNICAL24_GENERATED,
+        '1',
+        id='technical24',
+    ),
+    pytest.param(
+        tests.resources.TECHNICAL24_GENERATED,
+        '0:5',
         id='technical24',
     ),
     pytest.param(
         tests.resources.MASTER78_GENERATED,
+        '0:5',
         id='master78',
     ),
     pytest.param(
         tests.resources.MASTER72_GENERATED,
+        '0:5',
         id='master72',
     ),
 ])
 @utila.skip_longrun
-def test_cli_detector_and_decider(source, testdir, monkeypatch):
-    """Run decider"""
+def test_cli_detector_and_decider(source, pages, testdir, monkeypatch):
+    """Run decider
+
+    pages = 1 - Non titlepage example
+    """
     root = str(testdir)
-    cmd = f'detector -i {source} -o {root} --pages=0:5'
+    cmd = f'detector -i {source} -o {root} --pages={pages}'
     completed = utila.run(cmd)
     assert completed.returncode == utila.SUCCESS, str(completed)
 
