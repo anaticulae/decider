@@ -43,9 +43,9 @@ def linting(
 
 
 SOLUTION_5000 = """\
-Abkuerzungsverzeichnis is nicht alphabetisch sortiert
+Abkürzungsverzeichnis ist nicht alphabetisch sortiert
 
-Sortieren Sie das Abkuerzungsverzeichis.
+Sortieren Sie das Abkürzungsverzeichnis.
 
 Gefunden:
 ---------
@@ -77,12 +77,12 @@ def check_5000_not_sorted_alphabetically(
 
 
 SOLUTION_5001 = """\
-Abkuerzung allgemein bekannt
+Abkürzung allgemein bekannt
 
-Die Abkuerzung {%short%}({%description%}) muss nicht separat geklaert
-werden, da diese Allgemeingueltigkeit besitzt.
+Die Abkürzung {%short%}({%description%}) muss nicht separat erklärt
+werden, da diese Allgemeingültingkeit besitzt.
 
-Tipp: Entfernen, um das Verzeichnis nicht aufzublaehen.
+Tipp: Abkürzung entfernen zur Erhöhung der Übersichtlichkeit
 
 {elemente/abkuerzungsverzeichnis#abkurzungsverzeichnis}
 """

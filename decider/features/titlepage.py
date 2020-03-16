@@ -52,9 +52,9 @@ def linting(
 
 
 SOLUTION_1200 = """\
-Dokument enhaelt keine Titelseite
+Dokument enthält keine Titelseite
 
-Fuegen Sie eine Titelseite zum Dokument hinzu.
+Fügen Sie eine Titelseite zum Dokument hinzu.
 
 {elemente/deckblatt#zwingend-notwendige-angaben}
 """
@@ -67,9 +67,10 @@ def check_1200_titlepage_existence(linter, titlepage):
 
 
 SOLUTION_1220 = """\
-Titleseite enthaelt keinen Author
+Titelseite enthält keinen Author
 
-Fuegen Sie ihren Namen und eventuellen akademischen Grad hinzu.
+Fügen Sie ihren Namen und eventuellen akademischen Grad auf
+der Titelseite hinzu.
 
 {elemente/deckblatt#zwingend-notwendige-angaben}
 """
@@ -84,9 +85,9 @@ def check_1220_author_existence(linter, titlepage):
 
 
 SOLUTION_1221 = """\
-Titleseite enthaelt keine Matrikelnummer des Authors
+Titelseite enthält keine Matrikelnummer des Authors
 
-Fuegen Sie ihre Matrikelnummer hinzu.
+Fügen Sie ihre Matrikelnummer auf der Titelseite hinzu.
 
 {elemente/deckblatt#zwingend-notwendige-angaben}
 """
@@ -101,9 +102,9 @@ def check_1221_author_matrikel_existence(linter, titlepage):
 
 
 SOLUTION_1230 = """\
-Titleseite enthaelt keinen Pruefer
+Titelseite enthält keinen Prüfer
 
-Fuegen Sie die Namen und die akademischen Gerade der Pruefer auf der
+Fügen Sie die Namen und die akademischen Grade der Prüfer auf der
 Titelseite hinzu.
 
 {elemente/deckblatt#zwingend-notwendige-angaben}
@@ -119,9 +120,10 @@ def check_1230_author_matrikel_existence(linter, titlepage):
 
 
 SOLUTION_1210 = """\
-Die Titleseite enthaelt keinen Thesistyp
+Titelseite enthält keinen Thesistyp
 
-Fuegen Sie den Typ(Bachelor, Master, Doktor) auf der Titelseite hinzu.
+Fügen Sie den Typ(Studienarbeit, Bachelorarbeit, Masterarbeit,
+Doktorarbeit oder Dissertation) auf der Titelseite hinzu.
 
 {elemente/deckblatt#zwingend-notwendige-angaben}
 """

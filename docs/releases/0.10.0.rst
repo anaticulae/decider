@@ -13,7 +13,7 @@ messages
 maintenance
 -----------
 
-* [ ] check spelling of every message
+* [x] check spelling of every message
 
 * [ ] increase code coverage
 

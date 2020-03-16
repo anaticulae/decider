@@ -66,7 +66,7 @@ def linting(
 SOLUTION_3030 = """\
 Abstand vor dem Object zu gering
 
-Der Abstand nach dem Text und vor dem Objekt is zu gering.
+Der Abstand nach dem Text und vor dem Objekt ist zu gering.
 
 Erkannter Abstand: {%distance%}
 Mindestabstand: {%min_distance%}

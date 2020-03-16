@@ -9,7 +9,7 @@
 
 DUDEN = {
     'Abb.': 'Abbildung',
-    'Abk.': 'Abkuerzung',
+    'Abk.': 'Abkürzung',
     'S.': 'Seite',
     'et al.': 'et alii',
     'etc.': 'et cetera',  # und so weiter

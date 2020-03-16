@@ -50,13 +50,13 @@ def linting(
 SOLUTION_2110 = """\
 Kopfzeile: wiederholdender Inhalt
 
-Ueberpruefen Sie ob redundanter Inhalt:
+Überprüfen Sie ob redundanter Inhalt:
 
 <cite>
 {%content%}
 </cite>
 
-wirklich noetig ist.
+wirklich nötig ist.
 """
 
 

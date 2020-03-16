@@ -44,9 +44,9 @@ def work(headerfooter: str, pages: tuple = None) -> typing.Tuple[str, str]:
 
 
 SOLUTION_1960 = """\
-Das Dokument enthaelt nicht nur aufsteigende Seitenzahlen
+Dokument enthält nicht nur aufsteigende Seitenzahlen
 
-Ueberpruefen Sie die Seitenzaehlung.
+Überprüfen Sie die Seitenzählung.
 
 Zeile: {%text%}
 

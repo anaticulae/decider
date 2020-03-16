@@ -80,10 +80,10 @@ def linting(
 
 
 SOLUTION_2001 = """\
-Fussnote {%number%} beginnt nicht mit einem Grossbuchstaben
+Fußnote {%number%} beginnt nicht mit einem Großbuchstaben
 
-Ersetzen Sie den ersten Buchstaben der Fussnote {%number%} mit einem
-Grossbuchstaben.
+Ersetzen Sie den ersten Buchstaben der Fußnote {%number%} mit einem
+Großbuchstaben.
 
 {text/fussnote#struktur}
 """
@@ -100,9 +100,9 @@ def check_2001_no_uppercase_at_start(linter, item):
 
 
 SOLUTION_2002 = """\
-Die Fussnote {%number%} endet nicht mit einem Punkt
+Die Fußnote {%number%} endet nicht mit einem Punkt
 
-Fuegen Sie einen Punkt am Ende der Fussnote {%number%} hinzu.
+Fügen Sie einen Punkt am Ende der Fußnote {%number%} hinzu.
 
 {text/abkuerzung#abkurzung}
 """
@@ -119,7 +119,7 @@ def check_2002_no_dot_at_end(linter, item):
 
 
 SOLUTION_2003 = """\
-Fussnote {%number%} invalid highnote rise
+Fußnote {%number%} invalid highnote rise
 
 Expected: {%expected%} != Current: {%current%}
 
@@ -143,7 +143,7 @@ def check_2003_invalid_highnote_rise(linter, item, data):
 
 
 SOLUTION_2004 = """\
-Fussnote {%number%}: invalid highnote size
+Fußnote {%number%}: invalid highnote size
 
 Expected: {%expected%} != Current: {%current%}
 
@@ -167,7 +167,7 @@ def check_2004_invalid_hignote_size(linter, item, data):
 
 
 SOLUTION_2005 = """\
-Fussnote {%number%}: invalid font family
+Fußnote {%number%}: invalid font family
 
 Expected: {%expected%} != Current: {%current%}
 
@@ -191,7 +191,7 @@ def check_2005_invalid_highnote_fontfamily(linter, item, data):
 
 
 SOLUTION_2010 = """\
-Fussnote {%number%}: invalid content size
+Fußnote {%number%}: invalid content size
 
 Expected: {%expected%} != Current: {%current%}
 

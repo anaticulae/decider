@@ -59,9 +59,13 @@ def linting(
 # TODO: ADD SOLUTION_1300_LATEX to link how to create table of content in LATEX
 
 SOLUTION_1300 = """\
-Dokument enhaelt kein Inhaltsverzeichnis
+Dokument enthält kein Inhaltsverzeichnis
 
-Fuegen Sie ein Inhaltsverzeichnis zum Dokument hinzu.
+Fügen Sie ein Inhaltsverzeichnis zum Dokument hinzu.
+
+TODO: ADD LINK TO TECHNIK
+
+{elemente/inhaltsverzeichnis}
 """
 
 
@@ -72,11 +76,13 @@ def check_1300_toc_existence(linter, toc: iamraw.Toc):
 
 
 SOLUTION_1350 = """\
-Kapitel enthaelt zu wenige Sektionen
+Kapitel enthält zu wenige Sektionen
 
-Ein Kapitel oder eine Sektion benoetigt mindestens zwei
-Teilueberschriften. Falls dies nicht moeglich ist, sollte das
-Unterkapitel in den Text eingeplfegt werden.
+Ein Kapitel oder eine Sektion benötigt mindestens zwei
+Teilüberschriften. Falls dies nicht moeglich ist, sollte das
+Unterkapitel in den Text eingeplegt werden.
+
+{elemente/inhaltsverzeichnis#kapitelstruktur}
 """
 
 
@@ -87,13 +93,15 @@ def check_1350_toc_level_to_few_children(linter, toc: iamraw.Toc):
 
 
 SOLUTION_1351 = """
-Der Unterpunkt weist eine zu tiefe Gliederung auf
+Gliederung zu komplex
 
 Das Dokument weist eine zu detaillierte Untergliederung auf. Eine zu
-feingliedrige Gliederung reduziert die Uebersichtlichkeit und verhindert
+feingliedrige Gliederung reduziert die Üebersichtlichkeit und verhindert
 das schnelle Navigieren im Text.
 
 Begrenzen Sie die Gliederung auf maximal 3 Sektionen.
+
+{elemente/inhaltsverzeichnis#tiefe-der-gliederung}
 """
 
 
@@ -104,13 +112,14 @@ def check_1351_toc_level_to_deep(linter, toc: iamraw.Toc):
 
 
 SOLUTION_1360 = """\
-Das Inhaltsverzeichnis enthaellt nicht nur aufsteigende Seitenzahlen
+Inhaltsverzeichnis enthält nicht nur aufsteigende Seitenzahlen
 
-Korrigieren Sie das Inhaltsverzeichnis.
+Korrigieren Sie das Inhaltsverzeichnis bzw. die Seitenzahlen.
 
 Zeile: {%text%}
-
 Seite {%current%} folgt auf {%before%}.
+
+{darstellung/seitenzahlen#anforderungen}
 """
 
 
