@@ -25,29 +25,22 @@ import functools
 import math
 import typing
 
+import groupme.border.utils
 import iamraw
 import protocol
 import serializeraw
 import utila
-
-import border.data
-import border.detection
-import border.detection.most
-import border.utils
+import yaml
 
 
 def work(
         border_boxes: str,
-        border_pages: str,
-        textpositions: str,
+        border_leftright: str,
         pages: tuple = None,
 ) -> typing.Tuple[str, str, str]:
     utila.call('work: border detection')
     boxes = serializeraw.load_boundingboxes(border_boxes, pages=pages)
-    sizeandborder = serializeraw.load_pageborders(border_pages, pages=pages)
-    textpositions = serializeraw.load_textpositions(textpositions, pages=pages)
-
-    expected = border.detection.determine_border(textpositions, sizeandborder)
+    expected = load_leftright(border_leftright)
 
     hits = boxes_outside_border(boxes, expected)
     utila.debug(hits)
@@ -60,6 +53,20 @@ def work(
     result = linter.result(unique=True)
     user, developer = protocol.dump_result(result)
     return dumped, user, developer
+
+
+def load_leftright(path: str):
+    content = utila.from_raw_or_path(path, ftype='yaml')
+    loaded = yaml.load(content, Loader=yaml.FullLoader)
+
+    def determine(pagenumber: int):
+        for page, border in loaded:
+            if page != pagenumber:
+                continue
+            return border
+        return None
+
+    return determine
 
 
 def linting(
@@ -134,7 +141,8 @@ def boxes_outside_border(
     return result
 
 
-def round_small(item: border.data.Rectangle) -> border.data.Rectangle:
+def round_small(item: groupme.border.utils.Rectangle,
+               ) -> groupme.border.utils.Rectangle:
     """Round border in direction to the center of the rectangle to get a
     `smaller` rectangle which fit in more parent rectangles."""
     # round to move coordinate in center direction of page

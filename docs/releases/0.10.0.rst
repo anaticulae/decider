@@ -20,7 +20,7 @@ maintenance
 refactor
 --------
 
-* [ ] move leftright to hey
+* [x] move leftright to hey
 
 code quality
 ------------
