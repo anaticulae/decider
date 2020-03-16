@@ -2,6 +2,21 @@
 
 Every noteable change is logged here.
 
+## v0.10.0
+
+### Feature
+
+* add links to further linter message documentation (a54a0215616d)
+* add links to checkitweg docs (9cddd603181d)
+
+### Fix
+
+* remove unused code (1405a862a444)
+
+### Documentation
+
+* fix spelling errors (c62110895323)
+
 ## v0.9.0
 
 ### Feature
