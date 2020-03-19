@@ -56,7 +56,7 @@ Dokument enthält keine Titelseite
 
 Fügen Sie eine Titelseite zum Dokument hinzu.
 
-{elemente/deckblatt#zwingend-notwendige-angaben}
+{elemente/titelblatt#zwingend-notwendige-angaben}
 """
 
 
@@ -72,7 +72,7 @@ Titelseite enthält keinen Author
 Fügen Sie ihren Namen und eventuellen akademischen Grad auf
 der Titelseite hinzu.
 
-{elemente/deckblatt#zwingend-notwendige-angaben}
+{elemente/titelblatt#zwingend-notwendige-angaben}
 """
 
 
@@ -89,7 +89,7 @@ Titelseite enthält keine Matrikelnummer des Authors
 
 Fügen Sie ihre Matrikelnummer auf der Titelseite hinzu.
 
-{elemente/deckblatt#zwingend-notwendige-angaben}
+{elemente/titelblatt#zwingend-notwendige-angaben}
 """
 
 
@@ -107,7 +107,7 @@ Titelseite enthält keinen Prüfer
 Fügen Sie die Namen und die akademischen Grade der Prüfer auf der
 Titelseite hinzu.
 
-{elemente/deckblatt#zwingend-notwendige-angaben}
+{elemente/titelblatt#zwingend-notwendige-angaben}
 """
 
 
@@ -125,7 +125,7 @@ Titelseite enthält keinen Thesistyp
 Fügen Sie den Typ(Studienarbeit, Bachelorarbeit, Masterarbeit,
 Doktorarbeit oder Dissertation) auf der Titelseite hinzu.
 
-{elemente/deckblatt#zwingend-notwendige-angaben}
+{elemente/titelblatt#zwingend-notwendige-angaben}
 """
 
 

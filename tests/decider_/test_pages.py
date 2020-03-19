@@ -7,7 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import hey.path
+import iamraw.path
 import serializeraw
 import yaml
 
@@ -16,7 +16,7 @@ import tests.resources
 
 
 def user_work(path: str):
-    headerfooter = hey.path.headerfooters(path)
+    headerfooter = iamraw.path.headerfooters(path)
     user, _ = decider.features.page.work(headerfooter)
     loaded = yaml.load(user, Loader=yaml.FullLoader)
     return loaded

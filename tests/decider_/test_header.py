@@ -6,7 +6,7 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
-import hey.path
+import iamraw.path
 import protocol
 
 import decider.features.header
@@ -14,7 +14,8 @@ import tests.resources
 
 
 def test_header_work():
-    headerfooter = hey.path.headerfooters(tests.resources.TECHNICAL24_GENERATED)
+    headerfooter = iamraw.path.headerfooters(
+        tests.resources.TECHNICAL24_GENERATED)
 
     user, _ = decider.features.header.work(headerfooter)
     assert len(user) > 200, user

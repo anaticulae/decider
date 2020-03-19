@@ -9,7 +9,7 @@
 import contextlib
 import os
 
-import hey.path
+import iamraw.path
 import protocol
 import pytest
 import utila
@@ -101,14 +101,14 @@ def empty(result):
 
 
 def test_footnotes_work_disable_all(monkeypatch):
-    footerheader = hey.path.headerfooters(tests.resources.MASTER72_GENERATED)
+    footerheader = iamraw.path.headerfooters(tests.resources.MASTER72_GENERATED)
     with active_ids(monkeypatch, ids=[]):
         user, _ = decider.features.footnote.work(footerheader)
     assert empty(user), f'not all events are disabled:\n {user}'
 
 
 def test_footnotes_work_highnote_rise(monkeypatch):
-    footerheader = hey.path.headerfooters(tests.resources.MASTER72_GENERATED)
+    footerheader = iamraw.path.headerfooters(tests.resources.MASTER72_GENERATED)
     with active_ids(
             monkeypatch,
             ids=[2003],
@@ -124,7 +124,7 @@ def test_footnotes_work_highnote_rise(monkeypatch):
 
 def test_footnotes_work_highnote_size(monkeypatch):
     # TODO: LOOK FOR AN EXAMPLE WITH WRONG HIGHNOTE SIZE
-    footerheader = hey.path.headerfooters(tests.resources.MASTER72_GENERATED)
+    footerheader = iamraw.path.headerfooters(tests.resources.MASTER72_GENERATED)
     with active_ids(
             monkeypatch,
             ids=[2004],
@@ -139,7 +139,7 @@ def test_footnotes_work_highnote_size(monkeypatch):
 
 
 def test_footnotes_work_highnote_font_family(monkeypatch):
-    footerheader = hey.path.headerfooters(tests.resources.MASTER72_GENERATED)
+    footerheader = iamraw.path.headerfooters(tests.resources.MASTER72_GENERATED)
     with active_ids(
             monkeypatch,
             ids=[2005],

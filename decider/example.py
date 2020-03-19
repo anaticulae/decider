@@ -63,6 +63,12 @@ def generate(files: list, outpath: str, pages: str) -> list:
         job = hey.example.create_job(
             inpath,
             outdir,
+            config={
+                'detector': True,
+                'groupme': True,
+                'sections': True,
+                'words': True,
+            },
             pages=pages,
         )
         next_job = create_job(

@@ -22,8 +22,8 @@ import os
 import statistics
 import typing
 
-import hey.path
 import iamraw
+import iamraw.path
 import serializeraw
 import utila
 
@@ -99,7 +99,7 @@ def load_frompath(
     """Determine path to footer file from given directory `path` and
     optional `prefix`."""
     assert os.path.isdir(path), f'invalid result directory {path}'
-    source = hey.path.headerfooters(path, prefix=prefix)
+    source = iamraw.path.headerfooters(path, prefix=prefix)
     loaded = load(source, pages=pages)
     return loaded
 

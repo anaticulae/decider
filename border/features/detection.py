@@ -25,7 +25,6 @@ import functools
 import math
 import typing
 
-import groupme.border.utils
 import iamraw
 import protocol
 import serializeraw
@@ -141,8 +140,7 @@ def boxes_outside_border(
     return result
 
 
-def round_small(item: groupme.border.utils.Rectangle,
-               ) -> groupme.border.utils.Rectangle:
+def round_small(item: utila.Rectangle,) -> utila.Rectangle:
     """Round border in direction to the center of the rectangle to get a
     `smaller` rectangle which fit in more parent rectangles."""
     # round to move coordinate in center direction of page
