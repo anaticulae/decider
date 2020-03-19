@@ -1,0 +1,18 @@
+.. _0_11_0:
+
+RP 0.11.0
+=========
+
+bibliography
+------------
+
+* [ ] validate alphabetical order of bibliograph table
+
+code quality
+------------
+
+before
+~~~~~~
+
+* Total coverage: 97.10%
+* Your code has been rated at 10.00/10
