@@ -41,6 +41,13 @@ WORKPLAN = [
         (USER, DEVELOPER),
     ),
     utila.create_step(
+        'bibliography',
+        [
+            utila.ResultFile(detector.PROCESS, 'bibliography_detected'),
+        ],
+        (USER, DEVELOPER),
+    ),
+    utila.create_step(
         FOOTNOTE,
         [
             utila.ResultFile(groupme.PROCESS, 'footer_footerheader'),
