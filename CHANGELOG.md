@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.11.0
+
+### Feature
+
+* add bibliography validator (ca417491f3b7)
+
 ## v0.10.0
 
 ### Feature
