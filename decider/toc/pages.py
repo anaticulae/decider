@@ -46,6 +46,7 @@ def validate(toc: iamraw.Toc) -> InvalidPages:
 def validate_pageorder(items) -> InvalidPages:
     """Validate list of (page number, page number raw/description). The
     number can contain roman and arabic numbers.
+
     >>> validate_pageorder([('1', 'Einleitung 1'), ('2', 'Beschreibung 2')])
     []
     >>> validate_pageorder([('II', 'Anhang II'), ('I', 'Inhaltsverzeichnis I')])
@@ -60,20 +61,12 @@ def validate_pageorder(items) -> InvalidPages:
             current_arabic = int(item[0])
             if current_arabic < arabic:
                 # invald
-                result.append(InvalidPage(
-                    current_arabic,
-                    arabic,
-                    item[1],
-                ))
+                result.append(InvalidPage(current_arabic, arabic, item[1]))
             arabic = current_arabic
         except ValueError:
             current_roman = decider.toc.utils.roman_to_arabic(item[0])
             if current_roman < decider.toc.utils.roman_to_arabic(roman):
-                result.append(InvalidPage(
-                    item[0],
-                    roman,
-                    item[1],
-                ))
+                result.append(InvalidPage(item[0], roman, item[1]))
             roman = item[0]
     return result
 
