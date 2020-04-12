@@ -75,6 +75,7 @@ def install_and_run(root, package, executable=None):
 
 
 def extract_without_titlepage():
+    utila.log('extract without titlepage')
     destination = tests.resources.NO_TITLE_PAGE
     files = tests.resources.TODO
     without_titlepage = [
@@ -82,6 +83,7 @@ def extract_without_titlepage():
         for item in hey.example.output_names(files)
     ]
     for inpath, outpath in zip(files, without_titlepage):
+        utila.log(inpath)
         completed = utila.run(f'jam -i {inpath} -o {outpath} --remove=0')
         assert completed.returncode == utila.SUCCESS, str(completed)
 
@@ -94,6 +96,7 @@ def extract_without_titlepage():
 
 
 def extract_without_toc():
+    utila.log('extract without toc')
     destination = tests.resources.NO_TOC
     files = tests.resources.TODO
     without_titlepage = [
@@ -101,6 +104,7 @@ def extract_without_toc():
         for item in hey.example.output_names(files)
     ]
     for inpath, outpath in zip(files, without_titlepage):
+        utila.log(inpath)
         completed = utila.run(f'jam -i {inpath} -o {outpath} --remove=1:5')
         assert completed.returncode == utila.SUCCESS, str(completed)
 
