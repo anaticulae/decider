@@ -9,7 +9,7 @@
 
 import functools
 
-import groupme.abbreviation
+import iamraw
 import protocol
 
 import decider.features.abbreviation_table
@@ -17,9 +17,9 @@ import tests
 
 
 def test_linter_abbreviation_table_sorted():
-    table = groupme.abbreviation.AbbreviationResult()
+    table = iamraw.AbbreviationResult()
     for item in ['Alpha', 'Beta', 'Gamma', 'helm']:
-        table.append(groupme.abbreviation.Abbreviation(item))
+        table.append(iamraw.Abbreviation(item))
 
     linter = protocol.Linter()
     decider.features.abbreviation_table.check_5000_not_sorted_alphabetically(
@@ -51,10 +51,10 @@ EXAMPLE = [
 
 
 def test_linter_abbreviation_table_unsorted():
-    table = groupme.abbreviation.AbbreviationResult()
+    table = iamraw.AbbreviationResult()
     for short, description in EXAMPLE:
         table.append(
-            groupme.abbreviation.Abbreviation(
+            iamraw.Abbreviation(
                 short=short,
                 description=description,
             ))

@@ -57,7 +57,7 @@ def extract(
 
 def generate(files: list, outpath: str, pages: str) -> list:
     todo = []
-    names = output_names(files)
+    names = utila.simplify_testfile_names(files)
     for inpath, output in zip(files, names):
         outdir = os.path.join(outpath, output)
         job = hey.example.create_job(
@@ -97,16 +97,3 @@ def create_job(path: str, pages: tuple = None) -> str:
     ]
     todo = ' && '.join(task)
     return todo
-
-
-# TODO: REPLACE WITH UTILA TEST/ MOVE
-def output_names(files):
-    files = [utila.forward_slash(item) for item in files]
-    prefix = utila.forward_slash(os.path.commonpath(files))
-
-    # remove first slash
-    files = [item.replace(prefix, '')[1:] for item in files]
-    files = [item.replace('.pdf', '') for item in files]
-    files = [item.replace('/', '_') for item in files]
-
-    return files

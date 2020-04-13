@@ -10,16 +10,16 @@
 import functools
 import typing
 
-import groupme.abbreviation
-import groupme.abbreviation.dumper as gad
+import iamraw
 import protocol
+import serializeraw
 import utila
 
 import decider.utils.abbreviation
 
 
 def work(abbreviations: str) -> typing.Tuple[str, str]:
-    abbreviations = gad.load_abbreviation_table(abbreviations)
+    abbreviations = serializeraw.load_abbreviation_table(abbreviations)
     linter = protocol.from_module(__name__)
     linting(abbreviations, linter)
     result = linter.result(unique=True)
@@ -28,7 +28,7 @@ def work(abbreviations: str) -> typing.Tuple[str, str]:
 
 
 def linting(
-        abbreviations: groupme.abbreviation.AbbreviationResult,
+        abbreviations: iamraw.AbbreviationResult,
         linter: protocol.Linter,
 ):
     location = protocol.Location.from_page(0)
@@ -61,7 +61,7 @@ Erwartet:
 
 def check_5000_not_sorted_alphabetically(
         linter: callable,
-        table: groupme.abbreviation.AbbreviationResult,
+        table: iamraw.AbbreviationResult,
 ):
     current = [item for item in table]
 
@@ -90,7 +90,7 @@ Tipp: Abkürzung entfernen zur Erhöhung der Übersichtlichkeit
 
 def check_5001_german_default(
         linter: callable,
-        table: groupme.abbreviation.AbbreviationResult,
+        table: iamraw.AbbreviationResult,
 ):
     for item in table:
         try:

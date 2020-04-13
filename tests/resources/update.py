@@ -80,7 +80,7 @@ def extract_without_titlepage():
     files = tests.resources.TODO
     without_titlepage = [
         os.path.join(destination, f'{item}.pdf')
-        for item in hey.example.output_names(files)
+        for item in utila.simplify_testfile_names(files)
     ]
     for inpath, outpath in zip(files, without_titlepage):
         utila.log(inpath)
@@ -101,7 +101,7 @@ def extract_without_toc():
     files = tests.resources.TODO
     without_titlepage = [
         os.path.join(destination, f'{item}.pdf')
-        for item in hey.example.output_names(files)
+        for item in utila.simplify_testfile_names(files)
     ]
     for inpath, outpath in zip(files, without_titlepage):
         utila.log(inpath)

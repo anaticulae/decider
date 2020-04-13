@@ -9,46 +9,45 @@
 
 import functools
 
-import groupme.abbreviation
+import iamraw
 import protocol
-import words.abbreviation.loader as wal
 
 import decider.features.abbreviation_text as dfa
 import tests
 
-TABLE = groupme.abbreviation.AbbreviationResult(abbreviations=[
-    groupme.abbreviation.Abbreviation(
+TABLE = iamraw.AbbreviationResult(abbreviations=[
+    iamraw.Abbreviation(
         short='SCB',
         description='Soli Chobi Bobi',
     ),
-    groupme.abbreviation.Abbreviation(
+    iamraw.Abbreviation(
         short='WAL',
         description='Word Aliance Lord',
     ),
 ])
 
 EXAMPLE = [
-    wal.ExtractedTextAbbreviation(
+    iamraw.ExtractedTextAbbreviation(
         page=2,
         content=[
-            groupme.abbreviation.Abbreviation(
+            iamraw.Abbreviation(
                 short='SCB',
-                position=groupme.abbreviation.AbbreviationPosition(
+                position=iamraw.AbbreviationPosition(
                     page=2,
                     sentence=1,
                 ),
             ),
-            groupme.abbreviation.Abbreviation(
+            iamraw.Abbreviation(
                 short='WAL',
-                position=groupme.abbreviation.AbbreviationPosition(
+                position=iamraw.AbbreviationPosition(
                     page=2,
                     sentence=2,
                 ),
             ),
-            groupme.abbreviation.Abbreviation(
+            iamraw.Abbreviation(
                 short='WAL',
                 description='Word Aliance Lord',
-                position=groupme.abbreviation.AbbreviationPosition(
+                position=iamraw.AbbreviationPosition(
                     page=2,
                     sentence=10,
                 ),
