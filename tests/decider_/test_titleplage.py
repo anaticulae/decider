@@ -43,9 +43,9 @@ import tests.resources
     ],
     ids=[
         # 'MASTER_HUGE',
-        'MASTER_72_PAGES',
-        'MASTER_78_PAGES',
-        'TWINE_NO_TITLE',
+        'master_72_pages',
+        'master_78_pages',
+        'twine_no_title',
     ])
 def titlepage(request, testdir):
     root = str(testdir)
