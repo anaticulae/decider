@@ -1,3 +1,12 @@
+# =============================================================================
+# C O P Y R I G H T
+# -----------------------------------------------------------------------------
+# Copyright (c) 2020 by Helmut Konrad Fahrendholz. All rights reserved.
+# This file is property of Helmut Konrad Fahrendholz. Any unauthorized copy,
+# use or distribution is an offensive act against international law and may
+# be prosecuted under federal law. Its content is company confidential.
+# =============================================================================
+
 # External packages
 PyYAML==5.1
 
@@ -5,20 +14,10 @@ PyYAML==5.1
 utila==1.20.1
 protocol==0.8.17
 iamraw==1.22.3
-hey==2.0.12
-
-words==0.2.0
+hey==2.0.14
+words==0.2.2
 
 # define holy values
 configo==0.6.2
-
-# test data converter
-rawmaker==1.17.13
-
 # docs
 writers==0.3.7
-
-# add test data provider
-power==0.7.4
-# modify test data
-jam==0.1.20
