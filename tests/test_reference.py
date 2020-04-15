@@ -52,7 +52,7 @@ def collect_message():
     result = []
     for pyfile in pyfiles():
         path = pyfile.replace('.py', '')
-        path = utila.forward_slash(path, save_newline=False)
+        path = utila.forward_slash(path)
         path = path.replace('/', '.')
         if '__' in path:
             # no messages in __init__ and __main__ packages
