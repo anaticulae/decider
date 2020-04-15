@@ -6,22 +6,3 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
-
-
-def roman_to_arabic(number: str):
-    # TODO: RELACE WITH LIBRARY
-    common = {
-        'I': 1,
-        'II': 2,
-        'III': 3,
-        'IIII': 4,
-        'IV': 4,
-        'V': 5,
-        'VI': 6,
-        'VII': 7,
-        'VIII': 8,
-        'VIIII': 9,
-        'IX': 9,
-        'X': 10
-    }
-    return common[number]

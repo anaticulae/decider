@@ -22,8 +22,7 @@ import typing
 
 import iamraw
 import iamraw.toc
-
-import decider.toc.utils
+import texmex.numbers
 
 
 @dataclasses.dataclass
@@ -64,8 +63,8 @@ def validate_pageorder(items) -> InvalidPages:
                 result.append(InvalidPage(current_arabic, arabic, item[1]))
             arabic = current_arabic
         except ValueError:
-            current_roman = decider.toc.utils.roman_to_arabic(item[0])
-            if current_roman < decider.toc.utils.roman_to_arabic(roman):
+            current_roman = texmex.numbers.arabic(item[0])
+            if current_roman < texmex.numbers.arabic(roman):
                 result.append(InvalidPage(item[0], roman, item[1]))
             roman = item[0]
     return result

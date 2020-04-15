@@ -26,11 +26,6 @@ import iamraw
 import iamraw.path
 import serializeraw
 import utila
-
-# TODO: REPLACE AFTER UPGRADING IAMRAW
-FootNotes = typing.List[iamraw.FootNote]
-iamraw.FootNotes = FootNotes
-
 PageContentFootnote = collections.namedtuple(
     'PageContentFootnotes',
     'content, page',
