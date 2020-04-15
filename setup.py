@@ -30,33 +30,12 @@ with open(join(ROOT, "requirements.txt"), mode='rt', encoding=UTF8) as fp:
         line for line in fp.readlines() if line and '#' not in line
     ]
 
-
-def datafiles():
-    return [
-        (
-            '.',
-            [
-                'CHANGELOG.md',
-                'README.md',
-                'requirements.txt',
-            ],
-        ),
-        (
-            'fonts/config',
-            [
-                'fonts/config/decider_fonts_config__ugly_fonts.yaml',
-            ],
-        ),
-    ]
-
-
 if __name__ == "__main__":
     # allow setup.py to run from another directory
     chdir(ROOT)
     setup(
         author='Helmut Konrad Fahrendholz',
         author_email='info@checkitweg.de',
-        data_files=datafiles(),
         description='top or flop',
         include_package_data=True,
         install_requires=INSTALL_REQUIRES,
