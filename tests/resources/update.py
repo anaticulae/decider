@@ -9,14 +9,17 @@
 
 import os
 
-import hey.example
 import utila
 import writers
 
 import border.cli
 import decider
 import fonts.cli
+import hey.example
 import tests.resources
+import tests.resources.utils
+
+WORKER = 8
 
 
 def install_requirements():
@@ -35,30 +38,6 @@ def install_requirements():
     writers.generate()
 
 
-def sync_resources():
-    completed = utila.run('power --all', tests.resources.RESOURCES)  # pylint:disable=C0103
-    assert completed.returncode == utila.SUCCESS, str(completed)
-
-
-WORKER = 12
-
-
-def extract_examples():
-    destination = tests.resources.GENERATED
-    if os.path.exists(destination):
-        return
-
-    hey.example.extract(
-        tests.resources.TODO,
-        destination,
-        pages=None,
-        worker=WORKER,
-    )
-
-    extract_without_titlepage()
-    extract_without_toc()
-
-
 def install_and_run(root, package, executable=None):
     """Install and run --help to ensure basic function"""
     executable = executable if executable else package
@@ -74,43 +53,76 @@ def install_and_run(root, package, executable=None):
     assert result.returncode == utila.SUCCESS, result.stdout + result.stderr
 
 
+def sync_resources():
+    completed = utila.run('power --all', tests.resources.RESOURCES)  # pylint:disable=C0103
+    assert completed.returncode == utila.SUCCESS, str(completed)
+
+
+def extract_examples():
+    destination = tests.resources.GENERATED
+    if os.path.exists(destination):
+        return
+
+    utila.log('extract')
+    for item in tests.resources.TODO:
+        utila.log(item)
+
+    todo = []
+    todo.extend(
+        hey.example.todolist(
+            tests.resources.TODO,
+            destination,
+            pages='0:30',
+        ))
+
+    todo.extend(extract_without_titlepage())
+    todo.extend(extract_without_toc())
+
+    # sort jam first
+    todo = sorted(todo, key=lambda x: x.startswith('jam'), reverse=True)
+
+    tests.resources.utils.run_parallel(todo, worker=WORKER, progress=True)
+
+
 def extract_without_titlepage():
     utila.log('extract without titlepage')
     destination = tests.resources.NO_TITLE_PAGE
+    todo = []
     files = tests.resources.TODO
     without_titlepage = [
         os.path.join(destination, f'{item}.pdf')
-        for item in utila.simplify_testfile_names(files)
+        for item in utila.simplify_testfile_names(files, sort=False)
     ]
     for inpath, outpath in zip(files, without_titlepage):
         utila.log(inpath)
-        completed = utila.run(f'jam -i {inpath} -o {outpath} --remove=0')
-        assert completed.returncode == utila.SUCCESS, str(completed)
+        todo.append(f'jam -i {inpath} -o {outpath} --remove=0')
 
-    hey.example.extract(
-        without_titlepage,
-        destination,
-        pages='0:10',
-        worker=WORKER,
-    )
+    todo.extend(
+        hey.example.todolist(
+            without_titlepage,
+            destination,
+            pages='0:10',
+        ))
+    return todo
 
 
 def extract_without_toc():
     utila.log('extract without toc')
+    todo = []
     destination = tests.resources.NO_TOC
     files = tests.resources.TODO
     without_titlepage = [
         os.path.join(destination, f'{item}.pdf')
-        for item in utila.simplify_testfile_names(files)
+        for item in utila.simplify_testfile_names(files, sort=False)
     ]
     for inpath, outpath in zip(files, without_titlepage):
         utila.log(inpath)
-        completed = utila.run(f'jam -i {inpath} -o {outpath} --remove=1:5')
-        assert completed.returncode == utila.SUCCESS, str(completed)
+        todo.append(f'jam -i {inpath} -o {outpath} --remove=1:5')
 
-    hey.example.extract(
-        without_titlepage,
-        destination,
-        pages='0:10',
-        worker=WORKER,
-    )
+    todo.extend(
+        hey.example.todolist(
+            without_titlepage,
+            destination,
+            pages='0:10',
+        ))
+    return todo
