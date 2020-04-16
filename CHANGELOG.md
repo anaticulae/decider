@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v0.12.0
+
+### Feature
+
+* add linter to validate divisions on line endings (38017a9c2f17)
+* add textflow_decider to judge extracted result (4beadde399b4)
+
 ## v0.11.4
 
 ## v0.11.3
