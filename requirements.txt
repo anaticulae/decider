@@ -15,7 +15,7 @@ utila==1.20.1
 protocol==0.8.17
 iamraw==1.22.3
 hey==2.0.14
-words==0.3.0
+words==0.3.1
 
 # define holy values
 configo==0.6.2
