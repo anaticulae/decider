@@ -67,7 +67,7 @@ def check_1200_titlepage_existence(linter, titlepage):
 
 
 SOLUTION_1220 = """\
-Titelseite enthält keinen Author
+Titelseite enthält keinen Autor
 
 Fügen Sie ihren Namen und eventuellen akademischen Grad auf
 der Titelseite hinzu.
@@ -85,7 +85,7 @@ def check_1220_author_existence(linter, titlepage):
 
 
 SOLUTION_1221 = """\
-Titelseite enthält keine Matrikelnummer des Authors
+Titelseite enthält keine Matrikelnummer des Autors
 
 Fügen Sie ihre Matrikelnummer auf der Titelseite hinzu.
 
