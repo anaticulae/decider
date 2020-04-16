@@ -11,7 +11,7 @@ text alignment
 text
 ----
 
-* [ ] add text division checker
+* [x] add text division checker
 
 code quality
 ------------

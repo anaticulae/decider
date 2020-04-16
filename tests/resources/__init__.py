@@ -52,6 +52,12 @@ MASTER78_GENERATED = os.path.join(
     'master_page_78_images_toc',
 )
 
+MASTER83 = os.path.join(MASTER, 'page_83_noimages_toc.pdf')
+MASTER83_GENERATED = os.path.join(
+    GENERATED,
+    'master_page_83_noimages_toc',
+)
+
 PYPORTING = os.path.join(DOCU, 'howto_pyporting.pdf')
 PYPORTING_GENERATED = os.path.join(
     GENERATED,
@@ -81,6 +87,7 @@ TODO = [
     (DOCU_TWINE, '0:10'),
     (LEFTRIGHT, '0:10'),
     (PYPORTING, '0:10'),
+    (MASTER83, '0:10'),
 ]
 
 GENERATE_NO_TOC = [
@@ -105,6 +112,8 @@ REQURIED_RESOURCES = [
     MASTER72_GENERATED,
     MASTER78,
     MASTER78_GENERATED,
+    MASTER83,
+    MASTER83_GENERATED,
     MASTER_HUGE,
     NO_TITLE_PAGE,
     TECHNICAL24,

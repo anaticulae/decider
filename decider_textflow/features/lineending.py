@@ -1,0 +1,81 @@
+# =============================================================================
+# C O P Y R I G H T
+# -----------------------------------------------------------------------------
+# Copyright (c) 2020 by Helmut Konrad Fahrendholz. All rights reserved.
+# This file is property of Helmut Konrad Fahrendholz. Any unauthorized copy,
+# use or distribution is an offensive act against international law and may
+# be prosecuted under federal law. Its content is company confidential.
+# =============================================================================
+
+import functools
+import typing
+
+import protocol
+import textflow.features.lineending
+
+
+def work(lineendings: str, pages: tuple = None) -> typing.Tuple[str, str]:
+    linter = protocol.from_module(__name__)
+
+    # TODO: REMOVE PYLINT LATER
+    endings = textflow.features.lineending.load_lineendings(  # pylint:disable=E1123
+        lineendings,
+        pages=pages,
+    )
+
+    linting(endings, linter)
+    result = linter.result(unique=True)
+    user, developer = protocol.dump_result(result)
+    return user, developer
+
+
+def linting(lineendings, linter: protocol.Linter):
+    checkers = protocol.parse_checkers(__name__)
+    for checker in checkers:
+        call = functools.partial(
+            linter.add_finding,
+            msgid=checker.msgid,
+        )
+        checker(call, lineendings)
+
+
+SOLUTION_7000 = """\
+Zu viele aufeinander folgende Trennungen
+
+Es wird empfohlen die Anzahl der aufeinander folgenden Zeilen die eine
+Trennung enthalten auf 3 zu beschränken.
+
+{darstellung/schriftbild#trennungen}
+"""
+
+MAX_FOLLOWING_DIVISION = 3
+
+
+def check_7000_more_than_three_division(linter: callable, lineendings: list):
+    """Ensure that there are not more than three following line
+    divisions(-)."""
+
+    def more_than_three(items):
+        if not items:
+            return []
+        collected = [[items[0]]]
+        for item in items[1:]:
+            if collected[-1][-1][0] == '-' and item[0] == '-':
+                collected[-1].append(item)
+            else:
+                collected.append([item])
+        result = [
+            item for item in collected if len(item) > MAX_FOLLOWING_DIVISION
+        ]
+        return result
+
+    for page in lineendings:
+        number = page.page
+        failures = more_than_three(page.content)
+        for failure in failures:
+            bounding = failure[0][1]
+            location = protocol.BoundingLocation.fromtuple(
+                bounding=bounding,
+                page=number,
+            )
+            linter(location=location)
