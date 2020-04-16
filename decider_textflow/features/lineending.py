@@ -69,11 +69,26 @@ def check_7000_more_than_three_division(linter: callable, lineendings: list):
         ]
         return result
 
+    def merge_bounding(items):
+        """Create bounding box around the list of division `-`. Limit
+        the box to the left side, cause boundingbox is used from whole
+        line but we want to highlight the last character."""
+        boundings = [item[1] for item in items]
+        x0, y0, x1, y1 = boundings[0]
+        x0 = x1 - 20  # limit bounding box to 20 width
+        for x00, y00, x11, y11 in boundings[1:]:
+            x00 = x11 - 20
+            x0 = min([x0, x00])
+            x1 = max([x1, x11])
+            y0 = min([y0, y00])
+            y1 = max([y1, y11])
+        return (x0, y0, x1, y1)
+
     for page in lineendings:
         number = page.page
         failures = more_than_three(page.content)
         for failure in failures:
-            bounding = failure[0][1]
+            bounding = merge_bounding(failure)
             location = protocol.BoundingLocation.fromtuple(
                 bounding=bounding,
                 page=number,
