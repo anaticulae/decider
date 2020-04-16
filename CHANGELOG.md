@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.12.1
+
+### Fix
+
+* do not sort files (f10c3feb666b)
+
 ## v0.12.0
 
 ### Feature
