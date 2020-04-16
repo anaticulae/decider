@@ -26,6 +26,7 @@ import iamraw
 import iamraw.path
 import serializeraw
 import utila
+
 PageContentFootnote = collections.namedtuple(
     'PageContentFootnotes',
     'content, page',
