@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.12.2
+
+### Feature
+
+* extend example generator (c4a7a4b23664)
+
 ## v0.12.1
 
 ### Fix
