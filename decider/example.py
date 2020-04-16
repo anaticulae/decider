@@ -57,7 +57,7 @@ def extract(
 
 def generate(files: list, outpath: str, pages: str) -> list:
     todo = []
-    names = utila.simplify_testfile_names(files)
+    names = utila.simplify_testfile_names(files, sort=False)
     for inpath, output in zip(files, names):
         outdir = os.path.join(outpath, output)
         job = hey.example.create_job(
