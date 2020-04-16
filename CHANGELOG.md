@@ -2,6 +2,16 @@
 
 Every noteable change is logged here.
 
+## v0.12.3
+
+### Feature
+
+* shrink bounding box to the last char instead of line (684ed36e4831)
+
+### Fix
+
+* fix spelling error (0edff0aa74f6)
+
 ## v0.12.2
 
 ### Feature
