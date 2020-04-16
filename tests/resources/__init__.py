@@ -74,13 +74,23 @@ TWINE_NO_TITLE_PAGE = os.path.join(NO_TITLE_PAGE, 'docu_twine')
 TWINE_NO_TOC = os.path.join(NO_TOC, 'docu_twine')
 
 TODO = [
-    MASTER78,
-    MASTER72,
-    BACHELOR37,
-    TECHNICAL24,
+    (MASTER78, '0:10'),
+    (MASTER72, '0:10'),
+    (BACHELOR37, '0:10'),
+    (TECHNICAL24, '0:10'),
+    (DOCU_TWINE, '0:10'),
+    (LEFTRIGHT, '0:10'),
+    (PYPORTING, '0:10'),
+]
+
+GENERATE_NO_TOC = [
     DOCU_TWINE,
     LEFTRIGHT,
-    PYPORTING,
+]
+
+GENERATE_NO_TITLE = [
+    DOCU_TWINE,
+    LEFTRIGHT,
 ]
 
 REQURIED_RESOURCES = [
