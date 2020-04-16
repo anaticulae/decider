@@ -10,5 +10,5 @@
 import tests.textflow_
 
 
-def test_textflow_decider_cli_help(monkeypatch):
+def test_decider_textflow_cli_help(monkeypatch):
     tests.textflow_.run('--help', monkeypatch=monkeypatch)

@@ -10,7 +10,7 @@
 import textflow
 import utila
 
-import textflow_decider
+import decider_textflow
 
 DESCRIPTION = ''
 
@@ -28,12 +28,12 @@ WORKPLAN = [
 def main():
     utila.featurepack(
         workplan=WORKPLAN,
-        root=textflow_decider.ROOT,
-        featurepackage='textflow_decider.features',
+        root=decider_textflow.ROOT,
+        featurepackage='decider_textflow.features',
         config=utila.FeaturePackConfig(
             description=DESCRIPTION,
             multiprocessed=True,
-            name=textflow_decider.PROCESS,
-            version=textflow_decider.__version__,
+            name=decider_textflow.PROCESS,
+            version=decider_textflow.__version__,
         ),
     )

@@ -13,5 +13,5 @@ ROOT = decider.ROOT
 
 __version__ = decider.__version__
 
-PACKAGE = 'textflow_decider'
-PROCESS = 'textflow_decider'
+PACKAGE = 'decider_textflow'
+PROCESS = 'decider_textflow'

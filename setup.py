@@ -55,18 +55,18 @@ if __name__ == "__main__":
             'decider.features',
             'decider.toc',
             'decider.utils',
+            'decider_textflow',
+            'decider_textflow.features',
             'fonts',
             'fonts.config',
             'fonts.features',
-            'textflow_decider',
-            'textflow_decider.features',
         ],
         entry_points={
             'console_scripts': [
                 'decider = decider.cli:main',
                 'decider_border = border.cli:main',
                 'decider_fonts = fonts.cli:main',
-                'textflow_decider = textflow_decider.cli:main',
+                'decider_textflow = decider_textflow.cli:main',
             ],
         },
     )
