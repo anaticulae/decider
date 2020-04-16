@@ -30,6 +30,11 @@ with open(join(ROOT, "requirements.txt"), mode='rt', encoding=UTF8) as fp:
         line for line in fp.readlines() if line and '#' not in line
     ]
 
+with open(join(ROOT, "requirements.dev"), mode='rt', encoding=UTF8) as fp:
+    REQUIREMENTS_DEV = [
+        line for line in fp.readlines() if line and '#' not in line
+    ]
+
 if __name__ == "__main__":
     # allow setup.py to run from another directory
     chdir(ROOT)
@@ -39,6 +44,7 @@ if __name__ == "__main__":
         description='top or flop',
         include_package_data=True,
         install_requires=INSTALL_REQUIRES,
+        tests_require=REQUIREMENTS_DEV,
         long_description=README,
         name='decider',
         platforms='any',
