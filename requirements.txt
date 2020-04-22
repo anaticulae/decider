@@ -13,11 +13,13 @@ PyYAML==5.1
 # Internal packages
 utila==1.20.1
 protocol==0.8.17
-iamraw==1.22.3
-hey==2.0.14
-words==0.3.2
+iamraw==1.23.1
+hey==2.0.16
+words==0.4.2
 
 # define holy values
 configo==0.6.2
 # docs
-writers==0.3.7
+writers==0.3.8
+
+german==0.2.3
