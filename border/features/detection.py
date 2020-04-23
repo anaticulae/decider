@@ -54,6 +54,13 @@ def work(
     return dumped, user, developer
 
 
+# TODO: HOLY VALUE
+BORDER_LEFT = 25
+BORDER_RIGHT = 25
+BORDER_TOP = 25
+BORDER_BOTTOM = 25
+
+
 def load_leftright(path: str):
     content = utila.from_raw_or_path(path, ftype='yaml')
     loaded = yaml.load(content, Loader=yaml.FullLoader)
@@ -68,10 +75,7 @@ def load_leftright(path: str):
     return determine
 
 
-def linting(
-        hits,
-        linter: protocol.Linter,
-):
+def linting(hits, linter: protocol.Linter):
     checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
         for page in hits:
@@ -109,9 +113,13 @@ def check_2020_content_inside_box(linter, item, page):  # pylint:disable=W0613
 def boxes_outside_border(
         boxes,
         expected_border: callable,
+        tol=None,
 ) -> iamraw.PageContentHits:
     """Determine `boxes` which are outside out of `border`."""
+    if tol is None:
+        tol = (BORDER_LEFT, BORDER_RIGHT, BORDER_TOP, BORDER_BOTTOM)
     result = []
+
     # x0 y0 x1 y1
     for page in boxes:
         hits = []
@@ -123,10 +131,10 @@ def boxes_outside_border(
             # move bounding to center of page to make approach more robust
             rounded_bounding = round_small(bounding)
             if not any([
-                    rounded_bounding[0] < border_box[0],
-                    rounded_bounding[2] > border_box[1],
-                    rounded_bounding[1] < border_box[2],
-                    rounded_bounding[3] > border_box[3],
+                    rounded_bounding[0] < (border_box[0] + tol[0]),
+                    rounded_bounding[2] > (border_box[1] + tol[1]),
+                    rounded_bounding[1] < (border_box[2] + tol[2]),
+                    rounded_bounding[3] > (border_box[3] + tol[3]),
             ]):
                 # all items in the box
                 continue
