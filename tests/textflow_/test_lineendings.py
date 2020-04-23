@@ -15,16 +15,28 @@ import tests.resources
 import tests.textflow_
 
 
-def run_textflow(source, pages, lineending: bool = False):
+def run_textflow(
+        source,
+        pages,
+        lineending: bool = False,
+        quotation: bool = False,
+):
     actions = ''
     if lineending:
         actions += ' --lineending'
+    if quotation:
+        actions += ' --quotation'
     utila.run(f'textflow -i {source} --pages={pages} {actions}')
 
 
 def test_lineendings_master83_page6(testdir, monkeypatch):  # pylint:disable=W0621
     root = testdir.tmpdir
-    run_textflow(tests.resources.MASTER83_GENERATED, pages='6', lineending=True)
+    run_textflow(
+        tests.resources.MASTER83_GENERATED,
+        pages='6',
+        lineending=True,
+        quotation=True,
+    )
 
     # lint result
     tests.textflow_.run('', monkeypatch=monkeypatch)

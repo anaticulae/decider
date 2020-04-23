@@ -17,10 +17,13 @@ DESCRIPTION = ''
 WORKPLAN = [
     utila.create_step(
         'lineending',
-        [
-            utila.ResultFile(textflow.PROCESS, 'lineending_lastchar'),
-        ],
-        ('user', 'developer'),
+        inputs=[utila.ResultFile(textflow.PROCESS, 'lineending_lastchar')],
+        output=('user', 'developer'),
+    ),
+    utila.create_step(
+        'quotation',
+        inputs=[utila.ResultFile(textflow.PROCESS, 'quotation_quotation')],
+        output=('user', 'developer'),
     ),
 ]
 

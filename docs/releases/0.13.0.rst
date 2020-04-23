@@ -8,7 +8,7 @@ citomas
 
 * [ ] write article
 
-* [ ] check sentence for valid citation
+* [x] check sentence for valid citation
 
 * [ ] check paragraph for valid citation
 
@@ -16,7 +16,7 @@ citomas
 
 * [ ] check dot in citation
 
-* [ ] check citation marks. Double and single
+* [x] check citation marks. Double and single
 
 code quality
 ------------

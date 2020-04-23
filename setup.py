@@ -63,6 +63,7 @@ if __name__ == "__main__":
             'decider.utils',
             'decider_textflow',
             'decider_textflow.features',
+            'decider_textflow.quotation',
             'fonts',
             'fonts.config',
             'fonts.features',
