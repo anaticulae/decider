@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.12.7
+
+### Feature
+
+* add quotation linter (122301db5bcb)
+
 ## v0.12.6
 
 ## v0.12.5
