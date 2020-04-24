@@ -39,8 +39,10 @@ def extract(
     os.makedirs(destination, exist_ok=True)
 
     def run_job(job: str):
+        utila.log(f'start: {job[0:150]}')
         completed = utila.run(job)
         utila.assert_success(completed)
+        utila.log(f'complete: {job[0:100]}')
 
     generated = generate(files, destination, pages=pages)
 
