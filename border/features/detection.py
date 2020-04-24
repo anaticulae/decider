@@ -54,7 +54,7 @@ def work(
     return dumped, user, developer
 
 
-# TODO: HOLY VALUE
+# TODO: HOLY VALUE, ADJUST THIS HOLY VALUES
 BORDER_LEFT = 25
 BORDER_RIGHT = 25
 BORDER_TOP = 25
@@ -127,14 +127,13 @@ def boxes_outside_border(
         for index, bounding in page.boundings:
             # BOUNDING:     'left, top,   right, bottom'
             # BORDER:       'left, right, top,   bottom'
-
             # move bounding to center of page to make approach more robust
             rounded_bounding = round_small(bounding)
-            if not any([
-                    rounded_bounding[0] < (border_box[0] + tol[0]),
-                    rounded_bounding[2] > (border_box[1] + tol[1]),
-                    rounded_bounding[1] < (border_box[2] + tol[2]),
-                    rounded_bounding[3] > (border_box[3] + tol[3]),
+            if all([
+                    rounded_bounding[0] > (border_box[0] - tol[0]),
+                    rounded_bounding[2] < (border_box[1] + tol[1]),
+                    rounded_bounding[1] > (border_box[2] - tol[2]),
+                    rounded_bounding[3] < (border_box[3] + tol[3]),
             ]):
                 # all items in the box
                 continue

@@ -7,6 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import contextlib
 import os
 
 import iamraw
@@ -16,6 +17,7 @@ import serializeraw
 import utila
 
 import border.cli
+import border.features.detection
 import border.path
 import tests.resources
 
@@ -79,7 +81,8 @@ def test_border_cli_decider_list(
 ):  # pylint:disable=W0621
     """Run `border` to extract common BoundingBox and check pages
     against this common box."""
-    detected_hits = run_border_detector(testdir.tmpdir, source, monkeypatch)
+    with patch_zero_border_tolerance(monkeypatch):
+        detected_hits = run_border_detector(testdir.tmpdir, source, monkeypatch)
     assert detected_hits
     # validated
     assert len(detected_hits) >= len(validate), (
@@ -105,7 +108,18 @@ def test_border_cli_decider_complex_validation(
 ):  # pylint:disable=W0621
     """Ensure to run border detection and load linter result later."""
     root = testdir.tmpdir
-    detected = run_border_detector(root, source, monkeypatch)
+    with patch_zero_border_tolerance(monkeypatch):
+        detected = run_border_detector(root, source, monkeypatch)
     validate(detected)
     loaded = protocol.load_result(border.path.border_user(testdir.tmpdir))
     assert loaded
+
+
+@contextlib.contextmanager
+def patch_zero_border_tolerance(monkeypatch):
+    with monkeypatch.context() as context:
+        context.setattr(border.features.detection, 'BORDER_LEFT', 0)
+        context.setattr(border.features.detection, 'BORDER_RIGHT', 0)
+        context.setattr(border.features.detection, 'BORDER_TOP', 0)
+        context.setattr(border.features.detection, 'BORDER_BOTTOM', 0)
+        yield
