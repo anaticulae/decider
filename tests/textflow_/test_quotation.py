@@ -22,7 +22,7 @@ def test_german_double_quote():
     first = words.text.word.split_words(
         words.text.sentence.split_sentences(STANDARD)[0])
     assert dtqv.german_double_quotation_closed(first)
-    assert dtqv.german_double_quotes_inside_double(first)
+    assert dtqv.german_no_double_quotes_inside_double(first)
 
 
 REQUIRE_SINGLE_INSIDE = """\
@@ -43,8 +43,8 @@ def test_german_double_quote_inside_double():
     assert len(splitted) == 5
 
     third = words.text.word.split_words(splitted[2])
-    assert dtqv.german_double_quotes_inside_double(third)
+    assert dtqv.german_no_double_quotes_inside_double(third)
 
     fourth = words.text.word.split_words(splitted[3])
-    double_inside_double = dtqv.german_double_quotes_inside_double(fourth)
+    double_inside_double = dtqv.german_no_double_quotes_inside_double(fourth)
     assert double_inside_double is False

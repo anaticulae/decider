@@ -90,6 +90,8 @@ def check_7101_german_quote_double_quote_inside(linter: callable, tokens: list):
     validated = dtqv.german_double_quotation_closed(tokens)
     if not validated:
         return
+    if dtqv.german_no_double_quotes_inside_double(tokens):
+        return
 
     linter()
 

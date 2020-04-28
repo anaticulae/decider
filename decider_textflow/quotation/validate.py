@@ -26,7 +26,21 @@ def german_double_quotation_closed(token: list) -> bool:
     return len(double_open) == len(double_close)
 
 
-def german_double_quotes_inside_double(token: list) -> bool:
+DOUBLE_INSIDE_DOUBLE = words.text.word.split_words(
+    '„zu diesem „etwas“ kontrollieren kann“.')
+
+NO_DOUBLE_INSIDE_DOUBLE = words.text.word.split_words(
+    "„zu diesem 'etwas' kontrollieren kann“.")
+
+
+def german_no_double_quotes_inside_double(token: list) -> bool:
+    """Check if single quotation are used in citation.
+
+    >>> german_no_double_quotes_inside_double(DOUBLE_INSIDE_DOUBLE)
+    False
+    >>> german_no_double_quotes_inside_double(NO_DOUBLE_INSIDE_DOUBLE)
+    True
+    """
     open_close = [item for item in token if item in (DOUBLE_OPEN, DOUBLE_CLOSE)]
     # ensure alernating
     if not open_close:
