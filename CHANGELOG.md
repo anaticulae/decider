@@ -2,6 +2,18 @@
 
 Every noteable change is logged here.
 
+## v0.12.9
+
+### Feature
+
+* add logging to make generator more responsive (ee2a4d52c137)
+* add tolerance to reduce massive linter warnings (c9728a6bad35)
+* add tolerance to increase acceptable border overwriting (a4b040459be8)
+
+### Fix
+
+* fix double quotation linter (582e6ee85901)
+
 ## v0.12.8
 
 ## v0.12.7
