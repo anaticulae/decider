@@ -8,8 +8,8 @@
 # =============================================================================
 
 # test data converter
-rawmaker==1.18.2
+rawmaker==1.18.3
 # add test data provider
-power==0.8.0
+power==0.8.1
 # modify test data
-jam==0.1.21
+jam==0.1.22
