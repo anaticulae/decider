@@ -11,12 +11,11 @@ import functools
 import typing
 
 import german
+import konrad
+import konrad.quotation.german
 import protocol
 import textflow.features.quotation
 import utila
-import words.text.sentence
-
-import decider_textflow.quotation.validate as dtqv
 
 
 def work(text: str, pages: tuple) -> typing.Tuple[str, str]:
@@ -51,7 +50,7 @@ def linting(quotations, linter: protocol.Linter):
                 location=location,
                 sentence=quote.index,
             )
-            tokens = words.text.sentence.split_token(quote.sentence)
+            tokens = german.split_token(quote.sentence)
             checker(call, tokens)
 
 
@@ -67,7 +66,7 @@ Satz {%sentence%} enthält eine ungerade Anzahl von Anführungszeichen.
 def check_7100_german_quote_not_closed(linter: callable, tokens: list):
     if not isger(tokens):
         return
-    validated = dtqv.german_double_quotation_closed(tokens)
+    validated = konrad.quotation.german.double_quotation_closed(tokens)
     if validated:
         return
 
@@ -87,18 +86,18 @@ Sie diese doppelten Anführungszeichen durch einfache Anführungszeichen.
 def check_7101_german_quote_double_quote_inside(linter: callable, tokens: list):
     if not isger(tokens):
         return
-    validated = dtqv.german_double_quotation_closed(tokens)
+    validated = konrad.quotation.german.double_quotation_closed(tokens)
     if not validated:
         return
-    if dtqv.german_no_double_quotes_inside_double(tokens):
+    if konrad.quotation.german.no_double_quotes_inside_double(tokens):
         return
 
     linter()
 
 
 def iseng(tokens):
-    return german.lang(tokens).language == german.Language.ENGLISH
+    return german.lang(tokens).language == konrad.Language.ENGLISH
 
 
 def isger(tokens):
-    return german.lang(tokens).language == german.Language.GERMAN
+    return german.lang(tokens).language == konrad.Language.GERMAN
