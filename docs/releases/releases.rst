@@ -28,3 +28,11 @@ completed
   0.6.0
   0.5.0
   0.4.0
+
+planned
+-------
+
+.. toctree::
+  :maxdepth: 1
+
+  0.14.0
