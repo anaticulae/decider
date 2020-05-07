@@ -6,15 +6,15 @@ RP 0.13.0
 citomas
 -------
 
-* [ ] write article
+* [x] write article
 
 * [x] check sentence for valid citation
 
-* [ ] check paragraph for valid citation
+* [/] check paragraph for valid citation
 
-* [ ] check citation and footnote "...Hello"102.
+* [/] check citation and footnote "...Hello"102.
 
-* [ ] check dot in citation
+* [/] check dot in citation
 
 * [x] check citation marks. Double and single
 
@@ -25,4 +25,11 @@ before
 ~~~~~~
 
 * Total coverage: 96.14%
+* Your code has been rated at 10.00/10
+
+after
+~~~~~
+
+* Todos: 27
+* Total coverage: 95.68%
 * Your code has been rated at 10.00/10
