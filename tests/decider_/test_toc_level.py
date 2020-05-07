@@ -55,24 +55,26 @@ TECHNICAL24_INVALID_CHILDREN = 1
 TECHNICAL24_TOO_DEEP = 14
 
 
-@pytest.mark.parametrize('source, invalids', [
-    pytest.param(
-        tests.resources.TECHNICAL24_GENERATED,
-        TECHNICAL24_INVALID_CHILDREN,
-        id='technical24',
-    ),
-    pytest.param(
-        tests.resources.MASTER78_GENERATED,
-        3,
-        marks=pytest.mark.xfail(reason='fix toc parser'),
-        id='master78',
-    ),
-    pytest.param(
-        tests.resources.MASTER72_GENERATED,
-        0,
-        id='master72',
-    ),
-])
+@pytest.mark.parametrize(
+    'source, invalids',
+    [
+        pytest.param(
+            tests.resources.TECHNICAL24_GENERATED,
+            TECHNICAL24_INVALID_CHILDREN,
+            id='technical24',
+        ),
+        # TODO: MASTER78 PARSER IS BUGGY RIGHT NOW
+        pytest.param(
+            tests.resources.MASTER78_GENERATED,
+            3,
+            id='master78',
+        ),
+        pytest.param(
+            tests.resources.MASTER72_GENERATED,
+            0,
+            id='master72',
+        ),
+    ])
 def test_toc_validate_children(source, invalids):
     toc = tests.tableofcontent(source)
     validated = dtl.validate_children(toc)
