@@ -24,6 +24,8 @@ import iamraw
 import iamraw.toc
 import texmex.numbers
 
+import decider.toc
+
 
 @dataclasses.dataclass
 class InvalidPage:
@@ -37,7 +39,7 @@ InvalidPages = typing.List[InvalidPage]
 
 
 def validate(toc: iamraw.Toc) -> InvalidPages:
-    toc = flat(toc)
+    toc = decider.toc.flat(toc)
     items = [(item.page, item.title, item.raw_location) for item in toc]
     result = validate_pageorder(items)
     return result
@@ -81,20 +83,4 @@ def validate_pageorder(items) -> InvalidPages:
                         raw_location=raw_location,
                     ))
             roman = pagenumber
-    return result
-
-
-def flat(toc: iamraw.Toc):
-    """Remove nested order and deliver a top down list of pages and
-    sections."""
-    result = []
-
-    def godown(item: iamraw.toc.TocLinkMixin):
-        result.append(item)
-        for children in item:
-            godown(children)
-
-    for item in toc:
-        godown(item)
-
     return result
