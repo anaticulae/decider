@@ -11,7 +11,8 @@ import decider.toc.pages
 
 
 def validate(footers):
-    pages = [(item.page.value, item.page.raw) for item in footers]
-
+    # TODO: ADD PARSED PDF RAW_LOCATION to `PagesFooterInformation`
+    # TODO: REPLACE 1024 afterwards
+    pages = [(item.page.value, item.page.raw, 1024) for item in footers]
     validated = decider.toc.pages.validate_pageorder(pages)
     return validated

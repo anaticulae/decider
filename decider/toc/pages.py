@@ -24,14 +24,13 @@ import iamraw
 import iamraw.toc
 import texmex.numbers
 
-# TODO: USE PARSED PDF RAW_LOCATION
-
 
 @dataclasses.dataclass
 class InvalidPage:
     current: str
     before: str
     text: str
+    raw_location: int = None
 
 
 InvalidPages = typing.List[InvalidPage]
@@ -39,7 +38,7 @@ InvalidPages = typing.List[InvalidPage]
 
 def validate(toc: iamraw.Toc) -> InvalidPages:
     toc = flat(toc)
-    items = [(item.page, item.title) for item in toc]
+    items = [(item.page, item.title, item.raw_location) for item in toc]
     result = validate_pageorder(items)
     return result
 
@@ -48,27 +47,40 @@ def validate_pageorder(items) -> InvalidPages:
     """Validate list of (page number, page number raw/description). The
     number can contain roman and arabic numbers.
 
-    >>> validate_pageorder([('1', 'Einleitung 1'), ('2', 'Beschreibung 2')])
+    >>> validate_pageorder([('1', 'Einleitung 1', 1), ('2', 'Beschreibung 2', 1)])
     []
-    >>> validate_pageorder([('II', 'Anhang II'), ('I', 'Inhaltsverzeichnis I')])
-    [InvalidPage(current='I', before='II', text='Inhaltsverzeichnis I')]
+    >>> validate_pageorder([('II', 'Anhang II', 1), ('I', 'Inhaltsverzeichnis I', 1)])
+    [InvalidPage(current='I', before='II', text='Inhaltsverzeichnis I', raw_location=1)]
     """
     # TODO: MOVE TO A MORE GENERAL PLACE/NAME
     result = []
     arabic = 0
     roman = 'I'
-    for item in items:
+    for pagenumber, title, raw_location in items:
+        raw_location = int(raw_location)
         try:
-            current_arabic = int(item[0])
+            current_arabic = int(pagenumber)
             if current_arabic < arabic:
                 # invald
-                result.append(InvalidPage(current_arabic, arabic, item[1]))
+                result.append(
+                    InvalidPage(
+                        current_arabic,
+                        arabic,
+                        title,
+                        raw_location=raw_location,
+                    ))
             arabic = current_arabic
         except ValueError:
-            current_roman = texmex.numbers.arabic(item[0])
+            current_roman = texmex.numbers.arabic(pagenumber)
             if current_roman < texmex.numbers.arabic(roman):
-                result.append(InvalidPage(item[0], roman, item[1]))
-            roman = item[0]
+                result.append(
+                    InvalidPage(
+                        pagenumber,
+                        roman,
+                        title,
+                        raw_location=raw_location,
+                    ))
+            roman = pagenumber
     return result
 
 

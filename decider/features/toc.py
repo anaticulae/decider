@@ -133,4 +133,10 @@ def check_1360_toc_ascending_pages(linter, toc: iamraw.Toc):
         return
     page_result: dtp.InvalidPages = dtp.validate(toc)
     for item in page_result:
-        linter(current=item.current, before=item.before, text=item.text)
+        location = protocol.Location.from_page(item.raw_location)
+        linter(
+            current=item.current,
+            before=item.before,
+            text=item.text,
+            location=location,
+        )
