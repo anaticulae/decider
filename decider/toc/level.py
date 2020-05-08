@@ -6,18 +6,20 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
-import collections
+
 import dataclasses
 
 import configo
 import iamraw
 
+import decider.toc
 
-class TooFewChildren(collections.UserList):  # pylint:disable=too-many-ancestors
+
+class TooFewChildren(decider.toc.InvalidTocItems):  # pylint:disable=too-many-ancestors
     pass
 
 
-class LevelToDeep(collections.UserList):  # pylint:disable=too-many-ancestors
+class LevelToDeep(decider.toc.InvalidTocItems):  # pylint:disable=too-many-ancestors
     pass
 
 

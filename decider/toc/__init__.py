@@ -59,3 +59,9 @@ Abstufungsprinzip
     1.
     2.
 """
+
+import collections
+
+
+class InvalidTocItems(collections.UserList):  # pylint:disable=too-many-ancestors
+    pass
