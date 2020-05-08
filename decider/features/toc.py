@@ -18,6 +18,7 @@ import iamraw
 import protocol
 import serializeraw
 
+import decider.features
 import decider.toc.level as dtl
 import decider.toc.pages as dtp
 
@@ -72,7 +73,7 @@ TODO: ADD LINK TO TECHNIK
 def check_1300_toc_existence(linter, toc: iamraw.Toc):
     if toc.children:
         return
-    linter()
+    linter(location=decider.features.OVERVIEW)
 
 
 SOLUTION_1350 = """\
@@ -88,8 +89,10 @@ Unterkapitel in den Text eingeplegt werden.
 
 def check_1350_toc_level_to_few_children(linter, toc: iamraw.Toc):
     level_result: dtl.TocValidationResult = dtl.validate(toc)
-    for _ in level_result.too_few_children:  # pylint:disable=E1133
-        linter()
+    for item in level_result.too_few_children:  # pylint:disable=E1133
+        # TODO: REMOVE AFTER UPGRADING SERIALIZERAW
+        location = protocol.Location.from_page(int(item.page))
+        linter(location=location)
 
 
 SOLUTION_1351 = """
@@ -107,8 +110,10 @@ Begrenzen Sie die Gliederung auf maximal 3 Sektionen.
 
 def check_1351_toc_level_to_deep(linter, toc: iamraw.Toc):
     level_result: dtl.TocValidationResult = dtl.validate(toc)
-    for _ in level_result.level_to_deep:  # pylint:disable=E1133
-        linter()
+    for item in level_result.level_to_deep:  # pylint:disable=E1133
+        # TODO: REMOVE AFTER UPGRADING SERIALIZERAW
+        location = protocol.Location.from_page(int(item.page))
+        linter(location=location)
 
 
 SOLUTION_1360 = """\

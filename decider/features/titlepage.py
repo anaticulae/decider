@@ -19,6 +19,8 @@ import iamraw
 import protocol
 import serializeraw
 
+import decider.features
+
 TITLEPAGE_CHECKER_ID = 12
 
 
@@ -63,7 +65,7 @@ Fügen Sie eine Titelseite zum Dokument hinzu.
 def check_1200_titlepage_existence(linter, titlepage):
     if titlepage is not None:
         return
-    linter()
+    linter(location=decider.features.OVERVIEW)
 
 
 SOLUTION_1220 = """\
