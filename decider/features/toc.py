@@ -19,6 +19,7 @@ import protocol
 import serializeraw
 
 import decider.features
+import decider.toc.duplicated as dtd
 import decider.toc.level as dtl
 import decider.toc.pages as dtp
 
@@ -139,4 +140,27 @@ def check_1360_toc_ascending_pages(linter, toc: iamraw.Toc):
             before=item.before,
             text=item.text,
             location=location,
+        )
+
+
+SOLUTION_1380 = """\
+Worthäufung im Inhaltsverzeichnis
+
+Das Wort „{%word%}“ wird {%count%} mal in den Zeilen {%lines%} benutzt.
+Variieren Sie dieses Wort um die Varianz der Sprache zu vergrößern.
+"""
+
+
+def check_1380_toc_duplicated_words(linter, toc: iamraw.Toc):
+    if not toc:
+        return
+    findings = dtd.validate(toc)
+    for item in findings:
+        (word, count), lines = item
+        lines = ', '.join([f'{item}' for item in lines])
+        # location = protocol.Location.from_page(item.raw_location)
+        linter(
+            word=word,
+            count=count,
+            lines=lines,
         )

@@ -43,7 +43,7 @@ def test_toc_extraction(monkeypatch):  # pylint:disable=W0621
         context.setattr(dtl, 'MAX_TOC_DEEPNESS', 2)
         failures = lint(tests.resources.TECHNICAL24_GENERATED)
     failures = len(failures)
-    assert failures == expected_failures, str(failures)
+    assert failures >= expected_failures, str(failures)
 
 
 def messageids(items):

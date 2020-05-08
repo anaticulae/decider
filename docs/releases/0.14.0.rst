@@ -8,7 +8,7 @@ toc
 
 * [ ] validate length of toc entry
 
-* [ ] validate different words in toc (don't repeat yourself)
+* [x] validate different words in toc (don't repeat yourself)
 
 * [ ] Eidesstaatliche Erklärung is not part of page counting
 
