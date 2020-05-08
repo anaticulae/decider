@@ -52,8 +52,8 @@ def extract(
             try:
                 comment = future.result()
                 utila.info(comment)
-            except Exception:
-                utila.info(f'{future} failed.')
+            except Exception as error:
+                utila.info(f'{error}\n{future} failed.')
                 raise
 
 
