@@ -24,6 +24,8 @@ import iamraw
 import iamraw.toc
 import texmex.numbers
 
+# TODO: USE PARSED PDF RAW_LOCATION
+
 
 @dataclasses.dataclass
 class InvalidPage:
