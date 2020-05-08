@@ -11,11 +11,10 @@ import functools
 import typing
 
 import iamraw
+import konrad
 import protocol
 import serializeraw
 import utila
-
-import decider.utils.abbreviation
 
 
 def work(abbreviations: str) -> typing.Tuple[str, str]:
@@ -94,7 +93,8 @@ def check_5001_german_default(
 ):
     for item in table:
         try:
-            description = decider.utils.abbreviation.DUDEN[item.short]
+            # TODO: INTRODUCE METOD TO CHECK LOWER-, UPPERCASE and spelling errors
+            description = konrad.ABBREVIATION[item.short]
         except KeyError:
             continue
         linter(short=item.short, description=description)
