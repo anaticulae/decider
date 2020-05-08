@@ -33,48 +33,27 @@ DOCU_TWINE_GENERATED = os.path.join(GENERATED, 'docu_twine')
 
 TECHNICAL = os.path.join(RESOURCES, 'technical')
 TECHNICAL24 = os.path.join(TECHNICAL, 'page_24_color_figures_images.pdf')
-TECHNICAL24_GENERATED = os.path.join(
-    GENERATED,
-    'technical_page_24_color_figures_images',
-)
+TECHNICAL24_GENERATED = os.path.join(GENERATED, 'technical_page_24_color_figures_images') # yapf:disable
 
 MASTER_HUGE = os.path.join(MASTER, 'page_116_images_toc_formular.pdf')
 
+BACHELOR37 = os.path.join(BACHELOR, 'page_37_tables.pdf')
+BACHELOR37_GENERATED = os.path.join(GENERATED, 'bachelor_page_37_tables')
+
 MASTER72 = os.path.join(MASTER, 'page_72_noimages_toc.pdf')
-MASTER72_GENERATED = os.path.join(
-    GENERATED,
-    'master_page_72_noimages_toc',
-)
+MASTER72_GENERATED = os.path.join(GENERATED, 'master_page_72_noimages_toc')
 
 MASTER78 = os.path.join(MASTER, 'page_78_images_toc.pdf')
-MASTER78_GENERATED = os.path.join(
-    GENERATED,
-    'master_page_78_images_toc',
-)
+MASTER78_GENERATED = os.path.join(GENERATED, 'master_page_78_images_toc')
 
 MASTER83 = os.path.join(MASTER, 'page_83_noimages_toc.pdf')
-MASTER83_GENERATED = os.path.join(
-    GENERATED,
-    'master_page_83_noimages_toc',
-)
+MASTER83_GENERATED = os.path.join(GENERATED, 'master_page_83_noimages_toc')
 
 PYPORTING = os.path.join(DOCU, 'howto_pyporting.pdf')
-PYPORTING_GENERATED = os.path.join(
-    GENERATED,
-    'docu_howto_pyporting',
-)
+PYPORTING_GENERATED = os.path.join(GENERATED, 'docu_howto_pyporting')
 
 LEFTRIGHT = os.path.join(BOOK, 'leftright.pdf')
-LEFTRIGHT_GENERATED = os.path.join(
-    GENERATED,
-    'book_leftright',
-)
-
-BACHELOR37 = os.path.join(BACHELOR, 'page_37_tables.pdf')
-BACHELOR37_GENERATED = os.path.join(
-    GENERATED,
-    'bachelor_page_37_tables',
-)
+LEFTRIGHT_GENERATED = os.path.join(GENERATED, 'book_leftright')
 
 TWINE_NO_TITLE_PAGE = os.path.join(NO_TITLE_PAGE, 'docu_twine')
 TWINE_NO_TOC = os.path.join(NO_TOC, 'docu_twine')
