@@ -124,11 +124,16 @@ def most_common_font(items: iamraw.FootNotes) -> FootNoteStyle:
         content_fontid.extend(
             utila.flatten([[item.font] * (item.end - item.start)
                            for item in content.content]))
-    highnote_size = statistics.mode(highnote_size)
-    highnote_rise = statistics.mode(highnote_rise)
-    highnote_fontid = statistics.mode(highnote_fontid)
-    content_size = statistics.mode(content_size)
-    content_fontid = statistics.mode(content_fontid)
+
+    highnote_rise = utila.roundme(highnote_rise, digits=1, convert=False)  # pylint:disable=R0204
+    content_size = utila.roundme(content_size, digits=1, convert=False)  # pylint:disable=R0204
+
+    # TODO: Add more information when returning multiple sizes?
+    highnote_size = utila.modes(highnote_size)
+    highnote_rise = utila.modes(highnote_rise)
+    highnote_fontid = utila.modes(highnote_fontid)
+    content_size = utila.modes(content_size)
+    content_fontid = utila.modes(content_fontid)
 
     result = FootNoteStyle(
         content_fontid=content_fontid,

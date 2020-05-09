@@ -30,7 +30,7 @@ def test_cli_decider(cmd, testdir, monkeypatch):
     pytest.param(tests.resources.LEFTRIGHT_GENERATED, id='leftright'),
     pytest.param(tests.resources.MASTER72_GENERATED, id='master72'),
     pytest.param(tests.resources.MASTER78_GENERATED, id='master78'),
-    pytest.param(tests.resources.MASTER98_GENERATED, id='master98', marks=pytest.mark.xfail(reason='statistics.StatisticsError:')),
+    pytest.param(tests.resources.MASTER98_GENERATED, id='master98'),
     pytest.param(tests.resources.MASTER99_GENERATED, id='master99'),
 ])
 # yapf:enable
