@@ -20,6 +20,7 @@ import serializeraw
 
 import decider.features
 import decider.toc.duplicated as dtd
+import decider.toc.length
 import decider.toc.level as dtl
 import decider.toc.pages as dtp
 
@@ -130,8 +131,6 @@ Seite {%current%} folgt auf {%before%}.
 
 
 def check_1360_toc_ascending_pages(linter, toc: iamraw.Toc):
-    if not toc:
-        return
     page_result: dtp.InvalidPages = dtp.validate(toc)
     for item in page_result:
         location = protocol.Location.from_page(item.raw_location)
@@ -152,8 +151,6 @@ Variieren Sie dieses Wort um die Varianz der Sprache zu vergrößern.
 
 
 def check_1380_toc_duplicated_words(linter, toc: iamraw.Toc):
-    if not toc:
-        return
     findings = dtd.validate(toc)
     for item in findings:
         (word, count), lines = item
@@ -164,3 +161,20 @@ def check_1380_toc_duplicated_words(linter, toc: iamraw.Toc):
             count=count,
             lines=lines,
         )
+
+
+# TODO: Link to article
+# TODO: Convert citation marks
+SOLUTION_1382 = """\
+Überschrift zu lang
+
+Die Überschrift {%number%} „{%title%}“ ist zu lang und verkürzt werdne.
+"""
+
+
+def check_1382_toc_long_lines(linter, toc: iamraw.Toc):
+    findings = decider.toc.length.validate(toc)
+    for item in findings:
+        index, title, _, raw_location = item
+        location = protocol.Location.from_page(raw_location)
+        linter(number=index, title=title, location=location)

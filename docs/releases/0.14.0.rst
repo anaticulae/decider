@@ -6,7 +6,7 @@ RP 0.14.0
 toc
 ---
 
-* [ ] validate length of toc entry
+* [x] validate length of toc entry
 
 * [x] validate different words in toc (don't repeat yourself)
 
