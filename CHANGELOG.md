@@ -2,6 +2,23 @@
 
 Every noteable change is logged here.
 
+## v0.14.0
+
+### Feature
+
+* round sizes to reduce probability of multiple detection (d1747bf29bee)
+* add toc quotation validator (2c580e5267e6)
+* add linter to mark question in table of content (c57a4c762a7f)
+* add check to validate max toc length (684798afa49e)
+* add linter to detect miss usage in table of content (205282780b00)
+* introduce invalid toc mixin (31f4b20bdb57)
+* add logging information about raised exception (6f31ac32b713)
+* show missing title,toc on separate overview page (8a6d4c124a78)
+
+### Fix
+
+* present toc linter result to correct pdf page (c452d7f1d00d)
+
 ## v0.13.1
 
 ## v0.13.0
