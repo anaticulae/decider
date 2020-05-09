@@ -27,3 +27,15 @@ def validate_question_mark(toc: iamraw.Toc) -> decider.toc.InvalidTocItems:
         if contains_question:
             lines.append((index, item.title, item.raw_location))
     return lines
+
+
+def collect_quotation_marks(toc: iamraw.Toc) -> decider.toc.InvalidTocItems:
+    flatten = decider.toc.flat(toc)
+
+    lines = []
+    for index, item in enumerate(flatten):
+        words = german.split_words(item.title, validate_sentences=False)
+        if not german.contain_quotation_marks(words):
+            continue
+        lines.append((index, item.title, item.raw_location))
+    return lines

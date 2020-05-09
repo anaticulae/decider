@@ -199,3 +199,25 @@ def check_1383_toc_contains_question_mark(linter, toc: iamraw.Toc):
         index, title, raw_location = item
         location = protocol.Location.from_page(raw_location)
         linter(number=index, title=title, location=location)
+
+
+# TODO: ADD ARTICLE
+SOLUTION_1384 = """\
+Sektion enthält Anführungszeichen
+
+Die Überschrift {%number%} „{%title%}“ enhält Anführungszeichen. Dies
+deutet auf eine spezielle Bedeutung hin. Dies sollte vermieden werden,
+da Überschriften, kurz, prägnant und substantivisch formuliert sein sollen.
+
+Überlegen Sie, wie die Sektion prägnanter und ohne spezielles Vorwissen
+verständlich wird.
+"""
+
+
+def check_1384_toc_contains_quotation_mark(linter, toc: iamraw.Toc):
+    findings = decider.toc.marks.collect_quotation_marks(toc)
+    for item in findings:
+        index, title, raw_location = item
+        location = protocol.Location.from_page(raw_location)
+        linter(number=index, title=title, location=location)
+        assert 0

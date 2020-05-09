@@ -10,7 +10,7 @@ toc
 
 * [x] validate different words in toc (don't repeat yourself)
 
-* [ ] mark quotation in in toc
+* [x] mark quotation in in toc
 
 code quality
 ------------

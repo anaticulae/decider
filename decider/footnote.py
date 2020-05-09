@@ -16,10 +16,10 @@
 
 [Wissenschaftliches Schreiben - Manuel Rene Theisen: page 202]
 """
+
 import collections
 import dataclasses
 import os
-import statistics
 import typing
 
 import iamraw
