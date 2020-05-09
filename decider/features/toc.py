@@ -22,6 +22,7 @@ import decider.features
 import decider.toc.duplicated as dtd
 import decider.toc.length
 import decider.toc.level as dtl
+import decider.toc.marks
 import decider.toc.pages as dtp
 
 
@@ -176,5 +177,25 @@ def check_1382_toc_long_lines(linter, toc: iamraw.Toc):
     findings = decider.toc.length.validate(toc)
     for item in findings:
         index, title, _, raw_location = item
+        location = protocol.Location.from_page(raw_location)
+        linter(number=index, title=title, location=location)
+
+
+# TODO: ADD ARTICLE
+SOLUTION_1383 = """\
+Sektion enthält Fragestellung
+
+Die Überschrift {%number%} „{%title%}“ ist als Frage formuliert.
+
+Überschriften zeichnen sich durch Knappheit und Eindeutigkeit aus. Daher
+sollten diese substantivisch, kurz und prägnant und nicht als Teilsatz oder
+Fragesatz formuliert werden.
+"""
+
+
+def check_1383_toc_contains_question_mark(linter, toc: iamraw.Toc):
+    findings = decider.toc.marks.validate_question_mark(toc)
+    for item in findings:
+        index, title, raw_location = item
         location = protocol.Location.from_page(raw_location)
         linter(number=index, title=title, location=location)
