@@ -17,12 +17,14 @@ etc.
 In some works Roman numbers are nor used anymore cause there are a
 relict of old times. Arabic numbers are used for the whole document.
 """
+
 import dataclasses
 import typing
 
 import iamraw
 import iamraw.toc
 import texmex.numbers
+import utila
 
 import decider.toc
 
@@ -59,6 +61,9 @@ def validate_pageorder(items) -> InvalidPages:
     arabic = 0
     roman = 'I'
     for pagenumber, title, raw_location in items:
+        if raw_location is None:
+            utila.error(f'no `raw_location` for toc: `{title}`')
+            raw_location = 0  # TODO: REMOVE LATER
         raw_location = int(raw_location)
         try:
             current_arabic = int(pagenumber)

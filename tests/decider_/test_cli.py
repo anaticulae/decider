@@ -22,10 +22,9 @@ def test_cli_decider(cmd, testdir, monkeypatch):
     tests.run_decider(cmd, monkeypatch=monkeypatch)
 
 
-# yapf:disable
 @pytest.mark.parametrize('source', [
     pytest.param(tests.resources.BACHELOR37_GENERATED, id='bachelor37'),
-    pytest.param(tests.resources.BACHELOR76_GENERATED, id='bachelor76', marks=pytest.mark.xfail(reason='none int page')),
+    pytest.param(tests.resources.BACHELOR76_GENERATED, id='bachelor76'),
     pytest.param(tests.resources.DOCU_TWINE_GENERATED, id='docu'),
     pytest.param(tests.resources.LEFTRIGHT_GENERATED, id='leftright'),
     pytest.param(tests.resources.MASTER72_GENERATED, id='master72'),
@@ -33,7 +32,6 @@ def test_cli_decider(cmd, testdir, monkeypatch):
     pytest.param(tests.resources.MASTER98_GENERATED, id='master98'),
     pytest.param(tests.resources.MASTER99_GENERATED, id='master99'),
 ])
-# yapf:enable
 def test_cli_decider_example(source, testdir, monkeypatch):
     """Run decider"""
     cmd = f'-i {source}'
