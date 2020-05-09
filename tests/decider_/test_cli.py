@@ -10,7 +10,6 @@
 import pytest
 import utila
 
-import decider
 import tests
 import tests.resources
 
@@ -20,13 +19,7 @@ import tests.resources
 ])
 def test_cli_decider(cmd, testdir, monkeypatch):
     """Run decider"""
-    utila.run_command(
-        cmd,
-        process=decider.PROCESS,
-        main=decider.cli.main,
-        monkeypatch=monkeypatch,
-        success=True,
-    )
+    tests.run_decider(cmd, monkeypatch=monkeypatch)
 
 
 @pytest.mark.parametrize('source, pages', [
