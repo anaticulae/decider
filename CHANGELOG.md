@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.14.1
+
+### Fix
+
+* do not fail if raw_location was not parsed properly (c1311cc5d607)
+
 ## v0.14.0
 
 ### Feature
