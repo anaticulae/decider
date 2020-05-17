@@ -81,7 +81,15 @@ def extract():
     todo = []
     for item, page in items:
         utila.log(f'pages:{page:8} source:{item}')
-    todo.extend(hey.example.todolist(items, destination=destination))
+    todo.extend(
+        hey.example.todolist(
+            items,
+            destination=destination,
+            groupme=True,
+            sections=True,
+            words=True,
+            # doctextstyle=True, # TODO: ACTIVATE AFER PATCHING HEY
+        ))
     return todo
 
 
