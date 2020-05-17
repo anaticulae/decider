@@ -37,6 +37,7 @@ TECHNICAL24_PDF = os.path.join(TECHNICAL, 'page_24_color_figures_images.pdf')
 TECHNICAL24 = os.path.join(GENERATED, 'technical_page_24_color_figures_images')
 
 MASTER116_PDF = os.path.join(MASTER, 'page_116_images_toc_formular.pdf')
+MASTER116 = os.path.join(GENERATED, 'master_page_116_images_toc_formular')
 
 BACHELOR37_PDF = os.path.join(BACHELOR, 'page_37_tables.pdf')
 BACHELOR37 = os.path.join(GENERATED, 'bachelor_page_37_tables')
@@ -78,6 +79,7 @@ TODO = [
     (MASTER83_PDF, '0:10'),
     (MASTER98_PDF, '0:10'),
     (MASTER99_PDF, '0:10'),
+    (MASTER116_PDF, '0:10'),
     (PYPORTING_PDF, '0:10'),
     (TECHNICAL24_PDF, '0:10'),
 ]
@@ -94,29 +96,30 @@ GENERATE_NO_TITLE = [
 
 REQURIED_RESOURCES = [
     BACHELOR,
-    BACHELOR37_PDF,
     BACHELOR37,
-    BACHELOR76_PDF,
+    BACHELOR37_PDF,
     BACHELOR76,
+    BACHELOR76_PDF,
     BOOK,
-    DOCU_TWINE_PDF,
     DOCU_TWINE,
-    LEFTRIGHT_PDF,
+    DOCU_TWINE_PDF,
     LEFTRIGHT,
-    MASTER72_PDF,
-    MASTER72,
-    MASTER78_PDF,
-    MASTER78,
-    MASTER83_PDF,
-    MASTER83,
-    MASTER98_PDF,
-    MASTER98,
-    MASTER99_PDF,
-    MASTER99,
+    LEFTRIGHT_PDF,
+    MASTER116,
     MASTER116_PDF,
+    MASTER72,
+    MASTER72_PDF,
+    MASTER78,
+    MASTER78_PDF,
+    MASTER83,
+    MASTER83_PDF,
+    MASTER98,
+    MASTER98_PDF,
+    MASTER99,
+    MASTER99_PDF,
     NO_TITLE_PAGE,
-    TECHNICAL24_PDF,
     TECHNICAL24,
+    TECHNICAL24_PDF,
     TWINE_NO_TITLE_PAGE,
     TWINE_NO_TOC,
 ]
