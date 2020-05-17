@@ -220,4 +220,5 @@ def check_1384_toc_contains_quotation_mark(linter, toc: iamraw.Toc):
         index, title, raw_location = item
         location = protocol.Location.from_page(raw_location)
         linter(number=index, title=title, location=location)
-        assert 0
+        # TODO
+        # assert 0
