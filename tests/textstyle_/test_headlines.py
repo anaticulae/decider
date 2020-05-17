@@ -14,25 +14,27 @@ import tests.resources
 import tests.textstyle_
 
 
-def test_decider_headlines(testdir, monkeypatch):
-    master72 = tests.resources.MASTER72
+def decide_headline_style(source, pages, testdir, monkeypatch):
     tests.textstyle_.run(
-        f'--headlines -i {master72} --pages=2:20',
+        f'--headlines -i {source} --pages={pages}',
         monkeypatch=monkeypatch,
     )
     path = decider_textstyle.path.headlines(testdir.tmpdir)
     findings = protocol.load_result(path)
+    return findings
+
+
+def test_decider_headlines(testdir, monkeypatch):
+    source = tests.resources.MASTER72
+    pages = '2:20'
+    findings = decide_headline_style(source, pages, testdir, monkeypatch)
     # no font size error
     assert not findings
 
 
 def test_decider_headlines_master72_all(testdir, monkeypatch):
-    master72 = tests.resources.MASTER72
-    tests.textstyle_.run(
-        f'--headlines -i {master72} --pages=3:65',
-        monkeypatch=monkeypatch,
-    )
-    path = decider_textstyle.path.headlines(testdir.tmpdir)
-    findings = protocol.load_result(path)
+    source = tests.resources.MASTER72
+    pages = '3:65'
+    findings = decide_headline_style(source, pages, testdir, monkeypatch)
     # no font size error
     assert not findings
