@@ -8,7 +8,7 @@ decider_textstyle
 
 * [ ] judge text style of normal text block
 
-* [ ] judge text style of headlines h1, h2
+* [x] judge text style of headlines h1, h2
 
 * [ ] verify with five extracted examples
 

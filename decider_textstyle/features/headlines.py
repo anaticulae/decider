@@ -69,6 +69,8 @@ def linting(driver, linter: protocol.Linter):
         checker(call, driver)
 
 
+LEVEL_1 = 1  # TODO: HOLY VALUE
+
 SOLUTION_7500 = """\
 Hauptüberschrift falsch formatiert
 
@@ -76,31 +78,96 @@ Die Schriftgröße {%current%} weicht von der
 erwarteten Schriftgröße {%expected%} ab.
 """
 
-LEVEL_1 = 1  # TODO: HOLY VALUE
-
 
 def check_7500_check_h1_font_size(linter: callable, driver):
     # TODO: HANDLE HIGH NOTES CORRECLTY
-    headlines = driver.headlines
-    navigators = driver.navigators
-    if not headlines:
+    if not driver.headlines:
         # TODO: ADD LINTING TO SIGNAL TO DEVELOPER THAT THERE ARE NO HEADLINES?
         return
-    if not navigators:
+    if not driver.navigators:
         return
-    h1_fontsize_expected = driver.style.h1_size
-    if not h1_fontsize_expected:
+    if not driver.style.h1_size:
         return
+    validate_headline_size(
+        linter,
+        driver.navigators,
+        driver.headlines,
+        LEVEL_1,
+        driver.style.h1_size,
+    )
+
+
+LEVEL_2 = 2  # TODO: HOLY VALUE
+
+SOLUTION_7510 = """\
+Teilüberschrift falsch formatiert
+
+Die Schriftgröße {%current%} weicht von der
+erwarteten Schriftgröße {%expected%} ab.
+"""
+
+
+def check_7510_check_h2_font_size(linter: callable, driver):
+    # TODO: HANDLE HIGH NOTES CORRECLTY
+    if not driver.headlines:
+        return
+    if not driver.navigators:
+        return
+    if not driver.style.h2_size:
+        return
+    validate_headline_size(
+        linter,
+        driver.navigators,
+        driver.headlines,
+        LEVEL_2,
+        driver.style.h2_size,
+    )
+
+
+LEVEL_3 = 3  # TODO: HOLY VALUE
+
+SOLUTION_7520 = """\
+Unterüberschrift falsch formatiert
+
+Die Schriftgröße {%current%} weicht von der
+erwarteten Schriftgröße {%expected%} ab.
+"""
+
+
+def check_7520_check_h3_font_size(linter: callable, driver):
+    # TODO: HANDLE HIGH NOTES CORRECLTY
+    if not driver.headlines:
+        return
+    if not driver.navigators:
+        return
+    if not driver.style.h3_size:
+        return
+    validate_headline_size(
+        linter,
+        driver.navigators,
+        driver.headlines,
+        LEVEL_3,
+        driver.style.h3_size,
+    )
+
+
+def validate_headline_size(
+        linter,
+        navigators,
+        headlines,
+        level,
+        expected_size,
+):
     flats = utila.flatten(headlines)
-    h1_headlines = [item for item in flats if item.level == LEVEL_1]
-    for headline in h1_headlines:
+    headlines = [item for item in flats if item.level == level]
+    for headline in headlines:
         containers_ = containers(headline.container)
         navigator = utila.select_page(navigators, headline.page)
 
         lines_selected = [navigator[index] for index in containers_]
         textsizes_ = container_textsizes(lines_selected)
 
-        if all([item == h1_fontsize_expected for item in textsizes_]):
+        if all([item == expected_size for item in textsizes_]):
             continue
 
         # font size diff
@@ -111,8 +178,8 @@ def check_7500_check_h1_font_size(linter: callable, driver):
         )
         linter(
             location=location,
-            expected=h1_fontsize_expected,
-            current=textsizes_,
+            expected=expected_size,
+            current=', '.join([f'{item}' for item in textsizes_]),
         )
 
 

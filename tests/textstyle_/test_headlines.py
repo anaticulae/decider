@@ -24,3 +24,15 @@ def test_decider_headlines(testdir, monkeypatch):
     findings = protocol.load_result(path)
     # no font size error
     assert not findings
+
+
+def test_decider_headlines_master72_all(testdir, monkeypatch):
+    master72 = tests.resources.MASTER72
+    tests.textstyle_.run(
+        f'--headlines -i {master72} --pages=3:65',
+        monkeypatch=monkeypatch,
+    )
+    path = decider_textstyle.path.headlines(testdir.tmpdir)
+    findings = protocol.load_result(path)
+    # no font size error
+    assert not findings
