@@ -34,8 +34,8 @@ import tests.resources
     ],
     ids=[
         'master116',
-        'master_72_pages',
-        'master_78_pages',
+        'master72',
+        'master78',
         'twine_no_title',
     ])
 def titlepage(request, testdir):
