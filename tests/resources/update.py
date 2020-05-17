@@ -88,7 +88,7 @@ def extract():
             groupme=True,
             sections=True,
             words=True,
-            # doctextstyle=True, # TODO: ACTIVATE AFER PATCHING HEY
+            doctextstyle=True,
         ))
     return todo
 
