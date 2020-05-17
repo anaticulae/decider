@@ -7,6 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import doctextstyle
+import doctextstyle.cli
 import utila
 
 import decider_textstyle
@@ -16,7 +18,14 @@ DESCRIPTION = ''
 WORKPLAN = [
     utila.create_step(
         'headlines',
-        inputs=[],
+        inputs=[
+            utila.ResultFile(doctextstyle.PROCESS, 'textstyle'),
+            utila.ResultFile('words', 'headlines_headlines'),
+            utila.ResultFile('rawmaker', 'oneline_text_text'),
+            utila.ResultFile('rawmaker', 'oneline_text_positions'),
+            utila.ResultFile('rawmaker', 'fonts_header'),
+            utila.ResultFile('rawmaker', 'fonts_content'),
+        ],
         output=('user', 'developer'),
     ),
 ]
@@ -30,6 +39,7 @@ def main():
         config=utila.FeaturePackConfig(
             description=DESCRIPTION,
             multiprocessed=True,
+            pages=True,
             name=decider_textstyle.PROCESS,
             version=decider_textstyle.__version__,
         ),
