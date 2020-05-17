@@ -70,9 +70,9 @@ TWINE_NO_TITLE_PAGE = os.path.join(NO_TITLE_PAGE, 'docu_twine')
 TWINE_NO_TOC = os.path.join(NO_TOC, 'docu_twine')
 
 TODO = [
+    (BACHELOR76_PDF, ':'),
     (MASTER72_PDF, ':'),
     (BACHELOR37_PDF, '0:10'),
-    (BACHELOR76_PDF, '0:10'),
     (DOCU_TWINE_PDF, '0:10'),
     (LEFTRIGHT_PDF, '0:10'),
     (MASTER78_PDF, '0:10'),
