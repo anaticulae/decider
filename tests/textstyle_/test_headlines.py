@@ -38,3 +38,11 @@ def test_decider_headlines_master72_all(testdir, monkeypatch):
     findings = decide_headline_style(source, pages, testdir, monkeypatch)
     # no font size error
     assert not findings
+
+
+def test_decider_headlines_bachelor76(testdir, monkeypatch):
+    # TODO: EXTEND THIS TESTS, specify expected findings
+    source = tests.resources.BACHELOR76
+    pages = '4:67'
+    findings = decide_headline_style(source, pages, testdir, monkeypatch)
+    assert findings
