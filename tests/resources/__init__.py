@@ -28,92 +28,93 @@ DECIDER_FONTS = os.path.join(TEST_CONFIG_DATA, 'decider_fonts')
 assert os.path.exists(DECIDER_FONTS), DECIDER_FONTS
 
 DOCU = os.path.join(RESOURCES, 'docu')
-DOCU_TWINE = os.path.join(DOCU, 'twine.pdf')
+DOCU_TWINE_PDF = os.path.join(DOCU, 'twine.pdf')
 DOCU_TWINE_GENERATED = os.path.join(GENERATED, 'docu_twine')
 
 TECHNICAL = os.path.join(RESOURCES, 'technical')
-TECHNICAL24 = os.path.join(TECHNICAL, 'page_24_color_figures_images.pdf')
+TECHNICAL24_PDF = os.path.join(TECHNICAL, 'page_24_color_figures_images.pdf')
 TECHNICAL24_GENERATED = os.path.join(GENERATED, 'technical_page_24_color_figures_images') # yapf:disable
 
-MASTER_HUGE = os.path.join(MASTER, 'page_116_images_toc_formular.pdf')
+MASTER116_PDF = os.path.join(MASTER, 'page_116_images_toc_formular.pdf')
 
-BACHELOR37 = os.path.join(BACHELOR, 'page_37_tables.pdf')
+BACHELOR37_PDF = os.path.join(BACHELOR, 'page_37_tables.pdf')
 BACHELOR37_GENERATED = os.path.join(GENERATED, 'bachelor_page_37_tables')
 
-BACHELOR76 = os.path.join(BACHELOR, 'page76.pdf')
+BACHELOR76_PDF = os.path.join(BACHELOR, 'page76.pdf')
 BACHELOR76_GENERATED = os.path.join(GENERATED, 'bachelor_page76')
 
-MASTER72 = os.path.join(MASTER, 'page_72_noimages_toc.pdf')
+MASTER72_PDF = os.path.join(MASTER, 'page_72_noimages_toc.pdf')
 MASTER72_GENERATED = os.path.join(GENERATED, 'master_page_72_noimages_toc')
 
-MASTER78 = os.path.join(MASTER, 'page_78_images_toc.pdf')
+MASTER78_PDF = os.path.join(MASTER, 'page_78_images_toc.pdf')
 MASTER78_GENERATED = os.path.join(GENERATED, 'master_page_78_images_toc')
 
-MASTER83 = os.path.join(MASTER, 'page_83_noimages_toc.pdf')
+MASTER83_PDF = os.path.join(MASTER, 'page_83_noimages_toc.pdf')
 MASTER83_GENERATED = os.path.join(GENERATED, 'master_page_83_noimages_toc')
 
-MASTER98 = os.path.join(MASTER, 'page98.pdf')
+MASTER98_PDF = os.path.join(MASTER, 'page98.pdf')
 MASTER98_GENERATED = os.path.join(GENERATED, 'master_page98')
 
-MASTER99 = os.path.join(MASTER, 'page99.pdf')
+MASTER99_PDF = os.path.join(MASTER, 'page99.pdf')
 MASTER99_GENERATED = os.path.join(GENERATED, 'master_page99')
 
-PYPORTING = os.path.join(DOCU, 'howto_pyporting.pdf')
+PYPORTING_PDF = os.path.join(DOCU, 'howto_pyporting.pdf')
 PYPORTING_GENERATED = os.path.join(GENERATED, 'docu_howto_pyporting')
 
-LEFTRIGHT = os.path.join(BOOK, 'leftright.pdf')
+LEFTRIGHT_PDF = os.path.join(BOOK, 'leftright.pdf')
 LEFTRIGHT_GENERATED = os.path.join(GENERATED, 'book_leftright')
 
 TWINE_NO_TITLE_PAGE = os.path.join(NO_TITLE_PAGE, 'docu_twine')
 TWINE_NO_TOC = os.path.join(NO_TOC, 'docu_twine')
 
 TODO = [
-    (MASTER72, ':'),
-    (BACHELOR37, '0:10'),
-    (BACHELOR76, '0:10'),
-    (DOCU_TWINE, '0:10'),
-    (LEFTRIGHT, '0:10'),
-    (MASTER78, '0:10'),
-    (MASTER83, '0:10'),
-    (MASTER98, '0:10'),
-    (MASTER99, '0:10'),
-    (PYPORTING, '0:10'),
-    (TECHNICAL24, '0:10'),
+    (MASTER72_PDF, ':'),
+    (BACHELOR37_PDF, '0:10'),
+    (BACHELOR76_PDF, '0:10'),
+    (DOCU_TWINE_PDF, '0:10'),
+    (LEFTRIGHT_PDF, '0:10'),
+    (MASTER78_PDF, '0:10'),
+    (MASTER83_PDF, '0:10'),
+    (MASTER98_PDF, '0:10'),
+    (MASTER99_PDF, '0:10'),
+    (PYPORTING_PDF, '0:10'),
+    (TECHNICAL24_PDF, '0:10'),
 ]
 
 GENERATE_NO_TOC = [
-    DOCU_TWINE,
-    LEFTRIGHT,
+    DOCU_TWINE_PDF,
+    LEFTRIGHT_PDF,
 ]
 
 GENERATE_NO_TITLE = [
-    DOCU_TWINE,
-    LEFTRIGHT,
+    DOCU_TWINE_PDF,
+    LEFTRIGHT_PDF,
 ]
 
 REQURIED_RESOURCES = [
     BACHELOR,
-    BACHELOR37,
-    BACHELOR76,
+    BACHELOR37_PDF,
+    BACHELOR37_GENERATED,
+    BACHELOR76_PDF,
     BACHELOR76_GENERATED,
     BOOK,
-    DOCU_TWINE,
+    DOCU_TWINE_PDF,
     DOCU_TWINE_GENERATED,
-    LEFTRIGHT,
+    LEFTRIGHT_PDF,
     LEFTRIGHT_GENERATED,
-    MASTER72,
+    MASTER72_PDF,
     MASTER72_GENERATED,
-    MASTER78,
+    MASTER78_PDF,
     MASTER78_GENERATED,
-    MASTER83,
+    MASTER83_PDF,
     MASTER83_GENERATED,
-    MASTER98,
+    MASTER98_PDF,
     MASTER98_GENERATED,
-    MASTER99,
+    MASTER99_PDF,
     MASTER99_GENERATED,
-    MASTER_HUGE,
+    MASTER116_PDF,
     NO_TITLE_PAGE,
-    TECHNICAL24,
+    TECHNICAL24_PDF,
     TECHNICAL24_GENERATED,
     TWINE_NO_TITLE_PAGE,
     TWINE_NO_TOC,

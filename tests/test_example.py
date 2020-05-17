@@ -20,8 +20,8 @@ def test_example_extract(testdir):
     root = str(testdir)
     generated = os.path.join(root, 'generated')
     pdfs = [
-        tests.resources.DOCU_TWINE,
-        tests.resources.TECHNICAL24,
+        tests.resources.DOCU_TWINE_PDF,
+        tests.resources.TECHNICAL24_PDF,
     ]
     decider.example.extract(pdfs, generated, pages='0:3')
     assert os.path.exists(generated), str(generated)

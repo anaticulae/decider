@@ -63,7 +63,7 @@ TECHNICAL24_TOO_DEEP = 14
             TECHNICAL24_INVALID_CHILDREN,
             id='technical24',
         ),
-        # TODO: MASTER78 PARSER IS BUGGY RIGHT NOW
+        # TODO: MASTER78_PDF PARSER IS BUGGY RIGHT NOW
         pytest.param(
             tests.resources.MASTER78_GENERATED,
             3,

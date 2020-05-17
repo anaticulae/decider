@@ -21,7 +21,7 @@ import tests.resources
 
 @pytest.fixture(
     params=[
-        # (tests.resources.MASTER_HUGE, [
+        # (tests.resources.MASTER116_PDF, [
         #     decider.features.titlepage.MISSING_THESIS_TYPE_ID,
         # ]),
         (
@@ -42,7 +42,7 @@ import tests.resources
         ),
     ],
     ids=[
-        # 'MASTER_HUGE',
+        # 'MASTER116_PDF',
         'master_72_pages',
         'master_78_pages',
         'twine_no_title',
