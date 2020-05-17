@@ -41,7 +41,7 @@ def test_toc_extraction(monkeypatch):  # pylint:disable=W0621
 
     with monkeypatch.context() as context:
         context.setattr(dtl, 'MAX_TOC_DEEPNESS', 2)
-        failures = lint(tests.resources.TECHNICAL24_GENERATED)
+        failures = lint(tests.resources.TECHNICAL24)
     failures = len(failures)
     assert failures >= expected_failures, str(failures)
 
@@ -59,20 +59,20 @@ TECHNICAL24_TOO_DEEP = 14
     'source, invalids',
     [
         pytest.param(
-            tests.resources.TECHNICAL24_GENERATED,
+            tests.resources.TECHNICAL24,
             TECHNICAL24_INVALID_CHILDREN,
             id='technical24',
         ),
         # TODO: MASTER78_PDF PARSER IS BUGGY RIGHT NOW
         pytest.param(
-            tests.resources.MASTER78_GENERATED,
+            tests.resources.MASTER78,
             3,
             id='master78',
             marks=pytest.mark.xfail(
                 reason='investigate here, expected seems not to be correct'),
         ),
         pytest.param(
-            tests.resources.MASTER72_GENERATED,
+            tests.resources.MASTER72,
             0,
             id='master72',
         ),
@@ -85,12 +85,12 @@ def test_toc_validate_children(source, invalids):
 
 @pytest.mark.parametrize('source, too_deep', [
     pytest.param(
-        tests.resources.TECHNICAL24_GENERATED,
+        tests.resources.TECHNICAL24,
         TECHNICAL24_TOO_DEEP,
         id='technical24',
     ),
     pytest.param(
-        tests.resources.MASTER72_GENERATED,
+        tests.resources.MASTER72,
         6,
         id='master72',
     ),

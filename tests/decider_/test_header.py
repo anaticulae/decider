@@ -15,7 +15,7 @@ import tests.resources
 
 def test_header_work():
     headerfooter = iamraw.path.headerfooters(
-        tests.resources.TECHNICAL24_GENERATED)
+        tests.resources.TECHNICAL24)
 
     user, _ = decider.features.header.work(headerfooter)
     assert len(user) > 200, user

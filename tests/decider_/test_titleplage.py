@@ -25,13 +25,13 @@ import tests.resources
         #     decider.features.titlepage.MISSING_THESIS_TYPE_ID,
         # ]),
         (
-            tests.resources.MASTER72_GENERATED,
+            tests.resources.MASTER72,
             [
                 1221,
             ],
         ),
         (
-            tests.resources.MASTER78_GENERATED,
+            tests.resources.MASTER78,
             [],
         ),
         (

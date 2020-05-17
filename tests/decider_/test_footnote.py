@@ -23,7 +23,7 @@ import tests.resources
 @pytest.fixture
 def example():
     loaded = decider.footnote.load_frompath(
-        tests.resources.MASTER72_GENERATED,
+        tests.resources.MASTER72,
         pages=(3),
     )
     return loaded[0]
@@ -46,7 +46,7 @@ def test_footnotes_example(example):  # pylint:disable=W0621
 def test_cli_footnotes(testdir, monkeypatch):  ## pylint:disable=W0621
     root = str(testdir)
 
-    cmd = ['-i', tests.resources.MASTER72_GENERATED, '-o', root]
+    cmd = ['-i', tests.resources.MASTER72, '-o', root]
     tests.run_decider(cmd, monkeypatch)
 
     outpath = os.path.join(
@@ -101,14 +101,14 @@ def empty(result):
 
 
 def test_footnotes_work_disable_all(monkeypatch):
-    footerheader = iamraw.path.headerfooters(tests.resources.MASTER72_GENERATED)
+    footerheader = iamraw.path.headerfooters(tests.resources.MASTER72)
     with active_ids(monkeypatch, ids=[]):
         user, _ = decider.features.footnote.work(footerheader)
     assert empty(user), f'not all events are disabled:\n {user}'
 
 
 def test_footnotes_work_highnote_rise(monkeypatch):
-    footerheader = iamraw.path.headerfooters(tests.resources.MASTER72_GENERATED)
+    footerheader = iamraw.path.headerfooters(tests.resources.MASTER72)
     with active_ids(
             monkeypatch,
             ids=[2003],
@@ -124,7 +124,7 @@ def test_footnotes_work_highnote_rise(monkeypatch):
 
 def test_footnotes_work_highnote_size(monkeypatch):
     # TODO: LOOK FOR AN EXAMPLE WITH WRONG HIGHNOTE SIZE
-    footerheader = iamraw.path.headerfooters(tests.resources.MASTER72_GENERATED)
+    footerheader = iamraw.path.headerfooters(tests.resources.MASTER72)
     with active_ids(
             monkeypatch,
             ids=[2004],
@@ -139,7 +139,7 @@ def test_footnotes_work_highnote_size(monkeypatch):
 
 
 def test_footnotes_work_highnote_font_family(monkeypatch):
-    footerheader = iamraw.path.headerfooters(tests.resources.MASTER72_GENERATED)
+    footerheader = iamraw.path.headerfooters(tests.resources.MASTER72)
     with active_ids(
             monkeypatch,
             ids=[2005],

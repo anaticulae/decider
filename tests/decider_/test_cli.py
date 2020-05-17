@@ -23,14 +23,14 @@ def test_cli_decider(cmd, testdir, monkeypatch):
 
 
 @pytest.mark.parametrize('source', [
-    pytest.param(tests.resources.BACHELOR37_GENERATED, id='bachelor37'),
-    pytest.param(tests.resources.BACHELOR76_GENERATED, id='bachelor76'),
-    pytest.param(tests.resources.DOCU_TWINE_GENERATED, id='docu'),
-    pytest.param(tests.resources.LEFTRIGHT_GENERATED, id='leftright'),
-    pytest.param(tests.resources.MASTER72_GENERATED, id='master72'),
-    pytest.param(tests.resources.MASTER78_GENERATED, id='master78'),
-    pytest.param(tests.resources.MASTER98_GENERATED, id='master98'),
-    pytest.param(tests.resources.MASTER99_GENERATED, id='master99'),
+    pytest.param(tests.resources.BACHELOR37, id='bachelor37'),
+    pytest.param(tests.resources.BACHELOR76, id='bachelor76'),
+    pytest.param(tests.resources.DOCU_TWINE, id='docu'),
+    pytest.param(tests.resources.LEFTRIGHT, id='leftright'),
+    pytest.param(tests.resources.MASTER72, id='master72'),
+    pytest.param(tests.resources.MASTER78, id='master78'),
+    pytest.param(tests.resources.MASTER98, id='master98'),
+    pytest.param(tests.resources.MASTER99, id='master99'),
 ])
 def test_cli_decider_example(source, testdir, monkeypatch):
     """Run decider"""
@@ -40,22 +40,22 @@ def test_cli_decider_example(source, testdir, monkeypatch):
 
 @pytest.mark.parametrize('source, pages', [
     pytest.param(
-        tests.resources.TECHNICAL24_GENERATED,
+        tests.resources.TECHNICAL24,
         '1',
         id='technical24',
     ),
     pytest.param(
-        tests.resources.TECHNICAL24_GENERATED,
+        tests.resources.TECHNICAL24,
         '0:5',
         id='technical24',
     ),
     pytest.param(
-        tests.resources.MASTER78_GENERATED,
+        tests.resources.MASTER78,
         '0:5',
         id='master78',
     ),
     pytest.param(
-        tests.resources.MASTER72_GENERATED,
+        tests.resources.MASTER72,
         '0:5',
         id='master72',
     ),

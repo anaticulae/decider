@@ -33,7 +33,7 @@ def test_pages_work(monkeypatch):
 
     with monkeypatch.context() as context:
         context.setattr(serializeraw, 'load_headerfooter', scrumble_load)
-        result = user_work(tests.resources.TECHNICAL24_GENERATED)
+        result = user_work(tests.resources.TECHNICAL24)
     assert len(result) == 1, result
     assert result[0].solution.title
     assert result[0].solution.description

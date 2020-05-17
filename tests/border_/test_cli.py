@@ -58,7 +58,7 @@ def run_border_detector(
 
 
 @pytest.mark.parametrize('source', [
-    pytest.param(tests.resources.TECHNICAL24_GENERATED, id='technical24'),
+    pytest.param(tests.resources.TECHNICAL24, id='technical24'),
 ])
 def test_border_cli_decider_simple(source, testdir, monkeypatch):
     root = testdir.tmpdir
@@ -69,8 +69,8 @@ def test_border_cli_decider_simple(source, testdir, monkeypatch):
 
 
 @pytest.mark.parametrize('source, validate', [
-    pytest.param(tests.resources.DOCU_TWINE_GENERATED, [4, 4], id='twine'),
-    pytest.param(tests.resources.MASTER78_GENERATED, [6, 8], id='master78'),
+    pytest.param(tests.resources.DOCU_TWINE, [4, 4], id='twine'),
+    pytest.param(tests.resources.MASTER78, [6, 8], id='master78'),
 ])
 @utila.skip_longrun
 def test_border_cli_decider_list(
@@ -94,7 +94,7 @@ def test_border_cli_decider_list(
 
 @pytest.mark.parametrize('source, validate', [
     pytest.param(
-        tests.resources.LEFTRIGHT_GENERATED,
+        tests.resources.LEFTRIGHT,
         validate_leftright,
         id='leftright',
     ),

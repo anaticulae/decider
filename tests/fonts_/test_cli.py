@@ -21,7 +21,7 @@ def test_main_fonts(testdir, monkeypatch):  ## pylint:disable=W0621
     # copy ugly font config
     utila.copy_content(tests.resources.DECIDER_FONTS, root)
 
-    command = ['-i', tests.resources.DOCU_TWINE_GENERATED, '-o', root]
+    command = ['-i', tests.resources.DOCU_TWINE, '-o', root]
     utila.run_command(
         command,
         process=fonts.cli.PROCESS,

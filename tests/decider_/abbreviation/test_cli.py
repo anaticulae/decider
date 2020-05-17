@@ -15,7 +15,7 @@ import tests.resources
 
 @pytest.mark.parametrize('source, pages', [
     pytest.param(
-        tests.resources.BACHELOR37_GENERATED,
+        tests.resources.BACHELOR37,
         '1',
         id='bachelor37',
     ),
@@ -33,7 +33,7 @@ def test_cli_groupme_abbreviation_table(source, pages, testdir, monkeypatch):
 
 @pytest.mark.parametrize('source, pages', [
     pytest.param(
-        tests.resources.BACHELOR37_GENERATED,
+        tests.resources.BACHELOR37,
         '1',
         id='bachelor37',
     ),

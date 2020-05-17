@@ -14,7 +14,7 @@ import tests.resources
 
 
 def test_duplicated_words():
-    source = tests.resources.MASTER98_GENERATED
+    source = tests.resources.MASTER98
     toc = serializeraw.load_toc(source)
     assert toc
     validated = decider.toc.duplicated.validate(toc)

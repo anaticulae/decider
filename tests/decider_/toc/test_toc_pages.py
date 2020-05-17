@@ -13,14 +13,14 @@ import tests.resources
 
 
 def test_toc_pages_validate():
-    toc = tests.tableofcontent(tests.resources.TECHNICAL24_GENERATED)
+    toc = tests.tableofcontent(tests.resources.TECHNICAL24)
     validated = dtp.validate(toc)  # pylint:disable=W0612
 
     assert validated == [], validated
 
 
 def test_toc_pages_validate_with_errors():
-    toc = tests.tableofcontent(tests.resources.TECHNICAL24_GENERATED)
+    toc = tests.tableofcontent(tests.resources.TECHNICAL24)
 
     # introduce some errors
     toc.children[1].page = 10

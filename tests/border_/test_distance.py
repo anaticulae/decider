@@ -21,8 +21,8 @@ import tests.resources
     (5, 6),
 ])
 def test_border_distances_linting(page, expected):
-    area = groupme.path.area(tests.resources.PYPORTING_GENERATED)
-    distance = groupme.path.distance(tests.resources.PYPORTING_GENERATED)
+    area = groupme.path.area(tests.resources.PYPORTING)
+    distance = groupme.path.distance(tests.resources.PYPORTING)
 
     dumped_findings = border.features.distance.work(area, distance, pages=page)
     findings = protocol.load_result(dumped_findings[0])

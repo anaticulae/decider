@@ -32,7 +32,7 @@ def run_textflow(
 def test_lineendings_master83_page6(testdir, monkeypatch):  # pylint:disable=W0621
     root = testdir.tmpdir
     run_textflow(
-        tests.resources.MASTER83_GENERATED,
+        tests.resources.MASTER83,
         pages='6',
         lineending=True,
         quotation=True,
