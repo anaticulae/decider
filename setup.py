@@ -64,6 +64,8 @@ if __name__ == "__main__":
             'decider_textflow',
             'decider_textflow.features',
             'decider_textflow.quotation',
+            'decider_textstyle',
+            'decider_textstyle.features',
             'fonts',
             'fonts.config',
             'fonts.features',
@@ -74,6 +76,7 @@ if __name__ == "__main__":
                 'decider_border = border.cli:main',
                 'decider_fonts = fonts.cli:main',
                 'decider_textflow = decider_textflow.cli:main',
+                'decider_textstyle = decider_textstyle.cli:main',
             ],
         },
     )
