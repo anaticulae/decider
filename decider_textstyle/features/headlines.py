@@ -52,8 +52,12 @@ def work(
         headlines=headlines,
         style=expected,
     )
-
-    linting(data, linter)
+    if not headlines:
+        utila.error('no headlines given')
+    if not navigators:
+        utila.error('no navigators given')
+    if navigators and headlines:
+        linting(data, linter)
     result = linter.result(unique=True)
     user, developer = protocol.dump_result(result)
     return user, developer
@@ -81,11 +85,6 @@ erwarteten Schriftgröße {%expected%} ab.
 
 def check_7500_check_h1_font_size(linter: callable, driver):
     # TODO: HANDLE HIGH NOTES CORRECLTY
-    if not driver.headlines:
-        # TODO: ADD LINTING TO SIGNAL TO DEVELOPER THAT THERE ARE NO HEADLINES?
-        return
-    if not driver.navigators:
-        return
     if not driver.style.h1_size:
         return
     validate_headline_size(
@@ -109,10 +108,6 @@ erwarteten Schriftgröße {%expected%} ab.
 
 def check_7510_check_h2_font_size(linter: callable, driver):
     # TODO: HANDLE HIGH NOTES CORRECLTY
-    if not driver.headlines:
-        return
-    if not driver.navigators:
-        return
     if not driver.style.h2_size:
         return
     validate_headline_size(
@@ -136,10 +131,6 @@ erwarteten Schriftgröße {%expected%} ab.
 
 def check_7520_check_h3_font_size(linter: callable, driver):
     # TODO: HANDLE HIGH NOTES CORRECLTY
-    if not driver.headlines:
-        return
-    if not driver.navigators:
-        return
     if not driver.style.h3_size:
         return
     validate_headline_size(
