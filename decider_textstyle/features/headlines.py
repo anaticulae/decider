@@ -7,9 +7,9 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import collections
 import contextlib
 import functools
+import string
 import typing
 
 import doctextstyle.serialize
@@ -49,6 +49,7 @@ def work(
 
     data = protocol.driver(
         navigators=navigators,
+        fontstore=fontstore,
         headlines=headlines,
         style=expected,
     )
@@ -73,20 +74,30 @@ def linting(driver, linter: protocol.Linter):
         checker(call, driver)
 
 
-LEVEL_1 = 1  # TODO: HOLY VALUE
-
-SOLUTION_7500 = """\
-Hauptüberschrift falsch formatiert
+FONT_SIZE_ERROR = string.Template("""\
+$title falsch formatiert
 
 Die Schriftgröße {%current%} weicht von der
 erwarteten Schriftgröße {%expected%} ab.
-"""
+""")
+
+FONT_FAMILY_ERROR = string.Template("""\
+$title falsch formatiert
+
+Die Schriftart {%current%} weicht von der
+erwarteten Schriftart {%expected%} ab.
+""")
+
+LEVEL_1 = 1  # TODO: HOLY VALUE
+
+SOLUTION_7500 = FONT_SIZE_ERROR.substitute(title='Hauptüberschrift')
 
 
 def check_7500_check_h1_font_size(linter: callable, driver):
     # TODO: HANDLE HIGH NOTES CORRECLTY
     if not driver.style.h1_size:
         return
+
     validate_headline_size(
         linter,
         driver.navigators,
@@ -96,20 +107,33 @@ def check_7500_check_h1_font_size(linter: callable, driver):
     )
 
 
+SOLUTION_7501 = FONT_FAMILY_ERROR.substitute(title='Hauptüberschrift')
+
+
+def check_7501_check_h1_font_family(linter: callable, driver):
+    if not driver.style.h1_family:
+        return
+
+    validate_headline_family(
+        linter,
+        driver.navigators,
+        driver.fontstore,
+        driver.headlines,
+        LEVEL_1,
+        driver.style.h1_family,
+    )
+
+
 LEVEL_2 = 2  # TODO: HOLY VALUE
 
-SOLUTION_7510 = """\
-Teilüberschrift falsch formatiert
-
-Die Schriftgröße {%current%} weicht von der
-erwarteten Schriftgröße {%expected%} ab.
-"""
+SOLUTION_7510 = FONT_SIZE_ERROR.substitute(title='Teilüberschrift')
 
 
 def check_7510_check_h2_font_size(linter: callable, driver):
     # TODO: HANDLE HIGH NOTES CORRECLTY
     if not driver.style.h2_size:
         return
+
     validate_headline_size(
         linter,
         driver.navigators,
@@ -119,26 +143,56 @@ def check_7510_check_h2_font_size(linter: callable, driver):
     )
 
 
+SOLUTION_7511 = FONT_FAMILY_ERROR.substitute(title='Teilüberschrift')
+
+
+def check_7511_check_h2_font_family(linter: callable, driver):
+    if not driver.style.h2_family:
+        return
+
+    validate_headline_family(
+        linter,
+        driver.navigators,
+        driver.fontstore,
+        driver.headlines,
+        LEVEL_2,
+        driver.style.h2_family,
+    )
+
+
 LEVEL_3 = 3  # TODO: HOLY VALUE
 
-SOLUTION_7520 = """\
-Unterüberschrift falsch formatiert
-
-Die Schriftgröße {%current%} weicht von der
-erwarteten Schriftgröße {%expected%} ab.
-"""
+SOLUTION_7520 = FONT_SIZE_ERROR.substitute(title='Unterüberschrift')
 
 
 def check_7520_check_h3_font_size(linter: callable, driver):
     # TODO: HANDLE HIGH NOTES CORRECLTY
     if not driver.style.h3_size:
         return
+
     validate_headline_size(
         linter,
         driver.navigators,
         driver.headlines,
         LEVEL_3,
         driver.style.h3_size,
+    )
+
+
+SOLUTION_7521 = FONT_FAMILY_ERROR.substitute(title='Unterüberschrift')
+
+
+def check_7521_check_h3_font_family(linter: callable, driver):
+    if not driver.style.h3_family:
+        return
+
+    validate_headline_family(
+        linter,
+        driver.navigators,
+        driver.fontstore,
+        driver.headlines,
+        LEVEL_3,
+        driver.style.h3_family,
     )
 
 
@@ -174,6 +228,43 @@ def validate_headline_size(
         )
 
 
+def validate_headline_family(
+        linter,
+        navigators,
+        fontstore,
+        headlines,
+        level,
+        expected_family,
+):
+    flats = utila.flatten(headlines)
+    headlines = [item for item in flats if item.level == level]
+    expected_family = fontstore[expected_family].name
+    for headline in headlines:
+        containers_ = containers(headline.container)
+        navigator = utila.select_page(navigators, headline.page)
+
+        lines_selected = [navigator[index] for index in containers_]
+        textfamily_ = [
+            fontstore[item].name
+            for item in container_textfamily(lines_selected)
+        ]
+
+        if all([item == expected_family for item in textfamily_]):
+            continue
+
+        # font family diff
+        location = protocol.RangedLocation(
+            page=headline.page,
+            line=containers_[0],
+            line_end=containers_[-1],
+        )
+        linter(
+            location=location,
+            expected=expected_family,
+            current=', '.join([f'{item}' for item in textfamily_]),
+        )
+
+
 def containers(item) -> tuple:
     with contextlib.suppress(TypeError):
         return tuple(range(item[0], item[1] + 1))
@@ -189,8 +280,23 @@ def container_textsizes(items):
     return result
 
 
-def textsizes(style: texmex.TextInfo) -> float:
+def container_textfamily(items):
+    result = []
+    for item in items:
+        family = textfamily(item.style)
+        result.extend(family)
+    result = sorted(result)
+    return result
+
+
+def textsizes(style: texmex.TextInfo) -> utila.Floats:
     sizes = [item.size for item in style.content]
     sizes = utila.make_unique(sizes)
     result = sorted(sizes)
     return result
+
+
+def textfamily(style: texmex.TextInfo) -> utila.Ints:
+    fonts = [item.font for item in style.content]
+    fonts = utila.make_unique(fonts)
+    return fonts
