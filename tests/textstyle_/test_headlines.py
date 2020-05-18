@@ -45,6 +45,5 @@ def test_decider_headlines_bachelor76(testdir, monkeypatch):
     source = tests.resources.BACHELOR76
     pages = '4:67'
     findings = decide_headline_style(source, pages, testdir, monkeypatch)
-    expected = 49  # not correct, but indicates that algo changed
-
+    expected = 93  # not correct, but indicates that algo changed
     assert len(findings) == expected

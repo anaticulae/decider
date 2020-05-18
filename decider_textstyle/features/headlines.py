@@ -12,11 +12,14 @@ import functools
 import string
 import typing
 
+import doctextstyle.parser
 import doctextstyle.serialize
 import protocol
 import serializeraw
 import texmex
 import utila
+
+MAX_HEADLINE_DIFF = 2.0  # TODO: HOLY VALUE
 
 
 def work(
@@ -88,6 +91,20 @@ Die Schriftart {%current%} weicht von der
 erwarteten Schriftart {%expected%} ab.
 """)
 
+FONT_DISTANCE_BEFORE_ERROR = string.Template("""\
+$title falsch formatiert
+
+Der Abstand vor der $title {%current%} weicht vom
+erwarteten Abstand {%expected%} ab.
+""")
+
+FONT_DISTANCE_AFTER_ERROR = string.Template("""\
+$title falsch formatiert
+
+Der Abstand nach der $title {%current%} weicht vom
+erwarteten Abstand {%expected%} ab.
+""")
+
 LEVEL_1 = 1  # TODO: HOLY VALUE
 
 SOLUTION_7500 = FONT_SIZE_ERROR.substitute(title='Hauptüberschrift')
@@ -121,6 +138,40 @@ def check_7501_check_h1_font_family(linter: callable, driver):
         driver.headlines,
         LEVEL_1,
         driver.style.h1_family,
+    )
+
+
+SOLUTION_7502 = FONT_DISTANCE_BEFORE_ERROR.substitute(title='Hauptüberschrift')
+
+
+def check_7502_check_h1_distance_before(linter: callable, driver):
+    if not driver.style.h1_before:
+        return
+
+    validate_headline_distance(
+        linter,
+        driver.navigators,
+        driver.headlines,
+        LEVEL_1,
+        driver.style.h1_before,
+        check_before=True,
+    )
+
+
+SOLUTION_7503 = FONT_DISTANCE_AFTER_ERROR.substitute(title='Hauptüberschrift')
+
+
+def check_7503_check_h1_distance_after(linter: callable, driver):
+    if not driver.style.h1_after:
+        return
+
+    validate_headline_distance(
+        linter,
+        driver.navigators,
+        driver.headlines,
+        LEVEL_1,
+        driver.style.h1_after,
+        check_before=False,
     )
 
 
@@ -160,6 +211,40 @@ def check_7511_check_h2_font_family(linter: callable, driver):
     )
 
 
+SOLUTION_7512 = FONT_DISTANCE_BEFORE_ERROR.substitute(title='Teilüberschrift')
+
+
+def check_7512_check_h2_distance_before(linter: callable, driver):
+    if not driver.style.h2_before:
+        return
+
+    validate_headline_distance(
+        linter,
+        driver.navigators,
+        driver.headlines,
+        LEVEL_2,
+        driver.style.h2_before,
+        check_before=True,
+    )
+
+
+SOLUTION_7513 = FONT_DISTANCE_AFTER_ERROR.substitute(title='Teilüberschrift')
+
+
+def check_7513_check_h2_distance_after(linter: callable, driver):
+    if not driver.style.h2_after:
+        return
+
+    validate_headline_distance(
+        linter,
+        driver.navigators,
+        driver.headlines,
+        LEVEL_2,
+        driver.style.h2_after,
+        check_before=False,
+    )
+
+
 LEVEL_3 = 3  # TODO: HOLY VALUE
 
 SOLUTION_7520 = FONT_SIZE_ERROR.substitute(title='Unterüberschrift')
@@ -193,6 +278,40 @@ def check_7521_check_h3_font_family(linter: callable, driver):
         driver.headlines,
         LEVEL_3,
         driver.style.h3_family,
+    )
+
+
+SOLUTION_7522 = FONT_DISTANCE_BEFORE_ERROR.substitute(title='Unterüberschrift')
+
+
+def check_7522_check_h3_distance_before(linter: callable, driver):
+    if not driver.style.h3_before:
+        return
+
+    validate_headline_distance(
+        linter,
+        driver.navigators,
+        driver.headlines,
+        LEVEL_3,
+        driver.style.h3_before,
+        check_before=True,
+    )
+
+
+SOLUTION_7523 = FONT_DISTANCE_AFTER_ERROR.substitute(title='Unterüberschrift')
+
+
+def check_7523_check_h3_distance_after(linter: callable, driver):
+    if not driver.style.h3_after:
+        return
+
+    validate_headline_distance(
+        linter,
+        driver.navigators,
+        driver.headlines,
+        LEVEL_3,
+        driver.style.h3_after,
+        check_before=False,
     )
 
 
@@ -262,6 +381,47 @@ def validate_headline_family(
             location=location,
             expected=expected_family,
             current=', '.join([f'{item}' for item in textfamily_]),
+        )
+
+
+def validate_headline_distance(
+        linter,
+        navigators,
+        headlines,
+        level,
+        expected_distance,
+        check_before: bool = True,
+):
+    flats = utila.flatten(headlines)
+    headlines = [item for item in flats if item.level == level]
+    for headline in headlines:
+        containers_ = containers(headline.container)
+        navigator = utila.select_page(navigators, headline.page)
+        distances = doctextstyle.parser.textdistances(navigator)
+
+        if check_before:
+            before = distances[containers_[0]][0]
+            if before is None:
+                continue
+            if utila.near(before, expected_distance, diff=MAX_HEADLINE_DIFF):
+                continue
+        else:
+            after = distances[containers_[-1]][1]
+            if after is None:
+                continue
+            if utila.near(after, expected_distance, diff=MAX_HEADLINE_DIFF):
+                continue
+
+        # distance diff
+        location = protocol.RangedLocation(
+            page=headline.page,
+            line=containers_[0],
+            line_end=containers_[-1],
+        )
+        linter(
+            location=location,
+            expected=expected_distance,
+            current=before if check_before else after,
         )
 
 
