@@ -2,6 +2,22 @@
 
 Every noteable change is logged here.
 
+## v0.15.0
+
+### Feature
+
+* add headline distance before and after linter (89bb8cf9d3ea)
+* add headline font family validator (7a0825396423)
+* add textstyle decider to example generator (7867ae90926e)
+* add h2, h3 text size validator (da280331a248)
+* add font style headline h1 linter (f10668fbc6e5)
+* add basic textstyle cli structure and testing (557349ca9b0d)
+
+### Fix
+
+* verify best selection algo/parser (d530bf36cec0)
+* enable master116 title page test (a2cc9cc3bdbc)
+
 ## v0.14.1
 
 ### Fix
