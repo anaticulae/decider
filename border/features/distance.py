@@ -45,11 +45,7 @@ def work(
     return user, developer
 
 
-def linting(
-        areas,
-        distances,
-        linter: protocol.Linter,
-):
+def linting(areas, distances, linter: protocol.Linter):
     checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
         for page in distances:
