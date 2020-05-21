@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.15.2
+
+### Feature
+
+* enable selective page for every resource (431e0aaec6af)
+
 ## v0.15.1
 
 ### Feature
