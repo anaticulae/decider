@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.15.3
+
+### Fix
+
+* fix check for (pdf, page)-pattern (723fd05b6195)
+
 ## v0.15.2
 
 ### Feature
