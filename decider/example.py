@@ -32,6 +32,8 @@ def extract(
     Raises:
         Exception: if Exception occurs while extracting file
     """
+    assert len(files) >= 2, ('require at least to files to '
+                             'determine output file name correctly')
     for pdf in files:
         assert pdf.endswith('.pdf') and os.path.exists(pdf), str(pdf)
 
