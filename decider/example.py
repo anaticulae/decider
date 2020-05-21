@@ -46,7 +46,9 @@ def extract(
         utila.assert_success(completed)
         utila.log(f'complete: {job[0:100]}')
 
-    generated = generate(files, destination, pages=pages)
+    # add selected page to every file
+    files = [(item, pages) for item in files]
+    generated = generate(files, destination)
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=worker) as executor:
         futures = {executor.submit(run_job, pdf): pdf for pdf in generated}
@@ -59,10 +61,13 @@ def extract(
                 raise
 
 
-def generate(files: list, outpath: str, pages: str) -> list:
+def generate(files: list, outpath: str) -> list:
     todo = []
-    names = utila.simplify_testfile_names(files, sort=False)
-    for inpath, output in zip(files, names):
+    names = utila.simplify_testfile_names(
+        files=[item for item, _ in files],  # remove page attribute
+        sort=False,
+    )
+    for (inpath, pages), output in zip(files, names):
         outdir = os.path.join(outpath, output)
         job = hey.example.create_job(
             inpath,
