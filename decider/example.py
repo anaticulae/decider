@@ -27,7 +27,8 @@ def extract(
     Args:
         files(list): list of files to work on
         destination(path): create folder for every file and save result
-        pages(str): range of selected pages
+        pages(str): default selection if `file` does not provide `page`
+                    selection
         worker(int): number of threads to extract examples
     Raises:
         Exception: if Exception occurs while extracting file
@@ -46,8 +47,8 @@ def extract(
         utila.assert_success(completed)
         utila.log(f'complete: {job[0:100]}')
 
-    # add selected page to every file
-    files = [(item, pages) for item in files]
+    # add selected page to every file if required
+    files = [(item, pages) if isinstance(item, str) else item for item in files]
     generated = generate(files, destination)
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=worker) as executor:
