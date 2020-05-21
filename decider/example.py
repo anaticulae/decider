@@ -6,8 +6,7 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
-""".. todo:: reduce code duplication, see `hey`.
-"""
+""".. todo:: reduce code duplication, see `hey`."""
 import concurrent
 import os
 
@@ -36,6 +35,7 @@ def extract(
     assert len(files) >= 2, ('require at least to files to '
                              'determine output file name correctly')
     for pdf in files:
+        pdf = pdf if isinstance(pdf, str) else pdf[0]  # remove pages
         assert pdf.endswith('.pdf') and os.path.exists(pdf), str(pdf)
 
     # ensure that generation directory exists
