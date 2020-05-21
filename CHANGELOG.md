@@ -2,6 +2,16 @@
 
 Every noteable change is logged here.
 
+## v0.15.1
+
+### Feature
+
+* add individual page selector to extend page select behavior (672d7642b0fb)
+
+### Documentation
+
+* extend interface documentation (542897ff480b)
+
 ## v0.15.0
 
 ### Feature
