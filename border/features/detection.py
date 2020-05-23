@@ -25,6 +25,7 @@ import functools
 import math
 import typing
 
+import groupme.serialize
 import iamraw
 import protocol
 import serializeraw
@@ -39,7 +40,7 @@ def work(
 ) -> typing.Tuple[str, str, str]:
     utila.call('work: border detection')
     boxes = serializeraw.load_boundingboxes(border_boxes, pages=pages)
-    expected = load_leftright(border_leftright)
+    expected = groupme.serialize.load_leftright_border(border_leftright)
 
     hits = boxes_outside_border(boxes, expected)
     utila.debug(hits)
@@ -59,20 +60,6 @@ BORDER_LEFT = 25
 BORDER_RIGHT = 25
 BORDER_TOP = 25
 BORDER_BOTTOM = 25
-
-
-def load_leftright(path: str):
-    content = utila.from_raw_or_path(path, ftype='yaml')
-    loaded = yaml.load(content, Loader=yaml.FullLoader)
-
-    def determine(pagenumber: int):
-        for page, border in loaded:
-            if page != pagenumber:
-                continue
-            return border
-        return None
-
-    return determine
 
 
 def linting(hits, linter: protocol.Linter):
@@ -112,7 +99,7 @@ def check_2020_content_inside_box(linter, item, page):  # pylint:disable=W0613
 
 def boxes_outside_border(
         boxes,
-        expected_border: callable,
+        expected_border: dict,
         tol=None,
 ) -> iamraw.PageContentHits:
     """Determine `boxes` which are outside out of `border`."""
@@ -123,7 +110,7 @@ def boxes_outside_border(
     # x0 y0 x1 y1
     for page in boxes:
         hits = []
-        border_box = expected_border(page.page)
+        border_box = expected_border[page.page]
         for index, bounding in page.boundings:
             # BOUNDING:     'left, top,   right, bottom'
             # BORDER:       'left, right, top,   bottom'

@@ -93,6 +93,8 @@ def test_toc_validate_children(source, invalids):
         tests.resources.MASTER72,
         6,
         id='master72',
+        marks=pytest.mark.xfail(
+            reason='fix toc extractor, shrink to first pages'),
     ),
 ])
 def test_toc_validate_deepness(source, too_deep):
