@@ -34,14 +34,18 @@ import utila
 
 def work(
         border_boxes: str,
+        border_pages: str,
         border_leftright: str,
         pages: tuple = None,
 ) -> typing.Tuple[str, str, str]:
     utila.call('work: border detection')
     boxes = serializeraw.load_boundingboxes(border_boxes, pages=pages)
+    border_pages = serializeraw.load_pageborders(border_pages, pages=pages)
+
+    page_sizes = {item.page: item.size for item in border_pages}
     expected = groupme.serialize.load_leftright_border(border_leftright)
 
-    hits = boxes_outside_border(boxes, expected)
+    hits = boxes_outside_border(boxes, page_sizes, expected)
     utila.debug(hits)
 
     dumped = serializeraw.dump_hits(hits)
@@ -98,6 +102,7 @@ def check_2020_content_inside_box(linter, item, page):  # pylint:disable=W0613
 
 def boxes_outside_border(
         boxes,
+        page_sizes: dict,
         expected_border: dict,
         tol=None,
 ) -> iamraw.PageContentHits:
@@ -109,20 +114,24 @@ def boxes_outside_border(
     # x0 y0 x1 y1
     for page in boxes:
         hits = []
+        pagesize = page_sizes[page.page]
         border_box = expected_border[page.page]
         for index, bounding in page.boundings:
             # BOUNDING:     'left, top,   right, bottom'
             # BORDER:       'left, right, top,   bottom'
             # move bounding to center of page to make approach more robust
             rounded_bounding = round_small(bounding)
+
+            # yapf:disable
             if all([
                     rounded_bounding[0] > (border_box[0] - tol[0]),
-                    rounded_bounding[2] < (border_box[1] + tol[1]),
+                    rounded_bounding[2] < (pagesize.width - border_box[1] + tol[1]),
                     rounded_bounding[1] > (border_box[2] - tol[2]),
-                    rounded_bounding[3] < (border_box[3] + tol[3]),
+                    rounded_bounding[3] < (pagesize.height - border_box[3] + tol[3]),
             ]):
                 # all items in the box
                 continue
+            # yapf:enable
             hits.append((index, bounding))
         result.append(
             iamraw.PageContentHit(
