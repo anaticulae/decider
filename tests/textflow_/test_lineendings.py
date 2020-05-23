@@ -7,10 +7,9 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import protocol
 import utila
-import yaml
 
-import decider_textflow.path
 import tests.resources
 import tests.textflow_
 
@@ -41,16 +40,7 @@ def test_lineendings_master83_page6(testdir, monkeypatch):  # pylint:disable=W06
     # lint result
     tests.textflow_.run('', monkeypatch=monkeypatch)
 
-    linted = decider_textflow.path.lineendings_linted(root)
-    linted = load_linted(linted)
+    loaded = [item.content for item in protocol.findings_from_path(root)]
+    loaded = utila.flatten(loaded)
+    linted = [item.msgid for item in loaded]
     assert len(linted) == 2, str(linted)
-
-
-def load_linted(path: str):
-    loaded = yaml.load(utila.file_read(path), Loader=yaml.FullLoader)
-    return messageids(loaded)
-
-
-def messageids(items):
-    result = [item.msgid for item in items]
-    return result

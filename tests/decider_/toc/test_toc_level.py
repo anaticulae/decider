@@ -21,7 +21,7 @@ def lint(path: str):
     linter = protocol.from_module(dft.__name__)
     dft.linting(toc=toc, linter=linter)
     result = linter.result(unique=False)
-    failures = sorted(messageids(result))
+    failures = sorted(item.msgid for item in result)
     return failures
 
 
@@ -44,11 +44,6 @@ def test_toc_extraction(monkeypatch):  # pylint:disable=W0621
         failures = lint(tests.resources.TECHNICAL24)
     failures = len(failures)
     assert failures >= expected_failures, str(failures)
-
-
-def messageids(items):
-    result = [item.msgid for item in items]
-    return result
 
 
 TECHNICAL24_INVALID_CHILDREN = 1

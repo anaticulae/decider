@@ -61,10 +61,5 @@ def test_titlepage_extraction(titlepage, monkeypatch):  # pylint:disable=W0621
     userpath = os.path.join(result, decider.cli.USER_LINT_OUTPUT)
     user = yaml.load(utila.file_read(userpath), Loader=yaml.FullLoader)
 
-    failures = messageids(user)
+    failures = [item.msgid for item in user]
     assert failures == expected_failures, str(failures)
-
-
-def messageids(items):
-    result = [item.msgid for item in items]
-    return result
