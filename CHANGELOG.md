@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v0.15.4
+
+### Feature
+
+* add text font family linter (59dd93d94141)
+* add step to judge content text style (b6ab75be4e4b)
+
 ## v0.15.3
 
 ### Fix
