@@ -109,6 +109,39 @@ def check_7550_check_text_size(linter: callable, driver):
         linter(location=location, expected=expected, current=textsize)
 
 
+SOLUTION_7551 = """\
+Schriftart des Texts weicht ab
+
+Die erkannte Schriftart **{%current%}** weicht von
+der erwarteten Schriftart **{%expected%}** ab.
+"""
+
+
+def check_7551_check_text_family(linter: callable, driver):
+    if not driver.style.text_family:
+        return
+    chunks = driver.text_chunks
+    expected = driver.fontstore[driver.style.text_family].name
+    for page, line, item in chunks:
+        if isinstance(item, iamraw.Headline):
+            continue
+        for style in item.style:
+            if style.font == iamraw.NO_FONT:
+                utila.error(f'no font for {page} {line} {item}')
+                continue
+            current = driver.fontstore[style.font].name
+            if current == expected:
+                continue
+            location = protocol.RangedLocation(
+                page=page,
+                line=line,
+                token=style.start,
+                token_end=style.end,
+            )
+            # TODO: CHECK FOR SINGLE CHAR OR WORDS TO BIG, BUT EXCLUDE HIGHNOTES
+            linter(location=location, expected=expected, current=current)
+
+
 # TODO: REPLACE WITH IAMRAW CODE
 def create_pagetextcontentnavigators_fromfile(
         text: str,

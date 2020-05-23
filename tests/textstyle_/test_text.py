@@ -38,3 +38,17 @@ def test_decider_text_master72_2_20_fontsize(testdir, monkeypatch):
         monkeypatch,
     )
     assert not findings
+
+
+def test_decider_text_master72_2_10_fontfamily(testdir, monkeypatch):
+    style = doctextstyle.data.DocTextStyle(text_family=873240484)
+    source = tests.resources.MASTER72
+    pages = '2:10'
+    findings = decide_text_style(
+        source,
+        pages,
+        style,
+        testdir,
+        monkeypatch,
+    )
+    assert len(findings) == 17
