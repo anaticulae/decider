@@ -21,6 +21,8 @@ import utila
 
 MAX_HEADLINE_DIFF = 2.0  # TODO: HOLY VALUE
 
+# TODO: USE VALIDATED TOC
+
 
 def work(
         textstyle: str,
