@@ -14,3 +14,7 @@ import decider_textstyle
 
 def headlines(path: str, prefix: str = '') -> str:
     return connect(path, decider_textstyle.PROCESS, 'headlines_user', prefix)
+
+
+def text(path: str, prefix: str = '') -> str:
+    return connect(path, decider_textstyle.PROCESS, 'text_user', prefix)

@@ -6,7 +6,7 @@ RP 0.15.0
 decider_textstyle
 -----------------
 
-* [ ] judge text style of normal text block
+* [x] judge text style of normal text block
 
 * [x] judge text style of headlines h1, h2
 

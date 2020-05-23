@@ -28,6 +28,20 @@ WORKPLAN = [
         ],
         output=('user', 'developer'),
     ),
+    utila.create_step(
+        'text',
+        inputs=[
+            utila.ResultFile(doctextstyle.PROCESS, 'textstyle'),
+            utila.ResultFile('words', 'headlines_headlines'),
+            utila.ResultFile('rawmaker', 'oneline_text_text'),
+            utila.ResultFile('rawmaker', 'oneline_text_positions'),
+            utila.ResultFile('rawmaker', 'border_pages'),
+            utila.ResultFile('groupme', 'footer_footerheader'),
+            utila.ResultFile('rawmaker', 'fonts_header'),
+            utila.ResultFile('rawmaker', 'fonts_content'),
+        ],
+        output=('user', 'developer'),
+    ),
 ]
 
 
