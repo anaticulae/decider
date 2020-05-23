@@ -7,16 +7,38 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import os
+
+import doctextstyle.data
+import doctextstyle.serialize
 import protocol
+import utila
 
 import decider_textstyle.path
 import tests.resources
 import tests.textstyle_
 
+MASTER_72_DOCSTYLE = doctextstyle.data.DocTextStyle(
+    h1_size=15.96,
+    h1_after=135.93 - 88.67,
+    h2_size=14.04,
+    h2_before=190.37 - 125.73,
+    h2_after=224.01 - 190.37,
+)
 
-def decide_headline_style(source, pages, testdir, monkeypatch):
+BACHELOR_76_DOCSTYLE = doctextstyle.data.DocTextStyle(
+    h1_after=132.18 - 92.87,
+    h1_size=15.96,
+    h2_after=529.1 - 485.39,
+    h2_before=485.39 - 426.84,
+    h2_size=12.96,
+)
+
+
+def decide_headline_style(source, pages, style, testdir, monkeypatch):
+    write_docstyle(style, testdir.tmpdir)
     tests.textstyle_.run(
-        f'--headlines -i {source} --pages={pages}',
+        f'--headlines -i {testdir.tmpdir} -i {source} --pages={pages}',
         monkeypatch=monkeypatch,
     )
     path = decider_textstyle.path.headlines(testdir.tmpdir)
@@ -24,10 +46,16 @@ def decide_headline_style(source, pages, testdir, monkeypatch):
     return findings
 
 
-def test_decider_headlines(testdir, monkeypatch):
+def test_decider_headlines_master72_2_20(testdir, monkeypatch):
     source = tests.resources.MASTER72
     pages = '2:20'
-    findings = decide_headline_style(source, pages, testdir, monkeypatch)
+    findings = decide_headline_style(
+        source,
+        pages,
+        MASTER_72_DOCSTYLE,
+        testdir,
+        monkeypatch,
+    )
     # no font size error
     assert not findings
 
@@ -35,7 +63,13 @@ def test_decider_headlines(testdir, monkeypatch):
 def test_decider_headlines_master72_all(testdir, monkeypatch):
     source = tests.resources.MASTER72
     pages = '3:65'
-    findings = decide_headline_style(source, pages, testdir, monkeypatch)
+    findings = decide_headline_style(
+        source,
+        pages,
+        MASTER_72_DOCSTYLE,
+        testdir,
+        monkeypatch,
+    )
     # no font size error
     assert not findings
 
@@ -44,6 +78,19 @@ def test_decider_headlines_bachelor76(testdir, monkeypatch):
     # TODO: EXTEND THIS TESTS, specify expected findings
     source = tests.resources.BACHELOR76
     pages = '4:67'
-    findings = decide_headline_style(source, pages, testdir, monkeypatch)
-    expected = 93  # not correct, but indicates that algo changed
+    findings = decide_headline_style(
+        source,
+        pages,
+        BACHELOR_76_DOCSTYLE,
+        testdir,
+        monkeypatch,
+    )
+    # TODO: IMPROVE HEADLINE EXTRACTOR
+    expected = 27  # not correct, but indicates that algo changed
     assert len(findings) == expected
+
+
+def write_docstyle(style, path: str):
+    outpath = os.path.join(path, 'doctextstyle__textstyle.yaml')
+    dumped = doctextstyle.serialize.dump_docstyle(style)
+    utila.file_create(outpath, dumped)

@@ -30,7 +30,6 @@ import iamraw
 import protocol
 import serializeraw
 import utila
-import yaml
 
 
 def work(
