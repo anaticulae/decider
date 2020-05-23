@@ -7,12 +7,9 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import os
-
 import doctextstyle.data
 import doctextstyle.serialize
 import protocol
-import utila
 
 import decider_textstyle.path
 import tests.resources
@@ -36,7 +33,7 @@ BACHELOR_76_DOCSTYLE = doctextstyle.data.DocTextStyle(
 
 
 def decide_headline_style(source, pages, style, testdir, monkeypatch):
-    write_docstyle(style, testdir.tmpdir)
+    tests.textstyle_.write_docstyle(style, testdir.tmpdir)
     tests.textstyle_.run(
         f'--headlines -i {testdir.tmpdir} -i {source} --pages={pages}',
         monkeypatch=monkeypatch,
@@ -88,9 +85,3 @@ def test_decider_headlines_bachelor76(testdir, monkeypatch):
     # TODO: IMPROVE HEADLINE EXTRACTOR
     expected = 27  # not correct, but indicates that algo changed
     assert len(findings) == expected
-
-
-def write_docstyle(style, path: str):
-    outpath = os.path.join(path, 'doctextstyle__textstyle.yaml')
-    dumped = doctextstyle.serialize.dump_docstyle(style)
-    utila.file_create(outpath, dumped)

@@ -8,7 +8,9 @@
 # =============================================================================
 
 import functools
+import os
 
+import doctextstyle.serialize
 import utila
 
 import decider_textstyle.cli
@@ -26,3 +28,9 @@ fail = functools.partial(
     process=decider_textstyle.PROCESS,
     success=False,
 )
+
+
+def write_docstyle(style, path: str):
+    outpath = os.path.join(path, 'doctextstyle__textstyle.yaml')
+    dumped = doctextstyle.serialize.dump_docstyle(style)
+    utila.file_create(outpath, dumped)
