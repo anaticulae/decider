@@ -7,11 +7,14 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import utila
+import tests.resources
+import tests.textstyle_
 
-import decider_textstyle
+
+def test_decider_textstyle_cli_help(monkeypatch):
+    tests.textstyle_.run('--help', monkeypatch=monkeypatch)
 
 
-def test_decider_textstyle_cli_help():
-    cmd = f'{decider_textstyle.PROCESS} --help'
-    utila.run(cmd)
+def test_decider_textstyle_master72(testdir, monkeypatch):
+    source = tests.resources.MASTER72
+    tests.textstyle_.run(f'-i {source}', monkeypatch=monkeypatch)
