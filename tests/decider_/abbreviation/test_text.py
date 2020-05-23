@@ -11,9 +11,9 @@ import functools
 
 import iamraw
 import protocol
+import utila
 
 import decider.features.abbreviation_text as dfa
-import tests
 
 TABLE = iamraw.AbbreviationResult(abbreviations=[
     iamraw.Abbreviation(
@@ -84,4 +84,4 @@ def test_linter_abbreviation_text_before_used():
     msgid = linter.findings[0].msgid
     description = linter.findings[0].solution.description
     assert msgid == expected_msgid
-    assert tests.template_replaced(description), description
+    assert utila.istemplate_replaced(description), description

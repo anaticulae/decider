@@ -11,9 +11,9 @@ import functools
 
 import iamraw
 import protocol
+import utila
 
 import decider.features.abbreviation_table
-import tests
 
 
 def test_linter_abbreviation_table_sorted():
@@ -68,4 +68,4 @@ def test_linter_abbreviation_table_unsorted():
     assert len(linter.findings) == 1, str(linter.findings)
 
     description = linter.findings[0].solution.description
-    assert tests.template_replaced(description), description
+    assert utila.istemplate_replaced(description), description
