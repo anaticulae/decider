@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.15.5
+
+### Fix
+
+* add page size to analysis cause border is defined relative yet (0ef988a18d0d)
+
 ## v0.15.4
 
 ### Feature
