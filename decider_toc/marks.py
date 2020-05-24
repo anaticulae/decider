@@ -11,11 +11,11 @@ import german
 import iamraw
 import konrad
 
-import decider.toc
+import decider_toc.utils
 
 
-def validate_question_mark(toc: iamraw.Toc) -> decider.toc.InvalidTocItems:
-    flatten = decider.toc.flat(toc)
+def validate_question_mark(toc: iamraw.Toc) -> decider_toc.utils.InvalidTocItems: # yapf:disable
+    flatten = decider_toc.utils.flat(toc)
 
     lines = []
     for index, item in enumerate(flatten):
@@ -29,8 +29,8 @@ def validate_question_mark(toc: iamraw.Toc) -> decider.toc.InvalidTocItems:
     return lines
 
 
-def collect_quotation_marks(toc: iamraw.Toc) -> decider.toc.InvalidTocItems:
-    flatten = decider.toc.flat(toc)
+def collect_quotation_marks(toc: iamraw.Toc) -> decider_toc.utils.InvalidTocItems: # yapf:disable
+    flatten = decider_toc.utils.flat(toc)
 
     lines = []
     for index, item in enumerate(flatten):

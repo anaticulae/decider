@@ -10,8 +10,8 @@
 import protocol
 import pytest
 
-import decider.features.toc as dft
-import decider.toc.level as dtl
+import decider_toc.features.toc as dft
+import decider_toc.level as dtl
 import tests
 import tests.resources
 

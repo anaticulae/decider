@@ -7,7 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import decider.toc.pages as dtp
+import decider_toc.pages as dtp
 import tests
 import tests.resources
 

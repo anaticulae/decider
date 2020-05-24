@@ -26,7 +26,7 @@ import iamraw.toc
 import texmex.numbers
 import utila
 
-import decider.toc
+import decider_toc.utils
 
 
 @dataclasses.dataclass
@@ -41,7 +41,7 @@ InvalidPages = typing.List[InvalidPage]
 
 
 def validate(toc: iamraw.Toc) -> InvalidPages:
-    toc = decider.toc.flat(toc)
+    toc = decider_toc.utils.flat(toc)
     items = [(item.page, item.title, item.raw_location) for item in toc]
     result = validate_pageorder(items)
     return result

@@ -7,22 +7,15 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import german
-import iamraw
+import serializeraw
 
-import decider.toc
-
-MAX_WORD_COUNT = 12  # TODO: HOLY VALUE
+import decider_toc.duplicated
+import tests.resources
 
 
-def validate(toc: iamraw.Toc) -> decider.toc.InvalidTocItems:
-    flatten = decider.toc.flat(toc)
-
-    lines = []
-    for index, item in enumerate(flatten):
-        words = german.split_words(item.title, validate_sentences=False)
-        words = decider.toc.remove_marks(words)
-        linelength = len(words)
-        if linelength > MAX_WORD_COUNT:
-            lines.append((index, item.title, linelength, item.raw_location))
-    return lines
+def test_duplicated_words():
+    source = tests.resources.MASTER98
+    toc = serializeraw.load_toc(source)
+    assert toc
+    validated = decider_toc.duplicated.validate(toc)
+    assert len(validated) >= 3

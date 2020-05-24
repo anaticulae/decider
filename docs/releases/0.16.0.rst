@@ -6,7 +6,7 @@ RP 0.15.0
 decider_toc
 -----------------
 
-* [ ] add seperate toc decider_toc
+* [x] add seperate toc decider_toc
 
 * [ ] add toc duplicated words step to judge quality of toc
 

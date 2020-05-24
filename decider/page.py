@@ -7,12 +7,12 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import decider.toc.pages
+import decider_toc.pages
 
 
 def validate(footers):
     # TODO: ADD PARSED PDF RAW_LOCATION to `PagesFooterInformation`
     # TODO: REPLACE 1024 afterwards
     pages = [(item.page.value, item.page.raw, 1024) for item in footers]
-    validated = decider.toc.pages.validate_pageorder(pages)
+    validated = decider_toc.pages.validate_pageorder(pages)
     return validated

@@ -19,11 +19,11 @@ import protocol
 import serializeraw
 
 import decider.features
-import decider.toc.duplicated as dtd
-import decider.toc.length
-import decider.toc.level as dtl
-import decider.toc.marks
-import decider.toc.pages as dtp
+import decider_toc.duplicated as dtd
+import decider_toc.length
+import decider_toc.level as dtl
+import decider_toc.marks
+import decider_toc.pages as dtp
 
 
 def work(tableofcontent: str) -> typing.Tuple[str, str]:
@@ -44,10 +44,7 @@ def work(tableofcontent: str) -> typing.Tuple[str, str]:
 TOC_CHECKER_ID = 13
 
 
-def linting(
-        toc,
-        linter: protocol.Linter,
-):
+def linting(toc, linter: protocol.Linter):
     location = protocol.Location.from_page(1)
     checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
@@ -174,7 +171,7 @@ Die Überschrift {%number%} „{%title%}“ ist zu lang und verkürzt werdne.
 
 
 def check_1382_toc_long_lines(linter, toc: iamraw.Toc):
-    findings = decider.toc.length.validate(toc)
+    findings = decider_toc.length.validate(toc)
     for item in findings:
         index, title, _, raw_location = item
         location = protocol.Location.from_page(raw_location)
@@ -194,7 +191,7 @@ Fragesatz formuliert werden.
 
 
 def check_1383_toc_contains_question_mark(linter, toc: iamraw.Toc):
-    findings = decider.toc.marks.validate_question_mark(toc)
+    findings = decider_toc.marks.validate_question_mark(toc)
     for item in findings:
         index, title, raw_location = item
         location = protocol.Location.from_page(raw_location)
@@ -215,7 +212,7 @@ verständlich wird.
 
 
 def check_1384_toc_contains_quotation_mark(linter, toc: iamraw.Toc):
-    findings = decider.toc.marks.collect_quotation_marks(toc)
+    findings = decider_toc.marks.collect_quotation_marks(toc)
     for item in findings:
         index, title, raw_location = item
         location = protocol.Location.from_page(raw_location)

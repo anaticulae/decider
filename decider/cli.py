@@ -6,6 +6,7 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
+
 import detector
 import detector.cli
 import groupme
@@ -64,13 +65,6 @@ WORKPLAN = [
         ],
         (USER, DEVELOPER),
     ),
-    utila.create_step(
-        TOC,
-        [
-            utila.ResultFile(groupme.PROCESS, 'toc_toc'),
-        ],
-        (USER, DEVELOPER),
-    )
 ]
 
 USER_LINT_OUTPUT = f'{decider.PROCESS}__{TITLEPAGE}_{USER}.yaml'

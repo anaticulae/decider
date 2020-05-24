@@ -6,3 +6,20 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
+
+import protocol
+
+import tests.resources
+import tests.toc_
+
+
+def test_toc_cli_help(monkeypatch):
+    tests.textstyle_.run('--help', monkeypatch=monkeypatch)
+
+
+def test_toc_cli_master99(testdir, monkeypatch):
+    source = tests.resources.MASTER99
+    tests.toc_.run(f'-i {source}', monkeypatch=monkeypatch)
+
+    findings = protocol.findings_from_path(testdir.tmpdir)
+    assert len(findings) == 1

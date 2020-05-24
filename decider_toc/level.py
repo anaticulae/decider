@@ -12,14 +12,14 @@ import dataclasses
 import configo
 import iamraw
 
-import decider.toc
+import decider_toc.utils
 
 
-class TooFewChildren(decider.toc.InvalidTocItems):  # pylint:disable=too-many-ancestors
+class TooFewChildren(decider_toc.utils.InvalidTocItems):  # pylint:disable=too-many-ancestors
     pass
 
 
-class LevelToDeep(decider.toc.InvalidTocItems):  # pylint:disable=too-many-ancestors
+class LevelToDeep(decider_toc.utils.InvalidTocItems):  # pylint:disable=too-many-ancestors
     pass
 
 
