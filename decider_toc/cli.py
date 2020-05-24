@@ -15,7 +15,28 @@ DESCRIPTION = ''
 
 WORKPLAN = [
     utila.create_step(
-        'toc',
+        'basic',
+        [
+            utila.ResultFile('groupme', 'toc_toc'),
+        ],
+        ('user', 'developer'),
+    ),
+    utila.create_step(
+        'complexity',
+        [
+            utila.ResultFile('groupme', 'toc_toc'),
+        ],
+        ('user', 'developer'),
+    ),
+    utila.create_step(
+        'rules',
+        [
+            utila.ResultFile('groupme', 'toc_toc'),
+        ],
+        ('user', 'developer'),
+    ),
+    utila.create_step(
+        'style',
         [
             utila.ResultFile('groupme', 'toc_toc'),
         ],

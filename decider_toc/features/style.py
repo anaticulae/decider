@@ -6,11 +6,7 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
-""".. _decider_features_toc:
 
-Table of content
-================
-"""
 import functools
 import typing
 
@@ -18,12 +14,8 @@ import iamraw
 import protocol
 import serializeraw
 
-import decider.features
 import decider_toc.duplicated as dtd
-import decider_toc.length
-import decider_toc.level as dtl
 import decider_toc.marks
-import decider_toc.pages as dtp
 
 
 def work(tableofcontent: str) -> typing.Tuple[str, str]:
@@ -56,90 +48,6 @@ def linting(toc, linter: protocol.Linter):
         checker(call, toc)
 
 
-# TODO: ADD SOLUTION_1300_MS to link how to create table of content in word
-# TODO: ADD SOLUTION_1300_LATEX to link how to create table of content in LATEX
-
-SOLUTION_1300 = """\
-Dokument enthält kein Inhaltsverzeichnis
-
-Fügen Sie ein Inhaltsverzeichnis zum Dokument hinzu.
-
-TODO: ADD LINK TO TECHNIK
-
-{elemente/inhaltsverzeichnis}
-"""
-
-
-def check_1300_toc_existence(linter, toc: iamraw.Toc):
-    if toc.children:
-        return
-    linter(location=decider.features.OVERVIEW)
-
-
-SOLUTION_1350 = """\
-Kapitel enthält zu wenige Sektionen
-
-Ein Kapitel oder eine Sektion benötigt mindestens zwei
-Teilüberschriften. Falls dies nicht moeglich ist, sollte das
-Unterkapitel in den Text eingeplegt werden.
-
-{elemente/inhaltsverzeichnis#kapitelstruktur}
-"""
-
-
-def check_1350_toc_level_to_few_children(linter, toc: iamraw.Toc):
-    level_result: dtl.TocValidationResult = dtl.validate(toc)
-    for item in level_result.too_few_children:  # pylint:disable=E1133
-        # TODO: REMOVE AFTER UPGRADING SERIALIZERAW
-        location = protocol.Location.from_page(int(item.page))
-        linter(location=location)
-
-
-SOLUTION_1351 = """
-Gliederung zu komplex
-
-Das Dokument weist eine zu detaillierte Untergliederung auf. Eine zu
-feingliedrige Gliederung reduziert die Üebersichtlichkeit und verhindert
-das schnelle Navigieren im Text.
-
-Begrenzen Sie die Gliederung auf maximal 3 Sektionen.
-
-{elemente/inhaltsverzeichnis#tiefe-der-gliederung}
-"""
-
-
-def check_1351_toc_level_to_deep(linter, toc: iamraw.Toc):
-    level_result: dtl.TocValidationResult = dtl.validate(toc)
-    for item in level_result.level_to_deep:  # pylint:disable=E1133
-        # TODO: REMOVE AFTER UPGRADING SERIALIZERAW
-        location = protocol.Location.from_page(int(item.page))
-        linter(location=location)
-
-
-SOLUTION_1360 = """\
-Inhaltsverzeichnis enthält nicht nur aufsteigende Seitenzahlen
-
-Korrigieren Sie das Inhaltsverzeichnis bzw. die Seitenzahlen.
-
-Zeile: {%text%}
-Seite {%current%} folgt auf {%before%}.
-
-{darstellung/seitenzahlen#anforderungen}
-"""
-
-
-def check_1360_toc_ascending_pages(linter, toc: iamraw.Toc):
-    page_result: dtp.InvalidPages = dtp.validate(toc)
-    for item in page_result:
-        location = protocol.Location.from_page(item.raw_location)
-        linter(
-            current=item.current,
-            before=item.before,
-            text=item.text,
-            location=location,
-        )
-
-
 SOLUTION_1380 = """\
 Worthäufung im Inhaltsverzeichnis
 
@@ -159,23 +67,6 @@ def check_1380_toc_duplicated_words(linter, toc: iamraw.Toc):
             count=count,
             lines=lines,
         )
-
-
-# TODO: Link to article
-# TODO: Convert citation marks
-SOLUTION_1382 = """\
-Überschrift zu lang
-
-Die Überschrift {%number%} „{%title%}“ ist zu lang und verkürzt werdne.
-"""
-
-
-def check_1382_toc_long_lines(linter, toc: iamraw.Toc):
-    findings = decider_toc.length.validate(toc)
-    for item in findings:
-        index, title, _, raw_location = item
-        location = protocol.Location.from_page(raw_location)
-        linter(number=index, title=title, location=location)
 
 
 # TODO: ADD ARTICLE
