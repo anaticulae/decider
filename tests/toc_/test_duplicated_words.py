@@ -18,4 +18,4 @@ def test_duplicated_words():
     toc = serializeraw.load_toc(source)
     assert toc
     validated = decider_toc.duplicated.validate(toc)
-    assert len(validated) >= 3
+    assert len(validated) == 2

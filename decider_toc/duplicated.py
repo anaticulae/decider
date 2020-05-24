@@ -54,4 +54,41 @@ def duplicates(lines):
                 counter[sub] += 1
     most_common = counter.most_common(n=100)
     result = [item for item in most_common if item[1] >= DUPLICATES_MIN_COUNT]
+    result = remove_duplicates(result)
+    # filter again, if after merging a subgroup is not completly covered
+    # by parent group.
+    result = [item for item in result if item[1] >= DUPLICATES_MIN_COUNT]
+    return result
+
+
+def remove_duplicates(items):
+    """Remove items which are part of a bigger parent/father item.
+
+    >>> remove_duplicates([('Industrie', 6), ('Industrie 4.0', 6), ('4.0', 6)])
+    [('Industrie 4.0', 6)]
+    >>> remove_duplicates([('Industrie', 8), ('Industrie 4.0', 6), ('4.0', 6)])
+    [('Industrie 4.0', 6), ('Industrie', 2)]
+    """
+    if not items:
+        return []
+    # longest items first
+    todo = sorted(items, key=lambda x: x[0], reverse=True)
+    result, todo = [todo[0]], todo[1:]
+    for current in todo:
+        candiate, count = current
+        for item in result:
+            if count > 0 and candiate in item[0]:
+                if count <= item[1]:
+                    count -= item[1]
+                    # father can completely cover children
+                    break
+                else:
+                    # father is not huge enough, other fathers are
+                    # required to cover children completely
+                    count -= item[1]
+        else:
+            if count > 0:
+                # some words are left, no all can be covered in fathers,
+                # children becomes a father itself
+                result.append((candiate, count))
     return result
