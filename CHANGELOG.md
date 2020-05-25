@@ -2,6 +2,20 @@
 
 Every noteable change is logged here.
 
+## v0.16.0
+
+### Feature
+
+* extend linter to display out ranged chapters (769a12088fdc)
+* add toc balance extractor out of headline level (1a8d53141849)
+* improve duplicated words checker (33e9b76d9ded)
+* split rules by meaning into different features (dec586ea477a)
+* move toc rules to separate runner `decider_toc` (ef1b2d7139c8)
+
+### Fix
+
+* log non existing fonts on headline validator (466e18ceaa0e)
+
 ## v0.15.5
 
 ### Fix
