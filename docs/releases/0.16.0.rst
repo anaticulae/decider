@@ -10,7 +10,7 @@ decider_toc
 
 * [x] add toc duplicated words step to judge quality of toc
 
-* [ ] add chapter length validation step?
+* [x] add chapter length validation step
 
 code quality
 ------------

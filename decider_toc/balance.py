@@ -54,6 +54,11 @@ def judge(toc: iamraw.Toc) -> JudgedBalance:
     return result
 
 
+TOO_LONG = 1
+TOO_SHORT = -1
+FIT = 0
+
+
 def validate_level(items: list, balance: Evaluated) -> list:
     """Decide if size of sections is too high(1), too small(-1) or in
     range(0).
@@ -68,14 +73,14 @@ def validate_level(items: list, balance: Evaluated) -> list:
     for group in items:
         stepresult = []
         for item in group:
-            upper = balance.median + balance.stdev
-            lower = balance.median - balance.stdev
+            upper = utila.roundme(balance.median + balance.stdev, digits=1)
+            lower = utila.roundme(balance.median - balance.stdev, digits=1)
             if item > upper:
-                stepresult.append(1)
+                stepresult.append((TOO_LONG, item, upper))
             elif item < lower:
-                stepresult.append(-1)
+                stepresult.append((TOO_SHORT, item, lower))
             else:
-                stepresult.append(0)
+                stepresult.append((FIT,))
         result.append(stepresult)
     return result
 

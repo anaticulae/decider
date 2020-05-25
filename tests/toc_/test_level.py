@@ -40,7 +40,7 @@ def test_toc_to_deep(monkeypatch):
     with monkeypatch.context() as context:
         context.setattr(dtl, 'MAX_TOC_DEEPNESS', 2)
         failures = lint(tests.resources.TECHNICAL24, dtfc)
-    failures = len(failures)
+    failures = len([item for item in failures if item in (1351, 1382)])
     expected = sum([
         TECHNICAL24_INVALID_CHILDREN_TO_LONG,
         TECHNICAL24_TOO_DEEP,

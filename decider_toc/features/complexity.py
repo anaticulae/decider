@@ -13,7 +13,9 @@ import typing
 import iamraw
 import protocol
 import serializeraw
+import utila
 
+import decider_toc.balance
 import decider_toc.length
 import decider_toc.level as dtl
 import decider_toc.marks
@@ -49,7 +51,7 @@ def linting(toc, linter: protocol.Linter):
         checker(call, toc)
 
 
-SOLUTION_1351 = """
+SOLUTION_1351 = """\
 Gliederung zu komplex
 
 Das Dokument weist eine zu detaillierte Untergliederung auf. Eine zu
@@ -70,12 +72,88 @@ def check_1351_toc_level_to_deep(linter, toc: iamraw.Toc):
         linter(location=location)
 
 
+SOLUTION_1370 = """\
+Abschnitt zu lang
+
+Der Abschnitt „{%headline%}“ ist im Vergleich zu den gleichranggigen
+Abschnitten({%expected%}) zu lang({%current%}). Überdenken Sie die
+Abschnittseinteilung und überlegen Sie sich weitere Teilabschnitte
+einzuführen.
+
+! ADD Theissen ARTICLE !
+"""
+
+
+def check_1370_section_too_long(linter, toc: iamraw.Toc):
+    validate_chapter_length(
+        linter,
+        toc,
+        level=2,
+        expected=decider_toc.balance.TOO_LONG,
+    )
+
+    validate_chapter_length(
+        linter,
+        toc,
+        level=3,
+        expected=decider_toc.balance.TOO_LONG,
+    )
+
+
+SOLUTION_1371 = """\
+Abschnitt zu kurz
+
+Der Abschnitt „{%headline%}“ ist im Vergleich zu den gleichranggigen
+Abschnitten({%expected%}) zu kurz({%current%}). Überdenken Sie die
+Abschnittseinteilung und überlegen Sie sich Teilabschnitte zusammen zu
+führen.
+
+! ADD Theissen ARTICLE !
+"""
+
+
+def check_1371_section_too_short(linter, toc: iamraw.Toc):
+    validate_chapter_length(
+        linter,
+        toc,
+        level=2,
+        expected=decider_toc.balance.TOO_SHORT,
+    )
+    validate_chapter_length(
+        linter,
+        toc,
+        level=3,
+        expected=decider_toc.balance.TOO_SHORT,
+    )
+
+
+def validate_chapter_length(linter, toc, level, expected):
+    balanced = decider_toc.balance.judge(toc)
+    level2 = utila.flatten(balanced.level2)
+    flat = decider_toc.balance.data(toc)
+
+    level_two = [item for item in flat if item.level == level]
+
+    for line, judged in zip(level_two, level2):
+        if judged[0] != expected:
+            continue
+        title = line.title
+        location = protocol.Location.from_page(line.page)
+        linter(
+            location=location,
+            headline=title,
+            current=judged[1],
+            expected=judged[2],
+        )
+
+
 # TODO: Link to article
 # TODO: Convert citation marks
 SOLUTION_1382 = """\
 Überschrift zu lang
 
-Die Überschrift {%number%} „{%title%}“ ist zu lang und verkürzt werdne.
+Die Überschrift {%number%} „{%title%}“ ist zu lang und sollte verkürzt
+werden.
 """
 
 

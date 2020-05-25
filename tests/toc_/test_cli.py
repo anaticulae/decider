@@ -17,9 +17,25 @@ def test_toc_cli_help(monkeypatch):
     tests.textstyle_.run('--help', monkeypatch=monkeypatch)
 
 
-def test_toc_cli_master99(testdir, monkeypatch):
+def test_toc_cli_master99_headline_too_long(testdir, monkeypatch):
     source = tests.resources.MASTER99
     tests.toc_.run(f'-i {source}', monkeypatch=monkeypatch)
 
     findings = protocol.findings_from_path(testdir.tmpdir)
-    assert len(findings) == 1
+    assert len(tests.toc_.select(findings, 1382)) == 1
+
+
+def test_toc_cli_master99_chapter_too_long(testdir, monkeypatch):
+    source = tests.resources.MASTER99
+    tests.toc_.run(f'-i {source}', monkeypatch=monkeypatch)
+
+    findings = protocol.findings_from_path(testdir.tmpdir)
+    assert len(tests.toc_.select(findings, 1370)) == 4
+
+
+def test_toc_cli_master98_chapter_too_short(testdir, monkeypatch):
+    source = tests.resources.MASTER98
+    tests.toc_.run(f'-i {source}', monkeypatch=monkeypatch)
+
+    findings = protocol.findings_from_path(testdir.tmpdir)
+    assert len(tests.toc_.select(findings, 1371)) == 1
