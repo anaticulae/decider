@@ -359,16 +359,22 @@ def validate_headline_family(
 ):
     flats = utila.flatten(headlines)
     headlines = [item for item in flats if item.level == level]
-    expected_family = fontstore[expected_family].name
+    try:
+        expected_family = fontstore[expected_family].name
+    except KeyError:
+        utila.error(f'no expected headline family: {expected_family}')
+        return
     for headline in headlines:
         containers_ = containers(headline.container)
         navigator = utila.select_page(navigators, headline.page)
 
         lines_selected = [navigator[index] for index in containers_]
-        textfamily_ = [
-            fontstore[item].name
-            for item in container_textfamily(lines_selected)
-        ]
+        textfamily_ = []
+        for item in container_textfamily(lines_selected):
+            try:
+                textfamily_.append(fontstore[item].name)
+            except KeyError:
+                utila.error(f'headline - font not found: {item}')
 
         if all([item == expected_family for item in textfamily_]):
             continue
