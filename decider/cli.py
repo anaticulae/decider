@@ -49,13 +49,6 @@ WORKPLAN = [
         (USER, DEVELOPER),
     ),
     utila.create_step(
-        FOOTNOTE,
-        [
-            utila.ResultFile(groupme.PROCESS, 'footer_footerheader'),
-        ],
-        (USER, DEVELOPER),
-    ),
-    utila.create_step(
         TITLEPAGE,
         [
             utila.ResultFile(

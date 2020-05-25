@@ -16,7 +16,7 @@ decider_textstyle
 decider_footnote
 ----------------
 
-* [ ] add separate cli
+* [x] add separate cli
 
 * [ ] add ascending footnote checker, see bachelor90
 

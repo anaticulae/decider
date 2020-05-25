@@ -11,6 +11,7 @@
 Footnotes
 =========
 """
+
 import functools
 import math
 import typing
@@ -19,7 +20,7 @@ import configo
 import protocol
 import utila
 
-import decider.footnote
+import decider_footnote.footnote
 
 MAX_HIGHNOTE_RISE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
 MAX_HIGHNOTE_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
@@ -30,9 +31,9 @@ MAX_CONTENT_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
 def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
     linter = protocol.from_module(__name__)
 
-    headerfooters = decider.footnote.load(footerheader, pages)
+    headerfooters = decider_footnote.footnote.load(footerheader, pages)
     footnotes = utila.flatten([item.content for item in headerfooters if item])
-    fontconfig = decider.footnote.most_common_font(footnotes)
+    fontconfig = decider_footnote.footnote.most_common_font(footnotes)
 
     for footer in headerfooters:
         # run linter
@@ -49,7 +50,7 @@ FOOTER_CHECKER_ID = 20
 
 def linting(
         items,
-        fontconfig: decider.footnote.FootNoteStyle,
+        fontconfig: decider_footnote.footnote.FootNoteStyle,
         page: int,
         linter: protocol.Linter,
 ):

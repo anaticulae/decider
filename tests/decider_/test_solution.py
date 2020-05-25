@@ -9,11 +9,11 @@
 
 import protocol
 
-import decider.features.footnote
+import decider_footnote.features.footnote
 
 
 def test_parsing_solution_definition():
-    parsed = protocol.parse_solutions(decider.features.footnote)
+    parsed = protocol.parse_solutions(decider_footnote.features.footnote)
     assert len(parsed) >= 1, parsed
 
     first = parsed[0]
@@ -23,5 +23,5 @@ def test_parsing_solution_definition():
 
 
 def test_parsing_validators_definition():
-    parsed = protocol.parse_checkers(decider.features.footnote)
+    parsed = protocol.parse_checkers(decider_footnote.features.footnote)
     assert len(parsed) >= 6, parsed

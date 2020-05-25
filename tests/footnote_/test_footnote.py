@@ -8,22 +8,19 @@
 # =============================================================================
 
 import contextlib
-import os
 
 import iamraw.path
 import protocol
 import pytest
-import utila
 
-import decider
-import decider.features.footnote
-import decider.footnote
+import decider_footnote.features.footnote
+import decider_footnote.footnote
 import tests.resources
 
 
 @pytest.fixture
 def example():
-    loaded = decider.footnote.load_frompath(
+    loaded = decider_footnote.footnote.load_frompath(
         tests.resources.MASTER72,
         pages=(3),
     )
@@ -36,7 +33,7 @@ def test_footnotes_example(example):  # pylint:disable=W0621
 
 
 # def test_footnotes_validate(example):  # pylint:disable=W0621
-#     result = [decider.footnote.validate(item) for item in example.content]
+#     result = [decider_footnote.footnote.validate(item) for item in example.content]
 
 #     valid = [item.valid for item in result]
 
@@ -44,32 +41,15 @@ def test_footnotes_example(example):  # pylint:disable=W0621
 #     assert valid == expected
 
 
-def test_cli_footnotes(testdir, monkeypatch):  ## pylint:disable=W0621
-    root = str(testdir)
-
-    cmd = ['-i', tests.resources.MASTER72, '-o', root]
-    tests.run_decider(cmd, monkeypatch)
-
-    outpath = os.path.join(
-        root,
-        f'{decider.PROCESS}__{decider.cli.FOOTNOTE}_user.yaml',
-    )
-    assert os.path.exists(outpath), outpath
-
-    dumped = utila.file_read(outpath)
-    assert len(dumped) > 1000  # result contains some content
-    assert '{%number%}' not in dumped, dumped  # ensure that template is replaced
-
-
 def test_footnotes_most_common_font(example):  # pylint:disable=W0621
     data = example.content
-    fontconfig = decider.footnote.most_common_font(data)
+    fontconfig = decider_footnote.footnote.most_common_font(data)
     collected = [item is not None for item in vars(fontconfig).values()]
     assert all(collected), fontconfig
 
 
 def test_footnotes_most_common_font_empty():
-    fontconfig = decider.footnote.most_common_font(items=[])
+    fontconfig = decider_footnote.footnote.most_common_font(items=[])
     assert fontconfig is None
 
 
@@ -78,7 +58,7 @@ def active_ids(monkeypatch, ids=None):
     if ids is None:
         ids = []
     with monkeypatch.context() as context:
-        parsed = protocol.parse_checkers(decider.features.footnote)
+        parsed = protocol.parse_checkers(decider_footnote.features.footnote)
         for item in parsed:
             msgid = protocol.parse_msgid(item.__name__)
             if msgid in ids:
@@ -104,7 +84,7 @@ def empty(result):
 def test_footnotes_work_disable_all(monkeypatch):
     footerheader = iamraw.path.headerfooters(tests.resources.MASTER72)
     with active_ids(monkeypatch, ids=[]):
-        user, _ = decider.features.footnote.work(footerheader)
+        user, _ = decider_footnote.features.footnote.work(footerheader)
     assert empty(user), f'not all events are disabled:\n {user}'
 
 
@@ -115,11 +95,11 @@ def test_footnotes_work_highnote_rise(monkeypatch):
             ids=[2003],
     ) as context:
         context.setattr(
-            decider.features.footnote,
+            decider_footnote.features.footnote,
             'MAX_HIGHNOTE_RISE_DIFF',
             0.0,
         )
-        user, _ = decider.features.footnote.work(footerheader)
+        user, _ = decider_footnote.features.footnote.work(footerheader)
     assert not empty(user)
 
 
@@ -131,11 +111,11 @@ def test_footnotes_work_highnote_size(monkeypatch):
             ids=[2004],
     ) as context:
         context.setattr(
-            decider.features.footnote,
+            decider_footnote.features.footnote,
             'MAX_HIGHNOTE_SIZE_DIFF',
             0.0,
         )
-        user, _ = decider.features.footnote.work(footerheader)
+        user, _ = decider_footnote.features.footnote.work(footerheader)
     assert empty(user), user
 
 
@@ -145,5 +125,5 @@ def test_footnotes_work_highnote_font_family(monkeypatch):
             monkeypatch,
             ids=[2005],
     ):
-        user, _ = decider.features.footnote.work(footerheader)
+        user, _ = decider_footnote.features.footnote.work(footerheader)
     assert not empty(user), 'no invalid font detection'
