@@ -1,0 +1,39 @@
+.. _0_17_0:
+
+RP 0.17.0
+=========
+
+decider_toc
+-----------
+
+* [ ] Eidesstaatliche Erklärung is not part of page counting
+
+decider_textstyle
+-----------------
+
+* [ ] chapter starts on new page
+
+decider_footnote
+----------------
+
+* [ ] add separate cli
+
+* [ ] add ascending footnote checker, see bachelor90
+
+* [ ] footnote size checker
+
+* [ ] footnote distance checker
+
+quality
+-------
+
+* [ ] increase coverage to 97.0%
+
+code quality
+------------
+
+after
+~~~~~
+
+* Total coverage: 94.38%
+* Your code has been rated: 10.0/10
