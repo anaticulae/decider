@@ -24,6 +24,13 @@ WORKPLAN = [
         ],
         (USER, DEVELOPER),
     ),
+    utila.create_step(
+        'style',
+        [
+            utila.ResultFile('groupme', 'footer_footerheader'),
+        ],
+        (USER, DEVELOPER),
+    ),
 ]
 
 

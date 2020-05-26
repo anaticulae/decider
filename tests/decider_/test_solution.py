@@ -24,4 +24,4 @@ def test_parsing_solution_definition():
 
 def test_parsing_validators_definition():
     parsed = protocol.parse_checkers(decider_footnote.features.footnote)
-    assert len(parsed) >= 6, parsed
+    assert len(parsed) >= 2, parsed

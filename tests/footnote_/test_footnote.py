@@ -14,6 +14,7 @@ import protocol
 import pytest
 
 import decider_footnote.features.footnote
+import decider_footnote.features.style
 import decider_footnote.footnote
 import tests.resources
 
@@ -68,15 +69,6 @@ def active_ids(monkeypatch, ids=None):
         yield context
 
 
-def enable(items, active=None):
-    if active is None:
-        active = {}
-    result = [
-        protocol.MessageStatus(item, active=item in active) for item in items
-    ]
-    return result
-
-
 def empty(result):
     return result == '[]\n'
 
@@ -90,40 +82,40 @@ def test_footnotes_work_disable_all(monkeypatch):
 
 def test_footnotes_work_highnote_rise(monkeypatch):
     footerheader = iamraw.path.headerfooters(tests.resources.MASTER72)
-    with active_ids(
-            monkeypatch,
-            ids=[2003],
-    ) as context:
+    with monkeypatch.context() as context:
         context.setattr(
-            decider_footnote.features.footnote,
+            decider_footnote.features.style,
             'MAX_HIGHNOTE_RISE_DIFF',
             0.0,
         )
-        user, _ = decider_footnote.features.footnote.work(footerheader)
-    assert not empty(user)
+        user, _ = decider_footnote.features.style.work(footerheader)
+    result = load_byid(user, 2003)
+    assert len(result) == 255
 
 
 def test_footnotes_work_highnote_size(monkeypatch):
     # TODO: LOOK FOR AN EXAMPLE WITH WRONG HIGHNOTE SIZE
     footerheader = iamraw.path.headerfooters(tests.resources.MASTER72)
-    with active_ids(
-            monkeypatch,
-            ids=[2004],
-    ) as context:
+    with monkeypatch.context() as context:
         context.setattr(
-            decider_footnote.features.footnote,
+            decider_footnote.features.style,
             'MAX_HIGHNOTE_SIZE_DIFF',
             0.0,
         )
-        user, _ = decider_footnote.features.footnote.work(footerheader)
-    assert empty(user), user
+        user, _ = decider_footnote.features.style.work(footerheader)
+    result = load_byid(user, 2004)
+    assert not result
 
 
-def test_footnotes_work_highnote_font_family(monkeypatch):
+def test_footnotes_work_highnote_font_family():
     footerheader = iamraw.path.headerfooters(tests.resources.MASTER72)
-    with active_ids(
-            monkeypatch,
-            ids=[2005],
-    ):
-        user, _ = decider_footnote.features.footnote.work(footerheader)
-    assert not empty(user), 'no invalid font detection'
+    user, _ = decider_footnote.features.style.work(footerheader)
+    result = load_byid(user, 2005)
+    assert len(result) == 2
+
+
+def load_byid(content: str, selected=None):
+    # TODO: REPLACE AFTER UPGRADING PROTOCOL
+    content = protocol.load_result(content)
+    result = tests.select_finding(content, selected)
+    return result

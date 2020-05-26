@@ -19,3 +19,12 @@ def footnote(path: str, prefix: str = '') -> str:
         'footnote_user',
         prefix,
     )
+
+
+def style(path: str, prefix: str = '') -> str:
+    return utila.pathconnector(
+        path,
+        decider_footnote.PROCESS,
+        'style_user',
+        prefix,
+    )
