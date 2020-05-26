@@ -9,6 +9,7 @@
 
 import protocol
 
+import tests
 import tests.resources
 import tests.toc_
 
@@ -22,7 +23,7 @@ def test_toc_cli_master99_headline_too_long(testdir, monkeypatch):
     tests.toc_.run(f'-i {source}', monkeypatch=monkeypatch)
 
     findings = protocol.findings_from_path(testdir.tmpdir)
-    assert len(tests.toc_.select(findings, 1382)) == 1
+    assert len(tests.select(findings, 1382)) == 1
 
 
 def test_toc_cli_master99_chapter_too_long(testdir, monkeypatch):
@@ -30,7 +31,7 @@ def test_toc_cli_master99_chapter_too_long(testdir, monkeypatch):
     tests.toc_.run(f'-i {source}', monkeypatch=monkeypatch)
 
     findings = protocol.findings_from_path(testdir.tmpdir)
-    assert len(tests.toc_.select(findings, 1370)) == 4
+    assert len(tests.select(findings, 1370)) == 4
 
 
 def test_toc_cli_master98_chapter_too_short(testdir, monkeypatch):
@@ -38,4 +39,4 @@ def test_toc_cli_master98_chapter_too_short(testdir, monkeypatch):
     tests.toc_.run(f'-i {source}', monkeypatch=monkeypatch)
 
     findings = protocol.findings_from_path(testdir.tmpdir)
-    assert len(tests.toc_.select(findings, 1371)) == 1
+    assert len(tests.select(findings, 1371)) == 1

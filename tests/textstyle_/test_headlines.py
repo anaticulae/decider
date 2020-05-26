@@ -12,6 +12,7 @@ import doctextstyle.serialize
 import protocol
 
 import decider_textstyle.path
+import tests
 import tests.resources
 import tests.textstyle_
 

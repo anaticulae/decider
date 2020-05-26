@@ -30,3 +30,20 @@ def tableofcontent(path: str) -> iamraw.Toc:
     path = groupme.path.toc(path)
     result = serializeraw.load_toc(path)
     return result
+
+
+# TODO: MOVE TO PROTOCOL
+def select(items, selected=None):
+    if isinstance(selected, int):
+        selected = [selected]
+    content = [item.content for item in items]
+    flatten = utila.flatten(content)
+    ids = [item.msgid for item in flatten]
+    if selected:
+        ids = [item for item in ids if item in selected]
+    return ids
+
+
+def select_finding(findings, msgid: int):
+    # TODO: REPLACE WITH PROTCOL CODE
+    return [item for item in findings if item.msgid == msgid]
