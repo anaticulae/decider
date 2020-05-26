@@ -200,15 +200,3 @@ def level_three(items):
     if group:
         result.append(group)
     return result
-
-
-def split_bysection(items):
-    if not items:
-        return []
-    result = [[items[0]]]
-    for item in items[1:]:
-        if result[-1][-1][1] == item[1]:
-            result[-1].append(item)
-        else:
-            result.append([item])
-    return result
