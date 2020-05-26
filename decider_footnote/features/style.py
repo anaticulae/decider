@@ -61,9 +61,10 @@ def linting(
 
 
 SOLUTION_2003 = """\
-Fußnote {%number%} invalid highnote rise
+Fußnote {%number%} falsch formatiert
 
-Expected: {%expected%} != Current: {%current%}
+Die Schriftgröße der Fußnotenummer {%current%} weicht von der
+erwarteten Schriftgröße der Fußnotennummer {%expected%} ab.
 
 {text/fussnote#formatierung}
 """
@@ -86,9 +87,10 @@ def check_2003_invalid_highnote_rise(linter, driver):
 
 
 SOLUTION_2004 = """\
-Fußnote {%number%}: invalid highnote size
+Fußnote {%number%} falsch formatiert
 
-Expected: {%expected%} != Current: {%current%}
+Die Schriftgröße {%current%} weicht von der
+erwarteten Schriftgröße {%expected%} ab.
 
 {text/fussnote#formatierung}
 """
@@ -111,9 +113,10 @@ def check_2004_invalid_hignote_size(linter, driver):
 
 
 SOLUTION_2005 = """\
-Fußnote {%number%}: invalid font family
+Fußnote {%number%} falsch formatiert
 
-Expected: {%expected%} != Current: {%current%}
+Die Schriftart {%current%} weicht von der
+erwarteten Schriftart {%expected%} ab.
 
 {text/fussnote#formatierung}
 """
@@ -136,9 +139,10 @@ def check_2005_invalid_highnote_fontfamily(linter, driver):
 
 
 SOLUTION_2010 = """\
-Fußnote {%number%}: invalid content size
+Fußnote {%number%} falsch formatiert
 
-Expected: {%expected%} != Current: {%current%}
+Die Schriftgröße {%current%} weicht von der
+erwarteten Schriftgröße {%expected%} ab.
 
 {text/fussnote#formatierung}
 """
@@ -152,7 +156,6 @@ def check_2010_invalid_content_fontsize(linter, driver):
     sizes_equal = [
         utila.near(item, expected, MAX_CONTENT_SIZE_DIFF) for item in sizes
     ]
-
     if all(sizes_equal):
         return
 
