@@ -11,7 +11,7 @@ decider_toc
 decider_textstyle
 -----------------
 
-* [ ] chapter starts on new page
+* [x] chapter starts on new page
 
 decider_footnote
 ----------------

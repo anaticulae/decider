@@ -32,6 +32,9 @@ BACHELOR_76_DOCSTYLE = doctextstyle.data.DocTextStyle(
     h2_size=12.96,
 )
 
+# disable font style linting
+NO_STYLE = doctextstyle.data.DocTextStyle()
+
 
 def decide_headline_style(source, pages, style, testdir, monkeypatch):
     tests.textstyle_.write_docstyle(style, testdir.tmpdir)
@@ -84,5 +87,19 @@ def test_decider_headlines_bachelor76(testdir, monkeypatch):
         monkeypatch,
     )
     # TODO: IMPROVE HEADLINE EXTRACTOR
-    expected = 27  # not correct, but indicates that algo changed
+    expected = 33  # not correct, but indicates that algo changed
     assert len(findings) == expected
+
+
+def test_decider_headlines_chapter_on_new_page(testdir, monkeypatch):
+    source = tests.resources.BACHELOR76
+    pages = '0:42'
+    findings = decide_headline_style(
+        source,
+        pages,
+        NO_STYLE,
+        testdir,
+        monkeypatch,
+    )
+    no_new_page_start = tests.select_finding(findings, 7540)
+    assert len(no_new_page_start) == 2, str(no_new_page_start)

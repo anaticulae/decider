@@ -317,6 +317,47 @@ def check_7523_check_h3_distance_after(linter: callable, driver):
     )
 
 
+SOLUTION_7540 = """\
+Kapitel beginnt nicht auf neuer Seite
+
+Das Kapitel „{%chapter%}“ beginnt nicht auf einer neuen Seite. Fügen
+Sie vor dem Kapitelstart einen Seitenumbruch ein.
+
+{WORD}
+Passen Sie dazu die **Formatvorlage der Überschriften** Level 1 an oder
+verwenden Sie einen **manuellen Zeilenumbruch**.
+{END}
+
+* TODO: Article with explaination
+{WORD}
+* Formatvorlage anpassen
+* Manueller Seitenumbruch
+{END}
+"""
+
+
+def check_7540_chapter_on_new_page(linter: callable, driver):
+    headlines = utila.flatten(driver.headlines)
+    headlines = [headline for headline in headlines if headline.level == 1]
+    for headline in headlines:
+        start = container_start(headline.container)
+        if start == 0:
+            # chapter starts at page begin
+            # TODO: CHECK FOR HEADER OR PAGE NUMBER BEFORE HEADLINE? MAY
+            # BE NOT ZERO?
+            continue
+        containers_ = containers(headline.container)
+        location = protocol.RangedLocation(
+            page=headline.page,
+            line=containers_[0],
+            line_end=containers_[-1],
+        )
+        linter(
+            location=location,
+            chapter=headline.text,
+        )
+
+
 def validate_headline_size(
         linter,
         navigators,
@@ -431,6 +472,12 @@ def validate_headline_distance(
             expected=expected_distance,
             current=before if check_before else after,
         )
+
+
+def container_start(item):
+    with contextlib.suppress(TypeError):
+        return item[0]
+    return item
 
 
 def containers(item) -> tuple:
