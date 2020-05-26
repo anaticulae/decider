@@ -2,6 +2,19 @@
 
 Every noteable change is logged here.
 
+## v0.17.0
+
+### Feature
+
+* add general step to judge footnotes (6cbcc1386d28)
+* add toc linter to to mark wrong located `Eidesstattliche` (f7de57ee6c84)
+* add linter step `chapter start not on new page` (1200b5e2e5de)
+* add separate `decider_footnote` application (753ac65efe9f)
+
+### Fix
+
+* fix footnote linter messages (839ea794e509)
+
 ## v0.16.0
 
 ### Feature
