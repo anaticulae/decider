@@ -14,13 +14,13 @@ PyYAML==5.1
 utila==1.22.1
 protocol==0.9.3
 iamraw==1.25.1
-hey==2.7.1
-words==0.5.7
+hey==2.7.2
+words==0.5.8
 
 # define holy values
 configo==0.6.6
 # docs
 writers==0.3.12
 
-german==0.3.11
-konrad==0.2.10
+german==0.3.12
+konrad==0.2.11

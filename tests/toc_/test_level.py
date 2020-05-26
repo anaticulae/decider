@@ -76,20 +76,12 @@ def test_toc_validate_children(source, invalids):
     assert len(validated) == invalids, str(len(validated))
 
 
+# yapf:disable
 @pytest.mark.parametrize('source, too_deep', [
-    pytest.param(
-        tests.resources.TECHNICAL24,
-        TECHNICAL24_TOO_DEEP,
-        id='technical24',
-    ),
-    pytest.param(
-        tests.resources.MASTER72,
-        6,
-        id='master72',
-        marks=pytest.mark.xfail(
-            reason='fix toc extractor, shrink to first pages'),
-    ),
+    pytest.param(tests.resources.TECHNICAL24, TECHNICAL24_TOO_DEEP, id='technical24'),
+    pytest.param(tests.resources.MASTER72, 6, id='master72'),
 ])
+# yapf:enable
 def test_toc_validate_deepness(source, too_deep):
     toc = tests.tableofcontent(source)
     maxdeep = 2
