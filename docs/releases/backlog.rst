@@ -5,6 +5,8 @@ backlog
 
 * duplicated sections: repeat section name in child node
 * add toc rating number?
+* footnote distance checker
+
 
 citomas
 -------

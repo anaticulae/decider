@@ -20,20 +20,19 @@ decider_footnote
 
 * [x] add ascending footnote checker, see bachelor90
 
-* [ ] footnote size checker
-
-* [ ] footnote distance checker
-
-quality
--------
-
-* [ ] increase coverage to 97.0%
+* [x] footnote size checker
 
 code quality
 ------------
 
+before
+~~~~~~
+
+* Total coverage: 94.38%
+* Your code has been rated: 10.0/10
+
 after
 ~~~~~
 
-* Total coverage: 94.38%
+* Total coverage: 94.66%
 * Your code has been rated: 10.0/10
