@@ -12,11 +12,11 @@ import utila
 import decider_footnote
 
 
-def footnote(path: str, prefix: str = '') -> str:
+def rules(path: str, prefix: str = '') -> str:
     return utila.pathconnector(
         path,
         decider_footnote.PROCESS,
-        'footnote_user',
+        'rules_user',
         prefix,
     )
 

@@ -18,7 +18,7 @@ DEVELOPER = 'developer'
 
 WORKPLAN = [
     utila.create_step(
-        'footnote',
+        'rules',
         [
             utila.ResultFile('groupme', 'footer_footerheader'),
         ],

@@ -13,7 +13,7 @@ import iamraw.path
 import protocol
 import pytest
 
-import decider_footnote.features.footnote
+import decider_footnote.features.rules
 import decider_footnote.features.style
 import decider_footnote.footnote
 import tests.resources
@@ -59,7 +59,7 @@ def active_ids(monkeypatch, ids=None):
     if ids is None:
         ids = []
     with monkeypatch.context() as context:
-        parsed = protocol.parse_checkers(decider_footnote.features.footnote)
+        parsed = protocol.parse_checkers(decider_footnote.features.rules)
         for item in parsed:
             msgid = protocol.parse_msgid(item.__name__)
             if msgid in ids:
@@ -76,7 +76,7 @@ def empty(result):
 def test_footnotes_work_disable_all(monkeypatch):
     footerheader = iamraw.path.headerfooters(tests.resources.MASTER72)
     with active_ids(monkeypatch, ids=[]):
-        user, _ = decider_footnote.features.footnote.work(footerheader)
+        user, _ = decider_footnote.features.rules.work(footerheader)
     assert empty(user), f'not all events are disabled:\n {user}'
 
 

@@ -20,13 +20,13 @@ def test_decider_footnote_cli_help(monkeypatch):
     tests.footnote_.run('--help', monkeypatch=monkeypatch)
 
 
-def test_cli_footnotes(testdir, monkeypatch):  ## pylint:disable=W0621
+def test_cli_rules(testdir, monkeypatch):  ## pylint:disable=W0621
     root = str(testdir)
 
     cmd = f'-i {tests.resources.MASTER72} -o {root}'
     tests.footnote_.run(cmd, monkeypatch=monkeypatch)
 
-    outpath = decider_footnote.path.footnote(root)
+    outpath = decider_footnote.path.rules(root)
     assert os.path.exists(outpath), outpath
 
     dumped = utila.file_read(outpath)
