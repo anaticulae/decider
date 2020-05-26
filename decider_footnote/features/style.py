@@ -53,10 +53,7 @@ def linting(
             location=location,
         )
         for item in footer.content:
-            datum = protocol.driver(
-                item=item,
-                fontconfig=fontconfig,
-            )
+            datum = protocol.driver(item=item, fontconfig=fontconfig)
             checker(call, datum)
 
 
@@ -79,11 +76,7 @@ def check_2003_invalid_highnote_rise(linter, driver):
     if utila.near(current, expected, MAX_HIGHNOTE_RISE_DIFF):
         return
 
-    linter(
-        number=item.number,
-        current=current,
-        expected=expected,
-    )
+    linter(number=item.number, current=current, expected=expected)
 
 
 SOLUTION_2004 = """\
@@ -105,11 +98,7 @@ def check_2004_invalid_hignote_size(linter, driver):
     if utila.near(current, expected, MAX_HIGHNOTE_SIZE_DIFF):
         return
 
-    linter(
-        number=item.number,
-        current=current,
-        expected=expected,
-    )
+    linter(number=item.number, current=current, expected=expected)
 
 
 SOLUTION_2005 = """\
@@ -131,11 +120,7 @@ def check_2005_invalid_highnote_fontfamily(linter, driver):
     if current == expected:
         return
 
-    linter(
-        number=item.number,
-        current=current,
-        expected=expected,
-    )
+    linter(number=item.number, current=current, expected=expected)
 
 
 SOLUTION_2010 = """\
@@ -159,8 +144,4 @@ def check_2010_invalid_content_fontsize(linter, driver):
     if all(sizes_equal):
         return
 
-    linter(
-        number=item.number,
-        current=sizes,
-        expected=expected,
-    )
+    linter(number=item.number, current=sizes, expected=expected)
