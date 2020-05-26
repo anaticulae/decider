@@ -9,6 +9,7 @@
 
 import groupme.path
 import iamraw
+import protocol
 import serializeraw
 import utila
 
@@ -47,3 +48,10 @@ def select(items, selected=None):
 def select_finding(findings, msgid: int):
     # TODO: REPLACE WITH PROTCOL CODE
     return [item for item in findings if item.msgid == msgid]
+
+
+def load_byid(content: str, selected=None):
+    # TODO: REPLACE AFTER UPGRADING PROTOCOL
+    content = protocol.load_result(content)
+    result = select_finding(content, selected)
+    return result

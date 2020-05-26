@@ -89,7 +89,7 @@ def test_footnotes_work_highnote_rise(monkeypatch):
             0.0,
         )
         user, _ = decider_footnote.features.style.work(footerheader)
-    result = load_byid(user, 2003)
+    result = tests.load_byid(user, 2003)
     assert len(result) == 255
 
 
@@ -103,19 +103,12 @@ def test_footnotes_work_highnote_size(monkeypatch):
             0.0,
         )
         user, _ = decider_footnote.features.style.work(footerheader)
-    result = load_byid(user, 2004)
+    result = tests.load_byid(user, 2004)
     assert not result
 
 
 def test_footnotes_work_highnote_font_family():
     footerheader = iamraw.path.headerfooters(tests.resources.MASTER72)
     user, _ = decider_footnote.features.style.work(footerheader)
-    result = load_byid(user, 2005)
+    result = tests.load_byid(user, 2005)
     assert len(result) == 2
-
-
-def load_byid(content: str, selected=None):
-    # TODO: REPLACE AFTER UPGRADING PROTOCOL
-    content = protocol.load_result(content)
-    result = tests.select_finding(content, selected)
-    return result
