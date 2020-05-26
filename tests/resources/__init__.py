@@ -45,6 +45,9 @@ BACHELOR37 = os.path.join(GENERATED, 'bachelor_page_37_tables')
 BACHELOR76_PDF = os.path.join(BACHELOR, 'page76.pdf')
 BACHELOR76 = os.path.join(GENERATED, 'bachelor_page76')
 
+BACHELOR90_PDF = os.path.join(BACHELOR, 'bachelor90.pdf')
+BACHELOR90 = os.path.join(GENERATED, 'bachelor_bachelor90')
+
 MASTER72_PDF = os.path.join(MASTER, 'page_72_noimages_toc.pdf')
 MASTER72 = os.path.join(GENERATED, 'master_page_72_noimages_toc')
 
@@ -73,6 +76,7 @@ TODO = [
     (MASTER116_PDF, '0:10,90:115'),
     (BACHELOR76_PDF, ':'),
     (MASTER72_PDF, ':'),
+    (BACHELOR90_PDF, ':'),
     (BACHELOR37_PDF, '0:10'),
     (DOCU_TWINE_PDF, '0:10'),
     (LEFTRIGHT_PDF, '0:10'),
@@ -100,6 +104,8 @@ REQURIED_RESOURCES = [
     BACHELOR37_PDF,
     BACHELOR76,
     BACHELOR76_PDF,
+    BACHELOR90,
+    BACHELOR90_PDF,
     BOOK,
     DOCU_TWINE,
     DOCU_TWINE_PDF,
