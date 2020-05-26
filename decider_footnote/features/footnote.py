@@ -16,7 +16,6 @@ import functools
 import typing
 
 import protocol
-import utila
 
 import decider_footnote.footnote
 
@@ -25,34 +24,18 @@ def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
     linter = protocol.from_module(__name__)
 
     headerfooters = decider_footnote.footnote.load(footerheader, pages)
-    footnotes = utila.flatten([item.content for item in headerfooters if item])
-    fontconfig = decider_footnote.footnote.most_common_font(footnotes)
 
     for footer in headerfooters:
         # run linter
-        linting(footer.content, fontconfig, footer.page, linter)
+        linting(footer, linter)
 
     result = linter.result(unique=True)
     user, developer = protocol.dump_result(result)
     return user, developer
 
 
-def linting(
-        items,
-        fontconfig: decider_footnote.footnote.FootNoteStyle,
-        page: int,
-        linter: protocol.Linter,
-):
-    location = protocol.Location.from_page(page)
-
-    if fontconfig:
-        # validation requires valid font config
-        datum = protocol.driver(
-            location=location,
-            fontconfig=fontconfig,
-        )
-    else:
-        datum = protocol.driver(location=location)
+def linting(footer, linter: protocol.Linter):
+    location = protocol.Location.from_page(footer.page)
 
     checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
@@ -61,12 +44,8 @@ def linting(
             msgid=checker.msgid,
             location=location,
         )
-        for item in items:
-            try:
-                checker(call, item, datum)
-            except TypeError:
-                # no `datum` required
-                checker(call, item)
+        for item in footer.content:
+            checker(call, item)
 
 
 SOLUTION_2001 = """\
