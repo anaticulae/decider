@@ -12,6 +12,15 @@ import utila
 import decider_footnote
 
 
+def global_(path: str, prefix: str = '') -> str:
+    return utila.pathconnector(
+        path,
+        decider_footnote.PROCESS,
+        'global_user',
+        prefix,
+    )
+
+
 def rules(path: str, prefix: str = '') -> str:
     return utila.pathconnector(
         path,

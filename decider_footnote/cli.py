@@ -18,6 +18,13 @@ DEVELOPER = 'developer'
 
 WORKPLAN = [
     utila.create_step(
+        'global',
+        [
+            utila.ResultFile('groupme', 'footer_footerheader'),
+        ],
+        (USER, DEVELOPER),
+    ),
+    utila.create_step(
         'rules',
         [
             utila.ResultFile('groupme', 'footer_footerheader'),

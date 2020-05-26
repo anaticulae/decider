@@ -18,7 +18,7 @@ decider_footnote
 
 * [x] add separate cli
 
-* [ ] add ascending footnote checker, see bachelor90
+* [x] add ascending footnote checker, see bachelor90
 
 * [ ] footnote size checker
 
