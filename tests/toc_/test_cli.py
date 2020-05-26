@@ -40,3 +40,11 @@ def test_toc_cli_master98_chapter_too_short(testdir, monkeypatch):
 
     findings = protocol.findings_from_path(testdir.tmpdir)
     assert len(tests.select(findings, 1371)) == 1
+
+
+def test_toc_cli_bachelor76_legal_inside_toc(testdir, monkeypatch):
+    source = tests.resources.BACHELOR76
+    tests.toc_.run(f'-i {source} --rules', monkeypatch=monkeypatch)
+
+    findings = protocol.findings_from_path(testdir.tmpdir)
+    assert len(tests.select(findings, 1365)) == 1

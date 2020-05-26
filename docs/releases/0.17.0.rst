@@ -6,7 +6,7 @@ RP 0.17.0
 decider_toc
 -----------
 
-* [ ] Eidesstaatliche Erklärung is not part of page counting
+* [x] Eidesstaatliche Erklärung is not part of page counting
 
 decider_textstyle
 -----------------

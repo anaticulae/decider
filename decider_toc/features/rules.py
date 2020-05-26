@@ -13,9 +13,11 @@ import typing
 import iamraw
 import protocol
 import serializeraw
+import utila
 
 import decider_toc.level as dtl
 import decider_toc.pages as dtp
+import decider_toc.utils
 
 
 def work(tableofcontent: str) -> typing.Tuple[str, str]:
@@ -89,3 +91,43 @@ def check_1360_toc_ascending_pages(linter, toc: iamraw.Toc):
             text=item.text,
             location=location,
         )
+
+
+SOLUTION_1365 = """\
+Eidesstattliche Erklärung als Teil der Arbeit
+
+Die Eidesstatttliche Erklärung ist kein Teil der Prüfungsleistung und
+wird somit nicht im Inhaltsverzeichnis aufgeführt und wird ebenfalls
+nicht bei der Seitenzählung berücksichtigt.
+
+TODO: ADD ARTICLE
+"""
+
+# TODO: MOVE TO KONRAD?
+# TODO: ADD METHOD WHICH CAN JUDGE TYPOS TOO
+# TODO: LOWER
+LEGAL = set(item.lower() for item in [
+    'Eidesstattliche Erklärung',
+    'Eidesstattliche Versicherung',
+])
+
+
+def islegal(item: str) -> bool:
+    item = item.strip().lower()
+    return item in LEGAL
+
+
+def check_1365_toc_legal_inside_toc(linter, toc: iamraw.Toc):
+    if not toc:
+        return
+    toc = decider_toc.utils.flat(toc)
+
+    legal_intoc = [item for item in toc if islegal(item.title)]
+    if not legal_intoc:
+        return
+
+    location = protocol.Location.from_page(legal_intoc[0].raw_location)
+    linter(location=location)
+
+    if len(legal_intoc) >= 2:
+        utila.error(f'multiple legal toc detected {legal_intoc}')
