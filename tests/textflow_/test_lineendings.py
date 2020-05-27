@@ -7,9 +7,10 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import protocol
 import utila
 
+import decider_textflow.path
+import tests
 import tests.resources
 import tests.textflow_
 
@@ -25,22 +26,22 @@ def run_textflow(
         actions += ' --lineending'
     if quotation:
         actions += ' --quotation'
-    utila.run(f'textflow -i {source} --pages={pages} {actions}')
+    utila.run(f'textflow -i={source}  --pages={pages} {actions}')
 
 
-def test_lineendings_master83_page6(testdir, monkeypatch):  # pylint:disable=W0621
-    root = testdir.tmpdir
+def test_lineendings_master83_page6_lineending(testdir, monkeypatch):  # pylint:disable=W0621
+    source = tests.resources.MASTER83
     run_textflow(
-        tests.resources.MASTER83,
+        source,
         pages='6',
         lineending=True,
         quotation=True,
     )
-
     # lint result
-    tests.textflow_.run('', monkeypatch=monkeypatch)
+    tests.textflow_.run(f'-i={source}', monkeypatch=monkeypatch)
 
-    loaded = [item.content for item in protocol.findings_from_path(root)]
-    loaded = utila.flatten(loaded)
-    linted = [item.msgid for item in loaded]
-    assert len(linted) == 2, str(linted)
+    result = tests.load_byid(
+        decider_textflow.path.lineendings_linted(testdir.tmpdir),
+        7000,
+    )
+    assert len(result) == 2, str(result)

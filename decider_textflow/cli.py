@@ -25,6 +25,17 @@ WORKPLAN = [
         inputs=[utila.ResultFile(textflow.PROCESS, 'quotation_quotation')],
         output=('user', 'developer'),
     ),
+    utila.create_step(
+        'writing',
+        inputs=[
+            utila.ResultFile('words', 'headlines_headlines'),
+            utila.ResultFile('rawmaker', 'oneline_text_text'),
+            utila.ResultFile('rawmaker', 'oneline_text_positions'),
+            utila.ResultFile('rawmaker', 'border_pages'),
+            utila.ResultFile('groupme', 'footer_footerheader'),
+        ],
+        output=('user', 'developer'),
+    ),
 ]
 
 
@@ -37,6 +48,7 @@ def main():
             description=DESCRIPTION,
             multiprocessed=True,
             name=decider_textflow.PROCESS,
+            pages=True,
             version=decider_textflow.__version__,
         ),
     )
