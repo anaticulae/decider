@@ -7,31 +7,15 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import utila
-
 import decider_textflow.path
 import tests
 import tests.resources
 import tests.textflow_
 
 
-def run_textflow(
-        source,
-        pages,
-        lineending: bool = False,
-        quotation: bool = False,
-):
-    actions = ''
-    if lineending:
-        actions += ' --lineending'
-    if quotation:
-        actions += ' --quotation'
-    utila.run(f'textflow -i={source}  --pages={pages} {actions}')
-
-
 def test_lineendings_master83_page6_lineending(testdir, monkeypatch):  # pylint:disable=W0621
     source = tests.resources.MASTER83
-    run_textflow(
+    tests.textflow_.run_textflow(
         source,
         pages='6',
         lineending=True,

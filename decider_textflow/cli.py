@@ -14,27 +14,31 @@ import decider_textflow
 
 DESCRIPTION = ''
 
+CONTENT_INPUT = [
+    utila.ResultFile('words', 'headlines_headlines'),
+    utila.ResultFile('rawmaker', 'oneline_text_text'),
+    utila.ResultFile('rawmaker', 'oneline_text_positions'),
+    utila.ResultFile('rawmaker', 'border_pages'),
+    utila.ResultFile('groupme', 'footer_footerheader'),
+]
+
+LINT_OUT = ('user', 'developer')
+
 WORKPLAN = [
     utila.create_step(
         'lineending',
         inputs=[utila.ResultFile(textflow.PROCESS, 'lineending_lastchar')],
-        output=('user', 'developer'),
+        output=LINT_OUT,
     ),
     utila.create_step(
         'quotation',
         inputs=[utila.ResultFile(textflow.PROCESS, 'quotation_quotation')],
-        output=('user', 'developer'),
+        output=LINT_OUT,
     ),
     utila.create_step(
         'writing',
-        inputs=[
-            utila.ResultFile('words', 'headlines_headlines'),
-            utila.ResultFile('rawmaker', 'oneline_text_text'),
-            utila.ResultFile('rawmaker', 'oneline_text_positions'),
-            utila.ResultFile('rawmaker', 'border_pages'),
-            utila.ResultFile('groupme', 'footer_footerheader'),
-        ],
-        output=('user', 'developer'),
+        inputs=CONTENT_INPUT,
+        output=LINT_OUT,
     ),
 ]
 

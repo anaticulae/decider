@@ -26,3 +26,17 @@ fail = functools.partial(
     process=decider_textflow.PROCESS,
     success=False,
 )
+
+
+def run_textflow(
+        source,
+        pages,
+        lineending: bool = False,
+        quotation: bool = False,
+):
+    actions = ''
+    if lineending:
+        actions += ' --lineending'
+    if quotation:
+        actions += ' --quotation'
+    utila.run(f'textflow -i={source}  --pages={pages} {actions}')
