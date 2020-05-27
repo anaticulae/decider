@@ -7,7 +7,6 @@ backlog
 * add toc rating number?
 * footnote distance checker
 
-
 citomas
 -------
 
