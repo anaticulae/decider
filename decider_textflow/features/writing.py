@@ -7,16 +7,13 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import functools
 import typing
 
 import german
 import iamraw
 import protocol
-import serializeraw
-import utila
 
-import decider_textstyle.utils
+import decider_textflow.features
 
 
 def work(  # pylint:disable=R0914
@@ -27,42 +24,16 @@ def work(  # pylint:disable=R0914
         headerfooter: str,
         pages: tuple = None,
 ) -> typing.Tuple[str, str]:
-    headlines = serializeraw.load_headlines(headlines, pages=pages)
-    navigators = decider_textstyle.utils.create_pagetextcontentnavigators_fromfile(
-        text=text,
-        textpositions=textpositions,
-        sizeandborderpath=sizeandborders,
-        headerfooterpath=headerfooter,
+    driver = decider_textflow.features.textdata(
+        headlines,
+        text,
+        textpositions,
+        sizeandborders,
+        headerfooter,
         pages=pages,
     )
-
-    if not headlines:
-        utila.error('no headlines given')
-    if not navigators:
-        utila.error('no navigators given')
-
-    linter = protocol.from_module(__name__)
-    if navigators and headlines:
-        chunks = decider_textstyle.utils.text_chunks(
-            headlines,
-            navigators,
-        )
-        data = protocol.driver(text_chunks=chunks)
-        linting(data, linter)
-
-    result = linter.result(unique=True)
-    user, developer = protocol.dump_result(result)
-    return user, developer
-
-
-def linting(driver, linter: protocol.Linter):
-    checkers = protocol.parse_checkers(__name__)
-    for checker in checkers:
-        call = functools.partial(
-            linter.add_finding,
-            msgid=checker.msgid,
-        )
-        checker(call, driver)
+    result = decider_textflow.features.linting(__name__, driver)
+    return result
 
 
 SOLUTION_7600 = """\
