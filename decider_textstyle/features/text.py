@@ -14,6 +14,7 @@ import typing
 import doctextstyle.parser
 import doctextstyle.serialize
 import iamraw
+import iamraw.fonts
 import protocol
 import serializeraw
 import serializeraw.border
@@ -140,6 +141,40 @@ def check_7551_check_text_family(linter: callable, driver):
             )
             # TODO: CHECK FOR SINGLE CHAR OR WORDS TO BIG, BUT EXCLUDE HIGHNOTES
             linter(location=location, expected=expected, current=current)
+
+
+SOLUTION_7555 = """\
+Text: Unzulässige Markierung
+
+Der Text weist unnötige Hervorhebungen auf. Es ist nicht nötig den Leser
+durch typografische Veränderungen auf besonders `wichtige` Punkte
+hinzuweisen. Dies erschwert den Lesefluss.
+
+TODO: SIEHE ARTIKEL THEISSEN
+"""
+
+
+def check_7555_text_bold(linter: callable, driver):
+    chunks = driver.text_chunks
+    for page, line, item in chunks:
+        if isinstance(item, iamraw.Headline):
+            continue
+        for style in item.style:
+            if style.font == iamraw.NO_FONT:
+                utila.error(f'no font for {page} {line} {item}')
+                continue
+            current = driver.fontstore[style.font]
+            if current.weight != iamraw.fonts.Weight.BOLD:
+                # TODO: EXCLUDE TABLE HEADLINES ETC.
+                continue
+            location = protocol.RangedLocation(
+                page=page,
+                line=line,
+                token=style.start,
+                token_end=style.end,
+            )
+            # TODO: CHECK FOR SINGLE CHAR OR WORDS TO BIG, BUT EXCLUDE HIGHNOTES
+            linter(location=location)
 
 
 # TODO: REPLACE WITH IAMRAW CODE

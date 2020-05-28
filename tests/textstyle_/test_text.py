@@ -14,6 +14,8 @@ import decider_textstyle.path
 import tests.resources
 import tests.textstyle_
 
+NO_STYLE = doctextstyle.data.DocTextStyle()
+
 
 def decide_text_style(source, pages, style, testdir, monkeypatch):
     tests.textstyle_.write_docstyle(style, testdir.tmpdir)
@@ -41,7 +43,7 @@ def test_decider_text_master72_2_20_fontsize(testdir, monkeypatch):
 
 
 def test_decider_text_master72_2_10_fontfamily(testdir, monkeypatch):
-    style = doctextstyle.data.DocTextStyle(text_family=873240484)
+    style = doctextstyle.data.DocTextStyle(text_family=1386554774)
     source = tests.resources.MASTER72
     pages = '2:10'
     findings = decide_text_style(
@@ -51,4 +53,18 @@ def test_decider_text_master72_2_10_fontfamily(testdir, monkeypatch):
         testdir,
         monkeypatch,
     )
-    assert len(findings) == 17
+    assert len(findings) == 41
+
+
+def test_decider_text_bachelor76_4_10_bold_font(testdir, monkeypatch):
+    source = tests.resources.BACHELOR76
+    pages = '2:10'
+    findings = decide_text_style(
+        source,
+        pages,
+        NO_STYLE,
+        testdir,
+        monkeypatch,
+    )
+    # five words marked bold
+    assert len(findings) == 5
