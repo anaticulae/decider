@@ -42,3 +42,16 @@ def test_startend_hurenkind_bachelor90_page18(testdir, monkeypatch):  # pylint:d
         7620,
     )
     assert len(result) == 1, str(result)
+
+
+def test_startend_figure_start_bachelor90_page40_55(testdir, monkeypatch):  # pylint:disable=W0621
+    source = tests.resources.BACHELOR90
+    cmd = f'-i={source} --startend --pages=40:55'
+
+    tests.textflow_.run(cmd, monkeypatch=monkeypatch)
+
+    result = tests.load_byid(
+        decider_textflow.path.startend_linted(testdir.tmpdir),
+        7625,
+    )
+    assert len(result) == 3, str(result)

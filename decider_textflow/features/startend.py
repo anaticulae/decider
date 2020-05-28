@@ -88,6 +88,42 @@ Schusterjunge: Einsame Zeile am Seitenende
 
 """
 
+SOLUTION_7625 = """\
+Seitenanfang: Seite beginnt nicht mit Text
+
+Die Grafik/Tabelle etc. sollte in den Text eingebunden werden und nicht
+direkt am Seitenanfang stehen.
+"""
+
+
+def check_7625_empty_start(linter: callable, driver):
+    text = decider_textstyle.utils.page_chunks(driver.text_chunks)
+    start, _ = page_startend(text)
+    failstart = start + 100  # TODO: HOLY VALUE
+    for page, content in text:
+        if not content:
+            continue
+        if isinstance(content[0], iamraw.Headline):
+            # TODO: ADD CHECK TO CHECK HEADLINES
+            continue
+        # TODO: HANDLE SINGLE ITEM ON PAGE
+        first = content[0]
+        if first.bounding.y0 <= failstart:
+            continue
+        location = protocol.RangedLocation(page=page, line=0)
+        linter(location)
+
+
+SOLUTION_7626 = """\
+Seitenende: Seite endet nicht mit Text
+
+"""
+
+
+def check_7626_empty_end(linter: callable, driver):
+    # TODO: DO WE REQUIRE THIS TEST OR IS IT SOLVED VIA 7625?
+    pass
+
 
 def textwidth(chunks) -> float:
     result = []
@@ -98,6 +134,26 @@ def textwidth(chunks) -> float:
 
     result = utila.mode(result)
     return result
+
+
+def page_startend(items):
+    start, end = [], []
+    for _, content in items:
+        if not content:
+            continue
+        first = content[0]
+        if not isinstance(first, iamraw.Headline):
+            first = first.bounding.y0
+            start.append(first)
+        if len(content) == 1:
+            continue
+        last = content[-1]
+        if not isinstance(first, iamraw.Headline):
+            last = last.bounding.y1
+            end.append(last)
+    start = utila.mode(start)
+    end = utila.mode(end)
+    return start, end
 
 
 def width(item):
