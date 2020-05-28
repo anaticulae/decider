@@ -44,7 +44,7 @@ def work(  # pylint:disable=R0914
         fontcontent,
         pages=pages,
     )
-    navigators = decider_textstyle.utils.create_pagetextcontentnavigators_fromfile(
+    navigators = serializeraw.create_pagetextcontentnavigators_fromfile(
         text=text,
         textpositions=textpositions,
         sizeandborderpath=sizeandborders,
