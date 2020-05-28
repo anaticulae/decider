@@ -36,6 +36,11 @@ WORKPLAN = [
         output=LINT_OUT,
     ),
     utila.create_step(
+        'startend',
+        inputs=CONTENT_INPUT,
+        output=LINT_OUT,
+    ),
+    utila.create_step(
         'writing',
         inputs=CONTENT_INPUT,
         output=LINT_OUT,

@@ -21,6 +21,15 @@ def lineendings_linted(path: str, prefix: str = '') -> str:
     )
 
 
+def startend_linted(path: str, prefix: str = '') -> str:
+    return utila.pathconnector(
+        path,
+        decider_textflow.PROCESS,
+        'startend_user',
+        prefix,
+    )
+
+
 def writing_linted(path: str, prefix: str = '') -> str:
     return utila.pathconnector(
         path,

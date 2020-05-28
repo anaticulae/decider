@@ -46,3 +46,17 @@ def text_chunks(headlines, navigators) -> list:  # pylint:disable=R1260,W0613
         # sync to first headline
         flat = flat[1:]
     return flat
+
+
+def page_chunks(items):
+    if not items:
+        return []
+    result = []
+    page = None
+    for item in items:
+        if item[0] != page:
+            result.append([item[0], [item[2]]])
+            page = item[0]
+        else:
+            result[-1][1].append(item[2])
+    return result
