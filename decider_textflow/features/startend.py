@@ -119,10 +119,9 @@ Seitenende: Seite endet nicht mit Text
 
 """
 
-
-def check_7626_empty_end(linter: callable, driver):
-    # TODO: DO WE REQUIRE THIS TEST OR IS IT SOLVED VIA 7625?
-    pass
+# def check_7626_empty_end(linter: callable, driver):
+#     # TODO: DO WE REQUIRE THIS TEST OR IS IT SOLVED VIA 7625?
+#     pass
 
 
 def textwidth(chunks) -> float:

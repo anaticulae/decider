@@ -9,12 +9,12 @@
 
 import typing
 
+import doctextstyle.serialize
 import iamraw
 import protocol
 import utila
 
 import decider_textflow.features
-import doctextstyle.serialize
 
 
 def work(  # pylint:disable=R0914
