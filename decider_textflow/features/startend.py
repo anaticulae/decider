@@ -142,12 +142,14 @@ def page_startend(items):
             continue
         first = content[0]
         if not isinstance(first, iamraw.Headline):
+            # TODO: ADD HEADLINE SUPPORT
             first = first.bounding.y0
             start.append(first)
         if len(content) == 1:
             continue
         last = content[-1]
-        if not isinstance(first, iamraw.Headline):
+        if not isinstance(last, iamraw.Headline):
+            # TODO: ADD HEADLINE SUPPORT
             last = last.bounding.y1
             end.append(last)
     start = utila.mode(start)
