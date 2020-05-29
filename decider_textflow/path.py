@@ -37,3 +37,12 @@ def writing_linted(path: str, prefix: str = '') -> str:
         'writing_user',
         prefix,
     )
+
+
+def paragraph_linted(path: str, prefix: str = '') -> str:
+    return utila.pathconnector(
+        path,
+        decider_textflow.PROCESS,
+        'paragraph_user',
+        prefix,
+    )

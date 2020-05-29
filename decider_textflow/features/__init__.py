@@ -39,7 +39,8 @@ def textdata(
         textpositions,
         sizeandborders,
         headerfooter,
-        pages,
+        textstyle=None,
+        pages=None,
 ):
     headlines = serializeraw.load_headlines(headlines, pages=pages)
     navigators = serializeraw.create_pagetextcontentnavigators_fromfile(
@@ -59,4 +60,6 @@ def textdata(
         headlines,
         navigators,
     )
+    if textstyle:
+        return protocol.driver(text_chunks=chunks, doctextstyle=textstyle)
     return protocol.driver(text_chunks=chunks)

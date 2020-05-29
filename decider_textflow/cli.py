@@ -31,6 +31,11 @@ WORKPLAN = [
         output=LINT_OUT,
     ),
     utila.create_step(
+        'paragraph',
+        inputs=CONTENT_INPUT + [utila.ResultFile('doctextstyle', 'textstyle')],
+        output=LINT_OUT,
+    ),
+    utila.create_step(
         'quotation',
         inputs=[utila.ResultFile(textflow.PROCESS, 'quotation_quotation')],
         output=LINT_OUT,
