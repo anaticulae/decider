@@ -2,6 +2,19 @@
 
 Every noteable change is logged here.
 
+## v0.18.0
+
+### Feature
+
+* add checker to lint to short paragraphs (b8812e762e50)
+* add linter to check that page start with text (2e2bf2a9b3a8)
+* add page start/end step to detect correct page start/end (febdee210309)
+* add step to lint correct using of German language (7633946c1439)
+
+### Fix
+
+* solve some linter warnings (d38c81df8c39)
+
 ## v0.17.0
 
 ### Feature
