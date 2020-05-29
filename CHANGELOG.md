@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.18.1
+
+### Fix
+
+* fix copy paste error (f9a9c4e9637d)
+
 ## v0.18.0
 
 ### Feature
