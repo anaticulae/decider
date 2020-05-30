@@ -120,7 +120,9 @@ def data(toc: iamraw.Toc) -> TocLines:
 
 
 def analyse(items: list) -> Evaluated:
-    if not items:
+    if len(items) < 2:
+        # variance requires at least two points
+        # with few items, this approach makes no sence
         return None
 
     mean = statistics.mean(items)
