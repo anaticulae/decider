@@ -82,29 +82,29 @@ def linting(driver, linter: protocol.Linter):
 FONT_SIZE_ERROR = string.Template("""\
 $title falsch formatiert
 
-Die Schriftgröße {%current%} weicht von der
-erwarteten Schriftgröße {%expected%} ab.
+Die Schriftgröße **{%current%}** weicht von der
+erwarteten Schriftgröße **{%expected%}** ab.
 """)
 
 FONT_FAMILY_ERROR = string.Template("""\
 $title falsch formatiert
 
-Die Schriftart {%current%} weicht von der
-erwarteten Schriftart {%expected%} ab.
+Die Schriftart **{%current%}** weicht von der
+erwarteten Schriftart **{%expected%}** ab.
 """)
 
 FONT_DISTANCE_BEFORE_ERROR = string.Template("""\
 $title falsch formatiert
 
-Der Abstand vor der $title {%current%} weicht vom
-erwarteten Abstand {%expected%} ab.
+Der Abstand vor der $title **{%current%}** weicht vom
+erwarteten Abstand **{%expected%}** ab.
 """)
 
 FONT_DISTANCE_AFTER_ERROR = string.Template("""\
 $title falsch formatiert
 
-Der Abstand nach der $title {%current%} weicht vom
-erwarteten Abstand {%expected%} ab.
+Der Abstand nach der $title **{%current%}** weicht vom
+erwarteten Abstand **{%expected%}** ab.
 """)
 
 LEVEL_1 = 1  # TODO: HOLY VALUE

@@ -60,8 +60,8 @@ def linting(
 SOLUTION_2003 = """\
 Fußnote {%number%} falsch formatiert
 
-Die Schriftgröße der Fußnotenummer {%current%} weicht von der
-erwarteten Schriftgröße der Fußnotennummer {%expected%} ab.
+Die Schriftgröße der Fußnotenummer **{%current%}** weicht von der
+erwarteten Schriftgröße der Fußnotennummer **{%expected%}** ab.
 
 {text/fussnote#formatierung}
 """
@@ -82,8 +82,8 @@ def check_2003_invalid_highnote_rise(linter, driver):
 SOLUTION_2004 = """\
 Fußnote {%number%} falsch formatiert
 
-Die Schriftgröße {%current%} weicht von der
-erwarteten Schriftgröße {%expected%} ab.
+Die Schriftgröße **{%current%}** weicht von der
+erwarteten Schriftgröße **{%expected%}** ab.
 
 {text/fussnote#formatierung}
 """
@@ -104,8 +104,8 @@ def check_2004_invalid_hignote_size(linter, driver):
 SOLUTION_2005 = """\
 Fußnote {%number%} falsch formatiert
 
-Die Schriftart {%current%} weicht von der
-erwarteten Schriftart {%expected%} ab.
+Die Schriftart **{%current%}** weicht von der
+erwarteten Schriftart **{%expected%}** ab.
 
 {text/fussnote#formatierung}
 """
@@ -126,8 +126,8 @@ def check_2005_invalid_highnote_fontfamily(linter, driver):
 SOLUTION_2010 = """\
 Fußnote {%number%} falsch formatiert
 
-Die Schriftgröße {%current%} weicht von der
-erwarteten Schriftgröße {%expected%} ab.
+Die Schriftgröße **{%current%}** weicht von der
+erwarteten Schriftgröße **{%expected%}** ab.
 
 {text/fussnote#formatierung}
 """
