@@ -71,7 +71,10 @@ def check_7630_paragraph_too_short(linter: callable, driver):
                     line=collected[0][1],
                     line_end=collected[-1][1],
                 )
-                linter(location)
+                linter(
+                    location=location,
+                    lines=len(collected),
+                )
             collected = []
             continue
         line_width = width(item)
