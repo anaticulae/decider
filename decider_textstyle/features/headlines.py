@@ -371,7 +371,13 @@ def validate_headline_size(
         containers_ = containers(headline.container)
         navigator = utila.select_page(navigators, headline.page)
 
-        lines_selected = [navigator[index] for index in containers_]
+        try:
+            lines_selected = [navigator[index] for index in containers_]
+        except IndexError:
+            msg = f'headline size: {containers_} out of bounds on page: {navigator.page}'
+            utila.error(msg)
+            continue
+
         textsizes_ = container_textsizes(lines_selected)
 
         if all([item == expected_size for item in textsizes_]):
@@ -409,7 +415,13 @@ def validate_headline_family(
         containers_ = containers(headline.container)
         navigator = utila.select_page(navigators, headline.page)
 
-        lines_selected = [navigator[index] for index in containers_]
+        try:
+            lines_selected = [navigator[index] for index in containers_]
+        except IndexError:
+            msg = f'headline familiy: {containers_} out of bounds on page: {navigator.page}'
+            utila.error(msg)
+            continue
+
         textfamily_ = []
         for item in container_textfamily(lines_selected):
             try:
