@@ -73,6 +73,9 @@ def check_2003_invalid_highnote_rise(linter, driver):
     current = item.style[0].rise
     expected = driver.fontconfig.highnote_rise
 
+    if isinstance(expected, list):
+        utila.error(f'ambiguous expected highnote rise: {expected}; skip')
+        return
     if utila.near(current, expected, MAX_HIGHNOTE_RISE_DIFF):
         return
 
