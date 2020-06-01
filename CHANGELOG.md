@@ -2,6 +2,19 @@
 
 Every noteable change is logged here.
 
+## v0.18.2
+
+### Feature
+
+* add strong tag to highlight extracted values (ad55d3b62c1a)
+
+### Fix
+
+* log error on headline access (5a0e689f9a9a)
+* catch ambiguous font size rise (0469201be78b)
+* ensure to have enough data (658af4e262da)
+* fix missing lines template replacing (a6f70be093f7)
+
 ## v0.18.1
 
 ### Fix
