@@ -19,6 +19,14 @@ def validate_question_mark(toc: iamraw.Toc) -> dtu.InvalidTocItems:
     return result
 
 
+def validate_general_marks(toc: iamraw.Toc) -> dtu.InvalidTocItems:
+    result = collect_mark(toc, (
+        konrad.Mark.EXCLAMATION_MARK,
+        konrad.Mark.COMMA,
+    ))
+    return result
+
+
 def collect_mark(toc: iamraw.Toc, mark: konrad.Mark) -> dtu.InvalidTocItems:
     flatten = dtu.flat(toc)
     marks = [mark] if isinstance(mark, konrad.Mark) else mark
