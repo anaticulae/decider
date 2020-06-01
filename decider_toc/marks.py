@@ -11,27 +11,29 @@ import german
 import iamraw
 import konrad
 
-import decider_toc.utils
+import decider_toc.utils as dtu
 
 
-def validate_question_mark(toc: iamraw.Toc) -> decider_toc.utils.InvalidTocItems: # yapf:disable
-    flatten = decider_toc.utils.flat(toc)
+def validate_question_mark(toc: iamraw.Toc) -> dtu.InvalidTocItems:
+    result = collect_mark(toc, konrad.Mark.QUESTION_MARK)
+    return result
 
-    lines = []
+
+def collect_mark(toc: iamraw.Toc, mark: konrad.Mark) -> dtu.InvalidTocItems:
+    flatten = dtu.flat(toc)
+    marks = [mark] if isinstance(mark, konrad.Mark) else mark
+
+    result = []
     for index, item in enumerate(flatten):
         words = german.split_words(item.title, validate_sentences=False)
-
-        contains_question = any(
-            [item == konrad.Mark.QUESTION_MARK for item in words])
-
-        if contains_question:
-            lines.append((index, item.title, item.raw_location))
-    return lines
+        contains_mark = any([item in marks for item in words])
+        if contains_mark:
+            result.append((index, item.title, item.raw_location))
+    return result
 
 
-def collect_quotation_marks(toc: iamraw.Toc) -> decider_toc.utils.InvalidTocItems: # yapf:disable
-    flatten = decider_toc.utils.flat(toc)
-
+def collect_quotation_marks(toc: iamraw.Toc) -> dtu.InvalidTocItems:
+    flatten = dtu.flat(toc)
     lines = []
     for index, item in enumerate(flatten):
         words = german.split_words(item.title, validate_sentences=False)
