@@ -459,15 +459,26 @@ def validate_headline_distance(
         containers_ = containers(headline.container)
         navigator = utila.select_page(navigators, headline.page)
         distances = doctextstyle.parser.textdistances(navigator)
-
         if check_before:
-            before = distances[containers_[0]][0]
+            # TODO: SOLVE THIS ISSUE
+            try:
+                before = distances[containers_[0]][0]
+            except IndexError:
+                utila.error(f'validate headline distance: {containers_} '
+                            f'before out of bounds {len(distances)}')
+                continue
             if before is None:
                 continue
             if utila.near(before, expected_distance, diff=MAX_HEADLINE_DIFF):
                 continue
         else:
-            after = distances[containers_[-1]][1]
+            # TODO: SOLVE THIS ISSUE
+            try:
+                after = distances[containers_[-1]][1]
+            except IndexError:
+                utila.error(f'validate headline distance: {containers_} '
+                            f'after out of bounds {len(distances)}')
+                continue
             if after is None:
                 continue
             if utila.near(after, expected_distance, diff=MAX_HEADLINE_DIFF):
