@@ -445,7 +445,7 @@ def validate_headline_family(
         )
 
 
-def validate_headline_distance(
+def validate_headline_distance(  # pylint:disable=R1260
         linter,
         navigators,
         headlines,
