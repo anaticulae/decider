@@ -114,6 +114,7 @@ def check_7110_max_citation_length(linter: callable, tokens: list):
 
 
 def iseng(tokens):
+    # TODO: REPLACE WITH GERMAN CODE
     return german.lang(tokens).language == konrad.Language.ENGLISH
 
 
