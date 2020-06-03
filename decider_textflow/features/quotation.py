@@ -14,12 +14,12 @@ import german
 import konrad
 import konrad.quotation.german
 import protocol
-import textflow.features.quotation
+import textflow.quotation.serialize
 import utila
 
 
 def work(text: str, pages: tuple) -> typing.Tuple[str, str]:
-    quotations = textflow.features.quotation.load_quotations(text)
+    quotations = textflow.quotation.serialize.load_quotations(text)
 
     # filter pages, TODO: remove after upgrading textflow
     quotations = [
