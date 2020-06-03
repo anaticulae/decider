@@ -22,13 +22,19 @@ import serializeraw
 import decider.features
 
 
-def work(tableofcontent: str) -> typing.Tuple[str, str]:
+def work(tableofcontent: str, outlines:str) -> typing.Tuple[str, str]:
     linter = protocol.from_module(__name__)
 
     tableofcontent: iamraw.Toc = serializeraw.load_toc(tableofcontent)
+    outlines = serializeraw.load_toc(outlines).
+
+    driver = protocol.driver(
+        toc=tableofcontent,
+        outlines=outlines,
+    )
 
     # run linter
-    linting(tableofcontent, linter)
+    linting(driver, linter)
 
     result = linter.result(unique=False)
 
@@ -40,16 +46,14 @@ def work(tableofcontent: str) -> typing.Tuple[str, str]:
 TOC_CHECKER_ID = 13
 
 
-def linting(toc, linter: protocol.Linter):
-    location = protocol.Location.from_page(1)
+def linting(driver, linter: protocol.Linter):
     checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
         call = functools.partial(
             linter.add_finding,
             msgid=checker.msgid,
-            location=location,
         )
-        checker(call, toc)
+        checker(call, driver)
 
 
 # TODO: ADD SOLUTION_1300_MS to link how to create table of content in word
@@ -66,7 +70,8 @@ TODO: ADD LINK TO TECHNIK
 """
 
 
-def check_1300_toc_existence(linter, toc: iamraw.Toc):
+def check_1300_toc_existence(linter, driver):
+    toc = driver.toc
     if toc.children:
         return
     linter(location=decider.features.OVERVIEW)
