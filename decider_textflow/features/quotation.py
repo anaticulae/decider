@@ -17,6 +17,8 @@ import protocol
 import textflow.quotation.serialize
 import utila
 
+MAX_CITATION_LENGTH = 50  # TODO: HOLY VALUE
+
 
 def work(text: str, pages: tuple) -> typing.Tuple[str, str]:
     quotations = textflow.quotation.serialize.load_quotations(text)
@@ -92,6 +94,22 @@ def check_7101_german_quote_double_quote_inside(linter: callable, tokens: list):
     if konrad.quotation.german.no_double_quotes_inside_double(tokens):
         return
 
+    linter()
+
+
+SOLUTION_7110 = """\
+Zitat zu lang
+
+Konzentrieren Sie sich auf den wichtigen Teil des Zitats und stellen Sie
+die eigene Denkleistung in den Vordergrund.
+
+TODO: ADD ARTICLE ABOUT OWN WORK
+"""
+
+
+def check_7110_max_citation_length(linter: callable, tokens: list):
+    if len(tokens) <= MAX_CITATION_LENGTH:
+        return
     linter()
 
 
