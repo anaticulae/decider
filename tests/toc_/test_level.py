@@ -22,12 +22,6 @@ TECHNICAL24_INVALID_CHILDREN_TO_LONG = 1
 TECHNICAL24_TOO_DEEP = 14
 
 
-def test_toc_extraction_no_toc():
-    expected_failures = [1300]
-    failures = lint(tests.resources.TWINE_NO_TOC, dtfb)
-    assert failures == expected_failures, str(failures)
-
-
 def test_toc_invalid_children(monkeypatch):
     with monkeypatch.context() as context:
         context.setattr(dtl, 'MAX_TOC_DEEPNESS', 2)
