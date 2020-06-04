@@ -22,16 +22,13 @@ import serializeraw
 import decider.features
 
 
-def work(tableofcontent: str, outlines:str) -> typing.Tuple[str, str]:
+def work(tableofcontent: str, outlines: str) -> typing.Tuple[str, str]:
     linter = protocol.from_module(__name__)
 
     tableofcontent: iamraw.Toc = serializeraw.load_toc(tableofcontent)
-    outlines = serializeraw.load_toc(outlines).
+    outlines = serializeraw.load_toc(outlines)
 
-    driver = protocol.driver(
-        toc=tableofcontent,
-        outlines=outlines,
-    )
+    driver = protocol.driver(toc=tableofcontent, outlines=outlines)
 
     # run linter
     linting(driver, linter)
@@ -75,3 +72,22 @@ def check_1300_toc_existence(linter, driver):
     if toc.children:
         return
     linter(location=decider.features.OVERVIEW)
+
+
+SOLUTION_1301 = """\
+Dokument enthält keine `Outlines`
+
+TODO: ADD LINK TO TECHNIK
+
+{elemente/inhaltsverzeichnis}
+"""
+
+
+def check_1301_outlines_existence(linter, driver):
+    outlines = driver.outlines
+    if outlines:
+        return
+    linter(location=decider.features.OVERVIEW)
+
+
+# TODO: ADD SOLUTION TO COMPARE TOC AND OUTLINES

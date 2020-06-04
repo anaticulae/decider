@@ -14,7 +14,7 @@ import tests.resources
 
 
 def test_toc_extraction_no_toc():
-    expected_failures = [1300]
+    expected_failures = [1300, 1301]
     failures = lint(tests.resources.TWINE_NO_TOC, dtfb)
     assert failures == expected_failures, str(failures)
 
@@ -22,7 +22,11 @@ def test_toc_extraction_no_toc():
 def lint(path: str, module):
     toc = tests.tableofcontent(path)
     linter = protocol.from_module(module.__name__)
-    module.linting(toc=toc, linter=linter)
+    driver = protocol.driver(
+        toc=toc,
+        outlines=None,
+    )
+    module.linting(driver=driver, linter=linter)
     result = linter.result(unique=False)
     failures = sorted(item.msgid for item in result)
     return failures

@@ -18,6 +18,7 @@ WORKPLAN = [
         'basic',
         [
             utila.ResultFile('groupme', 'toc_toc'),
+            utila.ResultFile('rawmaker', 'outlines_outlines'),
         ],
         ('user', 'developer'),
     ),
