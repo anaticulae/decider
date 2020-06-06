@@ -2,6 +2,19 @@
 
 Every noteable change is logged here.
 
+## v0.19.0
+
+### Feature
+
+* add outlines validator step (b86bc350dcea)
+* add linter to verify max citation length (ceb10df8b3d6)
+* add method to extract general marks (1fc6c6f3bc93)
+
+### Fix
+
+* add missing __init__ file (790630e4650c)
+* catch index error, solve later (3a8cb7c594d2)
+
 ## v0.18.2
 
 ### Feature
