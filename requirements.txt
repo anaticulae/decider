@@ -11,16 +11,17 @@
 PyYAML==5.1
 
 # Internal packages
-utila==1.23.0
-protocol==0.10.1
-iamraw==1.25.4
-hey==2.7.6
-words==0.6.0
+utila==1.23.1
+protocol==0.10.2
+iamraw==1.25.7
+hey==3.0.0
+detector==0.1.1
+words==0.6.1
 
 # define holy values
-configo==0.6.8
+configo==0.6.9
 # docs
-writers==0.3.14
+writers==0.3.15
 
-german==0.4.1
-konrad==0.2.15
+german==0.5.3
+konrad==0.2.16

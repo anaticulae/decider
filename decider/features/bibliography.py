@@ -12,7 +12,9 @@ import functools
 import typing
 
 import detector.bibliography.data
+import iamraw
 import protocol
+import serializeraw
 import texmex
 import texmex.alpha
 import utila
@@ -29,7 +31,7 @@ texmex.alphabetically = alphabetically
 
 
 def work(table: str) -> typing.Tuple[str, str]:
-    loaded = detector.bibliography.data.load_bibliography_reference(table)
+    loaded = serializeraw.load_bibliography_reference(table)
     with contextlib.suppress(AttributeError):
         # TODO: REMOVE LATER
         if isinstance(loaded[0], list):
@@ -42,7 +44,7 @@ def work(table: str) -> typing.Tuple[str, str]:
 
 
 def linting(
-        references: detector.bibliography.data.BibliographyReferences,
+        references: iamraw.BibliographyReferences,
         linter: protocol.Linter,
 ):
     location = protocol.Location.from_page(0)
@@ -75,15 +77,14 @@ Erwartet:
 
 def check_6000_not_sorted_alphabetically(
         linter: callable,
-        references: detector.bibliography.data.BibliographyReferences,
+        references: iamraw.BibliographyReferences,
 ):
     current = [item for item in references]
-
-    if sorted(current) == current:
+    expected = detector.bibliography.data.theissen_sort(current)
+    if current == expected:
         return
 
-    expected = sorted(current)
-    current = [f' * {item.reference}' for item in current]
+    current = [f' * {item.reference}' for item in expected]
     linter(
         current=utila.NEWLINE.join(current),
         expected=utila.NEWLINE.join(expected),
