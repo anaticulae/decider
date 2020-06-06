@@ -10,7 +10,6 @@
 import protocol
 import pytest
 
-import decider_toc.features.basic as dtfb
 import decider_toc.features.complexity as dtfc
 import decider_toc.features.rules as dtfr
 import decider_toc.level as dtl
