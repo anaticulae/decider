@@ -30,3 +30,5 @@ dasBehauptete wirklich oﬀenkundig oderbekanntist), oder stehen illegitim
 f¨ur den Nachweis selbst
 
 Menke 2015
+
+* support Roman page numbers in PageDistance Computation and Checks

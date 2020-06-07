@@ -48,3 +48,12 @@ def test_toc_cli_bachelor76_legal_inside_toc(testdir, monkeypatch):
 
     findings = protocol.findings_from_path(testdir.tmpdir)
     assert len(tests.select(findings, 1365)) == 1
+
+
+def test_toc_cli_bachelor76_roman_page_numbers(testdir, monkeypatch):
+    """Regression test to verify that roman page numbers does not break
+    page distance computation etc."""
+    source = tests.resources.BACHELOR76
+    tests.toc_.run(f'-i {source}', monkeypatch=monkeypatch)
+    findings = protocol.findings_from_path(testdir.tmpdir)
+    assert findings

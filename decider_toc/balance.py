@@ -6,6 +6,10 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
+"""TOC Balance
+===========
+
+"""
 
 import collections
 import statistics
@@ -95,8 +99,14 @@ def section_balance(toc: iamraw.Toc) -> Balance:
     return Balance(balance1, balance2, balance3)
 
 
-def level(toc: iamraw.Toc, flat: bool = True) -> Level:
+def level(toc: iamraw.Toc, *, flat: bool = True, roman: bool = False) -> Level:
+    # TODO: USE ROMAN NUMBERS
     extracted = data(toc)
+
+    # filter use roman or arabic numbers
+    extracted = [
+        item for item in extracted if utila.isroman(item.page) == roman
+    ]
 
     level1 = [item for item in level_one(extracted) if item is not None]
 
@@ -115,7 +125,12 @@ def data(toc: iamraw.Toc) -> TocLines:
     flat = decider_toc.utils.flat(toc)
     result = []
     for item in flat:
-        result.append(TocLine(int(item.page), item.level, item.title))
+        page = item.page
+        try:
+            page = int(page)
+        except ValueError:
+            page = page
+        result.append(TocLine(page, item.level, item.title))
     return result
 
 
