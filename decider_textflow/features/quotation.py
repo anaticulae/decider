@@ -66,7 +66,7 @@ Satz {%sentence%} enthält eine ungerade Anzahl von Anführungszeichen.
 
 
 def check_7100_german_quote_not_closed(linter: callable, tokens: list):
-    if not isger(tokens):
+    if not german.isger(tokens):
         return
     validated = konrad.quotation.german.double_quotation_closed(tokens)
     if validated:
@@ -86,7 +86,7 @@ Sie diese doppelten Anführungszeichen durch einfache Anführungszeichen.
 
 
 def check_7101_german_quote_double_quote_inside(linter: callable, tokens: list):
-    if not isger(tokens):
+    if not german.isger(tokens):
         return
     validated = konrad.quotation.german.double_quotation_closed(tokens)
     if not validated:
@@ -111,12 +111,3 @@ def check_7110_max_citation_length(linter: callable, tokens: list):
     if len(tokens) <= MAX_CITATION_LENGTH:
         return
     linter()
-
-
-def iseng(tokens):
-    # TODO: REPLACE WITH GERMAN CODE
-    return german.lang(tokens).language == konrad.Language.ENGLISH
-
-
-def isger(tokens):
-    return german.lang(tokens).language == konrad.Language.GERMAN
