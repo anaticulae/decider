@@ -18,6 +18,7 @@ import typing
 import protocol
 import utila
 
+import decider.features
 import decider_footnote.footnote
 
 DISABLE_2001_UPPER_CASE = 0.15
@@ -43,6 +44,12 @@ def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
     else:
         utila.info('no headerfooters')
         footnote_count = 0
+
+    send_footnote_pattern_information(
+        linter.add_finding,
+        linter.result(unique=True),
+        footnote_count,
+    )
 
     result = linter.result(unique=True)
 
@@ -119,7 +126,8 @@ def judge_active(items, footnote_count: int):
     if disable_2002:
         inactive.append(2002)
     inactive = set(inactive)  # pylint:disable=R0204
-    result = [item for item in items if item.number not in inactive]
+    # remove disabled messages
+    result = [item for item in items if item.msgid not in inactive]
     return result
 
 
@@ -131,6 +139,47 @@ def disabled(items, footnote_count: int):
     count_2001 = len([item.number == 2001 for item in items])
     count_2002 = len([item.number == 2002 for item in items])
 
-    disable_2001 = (count_2001 / footnote_count) > DISABLE_2001_UPPER_CASE
-    disable_2002 = (count_2002 / footnote_count) > DISABLE_2002_DOT_END
+    not_uppercased = utila.roundme(count_2001 / footnote_count)
+    not_dotted = utila.roundme(count_2002 / footnote_count)
+
+    utila.log(f'footnote count: {footnote_count}')
+    utila.log(f'not uppercased: {not_uppercased}')  # TODO :DECREASE LOG LEVEL
+    utila.log(f'not dotted: {not_dotted}')
+
+    disable_2001 = not_uppercased > DISABLE_2001_UPPER_CASE
+    disable_2002 = not_dotted > DISABLE_2002_DOT_END
     return disable_2001, disable_2002
+
+
+SOLUTION_2012 = """\
+Empfehlung: Anfang der Fußnote
+
+Es wird empfohlen sämtliche Fußnoten mit einen Großbuchenstaben beginnen
+zu lassen.
+
+TODO: ADD ARTICLE
+"""
+
+SOLUTION_2013 = """\
+Empfehlung: Ende der Fußnote
+
+Es wird empfohlen sämtliche Fußnoten durch einen Punkt abzuschließen.
+
+TODO: ADD ARTICLE
+"""
+
+
+def send_footnote_pattern_information(linter, items, footnote_count: int):
+    """Send hint to user to use UpperCase/Dot pattern."""
+    disable_2001, disable_2002 = disabled(items, footnote_count)
+    # TODO: USE LINTER INFORMATION TYPE
+    if disable_2001:
+        linter(
+            msgid=2012,
+            location=decider.features.OVERVIEW,
+        )
+    if disable_2002:
+        linter(
+            msgid=2013,
+            location=decider.features.OVERVIEW,
+        )
