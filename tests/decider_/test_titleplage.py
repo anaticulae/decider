@@ -9,9 +9,9 @@
 
 import os
 
+import protocol
 import pytest
 import utila
-import yaml
 
 import decider
 import decider.features.titlepage
@@ -59,7 +59,7 @@ def test_titlepage_extraction(titlepage, monkeypatch):  # pylint:disable=W0621
     tests.run_decider(cmd, monkeypatch)
 
     userpath = os.path.join(result, decider.cli.USER_LINT_OUTPUT)
-    user = yaml.load(utila.file_read(userpath), Loader=yaml.FullLoader)
+    user = protocol.load_result(userpath)
 
     failures = [item.msgid for item in user]
     assert failures == expected_failures, str(failures)

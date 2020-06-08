@@ -8,8 +8,8 @@
 # =============================================================================
 
 import iamraw.path
+import protocol
 import serializeraw
-import yaml
 
 import decider.features.page
 import tests.resources
@@ -18,7 +18,7 @@ import tests.resources
 def user_work(path: str):
     headerfooter = iamraw.path.headerfooters(path)
     user, _ = decider.features.page.work(headerfooter)
-    loaded = yaml.load(user, Loader=yaml.FullLoader)
+    loaded = protocol.load_result(user)
     return loaded
 
 
