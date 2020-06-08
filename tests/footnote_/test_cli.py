@@ -47,6 +47,7 @@ def test_cli_footnote_global(testdir, monkeypatch):  ## pylint:disable=W0621
     tests.footnote_.run(cmd, monkeypatch=monkeypatch)
 
     global_ = decider_footnote.path.global_(root)
+    # TODO: REPLACE AFTER UPGRADING TO NEW PROTOCOL
     result = tests.load_byid(global_, 2015)
     assert len(result) == 1
 
