@@ -16,8 +16,17 @@ import functools
 import typing
 
 import protocol
+import utila
 
 import decider_footnote.footnote
+
+DISABLE_2001_UPPER_CASE = 0.15
+DISABLE_2002_DOT_END = 0.15
+
+# minimum number of note to decide if we want to disable function. If we
+# had lower numbers, judging is not possible, cause we can not determine
+# if user follow this rule or not.
+DISABLE_MIN_FOOTNOTE_COUNT = 15
 
 
 def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
@@ -29,7 +38,16 @@ def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
         # run linter
         linting(footer, linter)
 
+    if headerfooters:
+        footnote_count = sum([len(item.content) for item in headerfooters])
+    else:
+        utila.info('no headerfooters')
+        footnote_count = 0
+
     result = linter.result(unique=True)
+
+    result = judge_active(result, footnote_count)
+
     user, developer = protocol.dump_result(result)
     return user, developer
 
@@ -85,3 +103,34 @@ def check_2002_no_dot_at_end(linter, item):
         return
 
     linter(number=item.number)
+
+
+def judge_active(items, footnote_count: int):
+    """Decide if some lintings are not stored, cause the user obviously
+    uses an other rules than this linter checks.
+    """
+    if not footnote_count:
+        # no footnotes, nothing to check
+        return items
+    disable_2001, disable_2002 = disabled(items, footnote_count)
+    inactive = []
+    if disable_2001:
+        inactive.append(2001)
+    if disable_2002:
+        inactive.append(2002)
+    inactive = set(inactive)  # pylint:disable=R0204
+    result = [item for item in items if item.number not in inactive]
+    return result
+
+
+def disabled(items, footnote_count: int):
+    if footnote_count < DISABLE_MIN_FOOTNOTE_COUNT:
+        # disable judeging
+        utila.info(f'to few footnotes({footnote_count}) to judge disabling')
+        return False, False
+    count_2001 = len([item.number == 2001 for item in items])
+    count_2002 = len([item.number == 2002 for item in items])
+
+    disable_2001 = (count_2001 / footnote_count) > DISABLE_2001_UPPER_CASE
+    disable_2002 = (count_2002 / footnote_count) > DISABLE_2002_DOT_END
+    return disable_2001, disable_2002
