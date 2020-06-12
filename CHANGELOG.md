@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v0.20.1
+
+### Fix
+
+* fix str conversion bug (2eae7c1f0e0b)
+* remove useless log (18e5fc976b29)
+
 ## v0.20.0
 
 ### Feature
