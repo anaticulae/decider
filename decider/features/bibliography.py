@@ -84,7 +84,10 @@ def check_6000_not_sorted_alphabetically(
     if current == expected:
         return
 
-    current = [f' * {item.reference}' for item in expected]
+    # TODO: CHECK REPRESENTATION
+    current = [f' * {item.reference}' for item in current]
+    expected = [f' * {item.reference}' for item in expected]
+
     linter(
         current=utila.NEWLINE.join(current),
         expected=utila.NEWLINE.join(expected),
