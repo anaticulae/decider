@@ -7,10 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import contextlib
-
 import iamraw.path
-import protocol
 import pytest
 
 import decider_footnote.features.rules
