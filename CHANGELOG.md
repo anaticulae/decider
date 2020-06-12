@@ -2,6 +2,19 @@
 
 Every noteable change is logged here.
 
+## v0.20.0
+
+### Feature
+
+* send information to use better footnote pattern (41169f3c32c2)
+* disable dot and upper case checker if not wanted (77a1884fcf51)
+
+### Fix
+
+* fix linter warnings (7d4a8d40a0a2)
+* fix flaky test cause this test modify global state (3eb619acfb84)
+* do not fail on roman page numbers (4d6fcf5b8fee)
+
 ## v0.19.0
 
 ### Feature
