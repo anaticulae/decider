@@ -50,7 +50,6 @@ def linting(
     location = protocol.Location.from_page(0)
     checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
-        print(checker)
         call = functools.partial(
             linter.add_finding,
             msgid=checker.msgid,
