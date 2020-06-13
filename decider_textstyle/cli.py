@@ -39,6 +39,7 @@ WORKPLAN = [
             utila.ResultFile('groupme', 'footer_footerheader'),
             utila.ResultFile('rawmaker', 'fonts_header'),
             utila.ResultFile('rawmaker', 'fonts_content'),
+            utila.ResultFile('words', 'list_list'),
         ],
         output=('user', 'developer'),
     ),

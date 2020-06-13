@@ -24,6 +24,7 @@ def work(
         sizeandborders: str,
         headerfooter: str,
         textstyle: str,
+        lists: str,
         pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     textstyle = doctextstyle.serialize.load_docstyle(textstyle)
@@ -33,6 +34,7 @@ def work(
         textpositions,
         sizeandborders,
         headerfooter,
+        lists=lists,
         textstyle=textstyle,
         pages=pages,
     )
@@ -62,6 +64,13 @@ def check_7630_paragraph_too_short(linter: callable, driver):
 
     collected = []
     for page, line, item in driver.text_chunks:
+        # TODO: USE VISITOR PATTERN
+        if isinstance(item, iamraw.PageList):
+            # TODO: THINK ABOUT WHAT WE CAN CHECK
+            # no check before list starts.
+            collected = []
+            continue
+
         if isinstance(item, iamraw.Headline):
             too_short = 2 <= len(collected) <= PARAGRAPH_TOO_SHORT
             if too_short:

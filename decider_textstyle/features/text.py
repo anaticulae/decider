@@ -32,12 +32,15 @@ def work(  # pylint:disable=R0914
         headerfooter: str,
         fontheader: str,
         fontcontent: str,
+        lists: str,
         pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     linter = protocol.from_module(__name__)
 
     expected = doctextstyle.serialize.load_docstyle(textstyle)
     headlines = serializeraw.load_headlines(headlines, pages=pages)
+
+    lists = serializeraw.load_lists(lists, pages=pages) if lists else []
 
     fontstore = serializeraw.create_fontstore(
         fontheader,
@@ -60,9 +63,12 @@ def work(  # pylint:disable=R0914
         utila.error('no navigators given')
 
     if navigators and headlines:
+        # TODO: DO WE REALY REQUIRE HEADLINES?
         chunks = decider_textstyle.utils.text_chunks(
             headlines,
             navigators,
+            lists,
+            sync=True,  # TODO: REMOVE?
         )
         data = protocol.driver(
             text_chunks=chunks,
@@ -103,7 +109,10 @@ def check_7550_check_text_size(linter: callable, driver):
     for page, line, item in chunks:
         if isinstance(item, iamraw.Headline):
             continue
-
+        if isinstance(item, iamraw.PageList):
+            # TODO: ENABLE TEXT SIZE CHECKER IN LISTS
+            # TODO: ADD SPECIAL LISTS CHECKER?
+            continue
         textsize = item.style.textsize()
         if textsize == expected:
             continue
@@ -127,7 +136,10 @@ def check_7551_check_text_family(linter: callable, driver):
     chunks = driver.text_chunks
     expected = driver.fontstore[driver.style.text_family].name
     for page, line, item in chunks:
+        # TODO: UNITE THIS CHECK
         if isinstance(item, iamraw.Headline):
+            continue
+        if isinstance(item, iamraw.PageList):
             continue
         for style in item.style:
             if style.font == iamraw.NO_FONT:
@@ -161,6 +173,8 @@ def check_7555_text_bold(linter: callable, driver):
     chunks = driver.text_chunks
     for page, line, item in chunks:
         if isinstance(item, iamraw.Headline):
+            continue
+        if isinstance(item, iamraw.PageList):
             continue
         for style in item.style:
             if style.font == iamraw.NO_FONT:

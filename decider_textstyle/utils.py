@@ -13,7 +13,12 @@ import iamraw
 import utila
 
 
-def text_chunks(headlines, navigators) -> list:  # pylint:disable=R1260,W0613
+def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
+        headlines,
+        navigators,
+        lists,
+        sync: bool = False,
+) -> list:
     # TODO: SO BAD
     headlines = utila.flatten(headlines)
 
@@ -27,6 +32,16 @@ def text_chunks(headlines, navigators) -> list:  # pylint:disable=R1260,W0613
             visited.add((headline.page, item))
 
     flat = []
+    # add lists items
+    for page, collection in lists:
+        for _, __, list_ in collection:
+            for item in list_.area:
+                location = (page, item)
+                if location in visited:
+                    continue
+                visited.add(location)
+                flat.append((*location, list_))
+
     for navigator in navigators:
         for index, line in enumerate(navigator):
             if (navigator.page, index) in visited:
@@ -42,9 +57,12 @@ def text_chunks(headlines, navigators) -> list:  # pylint:disable=R1260,W0613
 
     flat = sorted(flat, key=operator.itemgetter(0, 1))
 
-    while flat and not isinstance(flat[0][2], iamraw.Headline):
-        # sync to first headline
-        flat = flat[1:]
+    if sync:
+        # TODO: WHY SHOULD WE DO THIS?
+        # TODO: ADD DOCU HERE
+        while flat and not isinstance(flat[0][2], iamraw.Headline):
+            # sync to first headline
+            flat = flat[1:]
     return flat
 
 

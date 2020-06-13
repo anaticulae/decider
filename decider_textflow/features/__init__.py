@@ -39,6 +39,7 @@ def textdata(
         textpositions,
         sizeandborders,
         headerfooter,
+        lists=None,
         textstyle=None,
         pages=None,
 ):
@@ -50,15 +51,20 @@ def textdata(
         headerfooterpath=headerfooter,
         pages=pages,
     )
+    lists = serializeraw.load_lists(lists, pages=pages) if lists else []
     if not headlines:
         utila.error('no headlines given')
     if not navigators:
         utila.error('no navigators given')
-    if not headlines or not navigators:
+    # TODO: DO WE REQUIRE HEADLINES?
+    # if not headlines or not navigators:
+    #     return None
+    if not navigators:
         return None
     chunks = decider_textstyle.utils.text_chunks(
         headlines,
         navigators,
+        lists,
     )
     if textstyle:
         return protocol.driver(text_chunks=chunks, doctextstyle=textstyle)

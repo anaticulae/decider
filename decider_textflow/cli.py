@@ -32,7 +32,10 @@ WORKPLAN = [
     ),
     utila.create_step(
         'paragraph',
-        inputs=CONTENT_INPUT + [utila.ResultFile('doctextstyle', 'textstyle')],
+        inputs=CONTENT_INPUT + [
+            utila.ResultFile('doctextstyle', 'textstyle'),
+            utila.ResultFile('words', 'list_list'),
+        ],
         output=LINT_OUT,
     ),
     utila.create_step(
