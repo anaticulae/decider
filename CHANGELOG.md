@@ -2,6 +2,14 @@
 
 Every noteable change is logged here.
 
+## v0.20.2
+
+### Fix
+
+* fix Solution2005 font name error (0b744587051f)
+* fix too few children validation test (e11fe91a55c2)
+* fix sorting bib algorithm (43b34eb481d7)
+
 ## v0.20.1
 
 ### Fix
