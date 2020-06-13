@@ -13,9 +13,10 @@ import tests.resources
 import tests.textflow_
 
 
-def test_paragraph_too_short(testdir, monkeypatch):  # pylint:disable=W0621
-    source = tests.resources.BACHELOR90
-    cmd = f'-i={source} --paragraph --pages=12,13,14'
+def run_paragraph_length_linter(source, pages, testdir, monkeypatch):
+    # TODO: REPLACE WITH UTILA CODE
+    pages = ','.join([str(item) for item in pages])
+    cmd = f'-i={source} --paragraph --pages={pages}'
 
     tests.textflow_.run(cmd, monkeypatch=monkeypatch)
 
@@ -23,4 +24,11 @@ def test_paragraph_too_short(testdir, monkeypatch):  # pylint:disable=W0621
         decider_textflow.path.paragraph_linted(testdir.tmpdir),
         7630,
     )
+    return result
+
+
+def test_paragraph_too_short(testdir, monkeypatch):  # pylint:disable=W0621
+    source = tests.resources.BACHELOR90
+    pages = (12, 13, 14)
+    result = run_paragraph_length_linter(source, pages, testdir, monkeypatch)
     assert len(result) == 7, str(result)
