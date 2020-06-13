@@ -11,7 +11,6 @@ import contextlib
 import functools
 import typing
 
-import detector.bibliography.data
 import iamraw
 import protocol
 import serializeraw
@@ -80,7 +79,7 @@ def check_6000_not_sorted_alphabetically(
         references: iamraw.BibliographyReferences,
 ):
     current = [item for item in references]
-    expected = detector.bibliography.data.theissen_sort(current)
+    expected = theissen_sort(current)
     if current == expected:
         return
 
@@ -92,3 +91,22 @@ def check_6000_not_sorted_alphabetically(
         current=utila.NEWLINE.join(current),
         expected=utila.NEWLINE.join(expected),
     )
+
+
+def theissen_sort(items):
+    """We sort by family name and as tybreaker by year. If no name is
+    given, we use `o. V. = ohne Verfasser` instead. If no year is given,
+    we sort it after the items with year(INF year)."""
+    # TODO: REPLACE AFTER UPGRADE
+    # sort by year
+    items = sorted(
+        items,
+        key=lambda x: utila.INF if x.year in ('no year', None) else x.year,
+    )
+    # sort by author name
+    items = sorted(
+        items,
+        key=lambda x: texmex.alpha.replace(x.author).lower()
+        if x.author else 'o. V.',
+    )
+    return items
