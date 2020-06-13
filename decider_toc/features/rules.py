@@ -65,7 +65,13 @@ def check_1350_toc_level_to_few_children(linter, toc: iamraw.Toc):
     level_result: dtl.TocValidationResult = dtl.validate(toc)
     for item in level_result.too_few_children:  # pylint:disable=E1133
         # TODO: REMOVE AFTER UPGRADING SERIALIZERAW
-        location = protocol.Location.from_page(int(item.page))
+        try:
+            location = protocol.Location.from_page(int(item.page))
+        except ValueError:
+            # TODO: THINK ABOUT CONCEPT TO HANDLE ROMAN PAGE NUMBERS
+            # TODO: INTRODUCE RAW LOCATION?
+            utila.error(f'could not convert roman page number: {item.page}')
+            continue
         linter(location=location)
 
 
