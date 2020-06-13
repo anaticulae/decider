@@ -7,6 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import pytest
+
 import decider_textflow.path
 import tests
 import tests.resources
@@ -27,8 +29,18 @@ def run_paragraph_length_linter(source, pages, testdir, monkeypatch):
     return result
 
 
-def test_paragraph_too_short(testdir, monkeypatch):  # pylint:disable=W0621
+def test_paragraph_too_short(testdir, monkeypatch):
     source = tests.resources.BACHELOR90
     pages = (12, 13, 14)
     result = run_paragraph_length_linter(source, pages, testdir, monkeypatch)
     assert len(result) == 7, str(result)
+
+
+@pytest.mark.xfail(reason='list items are included in current check')
+def test_list_no_paragraph_too_short(testdir, monkeypatch):
+    source = tests.resources.MASTER72
+    # page 6 is required to load headlines
+    pages = (6, 7)
+    result = run_paragraph_length_linter(source, pages, testdir, monkeypatch)
+    result = [item for item in result if item.location.page == 7]
+    assert not result, str(result)
