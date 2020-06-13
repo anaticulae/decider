@@ -30,16 +30,23 @@ texmex.alphabetically = alphabetically
 
 
 def work(table: str) -> typing.Tuple[str, str]:
-    loaded = serializeraw.load_bibliography_reference(table)
-    with contextlib.suppress(AttributeError):
-        # TODO: REMOVE LATER
-        if isinstance(loaded[0], list):
-            loaded = utila.flatten(loaded)
+    loaded = load_bibliography_reference(table)
     linter = protocol.from_module(__name__)
     linting(loaded, linter)
     result = linter.result(unique=True)
     user, developer = protocol.dump_result(result)
     return user, developer
+
+
+def load_bibliography_reference(path) -> list:
+    loaded = serializeraw.load_bibliography_reference(path)
+    if not loaded:
+        return []
+    with contextlib.suppress(AttributeError):
+        # TODO: REMOVE LATER
+        if isinstance(loaded[0], list):
+            loaded = utila.flatten(loaded)
+    return loaded
 
 
 def linting(
