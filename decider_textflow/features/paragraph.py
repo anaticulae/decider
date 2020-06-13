@@ -17,7 +17,7 @@ import utila
 import decider_textflow.features
 
 
-def work(  # pylint:disable=R0914
+def work(
         headlines: str,
         text: str,
         textpositions: str,
