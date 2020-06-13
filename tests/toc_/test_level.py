@@ -41,32 +41,41 @@ def test_toc_to_deep(monkeypatch):
     assert failures == expected, str(failures)
 
 
-@pytest.mark.parametrize(
-    'source, invalids',
-    [
-        pytest.param(
-            tests.resources.TECHNICAL24,
-            TECHNICAL24_INVALID_CHILDREN,
-            id='technical24',
-        ),
-        # TODO: MASTER78_PDF PARSER IS BUGGY RIGHT NOW
-        pytest.param(
-            tests.resources.MASTER78,
-            3,
-            id='master78',
-            marks=pytest.mark.xfail(
-                reason='investigate here, expected seems not to be correct'),
-        ),
-        pytest.param(
-            tests.resources.MASTER72,
-            0,
-            id='master72',
-        ),
-    ])
-def test_toc_validate_children(source, invalids):
+def master78_too_few_children(invalid):
+    # TODO: MASTER78_PDF PARSER IS BUGGY RIGHT NOW
+    assert invalid[0].title == 'Grundsätzliche Anforderungen'
+    assert invalid[1].title == 'Anbindung der Bussysteme'
+    assert invalid[2].title == 'Auswahl passender Busgeräte'
+
+
+@pytest.mark.parametrize('source, invalids, validate', [
+    pytest.param(
+        tests.resources.TECHNICAL24,
+        TECHNICAL24_INVALID_CHILDREN,
+        None,
+        id='technical24',
+    ),
+    pytest.param(
+        tests.resources.MASTER78,
+        3,
+        master78_too_few_children,
+        id='master78',
+        marks=pytest.mark.xfail(reason='toc extraction does not work properly'),
+    ),
+    pytest.param(
+        tests.resources.MASTER72,
+        0,
+        None,
+        id='master72',
+    ),
+])
+def test_toc_too_few_children(source, invalids, validate):
     toc = tests.tableofcontent(source)
     validated = dtl.validate_children(toc)
     assert len(validated) == invalids, str(len(validated))
+    if not validate:
+        return
+    validate(validated)
 
 
 # yapf:disable

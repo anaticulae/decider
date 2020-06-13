@@ -50,6 +50,7 @@ def validate_children(toc: iamraw.Toc) -> TooFewChildren:
         if len(item.children) == 1:
             # If subpoint has only one children, it is not a subpoint.
             result.append(item)
+            return
         for children in item:
             godown(children)
 
