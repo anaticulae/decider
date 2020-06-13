@@ -33,12 +33,12 @@ class TocValidationResult:
 
 
 def validate(toc: iamraw.Toc) -> TocValidationResult:
-    children = validate_children(toc)
+    too_few_children = validate_children(toc)
     deepness = validate_deepness(toc)
 
     result = TocValidationResult(
         level_to_deep=deepness,
-        too_few_children=children,
+        too_few_children=too_few_children,
     )
     return result
 
