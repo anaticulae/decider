@@ -11,7 +11,9 @@ import functools
 import typing
 
 import configo
+import iamraw
 import protocol
+import serializeraw
 import utila
 
 import decider_footnote.footnote
@@ -22,16 +24,23 @@ MAX_HIGHNOTE_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
 MAX_CONTENT_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
 
 
-def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
+def work(
+        footerheader: str,
+        fontheader: str,
+        fontcontent: str,
+        pages: tuple = None,
+) -> typing.Tuple[str, str]:
     linter = protocol.from_module(__name__)
 
     headerfooters = decider_footnote.footnote.load(footerheader, pages)
     footnotes = utila.flatten([item.content for item in headerfooters if item])
     fontconfig = decider_footnote.footnote.most_common_font(footnotes)
 
+    fontstore = serializeraw.create_fontstore(fontheader, fontcontent)
+
     for footer in headerfooters:
         # run linter for every page
-        linting(footer, fontconfig, linter)
+        linting(footer, fontconfig, fontstore, linter)
 
     result = linter.result(unique=True)
     user, developer = protocol.dump_result(result)
@@ -41,6 +50,7 @@ def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
 def linting(
         footer,
         fontconfig: decider_footnote.footnote.FootNoteStyle,
+        fontstore: iamraw.FontStore,
         linter: protocol.Linter,
 ):
     location = protocol.Location.from_page(footer.page)
@@ -53,7 +63,11 @@ def linting(
             location=location,
         )
         for item in footer.content:
-            datum = protocol.driver(item=item, fontconfig=fontconfig)
+            datum = protocol.driver(
+                item=item,
+                fontconfig=fontconfig,
+                fontstore=fontstore,
+            )
             checker(call, datum)
 
 
@@ -122,6 +136,16 @@ def check_2005_invalid_highnote_fontfamily(linter, driver):
 
     if current == expected:
         return
+
+    try:
+        current = driver.fontstore[current].name
+    except KeyError:
+        # TODO: REMOVE AFTER UPGRADINING IAMRAW, LOGGING IS INCLUDED NOW
+        utila.error(f'could not find font: {current}')
+    try:
+        expected = driver.fontstore[expected].name
+    except KeyError:
+        utila.error(f'could not find font: {current}')
 
     linter(number=item.number, current=current, expected=expected)
 

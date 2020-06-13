@@ -53,13 +53,19 @@ def test_footnotes_most_common_font_empty():
 
 def test_footnotes_work_highnote_rise(monkeypatch):
     footerheader = iamraw.path.headerfooters(tests.resources.MASTER72)
+    fontheader = iamraw.path.fontheader(tests.resources.MASTER72)
+    fontcontent = iamraw.path.fontcontent(tests.resources.MASTER72)
     with monkeypatch.context() as context:
         context.setattr(
             decider_footnote.features.style,
             'MAX_HIGHNOTE_RISE_DIFF',
             0.0,
         )
-        user, _ = decider_footnote.features.style.work(footerheader)
+        user, _ = decider_footnote.features.style.work(
+            footerheader,
+            fontheader,
+            fontcontent,
+        )
     result = tests.load_byid(user, 2003)
     assert len(result) == 255
 
@@ -67,19 +73,31 @@ def test_footnotes_work_highnote_rise(monkeypatch):
 def test_footnotes_work_highnote_size(monkeypatch):
     # TODO: LOOK FOR AN EXAMPLE WITH WRONG HIGHNOTE SIZE
     footerheader = iamraw.path.headerfooters(tests.resources.MASTER72)
+    fontheader = iamraw.path.fontheader(tests.resources.MASTER72)
+    fontcontent = iamraw.path.fontcontent(tests.resources.MASTER72)
     with monkeypatch.context() as context:
         context.setattr(
             decider_footnote.features.style,
             'MAX_HIGHNOTE_SIZE_DIFF',
             0.0,
         )
-        user, _ = decider_footnote.features.style.work(footerheader)
+        user, _ = decider_footnote.features.style.work(
+            footerheader,
+            fontheader,
+            fontcontent,
+        )
     result = tests.load_byid(user, 2004)
     assert not result
 
 
 def test_footnotes_work_highnote_font_family():
     footerheader = iamraw.path.headerfooters(tests.resources.MASTER72)
-    user, _ = decider_footnote.features.style.work(footerheader)
+    fontheader = iamraw.path.fontheader(tests.resources.MASTER72)
+    fontcontent = iamraw.path.fontcontent(tests.resources.MASTER72)
+    user, _ = decider_footnote.features.style.work(
+        footerheader,
+        fontheader,
+        fontcontent,
+    )
     result = tests.load_byid(user, 2005)
     assert len(result) == 2
