@@ -65,36 +65,31 @@ def check_7630_paragraph_too_short(linter: callable, driver):
         if isinstance(item, iamraw.Headline):
             too_short = 2 <= len(collected) <= PARAGRAPH_TOO_SHORT
             if too_short:
-                location = protocol.RangedLocation(
-                    page=collected[0][0],
-                    page_end=collected[-1][0],
-                    line=collected[0][1],
-                    line_end=collected[-1][1],
-                )
-                linter(
-                    location=location,
-                    lines=len(collected),
-                )
+                location = ranged_location(collected)
+                linter(location=location, lines=len(collected))
             collected = []
             continue
+
         line_width = width(item)
         if line_width <= min_textwidth:
             collected.append((page, line, item))
             too_short = 2 <= len(collected) <= PARAGRAPH_TOO_SHORT
             if too_short:
-                location = protocol.RangedLocation(
-                    page=collected[0][0],
-                    page_end=collected[-1][0],
-                    line=collected[0][1],
-                    line_end=collected[-1][1],
-                )
-                linter(
-                    location=location,
-                    lines=len(collected),
-                )
+                location = ranged_location(collected)
+                linter(location=location, lines=len(collected))
             collected = []
         else:
             collected.append((page, line, item))
+
+
+def ranged_location(collected) -> protocol.RangedLocation:
+    location = protocol.RangedLocation(
+        page=collected[0][0],
+        page_end=collected[-1][0],
+        line=collected[0][1],
+        line_end=collected[-1][1],
+    )
+    return location
 
 
 def width(item):
