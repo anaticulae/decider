@@ -10,6 +10,7 @@
 import operator
 
 import iamraw
+import texmex.style
 import utila
 
 
@@ -18,7 +19,12 @@ def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
         navigators,
         lists,
         sync: bool = False,
+        yieldnone: bool = False,
 ) -> list:
+    """\
+    Args:
+        yieldnone: yield none-TextInfo-elements with None
+    """
     # TODO: SO BAD
     headlines = utila.flatten(headlines)
 
@@ -63,6 +69,12 @@ def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
         while flat and not isinstance(flat[0][2], iamraw.Headline):
             # sync to first headline
             flat = flat[1:]
+
+    if yieldnone:
+        flat = [
+            item if isinstance(item[2], texmex.style.TextInfo) else
+            (item[0], item[1], None) for item in flat
+        ]
     return flat
 
 
