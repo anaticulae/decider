@@ -11,6 +11,7 @@ import typing
 
 import doctextstyle.serialize
 import iamraw
+import magic.data
 import protocol
 import utila
 
@@ -25,9 +26,11 @@ def work(
         headerfooter: str,
         textstyle: str,
         lists: str,
+        magiccontent: str,
         pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     textstyle = doctextstyle.serialize.load_docstyle(textstyle)
+    magiccontent = magic.data.load_types(magiccontent)
     driver = decider_textflow.features.textdata(
         headlines,
         text,
@@ -35,6 +38,7 @@ def work(
         sizeandborders,
         headerfooter,
         lists=lists,
+        magiccontent=magiccontent,
         textstyle=textstyle,
         pages=pages,
     )
@@ -78,7 +82,9 @@ def check_7630_paragraph_too_short(linter: callable, driver):
                 linter(location=location, lines=len(collected))
             collected = []
             continue
-
+        if item is None:
+            collected = []
+            continue
         line_width = width(item)
         if line_width <= min_textwidth:
             collected.append((page, line, item))

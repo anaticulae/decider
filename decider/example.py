@@ -79,6 +79,7 @@ def generate(files: list, outpath: str) -> list:
                 'sections': True,
                 'words': True,
                 'doctextstyle': True,
+                'magic': True,
             },
             pages=pages,
         )

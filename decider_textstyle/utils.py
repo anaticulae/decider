@@ -10,6 +10,7 @@
 import operator
 
 import iamraw
+import magic.data
 import texmex.style
 import utila
 
@@ -18,41 +19,28 @@ def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
         headlines,
         navigators,
         lists,
+        magiccontent: list = None,
         sync: bool = False,
         yieldnone: bool = False,
 ) -> list:
     """\
     yieldnone yield none-TextInfo-elements with None
     """
+    magiccontent = magiccontent if magiccontent else []
     # TODO: SO BAD
     headlines = utila.flatten(headlines)
 
-    visited = set()
+    visited = utila.Single()
     for headline in headlines:
         try:
             start, end = headline.container
         except TypeError:
             start, end = headline.container, headline.container
         for item in range(start, end + 1):
-            visited.add((headline.page, item))
+            # reserve headline container ids
+            visited.contains((headline.page, item))
 
     flat = []
-    # add lists items
-    for page, collection in lists:
-        for list_ in collection:
-            for item in list_.area:
-                location = (page, item)
-                if location in visited:
-                    continue
-                visited.add(location)
-                flat.append((*location, list_))
-
-    for navigator in navigators:
-        for index, line in enumerate(navigator):
-            if (navigator.page, index) in visited:
-                continue
-            flat.append((navigator.page, index, line))
-
     for headline in headlines:
         try:
             position = (headline.page, headline.container[0])
@@ -60,6 +48,24 @@ def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
             position = (headline.page, headline.container)
         flat.append((*position, headline))
 
+    for magicpage in magiccontent:
+        for line, content in magicpage.content:
+            location = (magicpage.page, line)
+            if visited.contains(location):
+                continue
+            if content == magic.data.ContentType.TEXT:
+                # Do not skip TEXT
+                continue
+            flat.append((*location, None))
+
+    for navigator in navigators:
+        for index, line in enumerate(navigator):
+            location = (navigator.page, index)
+            if visited.contains(location):
+                continue
+            flat.append((*location, line))
+
+    # sort by page and line
     flat = sorted(flat, key=operator.itemgetter(0, 1))
 
     if sync:

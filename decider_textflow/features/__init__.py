@@ -40,6 +40,7 @@ def textdata(
         sizeandborders,
         headerfooter,
         lists=None,
+        magiccontent=None,
         textstyle=None,
         pages=None,
 ):
@@ -65,6 +66,7 @@ def textdata(
         headlines,
         navigators,
         lists,
+        magiccontent=magiccontent,
     )
     if textstyle:
         return protocol.driver(text_chunks=chunks, doctextstyle=textstyle)
