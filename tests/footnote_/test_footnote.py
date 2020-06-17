@@ -8,6 +8,7 @@
 # =============================================================================
 
 import iamraw.path
+import protocol
 import pytest
 
 import decider_footnote.features.rules
@@ -66,7 +67,7 @@ def test_footnotes_work_highnote_rise(monkeypatch):
             fontheader,
             fontcontent,
         )
-    result = tests.load_byid(user, 2003)
+    result = protocol.load_result(user, 2003)
     assert len(result) == 255
 
 
@@ -86,7 +87,7 @@ def test_footnotes_work_highnote_size(monkeypatch):
             fontheader,
             fontcontent,
         )
-    result = tests.load_byid(user, 2004)
+    result = protocol.load_result(user, 2004)
     assert not result
 
 
@@ -99,5 +100,5 @@ def test_footnotes_work_highnote_font_family():
         fontheader,
         fontcontent,
     )
-    result = tests.load_byid(user, 2005)
+    result = protocol.load_result(user, 2005)
     assert len(result) == 2

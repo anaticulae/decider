@@ -19,6 +19,6 @@ def test_toc_style_bachelor76_duplicated_words(testdir, monkeypatch):
     findings = protocol.findings_from_path(testdir.tmpdir)
     findings = findings[0].content
 
-    duplicated_words = tests.select_finding(findings, msgid=1380)
+    duplicated_words = protocol.select_findings(findings, msgid=1380)
     assert len(duplicated_words) == 1, str(duplicated_words)
     assert 'Industrie 4.0' in duplicated_words[0].solution.description

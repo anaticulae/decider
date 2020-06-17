@@ -7,6 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import protocol
+
 import decider_textflow.path
 import tests
 import tests.resources
@@ -24,7 +26,7 @@ def test_lineendings_master83_page6_lineending(testdir, monkeypatch):  # pylint:
     # lint result
     tests.textflow_.run(f'-i={source}', monkeypatch=monkeypatch)
 
-    result = tests.load_byid(
+    result = protocol.load_result(
         decider_textflow.path.lineendings_linted(testdir.tmpdir),
         7000,
     )

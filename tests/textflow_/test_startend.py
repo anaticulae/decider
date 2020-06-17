@@ -7,6 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import protocol
+
 import decider_textflow.path
 import tests
 import tests.resources
@@ -21,7 +23,7 @@ def test_startend_hurenkind_bachelor90_page16(testdir, monkeypatch):  # pylint:d
 
     tests.textflow_.run(cmd, monkeypatch=monkeypatch)
 
-    result = tests.load_byid(
+    result = protocol.load_result(
         decider_textflow.path.startend_linted(testdir.tmpdir),
         7620,
     )
@@ -37,7 +39,7 @@ def test_startend_hurenkind_bachelor90_page18(testdir, monkeypatch):  # pylint:d
 
     tests.textflow_.run(cmd, monkeypatch=monkeypatch)
 
-    result = tests.load_byid(
+    result = protocol.load_result(
         decider_textflow.path.startend_linted(testdir.tmpdir),
         7620,
     )
@@ -50,7 +52,7 @@ def test_startend_figure_start_bachelor90_page40_55(testdir, monkeypatch):  # py
 
     tests.textflow_.run(cmd, monkeypatch=monkeypatch)
 
-    result = tests.load_byid(
+    result = protocol.load_result(
         decider_textflow.path.startend_linted(testdir.tmpdir),
         7625,
     )

@@ -31,4 +31,3 @@ def flat(toc: iamraw.Toc):
         godown(item)
 
     return result
-

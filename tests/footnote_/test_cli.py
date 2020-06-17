@@ -48,9 +48,8 @@ def test_cli_footnote_global(testdir, monkeypatch):  ## pylint:disable=W0621
 
     global_ = decider_footnote.path.global_(root)
     # TODO: REPLACE AFTER UPGRADING TO NEW PROTOCOL
-    result = tests.load_byid(global_, 2015)
+    result = protocol.load_result(global_, 2015)
     assert len(result) == 1
-
 
 def test_cli_footnote_disabled_checker(testdir, monkeypatch):  ## pylint:disable=W0621
     root = str(testdir)
@@ -61,13 +60,13 @@ def test_cli_footnote_disabled_checker(testdir, monkeypatch):  ## pylint:disable
     rules = decider_footnote.path.rules(root)
 
     # ensure that checker is disabled
-    result = tests.load_byid(rules, 2001)
+    result = protocol.load_result(rules, 2001)
     assert not result
-    result = tests.load_byid(rules, 2002)
+    result = protocol.load_result(rules, 2002)
     assert not result
 
     # ensure that info message was send
-    result = tests.load_byid(rules, 2013)
+    result = protocol.load_result(rules, 2013)
     assert len(result) == 1
-    result = tests.load_byid(rules, 2012)
+    result = protocol.load_result(rules, 2012)
     assert len(result) == 1

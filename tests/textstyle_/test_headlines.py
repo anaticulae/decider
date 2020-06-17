@@ -101,5 +101,5 @@ def test_decider_headlines_chapter_on_new_page(testdir, monkeypatch):
         testdir,
         monkeypatch,
     )
-    no_new_page_start = tests.select_finding(findings, 7540)
+    no_new_page_start = protocol.select_findings(findings, 7540)
     assert len(no_new_page_start) == 2, str(no_new_page_start)
