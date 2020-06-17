@@ -73,14 +73,14 @@ def generate(files: list, outpath: str) -> list:
         job = hey.example.create_job(
             inpath,
             outdir,
-            config={
-                'detector': True,
-                'groupme': True,
-                'sections': True,
-                'words': True,
-                'doctextstyle': True,
-                'magic': True,
-            },
+            config=dict(
+                detector=True,
+                doctextstyle=True,
+                groupme=True,
+                magic=True,
+                sections=True,
+                words=True,
+            ),
             pages=pages,
         )
         next_job = create_job(
