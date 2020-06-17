@@ -39,7 +39,7 @@ def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
     flat = []
     # add lists items
     for page, collection in lists:
-        for _, __, list_ in collection:
+        for list_ in collection:
             for item in list_.area:
                 location = (page, item)
                 if location in visited:
