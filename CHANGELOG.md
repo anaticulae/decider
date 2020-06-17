@@ -2,6 +2,21 @@
 
 Every noteable change is logged here.
 
+## v0.21.0
+
+### Feature
+
+* remove unnecessary list after introducing magic content (26934f4511ec)
+* use general magic line look up to determine pure text lines (5e24ce4692a7)
+* use magic content to exclude from text style check (2ec227b8e9ae)
+* add option to yield non textual elements with none (8f3e325ca748)
+* do not check paragraph length in lists (d426415748ac)
+
+### Fix
+
+* ensure loading empty bib reference (09fc47d53415)
+* catch roman page number (52ce72518243)
+
 ## v0.20.2
 
 ### Fix
