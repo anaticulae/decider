@@ -9,10 +9,10 @@
 
 import os
 
+import power
 import utila
 
 import decider.example
-import tests.resources
 
 
 @utila.skip_longrun
@@ -20,8 +20,8 @@ def test_example_extract(testdir):
     root = str(testdir)
     generated = os.path.join(root, 'generated')
     pdfs = [
-        tests.resources.DOCU_TWINE_PDF,
-        tests.resources.TECHNICAL24_PDF,
+        power.DOCU35_PDF,
+        power.TECHNICAL_024,
     ]
     decider.example.extract(pdfs, generated, pages='0:3')
     assert os.path.exists(generated), str(generated)
