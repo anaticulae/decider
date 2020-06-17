@@ -9,6 +9,8 @@
 
 import os
 
+import power
+
 import decider
 
 RESOURCES = os.path.join(decider.ROOT, 'tests/resources')
@@ -73,19 +75,19 @@ TWINE_NO_TITLE_PAGE = os.path.join(NO_TITLE_PAGE, 'docu_twine')
 TWINE_NO_TOC = os.path.join(NO_TOC, 'docu_twine')
 
 TODO = [
-    (MASTER116_PDF, '0:10,90:115'),
-    (BACHELOR76_PDF, ':'),
-    (MASTER72_PDF, ':'),
-    (BACHELOR90_PDF, ':'),
-    (BACHELOR37_PDF, '0:10'),
-    (DOCU_TWINE_PDF, '0:10'),
-    (LEFTRIGHT_PDF, '0:10'),
-    (MASTER78_PDF, '0:10'),
-    (MASTER83_PDF, '0:10'),
-    (MASTER98_PDF, '0:10'),
-    (MASTER99_PDF, '0:10'),
-    (PYPORTING_PDF, '0:10'),
-    (TECHNICAL24_PDF, '0:10'),
+    (power.MASTER116_PDF, '0:10,90:115'),
+    (power.BACHELOR076_PDF, ':'),
+    (power.MASTER072_PDF, ':'),
+    (power.BACHELOR090_PDF, ':'),
+    (power.BACHELOR037_PDF, '0:10'),
+    (power.DOCU35_PDF, '0:10'),
+    (power.BOOK007_PDF, '0:10'),
+    (power.MASTER078_PDF, '0:10'),
+    (power.MASTER083_PDF, '0:10'),
+    (power.MASTER098_PDF, '0:10'),
+    (power.MASTER099_PDF, '0:10'),
+    (power.DOCU07_PDF, '0:10'),
+    (power.TECHNICAL_024, '0:10'),
 ]
 
 GENERATE_NO_TOC = [
