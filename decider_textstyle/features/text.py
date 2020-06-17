@@ -69,6 +69,7 @@ def work(  # pylint:disable=R0914
             navigators,
             lists,
             sync=True,  # TODO: REMOVE?
+            yieldnone=True,
         )
         data = protocol.driver(
             text_chunks=chunks,
@@ -107,11 +108,7 @@ def check_7550_check_text_size(linter: callable, driver):
     chunks = driver.text_chunks
     expected = driver.style.text_size
     for page, line, item in chunks:
-        if isinstance(item, iamraw.Headline):
-            continue
-        if isinstance(item, iamraw.PageList):
-            # TODO: ENABLE TEXT SIZE CHECKER IN LISTS
-            # TODO: ADD SPECIAL LISTS CHECKER?
+        if not item:
             continue
         textsize = item.style.textsize()
         if textsize == expected:
@@ -136,10 +133,7 @@ def check_7551_check_text_family(linter: callable, driver):
     chunks = driver.text_chunks
     expected = driver.fontstore[driver.style.text_family].name
     for page, line, item in chunks:
-        # TODO: UNITE THIS CHECK
-        if isinstance(item, iamraw.Headline):
-            continue
-        if isinstance(item, iamraw.PageList):
+        if not item:
             continue
         for style in item.style:
             if style.font == iamraw.NO_FONT:
@@ -172,9 +166,7 @@ TODO: SIEHE ARTIKEL THEISSEN
 def check_7555_text_bold(linter: callable, driver):
     chunks = driver.text_chunks
     for page, line, item in chunks:
-        if isinstance(item, iamraw.Headline):
-            continue
-        if isinstance(item, iamraw.PageList):
+        if not item:
             continue
         for style in item.style:
             if style.font == iamraw.NO_FONT:

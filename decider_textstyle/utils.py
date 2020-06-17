@@ -22,8 +22,7 @@ def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
         yieldnone: bool = False,
 ) -> list:
     """\
-    Args:
-        yieldnone: yield none-TextInfo-elements with None
+    yieldnone yield none-TextInfo-elements with None
     """
     # TODO: SO BAD
     headlines = utila.flatten(headlines)
