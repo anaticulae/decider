@@ -40,6 +40,11 @@ WORKPLAN = [
             utila.ResultFile('rawmaker', 'fonts_header'),
             utila.ResultFile('rawmaker', 'fonts_content'),
             utila.ResultFile('words', 'list_list'),
+            utila.ResultFile(
+                'magic',
+                'content_content',
+                optional=True,
+            ),
         ],
         output=('user', 'developer'),
     ),

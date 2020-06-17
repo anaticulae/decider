@@ -8,22 +8,21 @@
 # =============================================================================
 
 import functools
+import os
 import typing
 
-import doctextstyle.parser
 import doctextstyle.serialize
 import iamraw
 import iamraw.fonts
+import magic.path
 import protocol
 import serializeraw
-import serializeraw.border
-import serializeraw.headerfooter
 import utila
 
 import decider_textstyle.utils
 
 
-def work(  # pylint:disable=R0914
+def work(  # pylint:disable=R0913,R0914
         textstyle: str,
         headlines: str,
         text: str,
@@ -33,6 +32,7 @@ def work(  # pylint:disable=R0914
         fontheader: str,
         fontcontent: str,
         lists: str,
+        magiccontent: str,
         pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     linter = protocol.from_module(__name__)
@@ -56,6 +56,11 @@ def work(  # pylint:disable=R0914
         fontcontent=fontcontent,
         pages=pages,
     )
+
+    if os.path.exists(magiccontent):
+        magiccontent = magic.data.load_types(magiccontent)
+    else:
+        magiccontent = []
 
     if not headlines:
         utila.error('no headlines given')

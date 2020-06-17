@@ -54,7 +54,7 @@ def test_decider_text_master72_2_10_fontfamily(testdir, monkeypatch):
         monkeypatch,
     )
     # not correct, but indicates that algo changed
-    assert len(findings) == 15
+    assert len(findings) == 41
 
 
 def test_decider_text_bachelor76_4_10_bold_font(testdir, monkeypatch):
