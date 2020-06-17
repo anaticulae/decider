@@ -65,7 +65,6 @@ def textdata(
     chunks = decider_textstyle.utils.text_chunks(
         headlines,
         navigators,
-        lists,
         magiccontent=magiccontent,
     )
     if textstyle:

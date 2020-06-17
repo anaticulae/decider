@@ -34,7 +34,6 @@ WORKPLAN = [
         'paragraph',
         inputs=CONTENT_INPUT + [
             utila.ResultFile('doctextstyle', 'textstyle'),
-            utila.ResultFile('words', 'list_list'),
             utila.ResultFile('magic', 'content_content'),
         ],
         output=LINT_OUT,

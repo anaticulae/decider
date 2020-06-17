@@ -31,7 +31,6 @@ def work(  # pylint:disable=R0913,R0914
         headerfooter: str,
         fontheader: str,
         fontcontent: str,
-        lists: str,
         magiccontent: str,
         pages: tuple = None,
 ) -> typing.Tuple[str, str]:
@@ -39,8 +38,6 @@ def work(  # pylint:disable=R0913,R0914
 
     expected = doctextstyle.serialize.load_docstyle(textstyle)
     headlines = serializeraw.load_headlines(headlines, pages=pages)
-
-    lists = serializeraw.load_lists(lists, pages=pages) if lists else []
 
     fontstore = serializeraw.create_fontstore(
         fontheader,
@@ -72,7 +69,6 @@ def work(  # pylint:disable=R0913,R0914
         chunks = decider_textstyle.utils.text_chunks(
             headlines,
             navigators,
-            lists,
             sync=True,  # TODO: REMOVE?
             yieldnone=True,
         )

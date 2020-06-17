@@ -25,7 +25,6 @@ def work(
         sizeandborders: str,
         headerfooter: str,
         textstyle: str,
-        lists: str,
         magiccontent: str,
         pages: tuple = None,
 ) -> typing.Tuple[str, str]:
@@ -37,7 +36,6 @@ def work(
         textpositions,
         sizeandborders,
         headerfooter,
-        lists=lists,
         magiccontent=magiccontent,
         textstyle=textstyle,
         pages=pages,
