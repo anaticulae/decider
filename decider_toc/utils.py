@@ -32,9 +32,3 @@ def flat(toc: iamraw.Toc):
 
     return result
 
-
-def remove_marks(items: list) -> list:
-    # TODO: REPLACE WITH KONRAD CODE
-    assert isinstance(items, list), type(items)
-    result = [item for item in items if isinstance(item, str)]
-    return result

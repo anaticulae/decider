@@ -11,6 +11,7 @@ import collections
 
 import german
 import iamraw
+import konrad
 
 import decider_toc.utils
 
@@ -21,7 +22,7 @@ def validate(toc: iamraw.Toc) -> decider_toc.utils.InvalidTocItems:
     lines = []
     for item in flatten:
         words = german.split_words(item.title, validate_sentences=False)
-        words = decider_toc.utils.remove_marks(words)
+        words = konrad.remove_marks(words)
         lines.append(words)
     result = []
     duplication = duplicates(lines)
