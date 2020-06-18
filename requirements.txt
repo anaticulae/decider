@@ -15,13 +15,13 @@ utila==1.25.1
 protocol==0.10.5
 iamraw==1.27.2
 hey==3.2.0
-detector==0.3.1
-words==0.9.1
+detector==0.4.0
+words==0.9.2
 
 # define holy values
 configo==0.6.12
 # docs
 writers==0.3.17
 
-german==0.6.2
-konrad==0.2.19
+german==0.6.3
+konrad==0.2.20
