@@ -443,7 +443,7 @@ def validate_headline_family(headline, navigators, fontstore, expected_family):
     for item in container_textfamily(lines_selected):
         headline_family = fontstore[item]
         if headline_family:
-            textfamily_.append(headline_family)
+            textfamily_.append(headline_family.name)
         else:
             utila.error(f'headline: font not found {item}')
 
