@@ -133,7 +133,7 @@ def check_7501_check_h1_font_family(linter: callable, driver):
     if not driver.style.h1_family:
         return
 
-    validate_headline_family(
+    validate_headlines_family(
         linter,
         driver.navigators,
         driver.fontstore,
@@ -183,7 +183,7 @@ SOLUTION_7510 = FONT_SIZE_ERROR.substitute(title='Teilüberschrift')
 
 
 def check_7510_check_h2_font_size(linter: callable, driver):
-    # TODO: HANDLE HIGH NOTES CORRECLTY
+    # TODO: HANDLE HIGH NOTES CORRECTLY
     if not driver.style.h2_size:
         return
 
@@ -203,7 +203,7 @@ def check_7511_check_h2_font_family(linter: callable, driver):
     if not driver.style.h2_family:
         return
 
-    validate_headline_family(
+    validate_headlines_family(
         linter,
         driver.navigators,
         driver.fontstore,
@@ -273,7 +273,7 @@ def check_7521_check_h3_font_family(linter: callable, driver):
     if not driver.style.h3_family:
         return
 
-    validate_headline_family(
+    validate_headlines_family(
         linter,
         driver.navigators,
         driver.fontstore,
@@ -396,7 +396,7 @@ def validate_headline_size(
         )
 
 
-def validate_headline_family(
+def validate_headlines_family(
         linter,
         navigators,
         fontstore,
@@ -406,43 +406,53 @@ def validate_headline_family(
 ):
     flats = utila.flatten(headlines)
     headlines = [item for item in flats if item.level == level]
-    try:
-        expected_family = fontstore[expected_family].name
-    except KeyError:
+
+    if not fontstore[expected_family]:
         utila.error(f'no expected headline family: {expected_family}')
         return
+    expected_family = fontstore[expected_family].name
+
     for headline in headlines:
-        containers_ = containers(headline.container)
-        navigator = utila.select_page(navigators, headline.page)
-
-        try:
-            lines_selected = [navigator[index] for index in containers_]
-        except IndexError:
-            msg = f'headline familiy: {containers_} out of bounds on page: {navigator.page}'
-            utila.error(msg)
-            continue
-
-        textfamily_ = []
-        for item in container_textfamily(lines_selected):
-            try:
-                textfamily_.append(fontstore[item].name)
-            except KeyError:
-                utila.error(f'headline - font not found: {item}')
-
-        if all([item == expected_family for item in textfamily_]):
-            continue
-
-        # font family diff
-        location = protocol.RangedLocation(
-            page=headline.page,
-            line=containers_[0],
-            line_end=containers_[-1],
+        finding = validate_headline_family(
+            headline,
+            navigators,
+            fontstore,
+            expected_family,
         )
+        if not finding:
+            continue
         linter(
-            location=location,
+            location=headline_location(headline),
             expected=expected_family,
-            current=', '.join([f'{item}' for item in textfamily_]),
+            current=finding,
         )
+
+
+def validate_headline_family(headline, navigators, fontstore, expected_family):
+    containers_ = containers(headline.container)
+    navigator = utila.select_page(navigators, headline.page)
+
+    try:
+        lines_selected = [navigator[index] for index in containers_]
+    except IndexError:
+        msg = f'headline family: {containers_} out of bounds on page: {navigator.page}'
+        utila.error(msg)
+        return None
+
+    textfamily_ = []
+    for item in container_textfamily(lines_selected):
+        headline_family = fontstore[item]
+        if headline_family:
+            textfamily_.append(headline_family)
+        else:
+            utila.error(f'headline: font not found {item}')
+
+    if all([item == expected_family for item in textfamily_]):
+        return None
+
+    # font family diff
+    current = utila.from_tuple(textfamily_, ', ')
+    return current
 
 
 def validate_headline_distance(  # pylint:disable=R1260
@@ -538,3 +548,13 @@ def textfamily(style: texmex.TextInfo) -> utila.Ints:
     fonts = [item.font for item in style.content]
     fonts = utila.make_unique(fonts)
     return fonts
+
+
+def headline_location(headline) -> protocol.RangedLocation:
+    containers_ = containers(headline.container)
+    location = protocol.RangedLocation(
+        page=headline.page,
+        line=containers_[0],
+        line_end=containers_[-1],
+    )
+    return location
