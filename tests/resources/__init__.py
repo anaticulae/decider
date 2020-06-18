@@ -61,12 +61,12 @@ TODO = [
 
 GENERATE_NO_TOC = [
     power.DOCU35_PDF,
-    power.BOOK007_PDF
+    power.BOOK007_PDF,
 ]
 
 GENERATE_NO_TITLE = [
     power.DOCU35_PDF,
-    power.BOOK007_PDF
+    power.BOOK007_PDF,
 ]
 
 REQURIED_RESOURCES = [

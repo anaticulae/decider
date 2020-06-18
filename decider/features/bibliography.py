@@ -81,6 +81,7 @@ Erwartet:
 {elemente/literaturverzeichnis}
 """
 
+
 def check_6000_not_sorted_alphabetically(
         linter: callable,
         references: iamraw.BibliographyReferences,

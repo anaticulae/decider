@@ -51,6 +51,7 @@ def test_cli_footnote_global(testdir, monkeypatch):  ## pylint:disable=W0621
     result = protocol.load_result(global_, 2015)
     assert len(result) == 1
 
+
 def test_cli_footnote_disabled_checker(testdir, monkeypatch):  ## pylint:disable=W0621
     root = str(testdir)
 
