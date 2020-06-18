@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.21.1
+
+### Fix
+
+* fix changed font store access (4599017da358)
+
 ## v0.21.0
 
 ### Feature
