@@ -10,12 +10,12 @@
 import os
 
 import power
-import utila
+import utilatest
 
 import decider.example
 
 
-@utila.skip_longrun
+@utilatest.skip_longrun
 def test_example_extract(testdir):
     root = str(testdir)
     generated = os.path.join(root, 'generated')

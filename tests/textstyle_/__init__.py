@@ -12,18 +12,19 @@ import os
 
 import doctextstyle.serialize
 import utila
+import utilatest
 
 import decider_textstyle.cli
 
 # pylint:disable=C0103
 run = functools.partial(
-    utila.run_command,
+    utilatest.run_command,
     main=decider_textstyle.cli.main,
     process=decider_textstyle.PROCESS,
     success=True,
 )
 fail = functools.partial(
-    utila.run_command,
+    utilatest.run_command,
     main=decider_textstyle.cli.main,
     process=decider_textstyle.PROCESS,
     success=False,

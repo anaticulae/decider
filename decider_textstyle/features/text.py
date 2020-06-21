@@ -132,7 +132,10 @@ def check_7551_check_text_family(linter: callable, driver):
     if not driver.style.text_family:
         return
     chunks = driver.text_chunks
-    expected = driver.fontstore[driver.style.text_family].name
+    expected = driver.fontstore[driver.style.text_family]
+    if not expected:
+        return
+    expected = expected.name
     for page, line, item in chunks:
         if not item:
             continue

@@ -12,6 +12,7 @@ import os
 
 import hey.example
 import utila
+import utilatest
 
 
 def extract(
@@ -64,7 +65,7 @@ def extract(
 
 def generate(files: list, outpath: str) -> list:
     todo = []
-    names = utila.simplify_testfile_names(
+    names = utilatest.simplify_testfile_names(
         files=[item for item, _ in files],  # remove page attribute
         sort=False,
     )

@@ -9,19 +9,19 @@
 
 import functools
 
-import utila
+import utilatest
 
 import decider_footnote.cli
 
 # pylint:disable=C0103
 run = functools.partial(
-    utila.run_command,
+    utilatest.run_command,
     main=decider_footnote.cli.main,
     process=decider_footnote.PROCESS,
     success=True,
 )
 fail = functools.partial(
-    utila.run_command,
+    utilatest.run_command,
     main=decider_footnote.cli.main,
     process=decider_footnote.PROCESS,
     success=False,

@@ -11,6 +11,7 @@ import os
 import sys
 
 import utila
+import utilatest
 
 import tests.resources
 import tests.resources.update
@@ -25,7 +26,7 @@ def pytest_sessionstart(session):  # pylint:disable=W0613
     # ensure to avoid race condition if more than one thread tries to
     # install or use `decider`.
     single_test = '-k' in sys.argv
-    if not single_test and ('GENERATE' in os.environ or utila.test.LONGRUN):
+    if not single_test and ('GENERATE' in os.environ or utilatest.LONGRUN):
         utila.log('generate test data')
         utila.log('install requirements')
         tests.resources.update.install_requirements()

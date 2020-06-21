@@ -11,6 +11,7 @@ import os
 
 import hey.example
 import utila
+import utilatest
 import writers
 
 import border.cli
@@ -100,7 +101,7 @@ def extract_without_titlepage():
     # prepare
     without_titlepage = [
         os.path.join(destination, f'{item}.pdf')
-        for item in utila.simplify_testfile_names(files, sort=False)
+        for item in utilatest.simplify_testfile_names(files, sort=False)
     ]
     # jam
     todo = []
@@ -124,7 +125,7 @@ def extract_without_toc():
     # prepare
     without_titlepage = [
         os.path.join(destination, f'{item}.pdf')
-        for item in utila.simplify_testfile_names(files, sort=False)
+        for item in utilatest.simplify_testfile_names(files, sort=False)
     ]
     # jam
     todo = []

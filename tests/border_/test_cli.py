@@ -15,6 +15,7 @@ import protocol
 import pytest
 import serializeraw
 import utila
+import utilatest
 
 import border.cli
 import border.features.detection
@@ -41,7 +42,7 @@ def run_border_detector(
         monkeypatch,
 ) -> iamraw.PageContentHits:
     cmd = f'-i {source} -o {root} --pages=0:10'
-    utila.run_command(
+    utilatest.run_command(
         cmd,
         process=border.cli.PROCESS,
         main=border.cli.main,
@@ -72,7 +73,7 @@ def test_border_cli_decider_simple(source, testdir, monkeypatch):
     pytest.param(tests.resources.DOCU_TWINE, [4, 4], id='twine'),
     pytest.param(tests.resources.MASTER78, [6, 8], id='master78'),
 ])
-@utila.skip_longrun
+@utilatest.skip_longrun
 def test_border_cli_decider_list(
         source,
         validate,
@@ -99,7 +100,7 @@ def test_border_cli_decider_list(
         id='leftright',
     ),
 ])
-@utila.skip_longrun
+@utilatest.skip_longrun
 def test_border_cli_decider_complex_validation(
         source,
         validate,

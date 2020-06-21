@@ -11,18 +11,19 @@ import functools
 import os
 
 import utila
+import utilatest
 
 import decider_toc.cli
 
 # pylint:disable=C0103
 run = functools.partial(
-    utila.run_command,
+    utilatest.run_command,
     main=decider_toc.cli.main,
     process=decider_toc.PROCESS,
     success=True,
 )
 fail = functools.partial(
-    utila.run_command,
+    utilatest.run_command,
     main=decider_toc.cli.main,
     process=decider_toc.PROCESS,
     success=False,

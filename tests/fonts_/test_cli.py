@@ -10,6 +10,7 @@
 import os
 
 import utila
+import utilatest
 
 import fonts.cli
 import tests.resources
@@ -22,7 +23,7 @@ def test_main_fonts(testdir, monkeypatch):  ## pylint:disable=W0621
     utila.copy_content(tests.resources.DECIDER_FONTS, root)
 
     command = ['-i', tests.resources.DOCU_TWINE, '-o', root]
-    utila.run_command(
+    utilatest.run_command(
         command,
         process=fonts.cli.PROCESS,
         main=fonts.cli.main,

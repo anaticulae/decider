@@ -43,7 +43,8 @@ def test_decider_text_master72_2_20_fontsize(testdir, monkeypatch):
 
 
 def test_decider_text_master72_2_10_fontfamily(testdir, monkeypatch):
-    style = doctextstyle.data.DocTextStyle(text_family=1386554774)
+    # Hint: adjust text_family after text parser change
+    style = doctextstyle.data.DocTextStyle(text_family=-1702503278)
     source = tests.resources.MASTER72
     pages = '2:10'
     findings = decide_text_style(
@@ -54,7 +55,7 @@ def test_decider_text_master72_2_10_fontfamily(testdir, monkeypatch):
         monkeypatch,
     )
     # not correct, but indicates that algo changed
-    assert len(findings) == 41
+    assert len(findings) == 17
 
 
 def test_decider_text_bachelor76_4_10_bold_font(testdir, monkeypatch):

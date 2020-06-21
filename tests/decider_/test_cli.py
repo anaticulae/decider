@@ -9,6 +9,7 @@
 
 import pytest
 import utila
+import utilatest
 
 import tests
 import tests.resources
@@ -60,7 +61,7 @@ def test_cli_decider_example(source, testdir, monkeypatch):
         id='master72',
     ),
 ])
-@utila.skip_longrun
+@utilatest.skip_longrun
 def test_cli_detector_and_decider(source, pages, testdir, monkeypatch):
     """Run decider
 

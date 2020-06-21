@@ -10,18 +10,19 @@
 import functools
 
 import utila
+import utilatest
 
 import decider_textflow.cli
 
 # pylint:disable=C0103
 run = functools.partial(
-    utila.run_command,
+    utilatest.run_command,
     main=decider_textflow.cli.main,
     process=decider_textflow.PROCESS,
     success=True,
 )
 fail = functools.partial(
-    utila.run_command,
+    utilatest.run_command,
     main=decider_textflow.cli.main,
     process=decider_textflow.PROCESS,
     success=False,

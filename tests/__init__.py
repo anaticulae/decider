@@ -12,12 +12,13 @@ import iamraw
 import protocol
 import serializeraw
 import utila
+import utilatest
 
 import decider
 
 
 def run_decider(cmd: str, monkeypatch) -> int:
-    returncode = utila.run_command(
+    returncode = utilatest.run_command(
         cmd,
         decider.PROCESS,
         decider.cli.main,
