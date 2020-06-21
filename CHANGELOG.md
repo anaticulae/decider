@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.21.4
+
+### Fix
+
+* display font name not python repr (883f01272836)
+
 ## v0.21.3
 
 ## v0.21.2
