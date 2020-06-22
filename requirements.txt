@@ -13,10 +13,10 @@ PyYAML==5.1
 # Internal packages
 utila==2.0.0
 protocol==1.0.0
-iamraw==1.28.0
-hey==3.3.0
-detector==0.4.2
-words==0.9.4
+iamraw==1.29.0
+hey==3.4.0
+detector==0.5.2
+words==0.9.5
 
 # define holy values
 configo==0.6.13
