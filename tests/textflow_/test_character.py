@@ -41,3 +41,56 @@ def test_textflow_character_space_before_comma(testdir, monkeypatch):
         msgids=7650,
     )
     assert len(findings) == 1
+
+
+def test_textflow_character_missing_space_after_comma(testdir, monkeypatch):
+    source = tests.resources.BACHELOR90
+    pages = ':'
+    findings = decider_textflow_character(
+        source,
+        pages,
+        testdir,
+        monkeypatch,
+        msgids=7651,
+    )
+    assert len(findings) == 2
+
+
+def test_textflow_character_space_before_square_bracket(testdir, monkeypatch):
+    source = tests.resources.BACHELOR90
+    pages = ':'
+    findings = decider_textflow_character(
+        source,
+        pages,
+        testdir,
+        monkeypatch,
+        msgids=7652,
+    )
+    assert len(findings) == 2
+
+
+def test_textflow_character_space_after_square_bracket(testdir, monkeypatch):
+    source = tests.resources.BACHELOR90
+    pages = ':'
+    findings = decider_textflow_character(
+        source,
+        pages,
+        testdir,
+        monkeypatch,
+        msgids=7653,
+    )
+    assert len(findings) == 2
+
+
+def test_textflow_character_missing_space_before_semicolon(
+        testdir, monkeypatch):
+    source = tests.resources.BACHELOR90
+    pages = ':'
+    findings = decider_textflow_character(
+        source,
+        pages,
+        testdir,
+        monkeypatch,
+        msgids=7654,
+    )
+    assert len(findings) == 12  # TODO: CHANGE TO 13

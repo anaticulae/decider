@@ -6,9 +6,9 @@ RP 0.25.0
 decider_textflow
 ----------------
 
-* [ ] add character based checker `Hello , hier`
+* [x] add character based checker `Hello , hier`
 
-* [ ] `Hello ; hier`
+* [x] `Hello ; hier`
 
 * [ ] increase test data generator
 
