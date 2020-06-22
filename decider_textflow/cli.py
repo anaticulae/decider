@@ -26,6 +26,11 @@ LINT_OUT = ('user', 'developer')
 
 WORKPLAN = [
     utila.create_step(
+        'character',
+        inputs=CONTENT_INPUT,
+        output=LINT_OUT,
+    ),
+    utila.create_step(
         'lineending',
         inputs=[utila.ResultFile(textflow.PROCESS, 'lineending_lastchar')],
         output=LINT_OUT,
