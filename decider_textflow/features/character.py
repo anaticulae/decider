@@ -36,6 +36,23 @@ def work(  # pylint:disable=R0914
     return result
 
 
+def check_character(linter, driver, regex):
+    text = driver.text_chunks
+    for page, line, item in text:
+        if isinstance(item, iamraw.Headline):
+            continue
+
+        text = item.text
+        # TODO: SUPPORT MULTIPLE ERRORS IN ONE LINE
+        matched = re.search(regex, text)
+        if not matched:
+            continue
+
+        # TODO: ADD TOKEN LOCATION
+        location = protocol.RangedLocation(page=page, line=line)
+        linter(location=location)
+
+
 SOLUTION_7650 = """\
 Unzuläßiges Leerzeichen vor Komma
 
@@ -46,20 +63,7 @@ SPACE_BEFORE_COMMA = r'\s+\,'
 
 
 def check_7650_space_before_comma(linter: callable, driver):
-    text = driver.text_chunks
-    for page, line, item in text:
-        if isinstance(item, iamraw.Headline):
-            continue
-
-        text = item.text
-        # TODO: SUPPORT MULTIPLE ERRORS IN ONE LINE
-        matched = re.search(SPACE_BEFORE_COMMA, text)
-        if not matched:
-            continue
-
-        # TODO: ADD TOKEN LOCATION
-        location = protocol.RangedLocation(page=page, line=line)
-        linter(location=location)
+    check_character(linter, driver, SPACE_BEFORE_COMMA)
 
 
 SOLUTION_7651 = """\
@@ -72,20 +76,7 @@ MISSING_SPACE_AFTER_COMMA = r'\,\w'
 
 
 def check_7651_missing_space_after_comma(linter: callable, driver):
-    text = driver.text_chunks
-    for page, line, item in text:
-        if isinstance(item, iamraw.Headline):
-            continue
-
-        text = item.text
-        # TODO: SUPPORT MULTIPLE ERRORS IN ONE LINE
-        matched = re.search(MISSING_SPACE_AFTER_COMMA, text)
-        if not matched:
-            continue
-
-        # TODO: ADD TOKEN LOCATION
-        location = protocol.RangedLocation(page=page, line=line)
-        linter(location=location)
+    check_character(linter, driver, MISSING_SPACE_AFTER_COMMA)
 
 
 SOLUTION_7652 = """\
@@ -98,20 +89,7 @@ SPACE_BEFORE_SQUARE_BRACKET = r'\s+\]'
 
 
 def check_7652_space_before_square_bracket(linter: callable, driver):
-    text = driver.text_chunks
-    for page, line, item in text:
-        if isinstance(item, iamraw.Headline):
-            continue
-
-        text = item.text
-        # TODO: SUPPORT MULTIPLE ERRORS IN ONE LINE
-        matched = re.search(SPACE_BEFORE_SQUARE_BRACKET, text)
-        if not matched:
-            continue
-
-        # TODO: ADD TOKEN LOCATION
-        location = protocol.RangedLocation(page=page, line=line)
-        linter(location=location)
+    check_character(linter, driver, SPACE_BEFORE_SQUARE_BRACKET)
 
 
 SOLUTION_7653 = """\
@@ -124,20 +102,7 @@ SPACE_AFTER_SQUARE_BRACKET = r'\[\s+'
 
 
 def check_7653_space_after_square_bracket(linter: callable, driver):
-    text = driver.text_chunks
-    for page, line, item in text:
-        if isinstance(item, iamraw.Headline):
-            continue
-
-        text = item.text
-        # TODO: SUPPORT MULTIPLE ERRORS IN ONE LINE
-        matched = re.search(SPACE_AFTER_SQUARE_BRACKET, text)
-        if not matched:
-            continue
-
-        # TODO: ADD TOKEN LOCATION
-        location = protocol.RangedLocation(page=page, line=line)
-        linter(location=location)
+    check_character(linter, driver, SPACE_AFTER_SQUARE_BRACKET)
 
 
 SOLUTION_7654 = """\
@@ -150,17 +115,4 @@ MISSING_SPACE_BEFORE_SEMICOLON = r'\s+\;'
 
 
 def check_7654_space_before_semicolon(linter: callable, driver):
-    text = driver.text_chunks
-    for page, line, item in text:
-        if isinstance(item, iamraw.Headline):
-            continue
-
-        text = item.text
-        # TODO: SUPPORT MULTIPLE ERRORS IN ONE LINE
-        matched = re.search(MISSING_SPACE_BEFORE_SEMICOLON, text)
-        if not matched:
-            continue
-
-        # TODO: ADD TOKEN LOCATION
-        location = protocol.RangedLocation(page=page, line=line)
-        linter(location=location)
+    check_character(linter, driver, MISSING_SPACE_BEFORE_SEMICOLON)
