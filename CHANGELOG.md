@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v0.22.0
+
+### Feature
+
+* add some character checking steps (30c63c74799f)
+* add character decider step (888ecbb345d2)
+
 ## v0.21.4
 
 ### Fix
