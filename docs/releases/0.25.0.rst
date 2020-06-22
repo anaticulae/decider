@@ -1,0 +1,22 @@
+.. _0_25_0:
+
+RP 0.25.0
+=========
+
+decider_textflow
+----------------
+
+* [ ] add character based checker `Hello , hier`
+
+* [ ] `Hello ; hier`
+
+* [ ] increase test data generator
+
+code quality
+------------
+
+before
+~~~~~~
+
+* Total coverage: 94.66%
+* Your code has been rated: 10.0/10
