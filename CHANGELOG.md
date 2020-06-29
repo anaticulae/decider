@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.22.1
+
+### Feature
+
+* add physical value checker (7afffeaa9c07)
+
 ## v0.22.0
 
 ### Feature
