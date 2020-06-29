@@ -44,6 +44,11 @@ WORKPLAN = [
         output=LINT_OUT,
     ),
     utila.create_step(
+        'physical',
+        inputs=CONTENT_INPUT,
+        output=LINT_OUT,
+    ),
+    utila.create_step(
         'quotation',
         inputs=[utila.ResultFile(textflow.PROCESS, 'quotation_quotation')],
         output=LINT_OUT,
