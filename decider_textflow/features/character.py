@@ -77,10 +77,17 @@ Fehlendes Leerzeichen nach Komma
 Fehlendes Leerzeichen nach einem Komma erkannt.
 """
 
-MISSING_SPACE_AFTER_COMMA = r'\,\w'
+# TODO: ADD RISE to DISTINGUISH OF NORMAL NUMBERS
+MISSING_SPACE_AFTER_COMMA = r'\,[a-zA-Z]'
 
 
 def check_7651_missing_space_after_comma(linter: callable, driver):
+    """\
+    >>> message('hightnote: ,10', 7651)
+    0
+    >>> message('normal text: this is helmut,space missing', 7651)
+    1
+    """
     check_character(linter, driver, MISSING_SPACE_AFTER_COMMA)
 
 
