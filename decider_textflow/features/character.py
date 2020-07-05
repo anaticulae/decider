@@ -12,6 +12,7 @@ import typing
 
 import iamraw
 import protocol
+import texmex
 
 import decider_textflow.features
 
@@ -63,6 +64,10 @@ SPACE_BEFORE_COMMA = r'\s+\,'
 
 
 def check_7650_space_before_comma(linter: callable, driver):
+    """\
+    >>> message('space before , comma', 7650)
+    1
+    """
     check_character(linter, driver, SPACE_BEFORE_COMMA)
 
 
@@ -133,3 +138,18 @@ MISSING_SPACE_AFTER_SEMICOLON = r'\;[^\s]'
 
 def check_7655_missing_space_after_semicolon(linter: callable, driver):
     check_character(linter, driver, MISSING_SPACE_AFTER_SEMICOLON)
+
+
+def message(lines: list, msgid=None, page=0):
+    if isinstance(lines, str):
+        lines = [lines]
+    # page, line, text
+    lines = [(
+        page,
+        line,
+        texmex.TextBoundsInfo(text=content, bounds=None),
+    ) for line, content in enumerate(lines)]
+    driver = protocol.driver(text_chunks=lines)
+    user, _ = decider_textflow.features.linting(__name__, driver)
+    result = protocol.load_result(user, msgid)
+    return len(result)
