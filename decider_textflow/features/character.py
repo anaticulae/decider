@@ -97,10 +97,16 @@ Unzuläßiges Leerzeichen vor eckiger Klammer
 Ungültiges Leerzeichen vor einer eckigen Klammer erkannt.
 """
 
-SPACE_BEFORE_SQUARE_BRACKET = r'\s+\]'
+SPACE_BEFORE_SQUARE_BRACKET = r'[^\[]\s+\]'
 
 
 def check_7652_space_before_square_bracket(linter: callable, driver):
+    """\
+    >>> message('[Jens ] space inside author reference', 7652)
+    1
+    >>> message('[ ] replace with [...]', 7652)
+    0
+    """
     check_character(linter, driver, SPACE_BEFORE_SQUARE_BRACKET)
 
 
@@ -110,10 +116,16 @@ Unzuläßiges Leerzeichen nach eckiger Klammer
 Ungültiges Leerzeichen nach einer eckigen Klammer erkannt.
 """
 
-SPACE_AFTER_SQUARE_BRACKET = r'\[\s+'
+SPACE_AFTER_SQUARE_BRACKET = r'\[\s+[^\]]'
 
 
 def check_7653_space_after_square_bracket(linter: callable, driver):
+    """\
+    >>> message('[ Jens] space inside author reference', 7653)
+    1
+    >>> message('[ ] replace with [...]', 7653)
+    0
+    """
     check_character(linter, driver, SPACE_AFTER_SQUARE_BRACKET)
 
 
@@ -145,6 +157,25 @@ MISSING_SPACE_AFTER_SEMICOLON = r'\;[^\s]'
 
 def check_7655_missing_space_after_semicolon(linter: callable, driver):
     check_character(linter, driver, MISSING_SPACE_AFTER_SEMICOLON)
+
+
+SOLUTION_7656 = """\
+Fehlerhaftes Auslassungszeichen
+
+Gefunden **[ ]** ersetzen Sie es durch **[...]**
+"""
+
+MISSING_DOTS_BETWEEN_ANGLE_BRACKETS = r'\[\s*\]'
+
+
+def check_7656_missing_dots_between_brackets(linter: callable, driver):
+    """\
+    >>> message('[] replace with [...]', 7656)
+    1
+    >>> message('[  ] replace with [...]', 7656)
+    1
+    """
+    check_character(linter, driver, MISSING_DOTS_BETWEEN_ANGLE_BRACKETS)
 
 
 def message(lines: list, msgid=None, page=0):
