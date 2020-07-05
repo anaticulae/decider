@@ -106,13 +106,30 @@ def check_7653_space_after_square_bracket(linter: callable, driver):
 
 
 SOLUTION_7654 = """\
-Fehlendes Leerzeichen vor Semicolon
+Leerzeichen vor Semicolon
 
-Fehlendes Leerzeichen vor Semicolon erkannt.
+Unzuläßiges Leerzeichen vor Semicolon erkannt.
+
+SIEHE SATZZEICHEN
 """
 
-MISSING_SPACE_BEFORE_SEMICOLON = r'\s+\;'
+SPACE_BEFORE_SEMICOLON = r'\s+\;'
 
 
 def check_7654_space_before_semicolon(linter: callable, driver):
-    check_character(linter, driver, MISSING_SPACE_BEFORE_SEMICOLON)
+    check_character(linter, driver, SPACE_BEFORE_SEMICOLON)
+
+
+SOLUTION_7655 = """\
+Fehlendes Leerzeichen nach Semicolon
+
+Fehlendes Leerzeichen nach Semicolon erkannt.
+
+SIEHE SATZZEICHEN
+"""
+
+MISSING_SPACE_AFTER_SEMICOLON = r'\;[^\s]'
+
+
+def check_7655_missing_space_after_semicolon(linter: callable, driver):
+    check_character(linter, driver, MISSING_SPACE_AFTER_SEMICOLON)
