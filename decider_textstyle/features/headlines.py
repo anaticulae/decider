@@ -12,6 +12,7 @@ import functools
 import string
 import typing
 
+import configo
 import doctextstyle.parser
 import doctextstyle.serialize
 import protocol
@@ -19,7 +20,8 @@ import serializeraw
 import texmex
 import utila
 
-MAX_HEADLINE_DIFF = 2.0  # TODO: HOLY VALUE
+MAX_HEADLINE_DIFF_REL = configo.HV_PERCENT_PLUS(10).value
+MAX_HEADLINE_DIFF_ABS = configo.HV_FLOAT_PLUS(2.0).value
 
 # TODO: USE VALIDATED TOC
 
@@ -479,7 +481,12 @@ def validate_headline_distance(  # pylint:disable=R1260
                 continue
             if before is None:
                 continue
-            if utila.near(before, expected_distance, diff=MAX_HEADLINE_DIFF):
+            if utila.pnear(  # pylint:disable=E1101
+                    expected_distance,
+                    before,
+                    abs_tol=MAX_HEADLINE_DIFF_ABS,
+                    rel_tol=MAX_HEADLINE_DIFF_REL,
+            ):
                 continue
         else:
             # TODO: SOLVE THIS ISSUE
@@ -491,7 +498,12 @@ def validate_headline_distance(  # pylint:disable=R1260
                 continue
             if after is None:
                 continue
-            if utila.near(after, expected_distance, diff=MAX_HEADLINE_DIFF):
+            if utila.pnear(  # pylint:disable=E1101
+                    expected_distance,
+                    after,
+                    abs_tol=MAX_HEADLINE_DIFF_ABS,
+                    rel_tol=MAX_HEADLINE_DIFF_REL,
+            ):
                 continue
 
         # distance diff

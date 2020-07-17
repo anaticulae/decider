@@ -8,6 +8,7 @@
 # =============================================================================
 
 import decider
+import decider_textstyle.__patch__
 
 ROOT = decider.ROOT
 
