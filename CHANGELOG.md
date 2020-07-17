@@ -2,6 +2,17 @@
 
 Every noteable change is logged here.
 
+## v0.23.0
+
+### Feature
+
+* add broken angle brackets linter (f73b34172164)
+
+### Fix
+
+* ensure that highnote is not handled as error (73bc7123f2c2)
+* fix semicolon linter (067d8d727ce0)
+
 ## v0.22.4
 
 ## v0.22.3
