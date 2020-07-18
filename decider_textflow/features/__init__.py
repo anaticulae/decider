@@ -17,6 +17,7 @@ import decider_textstyle.utils
 
 
 def linting(name, driver=None):
+    # IMPORTANT TODO: WITHOUT DRIVER, NOTHING HAPPEN HERE?
     linter = protocol.from_module(name)
     if driver:
         # run linting if data is provided
