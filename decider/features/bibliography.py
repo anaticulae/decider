@@ -15,19 +15,7 @@ import detector.bibliography.data
 import iamraw
 import protocol
 import serializeraw
-import texmex
-import texmex.alpha
 import utila
-
-
-def alphabetically(item: str) -> str:
-    if item is None:
-        # sort at the end, use max value
-        return chr(0x10ffff)
-    return texmex.alpha.replace(item).lower()
-
-
-texmex.alphabetically = alphabetically
 
 
 def work(table: str) -> typing.Tuple[str, str]:
