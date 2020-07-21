@@ -70,18 +70,25 @@ Erwartet:
 """
 
 
+def format_bibline(item) -> str:
+    if item.reference:
+        return item.reference
+    return f' * {item.author} {item.year} {item.title}'
+
+
 def check_6000_not_sorted_alphabetically(
         linter: callable,
         references: iamraw.BibliographyReferences,
 ):
     current = [item for item in references]
     expected = detector.bibliography.data.theissen_sort(current)
+
     if current == expected:
         return
 
     # TODO: CHECK REPRESENTATION
-    current = [f' * {item.reference}' for item in current]
-    expected = [f' * {item.reference}' for item in expected]
+    current = [format_bibline(item) for item in current]
+    expected = [format_bibline(item) for item in expected]
 
     linter(
         current=utila.NEWLINE.join(current),
