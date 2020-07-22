@@ -8,38 +8,109 @@
 # =============================================================================
 
 import os
-import sys
 
+import hey.example
+import power
+import pytest
 import utila
 import utilatest
+import writers
 
+import decider
 import tests.resources
-import tests.resources.update
+import tests.resources.utils
+
+PACKAGE = decider.PACKAGE
 
 pytest_plugins = ['pytester', 'xdist']  # pylint: disable=invalid-name
 
+WORKER = 8
 
-def pytest_sessionstart(session):  # pylint:disable=W0613
-    if 'PYTEST_XDIST_WORKER' in os.environ:
-        return
-    # master process only
-    # ensure to avoid race condition if more than one thread tries to
-    # install or use `decider`.
-    single_test = '-k' in sys.argv
-    if not single_test and ('GENERATE' in os.environ or utilatest.LONGRUN):
-        utila.log('generate test data')
-        utila.log('install requirements')
-        tests.resources.update.install_requirements()
+RESOURCES = tests.resources.TODO
+RESOURCES_NOTOC = tests.resources.GENERATE_NO_TOC
+RESOURCES_NOTITLE = tests.resources.GENERATE_NO_TITLE
 
-        # ensure that all test resources exists
-        utila.log('synchronize test resources')
-        tests.resources.update.sync_resources()
 
-        utila.log('extract resources')
-        tests.resources.update.extract_examples()
-        utila.log('generate test data complete')
+@pytest.mark.usefixtures('session')
+def pytest_sessionstart():
+    power.run(tests.resources.REQURIED_RESOURCES)
 
-    for item in tests.resources.REQURIED_RESOURCES:
-        advice = 'run `baw --test=generate` to generate test data'
-        msg = f'required test path does not exists: {item}, {advice}'
-        assert os.path.exists(item), msg
+
+def extract(resources):
+    destination = tests.resources.GENERATED
+    for item, page in resources:
+        utila.log(f'pages:{page:8} source:{item}')
+    todo = hey.example.todolist(
+        resources,
+        destination=destination,
+        detector=True,
+        doctextstyle=True,
+        groupme=True,
+        magic=True,
+        sections=True,
+        words=True,
+    )
+    tests.resources.utils.run_parallel(todo, worker=WORKER, progress=True)
+
+
+def extract_notoc(resources):
+    destination = power.generated(folder='notoc')
+    for item, page in resources:
+        utila.log(f'pages:{page:8} source:{item}')
+    files = [item[0] for item in resources]
+    # prepare
+    without_titlepage = [
+        os.path.join(destination, f'{item}.pdf')
+        for item in utilatest.simplify_testfile_names(
+            files + [power.REPOSITORY],  # ensure correct parent
+            sort=False,
+        )
+    ]
+    # jam
+    todo = []
+    for inpath, outpath in zip(files, without_titlepage):
+        utila.log(inpath)
+        todo.append(f'jam -i {inpath} -o {outpath} --remove=1:5')
+    # generate
+    todo.extend(
+        hey.example.todolist(
+            without_titlepage + [destination],  # ensure correct parent
+            destination,
+            groupme=True,
+        ))
+    # avoid race condition that jam is not ready before starting extraction
+    worker = utila.mins(len(files), WORKER)
+    tests.resources.utils.run_parallel(todo, worker=worker, progress=True)
+
+
+def extract_notitle(resources):
+    destination = power.generated(folder='notitle')
+    files = [item[0] for item in resources]
+    # prepare
+    without_titlepage = [
+        os.path.join(destination, f'{item}.pdf')
+        for item in utilatest.simplify_testfile_names(
+            files + [power.REPOSITORY],  # ensure correct parent
+            sort=False,
+        )
+    ]
+    # jam
+    todo = []
+    for inpath, outpath in zip(files, without_titlepage):
+        utila.log(inpath)
+        todo.append(f'jam -i {inpath} -o {outpath} --remove=0')
+    # generate
+    todo.extend(
+        hey.example.todolist(
+            without_titlepage + [destination],  # ensure correct parent
+            destination,
+            groupme=True,
+        ))
+    # avoid race condition that jam is not ready before starting extraction
+    worker = utila.mins(len(files), WORKER)
+    tests.resources.utils.run_parallel(todo, worker=worker, progress=True)
+
+
+def install():
+    # generate docs after project is installed properly
+    writers.generate()

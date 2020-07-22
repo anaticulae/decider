@@ -18,30 +18,27 @@ assert os.path.exists(RESOURCES), RESOURCES
 
 GENERATED = os.path.join(RESOURCES, 'generated')
 
-NO_TITLE_PAGE = os.path.join(GENERATED, 'no_titlepage')
-NO_TOC = os.path.join(GENERATED, 'no_toc')
-
 TEST_CONFIG_DATA = os.path.join(decider.ROOT, 'tests/config')
 
 DECIDER_FONTS = os.path.join(TEST_CONFIG_DATA, 'decider_fonts')
 assert os.path.exists(DECIDER_FONTS), DECIDER_FONTS
 
-BACHELOR37 = os.path.join(GENERATED, 'bachelor_page_37_tables')
-BACHELOR76 = os.path.join(GENERATED, 'bachelor_page76')
-BACHELOR90 = os.path.join(GENERATED, 'bachelor_bachelor90')
-DOCU_TWINE = os.path.join(GENERATED, 'docu_twine')
-LEFTRIGHT = os.path.join(GENERATED, 'book_leftright')
-MASTER116 = os.path.join(GENERATED, 'master_page_116_images_toc_formular')
-MASTER72 = os.path.join(GENERATED, 'master_page_72_noimages_toc')
-MASTER78 = os.path.join(GENERATED, 'master_page_78_images_toc')
-MASTER83 = os.path.join(GENERATED, 'master_page_83_noimages_toc')
-MASTER98 = os.path.join(GENERATED, 'master_page98')
-MASTER99 = os.path.join(GENERATED, 'master_page99')
-PYPORTING = os.path.join(GENERATED, 'docu_howto_pyporting')
-TECHNICAL = os.path.join(RESOURCES, 'technical')
-TECHNICAL24 = os.path.join(GENERATED, 'technical_page_24_color_figures_images')
-TWINE_NO_TITLE_PAGE = os.path.join(NO_TITLE_PAGE, 'docu_twine')
-TWINE_NO_TOC = os.path.join(NO_TOC, 'docu_twine')
+BACHELOR37 = power.link(power.BACHELOR037_PDF)
+BACHELOR76 = power.link(power.BACHELOR076_PDF)
+BACHELOR90 = power.link(power.BACHELOR090_PDF)
+DOCU_TWINE = power.link(power.DOCU35_PDF)
+LEFTRIGHT = power.link(power.BOOK007_PDF)
+MASTER116 = power.link(power.MASTER116_PDF)
+MASTER72 = power.link(power.MASTER072_PDF)
+MASTER78 = power.link(power.MASTER078_PDF)
+MASTER83 = power.link(power.MASTER083_PDF)
+MASTER98 = power.link(power.MASTER098_PDF)
+MASTER99 = power.link(power.MASTER099_PDF)
+PYPORTING = power.link(power.DOCU07_PDF)
+TECHNICAL24 = power.link(power.TECHNICAL_024)
+
+TWINE_NO_TITLE_PAGE = power.link(power.DOCU35_PDF, folder='notitle')
+TWINE_NO_TOC = power.link(power.DOCU35_PDF, folder='notoc')
 
 TODO = [
     (power.MASTER116_PDF, '0:10,90:115'),
@@ -60,13 +57,13 @@ TODO = [
 ]
 
 GENERATE_NO_TOC = [
-    power.DOCU35_PDF,
-    power.BOOK007_PDF,
+    (power.DOCU35_PDF, ':'),
+    (power.BOOK007_PDF, ':'),
 ]
 
 GENERATE_NO_TITLE = [
-    power.DOCU35_PDF,
-    power.BOOK007_PDF,
+    (power.DOCU35_PDF, ':'),
+    (power.BOOK007_PDF, ':'),
 ]
 
 REQURIED_RESOURCES = [
@@ -81,7 +78,6 @@ REQURIED_RESOURCES = [
     MASTER83,
     MASTER98,
     MASTER99,
-    NO_TITLE_PAGE,
     TECHNICAL24,
     TWINE_NO_TITLE_PAGE,
     TWINE_NO_TOC,

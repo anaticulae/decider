@@ -9,12 +9,15 @@
 
 import groupme.path
 import iamraw
+import power
 import protocol
 import serializeraw
 import utila
 import utilatest
 
 import decider
+
+power.setup(decider.ROOT)
 
 
 def run_decider(cmd: str, monkeypatch) -> int:
