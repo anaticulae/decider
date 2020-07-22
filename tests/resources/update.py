@@ -113,6 +113,7 @@ def extract_without_titlepage():
         hey.example.todolist(
             without_titlepage,
             destination,
+            groupme=True,
             pages='0:10',
         ))
     return todo
@@ -137,6 +138,7 @@ def extract_without_toc():
         hey.example.todolist(
             without_titlepage,
             destination,
+            groupme=True,
             pages='0:10',
         ))
     return todo
