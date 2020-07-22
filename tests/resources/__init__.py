@@ -54,6 +54,7 @@ TODO = [
     (power.MASTER099_PDF, '0:10'),
     (power.DOCU07_PDF, '0:10'),
     (power.TECHNICAL_024, '0:10'),
+    (power.HOMEWORK025_PDF, '0:5'),
 ]
 
 GENERATE_NO_TOC = [
