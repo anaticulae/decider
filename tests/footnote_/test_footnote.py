@@ -8,12 +8,15 @@
 # =============================================================================
 
 import iamraw.path
+import power
 import protocol
 import pytest
+import utila
 
 import decider_footnote.features.rules
 import decider_footnote.features.style
 import decider_footnote.footnote
+import tests.footnote_
 import tests.resources
 
 
@@ -102,3 +105,31 @@ def test_footnotes_work_highnote_font_family():
     )
     result = protocol.load_result(user, 2005)
     assert len(result) == 2
+
+
+def test_footnote_email_exception(testdir, monkeypatch):
+    source = power.link(power.HOMEWORK025_PDF)
+    cmd = f'--rules -i {source}'
+
+    def run_linter():
+        tests.footnote_.run(cmd, monkeypatch=monkeypatch)
+        loaded = utila.select_content(
+            protocol.findings_from_path(testdir.tmpdir),
+            page=0,
+            default=[],
+        )
+        loaded = protocol.select_findings(loaded, {2001, 2002})
+        return loaded
+
+    with monkeypatch.context() as context:
+        # disable exception to verify that this method is required
+        context.setattr(
+            decider_footnote.features.rules,
+            'footnote_exception',
+            lambda _: False,
+        )
+        loaded = run_linter()
+        assert loaded
+
+    loaded = run_linter()
+    assert not loaded

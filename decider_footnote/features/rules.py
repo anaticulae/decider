@@ -15,6 +15,7 @@ Footnotes
 import functools
 import typing
 
+import german
 import protocol
 import utila
 
@@ -90,6 +91,10 @@ def check_2001_no_uppercase_at_start(linter, item):
     if text[0].isupper():
         return
 
+    if footnote_exception(text):
+        # disable for mails and hyperlinks
+        return
+
     linter(number=item.number)
 
 
@@ -107,6 +112,10 @@ def check_2002_no_dot_at_end(linter, item):
     text = item.text.strip()
 
     if text[-1] == '.':
+        return
+
+    if footnote_exception(text):
+        # disable for mails and hyperlinks
         return
 
     linter(number=item.number)
@@ -183,3 +192,28 @@ def send_footnote_pattern_information(linter, items, footnote_count: int):
             msgid=2013,
             location=decider.features.OVERVIEW,
         )
+
+
+# To ignore dots, spaces or <>.
+MAX_FOOTENOTE_EXCEPTION_CHARS = 10
+
+
+def footnote_exception(text: str) -> bool:
+    """Skip dot checking and upper cases for emails and hyperlinks. See:
+    <Theissen:2017>.
+
+    >>> footnote_exception('1<helmut.k.fahrendholz@mailbox.tu-berlin.de>123')
+    True
+    >>> footnote_exception('<http://www.url.com>123.')
+    True
+    >>> footnote_exception('This is a hyperlink: <http://www.url.com>.')
+    False
+    """
+    text = text.strip()
+    if not text:
+        return False
+    parsed = german.hyperlink(text) + german.mails(text)  # pylint:disable=E1101
+    detected = ''.join(parsed)
+    diff = len(text) - len(detected)
+    assert diff >= 0, str(diff)
+    return diff <= MAX_FOOTENOTE_EXCEPTION_CHARS
