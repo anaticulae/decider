@@ -41,7 +41,7 @@ def extract(resources):
     for item, page in resources:
         utila.log(f'pages:{page:8} source:{item}')
     todo = hey.example.todolist(
-        resources,
+        resources + [power.REPOSITORY],
         destination=destination,
         detector=True,
         doctextstyle=True,
