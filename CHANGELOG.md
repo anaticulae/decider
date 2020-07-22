@@ -2,6 +2,14 @@
 
 Every noteable change is logged here.
 
+## v0.24.0
+
+### Feature
+
+* ensure that bib line is formatted more properly (0b40f5f47ace)
+* add method to determine path to extracted bibliography (46c66e2c8e50)
+* use font size dependent distance check (045c4570cbda)
+
 ## v0.23.0
 
 ### Feature
