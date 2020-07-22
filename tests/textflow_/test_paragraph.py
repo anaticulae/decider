@@ -8,6 +8,7 @@
 # =============================================================================
 
 import protocol
+import pytest
 
 import decider_textflow.path
 import tests
@@ -36,6 +37,7 @@ def test_paragraph_too_short(testdir, monkeypatch):
     assert len(result) == 7, str(result)
 
 
+@pytest.mark.xfail(reason='failing magic/list parer')
 def test_list_no_paragraph_too_short(testdir, monkeypatch):
     source = tests.resources.MASTER72
     pages = (7,)

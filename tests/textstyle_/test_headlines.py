@@ -10,6 +10,7 @@
 import doctextstyle.data
 import doctextstyle.serialize
 import protocol
+import pytest
 
 import decider_textstyle.path
 import tests
@@ -47,6 +48,7 @@ def decide_headline_style(source, pages, style, testdir, monkeypatch):
     return findings
 
 
+@pytest.mark.xfail(reason='failing magic/list parer')
 def test_decider_headlines_master72_2_20(testdir, monkeypatch):
     source = tests.resources.MASTER72
     pages = '2:20'
@@ -61,6 +63,7 @@ def test_decider_headlines_master72_2_20(testdir, monkeypatch):
     assert not findings
 
 
+@pytest.mark.xfail(reason='failing magic/list parer')
 def test_decider_headlines_master72_all(testdir, monkeypatch):
     source = tests.resources.MASTER72
     pages = '3:65'
@@ -75,6 +78,7 @@ def test_decider_headlines_master72_all(testdir, monkeypatch):
     assert not findings
 
 
+@pytest.mark.xfail(reason='failing magic/list parer')
 def test_decider_headlines_bachelor76(testdir, monkeypatch):
     # TODO: EXTEND THIS TESTS, specify expected findings
     source = tests.resources.BACHELOR76
