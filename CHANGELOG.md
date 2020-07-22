@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v0.25.0
+
+### Feature
+
+* exclude pure hyperlinks and emails from footnote checker (1e1dca337a6c)
+* add email parser (bea7f0daf6bb)
+
 ## v0.24.0
 
 ### Feature
