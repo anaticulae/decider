@@ -37,7 +37,6 @@ def extract(
                              'determine output file name correctly')
     for pdf in files:
         pdf = pdf if isinstance(pdf, str) else pdf[0]  # remove pages
-        assert pdf.endswith('.pdf') and os.path.exists(pdf), str(pdf)
 
     # ensure that generation directory exists
     os.makedirs(destination, exist_ok=True)
