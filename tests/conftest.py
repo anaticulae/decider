@@ -37,9 +37,8 @@ def pytest_sessionstart():
 
 
 def extract(resources):
+    print_resources(resources)
     destination = tests.resources.GENERATED
-    for item, page in resources:
-        utila.log(f'pages:{page:8} source:{item}')
     todo = hey.example.todolist(
         resources + [power.REPOSITORY],
         destination=destination,
@@ -55,8 +54,7 @@ def extract(resources):
 
 def extract_notoc(resources):
     destination = power.generated(folder='notoc')
-    for item, page in resources:
-        utila.log(f'pages:{page:8} source:{item}')
+    print_resources(resources)
     files = [item[0] for item in resources]
     # prepare
     without_titlepage = [
@@ -84,6 +82,7 @@ def extract_notoc(resources):
 
 
 def extract_notitle(resources):
+    print_resources(resources)
     destination = power.generated(folder='notitle')
     files = [item[0] for item in resources]
     # prepare
@@ -114,3 +113,12 @@ def extract_notitle(resources):
 def install():
     # generate docs after project is installed properly
     writers.generate()
+
+
+def print_resources(resources):
+    for item in resources:
+        try:
+            source, page = item
+        except ValueError:
+            source, page, = item, 'all'
+        utila.log(f'source: {source}, pages: {page:8}')
