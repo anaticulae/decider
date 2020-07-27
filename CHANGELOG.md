@@ -2,6 +2,14 @@
 
 Every noteable change is logged here.
 
+## v0.25.1
+
+### Fix
+
+* use pagecontent navigator to adjust headlines (35b2c99518a6)
+* log files with page range correctly (b8c5b64ca567)
+* enable using simple-path-repository pattern (cc8edbcd6edc)
+
 ## v0.25.0
 
 ### Feature
