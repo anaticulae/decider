@@ -33,25 +33,61 @@ def work(
         textpositions: str,
         fontheader: str,
         fontcontent: str,
+        sizeandborders: str,
+        headerfooter: str,
         pages: tuple = None,
 ) -> typing.Tuple[str, str]:
-    linter = protocol.from_module(__name__)
+    data = load_driver(
+        textstyle,
+        headlines,
+        fontheader,
+        fontcontent,
+        text,
+        textpositions,
+        sizeandborders,
+        headerfooter,
+        pages,
+    )
+    if not data.headlines:  # pylint:disable=E1101
+        utila.error('no headlines given')
+    if not data.navigators:  # pylint:disable=E1101
+        utila.error('no navigators given')
 
+    linter = protocol.from_module(__name__)
+    if data.navigators and data.headlines:  # pylint:disable=E1101
+        linting(data, linter)
+    result = linter.result(unique=True)
+    user, developer = protocol.dump_result(result)
+    return user, developer
+
+
+def load_driver(
+        textstyle,
+        headlines,
+        fontheader,
+        fontcontent,
+        text,
+        textpositions,
+        sizeandborders,
+        headerfooter,
+        pages,
+):
     expected = doctextstyle.serialize.load_docstyle(textstyle)
     headlines = serializeraw.load_headlines(headlines, pages=pages)
 
-    # TODO: CREATE SEPARATE METHOD
-    text = serializeraw.load_document(text, pages=pages)
-    textpositions = serializeraw.load_textpositions(textpositions, pages=pages)
     fontstore = serializeraw.create_fontstore(
         fontheader,
         fontcontent,
         pages=pages,
     )
-    navigators = texmex.create_pagetextnavigators(
+    navigators = serializeraw.create_pagetextcontentnavigators_fromfile(
         text,
         textpositions,
-        fontstore,
+        sizeandborders,
+        headerfooter,
+        fontheader,
+        fontcontent,
+        pages=pages,
     )
 
     data = protocol.driver(
@@ -60,15 +96,7 @@ def work(
         headlines=headlines,
         style=expected,
     )
-    if not headlines:
-        utila.error('no headlines given')
-    if not navigators:
-        utila.error('no navigators given')
-    if navigators and headlines:
-        linting(data, linter)
-    result = linter.result(unique=True)
-    user, developer = protocol.dump_result(result)
-    return user, developer
+    return data
 
 
 def linting(driver, linter: protocol.Linter):
