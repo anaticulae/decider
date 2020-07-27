@@ -43,6 +43,7 @@ TWINE_NO_TOC = power.link(power.DOCU35_PDF, folder='notoc')
 TODO = [
     (power.MASTER116_PDF, '0:10,90:115'),
     (power.MASTER098_PDF, '0:10,88:97'),
+    (power.HOMEWORK025_PDF, ':'),
     (power.BACHELOR076_PDF, ':'),
     (power.MASTER072_PDF, ':'),
     (power.BACHELOR090_PDF, ':'),
@@ -54,7 +55,6 @@ TODO = [
     (power.MASTER099_PDF, '0:10'),
     (power.DOCU07_PDF, '0:10'),
     (power.TECHNICAL_024, '0:10'),
-    (power.HOMEWORK025_PDF, '0:5'),
 ]
 
 GENERATE_NO_TOC = [
