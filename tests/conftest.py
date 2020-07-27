@@ -67,7 +67,6 @@ def extract_notoc(resources):
     # jam
     todo = []
     for inpath, outpath in zip(files, without_titlepage):
-        utila.log(inpath)
         todo.append(f'jam -i {inpath} -o {outpath} --remove=1:5')
     # generate
     todo.extend(
@@ -96,7 +95,6 @@ def extract_notitle(resources):
     # jam
     todo = []
     for inpath, outpath in zip(files, without_titlepage):
-        utila.log(inpath)
         todo.append(f'jam -i {inpath} -o {outpath} --remove=0')
     # generate
     todo.extend(
