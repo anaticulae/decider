@@ -81,6 +81,8 @@ def generate(files: list, outpath: str) -> list:
                 sections=True,
                 words=True,
             ),
+            rawmaker=hey.example.CONFIG,
+            oneline=hey.example.ONELINE,
             pages=pages,
         )
         next_job = create_job(
