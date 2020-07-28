@@ -573,7 +573,6 @@ def container_textfamily(items):
     for item in items:
         family = textfamily(item.style)
         result.extend(family)
-    result = sorted(result)
     return result
 
 
