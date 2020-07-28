@@ -37,3 +37,30 @@ def test_headline_font_family_validation_page6(testdir, monkeypatch):
         tests.textstyle_.run(cmd, monkeypatch=monkeypatch)
     loaded = protocol.load_result(path, msgids={7501})
     assert len(loaded) == 1
+
+
+def test_headline_font_family_char_marker(testdir, monkeypatch):
+    """Ensure that linting is marked to wrong character and not to the
+    whole line."""
+    source = power.link(power.MASTER098_PDF)
+    cmd = f'-i {source}  --headlines --pages=6'
+    path = decider_textstyle.path.headlines(testdir.tmpdir)
+
+    with monkeypatch.context() as context:
+        # run linter in ``expert`` mode
+        context.setattr(
+            decider_textstyle.features.headlines,
+            'WHITESPACE_LINTING',
+            True,
+        )
+        tests.textstyle_.run(cmd, monkeypatch=monkeypatch)
+
+    # Analyze linter result
+    loaded = protocol.load_result(path, msgids={7501})
+    assert len(loaded) == 1
+    char_finding_location = loaded[0].location
+    # TODO: REPLACE TOKEN WITH CHAR
+    assert char_finding_location.token == 1
+    assert char_finding_location.token_end == 3
+    # Arial as wrong font was detected
+    assert 'Arial' in loaded[0].solution.description

@@ -453,14 +453,15 @@ def validate_headlines_family(
         )
         if not finding:
             continue
+        font, position = finding
         linter(
-            location=headline_location(headline),
+            location=headline_location(headline, position),
             expected=expected_family,
-            current=finding,
+            current=font,
         )
 
 
-def validate_headline_family(headline, navigators, fontstore, expected_family):
+def validate_headline_family(headline, navigators, fontstore, expected_family):  # pylint:disable=R0914
     containers_ = containers(headline.container)
     navigator = utila.select_page(navigators, headline.page)
 
@@ -473,22 +474,29 @@ def validate_headline_family(headline, navigators, fontstore, expected_family):
 
     textfamily_ = []
     skip_whitespaces = WHITESPACE_LINTING is False
-    for item in container_textfamily(
-            lines_selected,
-            skip_whitespaces=skip_whitespaces,
-    ):
+    analyzed = container_textfamily(
+        lines_selected,
+        skip_whitespaces=skip_whitespaces,
+    )
+    for item in analyzed[0]:
         headline_family = fontstore[item]
         if headline_family:
             textfamily_.append(headline_family.name)
         else:
             utila.error(f'headline: font not found {item}')
 
-    if all([item == expected_family for item in textfamily_]):
+    matched = [item == expected_family for item in textfamily_]
+    if all(matched):
         return None
 
+    # select invalid text families
+    positions = [
+        position for position, valid in zip(analyzed[1], matched) if not valid
+    ]
+    textfamilies = [item for item in textfamily_ if item != expected_family]
     # font family diff
-    current = utila.from_tuple(textfamily_, ', ')
-    return current
+    current = utila.from_tuple(textfamilies, ', ')
+    return current, positions
 
 
 def validate_headline_distance(  # pylint:disable=R1260
@@ -575,11 +583,12 @@ def container_textsizes(items):
 
 
 def container_textfamily(items, skip_whitespaces: bool = True):
-    result = []
+    families, positions = [], []
     for item in items:
-        family = textfamily(item, skip_whitespaces=skip_whitespaces)
-        result.extend(family)
-    return result
+        family, position = textfamily(item, skip_whitespaces=skip_whitespaces)
+        families.extend(family)
+        positions.extend(position)
+    return families, positions
 
 
 def textsizes(style: texmex.TextInfo) -> utila.Floats:
@@ -594,6 +603,7 @@ def textfamily(
         skip_whitespaces: bool = True,
 ) -> utila.Ints:
     fonts = []
+    positions = []
     for style in item.style.content:
         if skip_whitespaces:
             # do not lint the font of white spaces. Use this linting only
@@ -602,16 +612,22 @@ def textfamily(
             if not item.text[style.start:style.end].strip():
                 continue
         fonts.append(style.font)
+        positions.append((style.start, style.end))
     if len(utila.make_unique(fonts)) == 1:
         fonts = utila.make_unique(fonts)
-    return fonts
+        positions = [(0, len(item.text))]
+    return fonts, positions
 
 
-def headline_location(headline) -> protocol.RangedLocation:
+def headline_location(headline, chars: list = None) -> protocol.RangedLocation:
     containers_ = containers(headline.container)
+    # TODO: REPLACE TOKEN WITH CHAR
     location = protocol.RangedLocation(
         page=headline.page,
         line=containers_[0],
         line_end=containers_[-1],
     )
+    if chars:
+        location.token = chars[0][0]
+        location.token_end = chars[0][1]
     return location
