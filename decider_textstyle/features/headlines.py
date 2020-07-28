@@ -23,6 +23,8 @@ import utila
 MAX_HEADLINE_DIFF_REL = configo.HV_PERCENT_PLUS(10).value
 MAX_HEADLINE_DIFF_ABS = configo.HV_FLOAT_PLUS(2.0).value
 
+WHITESPACE_LINTING = False  # HOLY VALUE
+
 # TODO: USE VALIDATED TOC
 
 
@@ -470,7 +472,11 @@ def validate_headline_family(headline, navigators, fontstore, expected_family):
         return None
 
     textfamily_ = []
-    for item in container_textfamily(lines_selected):
+    skip_whitespaces = WHITESPACE_LINTING is False
+    for item in container_textfamily(
+            lines_selected,
+            skip_whitespaces=skip_whitespaces,
+    ):
         headline_family = fontstore[item]
         if headline_family:
             textfamily_.append(headline_family.name)
@@ -568,10 +574,10 @@ def container_textsizes(items):
     return result
 
 
-def container_textfamily(items):
+def container_textfamily(items, skip_whitespaces: bool = True):
     result = []
     for item in items:
-        family = textfamily(item.style)
+        family = textfamily(item, skip_whitespaces=skip_whitespaces)
         result.extend(family)
     return result
 
@@ -583,9 +589,21 @@ def textsizes(style: texmex.TextInfo) -> utila.Floats:
     return result
 
 
-def textfamily(style: texmex.TextInfo) -> utila.Ints:
-    fonts = [item.font for item in style.content]
-    fonts = utila.make_unique(fonts)
+def textfamily(
+        item: texmex.TextInfo,
+        skip_whitespaces: bool = True,
+) -> utila.Ints:
+    fonts = []
+    for style in item.style.content:
+        if skip_whitespaces:
+            # do not lint the font of white spaces. Use this linting only
+            # for expert linting, if you want to inform about failure in
+            # using words or orther style mechanism.
+            if not item.text[style.start:style.end].strip():
+                continue
+        fonts.append(style.font)
+    if len(utila.make_unique(fonts)) == 1:
+        fonts = utila.make_unique(fonts)
     return fonts
 
 
