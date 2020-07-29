@@ -2,6 +2,18 @@
 
 Every noteable change is logged here.
 
+## v0.26.0
+
+### Feature
+
+* do not validate table text with normal text definition (e2fb8d052aac)
+* shrink headline finding to corresponding characters (e2df419826ad)
+
+### Fix
+
+* do not lint font family of white spaces (6086bc65b992)
+* do not sort headline font families (90aae609bb2c)
+
 ## v0.25.1
 
 ### Fix
