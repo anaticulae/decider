@@ -57,7 +57,7 @@ def test_decider_text_master72_2_10_fontfamily(testdir, monkeypatch):
         monkeypatch,
     )
     # not correct, but indicates that algo changed
-    assert len(findings) == 17
+    assert len(findings) == 7
 
 
 @pytest.mark.xfail(reason='failing magic/list parer')
