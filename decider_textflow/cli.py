@@ -60,7 +60,9 @@ WORKPLAN = [
     ),
     utila.create_step(
         'writing',
-        inputs=CONTENT_INPUT,
+        inputs=CONTENT_INPUT + [
+            utila.ResultFile('magic', 'content_content'),
+        ],
         output=LINT_OUT,
     ),
 ]

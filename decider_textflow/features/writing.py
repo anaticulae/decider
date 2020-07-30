@@ -7,10 +7,12 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import os
 import typing
 
 import german
 import iamraw
+import magic.data
 import protocol
 
 import decider_textflow.features
@@ -22,14 +24,21 @@ def work(  # pylint:disable=R0914
         textpositions: str,
         sizeandborders: str,
         headerfooter: str,
+        magiccontent: str,
         pages: tuple = None,
 ) -> typing.Tuple[str, str]:
+    if os.path.exists(magiccontent):
+        magiccontent = magic.data.load_types(magiccontent, pages=pages)
+    else:
+        magiccontent = []
+
     driver = decider_textflow.features.textdata(
         headlines,
         text,
         textpositions,
         sizeandborders,
         headerfooter,
+        magiccontent=magiccontent,
         pages=pages,
     )
     result = decider_textflow.features.linting(__name__, driver)
@@ -52,6 +61,9 @@ def check_7600_text_perspective(linter: callable, driver):
     text = driver.text_chunks
     for page, line, item in text:
         if isinstance(item, iamraw.Headline):
+            continue
+        if not item:
+            # list, quotation or something
             continue
 
         words = german.split_words(item.text, validate_sentences=False)
