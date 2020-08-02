@@ -97,14 +97,18 @@ Unzuläßiges Leerzeichen vor eckiger Klammer
 Ungültiges Leerzeichen vor einer eckigen Klammer erkannt.
 """
 
-SPACE_BEFORE_SQUARE_BRACKET = r'[^\[]\s+\]'
+SPACE_BEFORE_SQUARE_BRACKET = r"""
+    [^\[\s]     # no open square bracket or space
+    \s+         # white space(s) before closing bracket
+    \]          # close with square bracket
+"""
 
 
 def check_7652_space_before_square_bracket(linter: callable, driver):
     """\
     >>> message('[Jens ] space inside author reference', 7652)
     1
-    >>> message('[ ] replace with [...]', 7652)
+    >>> message('[] [ ] [  ] [   ] replace with [...]', 7652)
     0
     """
     check_character(linter, driver, SPACE_BEFORE_SQUARE_BRACKET)
@@ -116,14 +120,21 @@ Unzuläßiges Leerzeichen nach eckiger Klammer
 Ungültiges Leerzeichen nach einer eckigen Klammer erkannt.
 """
 
-SPACE_AFTER_SQUARE_BRACKET = r'\[\s+[^\]]'
+SPACE_AFTER_SQUARE_BRACKET = r"""
+    \[          # start with open square bracket
+    \s+?        # one or more space after open square bracket
+    (?!\s*\])   # do not end with spaces and ] to distinguish from
+                # [ ] error message
+"""
 
 
 def check_7653_space_after_square_bracket(linter: callable, driver):
     """\
     >>> message('[ Jens] space inside author reference', 7653)
     1
-    >>> message('[ ] replace with [...]', 7653)
+    >>> message('[  DoubleSpace]', 7653)
+    1
+    >>> message('[   ] [  ] [ ] replace with [...]', 7653)
     0
     """
     check_character(linter, driver, SPACE_AFTER_SQUARE_BRACKET)
