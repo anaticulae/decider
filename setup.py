@@ -72,6 +72,8 @@ if __name__ == "__main__":
             'fonts',
             'fonts.config',
             'fonts.features',
+            'imgfig',
+            'imgfig.features',
         ],
         entry_points={
             'console_scripts': [
@@ -79,6 +81,7 @@ if __name__ == "__main__":
                 'decider_border = border.cli:main',
                 'decider_fonts = fonts.cli:main',
                 'decider_footnote = decider_footnote.cli:main',
+                'decider_imgfig = imgfig.cli:main',
                 'decider_textflow = decider_textflow.cli:main',
                 'decider_textstyle = decider_textstyle.cli:main',
                 'decider_toc = decider_toc.cli:main',

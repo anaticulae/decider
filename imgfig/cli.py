@@ -1,0 +1,41 @@
+# =============================================================================
+# C O P Y R I G H T
+# -----------------------------------------------------------------------------
+# Copyright (c) 2020 by Helmut Konrad Fahrendholz. All rights reserved.
+# This file is property of Helmut Konrad Fahrendholz. Any unauthorized copy,
+# use or distribution is an offensive act against international law and may
+# be prosecuted under federal law. Its content is company confidential.
+# =============================================================================
+
+import utila
+
+import imgfig
+
+DESCRIPTION = ''
+
+USER = 'user'
+DEVELOPER = 'developer'
+
+WORKPLAN = [
+    utila.create_step(
+        'quality',
+        [
+            utila.Pattern('rawmaker__images_images/*', 'yaml'),
+        ],
+        (USER, DEVELOPER),
+    ),
+]
+
+
+def main():
+    utila.featurepack(
+        workplan=WORKPLAN,
+        root=imgfig.ROOT,
+        featurepackage='imgfig.features',
+        config=utila.FeaturePackConfig(
+            description=DESCRIPTION,
+            multiprocessed=True,
+            name=imgfig.PROCESS,
+            version=imgfig.__version__,
+        ),
+    )
