@@ -48,6 +48,7 @@ TODO = [
     (power.MASTER072_PDF, ':'),
     (power.BACHELOR090_PDF, ':'),
     (power.BACHELOR037_PDF, '0:10'),
+    (power.BACHELOR063_PDF, '10:15'),
     (power.DOCU35_PDF, '0:10'),
     (power.BOOK007_PDF, '0:10'),
     (power.MASTER078_PDF, '0:10'),

@@ -36,3 +36,14 @@ def test_imgfig_max_quality(testdir, monkeypatch):
     )
     # max dpi = 2 * min dpi
     assert len(loaded) == 1  # dependent on max dpi definition
+
+
+def test_imgfig_relation(testdir, monkeypatch):
+    source = power.link(power.BACHELOR063_PDF)
+    tests.imgfig_.run(f'-i {source} --quality', monkeypatch=monkeypatch)
+
+    loaded = protocol.load_result(
+        imgfig.path.quality(testdir.tmpdir),
+        msgids={4005},
+    )
+    assert len(loaded) == 1

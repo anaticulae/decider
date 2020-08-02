@@ -10,6 +10,7 @@
 import functools
 import typing
 
+import configo
 import iamraw
 import protocol
 import serializeraw
@@ -17,6 +18,8 @@ import utila
 
 MIN_DPI = 96
 MAX_DPI = MIN_DPI * 2
+
+MAX_RESOLUTION_DIFF = configo.HV_PERCENT_PLUS(5).value
 
 
 def work(*images: str, pages: tuple = None) -> typing.Tuple[str, str]:
@@ -116,7 +119,22 @@ Grafik verzerrt
 
 Das Seitenverhältnis der Grafik im Dokument entspricht nicht dem
 Ausgangzverhältnis und wird daher verzerrt dargestellt.
+
+Druck: {%pdf%}
+Quelle: {%image%}
 """
+
+
+def check_4005_check_relation(linter, imageinfo):
+    pdfwidth = point_toinch(imageinfo.bounding[2] - imageinfo.bounding[0])
+    pdfheight = point_toinch(imageinfo.bounding[3] - imageinfo.bounding[1])
+
+    pdf = utila.roundme(pdfwidth / pdfheight)
+    image = utila.roundme(imageinfo.width / imageinfo.height)
+
+    if utila.pnear(pdf, image, rel_tol=MAX_RESOLUTION_DIFF):
+        return
+    linter(pdf=pdf, image=image)
 
 
 def load_image_info(
