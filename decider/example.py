@@ -7,6 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 """.. todo:: reduce code duplication, see `hey`."""
+
 import concurrent
 import os
 
@@ -111,6 +112,7 @@ def create_job(path: str, pages: tuple = None) -> str:
         f'textflow -i {path} -o {path} {pages}',
         f'decider_textflow -i {path} -o {path}',
         f'decider_textstyle -j8 -i {path} -o {path}',
+        f'decider_imgfig -j8 -i {path} -o {path}',
     ]
     todo = ' && '.join(task)
     return todo
