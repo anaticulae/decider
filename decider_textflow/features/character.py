@@ -45,7 +45,7 @@ def check_character(linter, driver, regex):
 
         text = item.text
         # TODO: SUPPORT MULTIPLE ERRORS IN ONE LINE
-        matched = re.search(regex, text)
+        matched = re.search(regex, text, flags=re.VERBOSE)
         if not matched:
             continue
 
