@@ -83,7 +83,27 @@ Auflösung unnötig hoch
 
 Die Auflösung der Grafik sollte reduziert werden um den benötigen
 Speicher zu reduzieren.
+
+Gefunden: {%dpi%}
+Erwartet: kleiner als {%expected%}
 """
+
+
+def check_4001_max_printing_resolution(linter, imageinfo):
+    pdfwidth = point_toinch(imageinfo.bounding[2] - imageinfo.bounding[0])
+    pdfheight = point_toinch(imageinfo.bounding[3] - imageinfo.bounding[1])
+
+    width_dpi = utila.roundme(imageinfo.width / pdfwidth)
+    height_dpi = utila.roundme(imageinfo.height / pdfheight)
+
+    dpi = (width_dpi, height_dpi)
+
+    if dpi[0] <= MAX_DPI or dpi[1] <= MAX_DPI:
+        return
+
+    expected = MAX_DPI, MAX_DPI
+    linter(dpi=dpi, expected=expected)
+
 
 SOLUTION_4002 = """\
 Pixelgrafik
