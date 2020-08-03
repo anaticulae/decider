@@ -31,6 +31,12 @@ import protocol
 import serializeraw
 import utila
 
+# TODO: HOLY VALUE, ADJUST THIS HOLY VALUES
+BORDER_LEFT = 25
+BORDER_RIGHT = 25
+BORDER_TOP = 25
+BORDER_BOTTOM = 25
+
 
 def work(
         border_boxes: str,
@@ -56,13 +62,6 @@ def work(
     result = linter.result(unique=True)
     user, developer = protocol.dump_result(result)
     return dumped, user, developer
-
-
-# TODO: HOLY VALUE, ADJUST THIS HOLY VALUES
-BORDER_LEFT = 25
-BORDER_RIGHT = 25
-BORDER_TOP = 25
-BORDER_BOTTOM = 25
 
 
 def linting(hits, linter: protocol.Linter):
