@@ -2,6 +2,22 @@
 
 Every noteable change is logged here.
 
+## v0.27.0
+
+### Feature
+
+* add image resolution checker (a90e87b53516)
+* add max dpi checker (f315e28541ab)
+* add min dpi checker (b222031c49c3)
+* add imgfig decider to default example job step (148d88b607c9)
+* load images informations from extracted folder (fae75ab6c712)
+* add decider to judge images and figures (24a06c64c2e2)
+* skip text analysis for quotation, lists, etc. (7fbf5c1561d1)
+
+### Fix
+
+* do not handle [  ] as square bracket error (884734f2d742)
+
 ## v0.26.0
 
 ### Feature

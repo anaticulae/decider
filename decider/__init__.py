@@ -57,7 +57,7 @@ Ranges
 
 import os
 
-__version__ = '0.26.0'
+__version__ = '0.27.0'
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
