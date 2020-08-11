@@ -68,6 +68,17 @@ def textdata(
         navigators,
         magiccontent=magiccontent,
     )
+    if not magiccontent:
+        nomagic = chunks
+    else:
+        nomagic = decider_textstyle.utils.text_chunks(
+            headlines,
+            navigators,
+        )
     if textstyle:
-        return protocol.driver(text_chunks=chunks, doctextstyle=textstyle)
-    return protocol.driver(text_chunks=chunks)
+        return protocol.driver(
+            text_chunks=chunks,
+            nomagic_text_chunks=nomagic,
+            doctextstyle=textstyle,
+        )
+    return protocol.driver(text_chunks=chunks, nomagic_text_chunks=nomagic)

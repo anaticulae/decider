@@ -14,6 +14,7 @@ Schusterjunge: Single Line at Page End
 import typing
 
 import iamraw
+import magic.data
 import protocol
 import utila
 
@@ -27,14 +28,17 @@ def work(  # pylint:disable=R0914
         textpositions: str,
         sizeandborders: str,
         headerfooter: str,
+        magiccontent: str,
         pages: tuple = None,
 ) -> typing.Tuple[str, str]:
+    magiccontent = magic.data.load_types(magiccontent)
     driver = decider_textflow.features.textdata(
         headlines,
         text,
         textpositions,
         sizeandborders,
         headerfooter,
+        magiccontent=magiccontent,
         pages=pages,
     )
     result = decider_textflow.features.linting(__name__, driver)
@@ -57,12 +61,12 @@ def check_7620_lonely_page_start(linter: callable, driver):
     for page, content in text:
         if len(content) < 2:
             continue
+        if content[0] is None or content[1] is None:
+            continue
         first_headline = isinstance(content[0], iamraw.Headline)
         second_headline = isinstance(content[1], iamraw.Headline)
-
         if first_headline and second_headline:
             continue
-
         if second_headline and not first_headline:
             # hurenkind
             # TEXT -> HEADLINE
@@ -95,14 +99,17 @@ Die Grafik/Tabelle etc. sollte in den Text eingebunden werden und nicht
 direkt am Seitenanfang stehen.
 """
 
+# TODO: ADD SUPPORT FOR TEXT ABOVE IMAGES/TABLE etc.
+
 
 def check_7625_empty_start(linter: callable, driver):
-    text = decider_textstyle.utils.page_chunks(driver.text_chunks)
-    start, _ = page_startend(text)
+    text = decider_textstyle.utils.page_chunks(driver.nomagic_text_chunks)
+    startend = page_startend(text)
+    if startend is None:
+        return
+    start, _ = startend
     failstart = start + 100  # TODO: HOLY VALUE
     for page, content in text:
-        if not content:
-            continue
         if isinstance(content[0], iamraw.Headline):
             # TODO: ADD CHECK TO CHECK HEADLINES
             continue
@@ -127,6 +134,8 @@ Seitenende: Seite endet nicht mit Text
 def textwidth(chunks) -> float:
     result = []
     for _, __, item in chunks:
+        if item is None:
+            continue
         if isinstance(item, iamraw.Headline):
             continue
         result.append(width(item))
@@ -135,12 +144,20 @@ def textwidth(chunks) -> float:
     return result
 
 
+STARTEND_MIN_PAGES = 5  # TODO: HOLY VALUE
+
+
 def page_startend(items):
+    if len(items) < STARTEND_MIN_PAGES:
+        utila.error(f'disable `startend`: too few pages {len(items)}')
+        return None
     start, end = [], []
     for _, content in items:
         if not content:
             continue
         first = content[0]
+        if first is None:
+            continue
         if not isinstance(first, iamraw.Headline):
             # TODO: ADD HEADLINE SUPPORT
             first = first.bounding.y0
@@ -148,6 +165,8 @@ def page_startend(items):
         if len(content) == 1:
             continue
         last = content[-1]
+        if last is None:
+            continue
         if not isinstance(last, iamraw.Headline):
             # TODO: ADD HEADLINE SUPPORT
             last = last.bounding.y1

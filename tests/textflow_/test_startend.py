@@ -57,3 +57,17 @@ def test_startend_figure_start_bachelor90_page40_55(testdir, monkeypatch):  # py
         7625,
     )
     assert len(result) == 3, str(result)
+
+
+def test_startend_figure_start_bachelor90_page34(testdir, monkeypatch):  # pylint:disable=W0621
+    """Ensure to detect page starts with an image instead of text."""
+    source = tests.resources.BACHELOR90
+    cmd = f'-i={source} --startend --pages=34:40'
+
+    tests.textflow_.run(cmd, monkeypatch=monkeypatch)
+
+    result = protocol.load_result(
+        decider_textflow.path.startend_linted(testdir.tmpdir),
+        7625,
+    )
+    assert len(result) == 1, str(result)
