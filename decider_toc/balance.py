@@ -73,6 +73,10 @@ def validate_level(items: list, balance: Evaluated) -> list:
     Returns:
         list of group with judged result
     """
+    if balance is None:
+        # See: technical19
+        # Not enough data to compute and check balance. Toc is very short.
+        return []
     result = []
     for group in items:
         stepresult = []
@@ -95,6 +99,13 @@ def section_balance(toc: iamraw.Toc) -> Balance:
     balance1 = analyse(level1_flat)
     balance2 = analyse(level2_flat)
     balance3 = analyse(level3_flat)
+
+    if balance1 is None:
+        utila.error(f'too few elements: {len(level1_flat)} for balance level 1')
+    if balance2 is None:
+        utila.error(f'too few elements: {len(level2_flat)} for balance level 2')
+    if balance3 is None:
+        utila.error(f'too few elements: {len(level3_flat)} for balance level 3')
 
     return Balance(balance1, balance2, balance3)
 
