@@ -42,6 +42,8 @@ def linting(
         titlepage: iamraw.TitlePage,
         linter: protocol.Linter,
 ):
+    # TODO:
+    assert not hasattr(titlepage, 'pageraw'), 'todo: update location'
     location = protocol.Location.from_page(0)
     checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
