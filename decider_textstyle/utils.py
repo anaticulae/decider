@@ -12,6 +12,7 @@ import operator
 import iamraw
 import magic.data
 import protocol
+import protocol.finding
 import texmex.style
 import utila
 
@@ -131,6 +132,9 @@ def merge_lintings(items):
                 result.append(item)
                 continue
             before.location.line_end = linebefore + 1
+        # update finding number
+        for finding in result:
+            finding.number = protocol.finding.hash_finding(finding)
         return result
 
     paged = protocol.bypage(ranged)
