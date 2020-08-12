@@ -7,6 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import protocol
 import utila
 
 
@@ -37,3 +38,11 @@ def pnear(
 
 
 utila.pnear = pnear
+
+
+def ranged(items: protocol.Findings) -> protocol.Findings:
+    # TODO: REMOVE AFTER UPGRADING PROTOCOL
+    return protocol.filter_mark(items, shortcut='r')
+
+
+protocol.ranged = ranged
