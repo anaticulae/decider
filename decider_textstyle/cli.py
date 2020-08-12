@@ -39,8 +39,8 @@ WORKPLAN = [
             utila.ResultFile('rawmaker', 'oneline_text_positions'),
             utila.ResultFile('rawmaker', 'border_pages'),
             utila.ResultFile('groupme', 'footer_footerheader'),
-            utila.ResultFile('rawmaker', 'fonts_header'),
-            utila.ResultFile('rawmaker', 'fonts_content'),
+            utila.ResultFile('rawmaker', 'oneline_fonts_header'),
+            utila.ResultFile('rawmaker', 'oneline_fonts_content'),
             utila.ResultFile(
                 'magic',
                 'content_content',
