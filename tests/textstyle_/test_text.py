@@ -73,3 +73,19 @@ def test_decider_text_bachelor76_4_10_bold_font(testdir, monkeypatch):
     )
     # five words marked bold
     assert len(findings) == 5
+
+
+def test_decider_textstyle_merge_connected_findings(testdir, monkeypatch):
+    """Merge more than one line with the same finding into a single
+    finding."""
+    source = tests.resources.MASTER72
+    tests.textstyle_.run(
+        f'-i {source} --text --pages=18:22',
+        monkeypatch=monkeypatch,
+    )
+
+    findings = protocol.load_result(
+        decider_textstyle.path.text(testdir.tmpdir),
+        msgids=7550,
+    )
+    assert len(findings) == 1, len(findings)

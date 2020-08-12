@@ -81,6 +81,9 @@ def work(  # pylint:disable=R0913,R0914
         linting(data, linter)
 
     result = linter.result(unique=True)
+
+    result = decider_textstyle.utils.merge_lintings(result)
+
     user, developer = protocol.dump_result(result)
     return user, developer
 
