@@ -10,7 +10,7 @@
 import functools
 import os
 
-import doctextstyle.serialize
+import serializeraw
 import utila
 import utilatest
 
@@ -33,5 +33,5 @@ fail = functools.partial(
 
 def write_docstyle(style, path: str):
     outpath = os.path.join(path, 'doctextstyle__textstyle.yaml')
-    dumped = doctextstyle.serialize.dump_docstyle(style)
+    dumped = serializeraw.dump_doctextstyle(style)
     utila.file_create(outpath, dumped)

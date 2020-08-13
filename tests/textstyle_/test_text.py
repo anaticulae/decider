@@ -7,7 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import doctextstyle.data
+import iamraw
 import protocol
 import pytest
 
@@ -15,7 +15,7 @@ import decider_textstyle.path
 import tests.resources
 import tests.textstyle_
 
-NO_STYLE = doctextstyle.data.DocTextStyle()
+NO_STYLE = iamraw.DocTextStyle()
 
 
 def decide_text_style(source, pages, style, testdir, monkeypatch):
@@ -31,7 +31,7 @@ def decide_text_style(source, pages, style, testdir, monkeypatch):
 
 @pytest.mark.xfail(reason='failing magic/list parser')
 def test_decider_text_master72_2_20_fontsize(testdir, monkeypatch):
-    style = doctextstyle.data.DocTextStyle(text_size=12.0)
+    style = iamraw.DocTextStyle(text_size=12.0)
     source = tests.resources.MASTER72
     pages = '2:20'
     findings = decide_text_style(
@@ -46,7 +46,7 @@ def test_decider_text_master72_2_20_fontsize(testdir, monkeypatch):
 
 def test_decider_text_master72_2_10_fontfamily(testdir, monkeypatch):
     # Hint: adjust text_family after text parser change
-    style = doctextstyle.data.DocTextStyle(text_family=-1702503278)
+    style = iamraw.DocTextStyle(text_family=-1702503278)
     source = tests.resources.MASTER72
     pages = '2:10'
     findings = decide_text_style(

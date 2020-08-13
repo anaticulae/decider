@@ -7,8 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import doctextstyle.data
-import doctextstyle.serialize
+import iamraw
 import protocol
 import pytest
 
@@ -17,7 +16,7 @@ import tests
 import tests.resources
 import tests.textstyle_
 
-MASTER_72_DOCSTYLE = doctextstyle.data.DocTextStyle(
+MASTER_72_DOCSTYLE = iamraw.DocTextStyle(
     h1_size=15.96,
     h1_after=135.93 - 88.67,
     h2_size=14.04,
@@ -25,7 +24,7 @@ MASTER_72_DOCSTYLE = doctextstyle.data.DocTextStyle(
     h2_after=224.01 - 190.37,
 )
 
-BACHELOR_76_DOCSTYLE = doctextstyle.data.DocTextStyle(
+BACHELOR_76_DOCSTYLE = iamraw.DocTextStyle(
     h1_after=132.18 - 92.87,
     h1_size=15.96,
     h2_after=529.1 - 485.39,
@@ -34,7 +33,7 @@ BACHELOR_76_DOCSTYLE = doctextstyle.data.DocTextStyle(
 )
 
 # disable font style linting
-NO_STYLE = doctextstyle.data.DocTextStyle()
+NO_STYLE = iamraw.DocTextStyle()
 
 
 def decide_headline_style(source, pages, style, testdir, monkeypatch):

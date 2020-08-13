@@ -11,7 +11,6 @@ import functools
 import os
 import typing
 
-import doctextstyle.serialize
 import iamraw
 import iamraw.fonts
 import magic.path
@@ -36,7 +35,7 @@ def work(  # pylint:disable=R0913,R0914
 ) -> typing.Tuple[str, str]:
     linter = protocol.from_module(__name__)
 
-    expected = doctextstyle.serialize.load_docstyle(textstyle)
+    expected = serializeraw.load_doctextstyle(textstyle)
     headlines = serializeraw.load_headlines(headlines, pages=pages)
 
     fontstore = serializeraw.create_fontstore(

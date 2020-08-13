@@ -9,10 +9,10 @@
 
 import typing
 
-import doctextstyle.serialize
 import iamraw
 import magic.data
 import protocol
+import serializeraw
 import utila
 
 import decider_textflow.features
@@ -28,7 +28,7 @@ def work(
         magiccontent: str,
         pages: tuple = None,
 ) -> typing.Tuple[str, str]:
-    textstyle = doctextstyle.serialize.load_docstyle(textstyle)
+    textstyle = serializeraw.load_doctextstyle(textstyle)
     magiccontent = magic.data.load_types(magiccontent)
     driver = decider_textflow.features.textdata(
         headlines,

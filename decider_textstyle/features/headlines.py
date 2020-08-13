@@ -14,7 +14,6 @@ import typing
 
 import configo
 import doctextstyle.parser
-import doctextstyle.serialize
 import protocol
 import serializeraw
 import texmex
@@ -74,7 +73,7 @@ def load_driver(
         headerfooter,
         pages,
 ):
-    expected = doctextstyle.serialize.load_docstyle(textstyle)
+    expected = serializeraw.load_doctextstyle(textstyle)
     headlines = serializeraw.load_headlines(headlines, pages=pages)
 
     fontstore = serializeraw.create_fontstore(
