@@ -84,6 +84,8 @@ erwarteten Schriftgröße der Fußnotennummer **{%expected%}** ab.
 def check_2003_invalid_highnote_rise(linter, driver):
     """Ensure that footnote fits to `common` footnote highnote numer rise."""
     item = driver.item
+    if not item.style:
+        return
     current = item.style[0].rise
     expected = driver.fontconfig.highnote_rise
 
@@ -109,6 +111,8 @@ erwarteten Schriftgröße **{%expected%}** ab.
 def check_2004_invalid_hignote_size(linter, driver):
     """Ensure correct font size of highnote."""
     item = driver.item
+    if not item.style:
+        return
     current = item.style[0].size
     expected = driver.fontconfig.highnote_size
 
@@ -131,6 +135,8 @@ erwarteten Schriftart **{%expected%}** ab.
 def check_2005_invalid_highnote_fontfamily(linter, driver):
     """Ensure correct font family of highnote."""
     item = driver.item
+    if not item.style:
+        return
     current = item.style[0].font
     expected = driver.fontconfig.highnote_fontid
 
@@ -164,6 +170,8 @@ def check_2010_invalid_content_fontsize(linter, driver):
     """Ensure correct font size of footnote content."""
     item = driver.item
     expected = driver.fontconfig.content_size
+    if not item.style:
+        return
     sizes = [item.size for item in item.style[1].content]
     sizes_equal = [
         utila.near(item, expected, MAX_CONTENT_SIZE_DIFF) for item in sizes
