@@ -15,7 +15,7 @@ import decider_textflow
 DESCRIPTION = ''
 
 CONTENT_INPUT = [
-    utila.ResultFile('words', 'headlines_headlines'),
+    utila.ResultFile('words', 'headlines_oneline'),
     utila.ResultFile('rawmaker', 'oneline_text_text'),
     utila.ResultFile('rawmaker', 'oneline_text_positions'),
     utila.ResultFile('rawmaker', 'border_pages'),
