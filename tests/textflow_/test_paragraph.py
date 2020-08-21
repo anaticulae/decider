@@ -30,11 +30,13 @@ def run_paragraph_length_linter(source, pages, testdir, monkeypatch):
     return result
 
 
-def test_paragraph_too_short(testdir, monkeypatch):
-    source = tests.resources.BACHELOR90
-    pages = (12, 13, 14)
+@pytest.mark.parametrize('source, pages, expected', [
+    pytest.param(tests.resources.BACHELOR90, (12, 13, 14), 7, id='bachelor90'),
+    pytest.param(tests.resources.MASTER116, (18,), 0, id='master116'),
+])
+def test_paragraph_too_short(source, pages, expected, testdir, monkeypatch):
     result = run_paragraph_length_linter(source, pages, testdir, monkeypatch)
-    assert len(result) == 7, str(result)
+    assert len(result) == expected, str(result)
 
 
 @pytest.mark.xfail(reason='failing magic/list parer')
