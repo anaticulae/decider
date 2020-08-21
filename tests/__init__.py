@@ -16,6 +16,7 @@ import utila
 import utilatest
 
 import decider
+import tests.__patch__
 
 power.setup(decider.ROOT)
 
