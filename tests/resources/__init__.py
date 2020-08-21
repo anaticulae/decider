@@ -41,7 +41,7 @@ TWINE_NO_TITLE_PAGE = power.link(power.DOCU35_PDF, folder='notitle')
 TWINE_NO_TOC = power.link(power.DOCU35_PDF, folder='notoc')
 
 TODO = [
-    (power.MASTER116_PDF, '0:10,90:115'),
+    (power.MASTER116_PDF, '0:50,90:115'),
     (power.MASTER098_PDF, '0:10,43:65,88:97'),
     (power.HOMEWORK025_PDF, ':'),
     (power.BACHELOR076_PDF, ':'),
