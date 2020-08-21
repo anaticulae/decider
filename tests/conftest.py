@@ -42,6 +42,7 @@ def extract(resources):
     todo = hey.example.todolist(
         resources + [power.REPOSITORY],
         destination=destination,
+        caption=True,
         detector=True,
         doctextstyle=True,
         groupme=True,
