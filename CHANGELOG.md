@@ -2,6 +2,23 @@
 
 Every noteable change is logged here.
 
+## v0.28.0
+
+### Feature
+
+* use new headline oneline source (4aea258f214c)
+* skip empty footnote style (9b1106bb8afc)
+* update finding id after merging neighbor findings (23b334d75d11)
+* merge findings to reduce finding count (b77054276752)
+* improve detector due using magic content to skip (2b01ee1981d3)
+
+### Fix
+
+* use missing pages flag (249f3867ab7f)
+* skip balance checking of very short table of content (41b5a5e896d2)
+* use oneline font data (0b466e54592d)
+* organize imports (27ae98c10d94)
+
 ## v0.27.0
 
 ### Feature
