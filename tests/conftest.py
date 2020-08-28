@@ -24,7 +24,7 @@ PACKAGE = decider.PACKAGE
 
 pytest_plugins = ['pytester', 'xdist']  # pylint: disable=invalid-name
 
-WORKER = 8
+WORKER = 6
 
 RESOURCES = tests.resources.TODO
 RESOURCES_NOTOC = tests.resources.GENERATE_NO_TOC
