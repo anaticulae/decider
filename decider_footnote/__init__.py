@@ -8,7 +8,6 @@
 # =============================================================================
 
 import decider
-import decider_footnote.__patch__
 
 ROOT = decider.ROOT
 
