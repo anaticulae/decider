@@ -18,6 +18,7 @@ import typing
 import iamraw
 import protocol
 import serializeraw
+import utila
 
 import decider.features
 
@@ -42,9 +43,8 @@ def linting(
         titlepage: iamraw.TitlePage,
         linter: protocol.Linter,
 ):
-    # TODO:
-    assert not hasattr(titlepage, 'pageraw'), 'todo: update location'
-    location = protocol.Location.from_page(0)
+    pdflocation = utila.ifnone(titlepage.pageraw, default=0) if titlepage else 0  # pylint:disable=E1101
+    location = protocol.Location.from_page(pdflocation)
     checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
         call = functools.partial(

@@ -57,6 +57,8 @@ Ranges
 
 import os
 
+import decider.__patch__
+
 __version__ = '0.27.0'
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
