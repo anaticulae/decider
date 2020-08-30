@@ -26,9 +26,33 @@ pytest_plugins = ['pytester', 'xdist']  # pylint: disable=invalid-name
 
 WORKER = 6
 
-RESOURCES = tests.resources.TODO
-RESOURCES_NOTOC = tests.resources.GENERATE_NO_TOC
-RESOURCES_NOTITLE = tests.resources.GENERATE_NO_TITLE
+RESOURCES = [
+    (power.MASTER116_PDF, '0:50,90:115'),
+    (power.MASTER098_PDF, '0:10,43:65,88:97'),
+    (power.HOMEWORK025_PDF, ':'),
+    (power.BACHELOR076_PDF, ':'),
+    (power.MASTER072_PDF, ':'),
+    (power.BACHELOR090_PDF, ':'),
+    (power.BACHELOR037_PDF, '0:10'),
+    (power.BACHELOR063_PDF, '10:15'),
+    (power.DOCU35_PDF, '0:10'),
+    (power.BOOK007_PDF, '0:10'),
+    (power.MASTER078_PDF, '0:10'),
+    (power.MASTER083_PDF, '0:10'),
+    (power.MASTER099_PDF, '0:10'),
+    (power.DOCU07_PDF, '0:10'),
+    (power.TECHNICAL_024, '0:10'),
+]
+
+RESOURCES_NOTOC = [
+    (power.DOCU35_PDF, ':'),
+    (power.BOOK007_PDF, ':'),
+]
+
+RESOURCES_NOTITLE = [
+    (power.DOCU35_PDF, ':'),
+    (power.BOOK007_PDF, ':'),
+]
 
 
 @pytest.mark.usefixtures('session')
@@ -38,10 +62,9 @@ def pytest_sessionstart():
 
 def extract(resources):
     print_resources(resources)
-    destination = tests.resources.GENERATED
     todo = hey.example.todolist(
         resources + [power.REPOSITORY],
-        destination=destination,
+        destination=power.generated(),
         caption=True,
         detector=True,
         doctextstyle=True,
