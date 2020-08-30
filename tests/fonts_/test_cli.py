@@ -9,6 +9,7 @@
 
 import os
 
+import power
 import utila
 import utilatest
 
@@ -22,7 +23,7 @@ def test_main_fonts(testdir, monkeypatch):  ## pylint:disable=W0621
     # copy ugly font config
     utila.copy_content(tests.resources.DECIDER_FONTS, root)
 
-    command = ['-i', tests.resources.DOCU_TWINE, '-o', root]
+    command = ['-i', power.link(power.DOCU35_PDF), '-o', root]
     utilatest.run_command(
         command,
         process=fonts.cli.PROCESS,

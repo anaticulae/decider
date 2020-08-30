@@ -7,10 +7,10 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import power
 import protocol
 
 import decider_textflow.path
-import tests.resources
 import tests.textflow_
 
 
@@ -25,7 +25,7 @@ def decide_textflow(source, pages, testdir, monkeypatch):
 
 
 def test_decider_textflow_bachelor67_perspective(testdir, monkeypatch):
-    source = tests.resources.BACHELOR76
+    source = power.link(power.BACHELOR076_PDF)
     pages = ':'
     findings = decide_textflow(source, pages, testdir, monkeypatch)
     # TODO: decrement to 4 after including quotation check

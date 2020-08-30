@@ -7,7 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import tests.resources
+import power
+
 import tests.textstyle_
 
 
@@ -16,5 +17,5 @@ def test_decider_textstyle_cli_help(monkeypatch):
 
 
 def test_decider_textstyle_master72(testdir, monkeypatch):
-    source = tests.resources.MASTER72
+    source = power.link(power.MASTER072_PDF)
     tests.textstyle_.run(f'-i {source}', monkeypatch=monkeypatch)

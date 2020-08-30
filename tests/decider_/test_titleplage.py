@@ -9,6 +9,7 @@
 
 import os
 
+import power
 import protocol
 import pytest
 import utila
@@ -17,19 +18,18 @@ import utilatest
 import decider
 import decider.features.titlepage
 import tests
-import tests.resources
 
 
 @pytest.fixture(
     params=[
-        (tests.resources.MASTER116, [
+        (power.link(power.MASTER116_PDF), [
             1210,
         ]),
-        (tests.resources.MASTER72, [
+        (power.link(power.MASTER072_PDF), [
             1221,
         ]),
-        (tests.resources.MASTER78, []),
-        (tests.resources.TWINE_NO_TITLE_PAGE, [
+        (power.link(power.MASTER078_PDF), []),
+        (power.link(power.DOCU35_PDF, folder='notitle'), [
             1200,
         ]),
     ],

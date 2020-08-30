@@ -9,12 +9,12 @@
 
 import os
 
+import power
 import protocol
 import utila
 
 import decider_footnote.path
 import tests.footnote_
-import tests.resources
 
 
 def test_decider_footnote_cli_help(monkeypatch):
@@ -24,7 +24,7 @@ def test_decider_footnote_cli_help(monkeypatch):
 def test_cli_rules(testdir, monkeypatch):  ## pylint:disable=W0621
     root = str(testdir)
 
-    cmd = f'-i {tests.resources.MASTER72} -o {root} --rules'
+    cmd = f'-i {power.link(power.MASTER072_PDF)} -o {root} --rules'
     tests.footnote_.run(cmd, monkeypatch=monkeypatch)
 
     outpath = decider_footnote.path.rules(root)
@@ -43,7 +43,7 @@ def test_cli_rules(testdir, monkeypatch):  ## pylint:disable=W0621
 def test_cli_footnote_global(testdir, monkeypatch):  ## pylint:disable=W0621
     root = str(testdir)
 
-    cmd = f'-i {tests.resources.BACHELOR90} -o {root} --global'
+    cmd = f'-i {power.link(power.BACHELOR090_PDF)} -o {root} --global'
     tests.footnote_.run(cmd, monkeypatch=monkeypatch)
 
     global_ = decider_footnote.path.global_(root)
@@ -55,7 +55,7 @@ def test_cli_footnote_global(testdir, monkeypatch):  ## pylint:disable=W0621
 def test_cli_footnote_disabled_checker(testdir, monkeypatch):  ## pylint:disable=W0621
     root = str(testdir)
 
-    cmd = f'-i {tests.resources.BACHELOR76} -o {root} --rules'
+    cmd = f'-i {power.link(power.BACHELOR076_PDF)} -o {root} --rules'
     tests.footnote_.run(cmd, monkeypatch=monkeypatch)
 
     rules = decider_footnote.path.rules(root)

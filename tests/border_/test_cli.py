@@ -11,6 +11,7 @@ import contextlib
 import os
 
 import iamraw
+import power
 import protocol
 import pytest
 import serializeraw
@@ -20,7 +21,6 @@ import utilatest
 import border.cli
 import border.features.detection
 import border.path
-import tests.resources
 
 
 def validate_leftright(hits):
@@ -59,7 +59,7 @@ def run_border_detector(
 
 
 @pytest.mark.parametrize('source', [
-    pytest.param(tests.resources.TECHNICAL24, id='technical24'),
+    pytest.param(power.link(power.TECHNICAL_024), id='technical24'),
 ])
 def test_border_cli_decider_simple(source, testdir, monkeypatch):
     root = testdir.tmpdir
@@ -70,8 +70,8 @@ def test_border_cli_decider_simple(source, testdir, monkeypatch):
 
 
 @pytest.mark.parametrize('source, validate', [
-    pytest.param(tests.resources.DOCU_TWINE, [4, 4], id='twine'),
-    pytest.param(tests.resources.MASTER78, [6, 8], id='master78'),
+    pytest.param(power.link(power.DOCU35_PDF), [4, 4], id='twine'),
+    pytest.param(power.link(power.MASTER078_PDF), [6, 8], id='master78'),
 ])
 @utilatest.skip_longrun
 def test_border_cli_decider_list(
@@ -95,7 +95,7 @@ def test_border_cli_decider_list(
 
 @pytest.mark.parametrize('source, validate', [
     pytest.param(
-        tests.resources.LEFTRIGHT,
+        power.link(power.BOOK007_PDF),
         validate_leftright,
         id='leftright',
     ),

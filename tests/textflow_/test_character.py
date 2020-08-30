@@ -7,10 +7,10 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import power
 import protocol
 
 import decider_textflow.path
-import tests.resources
 import tests.textflow_
 
 
@@ -31,7 +31,7 @@ def decider_textflow_character(
 
 
 def test_textflow_character_space_before_comma(testdir, monkeypatch):
-    source = tests.resources.BACHELOR90
+    source = power.link(power.BACHELOR090_PDF)
     pages = '30'
     findings = decider_textflow_character(
         source,
@@ -44,7 +44,7 @@ def test_textflow_character_space_before_comma(testdir, monkeypatch):
 
 
 def test_textflow_character_missing_space_after_comma(testdir, monkeypatch):
-    source = tests.resources.BACHELOR90
+    source = power.link(power.BACHELOR090_PDF)
     pages = ':'
     findings = decider_textflow_character(
         source,
@@ -57,7 +57,7 @@ def test_textflow_character_missing_space_after_comma(testdir, monkeypatch):
 
 
 def test_textflow_character_space_before_square_bracket(testdir, monkeypatch):
-    source = tests.resources.BACHELOR90
+    source = power.link(power.BACHELOR090_PDF)
     pages = ':'
     findings = decider_textflow_character(
         source,
@@ -70,7 +70,7 @@ def test_textflow_character_space_before_square_bracket(testdir, monkeypatch):
 
 
 def test_textflow_character_space_after_square_bracket(testdir, monkeypatch):
-    source = tests.resources.BACHELOR90
+    source = power.link(power.BACHELOR090_PDF)
     pages = ':'
     findings = decider_textflow_character(
         source,
@@ -84,7 +84,7 @@ def test_textflow_character_space_after_square_bracket(testdir, monkeypatch):
 
 def test_textflow_character_missing_space_before_semicolon(
         testdir, monkeypatch):
-    source = tests.resources.BACHELOR90
+    source = power.link(power.BACHELOR090_PDF)
     pages = ':'
     findings = decider_textflow_character(
         source,

@@ -7,16 +7,16 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import power
 import protocol
 
 import decider_textflow.path
 import tests
-import tests.resources
 import tests.textflow_
 
 
 def test_lineendings_master83_page6_lineending(testdir, monkeypatch):  # pylint:disable=W0621
-    source = tests.resources.MASTER83
+    source = power.link(power.MASTER083_PDF)
     tests.textflow_.run_textflow(
         source,
         pages='6',

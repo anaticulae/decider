@@ -7,16 +7,16 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import power
 import pytest
 import serializeraw
 
 import decider_toc.balance
-import tests.resources
 
 
 @pytest.fixture
 def master98_data():
-    source = tests.resources.MASTER98
+    source = power.link(power.MASTER098_PDF)
     toc = serializeraw.load_toc(source)
     assert toc
     flat = decider_toc.balance.data(toc)
@@ -25,7 +25,7 @@ def master98_data():
 
 @pytest.fixture
 def master99_data():
-    source = tests.resources.MASTER99
+    source = power.link(power.MASTER099_PDF)
     toc = serializeraw.load_toc(source)
     assert toc
     flat = decider_toc.balance.data(toc)
@@ -34,13 +34,13 @@ def master99_data():
 
 @pytest.fixture
 def master99_toc():
-    source = tests.resources.MASTER99
+    source = power.link(power.MASTER099_PDF)
     toc = serializeraw.load_toc(source)
     return toc
 
 
 def test_toc_section_balance():
-    source = tests.resources.MASTER98
+    source = power.link(power.MASTER098_PDF)
     toc = serializeraw.load_toc(source)
     balance = decider_toc.balance.section_balance(toc)
     assert balance.level1

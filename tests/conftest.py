@@ -33,7 +33,7 @@ RESOURCES_NOTITLE = tests.resources.GENERATE_NO_TITLE
 
 @pytest.mark.usefixtures('session')
 def pytest_sessionstart():
-    power.run(tests.resources.REQURIED_RESOURCES)
+    power.run()
 
 
 def extract(resources):

@@ -7,15 +7,15 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import power
 import protocol
 
 import decider.path
 import tests
-import tests.resources
 
 
 def test_bib_sorting_master98(testdir, monkeypatch):
-    source = tests.resources.MASTER98
+    source = power.link(power.MASTER098_PDF)
     cmd = f'-i {source} --bibliography'
     tests.run_decider(cmd, monkeypatch=monkeypatch)
 

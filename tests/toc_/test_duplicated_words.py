@@ -7,14 +7,14 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import power
 import serializeraw
 
 import decider_toc.duplicated
-import tests.resources
 
 
 def test_duplicated_words():
-    source = tests.resources.MASTER98
+    source = power.link(power.MASTER098_PDF)
     toc = serializeraw.load_toc(source)
     assert toc
     validated = decider_toc.duplicated.validate(toc)

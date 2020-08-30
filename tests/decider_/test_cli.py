@@ -7,12 +7,12 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import power
 import pytest
 import utila
 import utilatest
 
 import tests
-import tests.resources
 
 
 @pytest.mark.parametrize('cmd', [
@@ -24,14 +24,14 @@ def test_cli_decider(cmd, testdir, monkeypatch):
 
 
 @pytest.mark.parametrize('source', [
-    pytest.param(tests.resources.BACHELOR37, id='bachelor37'),
-    pytest.param(tests.resources.BACHELOR76, id='bachelor76'),
-    pytest.param(tests.resources.DOCU_TWINE, id='docu'),
-    pytest.param(tests.resources.LEFTRIGHT, id='leftright'),
-    pytest.param(tests.resources.MASTER72, id='master72'),
-    pytest.param(tests.resources.MASTER78, id='master78'),
-    pytest.param(tests.resources.MASTER98, id='master98'),
-    pytest.param(tests.resources.MASTER99, id='master99'),
+    pytest.param(power.link(power.BACHELOR037_PDF), id='bachelor37'),
+    pytest.param(power.link(power.BACHELOR076_PDF), id='bachelor76'),
+    pytest.param(power.link(power.DOCU35_PDF), id='docu'),
+    pytest.param(power.link(power.BOOK007_PDF), id='leftright'),
+    pytest.param(power.link(power.MASTER072_PDF), id='master72'),
+    pytest.param(power.link(power.MASTER078_PDF), id='master78'),
+    pytest.param(power.link(power.MASTER098_PDF), id='master98'),
+    pytest.param(power.link(power.MASTER099_PDF), id='master99'),
 ])
 def test_cli_decider_example(source, testdir, monkeypatch):
     """Run decider"""
@@ -41,22 +41,22 @@ def test_cli_decider_example(source, testdir, monkeypatch):
 
 @pytest.mark.parametrize('source, pages', [
     pytest.param(
-        tests.resources.TECHNICAL24,
+        power.link(power.TECHNICAL_024),
         '1',
         id='technical24',
     ),
     pytest.param(
-        tests.resources.TECHNICAL24,
+        power.link(power.TECHNICAL_024),
         '0:5',
         id='technical24',
     ),
     pytest.param(
-        tests.resources.MASTER78,
+        power.link(power.MASTER078_PDF),
         '0:5',
         id='master78',
     ),
     pytest.param(
-        tests.resources.MASTER72,
+        power.link(power.MASTER072_PDF),
         '0:5',
         id='master72',
     ),

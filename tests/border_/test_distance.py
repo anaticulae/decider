@@ -9,11 +9,11 @@
 
 import groupme.feature.distance
 import groupme.path
+import power
 import protocol
 import pytest
 
 import border.features.distance
-import tests.resources
 
 
 @pytest.mark.parametrize('page, expected', [
@@ -21,8 +21,8 @@ import tests.resources
     (5, 6),
 ])
 def test_border_distances_linting(page, expected):
-    area = groupme.path.area(tests.resources.PYPORTING)
-    distance = groupme.path.distance(tests.resources.PYPORTING)
+    area = groupme.path.area(power.link(power.DOCU07_PDF))
+    distance = groupme.path.distance(power.link(power.DOCU07_PDF))
 
     dumped_findings = border.features.distance.work(area, distance, pages=page)
     findings = protocol.load_result(dumped_findings[0])

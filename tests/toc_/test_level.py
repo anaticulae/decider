@@ -7,6 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import power
 import protocol
 import pytest
 
@@ -14,7 +15,6 @@ import decider_toc.features.complexity as dtfc
 import decider_toc.features.rules as dtfr
 import decider_toc.level as dtl
 import tests
-import tests.resources
 
 TECHNICAL24_INVALID_CHILDREN = 1
 TECHNICAL24_INVALID_CHILDREN_TO_LONG = 1
@@ -24,7 +24,7 @@ TECHNICAL24_TOO_DEEP = 14
 def test_toc_invalid_children(monkeypatch):
     with monkeypatch.context() as context:
         context.setattr(dtl, 'MAX_TOC_DEEPNESS', 2)
-        failures = lint(tests.resources.TECHNICAL24, dtfr)
+        failures = lint(power.link(power.TECHNICAL_024), dtfr)
     failures = len(failures)
     assert failures == TECHNICAL24_INVALID_CHILDREN, str(failures)
 
@@ -32,7 +32,7 @@ def test_toc_invalid_children(monkeypatch):
 def test_toc_to_deep(monkeypatch):
     with monkeypatch.context() as context:
         context.setattr(dtl, 'MAX_TOC_DEEPNESS', 2)
-        failures = lint(tests.resources.TECHNICAL24, dtfc)
+        failures = lint(power.link(power.TECHNICAL_024), dtfc)
     failures = len([item for item in failures if item in (1351, 1382)])
     expected = sum([
         TECHNICAL24_INVALID_CHILDREN_TO_LONG,
@@ -50,20 +50,20 @@ def master78_too_few_children(invalid):
 
 @pytest.mark.parametrize('source, invalids, validate', [
     pytest.param(
-        tests.resources.TECHNICAL24,
+        power.link(power.TECHNICAL_024),
         TECHNICAL24_INVALID_CHILDREN,
         None,
         id='technical24',
     ),
     pytest.param(
-        tests.resources.MASTER78,
+        power.link(power.MASTER078_PDF),
         3,
         master78_too_few_children,
         id='master78',
         marks=pytest.mark.xfail(reason='toc extraction does not work properly'),
     ),
     pytest.param(
-        tests.resources.MASTER72,
+        power.link(power.MASTER072_PDF),
         0,
         None,
         id='master72',
@@ -80,8 +80,8 @@ def test_toc_too_few_children(source, invalids, validate):
 
 # yapf:disable
 @pytest.mark.parametrize('source, too_deep', [
-    pytest.param(tests.resources.TECHNICAL24, TECHNICAL24_TOO_DEEP, id='technical24'),
-    pytest.param(tests.resources.MASTER72, 6, id='master72'),
+    pytest.param(power.link(power.TECHNICAL_024), TECHNICAL24_TOO_DEEP, id='technical24'),
+    pytest.param(power.link(power.MASTER072_PDF), 6, id='master72'),
 ])
 # yapf:enable
 def test_toc_validate_deepness(source, too_deep):

@@ -17,13 +17,12 @@ import decider_footnote.features.rules
 import decider_footnote.features.style
 import decider_footnote.footnote
 import tests.footnote_
-import tests.resources
 
 
 @pytest.fixture
 def example():
     loaded = decider_footnote.footnote.load_frompath(
-        tests.resources.MASTER72,
+        power.link(power.MASTER072_PDF),
         pages=(3),
     )
     return loaded[0]
@@ -56,9 +55,9 @@ def test_footnotes_most_common_font_empty():
 
 
 def test_footnotes_work_highnote_rise(monkeypatch):
-    footerheader = iamraw.path.headerfooters(tests.resources.MASTER72)
-    fontheader = iamraw.path.fontheader(tests.resources.MASTER72)
-    fontcontent = iamraw.path.fontcontent(tests.resources.MASTER72)
+    footerheader = iamraw.path.headerfooters(power.link(power.MASTER072_PDF))
+    fontheader = iamraw.path.fontheader(power.link(power.MASTER072_PDF))
+    fontcontent = iamraw.path.fontcontent(power.link(power.MASTER072_PDF))
     with monkeypatch.context() as context:
         context.setattr(
             decider_footnote.features.style,
@@ -76,9 +75,9 @@ def test_footnotes_work_highnote_rise(monkeypatch):
 
 def test_footnotes_work_highnote_size(monkeypatch):
     # TODO: LOOK FOR AN EXAMPLE WITH WRONG HIGHNOTE SIZE
-    footerheader = iamraw.path.headerfooters(tests.resources.MASTER72)
-    fontheader = iamraw.path.fontheader(tests.resources.MASTER72)
-    fontcontent = iamraw.path.fontcontent(tests.resources.MASTER72)
+    footerheader = iamraw.path.headerfooters(power.link(power.MASTER072_PDF))
+    fontheader = iamraw.path.fontheader(power.link(power.MASTER072_PDF))
+    fontcontent = iamraw.path.fontcontent(power.link(power.MASTER072_PDF))
     with monkeypatch.context() as context:
         context.setattr(
             decider_footnote.features.style,
@@ -95,9 +94,9 @@ def test_footnotes_work_highnote_size(monkeypatch):
 
 
 def test_footnotes_work_highnote_font_family():
-    footerheader = iamraw.path.headerfooters(tests.resources.MASTER72)
-    fontheader = iamraw.path.fontheader(tests.resources.MASTER72)
-    fontcontent = iamraw.path.fontcontent(tests.resources.MASTER72)
+    footerheader = iamraw.path.headerfooters(power.link(power.MASTER072_PDF))
+    fontheader = iamraw.path.fontheader(power.link(power.MASTER072_PDF))
+    fontcontent = iamraw.path.fontcontent(power.link(power.MASTER072_PDF))
     user, _ = decider_footnote.features.style.work(
         footerheader,
         fontheader,

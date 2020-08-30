@@ -7,15 +7,16 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import power
 import pytest
 import utila
 
-import tests.resources
+import tests
 
 
 @pytest.mark.parametrize('source, pages', [
     pytest.param(
-        tests.resources.BACHELOR37,
+        power.link(power.BACHELOR037_PDF),
         '1',
         id='bachelor37',
     ),
@@ -33,7 +34,7 @@ def test_cli_groupme_abbreviation_table(source, pages, testdir, monkeypatch):
 
 @pytest.mark.parametrize('source, pages', [
     pytest.param(
-        tests.resources.BACHELOR37,
+        power.link(power.BACHELOR037_PDF),
         '1',
         id='bachelor37',
     ),

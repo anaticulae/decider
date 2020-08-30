@@ -7,15 +7,16 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import power
 import protocol
 
 import decider_toc.features.basic as dtfb
-import tests.resources
+import tests
 
 
 def test_toc_extraction_no_toc():
     expected_failures = [1300, 1301]
-    failures = lint(tests.resources.TWINE_NO_TOC, dtfb)
+    failures = lint(power.link(power.DOCU35_PDF, folder='notoc'), dtfb)
     assert failures == expected_failures, str(failures)
 
 

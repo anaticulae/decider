@@ -7,13 +7,14 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import power
 import protocol
 
-import tests.resources
+import tests.toc_
 
 
 def test_toc_style_bachelor76_duplicated_words(testdir, monkeypatch):
-    source = tests.resources.BACHELOR76
+    source = power.link(power.BACHELOR076_PDF)
     tests.toc_.run(f'-i {source} --style', monkeypatch=monkeypatch)
 
     findings = protocol.findings_from_path(testdir.tmpdir)

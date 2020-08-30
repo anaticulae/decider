@@ -7,12 +7,12 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import power
 import protocol
 import pytest
 
 import decider_textflow.path
 import tests
-import tests.resources
 import tests.textflow_
 
 
@@ -31,8 +31,9 @@ def run_paragraph_length_linter(source, pages, testdir, monkeypatch):
 
 
 @pytest.mark.parametrize('source, pages, expected', [
-    pytest.param(tests.resources.BACHELOR90, (12, 13, 14), 7, id='bachelor90'),
-    pytest.param(tests.resources.MASTER116, (18,), 0, id='master116'),
+    pytest.param(
+        power.link(power.BACHELOR090_PDF), (12, 13, 14), 7, id='bachelor90'),
+    pytest.param(power.link(power.MASTER116_PDF), (18,), 0, id='master116'),
 ])
 def test_paragraph_too_short(source, pages, expected, testdir, monkeypatch):
     result = run_paragraph_length_linter(source, pages, testdir, monkeypatch)
@@ -41,7 +42,7 @@ def test_paragraph_too_short(source, pages, expected, testdir, monkeypatch):
 
 @pytest.mark.xfail(reason='failing magic/list parer')
 def test_list_no_paragraph_too_short(testdir, monkeypatch):
-    source = tests.resources.MASTER72
+    source = power.link(power.MASTER072_PDF)
     pages = (7,)
     result = run_paragraph_length_linter(source, pages, testdir, monkeypatch)
     result = [item for item in result if item.location.page == 7]

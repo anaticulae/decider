@@ -8,14 +8,14 @@
 # =============================================================================
 
 import iamraw.path
+import power
 import protocol
 
 import decider.features.header
-import tests.resources
 
 
 def test_header_work():
-    headerfooter = iamraw.path.headerfooters(tests.resources.TECHNICAL24)
+    headerfooter = iamraw.path.headerfooters(power.link(power.TECHNICAL_024))
 
     user, _ = decider.features.header.work(headerfooter)
     assert len(user) > 200, user
