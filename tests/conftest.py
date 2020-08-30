@@ -17,7 +17,6 @@ import utilatest
 import writers
 
 import decider
-import tests.resources
 import tests.resources.utils
 
 PACKAGE = decider.PACKAGE
