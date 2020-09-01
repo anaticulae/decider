@@ -8,6 +8,7 @@
 # =============================================================================
 """common border validator
 =======================
+
 Detect the common border of selected `pages` as a expected correct page
 border. Validate every page against this common border. Keep in mind to
 decide between left and right page. In some printings there are two
@@ -25,7 +26,6 @@ import functools
 import math
 import typing
 
-import groupme.serialize
 import iamraw
 import protocol
 import serializeraw
@@ -49,7 +49,7 @@ def work(
     border_pages = serializeraw.load_pageborders(border_pages, pages=pages)
 
     page_sizes = {item.page: item.size for item in border_pages}
-    expected = groupme.serialize.load_leftright_border(border_leftright)
+    expected = serializeraw.load_leftright_border(border_leftright)
 
     hits = boxes_outside_border(boxes, page_sizes, expected)
     utila.debug(hits)
