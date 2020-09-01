@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.28.1
+
+### Feature
+
+* use holy table to improve headline distance judging (6b78dd21f874)
+
 ## v0.28.0
 
 ### Feature
