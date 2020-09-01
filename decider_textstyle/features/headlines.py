@@ -20,7 +20,17 @@ import texmex
 import utila
 
 MAX_HEADLINE_DIFF_REL = configo.HV_PERCENT_PLUS(10).value
-MAX_HEADLINE_DIFF_ABS = configo.HV_FLOAT_PLUS(2.0).value
+MAX_HEADLINE_DIFF_ABS = configo.HolyTable(  # pylint:disable=E1101
+    items=[
+        (8, 0.5),
+        (12, 1.0),
+        (20, 2.5),
+        (25, 5),
+        (50, 5),
+    ],
+    strategy=utila.Strategy.LINEARISE,
+    right_outranges_none=False,
+)  # TODO: HOLY VALUE
 
 WHITESPACE_LINTING = False  # HOLY VALUE
 
@@ -525,7 +535,7 @@ def validate_headline_distance(  # pylint:disable=R1260
             if utila.pnear(  # pylint:disable=E1101
                     expected_distance,
                     before,
-                    abs_tol=MAX_HEADLINE_DIFF_ABS,
+                    abs_tol=MAX_HEADLINE_DIFF_ABS(expected_distance),
                     rel_tol=MAX_HEADLINE_DIFF_REL,
             ):
                 continue
@@ -542,7 +552,7 @@ def validate_headline_distance(  # pylint:disable=R1260
             if utila.pnear(  # pylint:disable=E1101
                     expected_distance,
                     after,
-                    abs_tol=MAX_HEADLINE_DIFF_ABS,
+                    abs_tol=MAX_HEADLINE_DIFF_ABS(expected_distance),
                     rel_tol=MAX_HEADLINE_DIFF_REL,
             ):
                 continue
