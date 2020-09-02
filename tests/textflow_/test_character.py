@@ -9,6 +9,7 @@
 
 import power
 import protocol
+import pytest
 
 import decider_textflow.path
 import tests.textflow_
@@ -94,3 +95,24 @@ def test_textflow_character_missing_space_before_semicolon(
         msgids=7654,
     )
     assert len(findings) == 12  # TODO: CHANGE TO 13
+
+
+@pytest.mark.xfail(reason='require line formula inside parser')
+def test_character_missing_space_after_comma_master116_page23(
+        testdir,
+        monkeypatch,
+):
+    """False positve comma detection. TODO: In the current
+    implementation `𝑐𝑤,anfang=0.23` is detected as an false positiv
+    error. After introduce a inline formula detector, this problem can
+    be solved."""
+    source = power.link(power.MASTER116_PDF)
+    pages = 23
+    findings = decider_textflow_character(
+        source,
+        pages,
+        testdir,
+        monkeypatch,
+        msgids=7651,
+    )
+    assert not findings
