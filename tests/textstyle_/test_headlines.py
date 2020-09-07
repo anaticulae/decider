@@ -106,3 +106,17 @@ def test_decider_headlines_chapter_on_new_page(testdir, monkeypatch):
     )
     no_new_page_start = protocol.select_findings(findings, 7540)
     assert len(no_new_page_start) == 2, str(no_new_page_start)
+
+
+def test_headlines_bachelor63_page17(testdir, monkeypatch):
+    """Do not parse font size error for white spaces in first level
+    headlines. Regression test after fixing docstyle extractor."""
+    source = power.link(power.BACHELOR063_PDF)
+    pages = 17
+    tests.textstyle_.run(
+        f'--headlines -i {testdir.tmpdir} -i {source} --pages={pages}',
+        monkeypatch=monkeypatch,
+    )
+    path = decider_textstyle.path.headlines(testdir.tmpdir)
+    findings = protocol.load_result(path, msgids={7500, 7510, 7520})
+    assert not findings
