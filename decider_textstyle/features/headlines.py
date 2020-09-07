@@ -14,10 +14,13 @@ import typing
 
 import configo
 import doctextstyle.parser
+import iamraw
 import protocol
 import serializeraw
 import texmex
 import utila
+
+import decider.features
 
 MAX_HEADLINE_DIFF_REL = configo.HV_PERCENT_PLUS(10).value
 MAX_HEADLINE_DIFF_ABS = configo.HolyTable(  # pylint:disable=E1101
@@ -355,6 +358,53 @@ def check_7523_check_h3_distance_after(linter: callable, driver):
         LEVEL_3,
         driver.style.h3_after,
         check_before=False,
+    )
+
+
+MAX_H1_FONT_SIZE = configo.HV_INT_PLUS(48.0).value  # TODO: HOLY VALUE
+MAX_H2_FONT_SIZE = configo.HV_INT_PLUS(30.0).value  # TODO: HOLY VALUE
+
+SOLUTION_7535 = """\
+Erwartete Schriftgröße der Kapitel zu groß
+
+Die erwartete Schriftgröße der Kapitel {%current%}pt überschreitet die
+maximal empfohlene Schriftgröße von {%max_font_size%}pt.
+
+TODO: ADD ARTICLE"""
+
+
+def check_7535_headline_h1_too_huge(linter: callable, driver):
+    style: iamraw.DocTextStyle = driver.style
+    if style.h1_size is None:
+        return
+    if style.h1_size <= MAX_H1_FONT_SIZE:
+        return
+    linter(
+        location=decider.features.OVERVIEW,
+        current=style.h1_size,
+        max_font_size=MAX_H1_FONT_SIZE,
+    )
+
+
+SOLUTION_7536 = """\
+Erwartete Schriftgröße der Abschnitte zu groß
+
+Die erwartete Schriftgröße der Abschnitte {%current%}pt überschreitet
+die maximal empfohlene Schriftgröße von {%max_font_size%}pt.
+
+TODO: ADD ARTICLE"""
+
+
+def check_7536_headline_h2_too_huge(linter: callable, driver):
+    style: iamraw.DocTextStyle = driver.style
+    if style.h2_size is None:
+        return
+    if style.h2_size <= MAX_H2_FONT_SIZE:
+        return
+    linter(
+        location=decider.features.OVERVIEW,
+        current=style.h1_size,
+        max_font_size=MAX_H2_FONT_SIZE,
     )
 
 
