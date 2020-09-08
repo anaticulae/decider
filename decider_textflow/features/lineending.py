@@ -77,7 +77,9 @@ def check_7000_more_than_three_division(linter: callable, lineendings: list):
         x0, y0, x1, y1 = boundings[0]
         x0 = x1 - 20  # limit bounding box to 20 width
         for x00, y00, x11, y11 in boundings[1:]:
+            # center box
             x00 = x11 - 20
+            x11 = x11 + 20
             x0 = min([x0, x00])
             x1 = max([x1, x11])
             y0 = min([y0, y00])
