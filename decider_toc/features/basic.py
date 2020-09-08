@@ -40,9 +40,6 @@ def work(tableofcontent: str, outlines: str) -> typing.Tuple[str, str]:
     return user, developer
 
 
-TOC_CHECKER_ID = 13
-
-
 def linting(driver, linter: protocol.Linter):
     checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
