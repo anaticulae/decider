@@ -8,7 +8,7 @@
 # =============================================================================
 
 import power
-import protocol
+import serializeraw
 
 import decider_textflow.path
 import tests.textflow_
@@ -20,7 +20,7 @@ def decide_textflow(source, pages, testdir, monkeypatch):
         monkeypatch=monkeypatch,
     )
     path = decider_textflow.path.writing_linted(testdir.tmpdir)
-    findings = protocol.load_result(path)
+    findings = serializeraw.load_findings(path)
     return findings
 
 

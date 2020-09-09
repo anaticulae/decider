@@ -15,7 +15,6 @@ import typing
 
 import iamraw
 import magic.data
-import protocol
 import utila
 
 import decider_textflow.features
@@ -70,7 +69,7 @@ def check_7620_lonely_page_start(linter: callable, driver):
         if second_headline and not first_headline:
             # hurenkind
             # TEXT -> HEADLINE
-            location = protocol.RangedLocation(page=page, line=0)
+            location = iamraw.RangedLocation(page=page, line=0)
             linter(location)
             continue
 
@@ -82,7 +81,7 @@ def check_7620_lonely_page_start(linter: callable, driver):
             if first_width <= hurenkind_maxwidth and second_full_line:
                 # hurenkind
                 # SHORT TEXT -> TEXT
-                location = protocol.RangedLocation(page=page, line=0)
+                location = iamraw.RangedLocation(page=page, line=0)
                 linter(location)
                 continue
 
@@ -117,7 +116,7 @@ def check_7625_empty_start(linter: callable, driver):
         first = content[0]
         if first.bounding.y0 <= failstart:
             continue
-        location = protocol.RangedLocation(page=page, line=0)
+        location = iamraw.RangedLocation(page=page, line=0)
         linter(location)
 
 

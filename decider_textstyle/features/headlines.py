@@ -438,14 +438,14 @@ def check_7540_chapter_on_new_page(linter: callable, driver):
             # BE NOT ZERO?
             continue
         containers_ = containers(headline.container)
-        location = protocol.RangedLocation(
+        location = iamraw.RangedLocation(
             page=headline.page,
             line=containers_[0],
             line_end=containers_[-1],
         )
         linter(
             location=location,
-            chapter=headline.text,
+            chapter=headline.title,
         )
 
 
@@ -475,7 +475,7 @@ def validate_headline_size(
             continue
 
         # font size diff
-        location = protocol.RangedLocation(
+        location = iamraw.RangedLocation(
             page=headline.page,
             line=containers_[0],
             line_end=containers_[-1],
@@ -608,7 +608,7 @@ def validate_headline_distance(  # pylint:disable=R1260
                 continue
 
         # distance diff
-        location = protocol.RangedLocation(
+        location = iamraw.RangedLocation(
             page=headline.page,
             line=containers_[0],
             line_end=containers_[-1],
@@ -678,10 +678,10 @@ def textfamily(
     return fonts, positions
 
 
-def headline_location(headline, chars: list = None) -> protocol.RangedLocation:
+def headline_location(headline, chars: list = None) -> iamraw.RangedLocation:
     containers_ = containers(headline.container)
     # TODO: REPLACE TOKEN WITH CHAR
-    location = protocol.RangedLocation(
+    location = iamraw.RangedLocation(
         page=headline.page,
         line=containers_[0],
         line_end=containers_[-1],

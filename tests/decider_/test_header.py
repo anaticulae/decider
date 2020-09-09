@@ -9,7 +9,7 @@
 
 import iamraw.path
 import power
-import protocol
+import serializeraw
 
 import decider.features.header
 
@@ -20,5 +20,5 @@ def test_header_work():
     user, _ = decider.features.header.work(headerfooter)
     assert len(user) > 200, user
 
-    loaded = protocol.load_result(user)
+    loaded = serializeraw.load_findings(user)
     assert loaded[0].solution is not None, user[0]

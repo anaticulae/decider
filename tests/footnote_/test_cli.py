@@ -10,7 +10,7 @@
 import os
 
 import power
-import protocol
+import serializeraw
 import utila
 
 import decider_footnote.path
@@ -32,7 +32,7 @@ def test_cli_rules(testdir, monkeypatch):  ## pylint:disable=W0621
 
     dumped = utila.file_read(outpath)
 
-    findings = protocol.load_result(dumped)
+    findings = serializeraw.load_findings(dumped)
 
     assert len(findings) >= 2  # result contains some findings
 
@@ -48,7 +48,7 @@ def test_cli_footnote_global(testdir, monkeypatch):  ## pylint:disable=W0621
 
     global_ = decider_footnote.path.global_(root)
     # TODO: REPLACE AFTER UPGRADING TO NEW PROTOCOL
-    result = protocol.load_result(global_, 2015)
+    result = serializeraw.load_findings(global_, 2015)
     assert len(result) == 1
 
 
@@ -61,13 +61,13 @@ def test_cli_footnote_disabled_checker(testdir, monkeypatch):  ## pylint:disable
     rules = decider_footnote.path.rules(root)
 
     # ensure that checker is disabled
-    result = protocol.load_result(rules, 2001)
+    result = serializeraw.load_findings(rules, 2001)
     assert not result
-    result = protocol.load_result(rules, 2002)
+    result = serializeraw.load_findings(rules, 2002)
     assert not result
 
     # ensure that info message was send
-    result = protocol.load_result(rules, 2013)
+    result = serializeraw.load_findings(rules, 2013)
     assert len(result) == 1
-    result = protocol.load_result(rules, 2012)
+    result = serializeraw.load_findings(rules, 2012)
     assert len(result) == 1

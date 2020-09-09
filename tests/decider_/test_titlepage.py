@@ -10,8 +10,8 @@
 import os
 
 import power
-import protocol
 import pytest
+import serializeraw
 import utila
 import utilatest
 
@@ -60,7 +60,7 @@ def test_titlepage_extraction(titlepage, monkeypatch):  # pylint:disable=W0621
     tests.run_decider(cmd, monkeypatch)
 
     userpath = os.path.join(result, decider.cli.USER_LINT_OUTPUT)
-    user = protocol.load_result(userpath)
+    user = serializeraw.load_findings(userpath)
 
     failures = [item.msgid for item in user]
     assert failures == expected_failures, str(failures)

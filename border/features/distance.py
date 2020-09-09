@@ -22,6 +22,7 @@ import typing
 
 import configo
 import groupme.feature.distance
+import iamraw
 import protocol
 import utila
 
@@ -75,7 +76,7 @@ Mindestabstand: {%min_distance%}
 
 def check_3030_text_before_to_near(linter, item, bound, page):  # pylint:disable=W0613
     assert isinstance(page, int), type(page)
-    location = protocol.BoundingLocation.fromtuple(
+    location = iamraw.BoundingLocation.fromtuple(
         bounding=bound,
         page=page,
     )
@@ -102,7 +103,7 @@ Mindestabstand: {%min_distance%}
 
 def check_3031_text_after_to_near(linter, item, bound, page):  # pylint:disable=W0613
     assert isinstance(page, int), type(page)
-    location = protocol.BoundingLocation.fromtuple(
+    location = iamraw.BoundingLocation.fromtuple(
         bounding=bound,
         page=page,
     )

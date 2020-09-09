@@ -8,10 +8,9 @@
 # =============================================================================
 
 import power
-import protocol
+import serializeraw
 
 import decider_textflow.path
-import tests
 import tests.textflow_
 
 
@@ -26,7 +25,7 @@ def test_lineendings_master83_page6_lineending(testdir, monkeypatch):  # pylint:
     # lint result
     tests.textflow_.run(f'-i={source}', monkeypatch=monkeypatch)
 
-    result = protocol.load_result(
+    result = serializeraw.load_findings(
         decider_textflow.path.lineendings_linted(testdir.tmpdir),
         7000,
     )

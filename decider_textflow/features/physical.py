@@ -10,7 +10,6 @@
 import typing
 
 import iamraw
-import protocol
 
 import decider_textflow.features
 
@@ -54,7 +53,7 @@ def check_7670_missing_space_after_value(linter: callable, driver):
         if not finding:
             continue
 
-        location = protocol.RangedLocation(page=page, line=line)
+        location = iamraw.RangedLocation(page=page, line=line)
         linter(location=location)
 
 

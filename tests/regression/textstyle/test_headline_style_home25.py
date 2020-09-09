@@ -8,7 +8,7 @@
 # =============================================================================
 
 import power
-import protocol
+import serializeraw
 
 import decider_textstyle
 import tests.textstyle_
@@ -22,5 +22,5 @@ def test_headline_size_validation_page4(testdir, monkeypatch):
     cmd = f'-i {source}  --headlines --pages=4'
     tests.textstyle_.run(cmd, monkeypatch=monkeypatch)
     path = decider_textstyle.path.headlines(testdir.tmpdir)
-    loaded = protocol.load_result(path, msgids={7500, 7510, 7520})
+    loaded = serializeraw.load_findings(path, msgids={7500, 7510, 7520})
     assert not loaded

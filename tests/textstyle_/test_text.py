@@ -9,8 +9,8 @@
 
 import iamraw
 import power
-import protocol
 import pytest
+import serializeraw
 
 import decider_textstyle.path
 import tests.textstyle_
@@ -25,7 +25,7 @@ def decide_text_style(source, pages, style, testdir, monkeypatch):
         monkeypatch=monkeypatch,
     )
     path = decider_textstyle.path.text(testdir.tmpdir)
-    findings = protocol.load_result(path)
+    findings = serializeraw.load_findings(path)
     return findings
 
 
@@ -84,7 +84,7 @@ def test_decider_textstyle_merge_connected_findings(testdir, monkeypatch):
         monkeypatch=monkeypatch,
     )
 
-    findings = protocol.load_result(
+    findings = serializeraw.load_findings(
         decider_textstyle.path.text(testdir.tmpdir),
         msgids=7550,
     )

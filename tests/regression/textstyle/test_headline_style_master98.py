@@ -8,7 +8,7 @@
 # =============================================================================
 
 import power
-import protocol
+import serializeraw
 
 import decider_textstyle
 import decider_textstyle.features.headlines
@@ -24,7 +24,7 @@ def test_headline_font_family_validation_page6(testdir, monkeypatch):
     cmd = f'-i {source}  --headlines --pages=6'
     tests.textstyle_.run(cmd, monkeypatch=monkeypatch)
     path = decider_textstyle.path.headlines(testdir.tmpdir)
-    loaded = protocol.load_result(path, msgids={7501})
+    loaded = serializeraw.load_findings(path, msgids={7501})
     assert not loaded
 
     with monkeypatch.context() as context:
@@ -35,7 +35,7 @@ def test_headline_font_family_validation_page6(testdir, monkeypatch):
             True,
         )
         tests.textstyle_.run(cmd, monkeypatch=monkeypatch)
-    loaded = protocol.load_result(path, msgids={7501})
+    loaded = serializeraw.load_findings(path, msgids={7501})
     assert len(loaded) == 1
 
 
@@ -56,7 +56,7 @@ def test_headline_font_family_char_marker(testdir, monkeypatch):
         tests.textstyle_.run(cmd, monkeypatch=monkeypatch)
 
     # Analyze linter result
-    loaded = protocol.load_result(path, msgids={7501})
+    loaded = serializeraw.load_findings(path, msgids={7501})
     assert len(loaded) == 1
     char_finding_location = loaded[0].location
     # TODO: REPLACE TOKEN WITH CHAR

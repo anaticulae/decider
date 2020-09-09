@@ -37,7 +37,7 @@ TOC_CHECKER_ID = 13
 
 
 def linting(toc, linter: protocol.Linter):
-    location = protocol.Location.from_page(1)
+    location = iamraw.Location.from_page(1)
     checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
         call = functools.partial(
@@ -61,7 +61,7 @@ def check_1380_toc_duplicated_words(linter, toc: iamraw.Toc):
     for item in findings:
         (word, count), lines = item
         lines = ', '.join([f'{item}' for item in lines])
-        # location = protocol.Location.from_page(item.raw_location)
+        # location = iamraw.Location.from_page(item.raw_location)
         linter(
             word=word,
             count=count,
@@ -85,7 +85,7 @@ def check_1383_toc_contains_question_mark(linter, toc: iamraw.Toc):
     findings = decider_toc.marks.validate_question_mark(toc)
     for item in findings:
         index, title, raw_location = item
-        location = protocol.Location.from_page(raw_location)
+        location = iamraw.Location.from_page(raw_location)
         linter(number=index, title=title, location=location)
 
 
@@ -106,7 +106,7 @@ def check_1384_toc_contains_quotation_mark(linter, toc: iamraw.Toc):
     findings = decider_toc.marks.collect_quotation_marks(toc)
     for item in findings:
         index, title, raw_location = item
-        location = protocol.Location.from_page(raw_location)
+        location = iamraw.Location.from_page(raw_location)
         linter(number=index, title=title, location=location)
         # TODO
         # assert 0

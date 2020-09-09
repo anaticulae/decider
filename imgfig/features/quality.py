@@ -42,7 +42,7 @@ def linting(imageinfos: iamraw.ImageInformations, linter: protocol.Linter):
 
     for checker in checkers:
         for imageinfo in imageinfos:
-            location = protocol.BoundingLocation.fromtuple(
+            location = iamraw.BoundingLocation.fromtuple(
                 bounding=imageinfo.bounding,
                 page=imageinfo.page,
             )

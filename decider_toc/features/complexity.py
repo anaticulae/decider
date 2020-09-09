@@ -40,7 +40,7 @@ TOC_CHECKER_ID = 13
 
 
 def linting(toc, linter: protocol.Linter):
-    location = protocol.Location.from_page(1)
+    location = iamraw.Location.from_page(1)
     checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
         call = functools.partial(
@@ -68,7 +68,7 @@ def check_1351_toc_level_to_deep(linter, toc: iamraw.Toc):
     level_result: dtl.TocValidationResult = dtl.validate(toc)
     for item in level_result.level_to_deep:  # pylint:disable=E1133
         # TODO: REMOVE AFTER UPGRADING SERIALIZERAW
-        location = protocol.Location.from_page(int(item.page))
+        location = iamraw.Location.from_page(int(item.page))
         linter(location=location)
 
 
@@ -138,7 +138,7 @@ def validate_chapter_length(linter, toc, level, expected):
         if judged[0] != expected:
             continue
         title = line.title
-        location = protocol.Location.from_page(line.page)
+        location = iamraw.Location.from_page(line.page)
         linter(
             location=location,
             headline=title,
@@ -161,5 +161,5 @@ def check_1382_toc_long_lines(linter, toc: iamraw.Toc):
     findings = decider_toc.length.validate(toc)
     for item in findings:
         index, title, _, raw_location = item
-        location = protocol.Location.from_page(raw_location)
+        location = iamraw.Location.from_page(raw_location)
         linter(number=index, title=title, location=location)

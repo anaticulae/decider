@@ -11,7 +11,7 @@ import functools
 import typing
 
 import german
-import konrad
+import iamraw
 import konrad.quotation.german
 import protocol
 import textflow.quotation.serialize
@@ -38,7 +38,7 @@ def work(text: str, pages: tuple) -> typing.Tuple[str, str]:
 
 
 def from_sentence(page, sentence):
-    return protocol.Location.fromstr(f's{sentence}p{page}')
+    return iamraw.Location.fromstr(f's{sentence}p{page}')
 
 
 def linting(quotations, linter: protocol.Linter):

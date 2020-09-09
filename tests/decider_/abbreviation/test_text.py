@@ -58,7 +58,7 @@ EXAMPLE = [
 
 def abbreviation_linter(method):
     linter = protocol.from_module(dfa)
-    location = protocol.Location.from_page(2)
+    location = iamraw.Location.from_page(2)
     msgid = vars(method)['msgid']
     call = functools.partial(
         linter.add_finding,

@@ -8,7 +8,7 @@
 # =============================================================================
 
 import power
-import protocol
+import serializeraw
 
 import decider_textflow.path
 import tests
@@ -23,7 +23,7 @@ def test_startend_hurenkind_bachelor90_page16(testdir, monkeypatch):  # pylint:d
 
     tests.textflow_.run(cmd, monkeypatch=monkeypatch)
 
-    result = protocol.load_result(
+    result = serializeraw.load_findings(
         decider_textflow.path.startend_linted(testdir.tmpdir),
         7620,
     )
@@ -39,7 +39,7 @@ def test_startend_hurenkind_bachelor90_page18(testdir, monkeypatch):  # pylint:d
 
     tests.textflow_.run(cmd, monkeypatch=monkeypatch)
 
-    result = protocol.load_result(
+    result = serializeraw.load_findings(
         decider_textflow.path.startend_linted(testdir.tmpdir),
         7620,
     )
@@ -52,7 +52,7 @@ def test_startend_figure_start_bachelor90_page40_55(testdir, monkeypatch):  # py
 
     tests.textflow_.run(cmd, monkeypatch=monkeypatch)
 
-    result = protocol.load_result(
+    result = serializeraw.load_findings(
         decider_textflow.path.startend_linted(testdir.tmpdir),
         7625,
     )
@@ -66,7 +66,7 @@ def test_startend_figure_start_bachelor90_page34(testdir, monkeypatch):  # pylin
 
     tests.textflow_.run(cmd, monkeypatch=monkeypatch)
 
-    result = protocol.load_result(
+    result = serializeraw.load_findings(
         decider_textflow.path.startend_linted(testdir.tmpdir),
         7625,
     )

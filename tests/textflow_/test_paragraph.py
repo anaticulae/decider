@@ -8,8 +8,8 @@
 # =============================================================================
 
 import power
-import protocol
 import pytest
+import serializeraw
 
 import decider_textflow.path
 import tests
@@ -23,7 +23,7 @@ def run_paragraph_length_linter(source, pages, testdir, monkeypatch):
 
     tests.textflow_.run(cmd, monkeypatch=monkeypatch)
 
-    result = protocol.load_result(
+    result = serializeraw.load_findings(
         decider_textflow.path.paragraph_linted(testdir.tmpdir),
         7630,
     )

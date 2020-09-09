@@ -12,6 +12,7 @@ import typing
 
 import iamraw
 import protocol
+import serializeraw
 import texmex
 
 import decider_textflow.features
@@ -50,7 +51,7 @@ def check_character(linter, driver, regex):
             continue
 
         # TODO: ADD TOKEN LOCATION
-        location = protocol.RangedLocation(page=page, line=line)
+        location = iamraw.RangedLocation(page=page, line=line)
         linter(location=location)
 
 
@@ -200,5 +201,5 @@ def message(lines: list, msgid=None, page=0):
     ) for line, content in enumerate(lines)]
     driver = protocol.driver(text_chunks=lines)
     user, _ = decider_textflow.features.linting(__name__, driver)
-    result = protocol.load_result(user, msgid)
+    result = serializeraw.load_findings(user, msgid)
     return len(result)

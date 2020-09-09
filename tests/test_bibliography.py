@@ -9,6 +9,7 @@
 
 import power
 import protocol
+import serializeraw
 
 import decider.path
 import tests
@@ -20,5 +21,8 @@ def test_bib_sorting_master98(testdir, monkeypatch):
     tests.run_decider(cmd, monkeypatch=monkeypatch)
 
     path = decider.path.bibliography_user(testdir.tmpdir)
-    result = protocol.select_findings(protocol.load_result(path), msgid=6000)
+    result = protocol.select_findings(
+        serializeraw.load_findings(path),
+        msgid=6000,
+    )
     assert len(result) == 1

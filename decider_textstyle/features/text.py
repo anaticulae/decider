@@ -118,7 +118,7 @@ def check_7550_check_text_size(linter: callable, driver):
         if textsize == expected:
             continue
 
-        location = protocol.RangedLocation(page=page, line=line)
+        location = iamraw.RangedLocation(page=page, line=line)
         # TODO: CHECK FOR SINGLE CHAR OR WORDS TO BIG, BUT EXCLUDE HIGHNOTES
         linter(location=location, expected=expected, current=textsize)
 
@@ -149,7 +149,7 @@ def check_7551_check_text_family(linter: callable, driver):
             current = driver.fontstore[style.font].name
             if current == expected:
                 continue
-            location = protocol.RangedLocation(
+            location = iamraw.RangedLocation(
                 page=page,
                 line=line,
                 token=style.start,
@@ -183,7 +183,7 @@ def check_7555_text_bold(linter: callable, driver):
             if current.weight != iamraw.fonts.Weight.BOLD:
                 # TODO: EXCLUDE TABLE HEADLINES ETC.
                 continue
-            location = protocol.RangedLocation(
+            location = iamraw.RangedLocation(
                 page=page,
                 line=line,
                 token=style.start,

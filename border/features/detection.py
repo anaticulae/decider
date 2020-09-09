@@ -92,7 +92,7 @@ def check_2020_content_inside_box(linter, item, page):  # pylint:disable=W0613
     assert isinstance(page, int), type(page)
     _, bounding = item
     assert isinstance(bounding, tuple), type(bounding)
-    location = protocol.BoundingLocation.fromtuple(
+    location = iamraw.BoundingLocation.fromtuple(
         bounding=bounding,
         page=page,
     )

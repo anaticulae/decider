@@ -16,6 +16,7 @@ import functools
 import typing
 
 import german
+import iamraw
 import protocol
 import utila
 
@@ -61,7 +62,7 @@ def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
 
 
 def linting(footer, linter: protocol.Linter):
-    location = protocol.Location.from_page(footer.page)
+    location = iamraw.Location.from_page(footer.page)
 
     checkers = protocol.parse_checkers(__name__)
     for checker in checkers:

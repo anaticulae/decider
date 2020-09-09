@@ -31,7 +31,7 @@ def test_linter_abbreviation_table_sorted():
 
 def abbreviation_linter(method):
     linter = protocol.from_module(decider.features.abbreviation_table)
-    location = protocol.Location.from_page(5)
+    location = iamraw.Location.from_page(5)
     msgid = vars(method)['msgid']
     call = functools.partial(
         linter.add_finding,

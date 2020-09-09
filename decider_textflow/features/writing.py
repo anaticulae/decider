@@ -13,7 +13,6 @@ import typing
 import german
 import iamraw
 import magic.data
-import protocol
 
 import decider_textflow.features
 
@@ -72,5 +71,5 @@ def check_7600_text_perspective(linter: callable, driver):
         invalid = [item for item in words if item in INVALID_PERSPECTIVE]
         if not invalid:
             continue
-        location = protocol.RangedLocation(page=page, line=line)
+        location = iamraw.RangedLocation(page=page, line=line)
         linter(location=location, invalid=', '.join(invalid))

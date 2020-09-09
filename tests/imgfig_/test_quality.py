@@ -8,7 +8,7 @@
 # =============================================================================
 
 import power
-import protocol
+import serializeraw
 
 import imgfig.path
 import tests.imgfig_
@@ -18,7 +18,7 @@ def test_imgfig_min_quality(testdir, monkeypatch):
     source = power.link(power.BACHELOR076_PDF)
     tests.imgfig_.run(f'-i {source} --quality', monkeypatch=monkeypatch)
 
-    loaded = protocol.load_result(
+    loaded = serializeraw.load_findings(
         imgfig.path.quality(testdir.tmpdir),
         msgids={4000},
     )
@@ -30,7 +30,7 @@ def test_imgfig_max_quality(testdir, monkeypatch):
     source = power.link(power.BACHELOR076_PDF)
     tests.imgfig_.run(f'-i {source} --quality', monkeypatch=monkeypatch)
 
-    loaded = protocol.load_result(
+    loaded = serializeraw.load_findings(
         imgfig.path.quality(testdir.tmpdir),
         msgids={4001},
     )
@@ -42,7 +42,7 @@ def test_imgfig_relation(testdir, monkeypatch):
     source = power.link(power.BACHELOR063_PDF)
     tests.imgfig_.run(f'-i {source} --quality', monkeypatch=monkeypatch)
 
-    loaded = protocol.load_result(
+    loaded = serializeraw.load_findings(
         imgfig.path.quality(testdir.tmpdir),
         msgids={4005},
     )

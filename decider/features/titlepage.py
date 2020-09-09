@@ -44,7 +44,7 @@ def linting(
         linter: protocol.Linter,
 ):
     pdflocation = utila.ifnone(titlepage.pageraw, default=0) if titlepage else 0  # pylint:disable=E1101
-    location = protocol.Location.from_page(pdflocation)
+    location = iamraw.Location.from_page(pdflocation)
     checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
         call = functools.partial(

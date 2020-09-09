@@ -42,7 +42,7 @@ WORKPLAN = [
             utila.ResultFile('groupme', 'toc_toc'),
         ],
         ('user', 'developer'),
-    )
+    ),
 ]
 
 

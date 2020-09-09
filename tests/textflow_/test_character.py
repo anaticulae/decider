@@ -8,8 +8,8 @@
 # =============================================================================
 
 import power
-import protocol
 import pytest
+import serializeraw
 
 import decider_textflow.path
 import tests.textflow_
@@ -27,7 +27,7 @@ def decider_textflow_character(
         monkeypatch=monkeypatch,
     )
     path = decider_textflow.path.character_linted(testdir.tmpdir)
-    findings = protocol.load_result(path, msgids=msgids)
+    findings = serializeraw.load_findings(path, msgids=msgids)
     return findings
 
 

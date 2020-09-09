@@ -11,6 +11,7 @@ import iamraw
 import power
 import protocol
 import pytest
+import serializeraw
 
 import decider_textstyle.path
 import tests
@@ -43,7 +44,7 @@ def decide_headline_style(source, pages, style, testdir, monkeypatch):
         monkeypatch=monkeypatch,
     )
     path = decider_textstyle.path.headlines(testdir.tmpdir)
-    findings = protocol.load_result(path)
+    findings = serializeraw.load_findings(path)
     return findings
 
 
@@ -118,5 +119,5 @@ def test_headlines_bachelor63_page17(testdir, monkeypatch):
         monkeypatch=monkeypatch,
     )
     path = decider_textstyle.path.headlines(testdir.tmpdir)
-    findings = protocol.load_result(path, msgids={7500, 7510, 7520})
+    findings = serializeraw.load_findings(path, msgids={7500, 7510, 7520})
     assert not findings

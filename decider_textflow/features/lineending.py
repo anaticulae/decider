@@ -10,6 +10,7 @@
 import functools
 import typing
 
+import iamraw
 import protocol
 import textflow.features.lineending
 
@@ -91,7 +92,7 @@ def check_7000_more_than_three_division(linter: callable, lineendings: list):
         failures = more_than_three(page.content)
         for failure in failures:
             bounding = merge_bounding(failure)
-            location = protocol.BoundingLocation.fromtuple(
+            location = iamraw.BoundingLocation.fromtuple(
                 bounding=bounding,
                 page=number,
             )

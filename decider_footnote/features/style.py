@@ -53,7 +53,7 @@ def linting(
         fontstore: iamraw.FontStore,
         linter: protocol.Linter,
 ):
-    location = protocol.Location.from_page(footer.page)
+    location = iamraw.Location.from_page(footer.page)
 
     checkers = protocol.parse_checkers(__name__)
     for checker in checkers:

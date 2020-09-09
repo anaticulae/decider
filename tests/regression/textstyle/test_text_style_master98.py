@@ -8,7 +8,7 @@
 # =============================================================================
 
 import power
-import protocol
+import serializeraw
 
 import decider_textstyle
 import tests.textstyle_
@@ -21,6 +21,6 @@ def test_textsize_in_table_page55(testdir, monkeypatch):
     cmd = f'-i {source}  --text --pages=51:55'
     tests.textstyle_.run(cmd, monkeypatch=monkeypatch)
     path = decider_textstyle.path.text(testdir.tmpdir)
-    loaded = protocol.load_result(path, msgids={7550})
+    loaded = serializeraw.load_findings(path, msgids={7550})
     loaded = [item for item in loaded if item.location.page == 54]
     assert not loaded

@@ -39,7 +39,7 @@ TOC_CHECKER_ID = 13
 
 
 def linting(toc, linter: protocol.Linter):
-    location = protocol.Location.from_page(1)
+    location = iamraw.Location.from_page(1)
     checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
         call = functools.partial(
@@ -66,7 +66,7 @@ def check_1350_toc_level_to_few_children(linter, toc: iamraw.Toc):
     for item in level_result.too_few_children:  # pylint:disable=E1133
         # TODO: REMOVE AFTER UPGRADING SERIALIZERAW
         try:
-            location = protocol.Location.from_page(int(item.page))
+            location = iamraw.Location.from_page(int(item.page))
         except ValueError:
             # TODO: THINK ABOUT CONCEPT TO HANDLE ROMAN PAGE NUMBERS
             # TODO: INTRODUCE RAW LOCATION?
@@ -90,7 +90,7 @@ Seite {%current%} folgt auf {%before%}.
 def check_1360_toc_ascending_pages(linter, toc: iamraw.Toc):
     page_result: dtp.InvalidPages = dtp.validate(toc)
     for item in page_result:
-        location = protocol.Location.from_page(item.raw_location)
+        location = iamraw.Location.from_page(item.raw_location)
         linter(
             current=item.current,
             before=item.before,
@@ -132,7 +132,7 @@ def check_1365_toc_legal_inside_toc(linter, toc: iamraw.Toc):
     if not legal_intoc:
         return
 
-    location = protocol.Location.from_page(legal_intoc[0].raw_location)
+    location = iamraw.Location.from_page(legal_intoc[0].raw_location)
     linter(location=location)
 
     if len(legal_intoc) >= 2:

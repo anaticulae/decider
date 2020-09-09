@@ -42,7 +42,7 @@ def linting(
         references: iamraw.BibliographyReferences,
         linter: protocol.Linter,
 ):
-    location = protocol.Location.from_page(0)
+    location = iamraw.Location.from_page(0)
     checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
         call = functools.partial(

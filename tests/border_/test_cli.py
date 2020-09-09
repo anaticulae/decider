@@ -12,7 +12,6 @@ import os
 
 import iamraw
 import power
-import protocol
 import pytest
 import serializeraw
 import utila
@@ -65,7 +64,7 @@ def test_border_cli_decider_simple(source, testdir, monkeypatch):
     root = testdir.tmpdir
     detected = run_border_detector(root, source, monkeypatch)
     assert detected
-    loaded = protocol.load_result(border.path.border_user(testdir.tmpdir))
+    loaded = serializeraw.load_findings(border.path.border_user(testdir.tmpdir))
     assert loaded
 
 
@@ -89,7 +88,7 @@ def test_border_cli_decider_list(
     assert len(detected_hits) >= len(validate), (
         f'expected hits: {validate}\ncurrent: {len(detected_hits)}\n'
         f'hits: {detected_hits}')
-    loaded = protocol.load_result(border.path.border_user(testdir.tmpdir))
+    loaded = serializeraw.load_findings(border.path.border_user(testdir.tmpdir))
     assert loaded
 
 
@@ -112,7 +111,7 @@ def test_border_cli_decider_complex_validation(
     with patch_zero_border_tolerance(monkeypatch):
         detected = run_border_detector(root, source, monkeypatch)
     validate(detected)
-    loaded = protocol.load_result(border.path.border_user(testdir.tmpdir))
+    loaded = serializeraw.load_findings(border.path.border_user(testdir.tmpdir))
     assert loaded
 
 

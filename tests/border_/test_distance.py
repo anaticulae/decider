@@ -7,11 +7,10 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import groupme.feature.distance
 import groupme.path
 import power
-import protocol
 import pytest
+import serializeraw
 
 import border.features.distance
 
@@ -25,5 +24,5 @@ def test_border_distances_linting(page, expected):
     distance = groupme.path.distance(power.link(power.DOCU07_PDF))
 
     dumped_findings = border.features.distance.work(area, distance, pages=page)
-    findings = protocol.load_result(dumped_findings[0])
+    findings = serializeraw.load_findings(dumped_findings[0])
     assert len(findings) == expected, findings

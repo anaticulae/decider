@@ -11,7 +11,6 @@ import typing
 
 import iamraw
 import magic.data
-import protocol
 import serializeraw
 import utila
 
@@ -95,8 +94,8 @@ def check_7630_paragraph_too_short(linter: callable, driver):
             collected.append((page, line, item))
 
 
-def ranged_location(collected) -> protocol.RangedLocation:
-    location = protocol.RangedLocation(
+def ranged_location(collected) -> iamraw.RangedLocation:
+    location = iamraw.RangedLocation(
         page=collected[0][0],
         page_end=collected[-1][0],
         line=collected[0][1],

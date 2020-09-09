@@ -9,6 +9,7 @@
 
 import functools
 
+import iamraw
 import protocol
 import serializeraw
 import utila

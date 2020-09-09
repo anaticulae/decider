@@ -12,7 +12,6 @@ import operator
 import iamraw
 import magic.data
 import protocol
-import protocol.finding
 import texmex.style
 import utila
 
