@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.29.1
+
+### Fix
+
+* make headline resource optional (7d8ee8a7efd7)
+
 ## v0.29.0
 
 ### Feature
