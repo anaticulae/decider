@@ -19,6 +19,7 @@ Verify:
 """
 
 import functools
+import os
 import typing
 
 import iamraw
@@ -40,7 +41,8 @@ def work(
 
     tableofcontent: iamraw.Toc = serializeraw.load_toc(tableofcontent)
     outlines = serializeraw.load_toc(outlines)
-    headlines = serializeraw.load_headlines(headlines)
+    headlines = serializeraw.load_headlines(headlines) if os.path.exists(
+        headlines) else None
 
     driver = protocol.driver(
         toc=tableofcontent,
