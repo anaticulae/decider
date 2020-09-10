@@ -6,18 +6,3 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
-
-import utila
-
-
-def ifnone(value, default):
-    """\
-    >>> ifnone(None, 10)
-    10
-    >>> ifnone(0, 5)
-    0
-    """
-    return default if value is None else value
-
-
-utila.ifnone = ifnone
