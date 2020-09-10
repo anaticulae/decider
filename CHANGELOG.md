@@ -2,6 +2,21 @@
 
 Every noteable change is logged here.
 
+## v0.29.0
+
+### Feature
+
+* use first page(-1) to display general findings (4c1c2f10e950)
+* enable negative page finding location (ffbb24a6117f)
+* check synchronisation of toc and document headlines (950a3f8fccf6)
+* patch default to convert headlines into toc (081bf4c34291)
+* extend bounding box of repeating division (948838697aec)
+* add checker to ensure headlines are not too huge (b508c33860af)
+
+### Fix
+
+* adjust to new import (998fa52f5f93)
+
 ## v0.28.2
 
 ## v0.28.1
