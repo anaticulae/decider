@@ -60,10 +60,6 @@ Abstufungsprinzip
     2.
 """
 
-import contextlib
-
-import utila
-
 import decider
 import decider_toc.__iamraw__
 
@@ -72,94 +68,3 @@ ROOT = decider.ROOT
 __version__ = decider.__version__
 
 PROCESS = 'decider_toc'
-
-
-def isroman(item) -> bool:
-    # TODO: REMOVE AFTER UPGRADE
-    """\
-    >>> isroman('XII')
-    True
-    >>> isroman('10')
-    False
-    >>> isroman(10)
-    False
-    """
-    with contextlib.suppress(KeyError):
-        _ = arabic(item)
-        return True
-    return False
-
-
-def arabic(*items) -> int:
-    """Converst Roman to Arabic numbers.
-
-    >>> arabic('XII')
-    12
-    >>> arabic('I', 'IIII', 'VI', 'VIIII')
-    [1, 4, 6, 9]
-    """
-    result = []
-    for item in items:
-        item = str(item).upper()
-        try:
-            result.append(NUMBERS[item])
-        except KeyError:
-            result.append(EXCEPTION[item])
-    if len(result) == 1:
-        return result[0]
-    return result
-
-
-NUMBERS = {
-    'I': 1,
-    'II': 2,
-    'III': 3,
-    'IV': 4,
-    'V': 5,
-    'VI': 6,
-    'VII': 7,
-    'VIII': 8,
-    'IX': 9,
-    'X': 10,
-    'XI': 11,
-    'XII': 12,
-    'XIII': 13,
-    'XIV': 14,
-    'XV': 15,
-    'XVI': 16,
-    'XVII': 17,
-    'XVIII': 18,
-    'XIX': 19,
-    'XX': 20,
-    'XXI': 21,
-    'XXII': 22,
-    'XXIII': 23,
-    'XXIV': 24,
-    'XXV': 25,
-    'XXVI': 26,
-    'XXVII': 27,
-    'XXVIII': 28,
-    'XXIX': 29,
-    'XXX': 30,
-    'XXXI': 31,
-    'XXXII': 32,
-    'XXXIII': 33,
-    'XXXIV': 34,
-    'XXXV': 35,
-    'XXXVI': 36,
-    'XXXVII': 37,
-    'XXXVIII': 38,
-    'XXXIX': 39,
-    'XL': 40
-}
-
-EXCEPTION = {
-    'VIIII': 9,
-    'IIII': 4,
-    'XIIII': 14,
-    'XXVIIII': 29,
-    'XXXIIII': 34,
-    'XXXVIIII': 39
-}
-
-utila.isroman = isroman
