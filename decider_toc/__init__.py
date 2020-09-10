@@ -65,6 +65,7 @@ import contextlib
 import utila
 
 import decider
+import decider_toc.__iamraw__
 
 ROOT = decider.ROOT
 
