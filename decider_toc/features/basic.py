@@ -85,6 +85,3 @@ def check_1301_outlines_existence(linter, driver):
     if outlines:
         return
     linter(location=decider.features.OVERVIEW)
-
-
-# TODO: ADD SOLUTION TO COMPARE TOC AND OUTLINES

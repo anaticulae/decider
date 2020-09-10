@@ -43,6 +43,15 @@ WORKPLAN = [
         ],
         ('user', 'developer'),
     ),
+    utila.create_step(
+        'sync',
+        [
+            utila.ResultFile('groupme', 'toc_toc'),
+            utila.ResultFile('rawmaker', 'outlines_outlines'),
+            utila.ResultFile('words', 'headlines_headlines'),
+        ],
+        ('user', 'developer'),
+    ),
 ]
 
 
