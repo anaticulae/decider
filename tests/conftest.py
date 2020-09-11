@@ -9,7 +9,7 @@
 
 import os
 
-import hey.example
+import genex
 import power
 import pytest
 import utila
@@ -61,7 +61,7 @@ def pytest_sessionstart():
 
 def extract(resources):
     print_resources(resources)
-    todo = hey.example.todolist(
+    todo = genex.todolist(
         resources + [power.REPOSITORY],
         destination=power.generated(),
         caption=True,
@@ -93,7 +93,7 @@ def extract_notoc(resources):
         todo.append(f'jam -i {inpath} -o {outpath} --remove=1:5')
     # generate
     todo.extend(
-        hey.example.todolist(
+        genex.todolist(
             without_titlepage + [destination],  # ensure correct parent
             destination,
             groupme=True,
@@ -121,7 +121,7 @@ def extract_notitle(resources):
         todo.append(f'jam -i {inpath} -o {outpath} --remove=0')
     # generate
     todo.extend(
-        hey.example.todolist(
+        genex.todolist(
             without_titlepage + [destination],  # ensure correct parent
             destination,
             groupme=True,

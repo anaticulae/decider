@@ -25,3 +25,5 @@ writers==0.3.26
 
 german==0.8.4
 konrad==0.2.22
+
+genex==0.1.1

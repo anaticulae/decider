@@ -11,7 +11,7 @@
 import concurrent
 import os
 
-import hey.example
+import genex
 import utila
 import utilatest
 
@@ -71,7 +71,7 @@ def generate(files: list, outpath: str) -> list:
     )
     for (inpath, pages), output in zip(files, names):
         outdir = os.path.join(outpath, output)
-        job = hey.example.create_job(
+        job = genex.create_job(
             inpath,
             outdir,
             config=dict(
@@ -82,8 +82,8 @@ def generate(files: list, outpath: str) -> list:
                 sections=True,
                 words=True,
             ),
-            rawmaker=hey.example.CONFIG,
-            oneline=hey.example.ONELINE,
+            rawmaker=genex.CONFIG,
+            oneline=genex.ONELINE,
             pages=pages,
         )
         next_job = create_job(
