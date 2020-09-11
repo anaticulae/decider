@@ -27,7 +27,7 @@ def lint(path: str, module):
         toc=toc,
         outlines=None,
     )
-    module.linting(driver=driver, linter=linter)
+    linter.run(driver=driver)
     result = linter.result(unique=False)
     failures = sorted(item.msgid for item in result)
     return failures

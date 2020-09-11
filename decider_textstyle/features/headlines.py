@@ -7,7 +7,6 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import functools
 import typing
 
 import protocol
@@ -16,8 +15,6 @@ import utila
 import decider_textstyle.headlines.data
 import decider_textstyle.headlines.rules
 import decider_textstyle.headlines.style
-
-# TODO: USE VALIDATED TOC
 
 
 def work(
@@ -51,17 +48,10 @@ def work(
         decider_textstyle.headlines.rules,
         decider_textstyle.headlines.style,
     ])
+
     if data.navigators and data.headlines:  # pylint:disable=E1101
-        linting(data, linter)
+        linter.run(driver=data)
+
     result = linter.result(unique=True)
     user, developer = protocol.dump_result(result)
     return user, developer
-
-
-def linting(driver, linter: protocol.Linter):
-    for checker in linter.checkers:
-        call = functools.partial(
-            linter.add_finding,
-            msgid=checker.msgid,
-        )
-        checker(call, driver)

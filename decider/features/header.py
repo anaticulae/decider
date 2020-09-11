@@ -11,8 +11,8 @@
 Header
 ======
 """
+
 import collections
-import functools
 import typing
 
 import configo
@@ -28,23 +28,11 @@ def work(headerfooter: str, pages: tuple = None) -> typing.Tuple[str, str]:
     loaded = serializeraw.load_headerfooter(headerfooter, pages=pages)
     headers = [item.header for item in loaded]
 
-    linting(headers, linter)
+    linter.run(driver=headers)
+
     result = linter.result(unique=True)
     user, developer = protocol.dump_result(result)
     return user, developer
-
-
-def linting(
-        headers,
-        linter: protocol.Linter,
-):
-    checkers = protocol.parse_checkers(__name__)
-    for checker in checkers:
-        call = functools.partial(
-            linter.add_finding,
-            msgid=checker.msgid,
-        )
-        checker(call, headers)
 
 
 SOLUTION_2110 = """\

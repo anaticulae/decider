@@ -7,7 +7,6 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import functools
 import typing
 
 import iamraw
@@ -23,21 +22,10 @@ def work(lineendings: str, pages: tuple = None) -> typing.Tuple[str, str]:
         lineendings,
         pages=pages,
     )
-
-    linting(endings, linter)
+    linter.run(driver=endings)
     result = linter.result(unique=True)
     user, developer = protocol.dump_result(result)
     return user, developer
-
-
-def linting(lineendings, linter: protocol.Linter):
-    checkers = protocol.parse_checkers(__name__)
-    for checker in checkers:
-        call = functools.partial(
-            linter.add_finding,
-            msgid=checker.msgid,
-        )
-        checker(call, lineendings)
 
 
 SOLUTION_7000 = """\

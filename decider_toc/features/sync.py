@@ -18,7 +18,6 @@ Verify:
     - page number
 """
 
-import functools
 import os
 import typing
 
@@ -51,23 +50,13 @@ def work(
     )
 
     # run linter
-    linting(driver, linter)
+    linter.run(driver=driver)
 
     result = linter.result(unique=False)
 
     # dump linter result
     user, developer = protocol.dump_result(result)
     return user, developer
-
-
-def linting(driver, linter: protocol.Linter):
-    checkers = protocol.parse_checkers(__name__)
-    for checker in checkers:
-        call = functools.partial(
-            linter.add_finding,
-            msgid=checker.msgid,
-        )
-        checker(call, driver)
 
 
 SOLUTION_1330 = """\

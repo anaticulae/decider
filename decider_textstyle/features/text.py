@@ -7,7 +7,6 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import functools
 import os
 import typing
 
@@ -78,7 +77,7 @@ def work(  # pylint:disable=R0913,R0914
             headlines=headlines,
             style=expected,
         )
-        linting(data, linter)
+        linter.run(driver=data)
 
     result = linter.result(unique=True)
 
@@ -86,16 +85,6 @@ def work(  # pylint:disable=R0913,R0914
 
     user, developer = protocol.dump_result(result)
     return user, developer
-
-
-def linting(driver, linter: protocol.Linter):
-    checkers = protocol.parse_checkers(__name__)
-    for checker in checkers:
-        call = functools.partial(
-            linter.add_finding,
-            msgid=checker.msgid,
-        )
-        checker(call, driver)
 
 
 SOLUTION_7550 = """\

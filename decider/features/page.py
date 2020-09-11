@@ -12,7 +12,6 @@ PageOrder
 =========
 """
 
-import functools
 import typing
 
 import protocol
@@ -29,13 +28,8 @@ def work(headerfooter: str, pages: tuple = None) -> typing.Tuple[str, str]:
     headerfooter = serializeraw.load_headerfooter(headerfooter, pages=pages)
 
     linter = protocol.from_module(__name__)
-    checkers = protocol.parse_checkers(__name__)
-    for checker in checkers:
-        call = functools.partial(
-            linter.add_finding,
-            msgid=checker.msgid,
-        )
-        checker(call, headerfooter)
+
+    linter.run(driver=headerfooter)
     # TODO: ADD PROCESS TO VALIDATE PAGE NUMBERS IN HEADER
 
     result = linter.result(unique=True)

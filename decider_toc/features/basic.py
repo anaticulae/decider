@@ -12,7 +12,6 @@ Table of content
 ================
 """
 
-import functools
 import typing
 
 import iamraw
@@ -31,23 +30,13 @@ def work(tableofcontent: str, outlines: str) -> typing.Tuple[str, str]:
     driver = protocol.driver(toc=tableofcontent, outlines=outlines)
 
     # run linter
-    linting(driver, linter)
+    linter.run(driver=driver)
 
     result = linter.result(unique=False)
 
     # dump linter result
     user, developer = protocol.dump_result(result)
     return user, developer
-
-
-def linting(driver, linter: protocol.Linter):
-    checkers = protocol.parse_checkers(__name__)
-    for checker in checkers:
-        call = functools.partial(
-            linter.add_finding,
-            msgid=checker.msgid,
-        )
-        checker(call, driver)
 
 
 # TODO: ADD SOLUTION_1300_MS to link how to create table of content in word
