@@ -26,7 +26,7 @@ pytest_plugins = ['pytester', 'xdist']  # pylint: disable=invalid-name
 WORKER = 6
 
 RESOURCES = [
-    (power.MASTER116_PDF, '0:50,90:115'),
+    (power.MASTER116_PDF, '0:50,75:115'),
     (power.MASTER098_PDF, '0:10,43:65,88:97'),
     (power.HOMEWORK025_PDF, ':'),
     (power.BACHELOR076_PDF, ':'),
