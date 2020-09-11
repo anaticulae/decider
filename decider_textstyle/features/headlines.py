@@ -13,6 +13,7 @@ import protocol
 import utila
 
 import decider_textstyle.headlines.data
+import decider_textstyle.headlines.improve
 import decider_textstyle.headlines.rules
 import decider_textstyle.headlines.style
 
@@ -45,6 +46,7 @@ def work(
         utila.error('no navigators given')
 
     linter = protocol.from_modules([  # pylint:disable=E1101
+        decider_textstyle.headlines.improve,
         decider_textstyle.headlines.rules,
         decider_textstyle.headlines.style,
     ])

@@ -121,3 +121,14 @@ def test_headlines_bachelor63_page17(testdir, monkeypatch):
     path = decider_textstyle.path.headlines(testdir.tmpdir)
     findings = serializeraw.load_findings(path, msgids={7500, 7510, 7520})
     assert not findings
+
+
+def test_headlines_bachelor90_page17_divide_headline(testdir, monkeypatch):
+    source = power.link(power.BACHELOR090_PDF)
+    tests.textstyle_.run(
+        f'--headlines -i {testdir.tmpdir} -i {source} --pages=17',
+        monkeypatch=monkeypatch,
+    )
+    path = decider_textstyle.path.headlines(testdir.tmpdir)
+    findings = serializeraw.load_findings(path, msgids={7560})
+    assert findings
