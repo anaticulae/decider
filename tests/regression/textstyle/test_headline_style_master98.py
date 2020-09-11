@@ -10,8 +10,8 @@
 import power
 import serializeraw
 
-import decider_textstyle
-import decider_textstyle.features.headlines
+import decider_textstyle.headlines.style
+import decider_textstyle.path
 import tests.textstyle_
 
 
@@ -30,7 +30,7 @@ def test_headline_font_family_validation_page6(testdir, monkeypatch):
     with monkeypatch.context() as context:
         # run linter in ``expert`` mode
         context.setattr(
-            decider_textstyle.features.headlines,
+            decider_textstyle.headlines.style,
             'WHITESPACE_LINTING',
             True,
         )
@@ -49,7 +49,7 @@ def test_headline_font_family_char_marker(testdir, monkeypatch):
     with monkeypatch.context() as context:
         # run linter in ``expert`` mode
         context.setattr(
-            decider_textstyle.features.headlines,
+            decider_textstyle.headlines.style,
             'WHITESPACE_LINTING',
             True,
         )

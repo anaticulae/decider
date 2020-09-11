@@ -67,6 +67,7 @@ if __name__ == "__main__":
             'decider_textflow.quotation',
             'decider_textstyle',
             'decider_textstyle.features',
+            'decider_textstyle.headlines',
             'decider_toc',
             'decider_toc.features',
             'fonts',
