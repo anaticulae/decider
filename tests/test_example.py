@@ -15,7 +15,7 @@ import utilatest
 import decider.example
 
 
-@utilatest.skip_longrun
+@utilatest.skip_nightly
 def test_example_extract(testdir):
     root = str(testdir)
     generated = os.path.join(root, 'generated')
