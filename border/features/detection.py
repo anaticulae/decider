@@ -122,15 +122,17 @@ def boxes_outside_border(
             rounded_bounding = round_small(bounding)
 
             # yapf:disable
-            if all([
+            if all((
                     rounded_bounding[0] > (border_box[0] - tol[0]),
                     rounded_bounding[2] < (pagesize.width - border_box[1] + tol[1]),
                     rounded_bounding[1] > (border_box[2] - tol[2]),
                     rounded_bounding[3] < (pagesize.height - border_box[3] + tol[3]),
-            ]):
+            )):
                 # all items in the box
                 continue
             # yapf:enable
+            if all_page(bounding, pagesize):
+                continue
             hits.append((index, bounding))
         result.append(
             iamraw.PageContentHit(
@@ -141,7 +143,13 @@ def boxes_outside_border(
     return result
 
 
-def round_small(item: utila.Rectangle,) -> utila.Rectangle:
+def all_page(bounding: tuple, page) -> bool:
+    """Bounding covers the complete page."""
+    expected = (0, 0, page.width, page.height)
+    return nears(bounding, expected, diff=5.0)  # TODO: HOLY VALUE
+
+
+def round_small(item: utila.Rectangle) -> utila.Rectangle:
     """Round border in direction to the center of the rectangle to get a
     `smaller` rectangle which fit in more parent rectangles."""
     # round to move coordinate in center direction of page
@@ -153,3 +161,17 @@ def round_small(item: utila.Rectangle,) -> utila.Rectangle:
     ]
     result = [method(item[index]) for index, method in enumerate(rounding)]
     return tuple(result)
+
+
+def nears(firsts, seconds, diff: float = 2.0) -> bool:
+    """Test that two n-items are close together.
+
+    >>> nears((1, 2, 3), (0.5, 1.5, 3.5), diff=0.5)
+    True
+    >>> nears((1, 2), (0.5, 1.5), diff=0.3)
+    False
+    """
+    # TODO: REPLACE WITH UTILA CODE
+    result = (utila.near(left, right, diff=diff)
+              for left, right in zip(firsts, seconds))
+    return all(result)
