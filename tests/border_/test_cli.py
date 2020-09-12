@@ -8,46 +8,16 @@
 # =============================================================================
 
 import contextlib
-import os
 
-import iamraw
 import power
 import pytest
 import serializeraw
 import utila
 import utilatest
 
-import border.cli
 import border.features.detection
 import border.path
 import tests.border_
-
-
-def validate_leftright(hits):
-    expected_hits = []
-    # text at bottom and
-    expected_hits.append(0)
-    # symbol at right top
-    # TODO: reduce after extracting symbol as one
-    expected_hits.extend([0] * 16)
-
-    hits = utila.flatten(item.hits for item in hits)
-    assert len(hits) >= len(expected_hits), (
-        f'expected hits: {expected_hits}\n current: {len(hits)}\n')
-
-
-def run_border_detector(
-        root: str,
-        source: str,
-        monkeypatch,
-) -> iamraw.PageContentHits:
-    cmd = f'-i {source} -o {root} --pages=0:10'
-    tests.border_.run(cmd, monkeypatch=monkeypatch)
-    outputfile = border.path.decider_border_hits(root)
-    dumped = utila.file_read(outputfile)
-    assert len(dumped) > 100  # result contains some content
-    detected_hits = serializeraw.load_hits(dumped)
-    return detected_hits
 
 
 @pytest.mark.parametrize('source', [
@@ -55,7 +25,7 @@ def run_border_detector(
 ])
 def test_border_cli_decider_simple(source, testdir, monkeypatch):
     root = testdir.tmpdir
-    detected = run_border_detector(root, source, monkeypatch)
+    detected = tests.border_.extract_border_hits(root, source, monkeypatch)
     assert detected
     loaded = serializeraw.load_findings(border.path.border_user(testdir.tmpdir))
     assert loaded
@@ -75,7 +45,11 @@ def test_border_cli_decider_list(
     """Run `border` to extract common BoundingBox and check pages
     against this common box."""
     with patch_zero_border_tolerance(monkeypatch):
-        detected_hits = run_border_detector(testdir.tmpdir, source, monkeypatch)
+        detected_hits = tests.border_.extract_border_hits(
+            testdir.tmpdir,
+            source,
+            monkeypatch,
+        )
     assert detected_hits
     # validated
     assert len(detected_hits) >= len(validate), (
@@ -83,6 +57,19 @@ def test_border_cli_decider_list(
         f'hits: {detected_hits}')
     loaded = serializeraw.load_findings(border.path.border_user(testdir.tmpdir))
     assert loaded
+
+
+def validate_leftright(hits):
+    expected_hits = []
+    # text at bottom and
+    expected_hits.append(0)
+    # symbol at right top
+    # TODO: reduce after extracting symbol as one
+    expected_hits.extend([0] * 16)
+
+    hits = utila.flatten(item.hits for item in hits)
+    assert len(hits) >= len(expected_hits), (
+        f'expected hits: {expected_hits}\n current: {len(hits)}\n')
 
 
 @pytest.mark.parametrize('source, validate', [
@@ -102,7 +89,7 @@ def test_border_cli_decider_complex_validation(
     """Ensure to run border detection and load linter result later."""
     root = testdir.tmpdir
     with patch_zero_border_tolerance(monkeypatch):
-        detected = run_border_detector(root, source, monkeypatch)
+        detected = tests.border_.extract_border_hits(root, source, monkeypatch)
     validate(detected)
     loaded = serializeraw.load_findings(border.path.border_user(testdir.tmpdir))
     assert loaded
@@ -116,3 +103,5 @@ def patch_zero_border_tolerance(monkeypatch):
         context.setattr(border.features.detection, 'BORDER_TOP', 0)
         context.setattr(border.features.detection, 'BORDER_BOTTOM', 0)
         yield
+
+
