@@ -84,12 +84,26 @@ Großbuchstaben.
 {text/fussnote#struktur}
 """
 
+QUOTATION_SIGNS = '„‚’"”“'  # TODO: REPLACE WITH MORE GENERAL PLACE
+
 
 def check_2001_no_uppercase_at_start(linter, item):
-    """Ensure that footnote starts with uppercase letter."""
-    text = item.text.strip()
+    """Ensure that footnote starts with uppercase letter.
 
-    if text[0].isupper():
+    Quotation character before first uppercase letter are allowed.
+    """
+    text = item.text.strip()
+    firstchar = text[0]
+
+    if firstchar.isupper():
+        return
+
+    if firstchar.isnumeric():
+        # start with number
+        return
+
+    if firstchar in QUOTATION_SIGNS:
+        # start with quotation
         return
 
     if footnote_exception(text):
