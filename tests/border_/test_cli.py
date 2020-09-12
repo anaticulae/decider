@@ -20,6 +20,7 @@ import utilatest
 import border.cli
 import border.features.detection
 import border.path
+import tests.border_
 
 
 def validate_leftright(hits):
@@ -41,16 +42,8 @@ def run_border_detector(
         monkeypatch,
 ) -> iamraw.PageContentHits:
     cmd = f'-i {source} -o {root} --pages=0:10'
-    utilatest.run_command(
-        cmd,
-        process=border.cli.PROCESS,
-        main=border.cli.main,
-        monkeypatch=monkeypatch,
-        success=True,
-    )
-    outputfile = f'{border.cli.PROCESS}__{border.cli.FEATURE_NAME}_hits.yaml'
-    outputfile = os.path.join(root, outputfile)
-
+    tests.border_.run(cmd, monkeypatch=monkeypatch)
+    outputfile = border.path.decider_border_hits(root)
     dumped = utila.file_read(outputfile)
     assert len(dumped) > 100  # result contains some content
     detected_hits = serializeraw.load_hits(dumped)
