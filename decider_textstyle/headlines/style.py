@@ -341,7 +341,9 @@ def validate_headline_size(
         textsizes_ = decider_textstyle.headlines.utils.container_textsizes(
             lines_selected)
 
-        if all([item == expected_size for item in textsizes_]):
+        maxdiff = MAX_HEADLINE_DIFF_ABS(expected_size)
+        if all((utila.near(item, expected_size, diff=maxdiff)
+                for item in textsizes_)):
             continue
 
         # font size diff
