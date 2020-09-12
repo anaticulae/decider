@@ -23,6 +23,9 @@ MAX_HIGHNOTE_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
 
 MAX_CONTENT_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
 
+# as a result of bad layout extraction
+MAX_RISE_NOISE = configo.HV_FLOAT_PLUS(default=2.0).value
+
 
 def work(
         footerheader: str,
@@ -172,10 +175,12 @@ def check_2010_invalid_content_fontsize(linter, driver):
     expected = driver.fontconfig.content_size
     if not item.style:
         return
-    sizes = [item.size for item in item.style[1].content]
+
+    sizes = [item.size for item in item.style[1] if item.rise < MAX_RISE_NOISE]
     sizes_equal = [
         utila.near(item, expected, MAX_CONTENT_SIZE_DIFF) for item in sizes
     ]
+
     if all(sizes_equal):
         return
 
