@@ -105,3 +105,15 @@ def patch_zero_border_tolerance(monkeypatch):
         yield
 
 
+def test_border_included_pdf_page_as_image(testdir, monkeypatch):
+    """Do not detect included pdf pages as bounding error."""
+    source = power.link(power.MASTER116_PDF)
+    root = testdir.tmpdir
+    extracted = tests.border_.extract_border_hits(
+        root,
+        source,
+        monkeypatch=monkeypatch,
+        pages='2',
+    )
+    hits = utila.select_page(extracted, page=2).hits
+    assert not hits

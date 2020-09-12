@@ -42,6 +42,5 @@ def extract_border_hits(
     run(cmd, monkeypatch=monkeypatch)
     outputfile = border.path.decider_border_hits(root)
     dumped = utila.file_read(outputfile)
-    assert len(dumped) > 100  # result contains some content
     detected_hits = serializeraw.load_hits(dumped)
     return detected_hits
