@@ -312,7 +312,7 @@ def check_7536_headline_h2_too_huge(linter: callable, driver):
         return
     linter(
         location=decider.features.OVERVIEW,
-        current=style.h1_size,
+        current=style.h2_size,
         max_font_size=MAX_H2_FONT_SIZE,
     )
 
