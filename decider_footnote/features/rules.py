@@ -125,8 +125,13 @@ Fügen Sie einen Punkt am Ende der Fußnote {%number%} hinzu.
 def check_2002_no_dot_at_end(linter, item):
     """Ensure that footnote is closed with an dot '.'."""
     text = item.text.strip()
+    lastchar = text[-1]
 
-    if text[-1] == '.':
+    if lastchar == '.':
+        return
+
+    if lastchar in QUOTATION_SIGNS and text[-2] == '.':
+        # end with quotation .“
         return
 
     if footnote_exception(text):

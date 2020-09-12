@@ -22,8 +22,21 @@ def test_footnote_uppercase_start_master89_page40(testdir, monkeypatch):  ## pyl
     tests.footnote_.run(cmd, monkeypatch=monkeypatch)
 
     rules = decider_footnote.path.rules(root)
-
     result = serializeraw.load_findings(rules, 2001)
 
     result = [finding for finding in result if finding.location.page == 40]
+    assert not result
+
+
+def test_footnote_dot_end_master89_page46(testdir, monkeypatch):  ## pylint:disable=W0621
+    """Support quotation end char, see: 2002"""
+    root = str(testdir)
+
+    cmd = f'-i {power.link(power.MASTER089_PDF)} -o {root} --rules'
+    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
+
+    rules = decider_footnote.path.rules(root)
+    result = serializeraw.load_findings(rules, 2002)
+
+    result = [finding for finding in result if finding.location.page == 46]
     assert not result
