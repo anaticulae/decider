@@ -9,13 +9,23 @@
 
 import utila
 
+import border
 import border.cli
 
 
 def border_user(path: str, prefix: str = '') -> str:
     return utila.pathconnector(
         path,
-        border.cli.PROCESS,
+        border.PROCESS,
         f'{border.cli.FEATURE_NAME}_user',
+        prefix,
+    )
+
+
+def decider_border_hits(path: str, prefix: str = '') -> str:
+    return utila.pathconnector(
+        path,
+        border.PROCESS,
+        f'{border.cli.FEATURE_NAME}_hits',
         prefix,
     )

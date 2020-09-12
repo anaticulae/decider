@@ -9,9 +9,8 @@
 
 import utila
 
+import border
 import decider
-
-PROCESS = 'decider_border'
 
 FEATURE_NAME = 'detection'
 DESCRIPTION = """\
@@ -49,11 +48,11 @@ WORKPLAN = [
 def main():
     utila.featurepack(
         workplan=WORKPLAN,
-        root=decider.ROOT,
+        root=border.ROOT,
         featurepackage='border.features',
         config=utila.FeaturePackConfig(
             description=DESCRIPTION,
-            name=PROCESS,
+            name=border.PROCESS,
             pages=True,
             version=decider.__version__,
         ),
