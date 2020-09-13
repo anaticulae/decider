@@ -26,3 +26,18 @@ def test_highnote_inside_master89_page40(testdir, monkeypatch):  ## pylint:disab
 
     result = [finding for finding in result if finding.location.page == 40]
     assert not result
+
+
+def test_highnote_inside_master89_page45(testdir, monkeypatch):  ## pylint:disable=W0621
+    """Regression: Font size error on last footnote whitespace which is
+    defined as following page number which differes in font size."""
+    root = str(testdir)
+
+    cmd = f'-i {power.link(power.MASTER089_PDF)} -o {root} --style'
+    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
+
+    style = decider_footnote.path.style(root)
+    result = serializeraw.load_findings(style, 2010)
+
+    result = [finding for finding in result if finding.location.page == 45]
+    assert not result

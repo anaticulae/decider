@@ -175,12 +175,24 @@ def check_2010_invalid_content_fontsize(linter, driver):
     expected = driver.fontconfig.content_size
     if not item.style:
         return
+    text = item.text
+    footnotestyle = item.style[1]
 
-    sizes = [item.size for item in item.style[1] if item.rise < MAX_RISE_NOISE]
+    # The style of the last footnote includes the ending
+    # whitespace/newline. This whitespace is formatted as next text token.
+    # This is a result of requirements. The next token is the page number
+    # with may differ in font size. Therefore we only validate text
+    # positions which are characters.
+    # do not check on whitespace or newline
+    footnotestyle = [
+        item for item in footnotestyle if text[item.start:item.end].strip()
+    ]
+    # not not check highnotes inside footnote
+    sizes = [item.size for item in footnotestyle if item.rise < MAX_RISE_NOISE]
+
     sizes_equal = [
         utila.near(item, expected, MAX_CONTENT_SIZE_DIFF) for item in sizes
     ]
-
     if all(sizes_equal):
         return
 
