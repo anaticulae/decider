@@ -18,6 +18,8 @@ hey==5.1.0
 detector==0.8.3
 words==0.17.1
 
+groupme==0.3.3
+
 # define holy values
 configo==0.8.2
 # docs
