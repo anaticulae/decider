@@ -2,6 +2,25 @@
 
 Every noteable change is logged here.
 
+## v0.30.0
+
+### Feature
+
+* add tolerance to headline checker (413ea7eb2bc7)
+* skip included pdf page (a22cce8cb7b9)
+* add method to determine path of extracted hits (75b450739880)
+* add method to judge line coverage of headline (722b8156a87d)
+* add preview of multiple linter creator from protocol module (32f10e8e1b0b)
+
+### Fix
+
+* do not validate text style for white spaces/newlines (60e4b54967cf)
+* do not judge highnotes as font size error (3093bace50a6)
+* fix footnote dot end checker (3c7bdaccc182)
+* adjust footnote start checker (94122360d26b)
+* display correct font size in too huge headline check (d2502b193bcd)
+* load correct corresponding font header (dc9fc1b0cd2c)
+
 ## v0.29.1
 
 ### Fix
