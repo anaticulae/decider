@@ -131,7 +131,7 @@ def boxes_outside_border(
                 # all items in the box
                 continue
             # yapf:enable
-            if all_page(bounding, pagesize):
+            if covers_complete_page(bounding, pagesize):
                 continue
             hits.append((index, bounding))
         result.append(
@@ -143,7 +143,7 @@ def boxes_outside_border(
     return result
 
 
-def all_page(bounding: tuple, page) -> bool:
+def covers_complete_page(bounding: tuple, page) -> bool:
     """Bounding covers the complete page."""
     expected = (0, 0, page.width, page.height)
     return nears(bounding, expected, diff=5.0)  # TODO: HOLY VALUE
