@@ -8,14 +8,12 @@
 # =============================================================================
 
 import power
-import pytest
 import serializeraw
 
 import decider_textflow
 import tests.textflow_
 
 
-@pytest.mark.xfail(reason='update hey data test generator')
 def test_paragraph_too_short_in_table_master116_page79(testdir, monkeypatch):
     source = power.link(power.MASTER116_PDF)
     cmd = f'-i {source}  --paragraph --pages=79'
