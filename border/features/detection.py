@@ -114,12 +114,12 @@ def boxes_outside_border(
     for page in boxes:
         pagesize = page_sizes[page.page]
         border_box = expected_border[page.page]
-        valid = (
+        valid = utila.roundme((
             border_box[0] - tol[0],  # x0
             border_box[2] - tol[2],  # y0
             pagesize.width - border_box[1] + tol[1],  # x1
             pagesize.height - border_box[3] + tol[3],  # y1
-        )
+        ))
         hits = []
         for index, bounding in page.boundings:
             # BOUNDING:     'left, top,   right, bottom'
@@ -157,7 +157,21 @@ def round_small(item: utila.Rectangle) -> utila.Rectangle:
         math.floor,  # y1
     ]
     result = [method(item[index]) for index, method in enumerate(rounding)]
+    # rounding to the middle can flip min and max. Therefore we have to
+    # ensure x0/x1 and y0/y1 constraint.
+    result = ensure_bounding(item)
     return tuple(result)
+
+
+def ensure_bounding(item):
+    """ensure x0/x1 and y0/y1 constraint."""
+    result = (
+        min(item[0], item[2]),
+        min(item[1], item[3]),
+        max(item[0], item[2]),
+        max(item[1], item[3]),
+    )
+    return utila.roundme(result)
 
 
 def nears(firsts, seconds, diff: float = 2.0) -> bool:
