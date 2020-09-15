@@ -112,25 +112,22 @@ def boxes_outside_border(
 
     # x0 y0 x1 y1
     for page in boxes:
-        hits = []
         pagesize = page_sizes[page.page]
         border_box = expected_border[page.page]
+        valid = (
+            border_box[0] - tol[0],  # x0
+            border_box[2] - tol[2],  # y0
+            pagesize.width - border_box[1] + tol[1],  # x1
+            pagesize.height - border_box[3] + tol[3],  # y1
+        )
+        hits = []
         for index, bounding in page.boundings:
             # BOUNDING:     'left, top,   right, bottom'
-            # BORDER:       'left, right, top,   bottom'
             # move bounding to center of page to make approach more robust
             rounded_bounding = round_small(bounding)
-
-            # yapf:disable
-            if all((
-                    rounded_bounding[0] > (border_box[0] - tol[0]),
-                    rounded_bounding[2] < (pagesize.width - border_box[1] + tol[1]),
-                    rounded_bounding[1] > (border_box[2] - tol[2]),
-                    rounded_bounding[3] < (pagesize.height - border_box[3] + tol[3]),
-            )):
+            if utila.rectangle_inside(valid, rounded_bounding):
                 # all items in the box
                 continue
-            # yapf:enable
             if covers_complete_page(bounding, pagesize):
                 continue
             hits.append((index, bounding))
