@@ -117,3 +117,17 @@ def test_border_included_pdf_page_as_image(testdir, monkeypatch):
     )
     hits = utila.select_page(extracted, page=2).hits
     assert not hits
+
+
+def test_border_whitespace_only(testdir, monkeypatch):
+    """Do not detect included pdf pages as bounding error."""
+    source = power.link(power.BACHELOR076_PDF)
+    root = testdir.tmpdir
+    extracted = tests.border_.extract_border_hits(
+        root,
+        source,
+        monkeypatch=monkeypatch,
+        pages='0',
+    )
+    hits = utila.select_page(extracted, page=0).hits
+    assert not hits

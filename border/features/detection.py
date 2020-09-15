@@ -130,6 +130,10 @@ def boxes_outside_border(
                 continue
             if covers_complete_page(bounding, pagesize):
                 continue
+            if utila.rectangle_size(rounded_bounding) <= 50:  # TODO: HOLY VALUE
+                # white space pdf printer errors
+                # TODO: USE THIS INFORMATION FOR EXPERT LINTING
+                continue
             hits.append((index, bounding))
         result.append(
             iamraw.PageContentHit(
