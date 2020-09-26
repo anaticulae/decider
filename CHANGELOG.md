@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.31.0
+
+### Feature
+
+* exclude single white space errors (47683c6ff78f)
+
 ## v0.30.1
 
 ## v0.30.0
