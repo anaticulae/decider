@@ -15,6 +15,8 @@ import protocol
 import texmex.style
 import utila
 
+import decider_textstyle.headlines.utils as dthu
+
 
 def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
         headlines,
@@ -31,21 +33,16 @@ def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
     headlines = utila.flatten(headlines)
 
     visited = utila.Single()
-    for headline in headlines:
-        try:
-            start, end = headline.container
-        except TypeError:
-            start, end = headline.container, headline.container
-        for item in range(start, end + 1):
-            # reserve headline container ids
-            visited.contains((headline.page, item))
 
     flat = []
     for headline in headlines:
-        try:
-            position = (headline.page, headline.container[0])
-        except TypeError:
-            position = (headline.page, headline.container)
+        # mark contaienr id as visited
+        for container in dthu.containers(headline.container):
+            visited.contains((headline.page, container))
+        position = (
+            headline.page,
+            dthu.container_start(headline.container),
+        )
         flat.append((*position, headline))
 
     for magicpage in magiccontent:
