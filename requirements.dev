@@ -11,6 +11,6 @@ utilatest==0.1.4
 # test data converter
 rawmaker==2.6.0
 # add test data provider
-power==0.15.2
+power==0.16.0
 # modify test data
 jam==0.2.18
