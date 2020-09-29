@@ -7,6 +7,9 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import contextlib
+import os
+
 import power
 import serializeraw
 
@@ -15,72 +18,47 @@ import tests
 import tests.textflow_
 
 
-def test_startend_hurenkind_bachelor90_page16(testdir, monkeypatch):
-    """After oneline a headline follow which marks a `Hurenkind`. Load
-    one page before and one page after to load required headlines."""
-    source = power.link(power.BACHELOR090_PDF)
-    cmd = f'-i={source} --startend --pages=15:17'
+@contextlib.contextmanager
+def startend(source, pages, findingid, monkeypatch):
+    source = power.link(source)
+    cmd = f'-i={source} --startend --pages={pages}'
 
     tests.textflow_.run(cmd, monkeypatch=monkeypatch)
 
+    cwd = os.getcwd()
     result = serializeraw.load_findings(
-        decider_textflow.path.startend_linted(testdir.tmpdir),
-        7620,
+        decider_textflow.path.startend_linted(cwd),
+        findingid,
     )
-    assert len(result) == 1, str(result)
+    yield result
+
+
+def test_startend_hurenkind_bachelor90_page16(testdir, monkeypatch):
+    """After oneline a headline follow which marks a `Hurenkind`. Load
+    one page before and one page after to load required headlines."""
+    with startend(power.BACHELOR090_PDF, '15:17', 7620, monkeypatch) as result:
+        assert len(result) == 1, str(result)
 
 
 def test_startend_hurenkind_bachelor90_page18(testdir, monkeypatch):
     """After a short line a full line follow, which marks a `Hurenkind`.
     Load one page before and one page after to load required
     headlines."""
-    source = power.link(power.BACHELOR090_PDF)
-    cmd = f'-i={source} --startend --pages=17:19'
-
-    tests.textflow_.run(cmd, monkeypatch=monkeypatch)
-
-    result = serializeraw.load_findings(
-        decider_textflow.path.startend_linted(testdir.tmpdir),
-        7620,
-    )
-    assert len(result) == 1, str(result)
+    with startend(power.BACHELOR090_PDF, '17:19', 7620, monkeypatch) as result:
+        assert len(result) == 1, str(result)
 
 
 def test_startend_figure_start_bachelor90_page40_55(testdir, monkeypatch):
-    source = power.link(power.BACHELOR090_PDF)
-    cmd = f'-i={source} --startend --pages=40:55'
-
-    tests.textflow_.run(cmd, monkeypatch=monkeypatch)
-
-    result = serializeraw.load_findings(
-        decider_textflow.path.startend_linted(testdir.tmpdir),
-        7625,
-    )
-    assert len(result) == 3, str(result)
+    with startend(power.BACHELOR090_PDF, '40:55', 7625, monkeypatch) as result:
+        assert len(result) == 3, str(result)
 
 
 def test_startend_figure_start_bachelor90_page34(testdir, monkeypatch):
     """Ensure to detect page starts with an image instead of text."""
-    source = power.link(power.BACHELOR090_PDF)
-    cmd = f'-i={source} --startend --pages=34:40'
-
-    tests.textflow_.run(cmd, monkeypatch=monkeypatch)
-
-    result = serializeraw.load_findings(
-        decider_textflow.path.startend_linted(testdir.tmpdir),
-        7625,
-    )
-    assert len(result) == 1, str(result)
+    with startend(power.BACHELOR090_PDF, '34:40', 7625, monkeypatch) as result:
+        assert len(result) == 1, str(result)
 
 
 def test_startend_hurenkind_bachelor128_page7(testdir, monkeypatch):
-    source = power.link(power.BACHELOR128_PDF)
-    cmd = f'-i={source} --startend --pages=7'
-
-    tests.textflow_.run(cmd, monkeypatch=monkeypatch)
-
-    result = serializeraw.load_findings(
-        decider_textflow.path.startend_linted(testdir.tmpdir),
-        7620,
-    )
-    assert not result
+    with startend(power.BACHELOR128_PDF, '7', 7620, monkeypatch) as result:
+        assert not result
