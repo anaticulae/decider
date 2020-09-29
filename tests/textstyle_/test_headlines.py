@@ -12,6 +12,7 @@ import power
 import protocol
 import pytest
 import serializeraw
+import utilatest
 
 import decider_textstyle.path
 import tests
@@ -49,6 +50,7 @@ def decide_headline_style(source, pages, style, testdir, monkeypatch):
 
 
 @pytest.mark.xfail(reason='failing magic/list parer')
+@utilatest.skip_longrun
 def test_decider_headlines_master72_2_20(testdir, monkeypatch):
     source = power.link(power.MASTER072_PDF)
     pages = '2:20'
@@ -64,6 +66,7 @@ def test_decider_headlines_master72_2_20(testdir, monkeypatch):
 
 
 @pytest.mark.xfail(reason='failing magic/list parer')
+@utilatest.skip_longrun
 def test_decider_headlines_master72_all(testdir, monkeypatch):
     source = power.link(power.MASTER072_PDF)
     pages = '3:65'
@@ -79,6 +82,7 @@ def test_decider_headlines_master72_all(testdir, monkeypatch):
 
 
 @pytest.mark.xfail(reason='failing magic/list parer')
+@utilatest.skip_longrun
 def test_decider_headlines_bachelor76(testdir, monkeypatch):
     # TODO: EXTEND THIS TESTS, specify expected findings
     source = power.link(power.BACHELOR076_PDF)
@@ -95,6 +99,7 @@ def test_decider_headlines_bachelor76(testdir, monkeypatch):
     assert len(findings) == expected
 
 
+@utilatest.skip_longrun
 def test_decider_headlines_chapter_on_new_page(testdir, monkeypatch):
     source = power.link(power.BACHELOR076_PDF)
     pages = '0:42'

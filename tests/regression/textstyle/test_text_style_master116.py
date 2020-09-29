@@ -9,11 +9,13 @@
 
 import power
 import serializeraw
+import utilatest
 
 import decider_textstyle
 import tests.textstyle_
 
 
+@utilatest.skip_longrun
 def test_textstyle_formula_master116_page22(testdir, monkeypatch):
     """Ensure that formulas are not treated as font size errors."""
     source = power.link(power.MASTER116_PDF)
