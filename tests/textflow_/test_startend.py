@@ -15,7 +15,7 @@ import tests
 import tests.textflow_
 
 
-def test_startend_hurenkind_bachelor90_page16(testdir, monkeypatch):  # pylint:disable=W0621
+def test_startend_hurenkind_bachelor90_page16(testdir, monkeypatch):
     """After oneline a headline follow which marks a `Hurenkind`. Load
     one page before and one page after to load required headlines."""
     source = power.link(power.BACHELOR090_PDF)
@@ -30,7 +30,7 @@ def test_startend_hurenkind_bachelor90_page16(testdir, monkeypatch):  # pylint:d
     assert len(result) == 1, str(result)
 
 
-def test_startend_hurenkind_bachelor90_page18(testdir, monkeypatch):  # pylint:disable=W0621
+def test_startend_hurenkind_bachelor90_page18(testdir, monkeypatch):
     """After a short line a full line follow, which marks a `Hurenkind`.
     Load one page before and one page after to load required
     headlines."""
@@ -46,7 +46,7 @@ def test_startend_hurenkind_bachelor90_page18(testdir, monkeypatch):  # pylint:d
     assert len(result) == 1, str(result)
 
 
-def test_startend_figure_start_bachelor90_page40_55(testdir, monkeypatch):  # pylint:disable=W0621
+def test_startend_figure_start_bachelor90_page40_55(testdir, monkeypatch):
     source = power.link(power.BACHELOR090_PDF)
     cmd = f'-i={source} --startend --pages=40:55'
 
@@ -59,7 +59,7 @@ def test_startend_figure_start_bachelor90_page40_55(testdir, monkeypatch):  # py
     assert len(result) == 3, str(result)
 
 
-def test_startend_figure_start_bachelor90_page34(testdir, monkeypatch):  # pylint:disable=W0621
+def test_startend_figure_start_bachelor90_page34(testdir, monkeypatch):
     """Ensure to detect page starts with an image instead of text."""
     source = power.link(power.BACHELOR090_PDF)
     cmd = f'-i={source} --startend --pages=34:40'
