@@ -63,7 +63,6 @@ def test_decider_text_master72_2_10_fontfamily(testdir, monkeypatch):
     assert len(findings) == 7
 
 
-@pytest.mark.xfail(reason='failing magic/list parer')
 @utilatest.skip_longrun
 def test_decider_text_bachelor76_4_10_bold_font(testdir, monkeypatch):
     source = power.link(power.BACHELOR076_PDF)
@@ -76,6 +75,7 @@ def test_decider_text_bachelor76_4_10_bold_font(testdir, monkeypatch):
         monkeypatch,
     )
     # five words marked bold
+    findings = [item for item in findings if item.msgid == 7555]
     assert len(findings) == 5
 
 
