@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.31.1
+
+### Fix
+
+* shrink magic data to selected pages (e4d78cbc7874)
+
 ## v0.31.0
 
 ### Feature
