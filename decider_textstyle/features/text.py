@@ -78,6 +78,8 @@ def work(  # pylint:disable=R0913,R0914
             style=expected,
         )
         linter.run(driver=data)
+    else:
+        utila.error('could not run --text linter')
 
     result = linter.result(unique=True)
 

@@ -53,6 +53,8 @@ def work(
 
     if data.navigators and data.headlines:  # pylint:disable=E1101
         linter.run(driver=data)
+    else:
+        utila.error('could not run --headlines linter')
 
     result = linter.result(unique=True)
     user, developer = protocol.dump_result(result)
