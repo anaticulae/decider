@@ -10,7 +10,6 @@
 import operator
 
 import iamraw
-import magic.data
 import protocol
 import texmex.style
 import utila
@@ -50,7 +49,7 @@ def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
             location = (magicpage.page, line)
             if visited.contains(location):
                 continue
-            if content == magic.data.ContentType.TEXT:
+            if content == iamraw.PageContentType.TEXT:
                 # Do not skip TEXT
                 continue
             flat.append((*location, None))

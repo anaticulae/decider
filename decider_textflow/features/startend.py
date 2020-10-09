@@ -14,7 +14,7 @@ Schusterjunge: Single Line at Page End
 import typing
 
 import iamraw
-import magic.data
+import serializeraw
 import utila
 
 import decider_textflow.features
@@ -30,7 +30,7 @@ def work(  # pylint:disable=R0914
         magiccontent: str,
         pages: tuple = None,
 ) -> typing.Tuple[str, str]:
-    magiccontent = magic.data.load_types(magiccontent, pages=pages)
+    magiccontent = serializeraw.load_types(magiccontent, pages=pages)
     driver = decider_textflow.features.textdata(
         headlines,
         text,

@@ -12,7 +12,7 @@ import typing
 
 import german
 import iamraw
-import magic.data
+import serializeraw
 
 import decider_textflow.features
 
@@ -27,7 +27,7 @@ def work(  # pylint:disable=R0914
         pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     if os.path.exists(magiccontent):
-        magiccontent = magic.data.load_types(magiccontent, pages=pages)
+        magiccontent = serializeraw.load_types(magiccontent, pages=pages)
     else:
         magiccontent = []
 
