@@ -9,6 +9,7 @@
 
 import iamraw
 import power
+import protocol
 import pytest
 import serializeraw
 import utilatest
@@ -94,3 +95,23 @@ def test_decider_textstyle_merge_connected_findings(testdir, monkeypatch):
         msgids=7550,
     )
     assert len(findings) == 1, len(findings)
+
+
+def test_textstyle_warning_in_wordfigure_bachelor51_pag30(testdir, monkeypatch):
+    """Regression test that figure text is not detected as text style
+    error. This was an error cause figure was not extracted correctly
+    and therefore magic does not detect these region as figure
+    region."""
+    source = power.link(power.BACHELOR051_PDF)
+    # 28: is required, cause we require the first headline
+    tests.textstyle_.run(
+        f'-i {source} --text --pages=28:31',
+        monkeypatch=monkeypatch,
+    )
+    findings = serializeraw.load_findings(
+        decider_textstyle.path.text(testdir.tmpdir),
+        msgids=7550,
+    )
+    # select page 30
+    findings = [finding for finding in findings if finding.location.page == 30]
+    assert not findings
