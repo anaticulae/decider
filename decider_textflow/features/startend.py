@@ -67,6 +67,11 @@ def check_7620_lonely_page_start(linter: callable, driver):
         if first_headline and second_headline:
             continue
         if second_headline and not first_headline:
+            # CHAPTER-X-Pattern
+            # Title
+            if content[1].decoration is not None:
+                continue
+        if second_headline and not first_headline:
             # hurenkind
             # TEXT -> HEADLINE
             location = iamraw.RangedLocation(page=page, line=0)

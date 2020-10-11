@@ -62,3 +62,8 @@ def test_startend_figure_start_bachelor90_page34(testdir, monkeypatch):
 def test_startend_hurenkind_bachelor128_page7(testdir, monkeypatch):
     with startend(power.BACHELOR128_PDF, '7', 7620, monkeypatch) as result:
         assert not result
+
+
+def test_startend_hurenkind_chapter_x_pattern(testdir, monkeypatch):
+    with startend(power.MASTER110_PDF, '18', 7620, monkeypatch) as result:
+        assert not result
