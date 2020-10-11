@@ -114,6 +114,20 @@ def test_decider_headlines_chapter_on_new_page(testdir, monkeypatch):
     assert len(no_new_page_start) == 2, str(no_new_page_start)
 
 
+def test_chapter_on_new_page_with_decoration(testdir, monkeypatch):
+    source = power.link(power.MASTER110_PDF)
+    pages = '18:20'
+    findings = decide_headline_style(
+        source,
+        pages,
+        NO_STYLE,
+        testdir,
+        monkeypatch,
+    )
+    new_chapter_page_start_error = protocol.select_findings(findings, 7540)
+    assert not new_chapter_page_start_error
+
+
 def test_headlines_bachelor63_page17(testdir, monkeypatch):
     """Do not parse font size error for white spaces in first level
     headlines. Regression test after fixing docstyle extractor."""
