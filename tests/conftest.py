@@ -28,6 +28,7 @@ WORKER = 6
 RESOURCES = [
     (power.MASTER116_PDF, '0:50,75:115'),
     (power.MASTER098_PDF, '0:10,43:65,88:97'),
+    (power.MASTER110_PDF, '0:50'),
     (power.MASTER089_PDF, '40:50'),
     (power.HOMEWORK025_PDF, ':'),
     (power.BACHELOR076_PDF, ':'),
