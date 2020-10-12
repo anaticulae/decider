@@ -9,7 +9,6 @@
 
 import iamraw
 import power
-import protocol
 import pytest
 import serializeraw
 import utilatest

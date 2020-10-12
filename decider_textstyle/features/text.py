@@ -12,7 +12,6 @@ import typing
 
 import iamraw
 import iamraw.fonts
-import magic.path
 import protocol
 import serializeraw
 import utila

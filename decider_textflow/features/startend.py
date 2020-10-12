@@ -21,7 +21,7 @@ import decider_textflow.features
 import decider_textstyle.utils
 
 
-def work(  # pylint:disable=R0914
+def work(
         headlines: str,
         text: str,
         textpositions: str,
