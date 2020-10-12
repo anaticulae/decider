@@ -45,7 +45,7 @@ def work(  # pylint:disable=R0914
 
 
 SOLUTION_7600 = """\
-Fehler in der Persepektive
+Fehler in der Perspektive
 
 **{%invalid%}** sollte vermieden werden.
 
