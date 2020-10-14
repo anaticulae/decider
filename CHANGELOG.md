@@ -2,6 +2,18 @@
 
 Every noteable change is logged here.
 
+## v0.32.0
+
+### Feature
+
+* exclude Chapter-X-Pattern from Hurenkind-Detector (29bfc278b25b)
+* warn user about skipped linter (2d62645ac635)
+
+### Fix
+
+* fix typo (767262c3e681)
+* no chapter start error on Chapter-X-Pattern (6613130d184b)
+
 ## v0.31.1
 
 ### Fix
