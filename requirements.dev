@@ -9,7 +9,7 @@
 
 utilatest==0.1.5
 # test data converter
-rawmaker==2.7.0
+rawmaker==2.8.0
 # add test data provider
 power==0.16.1
 # modify test data
