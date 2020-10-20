@@ -10,6 +10,7 @@
 import power
 import pytest
 import serializeraw
+import utila
 import utilatest
 
 import decider_textflow.path
@@ -18,8 +19,7 @@ import tests.textflow_
 
 
 def run_paragraph_length_linter(source, pages, testdir, monkeypatch):
-    # TODO: REPLACE WITH UTILA CODE
-    pages = ','.join([str(item) for item in pages])
+    pages = utila.from_tuple(pages, separator=',')
     cmd = f'-i={source} --paragraph --pages={pages}'
 
     tests.textflow_.run(cmd, monkeypatch=monkeypatch)
