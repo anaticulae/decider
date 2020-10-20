@@ -23,7 +23,7 @@ groupme==0.5.1
 # define holy values
 configo==0.8.4
 # docs
-writers==0.4.1
+writers==0.4.2
 
 german==0.9.0
 konrad==0.2.24

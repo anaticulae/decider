@@ -14,14 +14,14 @@ import tests
 
 
 def test_toc_pages_validate():
-    toc = tests.tableofcontent(power.link(power.TECHNICAL_024))
+    toc = tests.tableofcontent(power.link(power.TECH024_PDF))
     validated = dtp.validate(toc)  # pylint:disable=W0612
 
     assert validated == [], validated
 
 
 def test_toc_pages_validate_with_errors():
-    toc = tests.tableofcontent(power.link(power.TECHNICAL_024))
+    toc = tests.tableofcontent(power.link(power.TECH024_PDF))
 
     # introduce some errors
     toc.children[1].page = 10

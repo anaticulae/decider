@@ -20,7 +20,7 @@ def test_decider_textflow_cli_help(monkeypatch):
 
 
 @pytest.mark.parametrize('source', [
-    pytest.param(power.link(power.TECHNICAL_024), id='technical24'),
+    pytest.param(power.link(power.TECH024_PDF), id='technical24'),
     pytest.param(power.link(power.BACHELOR037_PDF), id='bachelor37'),
     pytest.param(power.link(power.BACHELOR076_PDF), id='bachelor76'),
     pytest.param(power.link(power.DOCU35_PDF), id='docu'),

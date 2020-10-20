@@ -24,7 +24,7 @@ TECHNICAL24_TOO_DEEP = 14
 def test_toc_invalid_children(monkeypatch):
     with monkeypatch.context() as context:
         context.setattr(dtl, 'MAX_TOC_DEEPNESS', 2)
-        failures = lint(power.link(power.TECHNICAL_024), dtfr)
+        failures = lint(power.link(power.TECH024_PDF), dtfr)
     failures = len(failures)
     assert failures == TECHNICAL24_INVALID_CHILDREN, str(failures)
 
@@ -32,7 +32,7 @@ def test_toc_invalid_children(monkeypatch):
 def test_toc_to_deep(monkeypatch):
     with monkeypatch.context() as context:
         context.setattr(dtl, 'MAX_TOC_DEEPNESS', 2)
-        failures = lint(power.link(power.TECHNICAL_024), dtfc)
+        failures = lint(power.link(power.TECH024_PDF), dtfc)
     failures = len([item for item in failures if item in (1351, 1382)])
     expected = sum([
         TECHNICAL24_INVALID_CHILDREN_TO_LONG,
@@ -50,7 +50,7 @@ def master78_too_few_children(invalid):
 
 @pytest.mark.parametrize('source, invalids, validate', [
     pytest.param(
-        power.link(power.TECHNICAL_024),
+        power.link(power.TECH024_PDF),
         TECHNICAL24_INVALID_CHILDREN,
         None,
         id='technical24',
@@ -80,7 +80,7 @@ def test_toc_too_few_children(source, invalids, validate):
 
 # yapf:disable
 @pytest.mark.parametrize('source, too_deep', [
-    pytest.param(power.link(power.TECHNICAL_024), TECHNICAL24_TOO_DEEP, id='technical24'),
+    pytest.param(power.link(power.TECH024_PDF), TECHNICAL24_TOO_DEEP, id='technical24'),
     pytest.param(power.link(power.MASTER072_PDF), 6, id='master72'),
 ])
 # yapf:enable

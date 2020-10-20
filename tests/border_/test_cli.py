@@ -21,7 +21,7 @@ import tests.border_
 
 
 @pytest.mark.parametrize('source', [
-    pytest.param(power.link(power.TECHNICAL_024), id='technical24'),
+    pytest.param(power.link(power.TECH024_PDF), id='technical24'),
 ])
 def test_border_cli_decider_simple(source, testdir, monkeypatch):
     root = testdir.tmpdir

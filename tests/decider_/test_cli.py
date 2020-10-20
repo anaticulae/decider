@@ -42,12 +42,12 @@ def test_cli_decider_example(source, testdir, monkeypatch):
 
 @pytest.mark.parametrize('source, pages', [
     pytest.param(
-        power.link(power.TECHNICAL_024),
+        power.link(power.TECH024_PDF),
         '1',
         id='technical24',
     ),
     pytest.param(
-        power.link(power.TECHNICAL_024),
+        power.link(power.TECH024_PDF),
         '0:5',
         id='technical24',
     ),

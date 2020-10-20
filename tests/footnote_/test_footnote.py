@@ -109,7 +109,7 @@ def test_footnotes_work_highnote_font_family():
 
 
 def test_footnote_email_exception(testdir, monkeypatch):
-    source = power.link(power.HOMEWORK025_PDF)
+    source = power.link(power.HOME025_PDF)
     cmd = f'--rules -i {source}'
 
     def run_linter():

@@ -18,7 +18,7 @@ def test_headline_size_validation_page4(testdir, monkeypatch):
     """Verify that extracted headline container line to text line. If
     the mapping is wrong, the wrong text size is selected and an
     incorrect linting is fired."""
-    source = power.link(power.HOMEWORK025_PDF)
+    source = power.link(power.HOME025_PDF)
     cmd = f'-i {source}  --headlines --pages=4'
     tests.textstyle_.run(cmd, monkeypatch=monkeypatch)
     path = decider_textstyle.path.headlines(testdir.tmpdir)
