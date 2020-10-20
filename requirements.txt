@@ -29,3 +29,6 @@ german==0.9.0
 konrad==0.2.24
 
 genex==0.1.4
+
+# template engine
+jinja2==2.10
