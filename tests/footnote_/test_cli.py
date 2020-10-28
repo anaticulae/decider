@@ -21,7 +21,7 @@ def test_decider_footnote_cli_help(monkeypatch):
     tests.footnote_.run('--help', monkeypatch=monkeypatch)
 
 
-def test_cli_rules(testdir, monkeypatch):  ## pylint:disable=W0621
+def test_cli_rules(testdir, monkeypatch):  # pylint:disable=W0621
     root = str(testdir)
 
     cmd = f'-i {power.link(power.MASTER072_PDF)} -o {root} --rules'
@@ -40,7 +40,7 @@ def test_cli_rules(testdir, monkeypatch):  ## pylint:disable=W0621
     assert utila.istemplate_replaced(dumped), dumped
 
 
-def test_cli_footnote_global(testdir, monkeypatch):  ## pylint:disable=W0621
+def test_cli_footnote_global(testdir, monkeypatch):  # pylint:disable=W0621
     root = str(testdir)
 
     cmd = f'-i {power.link(power.BACHELOR090_PDF)} -o {root} --global'
@@ -52,7 +52,7 @@ def test_cli_footnote_global(testdir, monkeypatch):  ## pylint:disable=W0621
     assert len(result) == 1
 
 
-def test_cli_footnote_disabled_checker(testdir, monkeypatch):  ## pylint:disable=W0621
+def test_cli_footnote_disabled_checker(testdir, monkeypatch):  # pylint:disable=W0621
     root = str(testdir)
 
     cmd = f'-i {power.link(power.BACHELOR076_PDF)} -o {root} --rules'

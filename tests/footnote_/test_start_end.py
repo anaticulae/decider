@@ -14,7 +14,7 @@ import decider_footnote.path
 import tests.footnote_
 
 
-def test_footnote_uppercase_start_master89_page40(testdir, monkeypatch):  ## pylint:disable=W0621
+def test_footnote_uppercase_start_master89_page40(testdir, monkeypatch):  # pylint:disable=W0621
     """Support quotation start char, see: 2001"""
     root = str(testdir)
 
@@ -28,7 +28,7 @@ def test_footnote_uppercase_start_master89_page40(testdir, monkeypatch):  ## pyl
     assert not result
 
 
-def test_footnote_dot_end_master89_page46(testdir, monkeypatch):  ## pylint:disable=W0621
+def test_footnote_dot_end_master89_page46(testdir, monkeypatch):  # pylint:disable=W0621
     """Support quotation end char, see: 2002"""
     root = str(testdir)
 

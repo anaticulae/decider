@@ -17,7 +17,7 @@ import fonts.cli
 import tests.resources
 
 
-def test_main_fonts(testdir, monkeypatch):  ## pylint:disable=W0621
+def test_main_fonts(testdir, monkeypatch):  # pylint:disable=W0621
     """Run decider with rawmaker_result to get hits output"""
     root = str(testdir)
     # copy ugly font config
