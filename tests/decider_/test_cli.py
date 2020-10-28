@@ -33,7 +33,7 @@ def test_cli_decider(cmd, testdir, monkeypatch):
     pytest.param(power.link(power.MASTER098_PDF), id='master98'),
     pytest.param(power.link(power.MASTER099_PDF), id='master99'),
 ])
-@utilatest.skip_longrun
+@utilatest.nightly
 def test_cli_decider_example(source, testdir, monkeypatch):
     """Run decider"""
     cmd = f'-i {source}'
@@ -62,7 +62,7 @@ def test_cli_decider_example(source, testdir, monkeypatch):
         id='master72',
     ),
 ])
-@utilatest.skip_longrun
+@utilatest.nightly
 def test_cli_detector_and_decider(source, pages, testdir, monkeypatch):
     """Run decider
 
