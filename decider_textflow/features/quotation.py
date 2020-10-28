@@ -103,7 +103,7 @@ Zitat zu lang
 Konzentrieren Sie sich auf den wichtigen Teil des Zitats und stellen Sie
 die eigene Denkleistung in den Vordergrund.
 
-TODO: ADD ARTICLE ABOUT OWN WORK
+{text/zitat#umfang}
 """
 
 

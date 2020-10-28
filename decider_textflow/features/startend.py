@@ -49,7 +49,7 @@ Hurenkind: Einsame Zeile am Seitenanfang
 
 Seite beginnt mit einsamer Zeile.
 
-TODO: ARTICLE
+{darstellung/schriftbild#hurenkind}
 """
 
 
@@ -94,6 +94,7 @@ def check_7620_lonely_page_start(linter: callable, driver):
 SOLUTION_7621 = """\
 Schusterjunge: Einsame Zeile am Seitenende
 
+{darstellung/schriftbild#schusterjunge}
 """
 
 SOLUTION_7625 = """\
@@ -101,6 +102,8 @@ Seitenanfang: Seite beginnt nicht mit Text
 
 Die Grafik/Tabelle etc. sollte in den Text eingebunden werden und nicht
 direkt am Seitenanfang stehen.
+
+{darstellung/schriftbild#seitenanfang}
 """
 
 # TODO: ADD SUPPORT FOR TEXT ABOVE IMAGES/TABLE etc.

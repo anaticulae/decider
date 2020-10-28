@@ -80,7 +80,7 @@ Abschnitten({{expected}}) zu lang({{current}}). Überdenken Sie die
 Abschnittseinteilung und überlegen Sie sich weitere Teilabschnitte
 einzuführen.
 
-! ADD Theissen ARTICLE !
+{aufbau_gliederung/absatz}
 """
 
 
@@ -108,7 +108,7 @@ Abschnitten({{expected}}) zu kurz({{current}}). Überdenken Sie die
 Abschnittseinteilung und überlegen Sie sich Teilabschnitte zusammen zu
 führen.
 
-! ADD Theissen ARTICLE !
+{aufbau_gliederung/absatz}
 """
 
 

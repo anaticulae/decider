@@ -279,7 +279,8 @@ Erwartete Schriftgröße der Kapitel zu groß
 Die erwartete Schriftgröße der Kapitel {{current}}pt überschreitet die
 maximal empfohlene Schriftgröße von {{max_font_size}}pt.
 
-TODO: ADD ARTICLE"""
+TODO: ADD ARTICLE
+"""
 
 
 def check_7535_headline_h1_too_huge(linter: callable, driver):
@@ -301,7 +302,8 @@ Erwartete Schriftgröße der Abschnitte zu groß
 Die erwartete Schriftgröße der Abschnitte {{current}}pt überschreitet
 die maximal empfohlene Schriftgröße von {{max_font_size}}pt.
 
-TODO: ADD ARTICLE"""
+TODO: ADD ARTICLE
+"""
 
 
 def check_7536_headline_h2_too_huge(linter: callable, driver):

@@ -47,7 +47,7 @@ Paragraph zu kurz
 
 Der Abschnitt umfasst nur {{lines}} Zeilen und sollte überarbeitet werden.
 
-TODO: ARTICLE
+{aufbau_gliederung/absatz}
 """
 
 PARAGRAPH_TOO_SHORT = 3

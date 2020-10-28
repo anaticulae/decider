@@ -49,7 +49,7 @@ Fehler in der Perspektive
 
 **{{invalid}}** sollte vermieden werden.
 
-TODO: ADD ARTICLE
+{text/stilkunde/perspektive}
 """
 
 # TODO: REPLACE WITH EXTERNAL METHOD

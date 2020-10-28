@@ -106,7 +106,7 @@ Die Eidesstatttliche Erklärung ist kein Teil der Prüfungsleistung und
 wird somit nicht im Inhaltsverzeichnis aufgeführt und wird ebenfalls
 nicht bei der Seitenzählung berücksichtigt.
 
-TODO: ADD ARTICLE
+{elemente/erklaerung}
 """
 
 # TODO: MOVE TO KONRAD?
