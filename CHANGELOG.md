@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v0.33.0
+
+### Feature
+
+* add link to absatz, quotation, text presentation (1c0fdabd4fbb)
+* link article to footnote advice (11a07205df8e)
+
 ## v0.32.0
 
 ### Feature
