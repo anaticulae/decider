@@ -186,7 +186,7 @@ Empfehlung: Anfang der Fußnote
 Es wird empfohlen sämtliche Fußnoten mit einen Großbuchenstaben beginnen
 zu lassen.
 
-TODO: ADD ARTICLE
+{text/fussnote#struktur}
 """
 
 SOLUTION_2013 = """\
@@ -194,7 +194,7 @@ Empfehlung: Ende der Fußnote
 
 Es wird empfohlen sämtliche Fußnoten durch einen Punkt abzuschließen.
 
-TODO: ADD ARTICLE
+{text/fussnote#struktur}
 """
 
 
