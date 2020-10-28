@@ -48,11 +48,11 @@ Sortieren Sie das Abkürzungsverzeichnis.
 
 Gefunden:
 ---------
-{%current%}
+{{current}}
 
 Erwartet:
 ---------
-{%expected%}
+{{expected}}
 
 {elemente/abkuerzungsverzeichnis#alphabetische-sortierung}
 """
@@ -78,7 +78,7 @@ def check_5000_not_sorted_alphabetically(
 SOLUTION_5001 = """\
 Abkürzung allgemein bekannt
 
-Die Abkürzung {%short%}({%description%}) muss nicht separat erklärt
+Die Abkürzung {{short}}({{description}}) muss nicht separat erklärt
 werden, da diese Allgemeingültingkeit besitzt.
 
 Tipp: Abkürzung entfernen zur Erhöhung der Übersichtlichkeit

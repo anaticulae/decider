@@ -91,8 +91,8 @@ def work(  # pylint:disable=R0913,R0914
 SOLUTION_7550 = """\
 Schriftgröße des Texts weicht ab
 
-Die erkannte Schriftgröße **{%current%}** weicht von
-der erwarteten Schriftgröße **{%expected%}**.
+Die erkannte Schriftgröße **{{current}}** weicht von
+der erwarteten Schriftgröße **{{expected}}**.
 """
 
 
@@ -116,8 +116,8 @@ def check_7550_check_text_size(linter: callable, driver):
 SOLUTION_7551 = """\
 Schriftart des Texts weicht ab
 
-Die erkannte Schriftart **{%current%}** weicht von
-der erwarteten Schriftart **{%expected%}** ab.
+Die erkannte Schriftart **{{current}}** weicht von
+der erwarteten Schriftart **{{expected}}** ab.
 """
 
 

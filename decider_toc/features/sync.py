@@ -68,7 +68,7 @@ Inhaltsverzeichnis.
 
 Folgende Überschriften sind nicht im Inhaltsverzeichnis enthalten:
 
-{%missing%}
+{{missing}}
 """
 
 

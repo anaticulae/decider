@@ -80,8 +80,8 @@ Inhaltsverzeichnis enthält nicht nur aufsteigende Seitenzahlen
 
 Korrigieren Sie das Inhaltsverzeichnis bzw. die Seitenzahlen.
 
-Zeile: {%text%}
-Seite {%current%} folgt auf {%before%}.
+Zeile: {{text}}
+Seite {{current}} folgt auf {{before}}.
 
 {darstellung/seitenzahlen#anforderungen}
 """

@@ -20,29 +20,29 @@ import decider_textstyle.headlines.utils
 FONT_SIZE_ERROR = string.Template("""\
 $title falsch formatiert
 
-Die Schriftgröße **{%current%}** weicht von der
-erwarteten Schriftgröße **{%expected%}** ab.
+Die Schriftgröße **{{current}}** weicht von der
+erwarteten Schriftgröße **{{expected}}** ab.
 """)
 
 FONT_FAMILY_ERROR = string.Template("""\
 $title falsch formatiert
 
-Die Schriftart **{%current%}** weicht von der
-erwarteten Schriftart **{%expected%}** ab.
+Die Schriftart **{{current}}** weicht von der
+erwarteten Schriftart **{{expected}}** ab.
 """)
 
 FONT_DISTANCE_BEFORE_ERROR = string.Template("""\
 $title falsch formatiert
 
-Der Abstand vor der $title **{%current%}** weicht vom
-erwarteten Abstand **{%expected%}** ab.
+Der Abstand vor der $title **{{current}}** weicht vom
+erwarteten Abstand **{{expected}}** ab.
 """)
 
 FONT_DISTANCE_AFTER_ERROR = string.Template("""\
 $title falsch formatiert
 
-Der Abstand nach der $title **{%current%}** weicht vom
-erwarteten Abstand **{%expected%}** ab.
+Der Abstand nach der $title **{{current}}** weicht vom
+erwarteten Abstand **{{expected}}** ab.
 """)
 
 MAX_HEADLINE_DIFF_REL = configo.HV_PERCENT_PLUS(10).value
@@ -276,8 +276,8 @@ MAX_H2_FONT_SIZE = configo.HV_INT_PLUS(30.0).value  # TODO: HOLY VALUE
 SOLUTION_7535 = """\
 Erwartete Schriftgröße der Kapitel zu groß
 
-Die erwartete Schriftgröße der Kapitel {%current%}pt überschreitet die
-maximal empfohlene Schriftgröße von {%max_font_size%}pt.
+Die erwartete Schriftgröße der Kapitel {{current}}pt überschreitet die
+maximal empfohlene Schriftgröße von {{max_font_size}}pt.
 
 TODO: ADD ARTICLE"""
 
@@ -298,8 +298,8 @@ def check_7535_headline_h1_too_huge(linter: callable, driver):
 SOLUTION_7536 = """\
 Erwartete Schriftgröße der Abschnitte zu groß
 
-Die erwartete Schriftgröße der Abschnitte {%current%}pt überschreitet
-die maximal empfohlene Schriftgröße von {%max_font_size%}pt.
+Die erwartete Schriftgröße der Abschnitte {{current}}pt überschreitet
+die maximal empfohlene Schriftgröße von {{max_font_size}}pt.
 
 TODO: ADD ARTICLE"""
 

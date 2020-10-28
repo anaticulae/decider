@@ -60,8 +60,8 @@ Auflösung zu niedrig
 Das Bild weist eine zu geringe Auflösung auf und wird im Druck
 ungenügend erscheinen.
 
-Gefunden: {%dpi%}
-Erwartet: {%expected%}
+Gefunden: {{dpi}}
+Erwartet: {{expected}}
 """
 
 
@@ -87,8 +87,8 @@ Auflösung unnötig hoch
 Die Auflösung der Grafik sollte reduziert werden um den benötigen
 Speicher zu reduzieren.
 
-Gefunden: {%dpi%}
-Erwartet: kleiner als {%expected%}
+Gefunden: {{dpi}}
+Erwartet: kleiner als {{expected}}
 """
 
 
@@ -120,8 +120,8 @@ Grafik verzerrt
 Das Seitenverhältnis der Grafik im Dokument entspricht nicht dem
 Ausgangzverhältnis und wird daher verzerrt dargestellt.
 
-Druck: {%pdf%}
-Quelle: {%image%}
+Druck: {{pdf}}
+Quelle: {{image}}
 """
 
 

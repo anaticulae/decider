@@ -60,11 +60,11 @@ Sortieren Sie das Quellenverzeichnis.
 
 Gefunden:
 ---------
-{%current%}
+{{current}}
 
 Erwartet:
 ---------
-{%expected%}
+{{expected}}
 
 {elemente/literaturverzeichnis}
 """

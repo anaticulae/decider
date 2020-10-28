@@ -61,8 +61,8 @@ def linting(
 SOLUTION_5100 = """\
 Abkürzung wurde vor der Definition benutzt
 
-Die Abkürzung "{%short%}" wurde auf Seite {%before_page%}, Satz {%before_sentence%}
-benutzt bevor sie auf Seite {%definition_page%}, Satz {%definition_sentence%}
+Die Abkürzung "{{short}}" wurde auf Seite {{before_page}}, Satz {{before_sentence}}
+benutzt bevor sie auf Seite {{definition_page}}, Satz {{definition_sentence}}
 definiert wurde.
 
 Definieren Sie die Abkürzung an der ersten Stelle des Gebrauchs.
@@ -112,7 +112,7 @@ def flat_abbreviation(items):
 SOLUTION_5110 = """\
 Abkürzung wurde nicht im Text verwerdet
 
-Die Abkürzung "{%short%}" konnte nicht im Text gefunden werden.
+Die Abkürzung "{{short}}" konnte nicht im Text gefunden werden.
 """
 
 

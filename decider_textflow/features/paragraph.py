@@ -45,7 +45,7 @@ def work(
 SOLUTION_7630 = """\
 Paragraph zu kurz
 
-Der Abschnitt umfasst nur {%lines%} Zeilen und sollte überarbeitet werden.
+Der Abschnitt umfasst nur {{lines}} Zeilen und sollte überarbeitet werden.
 
 TODO: ARTICLE
 """

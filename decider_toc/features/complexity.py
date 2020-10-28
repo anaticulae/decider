@@ -75,8 +75,8 @@ def check_1351_toc_level_to_deep(linter, toc: iamraw.Toc):
 SOLUTION_1370 = """\
 Abschnitt zu lang
 
-Der Abschnitt „{%headline%}“ ist im Vergleich zu den gleichranggigen
-Abschnitten({%expected%}) zu lang({%current%}). Überdenken Sie die
+Der Abschnitt „{{headline}}“ ist im Vergleich zu den gleichranggigen
+Abschnitten({{expected}}) zu lang({{current}}). Überdenken Sie die
 Abschnittseinteilung und überlegen Sie sich weitere Teilabschnitte
 einzuführen.
 
@@ -103,8 +103,8 @@ def check_1370_section_too_long(linter, toc: iamraw.Toc):
 SOLUTION_1371 = """\
 Abschnitt zu kurz
 
-Der Abschnitt „{%headline%}“ ist im Vergleich zu den gleichranggigen
-Abschnitten({%expected%}) zu kurz({%current%}). Überdenken Sie die
+Der Abschnitt „{{headline}}“ ist im Vergleich zu den gleichranggigen
+Abschnitten({{expected}}) zu kurz({{current}}). Überdenken Sie die
 Abschnittseinteilung und überlegen Sie sich Teilabschnitte zusammen zu
 führen.
 
@@ -152,7 +152,7 @@ def validate_chapter_length(linter, toc, level, expected):
 SOLUTION_1382 = """\
 Überschrift zu lang
 
-Die Überschrift {%number%} „{%title%}“ ist zu lang und sollte verkürzt
+Die Überschrift {{number}} „{{title}}“ ist zu lang und sollte verkürzt
 werden.
 """
 

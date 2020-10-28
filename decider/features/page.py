@@ -42,9 +42,9 @@ Dokument enthält nicht nur aufsteigende Seitenzahlen
 
 Überprüfen Sie die Seitenzählung.
 
-Zeile: {%text%}
+Zeile: {{text}}
 
-Seite {%current%} folgt auf {%before%}.
+Seite {{current}} folgt auf {{before}}.
 
 {darstellung/seitenzahlen}
 """

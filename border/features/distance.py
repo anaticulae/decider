@@ -65,8 +65,8 @@ Abstand vor dem Object zu gering
 
 Der Abstand nach dem Text und vor dem Objekt ist zu gering.
 
-Erkannter Abstand: {%distance%}
-Mindestabstand: {%min_distance%}
+Erkannter Abstand: {{distance}}
+Mindestabstand: {{min_distance}}
 
 # IF WORD
 # TODO: SHOW DISTANCE AND MINDISTANCE
@@ -96,8 +96,8 @@ Abstand nach dem Objekt zu gering
 
 Der Abstand nach dem Objekt und vor dem Text ist zu gering.
 
-Erkannter Abstand: {%distance%}
-Mindestabstand: {%min_distance%}
+Erkannter Abstand: {{distance}}
+Mindestabstand: {{min_distance}}
 """
 
 

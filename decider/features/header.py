@@ -41,7 +41,7 @@ Kopfzeile: wiederholdender Inhalt
 Überprüfen Sie ob redundanter Inhalt:
 
 <cite>
-{%content%}
+{{content}}
 </cite>
 
 wirklich nötig ist.

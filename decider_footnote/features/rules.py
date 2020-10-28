@@ -76,9 +76,9 @@ def linting(footer, linter: protocol.Linter):
 
 
 SOLUTION_2001 = """\
-Fußnote {%number%} beginnt nicht mit einem Großbuchstaben
+Fußnote {{number}} beginnt nicht mit einem Großbuchstaben
 
-Ersetzen Sie den ersten Buchstaben der Fußnote {%number%} mit einem
+Ersetzen Sie den ersten Buchstaben der Fußnote {{number}} mit einem
 Großbuchstaben.
 
 {text/fussnote#struktur}
@@ -114,9 +114,9 @@ def check_2001_no_uppercase_at_start(linter, item):
 
 
 SOLUTION_2002 = """\
-Die Fußnote {%number%} endet nicht mit einem Punkt
+Die Fußnote {{number}} endet nicht mit einem Punkt
 
-Fügen Sie einen Punkt am Ende der Fußnote {%number%} hinzu.
+Fügen Sie einen Punkt am Ende der Fußnote {{number}} hinzu.
 
 {text/abkuerzung#abkurzung}
 """

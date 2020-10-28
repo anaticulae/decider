@@ -59,7 +59,7 @@ def linting(quotations, linter: protocol.Linter):
 SOLUTION_7100 = """\
 Nicht geschlossenes Zitat
 
-Satz {%sentence%} enthält eine ungerade Anzahl von Anführungszeichen.
+Satz {{sentence}} enthält eine ungerade Anzahl von Anführungszeichen.
 
 {darstellung/satzzeichen#anfuhrungszeichen}
 """
@@ -78,7 +78,7 @@ def check_7100_german_quote_not_closed(linter: callable, tokens: list):
 SOLUTION_7101 = """\
 Doppelte Anführungszeichen im Zitat
 
-Satz {%sentence%} enthält doppelte Anführungszeichen im Zitat. Ersetzen
+Satz {{sentence}} enthält doppelte Anführungszeichen im Zitat. Ersetzen
 Sie diese doppelten Anführungszeichen durch einfache Anführungszeichen.
 
 {darstellung/satzzeichen#anfuhrungszeichen}

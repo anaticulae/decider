@@ -47,7 +47,7 @@ def work(
 SOLUTION_7600 = """\
 Fehler in der Perspektive
 
-**{%invalid%}** sollte vermieden werden.
+**{{invalid}}** sollte vermieden werden.
 
 TODO: ADD ARTICLE
 """
