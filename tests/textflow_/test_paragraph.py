@@ -42,7 +42,7 @@ def test_paragraph_too_short(source, pages, expected, testdir, monkeypatch):
 
 
 @pytest.mark.xfail(reason='failing magic/list parer')
-@utilatest.skip_longrun
+@utilatest.longrun
 def test_list_no_paragraph_too_short(testdir, monkeypatch):
     source = power.link(power.MASTER072_PDF)
     pages = (7,)

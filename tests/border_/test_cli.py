@@ -35,7 +35,7 @@ def test_border_cli_decider_simple(source, testdir, monkeypatch):
     pytest.param(power.link(power.DOCU35_PDF), [4, 4], id='twine'),
     pytest.param(power.link(power.MASTER078_PDF), [6, 8], id='master78'),
 ])
-@utilatest.skip_longrun
+@utilatest.longrun
 def test_border_cli_decider_list(
         source,
         validate,
@@ -79,7 +79,7 @@ def validate_leftright(hits):
         id='leftright',
     ),
 ])
-@utilatest.skip_longrun
+@utilatest.longrun
 def test_border_cli_decider_complex_validation(
         source,
         validate,

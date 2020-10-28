@@ -15,7 +15,7 @@ import decider_textstyle
 import tests.textstyle_
 
 
-@utilatest.skip_longrun
+@utilatest.longrun
 def test_font_family_bachelor90_page13(testdir, monkeypatch):
     """This is a regression test for false detected level 2 headline
     style judging. Before this patch, there was a mix of loading oneline

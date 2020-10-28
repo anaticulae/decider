@@ -45,7 +45,7 @@ def test_textflow_character_space_before_comma(testdir, monkeypatch):
     assert len(findings) == 1
 
 
-@utilatest.skip_longrun
+@utilatest.longrun
 def test_textflow_character_missing_space_after_comma(testdir, monkeypatch):
     source = power.link(power.BACHELOR090_PDF)
     pages = ':'
@@ -59,7 +59,7 @@ def test_textflow_character_missing_space_after_comma(testdir, monkeypatch):
     assert len(findings) == 2
 
 
-@utilatest.skip_longrun
+@utilatest.longrun
 def test_textflow_character_space_before_square_bracket(testdir, monkeypatch):
     source = power.link(power.BACHELOR090_PDF)
     pages = ':'
@@ -73,7 +73,7 @@ def test_textflow_character_space_before_square_bracket(testdir, monkeypatch):
     assert len(findings) == 2
 
 
-@utilatest.skip_longrun
+@utilatest.longrun
 def test_textflow_character_space_after_square_bracket(testdir, monkeypatch):
     source = power.link(power.BACHELOR090_PDF)
     pages = ':'
@@ -87,7 +87,7 @@ def test_textflow_character_space_after_square_bracket(testdir, monkeypatch):
     assert len(findings) == 2
 
 
-@utilatest.skip_longrun
+@utilatest.longrun
 def test_textflow_character_missing_space_before_semicolon(
         testdir, monkeypatch):
     source = power.link(power.BACHELOR090_PDF)
@@ -103,7 +103,7 @@ def test_textflow_character_missing_space_before_semicolon(
 
 
 @pytest.mark.xfail(reason='require line formula inside parser')
-@utilatest.skip_longrun
+@utilatest.longrun
 def test_character_missing_space_after_comma_master116_page23(
         testdir,
         monkeypatch,

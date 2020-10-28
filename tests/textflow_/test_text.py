@@ -25,7 +25,7 @@ def decide_textflow(source, pages, testdir, monkeypatch):
     return findings
 
 
-@utilatest.skip_longrun
+@utilatest.longrun
 def test_decider_textflow_bachelor67_perspective(testdir, monkeypatch):
     source = power.link(power.BACHELOR076_PDF)
     pages = ':'
