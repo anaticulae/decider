@@ -9,6 +9,7 @@
 
 import iamraw
 import power
+import protocol
 import pytest
 import serializeraw
 import utilatest
@@ -75,7 +76,7 @@ def test_decider_text_bachelor76_4_10_bold_font(testdir, monkeypatch):
         monkeypatch,
     )
     # five words marked bold
-    findings = [item for item in findings if item.msgid == 7555]
+    findings = protocol.select_findings(findings, msgid=7555)
     assert len(findings) == 5
 
 
@@ -112,5 +113,5 @@ def test_textstyle_warning_in_wordfigure_bachelor51_pag30(testdir, monkeypatch):
         msgids=7550,
     )
     # select page 30
-    findings = [finding for finding in findings if finding.location.page == 30]
+    findings = protocol.select_pages(findings, 30)  # pylint:disable=E1101
     assert not findings
