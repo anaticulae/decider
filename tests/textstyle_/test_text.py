@@ -115,3 +115,20 @@ def test_textstyle_warning_in_wordfigure_bachelor51_pag30(testdir, monkeypatch):
     # select page 30
     findings = protocol.select_pages(findings, 30)  # pylint:disable=E1101
     assert not findings
+
+
+def test_textstyle_master110_page29(testdir, monkeypatch):
+    """Investigate text style errors, especially in connection with
+    formulas."""
+    source = power.link(power.MASTER110_PDF)
+    tests.textstyle_.run(
+        f'-i {source} --pages=20:30 --text',
+        monkeypatch=monkeypatch,
+    )
+    findings = serializeraw.load_findings(
+        decider_textstyle.path.text(testdir.tmpdir),
+        msgids={7550, 7551},
+    )
+    # select page 29
+    findings = protocol.select_pages(findings, 29)  # pylint:disable=E1101
+    assert len(findings) == 20  # may change in the future
