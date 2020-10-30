@@ -18,7 +18,6 @@ import decider
 
 DESCRIPTION = ''
 
-TITLEPAGE = 'titlepage'
 TOC = 'toc'
 FOOTNOTE = 'footnote'
 
@@ -49,19 +48,16 @@ WORKPLAN = [
         (USER, DEVELOPER),
     ),
     utila.create_step(
-        TITLEPAGE,
+        'titlepage',
         [
-            utila.ResultFile(
-                detector.PROCESS,
-                f'{detector.cli.TITLEPAGE_STEP}_{detector.cli.TITLEPAGE_OUTPUT}'
-            ),
+            utila.ResultFile(detector.PROCESS, 'titlepage_detected'),
         ],
         (USER, DEVELOPER),
     ),
 ]
 
-USER_LINT_OUTPUT = f'{decider.PROCESS}__{TITLEPAGE}_{USER}.yaml'
-DEVELOPER_LINT_OUTPUT = f'{decider.PROCESS}__{TITLEPAGE}_{DEVELOPER}.yaml'
+USER_LINT_OUTPUT = f'{decider.PROCESS}__titlepage_{USER}.yaml'
+DEVELOPER_LINT_OUTPUT = f'{decider.PROCESS}__titlepage_{DEVELOPER}.yaml'
 
 
 def main():

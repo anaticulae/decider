@@ -54,8 +54,7 @@ def test_titlepage_extraction(titlepage, monkeypatch):  # pylint:disable=W0621
     root, expected_failures = titlepage
 
     result = os.path.join(root, 'result')
-    todo = f'--{decider.cli.TITLEPAGE}'
-    cmd = f'-i {root} -o {result} {todo}'
+    cmd = f'-i {root} -o {result} --titlepage'
 
     tests.run_decider(cmd, monkeypatch)
 
