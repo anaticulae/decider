@@ -51,6 +51,8 @@ def test_startend_hurenkind_bachelor90_page18(testdir, monkeypatch):
 def test_startend_figure_start_bachelor90_page40_55(testdir, monkeypatch):
     with startend(power.BACHELOR090_PDF, '40:55', 7625, monkeypatch) as result:
         assert len(result) == 3, str(result)
+    pages = sorted([finding.location.page for finding in result])
+    assert pages == [41, 47, 50]
 
 
 def test_startend_figure_start_bachelor90_page34(testdir, monkeypatch):
