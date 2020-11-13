@@ -88,8 +88,7 @@ def test_textflow_character_space_after_square_bracket(testdir, monkeypatch):
 
 
 @utilatest.longrun
-def test_textflow_character_missing_space_before_semicolon(
-        testdir, monkeypatch):
+def test_textflow_character_missing_space_before_semicolon(testdir, monkeypatch): # yapf:disable
     source = power.link(power.BACHELOR090_PDF)
     pages = ':'
     findings = decider_textflow_character(
@@ -100,6 +99,24 @@ def test_textflow_character_missing_space_before_semicolon(
         msgids=7654,
     )
     assert len(findings) == 12  # TODO: CHANGE TO 13
+
+
+def test_missing_space_after_semicolon_master110_page59(
+        testdir,
+        monkeypatch,
+):
+    """Verify that magic content skips errors located in formula."""
+    source = power.link(power.MASTER110_PDF)
+    pages = '59'
+    findings = decider_textflow_character(
+        source,
+        pages,
+        testdir,
+        monkeypatch,
+        msgids=7655,
+    )
+    # assert not findings TODO: activate after fixing magic parser
+    assert len(findings) == 4
 
 
 @pytest.mark.xfail(reason='require line formula inside parser')
