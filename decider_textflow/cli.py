@@ -27,7 +27,7 @@ LINT_OUT = ('user', 'developer')
 WORKPLAN = [
     utila.create_step(
         'character',
-        inputs=CONTENT_INPUT,
+        inputs=CONTENT_INPUT + [utila.ResultFile('magic', 'content_content')],
         output=LINT_OUT,
     ),
     utila.create_step(

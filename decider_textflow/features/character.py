@@ -24,6 +24,7 @@ def work(
         textpositions: str,
         sizeandborders: str,
         headerfooter: str,
+        magiccontent: str,
         pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     driver = decider_textflow.features.textdata(
@@ -32,6 +33,7 @@ def work(
         textpositions,
         sizeandborders,
         headerfooter,
+        magiccontent=magiccontent,
         pages=pages,
     )
     result = decider_textflow.features.linting(__name__, driver)
@@ -39,9 +41,12 @@ def work(
 
 
 def check_character(linter, driver, regex):
-    text = driver.text_chunks
+    text = driver.nomagic_text_chunks
     for page, line, item in text:
         if isinstance(item, iamraw.Headline):
+            continue
+        if not item:
+            # magic content
             continue
 
         text = item.text

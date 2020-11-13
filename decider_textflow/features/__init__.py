@@ -59,6 +59,8 @@ def textdata(
         utila.error('no headlines given')
     if not navigators:
         utila.error('no navigators given')
+    if isinstance(magiccontent, str):
+        magiccontent = serializeraw.load_magic_types(magiccontent, pages=pages)
     # TODO: DO WE REQUIRE HEADLINES?
     # if not headlines or not navigators:
     #     return None
@@ -67,7 +69,6 @@ def textdata(
     chunks = decider_textstyle.utils.text_chunks(
         headlines,
         navigators,
-        magiccontent=magiccontent,
     )
     if not magiccontent:
         nomagic = chunks
@@ -75,6 +76,7 @@ def textdata(
         nomagic = decider_textstyle.utils.text_chunks(
             headlines,
             navigators,
+            magiccontent=magiccontent,
         )
     if textstyle:
         return protocol.driver(
