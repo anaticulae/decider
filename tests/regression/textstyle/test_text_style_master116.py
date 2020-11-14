@@ -22,9 +22,11 @@ def test_textstyle_formula_master116_page22(testdir, monkeypatch):
     cmd = f'-i {source}  --text --pages=21,22'
     tests.textstyle_.run(cmd, monkeypatch=monkeypatch)
     path = decider_textstyle.path.text(testdir.tmpdir)
-    loaded = serializeraw.load_findings(path, msgids={7550, 7551, 7555})
-
-    findings = [item for item in loaded if item.location.page == 22]
+    findings = serializeraw.load_findings(
+        path,
+        msgids={7550, 7551, 7555},
+        pages=22,
+    )
     # HINT: COLUMBSCHES is detected as font face error. This may change in
-    # the future.
-    assert len(findings) == 1
+    # the future. TODO: MAY SKIP MATH IN TEXT IN THE FUTURE
+    assert len(findings) == 15

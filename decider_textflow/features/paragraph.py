@@ -15,6 +15,11 @@ import utila
 
 import decider_textflow.features
 
+TEXTUAL = [
+    iamraw.PageContentType.TEXT,
+    iamraw.PageContentType.BLOCKQUOTE,
+]
+
 
 def work(
         headlines: str,
@@ -36,6 +41,7 @@ def work(
         headerfooter,
         magiccontent=magiccontent,
         textstyle=textstyle,
+        magicvalid=TEXTUAL,
         pages=pages,
     )
     result = decider_textflow.features.linting(__name__, driver)
@@ -63,7 +69,7 @@ def check_7630_paragraph_too_short(linter: callable, driver):
     min_textwidth = textstyle.text_width - 35  # TODO: HOLY VALUE
 
     collected = []
-    for page, line, item in driver.text_chunks:
+    for page, line, item in driver.nomagic_text_chunks:
         # TODO: USE VISITOR PATTERN
         if isinstance(item, iamraw.PageList):
             # TODO: THINK ABOUT WHAT WE CAN CHECK

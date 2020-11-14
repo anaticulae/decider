@@ -23,10 +23,13 @@ def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
         magiccontent: list = None,
         sync: bool = False,
         yieldnone: bool = False,
+        magicvalid=None,
 ) -> list:
     """\
     yieldnone yield none-TextInfo-elements with None
     """
+    if not magicvalid:
+        magicvalid = [iamraw.PageContentType.TEXT]
     magiccontent = magiccontent if magiccontent else []
     # TODO: SO BAD
     headlines = utila.flatten(headlines)
@@ -49,8 +52,8 @@ def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
             location = (magicpage.page, line)
             if visited.contains(location):
                 continue
-            if content == iamraw.PageContentType.TEXT:
-                # Do not skip TEXT
+            if content in magicvalid:
+                # Do not skip valid magic content, Text for example
                 continue
             flat.append((*location, None))
 

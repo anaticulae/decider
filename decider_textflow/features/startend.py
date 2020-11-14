@@ -56,7 +56,7 @@ Seite beginnt mit einsamer Zeile.
 def check_7620_lonely_page_start(linter: callable, driver):
     linewidth = textwidth(driver.text_chunks)
     hurenkind_maxwidth = linewidth * 0.9  # TODO: HOLY VALUE
-    text = decider_textstyle.utils.page_chunks(driver.text_chunks)
+    text = decider_textstyle.utils.page_chunks(driver.nomagic_text_chunks)
     for page, content in text:
         if len(content) < 2:
             continue
@@ -120,10 +120,15 @@ def check_7625_empty_start(linter: callable, driver):
         if isinstance(content[0], iamraw.Headline):
             # TODO: ADD CHECK TO CHECK HEADLINES
             continue
+        # if not content[0]:
+        #     # page starts with math content
+        #     continue
         # TODO: HANDLE SINGLE ITEM ON PAGE
-        first = content[0]
-        if first.bounding.y0 <= failstart:
-            continue
+        if content[0]:
+            # page starts with content, table, caption etc. will yield none
+            first = content[0]
+            if first.bounding.y0 <= failstart:
+                continue
         location = iamraw.RangedLocation(page=page, line=0)
         linter(location)
 

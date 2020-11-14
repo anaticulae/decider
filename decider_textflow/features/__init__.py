@@ -44,6 +44,7 @@ def textdata(
         lists=None,
         magiccontent=None,
         textstyle=None,
+        magicvalid=iamraw.TEXTUAL,  # pylint:disable=E1101
         pages=None,
 ):
     headlines = serializeraw.load_headlines(headlines, pages=pages)
@@ -70,14 +71,12 @@ def textdata(
         headlines,
         navigators,
     )
-    if not magiccontent:
-        nomagic = chunks
-    else:
-        nomagic = decider_textstyle.utils.text_chunks(
-            headlines,
-            navigators,
-            magiccontent=magiccontent,
-        )
+    nomagic = decider_textstyle.utils.text_chunks(
+        headlines,
+        navigators,
+        magiccontent=magiccontent,
+        magicvalid=magicvalid,
+    )
     if textstyle:
         return protocol.driver(
             text_chunks=chunks,

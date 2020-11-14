@@ -8,6 +8,7 @@
 # =============================================================================
 
 import decider
+import decider_textflow.__patch__
 
 ROOT = decider.ROOT
 

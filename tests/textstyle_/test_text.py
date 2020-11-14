@@ -131,4 +131,4 @@ def test_textstyle_master110_page29(testdir, monkeypatch):
     )
     # select page 29
     findings = protocol.select_pages(findings, 29)  # pylint:disable=E1101
-    assert len(findings) == 20  # may change in the future
+    assert len(findings) == 7  # may change in the future
