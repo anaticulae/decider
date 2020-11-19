@@ -7,9 +7,9 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-utilatest==0.1.6
+utilatest==0.2.2
 # test data converter
-rawmaker==2.9.0
+rawmaker==2.9.1
 # add test data provider
 power==1.0.0
 # modify test data
