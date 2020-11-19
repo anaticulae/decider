@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v0.34.0
+
+### Feature
+
+* use magic content to improve character checking (7f737213d57e)
+* use magic data to improve character decider (ee11f20b372d)
+
 ## v0.33.1
 
 ## v0.33.0
