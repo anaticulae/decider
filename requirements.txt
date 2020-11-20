@@ -31,4 +31,4 @@ konrad==0.2.24
 genex==0.2.1
 
 # template engine
-jinja2==2.10
+Jinja2==2.10
