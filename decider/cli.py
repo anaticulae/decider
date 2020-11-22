@@ -55,6 +55,13 @@ WORKPLAN = [
         (USER, DEVELOPER),
     ),
     utila.create_step(
+        'links',
+        [
+            utila.ResultFile('words', 'links_links'),
+        ],
+        (USER, DEVELOPER),
+    ),
+    utila.create_step(
         'page',
         [
             utila.ResultFile('groupme', 'footer_footerheader'),
