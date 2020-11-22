@@ -53,6 +53,9 @@ def check_2110_repeating_header_content(linter, headers):
         return
     collected = collections.defaultdict(set)
     for item in headers:
+        if not item:
+            # no header extracted
+            continue
         for raw in item.undefined:
             collected[raw.text].add(item.page.value)
     for key, value in collected.items():

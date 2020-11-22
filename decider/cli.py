@@ -48,6 +48,20 @@ WORKPLAN = [
         (USER, DEVELOPER),
     ),
     utila.create_step(
+        'header',
+        [
+            utila.ResultFile('groupme', 'footer_footerheader'),
+        ],
+        (USER, DEVELOPER),
+    ),
+    utila.create_step(
+        'page',
+        [
+            utila.ResultFile('groupme', 'footer_footerheader'),
+        ],
+        (USER, DEVELOPER),
+    ),
+    utila.create_step(
         'titlepage',
         [
             utila.ResultFile(detector.PROCESS, 'titlepage_detected'),
