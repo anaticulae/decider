@@ -37,7 +37,7 @@ def work(links: str, pages: tuple = None) -> typing.Tuple[str, str]:
 SOLUTION_10500 = """\
 Aufrufdatum fehlt
 
-Für den Hyperlink **{{link.href}}** ist kein Aufrufdatum angegeben.
+Für den Hyperlink **{{link.href|wordwrap(40)}}** ist kein Aufrufdatum angegeben.
 
 {darstellung/hyperlink}
 """
