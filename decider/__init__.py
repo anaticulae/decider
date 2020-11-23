@@ -70,5 +70,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 PACKAGE = 'decider'
 PROCESS = 'decider'
 
+DECIDER_ONELINE_FLAG = 'DECIDER_ONELINE'
+
 from decider.cli import DEVELOPER_LINT_OUTPUT  # isort:skip
 from decider.cli import USER_LINT_OUTPUT  # isort:skip
