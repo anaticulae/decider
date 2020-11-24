@@ -44,9 +44,11 @@ def textdata(
         lists=None,
         magiccontent=None,
         textstyle=None,
-        magicvalid=iamraw.TEXTUAL,  # pylint:disable=E1101
+        magicvalid=None,
         pages=None,
 ):
+    if magicvalid is None:
+        magicvalid = iamraw.TEXTUAL  # pylint:disable=E1101
     headlines = serializeraw.load_headlines(headlines, pages=pages)
     navigators = serializeraw.create_pagetextcontentnavigators_fromfile(
         text=text,
