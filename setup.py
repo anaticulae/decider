@@ -59,6 +59,7 @@ if __name__ == "__main__":
             'border.features',
             'decider',
             'decider.features',
+            'decider.links',
             'decider.utils',
             'decider_footnote',
             'decider_footnote.features',

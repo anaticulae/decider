@@ -12,16 +12,14 @@
 10500: date of hyperlink access
 """
 
-import os
 import typing
 
 import iamraw
-import linkify.serialize
 import protocol
 import serializeraw
-import utila
 
 import decider
+import decider.links.validate
 
 
 def work(links: str, pages: tuple = None) -> typing.Tuple[str, str]:
@@ -73,25 +71,11 @@ Hyerplink ohne weitere Authorisierung erreichbar ist.
 
 def check_10510_hyperlink_existence(linter: callable, driver):
     hyperlinks = [item.href for item in driver.hyperlinks]
-    hyperlinks = utila.NEWLINE.join(hyperlinks)
 
-    directory = utila.tmpdir(decider.ROOT)
-    todo = os.path.join(directory, 'links__todo.yaml')
-    utila.file_create(todo, hyperlinks)
-
-    online = os.getenv(decider.DECIDER_ONELINE_FLAG, 'False')
-    online = utila.str2bool(online)
-    offline = '--offline' if not online else ''
-    done = utila.run(
-        f'linkify -i {directory} -o {directory} {offline}',
-        expect=None,
-    )
-    if done.returncode != utila.SUCCESS:
-        utila.error(f'{done.stdout}\n{done.stderr}')
+    result = decider.links.validate.visit(hyperlinks)
+    if not result:
+        # validation error
         return
-
-    outpath = os.path.join(directory, 'linkify__verify_verified.yaml')
-    result = linkify.serialize.load_links(outpath)
 
     for hyperlink, validated in zip(driver.hyperlinks, result):
         validated = validated.split()[0]
