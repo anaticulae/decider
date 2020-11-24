@@ -2,6 +2,19 @@
 
 Every noteable change is logged here.
 
+## v0.35.0
+
+### Feature
+
+* add step to access links and return result to user (8be3a1b8c00a)
+* wrap long hyperlinks (025b253d4536)
+* add step to judge extracted links (9c9d3d37884a)
+* add missing decider steps (01ac98514465)
+
+### Fix
+
+* fix dangerous default value (c530287f0aab)
+
 ## v0.34.1
 
 ## v0.34.0
