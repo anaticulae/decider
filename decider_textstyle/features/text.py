@@ -54,6 +54,7 @@ def work(  # pylint:disable=R0913,R0914
     if os.path.exists(magiccontent):
         magiccontent = serializeraw.load_types(magiccontent, pages=pages)
     else:
+        utila.error('no magic content')
         magiccontent = []
 
     if not headlines:
