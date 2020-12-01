@@ -72,6 +72,7 @@ def extract(resources):
         destination=power.generated(),
         caption=True,
         detector=True,
+        docref=True,
         doctextstyle=True,
         groupme=True,
         magic=True,
