@@ -68,10 +68,9 @@ def test_cli_detector_and_decider(source, pages, testdir, monkeypatch):
 
     pages = 1 - Non titlepage example
     """
-    root = str(testdir)
-    cmd = f'detector -i {source} -o {root} --pages={pages}'
+    cmd = f'detector -i {source} -o {testdir.tmpdir} --pages={pages}'
     completed = utila.run(cmd)
     assert completed.returncode == utila.SUCCESS, str(completed)
 
-    cmd = f'-i {root} -i {source} -o {root}'
+    cmd = f'-i {testdir.tmpdir} -i {source} -o {testdir.tmpdir}'
     tests.run_decider(cmd, monkeypatch)
