@@ -10,13 +10,14 @@
 import power
 import protocol
 
-import decider_toc.features.basic as dtfb
+import decider_toc.features.basic
 import tests
 
 
 def test_toc_extraction_no_toc():
     expected_failures = [1300, 1301]
-    failures = lint(power.link(power.DOCU35_PDF, folder='notoc'), dtfb)
+    source = power.link(power.DOCU35_PDF, folder='notoc')
+    failures = lint(source, decider_toc.features.basic)
     assert failures == expected_failures, str(failures)
 
 
