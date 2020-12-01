@@ -81,7 +81,6 @@ def test_decider_headlines_master72_all(testdir, monkeypatch):
     assert not findings
 
 
-@pytest.mark.xfail(reason='failing magic/list parer')
 @utilatest.longrun
 def test_decider_headlines_bachelor76(testdir, monkeypatch):
     # TODO: EXTEND THIS TESTS, specify expected findings
