@@ -15,7 +15,8 @@ import decider.features.header
 
 
 def test_header_work():
-    headerfooter = iamraw.path.headerfooters(power.link(power.TECH024_PDF))
+    source = power.link(power.TECH024_PDF)
+    headerfooter = iamraw.path.headerfooters(source)
 
     user, _ = decider.features.header.work(headerfooter)
     assert len(user) > 200, user
