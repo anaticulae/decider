@@ -65,7 +65,6 @@ if __name__ == "__main__":
             'decider_footnote.features',
             'decider_textflow',
             'decider_textflow.features',
-            'decider_textflow.quotation',
             'decider_textstyle',
             'decider_textstyle.features',
             'decider_textstyle.headlines',
