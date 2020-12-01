@@ -71,7 +71,6 @@ if __name__ == "__main__":
             'decider_toc',
             'decider_toc.features',
             'fonts',
-            'fonts.config',
             'fonts.features',
             'imgfig',
             'imgfig.features',
