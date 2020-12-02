@@ -78,6 +78,24 @@ def check_7200_figure_reference_exists(linter: callable, driver):
         linter(location=location, reference=raw)
 
 
+SOLUTION_7202 = """\
+Referenz nicht gefunden
+
+Der Tabellen-Verweis **{{reference}}** kann nicht gefunden werden.
+"""
+
+
+def check_7202_table_reference_exists(linter: callable, driver):
+    captions = caption_numbers(driver.caption_table)
+    for reference in driver.table:
+        selected = determine_reference(reference, driver.text)
+        if reference_exists(selected, captions):
+            continue
+        location = iamraw.RangedLocation(page=reference.page)
+        raw = ', '.join(selected)
+        linter(location=location, reference=raw)
+
+
 def determine_reference(item, text) -> str:
     selected = utila.select_content(text, page=item.page)
     marked = item.marked
