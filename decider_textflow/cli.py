@@ -31,6 +31,20 @@ WORKPLAN = [
         output=LINT_OUT,
     ),
     utila.create_step(
+        'docref',
+        inputs=[
+            utila.ResultFile('docref', 'figure_parsed'),
+            utila.ResultFile('docref', 'section_parsed'),
+            utila.ResultFile('docref', 'table_parsed'),
+            utila.ResultFile('caption', 'figure_caption'),
+            utila.ResultFile('caption', 'image_caption'),
+            utila.ResultFile('caption', 'table_caption'),
+            utila.ResultFile('words', 'text_text'),
+            utila.ResultFile('words', 'headlines_headlines'),
+        ],
+        output=LINT_OUT,
+    ),
+    utila.create_step(
         'lineending',
         inputs=[utila.ResultFile(textflow.PROCESS, 'lineending_lastchar')],
         output=LINT_OUT,

@@ -55,3 +55,12 @@ def character_linted(path: str, prefix: str = '') -> str:
         'character_user',
         prefix,
     )
+
+
+def docref_linted(path: str, prefix: str = '') -> str:
+    return utila.pathconnector(
+        path,
+        decider_textflow.PROCESS,
+        'docref_user',
+        prefix,
+    )
