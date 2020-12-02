@@ -14,6 +14,7 @@ import protocol
 import pytest
 import serializeraw
 import utila
+import utilatest
 
 import decider_footnote.features.rules
 import decider_footnote.features.style
@@ -56,6 +57,7 @@ def test_footnotes_most_common_font_empty():
     assert fontconfig is None
 
 
+@utilatest.longrun
 def test_footnotes_work_highnote_rise(monkeypatch):
     footerheader = iamraw.path.headerfooters(power.link(power.MASTER072_PDF))
     fontheader = iamraw.path.fontheader(power.link(power.MASTER072_PDF))

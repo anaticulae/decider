@@ -31,6 +31,7 @@ def run_paragraph_length_linter(source, pages, testdir, monkeypatch):
     return result
 
 
+@utilatest.longrun
 @pytest.mark.parametrize('source, pages, expected', [
     pytest.param(
         power.link(power.BACHELOR090_PDF), (12, 13, 14), 7, id='bachelor90'),

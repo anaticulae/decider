@@ -115,6 +115,7 @@ def test_decider_headlines_chapter_on_new_page(testdir, monkeypatch):
     assert len(no_new_page_start) == 2, str(no_new_page_start)
 
 
+@utilatest.longrun
 def test_chapter_on_new_page_with_decoration(testdir, monkeypatch):
     source = power.link(power.MASTER110_PDF)
     pages = '18:20'
@@ -143,6 +144,7 @@ def test_headlines_bachelor63_page17(testdir, monkeypatch):
     assert not findings
 
 
+@utilatest.longrun
 def test_headlines_bachelor90_page17_divide_headline(testdir, monkeypatch):
     source = power.link(power.BACHELOR090_PDF)
     tests.textstyle_.run(
