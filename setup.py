@@ -63,6 +63,8 @@ if __name__ == "__main__":
             'decider.utils',
             'decider_footnote',
             'decider_footnote.features',
+            'decider_smarty',
+            'decider_smarty.features',
             'decider_textflow',
             'decider_textflow.features',
             'decider_textstyle',
@@ -85,6 +87,7 @@ if __name__ == "__main__":
                 'decider_textflow = decider_textflow.cli:main',
                 'decider_textstyle = decider_textstyle.cli:main',
                 'decider_toc = decider_toc.cli:main',
+                'decider_smarty = decider_smarty.cli:main',
             ],
         },
     )
