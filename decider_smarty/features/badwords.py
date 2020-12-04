@@ -65,6 +65,32 @@ def check_8100_non_formal_speach(linter: callable, driver):
     run_reference_results(linter, driver.sentences, driver.phrases)
 
 
+SOLUTION_8105 = """\
+Pleonasma erkannt
+
+Vermeiden Sie **{{phrase}}** und reduzieren Sie diesen auf das Wesentliche.
+
+TODO: ADD LINK
+"""
+
+
+def check_8105_pleonasms_detected(linter: callable, driver):
+    run_reference_results(linter, driver.sentences, driver.pleonasms)
+
+
+SOLUTION_8110 = """\
+Unnötige Vorsible
+
+Reduzieren Sie **{{phrase}}** indem Sie die unnötige Vorsilbe entfernen.
+
+TODO: ADD LINK
+"""
+
+
+def check_8110_not_required_prefix(linter: callable, driver):
+    run_reference_results(linter, driver.sentences, driver.invalid_prefix)
+
+
 def run_reference_results(linter, text, errors):
     for error in errors:
         page, sentenceid, marked = error.page, error.sentence, error.marked

@@ -24,7 +24,7 @@ def decide_smarty_badwords(source, pages, testdir, monkeypatch, msgid=None):
     return findings
 
 
-def test_smarty_badwords_bachelor128(testdir, monkeypatch):
+def test_smarty_badwords_bachelor128_non_formal_speach(testdir, monkeypatch):
     source = power.link(power.BACHELOR128_PDF)
     pages = ':'
     findings = decide_smarty_badwords(
@@ -35,3 +35,29 @@ def test_smarty_badwords_bachelor128(testdir, monkeypatch):
         msgid=8100,
     )
     assert len(findings) >= 11
+
+
+def test_smarty_badwords_bachelor128_pleonasms(testdir, monkeypatch):
+    source = power.link(power.BACHELOR128_PDF)
+    pages = ':'
+    findings = decide_smarty_badwords(
+        source,
+        pages,
+        testdir,
+        monkeypatch,
+        msgid=8105,
+    )
+    assert len(findings) >= 2
+
+
+def test_smarty_badwords_bachelor128_not_required_prefix(testdir, monkeypatch):
+    source = power.link(power.BACHELOR128_PDF)
+    pages = ':'
+    findings = decide_smarty_badwords(
+        source,
+        pages,
+        testdir,
+        monkeypatch,
+        msgid=8110,
+    )
+    assert len(findings) >= 1
