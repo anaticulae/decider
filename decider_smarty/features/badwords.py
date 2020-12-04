@@ -12,7 +12,6 @@ import typing
 import iamraw
 import protocol
 import serializeraw
-import smarty.serialize
 
 import decider_smarty.utils
 
@@ -26,9 +25,9 @@ def work(
         pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     # prepare findings
-    invalid_prefix = smarty.serialize.load_phrases(invalid_prefix, pages=pages)
-    phrases = smarty.serialize.load_phrases(phrases, pages=pages)
-    pleonasms = smarty.serialize.load_phrases(pleonasms, pages=pages)
+    invalid_prefix = serializeraw.load_docref(invalid_prefix, pages=pages)
+    phrases = serializeraw.load_docref(phrases, pages=pages)
+    pleonasms = serializeraw.load_docref(pleonasms, pages=pages)
     # content
     headlines = serializeraw.load_headlines(headlines, pages=pages)
     text = serializeraw.load_text(text, headlines=headlines, pages=pages)
