@@ -22,6 +22,8 @@ WORKPLAN = [
             utila.ResultFile('smarty', 'badwords_invalid_prefix'),
             utila.ResultFile('smarty', 'badwords_phrases'),
             utila.ResultFile('smarty', 'badwords_pleonasms'),
+            utila.ResultFile('words', 'word_result'),
+            utila.ResultFile('words', 'headlines_headlines'),
         ],
         output=LINT_OUT,
     ),

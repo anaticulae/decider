@@ -7,6 +7,74 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import typing
 
-def work() -> str:
-    return ''
+import iamraw
+import protocol
+import serializeraw
+import smarty.serialize
+
+import decider_smarty.utils
+
+
+def work(
+        invalid_prefix: str,
+        phrases: str,
+        pleonasms: str,
+        text: str,
+        headlines: str,
+        pages: tuple = None,
+) -> typing.Tuple[str, str]:
+    # prepare findings
+    invalid_prefix = smarty.serialize.load_phrases(invalid_prefix, pages=pages)
+    phrases = smarty.serialize.load_phrases(phrases, pages=pages)
+    pleonasms = smarty.serialize.load_phrases(pleonasms, pages=pages)
+    # content
+    headlines = serializeraw.load_headlines(headlines, pages=pages)
+    text = serializeraw.load_text(text, headlines=headlines, pages=pages)
+    # sentences
+    sentences = decider_smarty.utils.sentence_lookup(text)
+    # driver
+    driver = protocol.driver(
+        invalid_prefix=invalid_prefix,
+        phrases=phrases,
+        pleonasms=pleonasms,
+        sentences=sentences,
+        text=text,
+    )
+    # create and run
+    linter = protocol.from_module(__name__)
+    linter.run(driver=driver)
+    # dump
+    result = linter.result(unique=True)
+    user, developer = protocol.dump_result(result)
+    return user, developer
+
+
+SOLUTION_8100 = """\
+Umgangssprache erkannt
+
+Vermeiden Sie **{{phrase}}** und ersetzen Sie diese durch eine
+förmlichere Formulierung.
+
+TODO: ADD LINK
+"""
+
+
+def check_8100_non_formal_speach(linter: callable, driver):
+    run_reference_results(linter, driver.sentences, driver.phrases)
+
+
+def run_reference_results(linter, text, errors):
+    for error in errors:
+        page, sentenceid, marked = error.page, error.sentence, error.marked
+        sentences = decider_smarty.utils.sentence_plain(
+            text[page][sentenceid],
+            marks=marked,
+        )
+        for single in sentences:
+            location = iamraw.Location.from_sentence(
+                page=page,
+                sentence=sentenceid,
+            )
+            linter(location=location, phrase=single)

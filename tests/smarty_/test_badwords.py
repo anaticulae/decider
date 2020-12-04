@@ -1,0 +1,37 @@
+# =============================================================================
+# C O P Y R I G H T
+# -----------------------------------------------------------------------------
+# Copyright (c) 2020 by Helmut Konrad Fahrendholz. All rights reserved.
+# This file is property of Helmut Konrad Fahrendholz. Any unauthorized copy,
+# use or distribution is an offensive act against international law and may
+# be prosecuted under federal law. Its content is company confidential.
+# =============================================================================
+
+import power
+import serializeraw
+
+import decider_smarty
+import tests.smarty_
+
+
+def decide_smarty_badwords(source, pages, testdir, monkeypatch, msgid=None):
+    tests.smarty_.run(
+        f'--badwords -i {source} --pages={pages}',
+        monkeypatch=monkeypatch,
+    )
+    path = decider_smarty.path.badwords(testdir.tmpdir)
+    findings = serializeraw.load_findings(path, msgids=msgid)
+    return findings
+
+
+def test_smarty_badwords_bachelor128(testdir, monkeypatch):
+    source = power.link(power.BACHELOR128_PDF)
+    pages = ':'
+    findings = decide_smarty_badwords(
+        source,
+        pages,
+        testdir,
+        monkeypatch,
+        msgid=8100,
+    )
+    assert len(findings) >= 11

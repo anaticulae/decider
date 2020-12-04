@@ -8,6 +8,7 @@
 # =============================================================================
 
 import decider
+import decider_smarty.path
 
 ROOT = decider.ROOT
 
