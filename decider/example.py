@@ -75,11 +75,15 @@ def generate(files: list, outpath: str) -> list:
             inpath,
             outdir,
             config=dict(
+                decider=True,
+                caption=True,
                 detector=True,
+                docref=True,
                 doctextstyle=True,
                 groupme=True,
                 magic=True,
                 sections=True,
+                smarty=True,
                 words=True,
             ),
             rawmaker=genex.CONFIG,
@@ -106,13 +110,12 @@ def create_job(path: str, pages: tuple = None) -> str:
     """
     pages = f'--pages={pages}' if pages is not None else ''
     task = [
-        f'detector -j 8 -i {path} -o {path} {pages}',
-        f'decider -j 8 -i {path} -o {path}',
         f'decider_border -i {path} -o {path} {pages}',
         f'textflow -i {path} -o {path} {pages}',
         f'decider_textflow -i {path} -o {path}',
         f'decider_textstyle -j8 -i {path} -o {path}',
         f'decider_imgfig -j8 -i {path} -o {path}',
+        f'decider_smarty -j8 -i {path} -o {path}',
     ]
     todo = ' && '.join(task)
     return todo
