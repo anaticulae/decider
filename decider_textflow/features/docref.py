@@ -141,7 +141,20 @@ def reference_number(reference) -> int:
     """\
     >>> reference_number('Abbildung 10: Verschiebung des Order')
     10
+    >>> reference_number('Abb. 2.7.: Hybride Lokomotive Toshiba HD300 aus [Wik13]')
+    2.7
     """
     splitted = german.split_words(reference, validate_sentences=False)
-    numbers = [int(item) for item in splitted if utila.isnumber(item)]
-    return numbers[0]
+    numbers = []
+    for item in splitted:
+        # TODO: IMPROVE THIS APPROACH
+        # enable converting int and float
+        # cut last . in `2.7.`
+        item = item[:-1] if str(item)[-1] == '.' else item
+        if not utila.isnumber(item):
+            continue
+        try:
+            numbers.append(int(item))
+        except ValueError:
+            numbers.append(float(item))
+    return numbers[0] if numbers else None
