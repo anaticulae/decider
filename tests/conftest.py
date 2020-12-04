@@ -70,14 +70,7 @@ def extract(resources):
     todo = genex.todolist(
         resources + [power.REPOSITORY],
         destination=power.generated(),
-        caption=True,
-        detector=True,
-        docref=True,
-        doctextstyle=True,
-        groupme=True,
-        magic=True,
-        sections=True,
-        words=True,
+        full=True,
     )
     tests.resources.utils.run_parallel(todo, worker=WORKER, progress=True)
 
