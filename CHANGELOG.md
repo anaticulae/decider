@@ -2,6 +2,14 @@
 
 Every noteable change is logged here.
 
+## v0.36.0
+
+### Feature
+
+* add table reference check (69426e26c8e8)
+* add docref decider step (4b727759e08a)
+* add debugging information (61c222eefe9a)
+
 ## v0.35.0
 
 ### Feature
