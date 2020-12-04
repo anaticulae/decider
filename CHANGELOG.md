@@ -2,6 +2,14 @@
 
 Every noteable change is logged here.
 
+## v0.37.0
+
+### Feature
+
+* add invalid prefix and pleonasm detection (a7eaa67edc3e)
+* add badwords step (72350140029c)
+* add decider_smarty client interface (aa385dcb1408)
+
 ## v0.36.0
 
 ### Feature
