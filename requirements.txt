@@ -28,7 +28,7 @@ writers==1.1.3
 german==0.12.1
 konrad==0.3.0
 
-genex==0.4.1
+genex==0.5.2
 
 # template engine
 Jinja2==2.11.2
