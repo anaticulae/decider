@@ -54,6 +54,7 @@ def main():
             description=DESCRIPTION,
             name=border.PROCESS,
             pages=True,
+            multiprocessed=True,
             version=decider.__version__,
         ),
     )

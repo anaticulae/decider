@@ -67,12 +67,12 @@ def pytest_sessionstart():
 
 def extract(resources):
     print_resources(resources)
-    todo = genex.todolist(
-        resources + [power.REPOSITORY],
+    genex.extract(
+        files=resources + [power.REPOSITORY],
         destination=power.generated(),
         full=True,
+        worker=WORKER,
     )
-    tests.resources.utils.run_parallel(todo, worker=WORKER, progress=True)
 
 
 def extract_notoc(resources):

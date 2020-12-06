@@ -6,14 +6,29 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
-""".. todo:: reduce code duplication, see `hey`."""
-
-import concurrent
-import os
 
 import genex
-import utila
-import utilatest
+
+RUNNER = [
+    'decider_border',
+    'textflow',
+    'decider_textflow',
+    'decider_textstyle',
+    'decider_imgfig',
+    'decider_smarty',
+]
+
+SELECTED = dict(
+    caption=True,
+    detector=True,
+    docref=True,
+    doctextstyle=True,
+    groupme=True,
+    magic=True,
+    sections=True,
+    smarty=True,
+    words=True,
+)
 
 
 def extract(
@@ -34,88 +49,15 @@ def extract(
     Raises:
         Exception: if Exception occurs while extracting file
     """
-    assert len(files) >= 2, ('require at least to files to '
-                             'determine output file name correctly')
-    for pdf in files:
-        pdf = pdf if isinstance(pdf, str) else pdf[0]  # remove pages
-
-    # ensure that generation directory exists
-    os.makedirs(destination, exist_ok=True)
-
-    def run_job(job: str):
-        utila.log(f'start: {job[0:150]}')
-        completed = utila.run(job)
-        utila.assert_success(completed)
-        utila.log(f'complete: {job[0:100]}')
-
-    # add selected page to every file if required
-    files = [(item, pages) if isinstance(item, str) else item for item in files]
-    generated = generate(files, destination)
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=worker) as executor:
-        futures = {executor.submit(run_job, pdf): pdf for pdf in generated}
-        for future in concurrent.futures.as_completed(futures):
-            try:
-                comment = future.result()
-                utila.info(comment)
-            except Exception as error:
-                utila.info(f'{error}\n{future} failed.')
-                raise
-
-
-def generate(files: list, outpath: str) -> list:
-    todo = []
-    names = utilatest.simplify_testfile_names(
-        files=[item for item, _ in files],  # remove page attribute
-        sort=False,
+    assert len(files) >= 2, ('require at least two files to '
+                             'determine output file names correctly')
+    genex.extract(
+        files=files,
+        destination=destination,
+        pages=pages,
+        morefeatures=RUNNER,
+        oneline=genex.ONELINE,
+        rawmaker=genex.CONFIG,
+        worker=worker,
+        **SELECTED,
     )
-    for (inpath, pages), output in zip(files, names):
-        outdir = os.path.join(outpath, output)
-        job = genex.create_job(
-            inpath,
-            outdir,
-            config=dict(
-                decider=True,
-                caption=True,
-                detector=True,
-                docref=True,
-                doctextstyle=True,
-                groupme=True,
-                magic=True,
-                sections=True,
-                smarty=True,
-                words=True,
-            ),
-            rawmaker=genex.CONFIG,
-            oneline=genex.ONELINE,
-            pages=pages,
-        )
-        next_job = create_job(
-            outdir,
-            pages=pages,
-        )
-        in_a_row = f'{job} && {next_job}'
-        todo.append(in_a_row)
-    return todo
-
-
-def create_job(path: str, pages: tuple = None) -> str:
-    """Create job to run required steps for next processing unit.
-
-    Args:
-        path: source with extract pdf
-        pages: shrink processing if given - if None process all pages
-    Returns:
-        Created process todo description.
-    """
-    pages = f'--pages={pages}' if pages is not None else ''
-    task = [
-        f'decider_border -i {path} -o {path} {pages}',
-        f'textflow -i {path} -o {path} {pages}',
-        f'decider_textflow -i {path} -o {path}',
-        f'decider_textstyle -j8 -i {path} -o {path}',
-        f'decider_imgfig -j8 -i {path} -o {path}',
-        f'decider_smarty -j8 -i {path} -o {path}',
-    ]
-    todo = ' && '.join(task)
-    return todo
