@@ -7,8 +7,6 @@
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
 
-import detector
-import detector.cli
 import groupme
 import groupme.cli
 import utila
@@ -43,7 +41,7 @@ WORKPLAN = [
     utila.create_step(
         'bibliography',
         [
-            utila.ResultFile(detector.PROCESS, 'bibliography_detected'),
+            utila.ResultFile('detector', 'bibliography_detected'),
         ],
         (USER, DEVELOPER),
     ),
@@ -71,7 +69,7 @@ WORKPLAN = [
     utila.create_step(
         'titlepage',
         [
-            utila.ResultFile(detector.PROCESS, 'titlepage_detected'),
+            utila.ResultFile('detector', 'titlepage_detected'),
         ],
         (USER, DEVELOPER),
     ),
