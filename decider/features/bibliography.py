@@ -11,7 +11,7 @@ import contextlib
 import functools
 import typing
 
-import detector.bibliography.data
+import detector.bibliography.order
 import iamraw
 import protocol
 import serializeraw
@@ -81,7 +81,7 @@ def check_6000_not_sorted_alphabetically(
         references: iamraw.BibliographyReferences,
 ):
     current = [item for item in references]
-    expected = detector.bibliography.data.theissen_sort(current)
+    expected = detector.bibliography.order.theissen_sort(current)
 
     if current == expected:
         return
