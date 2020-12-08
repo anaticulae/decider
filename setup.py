@@ -58,6 +58,7 @@ if __name__ == "__main__":
             'border',
             'border.features',
             'decider',
+            'decider.bibliography',
             'decider.features',
             'decider.links',
             'decider.utils',
