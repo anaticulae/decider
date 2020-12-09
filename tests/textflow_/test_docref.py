@@ -36,4 +36,4 @@ def test_decider_textflow_bachelor76_docref_negative(testdir, monkeypatch):
 def test_decider_textflow_master75_docref(testdir, monkeypatch):
     source = power.link(power.MASTER075_PDF)
     findings = decide_textflow(source, ':', testdir, monkeypatch)
-    assert len(findings) == 36  # may changes later
+    assert len(findings) == 1  # may changes later

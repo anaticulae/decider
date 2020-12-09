@@ -92,12 +92,13 @@ def extract_notoc(resources):
     for inpath, outpath in zip(files, without_titlepage):
         todo.append(f'jam -i {inpath} -o {outpath} --remove=1:5')
     # generate
-    todo.extend(
-        genex.todolist(
+    for job in genex.todolist(
             without_titlepage + [destination],  # ensure correct parent
             destination,
             groupme=True,
-        ))
+    ):
+        job = ' && '.join(job)
+        todo.append(job)
     # avoid race condition that jam is not ready before starting extraction
     worker = utila.mins(len(files), WORKER)
     tests.resources.utils.run_parallel(todo, worker=worker, progress=True)
@@ -120,12 +121,13 @@ def extract_notitle(resources):
     for inpath, outpath in zip(files, without_titlepage):
         todo.append(f'jam -i {inpath} -o {outpath} --remove=0')
     # generate
-    todo.extend(
-        genex.todolist(
+    for job in genex.todolist(
             without_titlepage + [destination],  # ensure correct parent
             destination,
             groupme=True,
-        ))
+    ):
+        job = ' && '.join(job)
+        todo.append(job)
     # avoid race condition that jam is not ready before starting extraction
     worker = utila.mins(len(files), WORKER)
     tests.resources.utils.run_parallel(todo, worker=worker, progress=True)

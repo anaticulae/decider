@@ -11,26 +11,26 @@
 PyYAML==5.1
 
 # Internal packages
-utila==2.15.0
-protocol==3.1.4
-iamraw==4.5.0
-hey==5.5.3
-detector==0.12.0
-words==0.22.1
+utila==2.16.1
+protocol==3.1.6
+iamraw==4.6.0
+hey==5.5.4
+detector==0.12.1
+words==0.23.0
 
-groupme==0.7.1
+groupme==0.7.2
 
 # define holy values
 configo==0.8.6
 # docs
-writers==1.1.3
+writers==1.1.4
 
-german==0.13.0
+german==0.13.3
 konrad==0.3.0
 
-genex==0.5.2
+genex==0.5.3
 
 # template engine
 Jinja2==2.11.2
 
-linkify==0.2.1
+linkify==0.2.2
