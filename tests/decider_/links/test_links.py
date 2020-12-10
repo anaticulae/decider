@@ -26,15 +26,25 @@ def test_links_work():
     assert findings
 
 
-@pytest.mark.parametrize('online', [True, False])
-def test_links_validate(testdir, monkeypatch, online):
-    linkpath = power.link(power.MASTER075_PDF)
-
+def run_links(source, testdir, monkeypatch, online: bool = False, msgids=None):
+    linkpath = power.link(source)
     # disable connecting to www
     monkeypatch.setenv(decider.DECIDER_ONELINE_FLAG, str(online))
     tests.run_decider(f'-i {linkpath} --links', monkeypatch)
     findings = serializeraw.load_findings(
         os.path.join(testdir.tmpdir, 'decider__links_user.yaml'),
+        msgids=msgids,
+    )
+    return findings
+
+
+@pytest.mark.parametrize('online', [True, False])
+def test_links_validate(testdir, monkeypatch, online):
+    findings = run_links(
+        power.MASTER075_PDF,
+        testdir,
+        monkeypatch,
+        online=online,
         msgids=10510,
     )
     assert findings if online else not findings
