@@ -48,3 +48,23 @@ def test_links_validate(testdir, monkeypatch, online):
         msgids=10510,
     )
     assert findings if online else not findings
+
+
+def test_links_date_mixed(testdir, monkeypatch):
+    findings = run_links(
+        power.MASTER098_PDF,
+        testdir,
+        monkeypatch,
+        msgids=10520,
+    )
+    assert not findings
+
+
+def test_links_single_access_date_mixed(testdir, monkeypatch):
+    findings = run_links(
+        power.MASTER098_PDF,
+        testdir,
+        monkeypatch,
+        msgids=10521,
+    )
+    assert not findings  # TODO: CHANGE AFTER PARSING ALL DOCUMENT LINKS

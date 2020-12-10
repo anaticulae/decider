@@ -17,8 +17,10 @@ import typing
 import iamraw
 import protocol
 import serializeraw
+import utila
 
 import decider
+import decider.links.date
 import decider.links.validate
 
 
@@ -83,3 +85,51 @@ def check_10510_hyperlink_existence(linter: callable, driver):
             continue
         location = iamraw.Location.from_page(hyperlink.page)
         linter(location=location, link=hyperlink)
+
+
+SOLUTION_10520 = """\
+Uneindeutige Zugriffsdaten erkannt
+
+Um Missverständnisse zu vermeiden verwenden Sie ein eindeutiges Datum im Format:
+
+YYYY.MM.DD oder DD.MM.YYYY.
+
+{darstellung/hyperlink}
+TODO: Add Dates link
+"""
+
+
+def check_10520_hyperlink_mixed_date_exists(linter: callable, driver):
+    dates = [item.visited for item in driver.hyperlinks if item.visited]
+    if not decider.links.date.is_mixed(dates):
+        return
+    linter(location=decider.features.OVERVIEW)
+
+
+SOLUTION_6016 = """\
+Uneindeutige Datum erkannt
+
+Jahreszahl **{{date}}** weicht vom erkannten Datums-Standard ab.
+
+{darstellung/hyperlink}
+TODO: Add Dates link
+"""
+
+
+def check_10521_hyperlink_mixed_access_date(linter: callable, driver):
+    dates = [item.visited for item in driver.hyperlinks if item.visited]
+    if decider.links.date.is_mixed(dates):
+        # message 10520 is used to inform user aboud changing
+        # dates-format. We avoid to highlight a lot of `wrong` dates,
+        # cause using other dates format.
+        return
+    for hyperlink in driver.hyperlinks:
+        if not hyperlink.visited:
+            continue
+        if not decider.links.date.mixed(hyperlink.visited):
+            continue
+        location = iamraw.Location.from_page(hyperlink.page)
+        linter(
+            date=utila.from_tuple(hyperlink.visited, separator='.'),
+            location=location,
+        )
