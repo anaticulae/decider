@@ -2,6 +2,18 @@
 
 Every noteable change is logged here.
 
+## v0.37.1
+
+### Feature
+
+* check href visited dates (7f1542020add)
+* move theissen sort algo from detector package (6789e552a9b7)
+
+### Fix
+
+* enable converting float reference (c6cecfffa582)
+* add missing generator step (49a5c19df60d)
+
 ## v0.37.0
 
 ### Feature
