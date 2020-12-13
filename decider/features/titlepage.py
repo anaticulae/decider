@@ -15,6 +15,7 @@ Titlepage
 import functools
 import typing
 
+import german.__iamraw__  # pylint:disable=W0611
 import iamraw
 import protocol
 import serializeraw
