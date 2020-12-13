@@ -39,13 +39,6 @@ WORKPLAN = [
         (USER, DEVELOPER),
     ),
     utila.create_step(
-        'bibliography',
-        [
-            utila.ResultFile('detector', 'bibliography_detected'),
-        ],
-        (USER, DEVELOPER),
-    ),
-    utila.create_step(
         'header',
         [
             utila.ResultFile('groupme', 'footer_footerheader'),
