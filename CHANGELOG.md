@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.37.3
+
+### Fix
+
+* add missing patch to load data (4a0954a7a8e1)
+
 ## v0.37.2
 
 ## v0.37.1
