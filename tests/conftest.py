@@ -44,14 +44,8 @@ RESOURCES = [
     (power.MASTER099_PDF, '0:10'),
     (power.DOCU07_PDF, '0:10'),
     (power.TECH024_PDF, '0:15'),
-    (power.PAPER18_PDF, '0:5'),
     (power.BACHELOR128_PDF, '0:20'),
     (power.BACHELOR051_PDF, '25:40'),
-]
-
-RESOURCES_NOTOC = [
-    (power.DOCU35_PDF, ':'),
-    (power.BOOK007_PDF, ':'),
 ]
 
 RESOURCES_NOTITLE = [
@@ -73,35 +67,6 @@ def extract(resources):
         full=True,
         worker=WORKER,
     )
-
-
-def extract_notoc(resources):
-    destination = power.generated(folder='notoc')
-    print_resources(resources)
-    files = [item[0] for item in resources]
-    # prepare
-    without_titlepage = [
-        os.path.join(destination, f'{item}.pdf')
-        for item in utilatest.simplify_testfile_names(
-            files + [power.REPOSITORY],  # ensure correct parent
-            sort=False,
-        )
-    ]
-    # jam
-    todo = []
-    for inpath, outpath in zip(files, without_titlepage):
-        todo.append(f'jam -i {inpath} -o {outpath} --remove=1:5')
-    # generate
-    for job in genex.todolist(
-            without_titlepage + [destination],  # ensure correct parent
-            destination,
-            groupme=True,
-    ):
-        job = ' && '.join(job)
-        todo.append(job)
-    # avoid race condition that jam is not ready before starting extraction
-    worker = utila.mins(len(files), WORKER)
-    tests.resources.utils.run_parallel(todo, worker=worker, progress=True)
 
 
 def extract_notitle(resources):
