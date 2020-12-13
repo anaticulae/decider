@@ -15,8 +15,8 @@ utila==2.16.1
 protocol==3.1.6
 iamraw==4.6.0
 hey==5.5.4
-detector==0.12.1
-words==0.23.0
+detector==0.12.2
+words==0.24.0
 
 groupme==0.7.2
 
@@ -28,7 +28,7 @@ writers==1.1.4
 german==0.13.3
 konrad==0.3.0
 
-genex==0.5.3
+genex==0.5.4
 
 # template engine
 Jinja2==2.11.2
