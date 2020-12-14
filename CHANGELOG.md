@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v1.0.0
+
+### Feature
+
+* remove decider_toc after moving to decider_ref (9bb9b8dab042)
+
 ## v0.37.3
 
 ### Fix
