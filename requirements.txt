@@ -12,7 +12,7 @@ PyYAML==5.1
 
 # Internal packages
 utila==2.16.1
-protocol==3.1.6
+protocol==3.2.1
 iamraw==4.6.0
 hey==5.5.4
 detector==0.12.2
@@ -23,7 +23,7 @@ groupme==0.7.2
 # define holy values
 configo==0.8.6
 # docs
-writers==1.1.4
+writers==1.2.0
 
 german==0.13.3
 konrad==0.3.0
