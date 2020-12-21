@@ -9,7 +9,6 @@
 
 import typing
 
-import docref.serialize
 import german
 import iamraw
 import konrad
@@ -29,9 +28,9 @@ def work(
         headlines: str,
         pages: tuple = None,
 ) -> typing.Tuple[str, str]:
-    figure = docref.serialize.load_docref(figure, pages=pages)
-    section = docref.serialize.load_docref(section, pages=pages)
-    table = docref.serialize.load_docref(table, pages=pages)
+    figure = serializeraw.load_docref(figure, pages=pages)
+    section = serializeraw.load_docref(section, pages=pages)
+    table = serializeraw.load_docref(table, pages=pages)
     headlines = serializeraw.load_headlines(headlines, pages=pages)
     text = serializeraw.load_text(text, headlines=headlines, pages=pages)
     caption_figure = serializeraw.load_captions(caption_figure, pages=pages)
