@@ -11,6 +11,7 @@ Hurenkind: Single Line at Page Start
 Schusterjunge: Single Line at Page End
 """
 
+import statistics
 import typing
 
 import iamraw
@@ -159,7 +160,7 @@ def textwidth(chunks) -> float:
 STARTEND_MIN_PAGES = 5  # TODO: HOLY VALUE
 
 
-def page_startend(items):
+def page_startend(items):  # pylint:disable=R1260
     if len(items) < STARTEND_MIN_PAGES:
         utila.error(f'disable `startend`: too few pages {len(items)}')
         return None
@@ -183,8 +184,12 @@ def page_startend(items):
             # TODO: ADD HEADLINE SUPPORT
             last = last.bounding.y1
             end.append(last)
-    start = utila.mode(start)
-    end = utila.mode(end)
+    try:
+        start = utila.mode(start)
+        end = utila.mode(end)
+    except statistics.StatisticsError:
+        utila.error(f'disable `startend`: empty data {start} {end}')
+        return None
     return start, end
 
 
