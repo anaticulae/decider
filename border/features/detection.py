@@ -22,6 +22,7 @@ are a lot of `hit the box` errors.
 * TODO: MARK EMPTY STRING LAYOUT ERRORS.
 """
 
+import contextlib
 import functools
 import math
 import typing
@@ -49,7 +50,8 @@ def work(
     border_pages = serializeraw.load_pageborders(border_pages, pages=pages)
 
     page_sizes = {item.page: item.size for item in border_pages}
-    expected = serializeraw.load_leftright_border(border_leftright)
+    border_leftright = serializeraw.load_leftright_border(border_leftright)
+    expected = BorderExpected(border_leftright)
 
     hits = boxes_outside_border(boxes, page_sizes, expected)
     utila.debug(hits)
@@ -99,10 +101,22 @@ def check_2020_content_inside_box(linter, item, page):  # pylint:disable=W0613
     linter(location=location)
 
 
+class BorderExpected:
+
+    def __init__(self, expected):
+        self.expected = expected
+
+    def __call__(self, page) -> tuple:
+        with contextlib.suppress(KeyError):
+            return self.expected[page]
+        utila.error(f'no expected page size: {page}')
+        return None
+
+
 def boxes_outside_border(
         boxes,
         page_sizes: dict,
-        expected_border: dict,
+        expected: BorderExpected,
         tol=None,
 ) -> iamraw.PageContentHits:
     """Determine `boxes` which are outside out of `border`."""
@@ -113,7 +127,9 @@ def boxes_outside_border(
     # x0 y0 x1 y1
     for page in boxes:
         pagesize = page_sizes[page.page]
-        border_box = expected_border[page.page]
+        border_box = expected(page.page)
+        if not border_box:
+            continue
         valid = utila.roundme((
             border_box[0] - tol[0],  # x0
             border_box[2] - tol[2],  # y0
