@@ -2,6 +2,18 @@
 
 Every noteable change is logged here.
 
+## v1.0.3
+
+### Fix
+
+* do not fail on missing expected page size (3e1a967f441a)
+* disable textflow startend on too few data (f181bb30b3c7)
+* organize imports (73e2596ba3a2)
+
+### Documentation
+
+* Happy New Year! (975b872fe7a5)
+
 ## v1.0.2
 
 ## v1.0.1
