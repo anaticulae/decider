@@ -25,6 +25,7 @@ SELECTED = dict(
     magic=True,
     sections=True,
     smarty=True,
+    spacestation=True,
     words=True,
 )
 
