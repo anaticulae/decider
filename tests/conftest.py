@@ -17,7 +17,6 @@ import utilatest
 import writers
 
 import decider
-import tests.resources.utils
 
 PACKAGE = decider.PACKAGE
 
@@ -93,7 +92,7 @@ def extract_notitle(resources):
         todo.append(job)
     # avoid race condition that jam is not ready before starting extraction
     worker = utila.mins(len(files), WORKER)
-    tests.resources.utils.run_parallel(todo, worker=worker, progress=True)
+    utila.run_parallel(todo, worker=worker)
 
 
 def install():
