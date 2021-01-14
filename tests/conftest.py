@@ -42,10 +42,8 @@ RESOURCES = [
     (power.MASTER078_PDF, '0:10'),
     (power.MASTER083_PDF, '0:10'),
     (power.MASTER099_PDF, '0:10'),
-    (power.DOCU07_PDF, '0:10'),
     (power.TECH024_PDF, '0:15'),
     (power.BACHELOR128_PDF, '0:20'),
-    (power.BACHELOR051_PDF, '25:40'),
 ]
 
 RESOURCES_NOTITLE = [
