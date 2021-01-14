@@ -10,10 +10,8 @@
 import genex
 
 RUNNER = [
-    'decider_border',
     'textflow',
     'decider_textflow',
-    'decider_textstyle',
     'decider_imgfig',
     'decider_smarty',
 ]

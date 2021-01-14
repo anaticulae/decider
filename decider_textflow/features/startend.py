@@ -19,7 +19,7 @@ import serializeraw
 import utila
 
 import decider_textflow.features
-import decider_textstyle.utils
+import decider_textflow.utils
 
 
 def work(
@@ -57,7 +57,7 @@ Seite beginnt mit einsamer Zeile.
 def check_7620_lonely_page_start(linter: callable, driver):
     linewidth = textwidth(driver.text_chunks)
     hurenkind_maxwidth = linewidth * 0.9  # TODO: HOLY VALUE
-    text = decider_textstyle.utils.page_chunks(driver.nomagic_text_chunks)
+    text = decider_textflow.utils.page_chunks(driver.nomagic_text_chunks)
     for page, content in text:
         if len(content) < 2:
             continue
@@ -111,7 +111,7 @@ direkt am Seitenanfang stehen.
 
 
 def check_7625_empty_start(linter: callable, driver):
-    text = decider_textstyle.utils.page_chunks(driver.nomagic_text_chunks)
+    text = decider_textflow.utils.page_chunks(driver.nomagic_text_chunks)
     startend = page_startend(text)
     if startend is None:
         return

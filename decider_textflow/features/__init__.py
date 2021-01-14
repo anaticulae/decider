@@ -9,12 +9,11 @@
 
 import functools
 
+import decider_textstyle.utils
 import iamraw
 import protocol
 import serializeraw
 import utila
-
-import decider_textstyle.utils
 
 
 def linting(name, driver=None):

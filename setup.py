@@ -55,8 +55,6 @@ if __name__ == "__main__":
             'Programming Language :: Python :: 3.8',
         ],
         packages=[
-            'border',
-            'border.features',
             'decider',
             'decider.features',
             'decider.links',
@@ -67,9 +65,6 @@ if __name__ == "__main__":
             'decider_smarty.features',
             'decider_textflow',
             'decider_textflow.features',
-            'decider_textstyle',
-            'decider_textstyle.features',
-            'decider_textstyle.headlines',
             'fonts',
             'fonts.features',
             'imgfig',
@@ -78,12 +73,10 @@ if __name__ == "__main__":
         entry_points={
             'console_scripts': [
                 'decider = decider.cli:main',
-                'decider_border = border.cli:main',
                 'decider_fonts = fonts.cli:main',
                 'decider_footnote = decider_footnote.cli:main',
                 'decider_imgfig = imgfig.cli:main',
                 'decider_textflow = decider_textflow.cli:main',
-                'decider_textstyle = decider_textstyle.cli:main',
                 'decider_smarty = decider_smarty.cli:main',
             ],
         },

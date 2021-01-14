@@ -38,7 +38,7 @@ def test_all_references_exists():
 
 def pyfiles():
     result = []
-    projects = ['border', 'decider']
+    projects = ['decider']
     for item in projects:
         source = os.path.join(decider.ROOT, item)
         with utila.chdir(source):
