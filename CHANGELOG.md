@@ -2,6 +2,17 @@
 
 Every noteable change is logged here.
 
+## v2.0.0
+
+### Feature
+
+* enable genex base feature (69458e79a4d7)
+* remove moved border and decider_textstyle (95abc28ced47)
+
+### Fix
+
+* add missing `space station` generator (6819a7d6bbf7)
+
 ## v1.0.4
 
 ## v1.0.3

@@ -59,7 +59,7 @@ import os
 
 import decider.__patch__
 
-__version__ = '1.0.4'
+__version__ = '2.0.0'
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
