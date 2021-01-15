@@ -95,15 +95,15 @@ def check_7202_table_reference_exists(linter: callable, driver):
         linter(location=location, reference=raw)
 
 
-def determine_reference(item, text) -> str:
-    selected = utila.select_content(text, page=item.page)
-    marked = item.marked
+def determine_reference(reference, text) -> str:
+    selected = utila.select_content(text, page=reference.page)
+    marked = reference.marked
     sentence_number = 0
     for section in selected:
         for sentence in section.content:
-            if sentence_number == item.sentence:
+            if sentence_number == reference.sentence:
                 words = [
-                    konrad.mark2str(item) for item in german.split_words(
+                    konrad.mark2str(word) for word in german.split_words(
                         sentence,
                         validate_sentences=False,
                     )
