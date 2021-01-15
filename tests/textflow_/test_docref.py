@@ -8,6 +8,7 @@
 # =============================================================================
 
 import power
+import pytest
 import serializeraw
 
 import decider_textflow.path
@@ -37,3 +38,12 @@ def test_decider_textflow_master75_docref(testdir, monkeypatch):
     source = power.link(power.MASTER075_PDF)
     findings = decide_textflow(source, ':', testdir, monkeypatch)
     assert len(findings) == 1  # may changes later
+
+
+@pytest.mark.xfail(reason='table1 is not parsed properly, use new table parser')
+def test_decider_textflow_bachelor56page15_tableref(testdir, monkeypatch):
+    """Verify that `s. Tab. 1` matches with `Tabelle 1`"""
+    source = power.link(power.BACHELOR056_PDF)
+    pages = '15'
+    findings = decide_textflow(source, pages, testdir, monkeypatch)
+    assert not findings
