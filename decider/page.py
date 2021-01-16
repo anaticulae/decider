@@ -7,7 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import decider_toc.pages
+import elements
 
 
 def validate(footers):
@@ -17,5 +17,5 @@ def validate(footers):
     pages = [
         (item.page.value, item.page.raw, 1024) for item in footers if item.page
     ]
-    validated = decider_toc.pages.validate_pageorder(pages)
+    validated = elements.validate_pageorder(pages)
     return validated
