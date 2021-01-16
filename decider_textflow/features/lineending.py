@@ -7,25 +7,19 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import typing
-
 import iamraw
 import protocol
 import textflow.features.lineending
 
 
-def work(lineendings: str, pages: tuple = None) -> typing.Tuple[str, str]:
-    linter = protocol.from_module(__name__)
-
+def work(lineendings: str, pages: tuple = None) -> protocol.ResultType:
     # TODO: REMOVE PYLINT LATER
     endings = textflow.features.lineending.load_lineendings(  # pylint:disable=E1123
         lineendings,
         pages=pages,
     )
-    linter.run(driver=endings)
-    result = linter.result(unique=True)
-    user, developer = protocol.dump_result(result)
-    return user, developer
+    result = protocol.run(__name__, driver=endings)
+    return result
 
 
 SOLUTION_7000 = """\
