@@ -8,7 +8,6 @@
 # =============================================================================
 
 import functools
-import typing
 
 import german
 import iamraw
@@ -20,7 +19,7 @@ import utila
 MAX_CITATION_LENGTH = 50  # TODO: HOLY VALUE
 
 
-def work(text: str, pages: tuple) -> typing.Tuple[str, str]:
+def work(text: str, pages: tuple) -> protocol.ResultType:
     quotations = textflow.quotation.serialize.load_quotations(text)
 
     # filter pages, TODO: remove after upgrading textflow
