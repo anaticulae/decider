@@ -15,6 +15,8 @@ import protocol
 import serializeraw
 import utila
 
+import decider_textflow.utils
+
 
 def linting(name, driver=None):
     # IMPORTANT TODO: WITHOUT DRIVER, NOTHING HAPPEN HERE?
@@ -68,11 +70,11 @@ def textdata(
     #     return None
     if not navigators:
         return None
-    chunks = decider_textstyle.utils.text_chunks(
+    chunks = decider_textflow.utils.text_chunks(
         headlines,
         navigators,
     )
-    nomagic = decider_textstyle.utils.text_chunks(
+    nomagic = decider_textflow.utils.text_chunks(
         headlines,
         navigators,
         magiccontent=magiccontent,
