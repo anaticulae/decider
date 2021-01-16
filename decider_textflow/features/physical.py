@@ -39,12 +39,13 @@ def work(
 
 
 SOLUTION_7670 = """\
-Fehlendes Leerzeichen nach Wert?
+Fehlendes Leerzeichen
 
-Zwischen physikalischer Einheit **{{unit}}** und **{{value}}** fehlt ein
+Zwischen Skalar **{{value}}** und Einheit **{{unit}}** fehlt ein \
 Leerzeichen.
 
 TODO: ADD LINK
+DUDEN
 """
 
 MISSING_SPACE_BEFORE_UNIT = r'(?P<value>\d+(\.\d+){0,1})(?P<unit>%|‰)'
