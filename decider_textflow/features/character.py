@@ -231,6 +231,29 @@ def check_7660_missing_minus_value_and_sign(linter: callable, driver):
     check_character(linter, driver, MISSING_MINUS_BETWEEN_VALUE_AND_SIGN)
 
 
+SOLUTION_7661 = """\
+Schrägstrich: Überflüssiges Leerzeichen
+
+Vor und nach einem Schrägstrich wird kein Leerzeichen gesetzt.
+
+Siehe Duden
+"""
+
+SPACE_BEFORE_OR_AFTER_SLASH = r'(\s+/\s+|\s+/|/\s+)'
+
+
+def check_7661_space_before_or_after_slash(linter: callable, driver):
+    """\
+    >>> message('Europäischen Gemeinschaften (Beutler / Bieber / Pipkorn / Streil 2001).', 7661)
+    3
+    >>> message('Bitte wählen Mann/ Frau., 7661')
+    1
+    >>> message('dieser bei 1.44/1.63, den Mittelaltrigen bei 0.72/0.483', 7661)
+    0
+    """
+    check_character(linter, driver, SPACE_BEFORE_OR_AFTER_SLASH)
+
+
 def message(lines: list, msgid=None, page=0):
     if isinstance(lines, str):
         lines = [lines]
