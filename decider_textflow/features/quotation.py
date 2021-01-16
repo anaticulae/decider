@@ -20,13 +20,10 @@ MAX_CITATION_LENGTH = 50  # TODO: HOLY VALUE
 
 
 def work(text: str, pages: tuple) -> protocol.ResultType:
-    quotations = textflow.quotation.serialize.load_quotations(text)
-
-    # filter pages, TODO: remove after upgrading textflow
-    quotations = [
-        item for item in quotations if not utila.should_skip(item.page, pages)
-    ]
-
+    quotations = textflow.quotation.serialize.load_quotations(
+        text,
+        pages=pages,
+    )
     linter = protocol.from_module(__name__)
 
     linting(quotations, linter)
