@@ -195,6 +195,36 @@ def check_7656_missing_dots_between_brackets(linter: callable, driver):
     check_character(linter, driver, MISSING_DOTS_BETWEEN_ANGLE_BRACKETS)
 
 
+SOLUTION_7660 = """\
+Bindestrich zwischen Ziffer und 'mal' fehlt.
+
+Siehe Duden:
+
+* 2-mal
+* fünfhundert Mal
+* ein Dutzend Mal
+
+Hinweis: Ziffern werden bei exakten Werten verwendet - ausgeschrieben \
+wird die Zahl wenn sie eine ungefähre Zahl beinhaltet.
+
+Siehe GUGELHUPF
+
+TODO ADD LINK
+"""
+
+MISSING_MINUS_BETWEEN_VALUE_AND_SIGN = r'\d+(mal)'
+
+
+def check_7660_missing_minus_value_and_sign(linter: callable, driver):
+    """Number in combination with `mal` is connected with minus. But
+    `zweihundert Mal` is correct, no minus is needed.
+
+    >>> message('300mal ist nicht so gut wie 600-mal', 7660)
+    1
+    """
+    check_character(linter, driver, MISSING_MINUS_BETWEEN_VALUE_AND_SIGN)
+
+
 def message(lines: list, msgid=None, page=0):
     if isinstance(lines, str):
         lines = [lines]
