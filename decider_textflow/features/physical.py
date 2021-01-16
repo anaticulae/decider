@@ -7,9 +7,13 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import re
 import typing
 
 import iamraw
+import protocol
+import serializeraw
+import texmex
 
 import decider_textflow.features
 
@@ -37,28 +41,46 @@ def work(
 SOLUTION_7670 = """\
 Fehlendes Leerzeichen nach Wert?
 
-Zwischen physikalischer Einheit und Wert? fehlt ein Leerzeichen.
+Zwischen physikalischer Einheit **{{unit}}** und **{{value}}** fehlt ein
+Leerzeichen.
+
+TODO: ADD LINK
 """
+
+MISSING_SPACE_BEFORE_UNIT = r'(?P<value>\d+(\.\d+){0,1})(?P<unit>%|‰)'
 
 
 def check_7670_missing_space_after_value(linter: callable, driver):
+    """\
+    >>> message('10.0% Guthaben', 7670)
+    1
+    >>> message('Fahrer unter Alkoholeinfluss (0.5‰) wurden', 7670)
+    1
+    """
     text = driver.text_chunks
     for page, line, item in text:
         if isinstance(item, iamraw.Headline):
             continue
-
         text = item.text
-        # TODO: SUPPORT MULTIPLE ERRORS IN ONE LINE
-        finding = extract_units(text)  # pylint:disable=E1128
-        if not finding:
+        matched = re.finditer(MISSING_SPACE_BEFORE_UNIT, text)
+        if not matched:
             continue
-
-        location = iamraw.RangedLocation(page=page, line=line)
-        linter(location=location)
-
-
-# TODO:  IMPROVE THIS DRAFT
+        for finding in matched:
+            unit, value = finding['unit'], finding['value']
+            location = iamraw.RangedLocation(page=page, line=line)
+            linter(location=location, unit=unit, value=value)
 
 
-def extract_units(text: str) -> list:  # pylint:disable=W0613
-    return None
+def message(lines: list, msgid=None, page=0):
+    if isinstance(lines, str):
+        lines = [lines]
+    # page, line, text
+    lines = [(
+        page,
+        line,
+        texmex.TextBoundsInfo(text=content, bounds=None),
+    ) for line, content in enumerate(lines)]
+    driver = protocol.driver(text_chunks=lines, nomagic_text_chunks=lines)
+    user, _ = decider_textflow.features.linting(__name__, driver)
+    result = serializeraw.load_findings(user, msgid)
+    return len(result)
