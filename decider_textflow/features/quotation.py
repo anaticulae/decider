@@ -13,8 +13,8 @@ import german
 import iamraw
 import konrad.quotation.german
 import protocol
+import serializeraw
 import textflow.quotation.serialize
-import utila
 
 MAX_CITATION_LENGTH = 50  # TODO: HOLY VALUE
 
@@ -92,6 +92,36 @@ def check_7101_german_quote_double_quote_inside(linter: callable, tokens: list):
     linter()
 
 
+SOLUTION_7105 = """\
+Zitat beginnt mit Auslassungszeichen.
+
+Am Zitatanfang sind keine Auslassungszeichen [...] nötig.
+
+TODO: ADD LINK
+"""
+
+QUOTATION_SIGNS = '„‚’"”“'  # TODO: REPLACE WITH MORE GENERAL PLACE
+
+
+def check_7105_quote_starts_with_omission_sign(linter: callable, tokens: list):
+    """Sentence starts with [...]
+
+    >>> message('„[...] Zitat darf nicht [...] mit Auslassung starten.“', 7105)
+    1
+    >>> message('  „  [...] spaces are fine', 7105)
+    1
+    """
+    if not german.isger(tokens):
+        return
+    if len(tokens) < 2:
+        return
+    if tokens[0] not in QUOTATION_SIGNS:
+        return
+    if tokens[1] not in '[...] [] ...':
+        return
+    linter()
+
+
 SOLUTION_7110 = """\
 Zitat zu lang
 
@@ -106,3 +136,13 @@ def check_7110_max_citation_length(linter: callable, tokens: list):
     if len(tokens) <= MAX_CITATION_LENGTH:
         return
     linter()
+
+
+def message(quotation: str, msgid=None):
+    raw = [
+        (0, 0, quotation),
+    ]
+    dumped = textflow.quotation.serialize.dump_quotations(raw)
+    user, _ = work(dumped, None)
+    result = serializeraw.load_findings(user, msgid)
+    return len(result)
