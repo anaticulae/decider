@@ -37,15 +37,14 @@ def work(text: str, pages: tuple) -> typing.Tuple[str, str]:
     return user, developer
 
 
-def from_sentence(page, sentence):
-    return iamraw.Location.fromstr(f's{sentence}p{page}')
-
-
 def linting(quotations, linter: protocol.Linter):
     checkers = protocol.parse_checkers(__name__)
     for checker in checkers:
         for quote in quotations:
-            location = from_sentence(page=quote.page, sentence=quote.index)
+            location = iamraw.Location.from_sentence(
+                page=quote.page,
+                sentence=quote.index,
+            )
             call = functools.partial(
                 linter.add_finding,
                 msgid=checker.msgid,
