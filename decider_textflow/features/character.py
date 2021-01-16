@@ -51,13 +51,19 @@ def check_character(linter, driver, regex):
 
         text = item.text
         # TODO: SUPPORT MULTIPLE ERRORS IN ONE LINE
-        matched = re.search(regex, text, flags=re.VERBOSE)
+        matched = re.finditer(regex, text, flags=re.VERBOSE)
         if not matched:
             continue
 
-        # TODO: ADD TOKEN LOCATION
-        location = iamraw.RangedLocation(page=page, line=line)
-        linter(location=location)
+        for match in matched:
+            start, end = match.span()[0], match.span()[1]
+            location = iamraw.RangedLocation(
+                page=page,
+                line=line,
+                char=start,
+                char_end=end,
+            )
+            linter(location=location)
 
 
 SOLUTION_7650 = """\
