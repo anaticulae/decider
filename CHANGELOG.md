@@ -2,6 +2,19 @@
 
 Every noteable change is logged here.
 
+## v2.1.0
+
+### Feature
+
+* add check that quotation does not start with omission sign (c3d7f912270c)
+* add missing minus-mal-rule (0d7763573f8b)
+* add textflow physical space error checker (2cc1b6628ebb)
+
+### Fix
+
+* adjust outdated import (fd74bdbab0f2)
+* use elements code (616412e6fcb8)
+
 ## v2.0.0
 
 ### Feature
