@@ -254,6 +254,27 @@ def check_7661_space_before_or_after_slash(linter: callable, driver):
     check_character(linter, driver, SPACE_BEFORE_OR_AFTER_SLASH)
 
 
+SOLUTION_7662 = """\
+Fehlendes Leerzeichen nach Paragraf
+
+Zwischen Paragrafzeichen und der Paragrafnummer wird ein Festabstand gesetzt.
+
+Siehe Duden
+"""
+
+SPACE_AFTER_PARAGRAPH = r'§\d+[a-z]?'
+
+
+def check_7662_space_after_paragraph(linter: callable, driver):
+    """\
+    >>> message('StVG §24c „ […] wer in der Probezeit nach §2a oder vor', 7662)
+    2
+    >>> message('um eine Straftat nach § 316, welches', 7662)
+    0
+    """
+    check_character(linter, driver, SPACE_AFTER_PARAGRAPH)
+
+
 def message(lines: list, msgid=None, page=0):
     if isinstance(lines, str):
         lines = [lines]
