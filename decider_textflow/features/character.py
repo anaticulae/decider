@@ -275,6 +275,30 @@ def check_7662_space_after_paragraph(linter: callable, driver):
     check_character(linter, driver, SPACE_AFTER_PARAGRAPH)
 
 
+SOLUTION_7663 = """\
+Bindestrich fehlt
+
+Siehe Duden:
+
+* vierjährig
+* 4-jährig
+* Fünfjähriger
+* die 4- bis 5-Jährigen
+
+TODO ADD LINK
+"""
+
+MISSING_MINUS_BETWEEN = r'\d+(jährig)(en){0,1}'
+
+
+def check_7663_missing_minus_number_jaehrig(linter: callable, driver):
+    """\
+    >>> message('25jährigen und die ab 69jährigen in Unfälle verwickelt waren.', 7663)
+    2
+    """
+    check_character(linter, driver, MISSING_MINUS_BETWEEN)
+
+
 def message(lines: list, msgid=None, page=0):
     if isinstance(lines, str):
         lines = [lines]
