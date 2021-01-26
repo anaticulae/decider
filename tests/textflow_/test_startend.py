@@ -12,7 +12,6 @@ import os
 
 import power
 import protocol
-import pytest
 import serializeraw
 import utilatest
 
@@ -52,7 +51,6 @@ def test_startend_hurenkind_bachelor90_page18(testdir, monkeypatch):
 
 
 @utilatest.longrun
-@pytest.mark.xfail(reason='fix figure parser on page 45')
 def test_startend_figure_start_bachelor90_page40_55(testdir, monkeypatch):
     with startend(power.BACHELOR090_PDF, '40:55', 7625, monkeypatch) as result:
         pages = sorted([finding.location.page for finding in result])

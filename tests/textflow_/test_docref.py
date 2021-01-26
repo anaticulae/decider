@@ -35,9 +35,10 @@ def test_decider_textflow_bachelor76_docref_negative(testdir, monkeypatch):
 
 
 def test_decider_textflow_master75_docref(testdir, monkeypatch):
+    # TODO: DESCRIBE PURPOSE OF TEST
     source = power.link(power.MASTER075_PDF)
     findings = decide_textflow(source, ':', testdir, monkeypatch)
-    assert len(findings) == 1  # may changes later
+    assert not findings  # may changes later
 
 
 @pytest.mark.xfail(reason='table1 is not parsed properly, use new table parser')
