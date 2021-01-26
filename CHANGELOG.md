@@ -2,6 +2,21 @@
 
 Every noteable change is logged here.
 
+## v2.2.0
+
+### Feature
+
+* extend supported physical units (5c90064421c2)
+* add jaehrig minus pattern (15d5693a5d6f)
+* ensure space between paragraph and number (185382b51f2f)
+* add slash intext linter (e530cf761a89)
+* adjust linter result to correct char bounding (57434060851a)
+
+### Fix
+
+* fix newlines (85295c6f3b5a)
+* clarify error message (f2582fff63f8)
+
 ## v2.1.0
 
 ### Feature
