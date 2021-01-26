@@ -53,7 +53,7 @@ def linting(footer, linter: protocol.Linter):
 SOLUTION_2015 = """\
 Endnoten verwendet
 
-Im Dokument werden Endnoten verwendet. Ersetzen Sie diese durch
+Im Dokument werden Endnoten verwendet. Ersetzen Sie diese durch \
 stringend aufsteigende Fußnoten.
 
 TODO: ARTICEL ENDNOTE_VS_FOOTNOTE

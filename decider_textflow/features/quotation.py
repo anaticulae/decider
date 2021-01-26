@@ -73,7 +73,7 @@ def check_7100_german_quote_not_closed(linter: callable, tokens: list):
 SOLUTION_7101 = """\
 Doppelte Anführungszeichen im Zitat
 
-Satz {{sentence}} enthält doppelte Anführungszeichen im Zitat. Ersetzen
+Satz {{sentence}} enthält doppelte Anführungszeichen im Zitat. Ersetzen \
 Sie diese doppelten Anführungszeichen durch einfache Anführungszeichen.
 
 {darstellung/satzzeichen#anfuhrungszeichen}
@@ -125,7 +125,7 @@ def check_7105_quote_starts_with_omission_sign(linter: callable, tokens: list):
 SOLUTION_7110 = """\
 Zitat zu lang
 
-Konzentrieren Sie sich auf den wichtigen Teil des Zitats und stellen Sie
+Konzentrieren Sie sich auf den wichtigen Teil des Zitats und stellen Sie \
 die eigene Denkleistung in den Vordergrund.
 
 {text/zitat#umfang}

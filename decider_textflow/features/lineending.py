@@ -25,7 +25,7 @@ def work(lineendings: str, pages: tuple = None) -> protocol.ResultType:
 SOLUTION_7000 = """\
 Zu viele aufeinander folgende Trennungen
 
-Es wird empfohlen die Anzahl der aufeinander folgenden Zeilen die eine
+Es wird empfohlen die Anzahl der aufeinander folgenden Zeilen die eine \
 Trennung enthalten auf 3 zu beschränken.
 
 {darstellung/schriftbild#trennungen}

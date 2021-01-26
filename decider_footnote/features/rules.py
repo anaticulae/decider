@@ -78,7 +78,7 @@ def linting(footer, linter: protocol.Linter):
 SOLUTION_2001 = """\
 Fußnote {{number}} beginnt nicht mit einem Großbuchstaben
 
-Ersetzen Sie den ersten Buchstaben der Fußnote {{number}} mit einem
+Ersetzen Sie den ersten Buchstaben der Fußnote {{number}} mit einem \
 Großbuchstaben.
 
 {text/fussnote#struktur}
@@ -183,7 +183,7 @@ def disabled(items, footnote_count: int):
 SOLUTION_2012 = """\
 Empfehlung: Anfang der Fußnote
 
-Es wird empfohlen sämtliche Fußnoten mit einen Großbuchenstaben beginnen
+Es wird empfohlen sämtliche Fußnoten mit einen Großbuchenstaben beginnen \
 zu lassen.
 
 {text/fussnote#struktur}

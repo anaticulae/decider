@@ -57,7 +57,7 @@ def linting(imageinfos: iamraw.ImageInformations, linter: protocol.Linter):
 SOLUTION_4000 = """\
 Auflösung zu niedrig
 
-Das Bild weist eine zu geringe Auflösung auf und wird im Druck
+Das Bild weist eine zu geringe Auflösung auf und wird im Druck \
 ungenügend erscheinen.
 
 Gefunden: {{dpi}}
@@ -84,7 +84,7 @@ def check_4000_min_printing_resolution(linter, imageinfo):
 SOLUTION_4001 = """\
 Auflösung unnötig hoch
 
-Die Auflösung der Grafik sollte reduziert werden um den benötigen
+Die Auflösung der Grafik sollte reduziert werden um den benötigen \
 Speicher zu reduzieren.
 
 Gefunden: {{dpi}}
@@ -117,7 +117,7 @@ TODO: Add message here
 SOLUTION_4005 = """\
 Grafik verzerrt
 
-Das Seitenverhältnis der Grafik im Dokument entspricht nicht dem
+Das Seitenverhältnis der Grafik im Dokument entspricht nicht dem \
 Ausgangzverhältnis und wird daher verzerrt dargestellt.
 
 Druck: {{pdf}}

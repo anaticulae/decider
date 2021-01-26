@@ -61,9 +61,9 @@ def linting(
 SOLUTION_5100 = """\
 Abkürzung wurde vor der Definition benutzt
 
-Die Abkürzung "{{short}}" wurde auf Seite {{before_page}}, Satz {{before_sentence}}
-benutzt bevor sie auf Seite {{definition_page}}, Satz {{definition_sentence}}
-definiert wurde.
+Die Abkürzung "{{short}}" wurde auf Seite {{before_page}}, Satz \
+{{before_sentence}} benutzt bevor sie auf Seite {{definition_page}}, \
+Satz {{definition_sentence}} definiert wurde.
 
 Definieren Sie die Abkürzung an der ersten Stelle des Gebrauchs.
 

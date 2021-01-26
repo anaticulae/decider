@@ -63,8 +63,8 @@ def check_10500_hyperlink_require_date(linter: callable, driver):
 SOLUTION_10510 = """\
 Hyperlink nicht erreichbar
 
-Auf den Hyperlink **{{link.href|wordwrap(40)}}** kann nicht zugegriffen
-werden. Überprüfen Sie die Schreibweise bzw. achten Sie darauf dass der
+Auf den Hyperlink **{{link.href|wordwrap(40)}}** kann nicht zugegriffen \
+werden. Überprüfen Sie die Schreibweise bzw. achten Sie darauf dass der \
 Hyerplink ohne weitere Authorisierung erreichbar ist.
 
 {darstellung/hyperlink}
@@ -90,7 +90,8 @@ def check_10510_hyperlink_existence(linter: callable, driver):
 SOLUTION_10520 = """\
 Uneindeutige Zugriffsdaten erkannt
 
-Um Missverständnisse zu vermeiden verwenden Sie ein eindeutiges Datum im Format:
+Um Missverständnisse zu vermeiden verwenden Sie ein eindeutiges Datum im \
+Format:
 
 YYYY.MM.DD oder DD.MM.YYYY.
 

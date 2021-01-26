@@ -101,7 +101,7 @@ Schusterjunge: Einsame Zeile am Seitenende
 SOLUTION_7625 = """\
 Seitenanfang: Seite beginnt nicht mit Text
 
-Die Grafik/Tabelle etc. sollte in den Text eingebunden werden und nicht
+Die Grafik/Tabelle etc. sollte in den Text eingebunden werden und nicht \
 direkt am Seitenanfang stehen.
 
 {darstellung/schriftbild#seitenanfang}

@@ -53,7 +53,7 @@ def work(
 SOLUTION_8100 = """\
 Umgangssprache erkannt
 
-Vermeiden Sie **{{phrase}}** und ersetzen Sie diese durch eine
+Vermeiden Sie **{{phrase}}** und ersetzen Sie diese durch eine \
 förmlichere Formulierung.
 
 TODO: ADD LINK
@@ -67,7 +67,8 @@ def check_8100_non_formal_speach(linter: callable, driver):
 SOLUTION_8105 = """\
 Pleonasma erkannt
 
-Vermeiden Sie **{{phrase}}** und reduzieren Sie diesen auf das Wesentliche.
+Vermeiden Sie **{{phrase}}** und reduzieren Sie diesen auf das \
+Wesentliche.
 
 TODO: ADD LINK
 """
