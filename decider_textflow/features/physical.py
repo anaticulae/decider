@@ -48,7 +48,8 @@ TODO: ADD LINK
 DUDEN
 """
 
-MISSING_SPACE_BEFORE_UNIT = r'(?P<value>\d+((\.|\,)\d+){0,1})(?P<unit>%|‰|km/h|ms|m|cm)'
+UNITS = r'%|‰|km/h|mmHg|ms|m|cm'
+MISSING_SPACE_BEFORE_UNIT = r'(?P<value>\d+((\.|\,)\d+){0,1})(?P<unit>' + UNITS + r')'
 
 
 def check_7670_missing_space_after_value(linter: callable, driver):
