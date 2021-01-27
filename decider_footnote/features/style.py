@@ -149,18 +149,19 @@ def check_2005_invalid_highnote_fontfamily(linter, driver):
     if isinstance(expected, list):
         utila.error(f'ambiguous expected highnote fontfamily: {expected}; skip')
         return
-    if current == expected:
+
+    current = driver.fontstore[current]
+    expected = driver.fontstore[expected]
+
+    if not current or not expected:
+        skip_method('missing font, regenerate resources')
         return
 
-    try:
-        current = driver.fontstore[current].name
-    except KeyError:
-        # TODO: REMOVE AFTER UPGRADINING IAMRAW, LOGGING IS INCLUDED NOW
-        utila.error(f'could not find font: {current}')
-    try:
-        expected = driver.fontstore[expected].name
-    except KeyError:
-        utila.error(f'could not find font: {current}')
+    current = current.name.lower()
+    expected = expected.name.lower()
+
+    if current == expected:
+        return
 
     linter(number=item.number, current=current, expected=expected)
 
