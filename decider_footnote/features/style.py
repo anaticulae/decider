@@ -8,6 +8,7 @@
 # =============================================================================
 
 import functools
+import inspect
 import typing
 
 import configo
@@ -93,7 +94,7 @@ def check_2003_invalid_highnote_rise(linter, driver):
     expected = driver.fontconfig.highnote_rise
 
     if isinstance(expected, list):
-        utila.error(f'ambiguous expected highnote rise: {expected}; skip')
+        skip_method(f'ambiguous expected highnote rise: {expected}')
         return
     if utila.near(current, expected, MAX_HIGHNOTE_RISE_DIFF):
         return
@@ -120,7 +121,7 @@ def check_2004_invalid_hignote_size(linter, driver):
     expected = driver.fontconfig.highnote_size
 
     if isinstance(expected, list):
-        utila.error(f'ambiguous expected highnote size: {expected}; skip')
+        skip_method(f'ambiguous expected highnote size: {expected}')
         return
     if utila.near(current, expected, MAX_HIGHNOTE_SIZE_DIFF):
         return
@@ -147,7 +148,7 @@ def check_2005_invalid_highnote_fontfamily(linter, driver):
     expected = driver.fontconfig.highnote_fontid
 
     if isinstance(expected, list):
-        utila.error(f'ambiguous expected highnote fontfamily: {expected}; skip')
+        skip_method(f'ambiguous expected highnote fontfamily: {expected}')
         return
 
     current = driver.fontstore[current]
@@ -182,9 +183,10 @@ def check_2010_invalid_content_fontsize(linter, driver):
     expected = driver.fontconfig.content_size
 
     if isinstance(expected, list):
-        utila.error(f'ambiguous expected highnote fontsize: {expected}; skip')
+        skip_method(f'ambiguous expected highnote fontsize: {expected}')
         return
     if not item.style:
+        skip_method('missing style')
         return
     text = item.text
     footnotestyle = item.style[1]
@@ -208,3 +210,13 @@ def check_2010_invalid_content_fontsize(linter, driver):
         return
 
     linter(number=item.number, current=sizes, expected=expected)
+
+
+def skip_method(msg: str = ''):
+    # TODO: MOVE TO UTILA
+    frame = inspect.currentframe()
+    caller = [item.function for item in inspect.getouterframes(frame)[0:5]]
+    caller = [item for item in caller if 'check_' in item]
+    caller = ' '.join(caller)
+    utila.error(msg)
+    utila.error(f'skip: {caller}')
