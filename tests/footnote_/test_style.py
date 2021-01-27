@@ -29,8 +29,8 @@ def test_highnote_inside_master89_page40(testdir, monkeypatch):  # pylint:disabl
 
 
 def test_highnote_inside_master89_page45(testdir, monkeypatch):  # pylint:disable=W0621
-    """Regression: Font size error on last footnote whitespace which is
-    defined as following page number which differes in font size."""
+    """Regression: Font size error on last footnote white space which is
+    defined as following page number which differs in font size."""
     root = str(testdir)
 
     cmd = f'-i {power.link(power.MASTER089_PDF)} -o {root} --style'
