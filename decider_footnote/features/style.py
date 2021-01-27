@@ -119,6 +119,9 @@ def check_2004_invalid_hignote_size(linter, driver):
     current = item.style[0].size
     expected = driver.fontconfig.highnote_size
 
+    if isinstance(expected, list):
+        utila.error(f'ambiguous expected highnote size: {expected}; skip')
+        return
     if utila.near(current, expected, MAX_HIGHNOTE_SIZE_DIFF):
         return
 
@@ -143,6 +146,9 @@ def check_2005_invalid_highnote_fontfamily(linter, driver):
     current = item.style[0].font
     expected = driver.fontconfig.highnote_fontid
 
+    if isinstance(expected, list):
+        utila.error(f'ambiguous expected highnote fontfamily: {expected}; skip')
+        return
     if current == expected:
         return
 
@@ -173,6 +179,10 @@ def check_2010_invalid_content_fontsize(linter, driver):
     """Ensure correct font size of footnote content."""
     item = driver.item
     expected = driver.fontconfig.content_size
+
+    if isinstance(expected, list):
+        utila.error(f'ambiguous expected highnote fontsize: {expected}; skip')
+        return
     if not item.style:
         return
     text = item.text
