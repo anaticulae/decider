@@ -17,6 +17,11 @@ import texmex
 
 import decider_textflow.features
 
+TEXTUAL = [
+    iamraw.PageContentType.TEXT,
+    iamraw.PageContentType.BLOCKQUOTE,
+]
+
 
 def work(
         headlines: str,
@@ -24,6 +29,7 @@ def work(
         textpositions: str,
         sizeandborders: str,
         headerfooter: str,
+        magiccontent: str,
         pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     driver = decider_textflow.features.textdata(
@@ -32,6 +38,8 @@ def work(
         textpositions,
         sizeandborders,
         headerfooter,
+        magiccontent=magiccontent,
+        magicvalid=TEXTUAL,
         pages=pages,
     )
     result = decider_textflow.features.linting(__name__, driver)
