@@ -48,7 +48,7 @@ TODO: ADD LINK
 DUDEN
 """
 
-UNITS = r'%|‰|km/h|mmHg|ms|m|cm'
+UNITS = r'%|‰|km/h|mmHg|mm|ms|m|cm|V|W|Hz|mW'
 MISSING_SPACE_BEFORE_UNIT = r'(?P<value>\d+((\.|\,)\d+){0,1})(?P<unit>' + UNITS + r')'
 
 
