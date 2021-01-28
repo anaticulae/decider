@@ -16,6 +16,10 @@ import serializeraw
 
 import decider_textflow.features
 
+TEXTUAL = [
+    iamraw.PageContentType.TEXT,
+]
+
 
 def work(
         headlines: str,
@@ -38,6 +42,7 @@ def work(
         sizeandborders,
         headerfooter,
         magiccontent=magiccontent,
+        magicvalid=TEXTUAL,
         pages=pages,
     )
     result = decider_textflow.features.linting(__name__, driver)
