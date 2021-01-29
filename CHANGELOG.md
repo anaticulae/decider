@@ -2,6 +2,20 @@
 
 Every noteable change is logged here.
 
+## v2.3.0
+
+### Feature
+
+* shrink writing checker to textual content (64dae4d3ad7d)
+* run physical checker inside text (017683bd3496)
+* add more physical units (1761578988aa)
+* compare font family instead of font id (a550cd7403c8)
+* add medical pressure unit (7e9b97da3b67)
+
+### Fix
+
+* skip style check for ambiguous expected style (658ee1d0bb10)
+
 ## v2.2.0
 
 ### Feature
