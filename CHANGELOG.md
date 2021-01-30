@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v2.4.1
+
+### Feature
+
+* integrate additional show hooks (e7285190dd54)
+
 ## v2.4.0
 
 ### Feature
