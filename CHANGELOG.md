@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v2.4.0
+
+### Feature
+
+* integrate linter show method (66a776ea0afb)
+
 ## v2.3.0
 
 ### Feature
