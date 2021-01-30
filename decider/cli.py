@@ -9,6 +9,7 @@
 
 import groupme
 import groupme.cli
+import protocol
 import utila
 import words
 
@@ -73,6 +74,7 @@ DEVELOPER_LINT_OUTPUT = f'{decider.PROCESS}__titlepage_{DEVELOPER}.yaml'
 
 
 def main():
+    hook = protocol.integrate(root=decider.ROOT, features='decider.features')
     utila.featurepack(
         workplan=WORKPLAN,
         root=decider.ROOT,
@@ -82,5 +84,6 @@ def main():
             multiprocessed=True,
             name=decider.PROCESS,
             version=decider.__version__,
+            cli_hook=hook,
         ),
     )
