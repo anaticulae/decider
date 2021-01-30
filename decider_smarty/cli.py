@@ -7,6 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import protocol
 import utila
 
 import decider_smarty
@@ -31,12 +32,15 @@ WORKPLAN = [
 
 
 def main():
+    root, features = decider_smarty.ROOT, 'decider_smarty.features'
+    hook = protocol.integrate(root=root, features=features)
     utila.featurepack(
         workplan=WORKPLAN,
-        root=decider_smarty.ROOT,
-        featurepackage='decider_smarty.features',
+        featurepackage=features,
+        root=root,
         config=utila.FeaturePackConfig(
             description=DESCRIPTION,
+            cli_hook=hook,
             multiprocessed=True,
             name=decider_smarty.PROCESS,
             pages=True,

@@ -7,6 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
 
+import protocol
 import utila
 
 import decider_footnote
@@ -44,12 +45,15 @@ WORKPLAN = [
 
 
 def main():
+    root, features = decider_footnote.ROOT, 'decider_footnote.features'
+    hook = protocol.integrate(root=root, features=features)
     utila.featurepack(
         workplan=WORKPLAN,
-        root=decider_footnote.ROOT,
-        featurepackage='decider_footnote.features',
+        root=root,
+        featurepackage=features,
         config=utila.FeaturePackConfig(
             description=DESCRIPTION,
+            cli_hook=hook,
             multiprocessed=True,
             name=decider_footnote.PROCESS,
             version=decider_footnote.__version__,

@@ -7,6 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import protocol
 import textflow
 import utila
 
@@ -87,12 +88,15 @@ WORKPLAN = [
 
 
 def main():
+    root, features = decider_textflow.ROOT, 'decider_textflow.features'
+    hook = protocol.integrate(root=root, features=features)
     utila.featurepack(
         workplan=WORKPLAN,
-        root=decider_textflow.ROOT,
-        featurepackage='decider_textflow.features',
+        root=root,
+        featurepackage=features,
         config=utila.FeaturePackConfig(
             description=DESCRIPTION,
+            cli_hook=hook,
             multiprocessed=True,
             name=decider_textflow.PROCESS,
             pages=True,

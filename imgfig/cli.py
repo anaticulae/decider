@@ -7,6 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import protocol
 import utila
 
 import imgfig
@@ -28,12 +29,15 @@ WORKPLAN = [
 
 
 def main():
+    root, features = imgfig.ROOT, 'imgfig.features'
+    hook = protocol.integrate(root=root, features=features)
     utila.featurepack(
         workplan=WORKPLAN,
-        root=imgfig.ROOT,
-        featurepackage='imgfig.features',
+        root=root,
+        featurepackage=features,
         config=utila.FeaturePackConfig(
             description=DESCRIPTION,
+            cli_hook=hook,
             multiprocessed=True,
             name=imgfig.PROCESS,
             version=imgfig.__version__,
