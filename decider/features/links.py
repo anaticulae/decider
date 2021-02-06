@@ -39,7 +39,7 @@ def work(links: str, pages: tuple = None) -> typing.Tuple[str, str]:
     return user, developer
 
 
-SOLUTION_10500 = """\
+SOLUTION_E10500 = """\
 Aufrufdatum fehlt
 
 Für den Hyperlink **{{link.href|wordwrap(40)}}** ist kein Aufrufdatum angegeben.
@@ -60,7 +60,7 @@ def check_10500_hyperlink_require_date(linter: callable, driver):
         linter(location=location, link=link)
 
 
-SOLUTION_10510 = """\
+SOLUTION_E10510 = """\
 Hyperlink nicht erreichbar
 
 Auf den Hyperlink **{{link.href|wordwrap(40)}}** kann nicht zugegriffen \
@@ -87,7 +87,7 @@ def check_10510_hyperlink_existence(linter: callable, driver):
         linter(location=location, link=hyperlink)
 
 
-SOLUTION_10520 = """\
+SOLUTION_W10520 = """\
 Uneindeutige Zugriffsdaten erkannt
 
 Um Missverständnisse zu vermeiden verwenden Sie ein eindeutiges Datum im \
@@ -107,7 +107,7 @@ def check_10520_hyperlink_mixed_date_exists(linter: callable, driver):
     linter(location=decider.features.OVERVIEW)
 
 
-SOLUTION_6016 = """\
+SOLUTION_W6016 = """\
 Uneindeutige Datum erkannt
 
 Jahreszahl **{{date}}** weicht vom erkannten Datums-Standard ab.

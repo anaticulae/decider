@@ -75,7 +75,7 @@ def check_5000_not_sorted_alphabetically(
     )
 
 
-SOLUTION_5001 = """\
+SOLUTION_R5001 = """\
 Abkürzung allgemein bekannt
 
 Die Abkürzung {{short}}({{description}}) muss nicht separat erklärt

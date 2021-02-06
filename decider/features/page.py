@@ -37,7 +37,7 @@ def work(headerfooter: str, pages: tuple = None) -> typing.Tuple[str, str]:
     return user, developer
 
 
-SOLUTION_1960 = """\
+SOLUTION_E1960 = """\
 Dokument enthält nicht nur aufsteigende Seitenzahlen
 
 Überprüfen Sie die Seitenzählung.

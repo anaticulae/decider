@@ -50,7 +50,7 @@ def work(
     return user, developer
 
 
-SOLUTION_8100 = """\
+SOLUTION_W8100 = """\
 Umgangssprache erkannt
 
 Vermeiden Sie **{{phrase}}** und ersetzen Sie diese durch eine \
@@ -64,7 +64,7 @@ def check_8100_non_formal_speach(linter: callable, driver):
     run_reference_results(linter, driver.sentences, driver.phrases)
 
 
-SOLUTION_8105 = """\
+SOLUTION_W8105 = """\
 Pleonasma erkannt
 
 Vermeiden Sie **{{phrase}}** und reduzieren Sie diesen auf das \
@@ -78,7 +78,7 @@ def check_8105_pleonasms_detected(linter: callable, driver):
     run_reference_results(linter, driver.sentences, driver.pleonasms)
 
 
-SOLUTION_8110 = """\
+SOLUTION_W8110 = """\
 Unnötige Vorsible
 
 Reduzieren Sie **{{phrase}}** indem Sie die unnötige Vorsilbe entfernen.

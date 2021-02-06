@@ -55,7 +55,7 @@ def linting(
         checker(call, titlepage)
 
 
-SOLUTION_1200 = """\
+SOLUTION_E1200 = """\
 Dokument enthält keine Titelseite
 
 Fügen Sie eine Titelseite zum Dokument hinzu.
@@ -70,7 +70,7 @@ def check_1200_titlepage_existence(linter, titlepage):
     linter(location=decider.features.OVERVIEW)
 
 
-SOLUTION_1220 = """\
+SOLUTION_E1220 = """\
 Titelseite enthält keinen Autor
 
 Fügen Sie ihren Namen und eventuellen akademischen Grad auf
@@ -88,7 +88,7 @@ def check_1220_author_existence(linter, titlepage):
     linter()
 
 
-SOLUTION_1221 = """\
+SOLUTION_E1221 = """\
 Titelseite enthält keine Matrikelnummer des Autors
 
 Fügen Sie ihre Matrikelnummer auf der Titelseite hinzu.
@@ -105,7 +105,7 @@ def check_1221_author_matrikel_existence(linter, titlepage):
     linter()
 
 
-SOLUTION_1230 = """\
+SOLUTION_E1230 = """\
 Titelseite enthält keinen Prüfer
 
 Fügen Sie die Namen und die akademischen Grade der Prüfer auf der
@@ -123,7 +123,7 @@ def check_1230_author_matrikel_existence(linter, titlepage):
     linter()
 
 
-SOLUTION_1210 = """\
+SOLUTION_E1210 = """\
 Titelseite enthält keinen Thesistyp
 
 Fügen Sie den Typ(Studienarbeit, Bachelorarbeit, Masterarbeit,

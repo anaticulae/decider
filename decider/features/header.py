@@ -35,7 +35,7 @@ def work(headerfooter: str, pages: tuple = None) -> typing.Tuple[str, str]:
     return user, developer
 
 
-SOLUTION_2110 = """\
+SOLUTION_I2110 = """\
 Kopfzeile: wiederholdender Inhalt
 
 Überprüfen Sie ob redundanter Inhalt:

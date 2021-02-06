@@ -58,7 +58,7 @@ def linting(
         checker(call, abbreviations, text)
 
 
-SOLUTION_5100 = """\
+SOLUTION_E5100 = """\
 Abkürzung wurde vor der Definition benutzt
 
 Die Abkürzung "{{short}}" wurde auf Seite {{before_page}}, Satz \
@@ -109,7 +109,7 @@ def flat_abbreviation(items):
     return result
 
 
-SOLUTION_5110 = """\
+SOLUTION_E5110 = """\
 Abkürzung wurde nicht im Text verwerdet
 
 Die Abkürzung "{{short}}" konnte nicht im Text gefunden werden.
