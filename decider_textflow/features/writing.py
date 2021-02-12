@@ -16,9 +16,9 @@ import serializeraw
 
 import decider_textflow.features
 
-TEXTUAL = [
+TEXTUAL = {
     iamraw.PageContentType.TEXT,
-]
+}
 
 
 def work(

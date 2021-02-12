@@ -15,10 +15,10 @@ import utila
 
 import decider_textflow.features
 
-TEXTUAL = [
+TEXTUAL = {
     iamraw.PageContentType.TEXT,
     iamraw.PageContentType.BLOCKQUOTE,
-]
+}
 
 
 def work(
