@@ -2,6 +2,17 @@
 
 Every noteable change is logged here.
 
+## v2.4.4
+
+### Feature
+
+* add list content to textual content (83c35f75de16)
+* add finding type to group solutions (5015fb2a1005)
+
+### Fix
+
+* ensure that valid magic is used (1f130431db9e)
+
 ## v2.4.3
 
 ## v2.4.2
