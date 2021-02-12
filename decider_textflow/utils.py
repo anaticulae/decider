@@ -48,10 +48,10 @@ def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
     for magicpage in magiccontent:
         for line, content in magicpage.content:
             location = (magicpage.page, line)
-            if visited.contains(location):
-                continue
             if content in magicvalid:
                 # Do not skip valid magic content, Text for example
+                continue
+            if visited.contains(location):
                 continue
             flat.append((*location, None))
 
