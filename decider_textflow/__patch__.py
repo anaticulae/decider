@@ -9,12 +9,13 @@
 
 import iamraw
 
-TEXTUAL = [
-    iamraw.PageContentType.TEXT,
-    iamraw.PageContentType.FORMULA,
+TEXTUAL = {
     # iamraw.PageContentType.CAPTION,
     # iamraw.PageContentType.TABLE,
     iamraw.PageContentType.BLOCKQUOTE,
-]
+    iamraw.PageContentType.FORMULA,
+    iamraw.PageContentType.LIST,
+    iamraw.PageContentType.TEXT,
+}
 
 iamraw.TEXTUAL = TEXTUAL
