@@ -24,18 +24,19 @@ def test_cli_decider(cmd, testdir, monkeypatch):
 
 
 @pytest.mark.parametrize('source', [
-    pytest.param(power.link(power.BACHELOR037_PDF), id='bachelor37'),
-    pytest.param(power.link(power.BACHELOR076_PDF), id='bachelor76'),
-    pytest.param(power.link(power.DOCU35_PDF), id='docu'),
-    pytest.param(power.link(power.BOOK007_PDF), id='leftright'),
-    pytest.param(power.link(power.MASTER072_PDF), id='master72'),
-    pytest.param(power.link(power.MASTER078_PDF), id='master78'),
-    pytest.param(power.link(power.MASTER098_PDF), id='master98'),
-    pytest.param(power.link(power.MASTER099_PDF), id='master99'),
+    pytest.param(power.BACHELOR037_PDF, id='bachelor37'),
+    pytest.param(power.BACHELOR076_PDF, id='bachelor76'),
+    pytest.param(power.DOCU35_PDF, id='docu'),
+    pytest.param(power.BOOK007_PDF, id='leftright'),
+    pytest.param(power.MASTER072_PDF, id='master72'),
+    pytest.param(power.MASTER078_PDF, id='master78'),
+    pytest.param(power.MASTER098_PDF, id='master98'),
+    pytest.param(power.MASTER099_PDF, id='master99'),
 ])
 @utilatest.nightly
 def test_cli_decider_example(source, testdir, monkeypatch):
     """Run decider"""
+    source = power.link(source)
     cmd = f'-i {source}'
     tests.run_decider(cmd, monkeypatch=monkeypatch)
 
