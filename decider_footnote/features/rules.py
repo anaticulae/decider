@@ -237,3 +237,26 @@ def footnote_exception(text: str) -> bool:
     diff = len(text) - len(detected)
     assert diff >= 0, str(diff)
     return diff <= MAX_FOOTENOTE_EXCEPTION_CHARS
+
+
+SOLUTION_R2017 = """\
+Quellenangabe uneindeutig
+
+Vermeiden Sie **Ebd.** am Anfang der Fußnoten auf einer neuen Seite \
+(Fußnote: {{number}}).
+
+Empfehlung: Komplette Quellenangabe am Seitenanfang um auch bei einzeln \
+kopierten Seiten komplette Quellenangaben zu erhalten.
+
+{text/fussnote#struktur}
+"""
+
+SOLUTION_R2018 = """\
+Fußnote verstreut
+
+Vermeiden Sie die Fußnoten über mehrere Seiten zu verteilen.
+
+# TODO: IF WORD, ADD LINK TO ARTICLE
+
+{text/fussnote#struktur}
+"""
