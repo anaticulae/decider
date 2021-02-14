@@ -65,7 +65,7 @@ def linting(footer, linter: protocol.Linter):
     location = iamraw.Location.from_page(footer.page)
 
     checkers = protocol.parse_checkers(__name__)
-    group = {2017, 2018}
+    group = {2017, 2018, 2019}
     for checker in checkers:
         call = functools.partial(
             linter.add_finding,
@@ -283,3 +283,20 @@ def check_2018_footnote_over_pages(linter, content):
         # TODO: IMPROVE THIS CHECK
         return
     linter()
+
+
+SOLUTION_R2019 = """\
+Fußnote dupliziert, vermeiden Sie Redundanz
+
+Identisch, aufeinander folgende Fußnoten erkannt. Verwenden Sie **ebd. \
+order ???** um identische Fußnoten darzustellen.
+
+{text/fussnote#struktur}
+"""
+
+
+def check_2019_duplicated_footnote(linter, content):
+    for current, after in zip(content[:-1], content[1:]):
+        if current.text.strip() != after.text.strip():
+            continue
+        linter()

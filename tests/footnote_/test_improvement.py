@@ -19,6 +19,11 @@ def home18(findings):
     assert protocol.count_findings(findings, 2018) == 1
 
 
+# def bachelor85(findings):
+#     # TODO: ENABLE AFTER FIXING RAWMAKER
+#     assert protocol.count_findings(findings, 2019)
+
+
 @pytest.mark.parametrize('source, expected', [
     pytest.param(power.HOME018_PDF, home18, id='home18'),
 ])
