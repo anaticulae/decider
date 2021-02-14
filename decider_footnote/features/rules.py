@@ -32,53 +32,30 @@ DISABLE_2002_DOT_END = 0.15
 DISABLE_MIN_FOOTNOTE_COUNT = 15
 
 
-def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
-    linter = protocol.from_module(__name__)
+def work(footerheader: str, pages: tuple = None) -> protocol.ResultType:
+    # load data
+    footnotes = serializeraw.load_footnotes(footerheader, pages)
+    # TODO: REPLACE WITH utila.flatten_content
+    footnotes_flat = utila.flatten([item.content for item in footnotes])
+    driver = protocol.driver(footnotes=footnotes_flat, footnote_page=footnotes)
+    # run linting
+    result = protocol.run(__name__, driver=driver, before_dump=before_dump)
+    return result
 
-    headerfooters = serializeraw.load_footnotes(footerheader, pages)
 
-    for footer in headerfooters:
-        # run linter
-        linting(footer, linter)
-
-    if headerfooters:
-        footnote_count = sum([len(item.content) for item in headerfooters])
-    else:
+def before_dump(result, driver, linter):
+    footnote_count = len(driver.footnotes)
+    if not footnote_count:
         utila.info('no headerfooters')
-        footnote_count = 0
-
-    send_footnote_pattern_information(
-        linter.add_finding,
-        linter.result(unique=True),
-        footnote_count,
-    )
-
-    result = linter.result(unique=True)
-
-    result = judge_active(result, footnote_count)
-
-    user, developer = protocol.dump_result(result)
-    return user, developer
-
-
-def linting(footer, linter: protocol.Linter):
-    location = iamraw.Location.from_page(footer.page)
-
-    checkers = protocol.parse_checkers(__name__)
-    group = {2017, 2018, 2019}
-    for checker in checkers:
-        call = functools.partial(
+    else:
+        send_footnote_pattern_information(
             linter.add_finding,
-            msgid=checker.msgid,
-            location=location,
+            result,
+            footnote_count,
         )
-        msgid = utila.parse_numbers(str(checker))[0]  # TODO: DIRTY
-        if not msgid in group:
-            for item in footer.content:
-                checker(call, item)
-        else:
-            # pass footnotes group of one page to linter
-            checker(call, footer.content)
+        result = linter.result()
+    result = judge_active(result, footnote_count)
+    return result
 
 
 SOLUTION_2001 = """\
@@ -93,30 +70,27 @@ Großbuchstaben.
 QUOTATION_SIGNS = '„‚’"”“'  # TODO: REPLACE WITH MORE GENERAL PLACE
 
 
-def check_2001_no_uppercase_at_start(linter, item):
+def check_2001_no_uppercase_at_start(linter, driver):
     """Ensure that footnote starts with uppercase letter.
 
     Quotation character before first uppercase letter are allowed.
     """
-    text = item.text.strip()
-    firstchar = text[0]
+    for footnote in driver.footnotes:
+        text = footnote.text.strip()
+        firstchar = text[0]
 
-    if firstchar.isupper():
-        return
-
-    if firstchar.isnumeric():
-        # start with number
-        return
-
-    if firstchar in QUOTATION_SIGNS:
-        # start with quotation
-        return
-
-    if footnote_exception(text):
-        # disable for mails and hyperlinks
-        return
-
-    linter(number=item.number)
+        if firstchar.isupper():
+            continue
+        if firstchar.isnumeric():
+            # start with number
+            continue
+        if firstchar in QUOTATION_SIGNS:
+            # start with quotation
+            continue
+        if footnote_exception(text):
+            # disable for mails and hyperlinks
+            continue
+        linter(number=footnote.number)
 
 
 SOLUTION_2002 = """\
@@ -128,23 +102,21 @@ Fügen Sie einen Punkt am Ende der Fußnote {{number}} hinzu.
 """
 
 
-def check_2002_no_dot_at_end(linter, item):
+def check_2002_no_dot_at_end(linter, driver):
     """Ensure that footnote is closed with an dot '.'."""
-    text = item.text.strip()
-    lastchar = text[-1]
+    for footnote in driver.footnotes:
+        text = footnote.text.strip()
+        lastchar = text[-1]
 
-    if lastchar == '.':
-        return
-
-    if lastchar in QUOTATION_SIGNS and text[-2] == '.':
-        # end with quotation .“
-        return
-
-    if footnote_exception(text):
-        # disable for mails and hyperlinks
-        return
-
-    linter(number=item.number)
+        if lastchar == '.':
+            continue
+        if lastchar in QUOTATION_SIGNS and text[-2] == '.':
+            # end with quotation .“
+            continue
+        if footnote_exception(text):
+            # disable for mails and hyperlinks
+            continue
+        linter(number=footnote.number)
 
 
 def judge_active(items, footnote_count: int):
@@ -171,8 +143,8 @@ def disabled(items, footnote_count: int):
         # disable judeging
         utila.info(f'to few footnotes({footnote_count}) to judge disabling')
         return False, False
-    count_2001 = len([item.number == 2001 for item in items])
-    count_2002 = len([item.number == 2002 for item in items])
+    count_2001 = protocol.count_findings(items, 2001)
+    count_2002 = protocol.count_findings(items, 2002)
 
     not_uppercased = utila.roundme(count_2001 / footnote_count)
     not_dotted = utila.roundme(count_2002 / footnote_count)
@@ -258,11 +230,13 @@ kopierten Seiten komplette Quellenangaben zu erhalten.
 """
 
 
-def check_2017_ambiguous_reference(linter, content):
-    first = content[0].text.lower()
-    if not 'ebd.' in first:
-        return
-    linter(number=content[0].number)
+def check_2017_ambiguous_reference(linter, driver):
+    for page in driver.footnote_page:
+        content = page.content
+        first = content[0].text.lower()
+        if not 'ebd.' in first:
+            continue
+        linter(number=content[0].number)
 
 
 SOLUTION_R2018 = """\
@@ -276,13 +250,15 @@ Vermeiden Sie die Fußnoten über mehrere Seiten zu verteilen.
 """
 
 
-def check_2018_footnote_over_pages(linter, content):
-    first = content[0]
-    if first.number != -1:
-        # TODO: HOW TO DECIDE BETWEEN PARSING ERROR
-        # TODO: IMPROVE THIS CHECK
-        return
-    linter()
+def check_2018_footnote_over_pages(linter, driver):
+    for page in driver.footnote_page:
+        content = page.content
+        first = content[0]
+        if first.number != -1:
+            # TODO: HOW TO DECIDE BETWEEN PARSING ERROR
+            # TODO: IMPROVE THIS CHECK
+            continue
+        linter()
 
 
 SOLUTION_R2019 = """\
@@ -295,8 +271,10 @@ order ???** um identische Fußnoten darzustellen.
 """
 
 
-def check_2019_duplicated_footnote(linter, content):
-    for current, after in zip(content[:-1], content[1:]):
-        if current.text.strip() != after.text.strip():
-            continue
-        linter()
+def check_2019_duplicated_footnote(linter, driver):
+    for footnote_page in driver.footnote_page:
+        footnote_page = footnote_page.content
+        for current, after in zip(footnote_page[:-1], footnote_page[1:]):
+            if current.text.strip() != after.text.strip():
+                continue
+            linter()

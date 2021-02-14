@@ -10,6 +10,7 @@
 import os
 
 import power
+import protocol
 import serializeraw
 import utila
 
@@ -58,16 +59,16 @@ def test_cli_footnote_disabled_checker(testdir, monkeypatch):  # pylint:disable=
     cmd = f'-i {power.link(power.BACHELOR076_PDF)} -o {root} --rules'
     tests.footnote_.run(cmd, monkeypatch=monkeypatch)
 
-    rules = decider_footnote.path.rules(root)
+    rules = serializeraw.load_findings(decider_footnote.path.rules(root))
 
+    result = protocol.count_findings(rules, 2001)
+    assert result == 1
     # ensure that checker is disabled
-    result = serializeraw.load_findings(rules, 2001)
-    assert not result
-    result = serializeraw.load_findings(rules, 2002)
+    result = protocol.count_findings(rules, 2002)
     assert not result
 
     # ensure that info message was send
-    result = serializeraw.load_findings(rules, 2013)
-    assert len(result) == 1
-    result = serializeraw.load_findings(rules, 2012)
-    assert len(result) == 1
+    result = protocol.count_findings(rules, 2013)
+    assert result == 1
+    result = protocol.count_findings(rules, 2012)
+    assert not result
