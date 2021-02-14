@@ -12,6 +12,8 @@ Footnotes
 =========
 """
 
+import math
+
 import protocol
 import serializeraw
 import utila
@@ -131,6 +133,41 @@ Es wird empfohlen sämtliche Fußnoten durch einen Punkt abzuschließen.
 
 {text/fussnote#struktur}
 """
+
+SOLUTION_R2015 = """\
+Fußnoten Separator zu klein/groß
+
+...
+"""
+
+SOLUTION_E2016 = """\
+Fußnoten Separator Position
+
+Abstand der horizontalen Linie zur Fußnote zu groß.
+
+See theissen fussnoten balken
+"""
+
+SEPARATOR_FOOTNOTE_MAX_DISTANCE = 15  # TODO: HOLY VALUE
+
+
+def check_2016_footnote_separator_position(linter, driver):
+    horizontals = driver.horizontals
+    for page in driver.footnotes_pages:
+        pagenumber = page.page
+        current = utila.select_content(horizontals, pagenumber)
+        if not current:
+            # TODO: ADD MISSING HORIZONTAL LINE?
+            continue
+        separator = sorted(current, key=lambda x: x.box[3], reverse=True)[0]
+        separator_y0 = separator.box.y0
+        firstfootnote_y0 = page.content[0].bounding[1]
+        # judge
+        distance = math.fabs(separator_y0 - firstfootnote_y0)
+        if distance < SEPARATOR_FOOTNOTE_MAX_DISTANCE:
+            continue
+        linter()
+
 
 SOLUTION_R2017 = """\
 Quellenangabe uneindeutig

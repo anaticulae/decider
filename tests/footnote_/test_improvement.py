@@ -19,6 +19,11 @@ def home18(findings):
     assert protocol.count_findings(findings, 2018) == 1
 
 
+def bachelor128(findings):
+    # TODO: MERGE THIS FINDING?
+    assert protocol.count_findings(findings, 2016) == 10
+
+
 # def bachelor85(findings):
 #     # TODO: ENABLE AFTER FIXING RAWMAKER
 #     assert protocol.count_findings(findings, 2019)
@@ -26,6 +31,7 @@ def home18(findings):
 
 @pytest.mark.parametrize('source, expected', [
     pytest.param(power.HOME018_PDF, home18, id='home18'),
+    pytest.param(power.BACHELOR128_PDF, bachelor128, id='bachelor128'),
 ])
 def test_footnote_rules_improvement(source, expected, testdir, monkeypatch):
     """Run decider"""
