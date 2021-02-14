@@ -16,9 +16,9 @@ import serializeraw
 import utila
 import utilatest
 
-import decider_footnote.features.rules
 import decider_footnote.features.style
 import decider_footnote.footnote
+import decider_footnote.rules.start
 import tests.footnote_
 
 
@@ -127,7 +127,7 @@ def test_footnote_email_exception(testdir, monkeypatch):
     with monkeypatch.context() as context:
         # disable exception to verify that this method is required
         context.setattr(
-            decider_footnote.features.rules,
+            decider_footnote.rules.start,
             'footnote_exception',
             lambda _: False,
         )
