@@ -102,6 +102,7 @@ def test_textflow_character_missing_space_before_semicolon(testdir, monkeypatch)
 
 
 @pytest.mark.xfail(reason='formula is badly converted to non existing semicolon') # yapf:disable
+@utilatest.longrun
 def test_missing_space_after_semicolon_master110_page59(
         testdir,
         monkeypatch,

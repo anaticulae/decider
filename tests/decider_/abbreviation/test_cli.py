@@ -10,6 +10,7 @@
 import power
 import pytest
 import utila
+import utilatest
 
 import tests
 
@@ -21,6 +22,7 @@ import tests
         id='bachelor37',
     ),
 ])
+@utilatest.longrun
 def test_cli_groupme_abbreviation_table(source, pages, testdir, monkeypatch):
     """Run decider"""
     root = testdir.tmpdir
@@ -39,6 +41,7 @@ def test_cli_groupme_abbreviation_table(source, pages, testdir, monkeypatch):
         id='bachelor37',
     ),
 ])
+@utilatest.longrun
 def test_cli_groupme_abbreviation_text(source, pages, testdir, monkeypatch):
     """Run decider"""
     root = testdir.tmpdir
