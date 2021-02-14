@@ -65,14 +65,20 @@ def linting(footer, linter: protocol.Linter):
     location = iamraw.Location.from_page(footer.page)
 
     checkers = protocol.parse_checkers(__name__)
+    group = {2017, 2018}
     for checker in checkers:
         call = functools.partial(
             linter.add_finding,
             msgid=checker.msgid,
             location=location,
         )
-        for item in footer.content:
-            checker(call, item)
+        msgid = utila.parse_numbers(str(checker))[0]  # TODO: DIRTY
+        if not msgid in group:
+            for item in footer.content:
+                checker(call, item)
+        else:
+            # pass footnotes group of one page to linter
+            checker(call, footer.content)
 
 
 SOLUTION_2001 = """\
@@ -250,6 +256,14 @@ kopierten Seiten komplette Quellenangaben zu erhalten.
 
 {text/fussnote#struktur}
 """
+
+
+def check_2017_ambiguous_reference(linter, content):
+    first = content[0].text.lower()
+    if not 'ebd.' in first:
+        return
+    linter(number=content[0].number)
+
 
 SOLUTION_R2018 = """\
 Fußnote verstreut
