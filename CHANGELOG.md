@@ -2,6 +2,15 @@
 
 Every noteable change is logged here.
 
+## v2.5.0
+
+### Feature
+
+* add method to inform about reducing footnote redundancy (3eb89485adae)
+* add footnote crowded over pages check (9d92f0237d05)
+* detect ebd. at start of page footnotes (cf086301e985)
+* ease importing path (b5cbe7ed1436)
+
 ## v2.4.4
 
 ### Feature
