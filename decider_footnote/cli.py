@@ -29,6 +29,7 @@ WORKPLAN = [
         'rules',
         [
             utila.ResultFile('groupme', 'footer_footerheader'),
+            utila.ResultFile('rawmaker', 'horizontals_horizontals'),
         ],
         (USER, DEVELOPER),
     ),

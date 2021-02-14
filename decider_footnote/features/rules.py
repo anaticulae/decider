@@ -19,12 +19,21 @@ import utila
 import decider_footnote.rules.start
 
 
-def work(footerheader: str, pages: tuple = None) -> protocol.ResultType:
+def work(
+        footerheader: str,
+        horizontals: str,
+        pages: tuple = None,
+) -> protocol.ResultType:
     # load data
     footnotes = serializeraw.load_footnotes(footerheader, pages)
     # TODO: REPLACE WITH utila.flatten_content
     footnotes_flat = utila.flatten([item.content for item in footnotes])
-    driver = protocol.driver(footnotes=footnotes_flat, footnotes_pages=footnotes)
+    horizontals = serializeraw.load_horizontals(horizontals, pages=pages)
+    driver = protocol.driver(
+        footnotes=footnotes_flat,
+        footnotes_pages=footnotes,
+        horizontals=horizontals,
+    )
     # run linting
     result = protocol.run(__name__, driver=driver, before_dump=before_dump)
     return result
