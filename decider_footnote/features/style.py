@@ -36,7 +36,7 @@ def work(
 ) -> typing.Tuple[str, str]:
     linter = protocol.from_module(__name__)
 
-    headerfooters = decider_footnote.footnote.load(footerheader, pages)
+    headerfooters = serializeraw.load_footnotes(footerheader, pages)
     footnotes = utila.flatten([item.content for item in headerfooters if item])
     fontconfig = decider_footnote.footnote.most_common_font(footnotes)
 

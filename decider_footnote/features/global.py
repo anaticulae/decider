@@ -16,16 +16,16 @@ import functools
 import typing
 
 import protocol
+import serializeraw
 import utila
 
 import decider.features
-import decider_footnote.footnote
 
 
 def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
     linter = protocol.from_module(__name__)
 
-    headerfooters = decider_footnote.footnote.load(footerheader, pages)
+    headerfooters = serializeraw.load_footnotes(footerheader, pages)
 
     linting(headerfooters, linter)
 

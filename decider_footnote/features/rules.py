@@ -18,10 +18,10 @@ import typing
 import german
 import iamraw
 import protocol
+import serializeraw
 import utila
 
 import decider.features
-import decider_footnote.footnote
 
 DISABLE_2001_UPPER_CASE = 0.15
 DISABLE_2002_DOT_END = 0.15
@@ -35,7 +35,7 @@ DISABLE_MIN_FOOTNOTE_COUNT = 15
 def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
     linter = protocol.from_module(__name__)
 
-    headerfooters = decider_footnote.footnote.load(footerheader, pages)
+    headerfooters = serializeraw.load_footnotes(footerheader, pages)
 
     for footer in headerfooters:
         # run linter

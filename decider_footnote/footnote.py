@@ -17,21 +17,10 @@
 [Wissenschaftliches Schreiben - Manuel Rene Theisen: page 202]
 """
 
-import collections
 import dataclasses
-import os
-import typing
 
 import iamraw
-import iamraw.path
-import serializeraw
 import utila
-
-PageContentFootnote = collections.namedtuple(
-    'PageContentFootnotes',
-    'content, page',
-)
-PageContentFootnotes = typing.List[PageContentFootnote]
 
 
 @dataclasses.dataclass
@@ -57,47 +46,6 @@ class Validated:
     @property
     def valid(self):
         return self.uppercase and self.ends
-
-
-def footnotes(headerfooters: iamraw.PageContentFooterHeaders,
-             ) -> PageContentFootnotes:
-    result = []
-    for item in headerfooters:
-        try:
-            selected = item.footer.notes
-        except AttributeError:
-            pass
-        else:
-            assert selected
-            result.append(PageContentFootnote(content=selected, page=item.page))
-    return result
-
-
-def load(path: str, pages: tuple = None) -> PageContentFootnotes:
-    """Load list of `PageContentFootnote` from given `path`
-
-    Args:
-        path: path to content file
-        pages: tuple of pages to process
-    Returns:
-        loaded list of PageContentFootnote
-    """
-    loaded = serializeraw.load_headerfooter(path, pages=pages)
-    selected = footnotes(loaded)
-    return selected
-
-
-def load_frompath(
-        path: str,
-        prefix: str = '',
-        pages: tuple = None,
-) -> PageContentFootnotes:
-    """Determine path to footer file from given directory `path` and
-    optional `prefix`."""
-    assert os.path.isdir(path), f'invalid result directory {path}'
-    source = iamraw.path.headerfooters(path, prefix=prefix)
-    loaded = load(source, pages=pages)
-    return loaded
 
 
 def most_common_font(items: iamraw.FootNotes) -> FootNoteStyle:

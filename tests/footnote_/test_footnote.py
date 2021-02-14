@@ -24,7 +24,7 @@ import tests.footnote_
 
 @pytest.fixture
 def example():
-    loaded = decider_footnote.footnote.load_frompath(
+    loaded = serializeraw.load_footnotes(
         power.link(power.MASTER072_PDF),
         pages=(3),
     )
