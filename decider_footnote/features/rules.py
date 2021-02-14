@@ -274,3 +274,12 @@ Vermeiden Sie die Fußnoten über mehrere Seiten zu verteilen.
 
 {text/fussnote#struktur}
 """
+
+
+def check_2018_footnote_over_pages(linter, content):
+    first = content[0]
+    if first.number != -1:
+        # TODO: HOW TO DECIDE BETWEEN PARSING ERROR
+        # TODO: IMPROVE THIS CHECK
+        return
+    linter()

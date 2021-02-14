@@ -17,6 +17,7 @@ import tests.footnote_
 def home18(findings):
     findings = protocol.flat(findings)
     assert protocol.count_findings(findings, 2017) == 8
+    assert protocol.count_findings(findings, 2018) == 1
 
 
 @pytest.mark.parametrize('source, expected', [
