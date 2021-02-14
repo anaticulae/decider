@@ -15,7 +15,6 @@ import tests.footnote_
 
 
 def home18(findings):
-    findings = protocol.flat(findings)
     assert protocol.count_findings(findings, 2017) == 8
     assert protocol.count_findings(findings, 2018) == 1
 
@@ -29,4 +28,5 @@ def test_footnote_rules_improvement(source, expected, testdir, monkeypatch):
     cmd = f'-i {source} --rules'
     tests.footnote_.run(cmd, monkeypatch=monkeypatch)
     loaded = protocol.findings_from_path(testdir.tmpdir)
-    expected(loaded)
+    findings = protocol.flat(loaded)
+    expected(findings)
