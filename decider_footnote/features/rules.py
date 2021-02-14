@@ -24,7 +24,7 @@ def work(footerheader: str, pages: tuple = None) -> protocol.ResultType:
     footnotes = serializeraw.load_footnotes(footerheader, pages)
     # TODO: REPLACE WITH utila.flatten_content
     footnotes_flat = utila.flatten([item.content for item in footnotes])
-    driver = protocol.driver(footnotes=footnotes_flat, footnote_page=footnotes)
+    driver = protocol.driver(footnotes=footnotes_flat, footnotes_pages=footnotes)
     # run linting
     result = protocol.run(__name__, driver=driver, before_dump=before_dump)
     return result
@@ -137,7 +137,7 @@ kopierten Seiten komplette Quellenangaben zu erhalten.
 
 
 def check_2017_ambiguous_reference(linter, driver):
-    for page in driver.footnote_page:
+    for page in driver.footnotes_pages:
         content = page.content
         first = content[0].text.lower()
         if not 'ebd.' in first:
@@ -157,7 +157,7 @@ Vermeiden Sie die Fußnoten über mehrere Seiten zu verteilen.
 
 
 def check_2018_footnote_over_pages(linter, driver):
-    for page in driver.footnote_page:
+    for page in driver.footnotes_pages:
         content = page.content
         first = content[0]
         if first.number != -1:
@@ -178,9 +178,9 @@ order ???** um identische Fußnoten darzustellen.
 
 
 def check_2019_duplicated_footnote(linter, driver):
-    for footnote_page in driver.footnote_page:
-        footnote_page = footnote_page.content
-        for current, after in zip(footnote_page[:-1], footnote_page[1:]):
+    for footnotes_pages in driver.footnotes_pages:
+        footnotes_pages = footnotes_pages.content
+        for current, after in zip(footnotes_pages[:-1], footnotes_pages[1:]):
             if current.text.strip() != after.text.strip():
                 continue
             linter()
