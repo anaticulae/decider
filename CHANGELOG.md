@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v2.6.0
+
+### Feature
+
+* add max distance footnote separator check (60adf82f1740)
+* add horizontals resource (cbd4a7c885a4)
+
 ## v2.5.0
 
 ### Feature
