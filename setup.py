@@ -47,6 +47,7 @@ if __name__ == "__main__":
             'decider.utils',
             'decider_footnote',
             'decider_footnote.features',
+            'decider_footnote.rules',
             'decider_smarty',
             'decider_smarty.features',
             'decider_textflow',
