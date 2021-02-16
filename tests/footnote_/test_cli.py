@@ -22,13 +22,11 @@ def test_decider_footnote_cli_help(monkeypatch):
     tests.footnote_.run('--help', monkeypatch=monkeypatch)
 
 
-def test_cli_rules(testdir, monkeypatch):  # pylint:disable=W0621
-    root = str(testdir)
-
-    cmd = f'-i {power.link(power.MASTER072_PDF)} -o {root} --rules'
+def test_cli_rules(testdir, monkeypatch):
+    cmd = f'-i {power.link(power.MASTER072_PDF)} -o {testdir.tmpdir} --rules'
     tests.footnote_.run(cmd, monkeypatch=monkeypatch)
 
-    outpath = decider_footnote.path.rules(root)
+    outpath = decider_footnote.path.rules(testdir.tmpdir)
     assert os.path.exists(outpath), outpath
 
     dumped = utila.file_read(outpath)
@@ -41,25 +39,20 @@ def test_cli_rules(testdir, monkeypatch):  # pylint:disable=W0621
     assert utila.istemplate_replaced(dumped), dumped
 
 
-def test_cli_footnote_global(testdir, monkeypatch):  # pylint:disable=W0621
-    root = str(testdir)
-
-    cmd = f'-i {power.link(power.BACHELOR090_PDF)} -o {root} --global'
+def test_cli_footnote_global(testdir, monkeypatch):
+    cmd = f'-i {power.link(power.BACHELOR090_PDF)} -o {testdir.tmpdir} --global'
     tests.footnote_.run(cmd, monkeypatch=monkeypatch)
-
-    global_ = decider_footnote.path.global_(root)
-    # TODO: REPLACE AFTER UPGRADING TO NEW PROTOCOL
+    global_ = decider_footnote.path.global_(testdir.tmpdir)
     result = serializeraw.load_findings(global_, 2015)
     assert len(result) == 1
 
 
-def test_cli_footnote_disabled_checker(testdir, monkeypatch):  # pylint:disable=W0621
-    root = str(testdir)
-
-    cmd = f'-i {power.link(power.BACHELOR076_PDF)} -o {root} --rules'
+def test_cli_footnote_disabled_checker(testdir, monkeypatch):
+    cmd = f'-i {power.link(power.BACHELOR076_PDF)} -o {testdir.tmpdir} --rules'
     tests.footnote_.run(cmd, monkeypatch=monkeypatch)
 
-    rules = serializeraw.load_findings(decider_footnote.path.rules(root))
+    rules = decider_footnote.path.rules(testdir.tmpdir)
+    rules = serializeraw.load_findings(rules)
 
     result = protocol.count_findings(rules, 2001)
     assert result == 1
