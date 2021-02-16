@@ -28,8 +28,7 @@ def work(
 ) -> protocol.ResultType:
     # load data
     footnotes = serializeraw.load_footnotes(footerheader, pages)
-    # TODO: REPLACE WITH utila.flatten_content
-    footnotes_flat = utila.flatten([item.content for item in footnotes])
+    footnotes_flat = utila.flatten_content(footnotes)
     horizontals = serializeraw.load_horizontals(horizontals, pages=pages)
     driver = protocol.driver(
         footnotes=footnotes_flat,
