@@ -34,8 +34,3 @@ f¨ur den Nachweis selbst
 Menke 2015
 
 * support Roman page numbers in PageDistance Computation and Checks
-
-technical
----------
-
-* Introduce jinja2 as template engine
