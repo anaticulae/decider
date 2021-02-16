@@ -7,6 +7,8 @@ backlog
 * add toc rating number?
 * footnote distance checker
 
+* titlepage: increase size of titlepage headline hint
+
 citomas
 -------
 
