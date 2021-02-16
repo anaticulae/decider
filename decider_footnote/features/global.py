@@ -19,8 +19,6 @@ import protocol
 import serializeraw
 import utila
 
-import decider.features
-
 
 def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
     linter = protocol.from_module(__name__)
@@ -86,7 +84,7 @@ def check_2015_endnotes_using(linter, footnotes):
     if rate <= MIN_STARTING_RATE:
         return
 
-    linter(location=decider.features.OVERVIEW)
+    linter(location=protocol.OVERVIEW)
 
 
 def group_raising(items: utila.Numbers):

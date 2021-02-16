@@ -11,8 +11,6 @@ import german
 import protocol
 import utila
 
-import decider.features
-
 DISABLE_2001_UPPER_CASE = 0.15
 DISABLE_2002_DOT_END = 0.15
 
@@ -51,12 +49,12 @@ def send_footnote_pattern_information(linter, items, footnote_count: int):
     if disable_2001:
         linter(
             msgid=2012,
-            location=decider.features.OVERVIEW,
+            location=protocol.OVERVIEW,
         )
     if disable_2002:
         linter(
             msgid=2013,
-            location=decider.features.OVERVIEW,
+            location=protocol.OVERVIEW,
         )
 
 

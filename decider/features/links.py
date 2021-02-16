@@ -104,7 +104,7 @@ def check_10520_hyperlink_mixed_date_exists(linter: callable, driver):
     dates = [item.visited for item in driver.hyperlinks if item.visited]
     if not decider.links.date.is_mixed(dates):
         return
-    linter(location=decider.features.OVERVIEW)
+    linter(location=protocol.OVERVIEW)
 
 
 SOLUTION_W6016 = """\

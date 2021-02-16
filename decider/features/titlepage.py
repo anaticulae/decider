@@ -20,8 +20,6 @@ import protocol
 import serializeraw
 import utila
 
-import decider.features
-
 TITLEPAGE_CHECKER_ID = 12
 
 
@@ -67,7 +65,7 @@ Fügen Sie eine Titelseite zum Dokument hinzu.
 def check_1200_titlepage_existence(linter, titlepage):
     if titlepage is not None:
         return
-    linter(location=decider.features.OVERVIEW)
+    linter(location=protocol.OVERVIEW)
 
 
 SOLUTION_E1220 = """\
