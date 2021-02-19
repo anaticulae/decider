@@ -14,6 +14,7 @@ Footnotes
 
 import math
 
+import iamraw
 import protocol
 import serializeraw
 import utila
@@ -165,7 +166,7 @@ def check_2016_footnote_separator_position(linter, driver):
         distance = math.fabs(separator_y0 - firstfootnote_y0)
         if distance < SEPARATOR_FOOTNOTE_MAX_DISTANCE:
             continue
-        linter()
+        linter(location=iamraw.Location.from_page(pagenumber))
 
 
 SOLUTION_R2017 = """\
