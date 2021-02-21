@@ -51,7 +51,7 @@ def check_character(linter, driver, regex):
 
         text = item.text
         # TODO: SUPPORT MULTIPLE ERRORS IN ONE LINE
-        matched = re.finditer(regex, text, flags=re.VERBOSE)
+        matched = re.finditer(regex, text, flags=re.VERBOSE | re.I)
         if not matched:
             continue
 
@@ -297,6 +297,27 @@ def check_7663_missing_minus_number_jaehrig(linter: callable, driver):
     2
     """
     check_character(linter, driver, MISSING_MINUS_BETWEEN)
+
+
+SOLUTION_7665 = """\
+Unnötige Genauigkeit
+
+Zahlen geschrieben als Ziffern symbolisieren eine exakte Genauigkeit. \
+Diese Genauigkeit wird durch den Zusatz **circa, ca. oder etwa** \
+relativiert. Schreiben Sie die Zahl aus um dies deutlich zu machen.
+
+TODO: ADD LINK
+"""
+
+WRONG_ACCURACY = r'(etwa|circa|\bca\.?\b)[ ]{0,4}\d+'
+
+
+def check_7665_wrong_accuracy(linter: callable, driver):
+    """\
+    >>> message('Etwa 1000 Einwohner wohnen hier. Circa 12 Menschen wohnen hier.', 7665)
+    2
+    """
+    check_character(linter, driver, WRONG_ACCURACY)
 
 
 def message(lines: list, msgid=None, page=0):
