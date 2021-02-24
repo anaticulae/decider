@@ -52,8 +52,7 @@ Fehlendes Leerzeichen
 Zwischen Skalar **{{value}}** und Einheit **{{unit}}** fehlt ein \
 Leerzeichen.
 
-TODO: ADD LINK
-DUDEN
+{darstellung/schreibweise}
 """
 
 UNITS = r'%|‰|km/h|mmHg|mm|ms|m|cm|V|W|Hz|mW'

@@ -137,15 +137,15 @@ Es wird empfohlen sämtliche Fußnoten durch einen Punkt abzuschließen.
 SOLUTION_R2015 = """\
 Fußnoten Separator zu klein/groß
 
-...
+{text/fussnote#zitierstrich}
 """
 
 SOLUTION_E2016 = """\
-Fußnoten Separator Position
+Position des Zitierstrichs fehlerhaft
 
 Abstand der horizontalen Linie zur Fußnote zu groß.
 
-See theissen fussnoten balken
+{text/fussnote#zitierstrich}
 """
 
 SEPARATOR_FOOTNOTE_MAX_DISTANCE = 15  # TODO: HOLY VALUE

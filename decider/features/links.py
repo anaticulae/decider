@@ -95,6 +95,7 @@ Format:
 
 YYYY.MM.DD oder DD.MM.YYYY.
 
+{darstellung/schreibweise#datum-und-uhrzeit}
 {darstellung/hyperlink}
 TODO: Add Dates link
 """
@@ -112,8 +113,8 @@ Uneindeutige Datum erkannt
 
 Jahreszahl **{{date}}** weicht vom erkannten Datums-Standard ab.
 
+{darstellung/schreibweise#datum-und-uhrzeit}
 {darstellung/hyperlink}
-TODO: Add Dates link
 """
 
 

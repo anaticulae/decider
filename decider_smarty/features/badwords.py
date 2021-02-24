@@ -56,7 +56,7 @@ Umgangssprache erkannt
 Vermeiden Sie **{{phrase}}** und ersetzen Sie diese durch eine \
 förmlichere Formulierung.
 
-TODO: ADD LINK
+{text/stilkunde/woerter/wortwahl}
 """
 
 
@@ -70,7 +70,7 @@ Pleonasma erkannt
 Vermeiden Sie **{{phrase}}** und reduzieren Sie diesen auf das \
 Wesentliche.
 
-TODO: ADD LINK
+{text/stilkunde/woerter/pleonasmen}
 """
 
 
@@ -83,7 +83,7 @@ Unnötige Vorsible
 
 Reduzieren Sie **{{phrase}}** indem Sie die unnötige Vorsilbe entfernen.
 
-TODO: ADD LINK
+TODO
 """
 
 

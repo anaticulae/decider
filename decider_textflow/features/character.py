@@ -70,6 +70,8 @@ SOLUTION_7650 = """\
 Unzuläßiges Leerzeichen vor Komma
 
 Ungültiges Leerzeichen vor einem Komma erkannt.
+
+{darstellung/satzzeichen#komma}
 """
 
 SPACE_BEFORE_COMMA = r'\s+\,'
@@ -87,6 +89,8 @@ SOLUTION_7651 = """\
 Fehlendes Leerzeichen nach Komma
 
 Fehlendes Leerzeichen nach einem Komma erkannt.
+
+{darstellung/satzzeichen#komma}
 """
 
 # TODO: ADD RISE to DISTINGUISH OF NORMAL NUMBERS
@@ -153,11 +157,11 @@ def check_7653_space_after_square_bracket(linter: callable, driver):
 
 
 SOLUTION_7654 = """\
-Leerzeichen vor Semicolon
+Leerzeichen vor Semikolon
 
-Unzuläßiges Leerzeichen vor Semicolon erkannt.
+Unzuläßiges Leerzeichen vor Semikolon erkannt.
 
-SIEHE SATZZEICHEN
+{darstellung/satzzeichen#semikolon}
 """
 
 SPACE_BEFORE_SEMICOLON = r'\s+\;'
@@ -172,7 +176,7 @@ Fehlendes Leerzeichen nach Semicolon
 
 Fehlendes Leerzeichen nach Semicolon erkannt.
 
-SIEHE SATZZEICHEN
+{darstellung/satzzeichen#semikolon}
 """
 
 MISSING_SPACE_AFTER_SEMICOLON = r'\;[^\s]'
@@ -186,6 +190,8 @@ SOLUTION_7656 = """\
 Fehlerhaftes Auslassungszeichen
 
 Gefunden **[ ]** ersetzen Sie es durch **[...]**
+
+{darstellung/satzzeichen#auslassungspunkte}
 """
 
 MISSING_DOTS_BETWEEN_ANGLE_BRACKETS = r'\[\s*\]'
@@ -236,7 +242,7 @@ Schrägstrich: Überflüssiges Leerzeichen
 
 Vor und nach einem Schrägstrich wird kein Leerzeichen gesetzt.
 
-Siehe Duden
+{darstellung/satzzeichen#divis}
 """
 
 SPACE_BEFORE_OR_AFTER_SLASH = r'(\s+/\s+|\s+/|/\s+)'
@@ -259,7 +265,7 @@ Fehlendes Leerzeichen nach Paragraf
 
 Zwischen Paragrafzeichen und der Paragrafnummer wird ein Festabstand gesetzt.
 
-Siehe Duden
+{darstellung/satzzeichen#paragrafzeichen}
 """
 
 SPACE_AFTER_PARAGRAPH = r'§\d+[a-z]?'
@@ -306,7 +312,7 @@ Zahlen geschrieben als Ziffern symbolisieren eine exakte Genauigkeit. \
 Diese Genauigkeit wird durch den Zusatz **circa, ca. oder etwa** \
 relativiert. Schreiben Sie die Zahl aus um dies deutlich zu machen.
 
-TODO: ADD LINK
+{darstellung/schreibweise#zahlen}
 """
 
 WRONG_ACCURACY = r'(etwa|circa|\bca\.?\b)[ ]{0,4}\d+'
