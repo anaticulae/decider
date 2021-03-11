@@ -36,6 +36,8 @@ def extract(
         pages: str = '0:10',
         worker: int = 12,
         base: str = None,
+        morefeatures: list = None,
+        selected: dict = None,
 ):
     """Run rawmaker, groupme, sections, words, detector, decider for
     given `files` and write result to `destination`.
@@ -47,20 +49,24 @@ def extract(
                     selection
         worker(int): number of threads to extract examples
         base(str): resource repository
+        morefeatures(list): add list to run additional runner
+        selected(dict): select runner to execute
     Raises:
         Exception: if Exception occurs while extracting file
     """
     assert len(files) >= 2 or base, ('require at least two '
                                      'files to determine output '
                                      'file names correctly or use `base`')
+    morefeatures = morefeatures + RUNNER if morefeatures is not None else RUNNER
+    selected = selected if selected is not None else SELECTED
     genex.extract(
         files=files,
         destination=destination,
         pages=pages,
-        morefeatures=RUNNER,
+        morefeatures=morefeatures,
         oneline=genex.ONELINE,
         rawmaker=genex.CONFIG,
         worker=worker,
         base=base,
-        **SELECTED,
+        **selected,
     )
