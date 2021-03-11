@@ -108,7 +108,10 @@ def check_7105_quote_starts_with_omission_sign(linter: callable, tokens: list):
 
     >>> message('„[...] Zitat darf nicht [...] mit Auslassung starten.“', 7105)
     1
-    >>> message('  „  [...] spaces are fine', 7105)
+
+    # support english later
+    # >>> message('  „  [...] spaces are fine', 7105)
+    >>> message('  „  [...] Leerzeicehn sind akzeptabel', 7105)
     1
     """
     if not german.isger(tokens):

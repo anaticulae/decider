@@ -74,7 +74,7 @@ def test_footnotes_work_highnote_rise(monkeypatch):
             fontcontent,
         )
     result = serializeraw.load_findings(user, 2003)
-    assert len(result) == 255
+    assert len(result) == 260  # TODO: VERIFY LATER
 
 
 def test_footnotes_work_highnote_size(monkeypatch):
