@@ -2,6 +2,17 @@
 
 Every noteable change is logged here.
 
+## v2.7.0
+
+### Feature
+
+* add links to brand new articles (2b3f315ba2d1)
+* warn about wrong accuracy (15b26740f0b0)
+
+### Fix
+
+* add missing page number (3ab97024035b)
+
 ## v2.6.0
 
 ### Feature
