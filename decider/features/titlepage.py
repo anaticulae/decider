@@ -71,7 +71,7 @@ def check_1200_titlepage_existence(linter, titlepage):
 SOLUTION_E1220 = """\
 Titelseite enthält keinen Autor
 
-Fügen Sie ihren Namen und eventuellen akademischen Grad auf
+Fügen Sie ihren Namen und eventuellen akademischen Grad auf \
 der Titelseite hinzu.
 
 {elemente/titelblatt#zwingend-notwendige-angaben}
@@ -106,7 +106,7 @@ def check_1221_author_matrikel_existence(linter, titlepage):
 SOLUTION_E1230 = """\
 Titelseite enthält keinen Prüfer
 
-Fügen Sie die Namen und die akademischen Grade der Prüfer auf der
+Fügen Sie die Namen und die akademischen Grade der Prüfer auf der \
 Titelseite hinzu.
 
 {elemente/titelblatt#zwingend-notwendige-angaben}
@@ -124,7 +124,7 @@ def check_1230_author_matrikel_existence(linter, titlepage):
 SOLUTION_E1210 = """\
 Titelseite enthält keinen Thesistyp
 
-Fügen Sie den Typ(Studienarbeit, Bachelorarbeit, Masterarbeit,
+Fügen Sie den Typ(Studienarbeit, Bachelorarbeit, Masterarbeit, \
 Doktorarbeit oder Dissertation) auf der Titelseite hinzu.
 
 {elemente/titelblatt#zwingend-notwendige-angaben}
