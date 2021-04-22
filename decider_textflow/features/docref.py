@@ -136,7 +136,7 @@ def reference_exists(reference: list, captions: set) -> bool:
     return not diff
 
 
-def reference_number(reference) -> int:
+def reference_number(reference: str) -> int:
     """\
     >>> reference_number('Abbildung 10: Verschiebung des Order')
     10
@@ -146,10 +146,12 @@ def reference_number(reference) -> int:
     splitted = german.word_tokenize(reference, validate_sentences=False)
     numbers = []
     for item in splitted:
+        # convert possible Mark to str to use str operation
+        item = str(item)
         # TODO: IMPROVE THIS APPROACH
         # enable converting int and float
         # cut last . in `2.7.`
-        item = item[:-1] if str(item)[-1] == '.' else item
+        item = item[:-1] if item[-1] == '.' else item
         if not utila.isnumber(item):
             continue
         try:
