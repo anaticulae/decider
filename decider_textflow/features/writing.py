@@ -70,7 +70,7 @@ def check_7600_text_perspective(linter: callable, driver):
             # list, quotation or something
             continue
 
-        words = german.split_words(item.text, validate_sentences=False)
+        words = german.word_tokenize(item.text, validate_sentences=False)
         words = [item.lower() for item in words if isinstance(item, str)]
         # TODO: DO NOT LINT IN QUOTATION
         invalid = [item for item in words if item in INVALID_PERSPECTIVE]

@@ -103,7 +103,7 @@ def determine_reference(reference, text) -> str:
         for sentence in section.content:
             if sentence_number == reference.sentence:
                 words = [
-                    konrad.mark2str(word) for word in german.split_words(
+                    konrad.mark2str(word) for word in german.word_tokenize(
                         sentence,
                         validate_sentences=False,
                     )
@@ -143,7 +143,7 @@ def reference_number(reference) -> int:
     >>> reference_number('Abb. 2.7.: Hybride Lokomotive Toshiba HD300 aus [Wik13]')
     2.7
     """
-    splitted = german.split_words(reference, validate_sentences=False)
+    splitted = german.word_tokenize(reference, validate_sentences=False)
     numbers = []
     for item in splitted:
         # TODO: IMPROVE THIS APPROACH
