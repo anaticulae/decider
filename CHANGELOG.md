@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v2.7.3
+
+### Fix
+
+* ensure that Mark is handled correctly (c0e05f41b131)
+* fix newlines (5d1dd5eadb90)
+
 ## v2.7.2
 
 ### Feature
