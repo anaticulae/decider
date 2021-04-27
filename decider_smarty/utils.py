@@ -32,7 +32,8 @@ def sentence_plain(sentence, marks) -> list:
 
 
 def selection_plain(items: list) -> str:
-    raw = ' '.join(items)
+    # ensure that Mark is converted
+    raw = ' '.join([str(item) for item in items])
     raw = raw.replace('( ', '(')
     raw = raw.replace(' )', ')')
     return raw
