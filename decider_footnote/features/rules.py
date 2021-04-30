@@ -143,7 +143,7 @@ Fußnoten Separator zu klein/groß
 SOLUTION_E2016 = """\
 Position des Zitierstrichs fehlerhaft
 
-Abstand der horizontalen Linie zur Fußnote zu groß.
+Abstand der horizontalen Linie zur ersten Fußnote zu groß.
 
 {text/fussnote#zitierstrich}
 """
