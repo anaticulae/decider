@@ -14,6 +14,7 @@ Footnotes
 
 import math
 
+import configo
 import iamraw
 import protocol
 import serializeraw
@@ -148,7 +149,8 @@ Abstand der horizontalen Linie zur ersten Fußnote zu groß.
 {text/fussnote#zitierstrich}
 """
 
-SEPARATOR_FOOTNOTE_MAX_DISTANCE = 15  # TODO: HOLY VALUE
+# TODO: ADD LOWER LIMIT
+SEPARATOR_FOOTNOTE_MAX_DISTANCE = configo.HV_INT_PLUS(30)
 
 
 def check_2016_footnote_separator_position(linter, driver):
