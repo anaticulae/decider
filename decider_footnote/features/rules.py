@@ -175,6 +175,7 @@ def check_2016_footnote_separator_position(linter, driver):
         if distance < SEPARATOR_FOOTNOTE_MAX_DISTANCE:
             continue
         linter(location=iamraw.Location.from_page(pagenumber))
+    # TODO: DISABLE TOO OFTEN SEPARATOR AND ADD GENERAL MESSAGE
 
 
 SOLUTION_R2017 = """\
