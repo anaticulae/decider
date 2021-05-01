@@ -89,7 +89,10 @@ def check_2001_no_uppercase_at_start(linter, driver):
         if decider_footnote.rules.start.footnote_exception(text):
             # disable for mails and hyperlinks
             continue
-        linter(number=footnote.number)
+        linter(
+            number=footnote.number,
+            location=iamraw.Location.from_page(footnote.page),
+        )
 
 
 SOLUTION_2002 = """\
@@ -115,7 +118,10 @@ def check_2002_no_dot_at_end(linter, driver):
         if decider_footnote.rules.start.footnote_exception(text):
             # disable for mails and hyperlinks
             continue
-        linter(number=footnote.number)
+        linter(
+            number=footnote.number,
+            location=iamraw.Location.from_page(footnote.page),
+        )
 
 
 SOLUTION_2012 = """\
@@ -190,7 +196,10 @@ def check_2017_ambiguous_reference(linter, driver):
         first = content[0].text.lower()
         if not 'ebd.' in first:
             continue
-        linter(number=content[0].number)
+        linter(
+            number=content[0].number,
+            location=iamraw.Location.from_page(content[0].page),
+        )
 
 
 SOLUTION_R2018 = """\
