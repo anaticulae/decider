@@ -56,7 +56,7 @@ Leerzeichen.
 """
 
 UNITS = r'%|‰|km/h|mmHg|mm|ms|m|cm|V|W|Hz|mW'
-MISSING_SPACE_BEFORE_UNIT = r'(?P<value>\d+((\.|\,)\d+){0,1})(?P<unit>' + UNITS + r')'
+MISSING_SPACE_BEFORE_UNIT = r'\W(?P<value>\d+((\.|\,)\d+){0,1})(?P<unit>' + UNITS + r')'
 
 
 def check_7670_missing_space_after_value(linter: callable, driver):
@@ -67,6 +67,8 @@ def check_7670_missing_space_after_value(linter: callable, driver):
     1
     >>> message('einer Geschwindigkeit von 100km/h dazu, dass noch 2,8m zurückgelegt werden, bevor', 7670)
     2
+    >>> message('Vorgehensweise von Word2Vec', 7670)  # 2V is detected false positive
+    0
     """
     text = driver.text_chunks
     for page, line, item in text:
