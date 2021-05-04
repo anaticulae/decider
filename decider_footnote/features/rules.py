@@ -222,14 +222,14 @@ def check_2018_footnote_over_pages(linter, driver):
             # TODO: HOW TO DECIDE BETWEEN PARSING ERROR
             # TODO: IMPROVE THIS CHECK
             continue
-        linter()
+        linter(location=iamraw.Location.from_page(page.page))
 
 
 SOLUTION_R2019 = """\
 Fußnote dupliziert, vermeiden Sie Redundanz
 
-Identisch, aufeinander folgende Fußnoten erkannt. Verwenden Sie **ebd. \
-order ???** um identische Fußnoten darzustellen.
+Identisch, aufeinander folgende Fußnoten erkannt: {{note}}. Verwenden \
+Sie **ebd. oder ???** um identische Fußnoten darzustellen.
 
 {text/fussnote#struktur}
 """
@@ -237,8 +237,13 @@ order ???** um identische Fußnoten darzustellen.
 
 def check_2019_duplicated_footnote(linter, driver):
     for footnotes_pages in driver.footnotes_pages:
+        pagenumber = footnotes_pages.page
         footnotes_pages = footnotes_pages.content
         for current, after in zip(footnotes_pages[:-1], footnotes_pages[1:]):
-            if current.text.strip() != after.text.strip():
+            note = current.text.strip()
+            if note != after.text.strip():
                 continue
-            linter()
+            linter(
+                note=note,
+                location=iamraw.Location.from_page(pagenumber),
+            )
