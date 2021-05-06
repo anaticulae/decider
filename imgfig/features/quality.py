@@ -51,6 +51,12 @@ def linting(imageinfos: iamraw.ImageInformations, linter: protocol.Linter):
                 msgid=checker.msgid,
                 location=location,
             )
+            if not utila.rectangle_width(imageinfo.bounding):
+                utila.error(f'skip zero-width image: {imageinfo.bounding}')
+                continue
+            if not utila.rectangle_height(imageinfo.bounding):
+                utila.error(f'skip zero-height image: {imageinfo.bounding}')
+                continue
             checker(call, imageinfo)
 
 
