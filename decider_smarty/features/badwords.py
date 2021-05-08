@@ -79,7 +79,7 @@ def check_8105_pleonasms_detected(linter: callable, driver):
 
 
 SOLUTION_W8110 = """\
-Unnötige Vorsible
+Unnötige Vorsilbe
 
 Reduzieren Sie **{{phrase}}** indem Sie die unnötige Vorsilbe entfernen.
 

@@ -25,7 +25,7 @@ MAX_RESOLUTION_DIFF = configo.HV_PERCENT_PLUS(5).value
 def work(*images: str, pages: tuple = None) -> typing.Tuple[str, str]:
     loaded = load_image_info(*images, pages=pages)
     if not loaded:
-        # document with imnages, nothing to lint, return empty result
+        # document without images, nothing to lint, return empty result
         return '[]', '[]'
 
     linter = protocol.from_module(__name__)
