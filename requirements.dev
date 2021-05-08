@@ -12,6 +12,6 @@ utilatest==0.5.2
 genex==0.8.0
 genref==1.0.5
 # add test data provider
-power==1.4.4
+power==1.4.5
 # modify test data
 jam==0.2.18
