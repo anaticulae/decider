@@ -87,7 +87,7 @@ def extract_notitle(resources):
     for inpath, outpath in zip(files, without_titlepage):
         todo.append(f'jam -i {inpath} -o {outpath} --remove=0')
     # generate
-    for job in genex.todolist(
+    for job, _ in genex.todolist(  # skip outpath
             without_titlepage + [destination],  # ensure correct parent
             destination,
             groupme=True,
