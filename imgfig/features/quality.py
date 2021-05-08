@@ -26,7 +26,7 @@ def work(*images: str, pages: tuple = None) -> typing.Tuple[str, str]:
     loaded = load_image_info(*images, pages=pages)
     if not loaded:
         # document without images, nothing to lint, return empty result
-        return '[]', '[]'
+        return protocol.RESULT_EMPTY
 
     linter = protocol.from_module(__name__)
 
