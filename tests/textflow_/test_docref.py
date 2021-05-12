@@ -34,6 +34,7 @@ def test_decider_textflow_bachelor76_docref_negative(testdir, monkeypatch):
     assert not findings
 
 
+@pytest.mark.xfail(reason='broken test')
 def test_decider_textflow_master75_docref(testdir, monkeypatch):
     # TODO: DESCRIBE PURPOSE OF TEST
     source = power.link(power.MASTER075_PDF)
