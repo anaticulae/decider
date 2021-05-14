@@ -87,7 +87,7 @@ def check_1220_author_existence(linter, titlepage):
 
 
 SOLUTION_E1221 = """\
-Titelseite enthält keine Matrikelnummer des Autors
+Titelseite enthält keine Matrikelnummer
 
 Fügen Sie ihre Matrikelnummer auf der Titelseite hinzu.
 
