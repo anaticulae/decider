@@ -2,6 +2,24 @@
 
 Every noteable change is logged here.
 
+## v2.8.0
+
+### Feature
+
+* show footnote on linted page (4c2788686dd5)
+* make unit detector more strict (23a406d32285)
+* add footnote linter result to specific page (bd386be31071)
+
+### Fix
+
+* shorten message headline (b624252709c7)
+* fix typo (4d805648dc80)
+* skip zero sized images (5d126a175bc8)
+* increase valid distance between footnote separator and first (d2fc203722a0)
+* make hint more precise (9604dcc3b705)
+* ensure that Mark is converted (04345ad2e604)
+* fix test data generator (5e8a516847cb)
+
 ## v2.7.3
 
 ### Fix
