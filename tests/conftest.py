@@ -7,13 +7,10 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import os
-
 import genex
 import power
 import pytest
 import utila
-import utilatest
 import writers
 
 import decider
@@ -72,32 +69,13 @@ def extract(resources):
 
 
 def extract_notitle(resources):
-    print_resources(resources)
-    destination = power.generated(folder='notitle')
-    files = [item[0] for item in resources]
-    # prepare
-    without_titlepage = [
-        os.path.join(destination, f'{item}.pdf')
-        for item in utilatest.simplify_testfile_names(
-            files + [power.REPOSITORY],  # ensure correct parent
-            sort=False,
-        )
-    ]
-    # jam
-    todo = []
-    for inpath, outpath in zip(files, without_titlepage):
-        todo.append(f'jam -i {inpath} -o {outpath} --remove=0')
-    # generate
-    for job, _ in genex.todolist(  # skip outpath
-            without_titlepage + [destination],  # ensure correct parent
-            destination,
-            groupme=True,
-    ):
-        job = ' && '.join(job)
-        todo.append(job)
-    # avoid race condition that jam is not ready before starting extraction
-    worker = utila.mins(len(files), WORKER)
-    utila.run_parallel(todo, worker=worker)
+    genex.extract_removepages(
+        resources,
+        removepages='0',
+        folder='notitle',
+        worker=WORKER,
+        groupme=True,
+    )
 
 
 def install():
