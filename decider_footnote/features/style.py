@@ -29,10 +29,10 @@ MAX_RISE_NOISE = configo.HV_FLOAT_PLUS(default=2.0).value
 
 
 def work(
-        footerheader: str,
-        fontheader: str,
-        fontcontent: str,
-        pages: tuple = None,
+    footerheader: str,
+    fontheader: str,
+    fontcontent: str,
+    pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     linter = protocol.from_module(__name__)
 
@@ -52,10 +52,10 @@ def work(
 
 
 def linting(
-        footer,
-        fontconfig: decider_footnote.footnote.FootNoteStyle,
-        fontstore: iamraw.FontStore,
-        linter: protocol.Linter,
+    footer,
+    fontconfig: decider_footnote.footnote.FootNoteStyle,
+    fontstore: iamraw.FontStore,
+    linter: protocol.Linter,
 ):
     location = iamraw.Location.from_page(footer.page)
 

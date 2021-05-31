@@ -23,13 +23,13 @@ import decider_textflow.utils
 
 
 def work(
-        headlines: str,
-        text: str,
-        textpositions: str,
-        sizeandborders: str,
-        headerfooter: str,
-        magiccontent: str,
-        pages: tuple = None,
+    headlines: str,
+    text: str,
+    textpositions: str,
+    sizeandborders: str,
+    headerfooter: str,
+    magiccontent: str,
+    pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     magiccontent = serializeraw.load_types(magiccontent, pages=pages)
     driver = decider_textflow.features.textdata(

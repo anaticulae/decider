@@ -30,10 +30,10 @@ fail = functools.partial(
 
 
 def run_textflow(
-        source,
-        pages,
-        lineending: bool = False,
-        quotation: bool = False,
+    source,
+    pages,
+    lineending: bool = False,
+    quotation: bool = False,
 ):
     actions = ''
     if lineending:

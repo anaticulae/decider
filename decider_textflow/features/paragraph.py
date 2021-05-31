@@ -22,14 +22,14 @@ TEXTUAL = {
 
 
 def work(
-        headlines: str,
-        text: str,
-        textpositions: str,
-        sizeandborders: str,
-        headerfooter: str,
-        textstyle: str,
-        magiccontent: str,
-        pages: tuple = None,
+    headlines: str,
+    text: str,
+    textpositions: str,
+    sizeandborders: str,
+    headerfooter: str,
+    textstyle: str,
+    magiccontent: str,
+    pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     textstyle = serializeraw.load_doctextstyle(textstyle)
     magiccontent = serializeraw.load_types(magiccontent, pages=pages)

@@ -20,25 +20,24 @@ import decider.features.titlepage
 import tests
 
 
-@pytest.fixture(
-    params=[
-        (power.link(power.MASTER116_PDF), [
-            1210,
-        ]),
-        (power.link(power.MASTER072_PDF), [
-            1221,
-        ]),
-        (power.link(power.MASTER078_PDF), []),
-        (power.link(power.DOCU35_PDF, folder='notitle'), [
-            1200,
-        ]),
-    ],
-    ids=[
-        'master116',
-        'master72',
-        'master78',
-        'twine_no_title',
-    ])
+@pytest.fixture(params=[
+    (power.link(power.MASTER116_PDF), [
+        1210,
+    ]),
+    (power.link(power.MASTER072_PDF), [
+        1221,
+    ]),
+    (power.link(power.MASTER078_PDF), []),
+    (power.link(power.DOCU35_PDF, folder='notitle'), [
+        1200,
+    ]),
+],
+                ids=[
+                    'master116',
+                    'master72',
+                    'master78',
+                    'twine_no_title',
+                ])
 def titlepage(request, testdir):
     root = str(testdir)
     source, expected_failures = request.param

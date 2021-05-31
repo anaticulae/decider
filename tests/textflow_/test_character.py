@@ -17,11 +17,11 @@ import tests.textflow_
 
 
 def decider_textflow_character(
-        source,
-        pages,
-        testdir,
-        monkeypatch,
-        msgids=None,
+    source,
+    pages,
+    testdir,
+    monkeypatch,
+    msgids=None,
 ):
     tests.textflow_.run(
         f'--writing -i {source} --pages={pages} --character',
@@ -104,8 +104,8 @@ def test_textflow_character_missing_space_before_semicolon(testdir, monkeypatch)
 @pytest.mark.xfail(reason='formula is badly converted to non existing semicolon') # yapf:disable
 @utilatest.longrun
 def test_missing_space_after_semicolon_master110_page59(
-        testdir,
-        monkeypatch,
+    testdir,
+    monkeypatch,
 ):
     """Verify that magic content skips errors located in formula."""
     source = power.link(power.MASTER110_PDF)
@@ -124,8 +124,8 @@ def test_missing_space_after_semicolon_master110_page59(
 @pytest.mark.xfail(reason='require line formula inside parser')
 @utilatest.longrun
 def test_character_missing_space_after_comma_master116_page23(
-        testdir,
-        monkeypatch,
+    testdir,
+    monkeypatch,
 ):
     """False positve comma detection. TODO: In the current
     implementation `𝑐𝑤,anfang=0.23` is detected as an false positiv

@@ -36,16 +36,16 @@ def linting(name, driver=None):
 
 
 def textdata(
-        headlines,
-        text,
-        textpositions,
-        sizeandborders,
-        headerfooter,
-        lists=None,
-        magiccontent=None,
-        textstyle=None,
-        magicvalid=None,
-        pages=None,
+    headlines,
+    text,
+    textpositions,
+    sizeandborders,
+    headerfooter,
+    lists=None,
+    magiccontent=None,
+    textstyle=None,
+    magicvalid=None,
+    pages=None,
 ):
     if magicvalid is None:
         magicvalid = iamraw.TEXTUAL  # pylint:disable=E1101

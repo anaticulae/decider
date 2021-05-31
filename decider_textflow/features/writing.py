@@ -22,13 +22,13 @@ TEXTUAL = {
 
 
 def work(
-        headlines: str,
-        text: str,
-        textpositions: str,
-        sizeandborders: str,
-        headerfooter: str,
-        magiccontent: str,
-        pages: tuple = None,
+    headlines: str,
+    text: str,
+    textpositions: str,
+    sizeandborders: str,
+    headerfooter: str,
+    magiccontent: str,
+    pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     if os.path.exists(magiccontent):
         magiccontent = serializeraw.load_types(magiccontent, pages=pages)

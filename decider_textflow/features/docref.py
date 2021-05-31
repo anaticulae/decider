@@ -18,15 +18,15 @@ import utila
 
 
 def work(
-        figure: str,
-        section: str,
-        table: str,
-        caption_figure: str,
-        caption_image: str,
-        caption_table: str,
-        text: str,
-        headlines: str,
-        pages: tuple = None,
+    figure: str,
+    section: str,
+    table: str,
+    caption_figure: str,
+    caption_image: str,
+    caption_table: str,
+    text: str,
+    headlines: str,
+    pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     figure = serializeraw.load_docref(figure, pages=pages)
     section = serializeraw.load_docref(section, pages=pages)

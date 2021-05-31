@@ -17,12 +17,12 @@ import decider_smarty.utils
 
 
 def work(
-        invalid_prefix: str,
-        phrases: str,
-        pleonasms: str,
-        text: str,
-        headlines: str,
-        pages: tuple = None,
+    invalid_prefix: str,
+    phrases: str,
+    pleonasms: str,
+    text: str,
+    headlines: str,
+    pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     # prepare findings
     invalid_prefix = serializeraw.load_docref(invalid_prefix, pages=pages)

@@ -24,9 +24,9 @@ import decider_footnote.rules.start
 
 
 def work(
-        footerheader: str,
-        horizontals: str,
-        pages: tuple = None,
+    footerheader: str,
+    horizontals: str,
+    pages: tuple = None,
 ) -> protocol.ResultType:
     # load data
     footnotes = serializeraw.load_footnotes(footerheader, pages)

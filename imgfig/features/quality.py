@@ -144,8 +144,8 @@ def check_4005_check_relation(linter, imageinfo):
 
 
 def load_image_info(
-        *images: str,
-        pages: tuple = None,
+    *images: str,
+    pages: tuple = None,
 ) -> iamraw.ImageInformations:
     loaded = [serializeraw.load_image_info(item) for item in images]
     result = [

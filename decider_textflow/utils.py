@@ -16,12 +16,12 @@ import utila
 
 
 def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
-        headlines,
-        navigators,
-        magiccontent: list = None,
-        sync: bool = False,
-        yieldnone: bool = False,
-        magicvalid=None,
+    headlines,
+    navigators,
+    magiccontent: list = None,
+    sync: bool = False,
+    yieldnone: bool = False,
+    magicvalid=None,
 ) -> list:
     """\
     yieldnone yield none-TextInfo-elements with None

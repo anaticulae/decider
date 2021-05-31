@@ -38,8 +38,8 @@ def work(titlepage_path: str) -> typing.Tuple[str, str]:
 
 
 def linting(
-        titlepage: iamraw.TitlePage,
-        linter: protocol.Linter,
+    titlepage: iamraw.TitlePage,
+    linter: protocol.Linter,
 ):
     pdflocation = utila.ifnone(titlepage.pageraw, default=0) if titlepage else 0
     location = iamraw.Location.from_page(pdflocation)

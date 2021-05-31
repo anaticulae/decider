@@ -43,9 +43,9 @@ def work(abbreviations: str, text: str) -> typing.Tuple[str, str]:
 
 
 def linting(
-        abbreviations: iamraw.AbbreviationResult,
-        text: iamraw.ExtractedTextAbbreviations,
-        linter: protocol.Linter,
+    abbreviations: iamraw.AbbreviationResult,
+    text: iamraw.ExtractedTextAbbreviations,
+    linter: protocol.Linter,
 ):
     location = iamraw.Location.from_page(0)
     checkers = protocol.parse_checkers(__name__)
@@ -72,9 +72,9 @@ Definieren Sie die Abkürzung an der ersten Stelle des Gebrauchs.
 
 
 def check_5100_used_before_defined(
-        linter: callable,
-        table: iamraw.AbbreviationResult,  # pylint:disable=W0613
-        text: iamraw.ExtractedTextAbbreviations,
+    linter: callable,
+    table: iamraw.AbbreviationResult,  # pylint:disable=W0613
+    text: iamraw.ExtractedTextAbbreviations,
 ):
     # TODO: Use table to verify lintings?
     flat = flat_abbreviation(text)
@@ -117,9 +117,9 @@ Die Abkürzung "{{short}}" konnte nicht im Text gefunden werden.
 
 
 def check_5110_unused_abbreviation(
-        linter: callable,
-        table: iamraw.AbbreviationResult,
-        text: iamraw.ExtractedTextAbbreviations,
+    linter: callable,
+    table: iamraw.AbbreviationResult,
+    text: iamraw.ExtractedTextAbbreviations,
 ):
     flat = flat_abbreviation(text)
     unique = {item.short for item in flat}

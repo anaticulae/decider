@@ -19,13 +19,13 @@ import decider_textflow.features
 
 
 def work(
-        headlines: str,
-        text: str,
-        textpositions: str,
-        sizeandborders: str,
-        headerfooter: str,
-        magiccontent: str,
-        pages: tuple = None,
+    headlines: str,
+    text: str,
+    textpositions: str,
+    sizeandborders: str,
+    headerfooter: str,
+    magiccontent: str,
+    pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     driver = decider_textflow.features.textdata(
         headlines,
