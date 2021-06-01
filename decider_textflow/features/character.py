@@ -48,13 +48,11 @@ def check_character(linter, driver, regex):
         if not item:
             # magic content
             continue
-
         text = item.text
         # TODO: SUPPORT MULTIPLE ERRORS IN ONE LINE
-        matched = re.finditer(regex, text, flags=re.VERBOSE | re.I)
+        matched = re.finditer(regex, text, flags=re.VERBOSE | re.IGNORECASE)
         if not matched:
             continue
-
         for match in matched:
             start, end = match.span()[0], match.span()[1]
             location = iamraw.RangedLocation(
