@@ -93,7 +93,7 @@ def check_7101_german_quote_double_quote_inside(linter: callable, tokens: list):
 
 
 SOLUTION_7105 = """\
-Zitat beginnt mit Auslassungszeichen.
+Zitat beginnt mit Auslassungszeichen
 
 Am Zitatanfang sind keine Auslassungszeichen [...] nötig.
 
