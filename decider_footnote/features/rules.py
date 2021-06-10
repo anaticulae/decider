@@ -243,6 +243,9 @@ def check_2019_duplicated_footnote(linter, driver):
             note = current.text.strip()
             if note != after.text.strip():
                 continue
+            if note.lower() in 'ebd ebd.'.split():
+                # Ebd. follows by Ebd.
+                continue
             linter(
                 note=note,
                 location=iamraw.Location.from_page(pagenumber),
