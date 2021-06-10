@@ -48,6 +48,15 @@ def paragraph_linted(path: str, prefix: str = '') -> str:
     )
 
 
+def quotation_linted(path: str, prefix: str = '') -> str:
+    return utila.pathconnector(
+        path,
+        decider_textflow.PROCESS,
+        'quotation_user',
+        prefix,
+    )
+
+
 def character_linted(path: str, prefix: str = '') -> str:
     return utila.pathconnector(
         path,
