@@ -118,9 +118,11 @@ def check_7105_quote_starts_with_omission_sign(linter: callable, tokens: list):
         return
     if len(tokens) < 2:
         return
+    if '[...]' not in ''.join(tokens):
+        return
     if tokens[0] not in QUOTATION_SIGNS:
         return
-    if tokens[1] not in '[...] [] ...':
+    if tokens[1] not in '[...] [] ...'.split():
         return
     linter()
 
