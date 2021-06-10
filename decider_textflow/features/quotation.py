@@ -130,8 +130,9 @@ def check_7105_quote_starts_with_omission_sign(linter: callable, tokens: list):
 SOLUTION_7110 = """\
 Zitat zu lang
 
-Konzentrieren Sie sich auf den wichtigen Teil des Zitats und stellen Sie \
-die eigene Denkleistung in den Vordergrund.
+Das Zitat **{{sentence}}** sollte verkürzt werden. Konzentrieren Sie \
+sich auf den wichtigen Teil des Zitats und stellen Sie die eigene \
+Denkleistung in den Vordergrund.
 
 {text/zitat#umfang}
 """
