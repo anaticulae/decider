@@ -7,12 +7,10 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import os
 import typing
 
 import german
 import iamraw
-import serializeraw
 
 import decider_textflow.features
 
@@ -28,13 +26,9 @@ def work(
     sizeandborders: str,
     headerfooter: str,
     magiccontent: str,
+    quotations: str,
     pages: tuple = None,
 ) -> typing.Tuple[str, str]:
-    if os.path.exists(magiccontent):
-        magiccontent = serializeraw.load_types(magiccontent, pages=pages)
-    else:
-        magiccontent = []
-
     driver = decider_textflow.features.textdata(
         headlines,
         text,
@@ -43,6 +37,7 @@ def work(
         headerfooter,
         magiccontent=magiccontent,
         magicvalid=TEXTUAL,
+        quotations=quotations,
         pages=pages,
     )
     result = decider_textflow.features.linting(__name__, driver)

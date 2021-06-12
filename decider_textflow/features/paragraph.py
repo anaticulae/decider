@@ -32,7 +32,6 @@ def work(
     pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     textstyle = serializeraw.load_doctextstyle(textstyle)
-    magiccontent = serializeraw.load_types(magiccontent, pages=pages)
     driver = decider_textflow.features.textdata(
         headlines,
         text,

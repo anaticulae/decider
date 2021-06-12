@@ -8,10 +8,12 @@
 # =============================================================================
 
 import functools
+import os
 
 import iamraw
 import protocol
 import serializeraw
+import textflow.quotation.serialize
 import utila
 
 import decider_textflow.utils
@@ -45,6 +47,7 @@ def textdata(
     magiccontent=None,
     textstyle=None,
     magicvalid=None,
+    quotations=None,
     pages=None,
 ):
     if magicvalid is None:
@@ -62,8 +65,10 @@ def textdata(
         utila.error('no headlines given')
     if not navigators:
         utila.error('no navigators given')
-    if isinstance(magiccontent, str):
+    if utila.exists(magiccontent):
         magiccontent = serializeraw.load_magic_types(magiccontent, pages=pages)
+    else:
+        magiccontent = None
     # TODO: DO WE REQUIRE HEADLINES?
     # if not headlines or not navigators:
     #     return None
@@ -79,10 +84,22 @@ def textdata(
         magiccontent=magiccontent,
         magicvalid=magicvalid,
     )
+    if utila.exists(quotations):
+        quotations = textflow.quotation.serialize.load_quotations(
+            quotations,
+            pages=pages,
+        )
+    else:
+        quotations = None
     if textstyle:
         return protocol.driver(
             text_chunks=chunks,
             nomagic_text_chunks=nomagic,
             doctextstyle=textstyle,
+            quotations=quotations,
         )
-    return protocol.driver(text_chunks=chunks, nomagic_text_chunks=nomagic)
+    return protocol.driver(
+        text_chunks=chunks,
+        nomagic_text_chunks=nomagic,
+        quotations=quotations,
+    )
