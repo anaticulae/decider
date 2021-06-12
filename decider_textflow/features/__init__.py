@@ -37,7 +37,7 @@ def linting(name, driver=None):
     return user, developer
 
 
-def textdata(
+def textdata(  # pylint:disable=R0913
     headlines,
     text,
     textpositions,

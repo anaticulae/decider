@@ -7,10 +7,13 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import collections
 import typing
 
 import german
 import iamraw
+import konrad
+import utila
 
 import decider_textflow.features
 
@@ -47,29 +50,67 @@ def work(
 SOLUTION_7600 = """\
 Fehler in der Perspektive
 
-**{{invalid}}** sollte vermieden werden.
+**{{invalid}}** in Satz **{{line}}** sollte vermieden werden.
 
 {text/stilkunde/perspektive}
 """
 
-# TODO: REPLACE WITH EXTERNAL METHOD
-INVALID_PERSPECTIVE = {'wir', 'man', 'Wir', 'Man'}
-
 
 def check_7600_text_perspective(linter: callable, driver):
     text = driver.text_chunks
-    for page, line, item in text:
+    # group quotes by page
+    quotes = collections.defaultdict(list)
+    for quote in driver.quotations:
+        quotes[quote.page].append(quote.sentence)
+    # group text content
+    grouped = groupby_page(driver.text_chunks)
+    for page, text in grouped.items():
+        text = german.word_tokenize(text, validate_sentences=False)
+        text = ' '.join(konrad.mark2str(item) for item in text)
+        text = remove_quotes(text, quotes[page])
+        for sentence in german.sentence_tokenize(text):
+            tokens = german.word_tokenize(sentence, validate_sentences=False)
+            invalid = invalid_perspective(tokens)
+            if not invalid:
+                continue
+            # TODO: DETERMINE SENTENCE/LINE NUMBER
+            line = 0
+            location = iamraw.RangedLocation(page=page, line=line)
+            linter(
+                location=location,
+                invalid=', '.join(invalid),
+                line=sentence,
+            )
+
+
+def groupby_page(text):
+    grouped = collections.defaultdict(list)
+    for page, _, item in text:
         if isinstance(item, iamraw.Headline):
             continue
         if not item:
             # list, quotation or something
             continue
+        text = item.text.strip()
+        grouped[page].append(text)
+    joined = {page: ' '.join(content) for page, content in grouped.items()}
+    return joined
 
-        words = german.word_tokenize(item.text, validate_sentences=False)
-        words = [item.lower() for item in words if isinstance(item, str)]
-        # TODO: DO NOT LINT IN QUOTATION
-        invalid = [item for item in words if item in INVALID_PERSPECTIVE]
-        if not invalid:
-            continue
-        location = iamraw.RangedLocation(page=page, line=line)
-        linter(location=location, invalid=', '.join(invalid))
+
+def remove_quotes(text, quotes):
+    if not quotes:
+        return text
+    for remove in quotes:
+        text = text.replace(remove, '')
+    text = utila.normalize_text(text)
+    return text
+
+
+INVALID_PERSPECTIVE = {'wir', 'man'}
+
+
+def invalid_perspective(words) -> list:
+    # TODO: REPLACE WITH EXTERNAL METHOD
+    words = [word for word in words if isinstance(word, str)]
+    words = [word for word in words if word.lower() in INVALID_PERSPECTIVE]
+    return words

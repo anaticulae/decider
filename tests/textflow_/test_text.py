@@ -15,13 +15,13 @@ import decider_textflow.path
 import tests.textflow_
 
 
-def decide_textflow(source, pages, testdir, monkeypatch):
+def decide_textflow(source, pages, testdir, monkeypatch, msgids=None):
     tests.textflow_.run(
         f'--writing -i {source} --pages={pages}',
         monkeypatch=monkeypatch,
     )
     path = decider_textflow.path.writing_linted(testdir.tmpdir)
-    findings = serializeraw.load_findings(path)
+    findings = serializeraw.load_findings(path, msgids=msgids)
     return findings
 
 
@@ -30,5 +30,12 @@ def test_decider_textflow_bachelor67_perspective(testdir, monkeypatch):
     source = power.link(power.BACHELOR076_PDF)
     pages = ':'
     findings = decide_textflow(source, pages, testdir, monkeypatch)
-    # TODO: decrement to 4 after including quotation check
-    assert len(findings) == 5
+    assert len(findings) == 4  # VALIDATED
+
+
+def test_decider_textflow_master72_writing_quotation(testdir, monkeypatch):
+    """Do not detect errors in perspective inside quotations."""
+    source = power.link(power.MASTER072_PDF)
+    pages = '14'
+    findings = decide_textflow(source, pages, testdir, monkeypatch, msgids=7600)
+    assert not findings
