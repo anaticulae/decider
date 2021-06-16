@@ -90,7 +90,9 @@ def textdata(  # pylint:disable=R0913
             pages=pages,
         )
     else:
-        quotations = None
+        # empty quotations
+        # Hint: Empty list is required to avoid failing later algorithms.
+        quotations = []
     if textstyle:
         return protocol.driver(
             text_chunks=chunks,
