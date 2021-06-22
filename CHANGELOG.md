@@ -2,6 +2,24 @@
 
 Every noteable change is logged here.
 
+## v2.9.0
+
+### Feature
+
+* do not lint perspective inside quotations (1ad99c209c76)
+* load extracted quotations if given (6dea189ce1b3)
+* make linter message more clear (85cd02c3445c)
+* add method to determine linter quotation path (0e78efa03496)
+* make message more clear (60400a243a47)
+
+### Fix
+
+* use sentence content instead of index (38b11253d946)
+* do not fail on empty quotations (a0849034d911)
+* Ebd. followed by Ebd. is not a problem (696d2d1db6b0)
+* improve ellipsis start detector (e2bb80f424f9)
+* fix spelling error (627a08e9d1b8)
+
 ## v2.8.0
 
 ### Feature
