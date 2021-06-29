@@ -39,3 +39,18 @@ def test_decider_textflow_master72_writing_quotation(testdir, monkeypatch):
     pages = '12:15'
     findings = decide_textflow(source, pages, testdir, monkeypatch, msgids=7600)
     assert not findings
+
+
+EXPECTED = """Norbert Schneider (2012) sieht die „Selbstentblößung“ in den \
+Medien als Folge einer Individualisierung und als Ersatz für die verlorene \
+Bestätigung aus einem Kollektiv, dem man angehörte, z.B."""
+
+
+def test_decider_textflow_master72_merge_token_correctly(testdir, monkeypatch):
+    """Do not detect errors in perspective inside quotations."""
+    source = power.link(power.MASTER072_PDF)
+    pages = '16'
+    findings = decide_textflow(source, pages, testdir, monkeypatch, msgids=7600)
+    assert len(findings) == 1
+    description = findings[0].solution.description
+    assert EXPECTED in description

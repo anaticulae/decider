@@ -50,7 +50,7 @@ def work(
 SOLUTION_7600 = """\
 Fehler in der Perspektive
 
-**{{invalid}}** in Satz **{{line}}** sollte vermieden werden.
+**{{invalid}}** im Satz: **{{line}}** sollte vermieden werden.
 
 {text/stilkunde/perspektive}
 """
@@ -64,8 +64,8 @@ def check_7600_text_perspective(linter: callable, driver):
         quotes[quote.page].append(quote.sentence)
     # group text content
     grouped = groupby_page(driver.text_chunks)
-    for page, text in grouped.items():
-        text = german.word_tokenize(text, validate_sentences=False)
+    for page, textraw in grouped.items():
+        text = german.word_tokenize(textraw, validate_sentences=False)
         text = ' '.join(konrad.mark2str(item) for item in text)
         text = remove_quotes(text, quotes[page])
         for sentence in german.sentence_tokenize(text):
@@ -73,6 +73,11 @@ def check_7600_text_perspective(linter: callable, driver):
             invalid = invalid_perspective(tokens)
             if not invalid:
                 continue
+            # convert token sentence to user sentence with correct spaces
+            # and punctuation.
+            sentence = german.sentence_select(textraw, tokens)
+            # TODO: CENTER SENTENCE TO FINDING, REDUCE SENTENCE LENGTH
+            sentence = utila.normalize_text(sentence, normalize_spaces=True)
             # TODO: DETERMINE SENTENCE/LINE NUMBER
             line = 0
             location = iamraw.RangedLocation(page=page, line=line)
