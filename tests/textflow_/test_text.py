@@ -36,6 +36,6 @@ def test_decider_textflow_bachelor67_perspective(testdir, monkeypatch):
 def test_decider_textflow_master72_writing_quotation(testdir, monkeypatch):
     """Do not detect errors in perspective inside quotations."""
     source = power.link(power.MASTER072_PDF)
-    pages = '14'
+    pages = '12:15'
     findings = decide_textflow(source, pages, testdir, monkeypatch, msgids=7600)
     assert not findings
