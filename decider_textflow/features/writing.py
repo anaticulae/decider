@@ -79,8 +79,9 @@ def check_7600_text_perspective(linter: callable, driver):
             # TODO: CENTER SENTENCE TO FINDING, REDUCE SENTENCE LENGTH
             sentence = utila.normalize_text(sentence, normalize_spaces=True)
             # TODO: DETERMINE SENTENCE/LINE NUMBER
-            line = 0
-            location = iamraw.RangedLocation(page=page, line=line)
+            # line = 0
+            # location = iamraw.RangedLocation(page=page, line=line)
+            location = iamraw.RangedLocation(page=page)
             linter(
                 location=location,
                 invalid=', '.join(invalid),
