@@ -93,26 +93,27 @@ def textdata(  # pylint:disable=R0913,R0914
         # empty quotations
         # Hint: Empty list is required to avoid failing later algorithms.
         quotations = []
+    sentences = []
     if words:
         words = serializeraw.load_text(
             words,
             headlines,
             pages=pages,
         )
-        words: Sentences = Sentences(words)
+        sentences: Sentences = Sentences(words)
     if textstyle:
         return protocol.driver(
             text_chunks=chunks,
             nomagic_text_chunks=nomagic,
             doctextstyle=textstyle,
             quotations=quotations,
-            text=words,
+            sentences=sentences,
         )
     return protocol.driver(
         text_chunks=chunks,
         nomagic_text_chunks=nomagic,
         quotations=quotations,
-        text=words,
+        sentences=sentences,
     )
 
 

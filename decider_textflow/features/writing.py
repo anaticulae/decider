@@ -105,7 +105,7 @@ MAX_SENTENCE_LENGTH = 400  # TODO: HOLY VALUE
 
 def check_7605_text_too_long(linter: callable, driver):
     # group text content
-    for sentence in driver.text:
+    for sentence in driver.sentences:
         try:
             line, page, number = sentence
         except TypeError:
