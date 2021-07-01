@@ -11,6 +11,7 @@ import power
 import serializeraw
 import utilatest
 
+import decider_textflow.features.writing
 import decider_textflow.path
 import tests.textflow_
 
@@ -54,3 +55,24 @@ def test_decider_textflow_master72_merge_token_correctly(testdir, monkeypatch):
     assert len(findings) == 1
     description = findings[0].solution.description
     assert EXPECTED in description
+
+
+@utilatest.requires(power.MASTER072_PDF)
+def test_decider_textflow_master72_text_too_long(testdir, monkeypatch):
+    """Detect sentence which are too long."""
+    source = power.link(power.MASTER072_PDF)
+    pages = '3:6'
+    with monkeypatch.context() as context:
+        context.setattr(
+            decider_textflow.features.writing,
+            'MAX_SENTENCE_LENGTH',
+            100,
+        )
+        findings = decide_textflow(
+            source,
+            pages,
+            testdir,
+            monkeypatch,
+            msgids=7605,
+        )
+    assert len(findings) == 20

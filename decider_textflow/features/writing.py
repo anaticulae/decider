@@ -94,6 +94,46 @@ def check_7600_text_perspective(linter: callable, driver):
             )
 
 
+SOLUTION_7605 = """\
+Satz zu lang
+
+Anzahl der Zeichen {{numbers}} in Satz **{{line}}** zu lang.
+"""
+
+MAX_SENTENCE_LENGTH = 400  # TODO: HOLY VALUE
+
+
+def check_7605_text_too_long(linter: callable, driver):
+    # group text content
+    for sentence in driver.text:
+        try:
+            line, page, number = sentence
+        except TypeError:
+            # headline
+            continue
+        if ':' in line:
+            # TODO: SPLIT LINE AND JUDGE LATER?
+            # Vor allem die sozialen Online-Netzwerke erfreuen sich großer
+            # Beliebtheit: Circa zwei Drittel aller Internetnutzer.
+            continue
+        if len(line) < MAX_SENTENCE_LENGTH:
+            continue
+        # TODO: CONVERT NUMBER TO LINE
+        location = iamraw.RangedLocation(page=page, line=number)
+        linter(
+            line=line,
+            numbers=len(line),
+            location=location,
+        )
+
+
+SOLUTION_7606 = """\
+Satz zu komplex
+
+
+"""
+
+
 def groupby_page(text):
     grouped = collections.defaultdict(list)
     for page, _, item in text:
