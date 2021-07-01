@@ -27,14 +27,14 @@ def decide_textflow(source, pages, testdir, monkeypatch, msgids=None):
 
 
 @utilatest.longrun
-def test_decider_textflow_bachelor67_perspective(testdir, monkeypatch):
+def test_dtf_bachelor67_perspective(testdir, monkeypatch):
     source = power.link(power.BACHELOR076_PDF)
     pages = ':'
     findings = decide_textflow(source, pages, testdir, monkeypatch)
     assert len(findings) == 4  # VALIDATED
 
 
-def test_decider_textflow_master72_writing_quotation(testdir, monkeypatch):
+def test_dtf_master72_writing_quotation(testdir, monkeypatch):
     """Do not detect errors in perspective inside quotations."""
     source = power.link(power.MASTER072_PDF)
     pages = '12:15'
@@ -47,7 +47,7 @@ Medien als Folge einer Individualisierung und als Ersatz für die verlorene \
 Bestätigung aus einem Kollektiv, dem man angehörte, z.B."""
 
 
-def test_decider_textflow_master72_merge_token_correctly(testdir, monkeypatch):
+def test_dtf_master72_merge_token_correctly(testdir, monkeypatch):
     """Do not detect errors in perspective inside quotations."""
     source = power.link(power.MASTER072_PDF)
     pages = '16'
@@ -58,7 +58,7 @@ def test_decider_textflow_master72_merge_token_correctly(testdir, monkeypatch):
 
 
 @utilatest.requires(power.MASTER072_PDF)
-def test_decider_textflow_master72_text_too_long(testdir, monkeypatch):
+def test_dtf_master72_text_too_long(testdir, monkeypatch):
     """Detect sentence which are too long."""
     source = power.link(power.MASTER072_PDF)
     pages = '3:6'

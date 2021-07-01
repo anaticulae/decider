@@ -25,7 +25,7 @@ def decide_textflow(source, pages, testdir, monkeypatch):
     return findings
 
 
-def test_decider_textflow_bachelor76_docref_negative(testdir, monkeypatch):
+def test_dtf_bachelor76_docref_negative(testdir, monkeypatch):
     """This document contains only valid references, therefore we do not
     detect any missing references."""
     source = power.link(power.BACHELOR076_PDF)
@@ -35,7 +35,7 @@ def test_decider_textflow_bachelor76_docref_negative(testdir, monkeypatch):
 
 
 @pytest.mark.xfail(reason='broken test')
-def test_decider_textflow_master75_docref(testdir, monkeypatch):
+def test_dtf_master75_docref(testdir, monkeypatch):
     # TODO: DESCRIBE PURPOSE OF TEST
     source = power.link(power.MASTER075_PDF)
     findings = decide_textflow(source, ':', testdir, monkeypatch)
@@ -43,7 +43,7 @@ def test_decider_textflow_master75_docref(testdir, monkeypatch):
 
 
 @pytest.mark.xfail(reason='table1 is not parsed properly, use new table parser')
-def test_decider_textflow_bachelor56page15_tableref(testdir, monkeypatch):
+def test_dtf_bachelor56page15_tableref(testdir, monkeypatch):
     """Verify that `s. Tab. 1` matches with `Tabelle 1`"""
     source = power.link(power.BACHELOR056_PDF)
     pages = '15'
