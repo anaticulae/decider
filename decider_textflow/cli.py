@@ -28,7 +28,9 @@ LINT_OUT = ('user', 'developer')
 WORKPLAN = [
     utila.create_step(
         'character',
-        inputs=CONTENT_INPUT + [utila.ResultFile('magic', 'content_content')],
+        inputs=CONTENT_INPUT + [
+            utila.ResultFile('magic', 'content_content'),
+        ],
         output=LINT_OUT,
     ),
     utila.create_step(
@@ -47,7 +49,9 @@ WORKPLAN = [
     ),
     utila.create_step(
         'lineending',
-        inputs=[utila.ResultFile(textflow.PROCESS, 'lineending_lastchar')],
+        inputs=[
+            utila.ResultFile(textflow.PROCESS, 'lineending_lastchar'),
+        ],
         output=LINT_OUT,
     ),
     utila.create_step(
@@ -67,7 +71,9 @@ WORKPLAN = [
     ),
     utila.create_step(
         'quotation',
-        inputs=[utila.ResultFile(textflow.PROCESS, 'quotation_quotation')],
+        inputs=[
+            utila.ResultFile(textflow.PROCESS, 'quotation_quotation'),
+        ],
         output=LINT_OUT,
     ),
     utila.create_step(
