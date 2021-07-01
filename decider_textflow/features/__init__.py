@@ -8,7 +8,6 @@
 # =============================================================================
 
 import functools
-import os
 
 import iamraw
 import protocol
