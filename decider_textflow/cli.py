@@ -23,15 +23,13 @@ CONTENT_INPUT = [
     utila.ResultFile('groupme', 'footer_footerheader'),
 ]
 
-LINT_OUT = ('user', 'developer')
-
 WORKPLAN = [
     utila.create_step(
         'character',
         inputs=CONTENT_INPUT + [
             utila.ResultFile('magic', 'content_content'),
         ],
-        output=LINT_OUT,
+        output=protocol.ResultDefault,
     ),
     utila.create_step(
         'docref',
@@ -45,14 +43,14 @@ WORKPLAN = [
             utila.ResultFile('words', 'text_text'),
             utila.ResultFile('words', 'headlines_headlines'),
         ],
-        output=LINT_OUT,
+        output=protocol.ResultDefault,
     ),
     utila.create_step(
         'lineending',
         inputs=[
             utila.ResultFile(textflow.PROCESS, 'lineending_lastchar'),
         ],
-        output=LINT_OUT,
+        output=protocol.ResultDefault,
     ),
     utila.create_step(
         'paragraph',
@@ -60,28 +58,28 @@ WORKPLAN = [
             utila.ResultFile('doctextstyle', 'textstyle'),
             utila.ResultFile('magic', 'content_content'),
         ],
-        output=LINT_OUT,
+        output=protocol.ResultDefault,
     ),
     utila.create_step(
         'physical',
         inputs=CONTENT_INPUT + [
             utila.ResultFile('magic', 'content_content'),
         ],
-        output=LINT_OUT,
+        output=protocol.ResultDefault,
     ),
     utila.create_step(
         'quotation',
         inputs=[
             utila.ResultFile(textflow.PROCESS, 'quotation_quotation'),
         ],
-        output=LINT_OUT,
+        output=protocol.ResultDefault,
     ),
     utila.create_step(
         'startend',
         inputs=CONTENT_INPUT + [
             utila.ResultFile('magic', 'content_content'),
         ],
-        output=LINT_OUT,
+        output=protocol.ResultDefault,
     ),
     utila.create_step(
         'writing',
@@ -89,7 +87,7 @@ WORKPLAN = [
             utila.ResultFile('magic', 'content_content'),
             utila.ResultFile('textflow', 'quotation_quotation')
         ],
-        output=LINT_OUT,
+        output=protocol.ResultDefault,
     ),
 ]
 

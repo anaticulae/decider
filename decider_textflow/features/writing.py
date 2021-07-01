@@ -8,11 +8,11 @@
 # =============================================================================
 
 import collections
-import typing
 
 import german
 import iamraw
 import konrad
+import protocol
 import utila
 
 import decider_textflow.features
@@ -31,7 +31,7 @@ def work(
     magiccontent: str,
     quotations: str,
     pages: tuple = None,
-) -> typing.Tuple[str, str]:
+) -> protocol.ResultType:
     driver = decider_textflow.features.textdata(
         headlines,
         text,
@@ -43,7 +43,10 @@ def work(
         quotations=quotations,
         pages=pages,
     )
-    result = decider_textflow.features.linting(__name__, driver)
+    result = decider_textflow.features.linting(
+        __name__,
+        driver,
+    )
     return result
 
 
