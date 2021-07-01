@@ -30,6 +30,7 @@ def work(
     headerfooter: str,
     magiccontent: str,
     quotations: str,
+    words: str,
     pages: tuple = None,
 ) -> protocol.ResultType:
     driver = decider_textflow.features.textdata(
@@ -41,6 +42,7 @@ def work(
         magiccontent=magiccontent,
         magicvalid=TEXTUAL,
         quotations=quotations,
+        words=words,
         pages=pages,
     )
     result = decider_textflow.features.linting(

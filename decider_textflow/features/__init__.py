@@ -36,7 +36,7 @@ def linting(name, driver=None):
     return user, developer
 
 
-def textdata(  # pylint:disable=R0913
+def textdata(  # pylint:disable=R0913,R0914
     headlines,
     text,
     textpositions,
@@ -47,6 +47,7 @@ def textdata(  # pylint:disable=R0913
     textstyle=None,
     magicvalid=None,
     quotations=None,
+    words=None,
     pages=None,
 ):
     if magicvalid is None:
@@ -92,15 +93,46 @@ def textdata(  # pylint:disable=R0913
         # empty quotations
         # Hint: Empty list is required to avoid failing later algorithms.
         quotations = []
+    if words:
+        words = serializeraw.load_text(
+            words,
+            headlines,
+            pages=pages,
+        )
+        words: Sentences = Sentences(words)
     if textstyle:
         return protocol.driver(
             text_chunks=chunks,
             nomagic_text_chunks=nomagic,
             doctextstyle=textstyle,
             quotations=quotations,
+            text=words,
         )
     return protocol.driver(
         text_chunks=chunks,
         nomagic_text_chunks=nomagic,
         quotations=quotations,
+        text=words,
     )
+
+
+class Sentences:
+
+    def __init__(self, words):
+        self.content = []
+        for contenttext in words:
+            for textsection in contenttext.content:
+                # yield headline
+                if textsection.headline.container != -1:
+                    self.content.append(textsection.headline)
+                #
+                merged = list(
+                    zip(
+                        textsection.content,
+                        textsection.pages,
+                        range(len(textsection.pages)),
+                    ))
+                self.content.extend(merged)
+
+    def __getitem__(self, index):
+        return self.content[index]
