@@ -130,8 +130,37 @@ def check_7605_text_too_long(linter: callable, driver):
 SOLUTION_7606 = """\
 Satz zu komplex
 
-
+Die Komplexität des Satzes **{{line}}** sollte reduziert werden.
 """
+
+
+def check_7606_text_too_complex(linter: callable, driver):
+    for sentence in driver.sentences:
+        try:
+            line, page, number = sentence
+        except TypeError:
+            # headline
+            continue
+        if not too_complex(line):
+            continue
+        # TODO: CONVERT NUMBER TO LINE
+        location = iamraw.RangedLocation(page=page, line=number)
+        linter(
+            line=line,
+            location=location,
+        )
+
+
+MAX_SENTENCE_COMPLEXITY = 7  # TODO: HOLY VALUE
+
+
+def too_complex(line: str) -> bool:
+    if ':' in line:
+        return False
+    subsentence = [item for item in line.split(',;') if len(item.split()) > 3]
+    if len(subsentence) > MAX_SENTENCE_COMPLEXITY:
+        return True
+    return False
 
 
 def groupby_page(text):
