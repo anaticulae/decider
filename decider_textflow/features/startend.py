@@ -68,18 +68,17 @@ def check_7620_lonely_page_start(linter: callable, driver):
         if first_headline and second_headline:
             continue
         if second_headline and not first_headline:
-            # CHAPTER-X-Pattern
-            # Title
             if content[1].decoration is not None:
+                # CHAPTER-X-Pattern
+                # Title
                 continue
-        if second_headline and not first_headline:
             # hurenkind
             # TEXT -> HEADLINE
             location = iamraw.RangedLocation(page=page, line=0)
             linter(location)
             continue
-
         if not first_headline and not second_headline:
+            # no headlines, text only
             first_width = width(content[0])
             second_width = width(content[1])
             # TODO: HOLY VALUE
@@ -89,7 +88,6 @@ def check_7620_lonely_page_start(linter: callable, driver):
                 # SHORT TEXT -> TEXT
                 location = iamraw.RangedLocation(page=page, line=0)
                 linter(location)
-                continue
 
 
 SOLUTION_7621 = """\
