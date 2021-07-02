@@ -10,7 +10,7 @@
 utilatest==0.7.1
 # test data generator
 genex==0.10.0
-genref==1.0.7
+genref==1.0.8
 # add test data provider
 power==1.5.0
 # modify test data
