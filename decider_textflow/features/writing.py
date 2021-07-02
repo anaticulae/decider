@@ -80,6 +80,8 @@ def check_7600_text_perspective(linter: callable, driver):
                 continue
             # convert token sentence to user sentence with correct spaces
             # and punctuation.
+            # Remove - as a result of word-division
+            tokens = [item for item in tokens if item != konrad.Mark.HYPHEN]
             sentence = german.sentence_select(textraw, tokens)
             # TODO: CENTER SENTENCE TO FINDING, REDUCE SENTENCE LENGTH
             sentence = utila.normalize_text(sentence, normalize_spaces=True)
