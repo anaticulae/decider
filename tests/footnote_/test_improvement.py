@@ -21,7 +21,7 @@ def home18(findings):
 
 def bachelor128(findings):
     # TODO: MERGE THIS FINDING?
-    assert protocol.count_findings(findings, 2016) == 10
+    assert protocol.count_findings(findings, 2016) == 26
 
 
 # def bachelor85(findings):
