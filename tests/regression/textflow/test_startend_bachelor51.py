@@ -31,7 +31,7 @@ def test_empty_start_bachelor51page2128(testdir, monkeypatch, capsys):
     cmd = f'-i {source}  --startend --pages=15:30'
     tests.textflow_.run(cmd, monkeypatch=monkeypatch)
     # ensure that startend is runned
-    assert not 'disable `startend`' in utilatest.stderr(capsys)
+    assert 'disable `startend`' not in utilatest.stderr(capsys)
     path = decider_textflow.path.startend_linted(testdir.tmpdir)
     loaded = serializeraw.load_findings(path, msgids={7625}, pages=(21, 28))
     assert not loaded
