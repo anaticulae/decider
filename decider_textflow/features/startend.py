@@ -48,7 +48,7 @@ def work(
 SOLUTION_7620 = """\
 Hurenkind: Einsame Zeile am Seitenanfang
 
-Seite beginnt mit einsamer Zeile.
+Seite beginnt mit einsamer Zeile: **{{rawline}}**.
 
 {darstellung/schriftbild#hurenkind}
 """
@@ -75,7 +75,10 @@ def check_7620_lonely_page_start(linter: callable, driver):
             # hurenkind
             # TEXT -> HEADLINE
             location = iamraw.RangedLocation(page=page, line=0)
-            linter(location)
+            linter(
+                location,
+                rawline=content[0].text.strip(),
+            )
             continue
         if not first_headline and not second_headline:
             # no headlines, text only
@@ -87,7 +90,10 @@ def check_7620_lonely_page_start(linter: callable, driver):
                 # hurenkind
                 # SHORT TEXT -> TEXT
                 location = iamraw.RangedLocation(page=page, line=0)
-                linter(location)
+                linter(
+                    location,
+                    rawline=content[0].text.strip(),
+                )
 
 
 SOLUTION_7621 = """\
