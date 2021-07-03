@@ -99,7 +99,8 @@ def check_7600_text_perspective(linter: callable, driver):
 SOLUTION_7605 = """\
 Satz zu lang
 
-Anzahl der Zeichen {{numbers}} in Satz **{{line}}** zu lang.
+Satz *{{line}}* überschreitet Limit. Anzahl der Zeichen({{numbers}}) \
+zu hoch.
 """
 
 MAX_SENTENCE_LENGTH = 400  # TODO: HOLY VALUE
