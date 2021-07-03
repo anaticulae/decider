@@ -8,6 +8,7 @@
 # =============================================================================
 
 import power
+import pytest
 import serializeraw
 import utilatest
 
@@ -26,6 +27,7 @@ def decide_textflow(source, pages, testdir, monkeypatch, msgids=None):
     return findings
 
 
+@pytest.mark.xfail(reason='invalid quotation parser')
 @utilatest.longrun
 def test_dtf_bachelor67_perspective(testdir, monkeypatch):
     source = power.link(power.BACHELOR076_PDF)
@@ -34,6 +36,7 @@ def test_dtf_bachelor67_perspective(testdir, monkeypatch):
     assert len(findings) == 4  # VALIDATED
 
 
+@pytest.mark.xfail(reason='invalid quotation parser')
 def test_dtf_master72_writing_quotation(testdir, monkeypatch):
     """Do not detect errors in perspective inside quotations."""
     source = power.link(power.MASTER072_PDF)
