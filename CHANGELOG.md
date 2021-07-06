@@ -2,6 +2,22 @@
 
 Every noteable change is logged here.
 
+## v2.10.0
+
+### Feature
+
+* improve error message (4ef59ed9c858)
+* make linting more explicit (6316e514dafe)
+* add sentence complexity judger (79aee40160d4)
+* add sentence length checker (e373c0615d96)
+* add sentence loader (f4958f7d26bd)
+* select proper formatted sentence (08911a90923a)
+
+### Fix
+
+* remove hyphen to improve writing (89e253537793)
+* select correct line later (465a3da3760d)
+
 ## v2.9.0
 
 ### Feature
