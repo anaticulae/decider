@@ -7,7 +7,6 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import functools
 import typing
 
 import configo
@@ -23,41 +22,29 @@ MAX_RESOLUTION_DIFF = configo.HV_PERCENT_PLUS(5).value
 
 
 def work(*images: str, pages: tuple = None) -> typing.Tuple[str, str]:
-    loaded = load_image_info(*images, pages=pages)
-    if not loaded:
+    driver = create_driver(*images, pages=pages)
+    if not driver.images:  # pylint:disable=E1101
         # document without images, nothing to lint, return empty result
         return protocol.RESULT_EMPTY
-
-    linter = protocol.from_module(__name__)
-
-    linting(loaded, linter)
-
-    result = linter.result(unique=True)
-    user, developer = protocol.dump_result(result)
-    return user, developer
+    result = protocol.run(
+        modulename=__name__,
+        driver=driver,
+    )
+    return result
 
 
-def linting(imageinfos: iamraw.ImageInformations, linter: protocol.Linter):
-    checkers = protocol.parse_checkers(__name__)
-
-    for checker in checkers:
-        for imageinfo in imageinfos:
-            location = iamraw.BoundingLocation.fromtuple(
-                bounding=imageinfo.bounding,
-                page=imageinfo.page,
-            )
-            call = functools.partial(
-                linter.add_finding,
-                msgid=checker.msgid,
-                location=location,
-            )
-            if not utila.rectangle_width(imageinfo.bounding):
-                utila.error(f'skip zero-width image: {imageinfo.bounding}')
-                continue
-            if not utila.rectangle_height(imageinfo.bounding):
-                utila.error(f'skip zero-height image: {imageinfo.bounding}')
-                continue
-            checker(call, imageinfo)
+def create_driver(*images, pages: tuple = None):
+    loaded = load_image_info(*images, pages=pages)
+    result = []
+    for image in loaded:
+        if not utila.rectangle_width(image.bounding):
+            utila.error(f'skip zero-width image: {image.bounding}')
+            continue
+        if not utila.rectangle_height(image.bounding):
+            utila.error(f'skip zero-height image: {image.bounding}')
+            continue
+        result.append(image)
+    return protocol.driver(images=result)
 
 
 SOLUTION_4000 = """\
@@ -71,20 +58,25 @@ Erwartet: {{expected}}
 """
 
 
-def check_4000_min_printing_resolution(linter, imageinfo):
-    pdfwidth = point_toinch(imageinfo.bounding[2] - imageinfo.bounding[0])
-    pdfheight = point_toinch(imageinfo.bounding[3] - imageinfo.bounding[1])
+def check_4000_min_printing_resolution(linter: callable, driver):
+    for imageinfo in driver.images:
+        pdfwidth = point_toinch(utila.rectangle_width(imageinfo.bounding))
+        pdfheight = point_toinch(utila.rectangle_height(imageinfo.bounding))
 
-    width_dpi = utila.roundme(imageinfo.width / pdfwidth)
-    height_dpi = utila.roundme(imageinfo.height / pdfheight)
+        width_dpi = utila.roundme(imageinfo.width / pdfwidth)
+        height_dpi = utila.roundme(imageinfo.height / pdfheight)
 
-    dpi = (width_dpi, height_dpi)
+        dpi = (width_dpi, height_dpi)
 
-    if dpi[0] >= MIN_DPI and dpi[1] >= MIN_DPI:
-        return
+        if dpi[0] >= MIN_DPI and dpi[1] >= MIN_DPI:
+            continue
 
-    expected = MIN_DPI, MIN_DPI
-    linter(dpi=dpi, expected=expected)
+        expected = MIN_DPI, MIN_DPI
+        location = iamraw.BoundingLocation.fromtuple(
+            bounding=imageinfo.bounding,
+            page=imageinfo.page,
+        )
+        linter(dpi=dpi, expected=expected, location=location)
 
 
 SOLUTION_4001 = """\
@@ -98,20 +90,25 @@ Erwartet: kleiner als {{expected}}
 """
 
 
-def check_4001_max_printing_resolution(linter, imageinfo):
-    pdfwidth = point_toinch(imageinfo.bounding[2] - imageinfo.bounding[0])
-    pdfheight = point_toinch(imageinfo.bounding[3] - imageinfo.bounding[1])
+def check_4001_max_printing_resolution(linter, driver):
+    for imageinfo in driver.images:
+        pdfwidth = point_toinch(utila.rectangle_width(imageinfo.bounding))
+        pdfheight = point_toinch(utila.rectangle_height(imageinfo.bounding))
 
-    width_dpi = utila.roundme(imageinfo.width / pdfwidth)
-    height_dpi = utila.roundme(imageinfo.height / pdfheight)
+        width_dpi = utila.roundme(imageinfo.width / pdfwidth)
+        height_dpi = utila.roundme(imageinfo.height / pdfheight)
 
-    dpi = (width_dpi, height_dpi)
+        dpi = (width_dpi, height_dpi)
 
-    if dpi[0] <= MAX_DPI or dpi[1] <= MAX_DPI:
-        return
+        if dpi[0] <= MAX_DPI or dpi[1] <= MAX_DPI:
+            continue
 
-    expected = MAX_DPI, MAX_DPI
-    linter(dpi=dpi, expected=expected)
+        expected = MAX_DPI, MAX_DPI
+        location = iamraw.BoundingLocation.fromtuple(
+            bounding=imageinfo.bounding,
+            page=imageinfo.page,
+        )
+        linter(dpi=dpi, expected=expected, location=location)
 
 
 SOLUTION_4002 = """\
@@ -131,16 +128,21 @@ Quelle: {{image}}
 """
 
 
-def check_4005_check_relation(linter, imageinfo):
-    pdfwidth = point_toinch(imageinfo.bounding[2] - imageinfo.bounding[0])
-    pdfheight = point_toinch(imageinfo.bounding[3] - imageinfo.bounding[1])
+def check_4005_check_relation(linter, driver):
+    for imageinfo in driver.images:
+        pdfwidth = point_toinch(utila.rectangle_width(imageinfo.bounding))
+        pdfheight = point_toinch(utila.rectangle_height(imageinfo.bounding))
 
-    pdf = utila.roundme(pdfwidth / pdfheight)
-    image = utila.roundme(imageinfo.width / imageinfo.height)
+        pdf = utila.roundme(pdfwidth / pdfheight)
+        image = utila.roundme(imageinfo.width / imageinfo.height)
 
-    if utila.pnear(pdf, image, rel_tol=MAX_RESOLUTION_DIFF):
-        return
-    linter(pdf=pdf, image=image)
+        if utila.pnear(pdf, image, rel_tol=MAX_RESOLUTION_DIFF):
+            continue
+        location = iamraw.BoundingLocation.fromtuple(
+            bounding=imageinfo.bounding,
+            page=imageinfo.page,
+        )
+        linter(pdf=pdf, image=image, location=location)
 
 
 def load_image_info(

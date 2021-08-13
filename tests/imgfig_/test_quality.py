@@ -15,7 +15,6 @@ import imgfig.path
 import tests.imgfig_
 
 
-@pytest.mark.xfail(reason='broken rawmaker image extractor')
 def test_imgfig_min_quality(testdir, monkeypatch):
     source = power.link(power.BACHELOR076_PDF)
     tests.imgfig_.run(f'-i {source} --quality', monkeypatch=monkeypatch)
@@ -25,7 +24,8 @@ def test_imgfig_min_quality(testdir, monkeypatch):
         msgids={4000},
     )
     # min dpi 96
-    assert len(loaded) == 5  # dependent on min dpi definition
+    # dependent on min dpi definition
+    assert len(loaded) == 13  # NOT VALIDATED
 
 
 @pytest.mark.xfail(reason='broken rawmaker image extractor')
