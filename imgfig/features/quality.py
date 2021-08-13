@@ -60,23 +60,26 @@ Erwartet: {{expected}}
 
 def check_4000_min_printing_resolution(linter: callable, driver):
     for imageinfo in driver.images:
-        pdfwidth = point_toinch(utila.rectangle_width(imageinfo.bounding))
-        pdfheight = point_toinch(utila.rectangle_height(imageinfo.bounding))
-
-        width_dpi = utila.roundme(imageinfo.width / pdfwidth)
-        height_dpi = utila.roundme(imageinfo.height / pdfheight)
-
-        dpi = (width_dpi, height_dpi)
-
+        dpi = determine_resolution(imageinfo)
         if dpi[0] >= MIN_DPI and dpi[1] >= MIN_DPI:
             continue
-
         expected = MIN_DPI, MIN_DPI
         location = iamraw.BoundingLocation.fromtuple(
             bounding=imageinfo.bounding,
             page=imageinfo.page,
         )
         linter(dpi=dpi, expected=expected, location=location)
+
+
+def determine_resolution(imageinfo):
+    pdfwidth = point_toinch(utila.rectangle_width(imageinfo.bounding))
+    pdfheight = point_toinch(utila.rectangle_height(imageinfo.bounding))
+
+    width_dpi = utila.roundme(imageinfo.width / pdfwidth)
+    height_dpi = utila.roundme(imageinfo.height / pdfheight)
+
+    dpi = (width_dpi, height_dpi)
+    return dpi
 
 
 SOLUTION_4001 = """\
@@ -92,17 +95,9 @@ Erwartet: kleiner als {{expected}}
 
 def check_4001_max_printing_resolution(linter, driver):
     for imageinfo in driver.images:
-        pdfwidth = point_toinch(utila.rectangle_width(imageinfo.bounding))
-        pdfheight = point_toinch(utila.rectangle_height(imageinfo.bounding))
-
-        width_dpi = utila.roundme(imageinfo.width / pdfwidth)
-        height_dpi = utila.roundme(imageinfo.height / pdfheight)
-
-        dpi = (width_dpi, height_dpi)
-
+        dpi = determine_resolution(imageinfo)
         if dpi[0] <= MAX_DPI or dpi[1] <= MAX_DPI:
             continue
-
         expected = MAX_DPI, MAX_DPI
         location = iamraw.BoundingLocation.fromtuple(
             bounding=imageinfo.bounding,
