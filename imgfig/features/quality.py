@@ -7,8 +7,6 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import typing
-
 import configo
 import iamraw
 import protocol
@@ -21,7 +19,7 @@ MAX_DPI = MIN_DPI * 2
 MAX_RESOLUTION_DIFF = configo.HV_PERCENT_PLUS(5).value
 
 
-def work(*images: str, pages: tuple = None) -> typing.Tuple[str, str]:
+def work(*images: str, pages: tuple = None) -> protocol.ResultType:
     driver = create_driver(*images, pages=pages)
     if not driver.images:  # pylint:disable=E1101
         # document without images, nothing to lint, return empty result
@@ -72,8 +70,8 @@ def check_4000_min_printing_resolution(linter: callable, driver):
 
 
 def determine_resolution(imageinfo):
-    pdfwidth = point_toinch(utila.rectangle_width(imageinfo.bounding))
-    pdfheight = point_toinch(utila.rectangle_height(imageinfo.bounding))
+    pdfwidth = utila.inch(utila.rectangle_width(imageinfo.bounding))
+    pdfheight = utila.inch(utila.rectangle_height(imageinfo.bounding))
 
     width_dpi = utila.roundme(imageinfo.width / pdfwidth)
     height_dpi = utila.roundme(imageinfo.height / pdfheight)
@@ -125,12 +123,12 @@ Quelle: {{image}}
 
 def check_4005_check_relation(linter, driver):
     for imageinfo in driver.images:
-        pdfwidth = point_toinch(utila.rectangle_width(imageinfo.bounding))
-        pdfheight = point_toinch(utila.rectangle_height(imageinfo.bounding))
-
+        # inch
+        pdfwidth = utila.inch(utila.rectangle_width(imageinfo.bounding))
+        pdfheight = utila.inch(utila.rectangle_height(imageinfo.bounding))
+        # pdf
         pdf = utila.roundme(pdfwidth / pdfheight)
         image = utila.roundme(imageinfo.width / imageinfo.height)
-
         if utila.pnear(pdf, image, rel_tol=MAX_RESOLUTION_DIFF):
             continue
         location = iamraw.BoundingLocation.fromtuple(
@@ -148,16 +146,4 @@ def load_image_info(
     result = [
         item for item in loaded if not utila.should_skip(item.page, pages)
     ]
-    return result
-
-
-# TODO: MOVE TO UTILA
-def point_toinch(point: float, userspace: float = 1.0) -> float:
-    """\
-    >>> point_toinch(72)
-    1.0
-    """
-    # TODO: CHECK USER SPACE
-    scale = 72.0 / userspace
-    result = point / scale
     return result
