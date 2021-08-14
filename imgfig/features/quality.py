@@ -31,7 +31,7 @@ def work(*images: str, pages: tuple = None) -> protocol.ResultType:
     return result
 
 
-def create_driver(*images, pages: tuple = None):
+def create_driver(*images, contentborder=None, pages: tuple = None):
     loaded = load_image_info(*images, pages=pages)
     result = []
     for image in loaded:
@@ -42,7 +42,7 @@ def create_driver(*images, pages: tuple = None):
             utila.error(f'skip zero-height image: {image.bounding}')
             continue
         result.append(image)
-    return protocol.driver(images=result)
+    return protocol.driver(images=result, contentborder=contentborder)
 
 
 SOLUTION_4000 = """\

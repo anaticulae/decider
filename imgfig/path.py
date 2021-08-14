@@ -14,3 +14,7 @@ import imgfig
 
 def quality(path: str, prefix: str = '') -> str:
     return utila.pathconnector(path, imgfig.PROCESS, 'quality_user', prefix)
+
+
+def position(path: str, prefix: str = '') -> str:
+    return utila.pathconnector(path, imgfig.PROCESS, 'position_user', prefix)

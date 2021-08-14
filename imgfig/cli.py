@@ -25,6 +25,14 @@ WORKPLAN = [
         ],
         (USER, DEVELOPER),
     ),
+    utila.create_step(
+        'position',
+        [
+            utila.Pattern('rawmaker__border_pages', 'yaml'),
+            utila.Pattern('rawmaker__images_images/*', 'yaml'),
+        ],
+        (USER, DEVELOPER),
+    ),
 ]
 
 
@@ -39,6 +47,7 @@ def main():
             description=DESCRIPTION,
             cli_hook=hook,
             multiprocessed=True,
+            pages=True,
             name=imgfig.PROCESS,
             version=imgfig.__version__,
         ),
