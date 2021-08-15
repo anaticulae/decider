@@ -45,8 +45,8 @@ def test_dtf_master72_writing_quotation(testdir, monkeypatch):
     assert not findings
 
 
-EXPECTED = """Norbert Schneider (2012) sieht die „Selbstentblößung“ in den \
-Medien als Folge einer Individualisierung und als Ersatz für die verlorene \
+EXPECTED = """Norbert Schneider &#40;2012&#41; sieht die „Selbstentblößung“ in \
+den Medien als Folge einer Individualisierung und als Ersatz für die verlorene \
 Bestätigung aus einem Kollektiv, dem man angehörte, z.B."""
 
 

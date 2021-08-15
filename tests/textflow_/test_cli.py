@@ -23,7 +23,7 @@ def test_dtf_cli_help(monkeypatch):
     pytest.param(power.TECH024_PDF, id='technical24'),
     pytest.param(power.BACHELOR037_PDF, id='bachelor37'),
     pytest.param(power.BACHELOR076_PDF, id='bachelor76'),
-    pytest.param(power.DOCU35_PDF, id='docu35'),
+    pytest.param(power.DOCU035_PDF, id='docu35'),
     pytest.param(power.BOOK007_PDF, id='book7'),
     pytest.param(power.MASTER072_PDF, id='master72'),
     pytest.param(power.MASTER078_PDF, id='master78'),

@@ -20,7 +20,7 @@ def test_example_extract(testdir):
     root = str(testdir)
     generated = os.path.join(root, 'generated')
     pdfs = [
-        power.DOCU35_PDF,
+        power.DOCU035_PDF,
         power.TECH024_PDF,
     ]
     decider.example.extract(pdfs, generated, pages='0:3')

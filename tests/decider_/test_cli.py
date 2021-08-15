@@ -26,7 +26,7 @@ def test_cli_decider(cmd, testdir, monkeypatch):
 @pytest.mark.parametrize('source', [
     pytest.param(power.BACHELOR037_PDF, id='bachelor37'),
     pytest.param(power.BACHELOR076_PDF, id='bachelor76'),
-    pytest.param(power.DOCU35_PDF, id='docu'),
+    pytest.param(power.DOCU035_PDF, id='docu'),
     pytest.param(power.BOOK007_PDF, id='leftright'),
     pytest.param(power.MASTER072_PDF, id='master72'),
     pytest.param(power.MASTER078_PDF, id='master78'),

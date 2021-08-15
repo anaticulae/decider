@@ -28,7 +28,7 @@ import tests
         1221,
     ]),
     (power.link(power.MASTER078_PDF), []),
-    (power.link(power.DOCU35_PDF, folder='notitle'), [
+    (power.link(power.DOCU035_PDF, folder='notitle'), [
         1200,
     ]),
 ],

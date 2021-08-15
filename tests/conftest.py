@@ -38,7 +38,7 @@ RESOURCES = [
     (power.BACHELOR056_PDF, '0:20'),
     (power.BACHELOR128_PDF, '0:20,50:70'),
     (power.BOOK007_PDF, '0:10'),
-    (power.DOCU35_PDF, '0:10'),
+    (power.DOCU035_PDF, '0:10'),
     power.HOME018_PDF,
     (power.MASTER078_PDF, '0:10'),
     (power.MASTER083_PDF, '0:10'),
@@ -48,7 +48,7 @@ RESOURCES = [
 ]
 
 RESOURCES_NOTITLE = [
-    (power.DOCU35_PDF, ':'),
+    (power.DOCU035_PDF, ':'),
     (power.BOOK007_PDF, ':'),
 ]
 
