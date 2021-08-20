@@ -54,12 +54,11 @@ def check_character(linter, driver, regex):
         if not matched:
             continue
         for match in matched:
-            start, end = match.span()[0], match.span()[1]
             location = iamraw.RangedLocation(
                 page=page,
                 line=line,
-                char=start,
-                char_end=end,
+                char=match.start(),
+                char_end=match.end(),
             )
             linter(location=location)
 
