@@ -50,7 +50,8 @@ class Validated:
 
 def most_common_font(items: iamraw.FootNotes) -> FootNoteStyle:
     """Compute general footer font family and font size to judge single
-    footnote."""
+    footnote.
+    """
     if not items:
         return None
     # font_size
@@ -75,17 +76,15 @@ def most_common_font(items: iamraw.FootNotes) -> FootNoteStyle:
         content_fontid.extend(
             utila.flatten([[item.font] * (item.end - item.start)
                            for item in content.content]))
-
-    highnote_rise = utila.roundme(highnote_rise, digits=1, convert=False)  # pylint:disable=R0204
-    content_size = utila.roundme(content_size, digits=1, convert=False)  # pylint:disable=R0204
-
+    # round result
+    highnote_rise: float = utila.roundme(highnote_rise, digits=1, convert=False)
+    content_size: float = utila.roundme(content_size, digits=1, convert=False)
     # TODO: Add more information when returning multiple sizes?
     highnote_size = utila.modes(highnote_size) if highnote_size else None
     highnote_rise = utila.modes(highnote_rise) if highnote_rise else None
     highnote_fontid = utila.modes(highnote_fontid) if highnote_fontid else None
     content_size = utila.modes(content_size) if content_size else None
     content_fontid = utila.modes(content_fontid) if content_fontid else None
-
     result = FootNoteStyle(
         content_fontid=content_fontid,
         content_size=content_size,
