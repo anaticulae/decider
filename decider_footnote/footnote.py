@@ -15,6 +15,16 @@
 * An exception is a http-url
 
 [Wissenschaftliches Schreiben - Manuel Rene Theisen: page 202]
+
+regression test
+---------------
+
+Ensure that FootNoteMerged merge styles:
+>>> most_common_font([iamraw.FootNoteMerged(number=2, page=-1, bounding=None,
+... notes=[iamraw.FootRawNote(number=2, page=22, text='In einer Häufigkeit',
+... raw=None, style=[]), iamraw.FootRawNote(number=-1, page=23,
+... text='eines Zufallsergebnisses[27].', raw=None, style=[])])])
+FootNoteStyle(...)
 """
 
 import dataclasses
