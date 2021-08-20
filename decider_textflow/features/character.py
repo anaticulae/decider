@@ -91,7 +91,7 @@ Fehlendes Leerzeichen nach einem Komma erkannt.
 """
 
 # TODO: ADD RISE to DISTINGUISH OF NORMAL NUMBERS
-MISSING_SPACE_AFTER_COMMA = r'\,[a-zA-Z]'
+MISSING_SPACE_AFTER_COMMA = r'\,[a-zA-Z]{3,}'
 
 
 def check_7651_missing_space_after_comma(linter: callable, driver):
@@ -100,6 +100,10 @@ def check_7651_missing_space_after_comma(linter: callable, driver):
     0
     >>> message('normal text: this is helmut,space missing', 7651)
     1
+
+    # TODO: REQUIRE FORMULA CHECKER, USE MAGIC LINE/CONTENT?
+    >>> message('Einführung von nmot,t = Tmot,t/TfB = 12 zusätzlichen')
+    0
     """
     check_character(linter, driver, MISSING_SPACE_AFTER_COMMA)
 
