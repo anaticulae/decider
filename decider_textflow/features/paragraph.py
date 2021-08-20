@@ -64,6 +64,9 @@ def check_7630_paragraph_too_short(linter: callable, driver):
     if textstyle.text_alignment == 0:
         # not justified
         return
+    if textstyle.text_width is None:
+        utila.debug('no textstyle.text_width, disable 7630')
+        return
 
     min_textwidth = textstyle.text_width - 35  # TODO: HOLY VALUE
 
