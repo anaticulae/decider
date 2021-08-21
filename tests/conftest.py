@@ -77,6 +77,8 @@ def extract_notitle(resources):
         folder='notitle',
         worker=WORKER,
         groupme=True,
+        sections=True,
+        detector=True,
     )
 
 
