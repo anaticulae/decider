@@ -7,60 +7,33 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import os
-
 import power
+import protocol
 import pytest
-import serializeraw
 import utila
-import utilatest
 
-import decider
-import decider.features.titlepage
 import tests
 
 
-@pytest.fixture(
-    params=[
-        (power.link(power.MASTER116_PDF), [
-            1210,
-        ]),
-        (power.link(power.MASTER072_PDF), [
-            1221,
-        ]),
-        (power.link(power.MASTER078_PDF), []),
-        (power.link(power.DOCU035_PDF, folder='notitle'), [
-            1200,
-        ]),
-    ],
-    ids=[
-        'master116',
-        'master72',
-        'master78',
-        'twine_no_title',
+@pytest.mark.parametrize(
+    'src, expected',
+    [
+        pytest.param(power.MASTER116_PDF, 1210, id='master116'),
+        pytest.param(power.MASTER072_PDF, 1221, id='master072'),
+        pytest.param(power.MASTER078_PDF, [], id='master078'),
+        pytest.param((power.DOCU035_PDF, 'notitle'), 1200, id='docu035'),
     ],
 )
-def titlepage(request, testdir):
-    root = str(testdir)
-    source, expected_failures = request.param
-
-    cmd = f'detector -i {source} -o {root}'
-    completed = utila.run(cmd)
-    assert completed.returncode == utila.SUCCESS, str(completed)
-    return root, expected_failures
-
-
-@utilatest.nightly
-def test_titlepage_extraction(titlepage, monkeypatch):  # pylint:disable=W0621
-    root, expected_failures = titlepage
-
-    result = os.path.join(root, 'result')
-    cmd = f'-i {root} -o {result} --titlepage'
-
+def test_titlepage_extraction(src, expected, testdir, monkeypatch):
+    src = power.link(*src) if isinstance(src, tuple) else power.link(src)
+    if isinstance(expected, int):
+        expected = [expected]
+    # run decider
+    cmd = f'-i {src} -o {testdir.tmpdir} --titlepage'
     tests.run_decider(cmd, monkeypatch)
-
-    userpath = os.path.join(result, decider.cli.USER_LINT_OUTPUT)
-    user = serializeraw.load_findings(userpath)
-
-    failures = [item.msgid for item in user]
-    assert failures == expected_failures, str(failures)
+    # validate result
+    failures = [
+        item.msgid for item in utila.flatten_content(
+            protocol.findings_from_path(testdir.tmpdir))
+    ]
+    assert failures == expected, str(failures)
