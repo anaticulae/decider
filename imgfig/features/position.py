@@ -12,7 +12,7 @@ import math
 import iamraw
 import protocol
 import serializeraw
-import textflow.alignment.style
+import texmex
 import utila
 
 import imgfig.features.quality
@@ -52,7 +52,7 @@ def check_4030_image_alignment_selection(linter: callable, driver):
     if expected is None:
         utila.debug(f'too few images: {len(driver.images)}, disable 4030')
         return
-    if expected != textflow.alignment.style.TextAlignment.UNDEFINED:
+    if expected != texmex.TextAlignment.UNDEFINED:
         # everything is fine
         return
     linter(
@@ -78,7 +78,7 @@ def check_4031_image_alignment_per_image(linter: callable, driver):
     if expected is None:
         utila.debug(f'too few images: {len(driver.images)}, disable 4030')
         return
-    if expected == textflow.alignment.style.TextAlignment.UNDEFINED:
+    if expected == texmex.TextAlignment.UNDEFINED:
         utila.debug('undefined image alignment, disable 4030')
         return
     for imageinfo in driver.images:
@@ -92,7 +92,7 @@ def check_4031_image_alignment_per_image(linter: callable, driver):
         border = utila.select_page(driver.contentborder, page=imageinfo.page)
         leftright = (border.border.left, border.border.right)
         current = alignment(imageinfo.bounding, leftright)
-        if current == textflow.alignment.style.TextAlignment.BLOCK:
+        if current == texmex.TextAlignment.BLOCK:
             # block is always right
             continue
         if current == expected:
@@ -104,7 +104,7 @@ ALIGNMENT_TRUST_MIN = 0.6
 
 
 def expected_alignment(images, contentborder, mincount: int = 5):
-    textstyle = textflow.alignment.style.TextAlignment
+    textstyle = texmex.TextAlignment
     alignments = []
     for item in images:
         border = utila.select_page(contentborder, page=item.page)
@@ -141,9 +141,9 @@ def alignment(bounding, leftright: tuple):
     imagewidth = utila.rectangle_width(bounding)
     if imagewidth > (pagewidth - 25):
         # image covers complete page or more than complete page
-        return textflow.alignment.style.TextAlignment.BLOCK
+        return texmex.TextAlignment.BLOCK
     if rightdist < 50.0 and leftdist > 150.0:
-        return textflow.alignment.style.TextAlignment.RIGHT
+        return texmex.TextAlignment.RIGHT
     if rightdist:
         rate = leftdist / rightdist
     else:
@@ -153,7 +153,7 @@ def alignment(bounding, leftright: tuple):
     if maxed > 10.0:
         dist = math.fabs(leftdist - rightdist)
         if rate > 0.9 or dist < 20:
-            return textflow.alignment.style.TextAlignment.CENTER
+            return texmex.TextAlignment.CENTER
     if leftdist < 5.0:
-        return textflow.alignment.style.TextAlignment.LEFT
-    return textflow.alignment.style.TextAlignment.UNDEFINED
+        return texmex.TextAlignment.LEFT
+    return texmex.TextAlignment.UNDEFINED
