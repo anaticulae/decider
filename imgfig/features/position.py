@@ -92,6 +92,9 @@ def check_4031_image_alignment_per_image(linter: callable, driver):
         border = utila.select_page(driver.contentborder, page=imageinfo.page)
         leftright = (border.border.left, border.border.right)
         current = alignment(imageinfo.bounding, leftright)
+        if current == textflow.alignment.style.TextAlignment.BLOCK:
+            # block is always right
+            continue
         if current == expected:
             continue
         linter(location=location, current=current, expected=expected)
