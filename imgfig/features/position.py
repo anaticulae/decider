@@ -65,6 +65,7 @@ Abbildungen nicht einheitlich ausgerichtet
 Erwartete Ausrichtung: {{expected}}
 Gefundene Ausrichtung: {{current}}
 """
+SOLUTION_4041_PAGE_MIN = 5
 
 
 def check_4031_image_alignment_per_image(linter: callable, driver):
@@ -79,6 +80,9 @@ def check_4031_image_alignment_per_image(linter: callable, driver):
         utila.debug('undefined image alignment, disable 4030')
         return
     for imageinfo in driver.images:
+        if imageinfo.page < SOLUTION_4041_PAGE_MIN:
+            # exclude title page from image judgement
+            continue
         location = iamraw.BoundingLocation.fromtuple(
             bounding=imageinfo.bounding,
             page=imageinfo.page,
