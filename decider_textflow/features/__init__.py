@@ -12,7 +12,6 @@ import functools
 import iamraw
 import protocol
 import serializeraw
-import textflow.quotation.serialize
 import utila
 
 import decider_textflow.utils
@@ -85,7 +84,7 @@ def textdata(  # pylint:disable=R0913,R0914
         magicvalid=magicvalid,
     )
     if utila.exists(quotations):
-        quotations = textflow.quotation.serialize.load_quotations(
+        quotations = serializeraw.load_quotations(
             quotations,
             pages=pages,
         )

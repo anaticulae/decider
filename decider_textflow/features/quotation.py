@@ -14,13 +14,12 @@ import iamraw
 import konrad.quotation.german
 import protocol
 import serializeraw
-import textflow.quotation.serialize
 
 MAX_CITATION_LENGTH = 50  # TODO: HOLY VALUE
 
 
 def work(text: str, pages: tuple) -> protocol.ResultType:
-    quotations = textflow.quotation.serialize.load_quotations(
+    quotations = serializeraw.load_quotations(
         text,
         pages=pages,
     )
@@ -146,7 +145,7 @@ def message(quotation: str, msgid=None):
     raw = [
         (0, 0, quotation),
     ]
-    dumped = textflow.quotation.serialize.dump_quotations(raw)
+    dumped = serializeraw.dump_quotations(raw)
     user, _ = work(dumped, None)
     result = serializeraw.load_findings(user, msgid)
     return len(result)
