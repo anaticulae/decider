@@ -129,9 +129,16 @@ def alignment(bounding, leftright: tuple):
     <TextAlignment.RIGHT: ...>
     >>> alignment((119.41, 185.91, 474.91, 287.16), (102.88, 498.13))
     <TextAlignment.CENTER: ...>
+    >>> alignment((102.88, 557.02, 498.13, 636.52), (102.88, 498.13))
+    <TextAlignment.BLOCK: ...>
     """
     left, right = leftright
     leftdist, rightdist = bounding[0] - left, right - bounding[2]
+    pagewidth = right - left
+    imagewidth = utila.rectangle_width(bounding)
+    if imagewidth > (pagewidth - 25):
+        # image covers complete page or more than complete page
+        return textflow.alignment.style.TextAlignment.BLOCK
     if rightdist < 50.0 and leftdist > 150.0:
         return textflow.alignment.style.TextAlignment.RIGHT
     if rightdist:
