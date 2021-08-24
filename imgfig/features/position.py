@@ -7,6 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import math
+
 import iamraw
 import protocol
 import serializeraw
@@ -125,6 +127,8 @@ def alignment(bounding, leftright: tuple):
     """\
     >>> alignment((354.35, 84.28, 495.62, 268.78), (69.38, 527.85))
     <TextAlignment.RIGHT: ...>
+    >>> alignment((119.41, 185.91, 474.91, 287.16), (102.88, 498.13))
+    <TextAlignment.CENTER: ...>
     """
     left, right = leftright
     leftdist, rightdist = bounding[0] - left, right - bounding[2]
@@ -135,8 +139,10 @@ def alignment(bounding, leftright: tuple):
     else:
         rate = 0.0
     leftdist, rightdist, rate = utila.roundme((leftdist, rightdist, rate))
-    if max((leftdist, rightdist)) > 10.0:
-        if rate > 0.9:
+    maxed = max((leftdist, rightdist))
+    if maxed > 10.0:
+        dist = math.fabs(leftdist - rightdist)
+        if rate > 0.9 or dist < 20:
             return textflow.alignment.style.TextAlignment.CENTER
     if leftdist < 5.0:
         return textflow.alignment.style.TextAlignment.LEFT
