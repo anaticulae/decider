@@ -17,6 +17,8 @@ import texmex
 
 import decider_textflow.features
 
+MORETHAN = 10
+
 
 def work(
     headlines: str,
@@ -74,6 +76,7 @@ Ungültiges Leerzeichen vor einem Komma erkannt.
 SPACE_BEFORE_COMMA = r'\s+\,'
 
 
+@protocol.disable_perpage(morethan=MORETHAN)
 def check_7650_space_before_comma(linter: callable, driver):
     """\
     >>> message('space before , comma', 7650)
@@ -94,6 +97,7 @@ Fehlendes Leerzeichen nach einem Komma erkannt.
 MISSING_SPACE_AFTER_COMMA = r'\,[a-zA-Z]{3,}'
 
 
+@protocol.disable_perpage(morethan=MORETHAN)
 def check_7651_missing_space_after_comma(linter: callable, driver):
     """\
     >>> message('hightnote: ,10', 7651)
@@ -121,6 +125,7 @@ SPACE_BEFORE_SQUARE_BRACKET = r"""
 """
 
 
+@protocol.disable_perpage(morethan=MORETHAN)
 def check_7652_space_before_square_bracket(linter: callable, driver):
     """\
     >>> message('[Jens ] space inside author reference', 7652)
@@ -145,6 +150,7 @@ SPACE_AFTER_SQUARE_BRACKET = r"""
 """
 
 
+@protocol.disable_perpage(morethan=MORETHAN)
 def check_7653_space_after_square_bracket(linter: callable, driver):
     """\
     >>> message('[ Jens] space inside author reference', 7653)
@@ -168,6 +174,7 @@ Unzuläßiges Leerzeichen vor Semikolon erkannt.
 SPACE_BEFORE_SEMICOLON = r'\s+\;'
 
 
+@protocol.disable_perpage(morethan=MORETHAN)
 def check_7654_space_before_semicolon(linter: callable, driver):
     check_character(linter, driver, SPACE_BEFORE_SEMICOLON)
 
@@ -183,6 +190,7 @@ Fehlendes Leerzeichen nach Semicolon erkannt.
 MISSING_SPACE_AFTER_SEMICOLON = r'\;[^\s]'
 
 
+@protocol.disable_perpage(morethan=MORETHAN)
 def check_7655_missing_space_after_semicolon(linter: callable, driver):
     check_character(linter, driver, MISSING_SPACE_AFTER_SEMICOLON)
 
@@ -198,6 +206,7 @@ Gefunden **[ ]** ersetzen Sie es durch **[...]**
 MISSING_DOTS_BETWEEN_ANGLE_BRACKETS = r'\[\s*\]'
 
 
+@protocol.disable_perpage(morethan=MORETHAN)
 def check_7656_missing_dots_between_brackets(linter: callable, driver):
     """\
     >>> message('[] replace with [...]', 7656)
@@ -228,6 +237,7 @@ TODO ADD LINK
 MISSING_MINUS_BETWEEN_VALUE_AND_SIGN = r'\d+(mal)'
 
 
+@protocol.disable_perpage(morethan=MORETHAN)
 def check_7660_missing_minus_value_and_sign(linter: callable, driver):
     """Number in combination with `mal` is connected with minus. But
     `zweihundert Mal` is correct, no minus is needed.
@@ -249,6 +259,7 @@ Vor und nach einem Schrägstrich wird kein Leerzeichen gesetzt.
 SPACE_BEFORE_OR_AFTER_SLASH = r'(\s+/\s+|\s+/|/\s+)'
 
 
+@protocol.disable_perpage(morethan=MORETHAN)
 def check_7661_space_before_or_after_slash(linter: callable, driver):
     """\
     >>> message('Europäischen Gemeinschaften (Beutler / Bieber / Pipkorn / Streil 2001).', 7661)
@@ -272,6 +283,7 @@ Zwischen Paragrafzeichen und der Paragrafnummer wird ein Festabstand gesetzt.
 SPACE_AFTER_PARAGRAPH = r'§\d+[a-z]?'
 
 
+@protocol.disable_perpage(morethan=MORETHAN)
 def check_7662_space_after_paragraph(linter: callable, driver):
     """\
     >>> message('StVG §24c „ […] wer in der Probezeit nach §2a oder vor', 7662)
@@ -298,6 +310,7 @@ TODO ADD LINK
 MISSING_MINUS_BETWEEN = r'\d+(jährig)(en){0,1}'
 
 
+@protocol.disable_perpage(morethan=MORETHAN)
 def check_7663_missing_minus_number_jaehrig(linter: callable, driver):
     """\
     >>> message('25jährigen und die ab 69jährigen in Unfälle verwickelt waren.', 7663)
