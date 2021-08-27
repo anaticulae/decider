@@ -100,7 +100,7 @@ def check_4031_image_alignment_per_image(linter: callable, driver):
         linter(location=location, current=current, expected=expected)
 
 
-ALIGNMENT_TRUST_MIN = 0.6
+ALIGNMENT_TRUST_MIN = 0.5
 
 
 def expected_alignment(images, contentborder, mincount: int = 5):
