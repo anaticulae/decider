@@ -111,6 +111,7 @@ def expected_alignment(images, contentborder, mincount: int = 5):
         leftright = (border.border.left, border.border.right)
         current = alignment(item.bounding, leftright)
         alignments.append(current.value)
+    alignments = [item for item in alignments if item != textstyle.BLOCK.value]
     if len(alignments) < mincount:
         return None
     left, center, right = utila.roundme([
