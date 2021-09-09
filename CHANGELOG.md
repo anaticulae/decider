@@ -2,6 +2,24 @@
 
 Every noteable change is logged here.
 
+## v2.11.0
+
+### Feature
+
+* skip block center in alignment detection (d9624ff7ed10)
+* adjust min alignment rate (db86e1b14a24)
+* skip too many lintings (94b5bb1f17ac)
+* add complete figure covering (d90d07233db3)
+* add another figure center judger (ca5b7d135f63)
+* skip titlepage img pos judgement (bf79b4440489)
+* check that figures are adjusted correctly (29ace11241b3)
+
+### Fix
+
+* page width image is always correct (f9f04f575467)
+* skip check if textstyle is not given (f22249fa06b9)
+* do not lint formulas as sign error (0dc863b71e86)
+
 ## v2.10.0
 
 ### Feature
