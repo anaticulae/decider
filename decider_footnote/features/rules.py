@@ -169,6 +169,10 @@ def check_2016_footnote_separator_position(linter, driver):
             continue
         separator = sorted(current, key=lambda x: x.box[3], reverse=True)[0]
         separator_y0 = separator.box.y0
+        bounding = page.content[0].bounding
+        if not bounding:
+            utila.error(f'missing bounding: {page.content[0]}')
+            continue
         firstfootnote_y0 = page.content[0].bounding[1]
         # judge
         distance = math.fabs(separator_y0 - firstfootnote_y0)
