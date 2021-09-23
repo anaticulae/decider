@@ -14,16 +14,13 @@ import imgfig
 
 DESCRIPTION = ''
 
-USER = 'user'
-DEVELOPER = 'developer'
-
 WORKPLAN = [
     utila.create_step(
         'quality',
         [
             utila.Pattern('rawmaker__images_images/*', 'yaml'),
         ],
-        (USER, DEVELOPER),
+        protocol.ResultDefault,
     ),
     utila.create_step(
         'position',
@@ -31,7 +28,7 @@ WORKPLAN = [
             utila.Pattern('rawmaker__border_pages', 'yaml'),
             utila.Pattern('rawmaker__images_images/*', 'yaml'),
         ],
-        (USER, DEVELOPER),
+        protocol.ResultDefault,
     ),
 ]
 

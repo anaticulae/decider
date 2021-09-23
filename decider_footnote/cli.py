@@ -14,16 +14,13 @@ import decider_footnote
 
 DESCRIPTION = ''
 
-USER = 'user'
-DEVELOPER = 'developer'
-
 WORKPLAN = [
     utila.create_step(
         'global',
         [
             utila.ResultFile('groupme', 'footer_footerheader'),
         ],
-        (USER, DEVELOPER),
+        protocol.ResultDefault,
     ),
     utila.create_step(
         'rules',
@@ -31,7 +28,7 @@ WORKPLAN = [
             utila.ResultFile('groupme', 'footer_footerheader'),
             utila.ResultFile('rawmaker', 'horizontals_horizontals'),
         ],
-        (USER, DEVELOPER),
+        protocol.ResultDefault,
     ),
     utila.create_step(
         'style',
@@ -40,7 +37,7 @@ WORKPLAN = [
             utila.ResultFile('rawmaker', 'fonts_header'),
             utila.ResultFile('rawmaker', 'fonts_content'),
         ],
-        (USER, DEVELOPER),
+        protocol.ResultDefault,
     ),
 ]
 

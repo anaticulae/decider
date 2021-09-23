@@ -20,9 +20,6 @@ DESCRIPTION = ''
 TOC = 'toc'
 FOOTNOTE = 'footnote'
 
-USER = 'user'
-DEVELOPER = 'developer'
-
 WORKPLAN = [
     utila.create_step(
         'abbreviation_text',
@@ -30,40 +27,40 @@ WORKPLAN = [
             utila.ResultFile(groupme.PROCESS, 'abbreviation_abbreviation'),
             utila.ResultFile(words.PROCESS, 'abbreviation_detected'),
         ],
-        (USER, DEVELOPER),
+        protocol.ResultDefault,
     ),
     utila.create_step(
         'header',
         [
             utila.ResultFile('groupme', 'footer_footerheader'),
         ],
-        (USER, DEVELOPER),
+        protocol.ResultDefault,
     ),
     utila.create_step(
         'links',
         [
             utila.ResultFile('words', 'links_links'),
         ],
-        (USER, DEVELOPER),
+        protocol.ResultDefault,
     ),
     utila.create_step(
         'page',
         [
             utila.ResultFile('groupme', 'footer_footerheader'),
         ],
-        (USER, DEVELOPER),
+        protocol.ResultDefault,
     ),
     utila.create_step(
         'titlepage',
         [
             utila.ResultFile('detector', 'titlepage_detected'),
         ],
-        (USER, DEVELOPER),
+        protocol.ResultDefault,
     ),
 ]
 
-USER_LINT_OUTPUT = f'{decider.PROCESS}__titlepage_{USER}.yaml'
-DEVELOPER_LINT_OUTPUT = f'{decider.PROCESS}__titlepage_{DEVELOPER}.yaml'
+USER_LINT_OUTPUT = f'{decider.PROCESS}__titlepage_user.yaml'
+DEVELOPER_LINT_OUTPUT = f'{decider.PROCESS}__titlepage_developer.yaml'
 
 
 def main():
