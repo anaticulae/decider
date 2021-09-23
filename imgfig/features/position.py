@@ -95,6 +95,9 @@ def check_4031_image_alignment_per_image(linter: callable, driver):
         if current == texmex.TextAlignment.BLOCK:
             # block is always right
             continue
+        if current == texmex.TextAlignment.UNDEFINED:
+            utila.log(f'undefined image alignment: {imageinfo}, skip 4031')
+            continue
         if current == expected:
             continue
         linter(location=location, current=current, expected=expected)
