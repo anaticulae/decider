@@ -18,7 +18,12 @@ import utila
 import imgfig.features.quality
 
 
-def work(border: str, *images: str, pages: tuple = None) -> protocol.ResultType:
+def work(
+    border: str,
+    docinfo: str,
+    *images: str,
+    pages: tuple = None,
+) -> protocol.ResultType:
     contentborder = serializeraw.load_pageborders(border, pages=pages)
     driver = imgfig.features.quality.create_driver(
         *images,
@@ -31,6 +36,7 @@ def work(border: str, *images: str, pages: tuple = None) -> protocol.ResultType:
     result = protocol.run(
         modulename=__name__,
         driver=driver,
+        document=serializeraw.load_docinfo(docinfo, pages=pages),
     )
     return result
 
@@ -67,9 +73,9 @@ Abbildungen nicht einheitlich ausgerichtet
 Erwartete Ausrichtung: {{expected}}
 Gefundene Ausrichtung: {{current}}
 """
-SOLUTION_4041_PAGE_MIN = 5
 
 
+@protocol.section_skip(iamraw.sections.TitlePage)
 def check_4031_image_alignment_per_image(linter: callable, driver):
     expected = expected_alignment(
         driver.images,
@@ -82,9 +88,6 @@ def check_4031_image_alignment_per_image(linter: callable, driver):
         utila.debug('undefined image alignment, disable 4030')
         return
     for imageinfo in driver.images:
-        if imageinfo.page < SOLUTION_4041_PAGE_MIN:
-            # exclude title page from image judgement
-            continue
         location = iamraw.BoundingLocation.fromtuple(
             bounding=imageinfo.bounding,
             page=imageinfo.page,

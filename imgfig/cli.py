@@ -26,6 +26,7 @@ WORKPLAN = [
         'position',
         [
             utila.Pattern('rawmaker__border_pages', 'yaml'),
+            utila.ResultFile('sections', 'docinfo_docinfo'),
             utila.Pattern('rawmaker__images_images/*', 'yaml'),
         ],
         protocol.ResultDefault,
