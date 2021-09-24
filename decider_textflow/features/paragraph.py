@@ -61,7 +61,7 @@ PARAGRAPH_TOO_SHORT = 3
 def check_7630_paragraph_too_short(linter: callable, driver):
     textstyle = driver.doctextstyle
 
-    if textstyle.text_alignment == 0:
+    if textstyle.text_alignment == 0:  # pylint:disable=C2001
         # not justified
         return
     if textstyle.text_width is None:

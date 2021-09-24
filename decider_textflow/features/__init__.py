@@ -125,7 +125,6 @@ class Sentences:
                 # yield headline
                 if textsection.headline.container != -1:
                     self.content.append(textsection.headline)
-                #
                 merged = list(
                     zip(
                         textsection.content,
