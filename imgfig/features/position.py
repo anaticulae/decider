@@ -75,8 +75,12 @@ Gefundene Ausrichtung: {{current}}
 """
 
 
+@protocol.section_skip(iamraw.sections.Abstract)
+@protocol.section_skip(iamraw.sections.LegalInformation)
 @protocol.section_skip(iamraw.sections.TitlePage)
 def check_4031_image_alignment_per_image(linter: callable, driver):
+    """Do not judge image positon in abstract, legal etc. There are
+    often signatures or logos."""
     expected = expected_alignment(
         driver.images,
         contentborder=driver.contentborder,
