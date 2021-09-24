@@ -2,6 +2,17 @@
 
 Every noteable change is logged here.
 
+## v2.11.1
+
+### Feature
+
+* replace with new protocol feature (66a5b2ba0c41)
+
+### Fix
+
+* do not judge undefined images position (caa8bdf38f45)
+* skip footnote without bounding (4518128a5e75)
+
 ## v2.11.0
 
 ### Feature
