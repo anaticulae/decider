@@ -8,6 +8,7 @@
 # =============================================================================
 
 import power
+import pytest
 import serializeraw
 
 import imgfig.features.position
@@ -47,3 +48,19 @@ def test_imgfig_position_unclear(testdir, monkeypatch):
         msgids={4030},
     )
     assert len(loaded) == 1
+
+
+@pytest.mark.xfail(reason='improve image/figure detector')
+def test_imgfig_skip_title_legal_etc(testdir, monkeypatch):
+    """Do not judge image position on title page or legal information."""
+    source = power.link(power.MASTER031_PDF)
+    tests.imgfig_.run(
+        f'-i {source} --position',
+        monkeypatch=monkeypatch,
+    )
+    loaded = serializeraw.load_findings(
+        imgfig.path.position(testdir.tmpdir),
+        msgids={4031},
+    )
+    # TODO: ADD SUPPORT FOR TEXT INLINED IMAGES
+    assert len(loaded) == 1  # TODO: VALIDATE LATER
