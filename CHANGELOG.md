@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v2.12.0
+
+### Feature
+
+* use improved quotation remover (4043d09e32ab)
+* do not judge image pos in abstract and legal (8a4c9fcc1b78)
+
 ## v2.11.1
 
 ### Feature
