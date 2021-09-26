@@ -14,17 +14,16 @@ import decider_textflow.path
 import tests.textflow_
 
 
-def test_lineendings_master83_page6_lineending(testdir, monkeypatch):  # pylint:disable=W0621
+def test_lineendings_master83page6_lineending(testdir, monkeypatch):
     source = power.link(power.MASTER083_PDF)
     tests.textflow_.run_textflow(
         source,
-        pages='6',
+        pages=6,
         lineending=True,
         quotation=True,
     )
     # lint result
-    tests.textflow_.run(f'-i={source}', monkeypatch=monkeypatch)
-
+    tests.textflow_.run(f'-i={source} --pages=6', monkeypatch=monkeypatch)
     result = serializeraw.load_findings(
         decider_textflow.path.lineendings_linted(testdir.tmpdir),
         7000,
