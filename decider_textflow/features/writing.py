@@ -70,6 +70,7 @@ def check_7600_text_perspective(linter: callable, driver):
     # group text content
     grouped = groupby_page(driver.text_chunks)
     for page, textraw in grouped.items():
+        # TODO: DO WE ALREADY REQUIRE THIS?
         text = german.word_tokenize(textraw, validate_sentences=False)
         text = ' '.join(konrad.mark2str(item) for item in text)
         text = remove_quotes(text, quotes[page])
