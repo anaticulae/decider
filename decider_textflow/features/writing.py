@@ -184,7 +184,11 @@ def remove_quotes(text, quotes):
     if not quotes:
         return text
     for remove in quotes:
-        text = text.replace(remove, '')
+        removed = german.sentence_select(text, remove)
+        if not removed:
+            utila.error(f'could not find text: {remove}')
+            continue
+        text = text.replace(removed, '', 1)
     text = utila.normalize_text(text)
     return text
 
