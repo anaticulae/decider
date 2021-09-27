@@ -84,6 +84,10 @@ def check_7600_text_perspective(linter: callable, driver):
             # Remove - as a result of word-division
             tokens = [item for item in tokens if item != konrad.Mark.HYPHEN]
             sentence = german.sentence_select(textraw, tokens)
+            if not sentence:
+                utila.error(f'could not select sentence: {tokens}')
+                utila.error(textraw)
+                continue
             # TODO: CENTER SENTENCE TO FINDING, REDUCE SENTENCE LENGTH
             sentence = utila.normalize_text(sentence, normalize_spaces=True)
             # TODO: DETERMINE SENTENCE/LINE NUMBER
