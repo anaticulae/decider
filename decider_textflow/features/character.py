@@ -256,17 +256,19 @@ Vor und nach einem Schrägstrich wird kein Leerzeichen gesetzt.
 {darstellung/satzzeichen#divis}
 """
 
-SPACE_BEFORE_OR_AFTER_SLASH = r'(\s+/\s+|\s+/|/\s+)'
+SPACE_BEFORE_OR_AFTER_SLASH = r'([ ]\/[ ]|[ ]\/|\/[ ])'
 
 
 @protocol.disable_perpage(morethan=MORETHAN)
 def check_7661_space_before_or_after_slash(linter: callable, driver):
-    """\
+    r"""\
     >>> message('Europäischen Gemeinschaften (Beutler / Bieber / Pipkorn / Streil 2001).', 7661)
     3
     >>> message('Bitte wählen Mann/ Frau., 7661')
     1
     >>> message('dieser bei 1.44/1.63, den Mittelaltrigen bei 0.72/0.483', 7661)
+    0
+    >>> message('no/\nnewline problem.', 7661)
     0
     """
     check_character(linter, driver, SPACE_BEFORE_OR_AFTER_SLASH)
