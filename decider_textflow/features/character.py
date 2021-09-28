@@ -333,13 +333,13 @@ relativiert. Schreiben Sie die Zahl aus um dies deutlich zu machen.
 
 WRONG_ACCURACY = r'(etwa|circa|\bca\.?\b)[ ]{0,4}\d+'
 
-
-def check_7665_wrong_accuracy(linter: callable, driver):
-    """\
-    >>> message('Etwa 1000 Einwohner wohnen hier. Circa 12 Menschen wohnen hier.', 7665)
-    2
-    """
-    check_character(linter, driver, WRONG_ACCURACY)
+# def check_7665_wrong_accuracy(linter: callable, driver):
+#     """\
+#     >>> message('Etwa 1000 Einwohner wohnen hier. Circa 12 Menschen wohnen hier.', 7665)
+#     2
+#     """
+#     TODO: INVESTIGATE LATER
+#     check_character(linter, driver, WRONG_ACCURACY)
 
 
 def message(lines: list, msgid=None, page=0):
