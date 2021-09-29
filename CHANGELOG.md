@@ -2,6 +2,14 @@
 
 Every noteable change is logged here.
 
+## v2.12.2
+
+### Fix
+
+* skip questionable `circa check` (e2599b59ea0a)
+* do not treat newline as space (1bb606b3f5d9)
+* skip detection error (abaa39f1ad12)
+
 ## v2.12.1
 
 ## v2.12.0
