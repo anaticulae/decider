@@ -36,7 +36,6 @@ def work(
     caption_figure = serializeraw.load_captions(caption_figure, pages=pages)
     caption_image = serializeraw.load_captions(caption_image, pages=pages)
     caption_table = serializeraw.load_captions(caption_table, pages=pages)
-
     # prepare
     driver = protocol.driver(
         figure=figure,
@@ -48,15 +47,11 @@ def work(
         caption_image=caption_image,
         caption_table=caption_table,
     )
-
-    # run
-    linter = protocol.from_module(__name__)
-    linter.run(driver=driver)
-
-    # dump
-    result = linter.result(unique=True)
-    user, developer = protocol.dump_result(result)
-    return user, developer
+    result = protocol.run(
+        modulename=__name__,
+        driver=driver,
+    )
+    return result
 
 
 SOLUTION_7200 = """\

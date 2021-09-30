@@ -23,6 +23,7 @@ def work(text: str, pages: tuple) -> protocol.ResultType:
         text,
         pages=pages,
     )
+
     linter = protocol.from_module(__name__)
 
     linting(quotations, linter)

@@ -38,7 +38,10 @@ def work(
         magiccontent=magiccontent,
         pages=pages,
     )
-    result = decider_textflow.features.linting(__name__, driver)
+    result = protocol.run(
+        modulename=__name__,
+        driver=driver,
+    )
     return result
 
 

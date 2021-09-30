@@ -15,6 +15,7 @@ import statistics
 import typing
 
 import iamraw
+import protocol
 import serializeraw
 import utila
 
@@ -41,7 +42,10 @@ def work(
         magiccontent=magiccontent,
         pages=pages,
     )
-    result = decider_textflow.features.linting(__name__, driver)
+    result = protocol.run(
+        modulename=__name__,
+        driver=driver,
+    )
     return result
 
 
@@ -76,7 +80,7 @@ def check_7620_lonely_page_start(linter: callable, driver):
             # TEXT -> HEADLINE
             location = iamraw.RangedLocation(page=page, line=0)
             linter(
-                location,
+                location=location,
                 rawline=content[0].text.strip(),
             )
             continue
@@ -91,7 +95,7 @@ def check_7620_lonely_page_start(linter: callable, driver):
                 # SHORT TEXT -> TEXT
                 location = iamraw.RangedLocation(page=page, line=0)
                 linter(
-                    location,
+                    location=location,
                     rawline=content[0].text.strip(),
                 )
 
@@ -135,7 +139,7 @@ def check_7625_empty_start(linter: callable, driver):
             if first.bounding.y0 <= failstart:
                 continue
         location = iamraw.RangedLocation(page=page, line=0)
-        linter(location)
+        linter(location=location)
 
 
 SOLUTION_7626 = """\
