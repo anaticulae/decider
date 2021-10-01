@@ -98,10 +98,9 @@ def test_textflow_character_missing_space_before_semicolon(testdir, monkeypatch)
         monkeypatch,
         msgids=7654,
     )
-    assert len(findings) == 25  # TODO: VALIDATE LATER
+    assert len(findings) == 22  # TODO: VALIDATE LATER
 
 
-@pytest.mark.xfail(reason='formula is badly converted to non existing semicolon') # yapf:disable
 @utilatest.longrun
 def test_missing_space_after_semicolon_master110_page59(
     testdir,
