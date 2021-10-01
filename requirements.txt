@@ -9,7 +9,7 @@
 
 # Internal packages
 utila>=2.53.0<3.0.0
-protocol>=3.12.2<4.0.0
+protocol>=3.12.3<4.0.0
 iamraw>=4.33.2<5.0.0
 
 detector>=0.28.0<1.0.0
