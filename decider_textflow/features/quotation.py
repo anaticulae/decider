@@ -7,8 +7,6 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import functools
-
 import german
 import iamraw
 import konrad.quotation.german
@@ -23,32 +21,12 @@ def work(text: str, pages: tuple) -> protocol.ResultType:
         text,
         pages=pages,
     )
-
-    linter = protocol.from_module(__name__)
-
-    linting(quotations, linter)
-    result = linter.result(unique=True)
-    user, developer = protocol.dump_result(result)
-
-    return user, developer
-
-
-def linting(quotations, linter: protocol.Linter):
-    checkers = protocol.parse_checkers(__name__)
-    for checker in checkers:
-        for quote in quotations:
-            location = iamraw.Location.from_sentence(
-                page=quote.page,
-                sentence=quote.index,
-            )
-            call = functools.partial(
-                linter.add_finding,
-                msgid=checker.msgid,
-                location=location,
-                sentence=quote.sentence,
-            )
-            tokens = german.split_token(quote.sentence)
-            checker(call, tokens)
+    driver = protocol.driver(quotations=quotations)
+    result = protocol.run(
+        __name__,
+        driver=driver,
+    )
+    return result
 
 
 SOLUTION_7100 = """\
@@ -60,13 +38,22 @@ Satz **{{sentence}}** enthält eine ungerade Anzahl von Anführungszeichen.
 """
 
 
-def check_7100_german_quote_not_closed(linter: callable, tokens: list):
-    if not german.isger(tokens):
-        return
-    validated = konrad.quotation.german.double_quotation_closed(tokens)
-    if validated:
-        return
-    linter()
+def check_7100_german_quote_not_closed(linter: callable, driver):
+    for quote in driver.quotations:
+        tokens = german.split_token(quote.sentence)
+        if not german.isger(tokens):
+            continue
+        validated = konrad.quotation.german.double_quotation_closed(tokens)
+        if validated:
+            continue
+        location = iamraw.Location.from_sentence(
+            page=quote.page,
+            sentence=quote.index,
+        )
+        linter(
+            location=location,
+            sentence=quote.sentence,
+        )
 
 
 SOLUTION_7101 = """\
@@ -79,15 +66,24 @@ Sie diese doppelten Anführungszeichen durch einfache Anführungszeichen.
 """
 
 
-def check_7101_german_quote_double_quote_inside(linter: callable, tokens: list):
-    if not german.isger(tokens):
-        return
-    validated = konrad.quotation.german.double_quotation_closed(tokens)
-    if not validated:
-        return
-    if konrad.quotation.german.no_double_quotes_inside_double(tokens):
-        return
-    linter()
+def check_7101_german_quote_double_quote_inside(linter: callable, driver):
+    for quote in driver.quotations:
+        tokens = german.split_token(quote.sentence)
+        if not german.isger(tokens):
+            continue
+        validated = konrad.quotation.german.double_quotation_closed(tokens)
+        if not validated:
+            continue
+        if konrad.quotation.german.no_double_quotes_inside_double(tokens):
+            continue
+        location = iamraw.Location.from_sentence(
+            page=quote.page,
+            sentence=quote.index,
+        )
+        linter(
+            location=location,
+            sentence=quote.sentence,
+        )
 
 
 SOLUTION_7105 = """\
@@ -101,7 +97,7 @@ TODO: ADD LINK
 QUOTATION_SIGNS = '„‚’"”“'  # TODO: REPLACE WITH MORE GENERAL PLACE
 
 
-def check_7105_quote_starts_with_omission_sign(linter: callable, tokens: list):
+def check_7105_quote_starts_with_omission_sign(linter: callable, driver):
     """Sentence starts with [...]
 
     >>> message('„[...] Zitat darf nicht [...] mit Auslassung starten.“', 7105)
@@ -112,17 +108,26 @@ def check_7105_quote_starts_with_omission_sign(linter: callable, tokens: list):
     >>> message('  „  [...] Leerzeicehn sind akzeptabel', 7105)
     1
     """
-    if not german.isger(tokens):
-        return
-    if len(tokens) < 2:
-        return
-    if '[...]' not in ''.join(tokens):
-        return
-    if tokens[0] not in QUOTATION_SIGNS:
-        return
-    if tokens[1] not in '[...] [] ...'.split():
-        return
-    linter()
+    for quote in driver.quotations:
+        tokens = german.split_token(quote.sentence)
+        if not german.isger(tokens):
+            continue
+        if len(tokens) < 2:
+            continue
+        if '[...]' not in ''.join(tokens):
+            continue
+        if tokens[0] not in QUOTATION_SIGNS:
+            continue
+        if tokens[1] not in '[...] [] ...'.split():
+            continue
+        location = iamraw.Location.from_sentence(
+            page=quote.page,
+            sentence=quote.index,
+        )
+        linter(
+            location=location,
+            sentence=quote.sentence,
+        )
 
 
 SOLUTION_7110 = """\
@@ -136,17 +141,25 @@ Denkleistung in den Vordergrund.
 """
 
 
-def check_7110_max_citation_length(linter: callable, tokens: list):
-    if len(tokens) <= MAX_CITATION_LENGTH:
-        return
-    linter()
+def check_7110_max_citation_length(linter: callable, driver):
+    for quote in driver.quotations:
+        tokens = german.split_token(quote.sentence)
+        if len(tokens) <= MAX_CITATION_LENGTH:
+            continue
+        location = iamraw.Location.from_sentence(
+            page=quote.page,
+            sentence=quote.index,
+        )
+        linter(
+            location=location,
+            sentence=quote.sentence,
+        )
 
 
 def message(quotation: str, msgid=None):
-    raw = [
-        (0, 0, quotation),
-    ]
-    dumped = serializeraw.dump_quotations(raw)
-    user, _ = work(dumped, None)
+    driver = protocol.driver(quotations=[
+        iamraw.ExtractedQuotation(0, 0, quotation),
+    ])
+    user, _ = protocol.run(modulename=__name__, driver=driver)
     result = serializeraw.load_findings(user, msgid)
     return len(result)
