@@ -11,11 +11,10 @@ import math
 
 import iamraw
 import protocol
-import serializeraw
 import texmex
 import utila
 
-import imgfig.features.quality
+import imgfig.driver
 
 
 def work(
@@ -24,10 +23,10 @@ def work(
     *images: str,
     pages: tuple = None,
 ) -> protocol.ResultType:
-    contentborder = serializeraw.load_pageborders(border, pages=pages)
-    driver = imgfig.features.quality.create_driver(
+    driver = imgfig.driver.create(
         images=images,
-        contentborder=contentborder,
+        contentborder=border,
+        docinfo=docinfo,
         pages=pages,
     )
     if not driver.images:  # pylint:disable=E1101
@@ -36,7 +35,7 @@ def work(
     result = protocol.run(
         modulename=__name__,
         driver=driver,
-        document=serializeraw.load_docinfo(docinfo, pages=pages),
+        document=driver.docinfo,  # pylint:disable=E1101
     )
     return result
 

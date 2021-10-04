@@ -10,8 +10,9 @@
 import configo
 import iamraw
 import protocol
-import serializeraw
 import utila
+
+import imgfig.driver
 
 MIN_DPI = 96
 MAX_DPI = MIN_DPI * 2
@@ -20,7 +21,7 @@ MAX_RESOLUTION_DIFF = configo.HV_PERCENT_PLUS(5).value
 
 
 def work(*images: str, pages: tuple = None) -> protocol.ResultType:
-    driver = create_driver(images=images, pages=pages)
+    driver = imgfig.driver.create(images=images, pages=pages)
     if not driver.images:  # pylint:disable=E1101
         # document without images, nothing to lint, return empty result
         return protocol.RESULT_EMPTY
@@ -29,27 +30,6 @@ def work(*images: str, pages: tuple = None) -> protocol.ResultType:
         driver=driver,
     )
     return result
-
-
-def create_driver(images, contentborder=None, pages: tuple = None):
-    # skip_hidden: do not judge or analyze raw images which are part of
-    # figures.
-    loaded = serializeraw.load_image_infos_fromfiles(
-        images,
-        pages=pages,
-        skip_hidden=True,
-    )
-    loaded = utila.flatten_content(loaded)
-    result = []
-    for image in loaded:
-        if not utila.rectangle_width(image.bounding):
-            utila.error(f'skip zero-width image: {image.bounding}')
-            continue
-        if not utila.rectangle_height(image.bounding):
-            utila.error(f'skip zero-height image: {image.bounding}')
-            continue
-        result.append(image)
-    return protocol.driver(images=result, contentborder=contentborder)
 
 
 SOLUTION_4000 = """\
