@@ -26,7 +26,7 @@ def work(
 ) -> protocol.ResultType:
     contentborder = serializeraw.load_pageborders(border, pages=pages)
     driver = imgfig.features.quality.create_driver(
-        *images,
+        images=images,
         contentborder=contentborder,
         pages=pages,
     )

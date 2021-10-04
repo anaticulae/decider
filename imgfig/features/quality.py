@@ -20,7 +20,7 @@ MAX_RESOLUTION_DIFF = configo.HV_PERCENT_PLUS(5).value
 
 
 def work(*images: str, pages: tuple = None) -> protocol.ResultType:
-    driver = create_driver(*images, pages=pages)
+    driver = create_driver(images=images, pages=pages)
     if not driver.images:  # pylint:disable=E1101
         # document without images, nothing to lint, return empty result
         return protocol.RESULT_EMPTY
@@ -31,8 +31,9 @@ def work(*images: str, pages: tuple = None) -> protocol.ResultType:
     return result
 
 
-def create_driver(*images, contentborder=None, pages: tuple = None):
-    loaded = load_image_info(*images, pages=pages)
+def create_driver(images, contentborder=None, pages: tuple = None):
+    loaded = serializeraw.load_image_infos_fromfiles(images, pages=pages)
+    loaded = utila.flatten_content(loaded)
     result = []
     for image in loaded:
         if not utila.rectangle_width(image.bounding):
@@ -136,14 +137,3 @@ def check_4005_check_relation(linter, driver):
             page=imageinfo.page,
         )
         linter(pdf=pdf, image=image, location=location)
-
-
-def load_image_info(
-    *images: str,
-    pages: tuple = None,
-) -> iamraw.ImageInformations:
-    loaded = [serializeraw.load_image_info(item) for item in images]
-    result = [
-        item for item in loaded if not utila.should_skip(item.page, pages)
-    ]
-    return result
