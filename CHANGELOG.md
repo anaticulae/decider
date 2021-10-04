@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v2.13.0
+
+### Feature
+
+* skip hidden images (8d67017162c9)
+
 ## v2.12.3
 
 ## v2.12.2
