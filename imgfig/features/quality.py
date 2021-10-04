@@ -32,7 +32,13 @@ def work(*images: str, pages: tuple = None) -> protocol.ResultType:
 
 
 def create_driver(images, contentborder=None, pages: tuple = None):
-    loaded = serializeraw.load_image_infos_fromfiles(images, pages=pages)
+    # skip_hidden: do not judge or analyze raw images which are part of
+    # figures.
+    loaded = serializeraw.load_image_infos_fromfiles(
+        images,
+        pages=pages,
+        skip_hidden=True,
+    )
     loaded = utila.flatten_content(loaded)
     result = []
     for image in loaded:
