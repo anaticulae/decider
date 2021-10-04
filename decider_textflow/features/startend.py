@@ -49,6 +49,8 @@ def work(
     return result
 
 
+HURENKIND_BEFORE = 120  # TODO: HOLY VALUE
+
 SOLUTION_7620 = """\
 Hurenkind: Einsame Zeile am Seitenanfang
 
@@ -58,7 +60,7 @@ Seite beginnt mit einsamer Zeile: **{{rawline}}**.
 """
 
 
-def check_7620_lonely_page_start(linter: callable, driver):
+def check_7620_lonely_page_start(linter: callable, driver):  # pylint:disable=R1260
     linewidth = textwidth(driver.text_chunks)
     hurenkind_maxwidth = linewidth * 0.9  # TODO: HOLY VALUE
     text = decider_textflow.utils.page_chunks(driver.nomagic_text_chunks)
@@ -71,6 +73,11 @@ def check_7620_lonely_page_start(linter: callable, driver):
         second_headline = isinstance(content[1], iamraw.Headline)
         if first_headline and second_headline:
             continue
+        if not first_headline:
+            if content[0].bounding.y0 > HURENKIND_BEFORE:
+                # this page does not start with text line, there is may a
+                # figure, table or something before.
+                continue
         if second_headline and not first_headline:
             if content[1].decoration is not None:
                 # CHAPTER-X-Pattern
