@@ -14,7 +14,7 @@ import protocol
 import texmex
 import utila
 
-import imgfig.driver
+import decider_imgfig.driver
 
 
 def work(
@@ -23,7 +23,7 @@ def work(
     *images: str,
     pages: tuple = None,
 ) -> protocol.ResultType:
-    driver = imgfig.driver.create(
+    driver = decider_imgfig.driver.create(
         images=images,
         contentborder=border,
         docinfo=docinfo,

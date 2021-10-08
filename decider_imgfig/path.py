@@ -9,12 +9,10 @@
 
 import utila
 
-import imgfig
-
 
 def quality(path: str, prefix: str = '') -> str:
-    return utila.pathconnector(path, imgfig.PROCESS, 'quality_user', prefix)
+    return utila.pathconnector(path, 'decider_imgfig', 'quality_user', prefix)
 
 
 def position(path: str, prefix: str = '') -> str:
-    return utila.pathconnector(path, imgfig.PROCESS, 'position_user', prefix)
+    return utila.pathconnector(path, 'decider_imgfig', 'position_user', prefix)

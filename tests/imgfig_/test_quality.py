@@ -11,7 +11,7 @@ import power
 import pytest
 import serializeraw
 
-import imgfig.path
+import decider_imgfig.path
 import tests.imgfig_
 
 
@@ -20,7 +20,7 @@ def test_imgfig_min_quality(testdir, monkeypatch):
     tests.imgfig_.run(f'-i {source} --quality', monkeypatch=monkeypatch)
 
     loaded = serializeraw.load_findings(
-        imgfig.path.quality(testdir.tmpdir),
+        decider_imgfig.path.quality(testdir.tmpdir),
         msgids={4000},
     )
     # min dpi 96
@@ -34,7 +34,7 @@ def test_imgfig_max_quality(testdir, monkeypatch):
     tests.imgfig_.run(f'-i {source} --quality', monkeypatch=monkeypatch)
 
     loaded = serializeraw.load_findings(
-        imgfig.path.quality(testdir.tmpdir),
+        decider_imgfig.path.quality(testdir.tmpdir),
         msgids={4001},
     )
     # max dpi = 2 * min dpi
@@ -47,7 +47,7 @@ def test_imgfig_relation(testdir, monkeypatch):
     tests.imgfig_.run(f'-i {source} --quality', monkeypatch=monkeypatch)
 
     loaded = serializeraw.load_findings(
-        imgfig.path.quality(testdir.tmpdir),
+        decider_imgfig.path.quality(testdir.tmpdir),
         msgids={4005},
     )
     assert len(loaded) == 1

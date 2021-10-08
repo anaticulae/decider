@@ -12,7 +12,7 @@ import iamraw
 import protocol
 import utila
 
-import imgfig.driver
+import decider_imgfig.driver
 
 MIN_DPI = 96
 MAX_DPI = MIN_DPI * 2
@@ -21,7 +21,7 @@ MAX_RESOLUTION_DIFF = configo.HV_PERCENT_PLUS(5).value
 
 
 def work(*images: str, pages: tuple = None) -> protocol.ResultType:
-    driver = imgfig.driver.create(images=images, pages=pages)
+    driver = decider_imgfig.driver.create(images=images, pages=pages)
     if not driver.images:  # pylint:disable=E1101
         # document without images, nothing to lint, return empty result
         return protocol.RESULT_EMPTY

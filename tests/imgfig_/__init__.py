@@ -13,18 +13,18 @@ import os
 import utila
 import utilatest
 
-import imgfig.cli
+import decider_imgfig.cli
 
 # pylint:disable=C0103
 run = functools.partial(
     utilatest.run_command,
-    main=imgfig.cli.main,
-    process=imgfig.PROCESS,
+    main=decider_imgfig.cli.main,
+    process=decider_imgfig.PROCESS,
     success=True,
 )
 fail = functools.partial(
     utilatest.run_command,
-    main=imgfig.cli.main,
-    process=imgfig.PROCESS,
+    main=decider_imgfig.cli.main,
+    process=decider_imgfig.PROCESS,
     success=False,
 )

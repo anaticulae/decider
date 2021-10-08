@@ -11,8 +11,8 @@ import power
 import pytest
 import serializeraw
 
-import imgfig.features.position
-import imgfig.path
+import decider_imgfig.features.position
+import decider_imgfig.path
 import tests.imgfig_
 
 
@@ -23,7 +23,7 @@ def test_imgfig_position_alignment(testdir, monkeypatch):
         monkeypatch=monkeypatch,
     )
     loaded = serializeraw.load_findings(
-        imgfig.path.position(testdir.tmpdir),
+        decider_imgfig.path.position(testdir.tmpdir),
         msgids={4031},
     )
     # -1: skip title page adjustment error
@@ -35,7 +35,7 @@ def test_imgfig_position_unclear(testdir, monkeypatch):
     with monkeypatch.context() as context:
         # use high required trust to invoke error
         context.setattr(
-            imgfig.features.position,
+            decider_imgfig.features.position,
             'ALIGNMENT_TRUST_MIN',
             0.9,
         )
@@ -44,7 +44,7 @@ def test_imgfig_position_unclear(testdir, monkeypatch):
             monkeypatch=monkeypatch,
         )
     loaded = serializeraw.load_findings(
-        imgfig.path.position(testdir.tmpdir),
+        decider_imgfig.path.position(testdir.tmpdir),
         msgids={4030},
     )
     assert len(loaded) == 1
@@ -59,7 +59,7 @@ def test_imgfig_skip_title_legal_etc(testdir, monkeypatch):
         monkeypatch=monkeypatch,
     )
     loaded = serializeraw.load_findings(
-        imgfig.path.position(testdir.tmpdir),
+        decider_imgfig.path.position(testdir.tmpdir),
         msgids={4031},
     )
     # TODO: ADD SUPPORT FOR TEXT INLINED IMAGES

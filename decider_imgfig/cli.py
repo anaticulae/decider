@@ -10,7 +10,7 @@
 import protocol
 import utila
 
-import imgfig
+import decider_imgfig
 
 DESCRIPTION = ''
 
@@ -35,7 +35,7 @@ WORKPLAN = [
 
 
 def main():
-    root, features = imgfig.ROOT, 'imgfig.features'
+    root, features = decider_imgfig.ROOT, 'decider_imgfig.features'
     hook = protocol.integrate(root=root, features=features)
     utila.featurepack(
         workplan=WORKPLAN,
@@ -46,7 +46,7 @@ def main():
             cli_hook=hook,
             multiprocessed=True,
             pages=True,
-            name=imgfig.PROCESS,
-            version=imgfig.__version__,
+            name=decider_imgfig.PROCESS,
+            version=decider_imgfig.__version__,
         ),
     )
