@@ -30,6 +30,9 @@ def create(images, contentborder=None, docinfo=None, pages: tuple = None):
     loaded = utila.flatten_content(loaded)
     result = []
     for image in loaded:
+        if image.figure:
+            # do not judge figures with decider_imgfig
+            continue
         if not utila.rectangle_width(image.bounding):
             utila.error(f'skip zero-width image: {image.bounding}')
             continue
