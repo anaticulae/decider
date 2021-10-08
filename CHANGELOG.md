@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v2.14.0
+
+### Feature
+
+* do not load figures as image (21d0d46af275)
+* do not detect Hurenkind as non first text line (94f1941b9ba4)
+
 ## v2.13.0
 
 ### Feature
