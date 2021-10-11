@@ -42,7 +42,6 @@ def test_dtf_master75_docref(testdir, monkeypatch):
     assert not findings  # may changes later
 
 
-@pytest.mark.xfail(reason='table1 is not parsed properly, use new table parser')
 def test_dtf_bachelor56page15_tableref(testdir, monkeypatch):
     """Verify that `s. Tab. 1` matches with `Tabelle 1`"""
     source = power.link(power.BACHELOR056_PDF)

@@ -9,13 +9,11 @@
 
 import power
 import protocol
-import pytest
 import utilatest
 
 import tests.textflow_
 
 
-@pytest.mark.xfail(reason='quotation is not parsed correctly')
 @utilatest.requires(power.BACHELOR128_PDF)
 def test_reg_writing_bachelor128page69(testdir, monkeypatch):
     """Regression that replaced quote was detected as finding: `**Wir**

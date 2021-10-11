@@ -25,7 +25,7 @@ def test_imgfig_min_quality(testdir, monkeypatch):
     )
     # min dpi 96
     # dependent on min dpi definition
-    assert len(loaded) == 13  # NOT VALIDATED
+    assert len(loaded) in (12, 13)  # NOT VALIDATED
 
 
 @pytest.mark.xfail(reason='broken rawmaker image extractor')
