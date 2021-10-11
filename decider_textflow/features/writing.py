@@ -161,6 +161,32 @@ def check_7606_text_too_complex(linter: callable, driver):
         )
 
 
+SOLUTION_7610 = """\
+Satzanfänge überprüfen
+
+Duplicated sentence start
+"""
+
+SOLUTION_7611 = """\
+Satzanfang wiederholt sich
+
+Duplicated sentence start
+"""
+
+SOLUTION_7616 = """\
+Writing statistics
+
+Wordcount:
+Sentencecount:
+
+Avg Word
+Avg Sentence
+
+Longest Word:
+Longest Sentence:
+"""
+
+
 def groupby_page(text):
     grouped = collections.defaultdict(list)
     for page, _, item in text:
