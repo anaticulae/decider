@@ -16,6 +16,8 @@ import protocol
 import utila
 
 import decider_textflow.features
+import decider_textflow.writing.complexity
+import decider_textflow.writing.perspective
 
 TEXTUAL = {
     iamraw.PageContentType.TEXT,
@@ -76,7 +78,7 @@ def check_7600_text_perspective(linter: callable, driver):
         text = remove_quotes(text, quotes[page])
         for sentence in german.sentence_tokenize(text):
             tokens = german.word_tokenize(sentence, validate_sentences=False)
-            invalid = invalid_perspective(tokens)
+            invalid = decider_textflow.writing.perspective.invalid_perspective(tokens)  # yapf:disable
             if not invalid:
                 continue
             # convert token sentence to user sentence with correct spaces
@@ -149,7 +151,7 @@ def check_7606_text_too_complex(linter: callable, driver):
         except TypeError:
             # headline
             continue
-        if not too_complex(line):
+        if not decider_textflow.writing.complexity.too_complex(line):
             continue
         # TODO: CONVERT NUMBER TO LINE
         location = iamraw.RangedLocation(page=page, line=number)
@@ -157,18 +159,6 @@ def check_7606_text_too_complex(linter: callable, driver):
             line=line,
             location=location,
         )
-
-
-MAX_SENTENCE_COMPLEXITY = 7  # TODO: HOLY VALUE
-
-
-def too_complex(line: str) -> bool:
-    if ':' in line:
-        return False
-    subsentence = [item for item in line.split(',;') if len(item.split()) > 3]
-    if len(subsentence) > MAX_SENTENCE_COMPLEXITY:
-        return True
-    return False
 
 
 def groupby_page(text):
@@ -196,13 +186,3 @@ def remove_quotes(text, quotes):
         text = text.replace(removed, '', 1)
     text = utila.normalize_text(text)
     return text
-
-
-INVALID_PERSPECTIVE = {'wir', 'man'}
-
-
-def invalid_perspective(words) -> list:
-    # TODO: REPLACE WITH EXTERNAL METHOD
-    words = [word for word in words if isinstance(word, str)]
-    words = [word for word in words if word.lower() in INVALID_PERSPECTIVE]
-    return words

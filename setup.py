@@ -54,6 +54,7 @@ if __name__ == "__main__":
             'decider_smarty.features',
             'decider_textflow',
             'decider_textflow.features',
+            'decider_textflow.writing',
             'fonts',
             'fonts.features',
         ],
