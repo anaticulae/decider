@@ -20,5 +20,26 @@ def invalid_perspective(words) -> list:
 def sentence_start(sentences: list, window: int = 3):
     result = []
     for sentence in sentences:
-        result.append(sentence[0][0:window], sentence[1], sentence[2])
+        result.append((sentence[0][0:window], sentence[1], sentence[2]))
+    return result
+
+
+def repeating_sentence_start(sentences, window: int = 3):
+    result = []
+    before = []
+    for current in sentences:
+        current = current[0][0:window], current[1], current[2]
+        if not before:
+            before = [current]
+            continue
+        if before[-1][0] == current[0]:
+            # same start as before
+            before.append(current)
+            continue
+        if len(before) > 1:
+            result.append(before)
+        before = [current]
+    # equal sentences on document end
+    if len(before) > 1:
+        result.append(before)
     return result

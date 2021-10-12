@@ -90,3 +90,17 @@ def test_writing_text_statistics(testdir, monkeypatch):
         msgids=7616,
     )
     assert len(findings) == 1
+
+
+@utilatest.requires(power.MASTER110_PDF)
+def test_writing_repeating_sentence_start(testdir, monkeypatch):
+    source = power.link(power.MASTER110_PDF)
+    pages = None
+    findings = decide_textflow(
+        source,
+        pages,
+        testdir,
+        monkeypatch,
+        msgids=7611,
+    )
+    assert len(findings) == 20  # NOT VALIDATED

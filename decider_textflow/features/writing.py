@@ -172,8 +172,35 @@ Duplicated sentence start
 SOLUTION_7611 = """\
 Satzanfang wiederholt sich
 
-Duplicated sentence start
+Der Satzanfang **{{sentence_start}}** wiederholt sich in den folgenden \
+Sätzen {{repetition}}-mal.
 """
+
+
+def check_7611_sentence_start(linter: callable, driver):
+    sentences = driver.sentences
+    if not sentences:
+        return
+    sentences = decider_textflow.writing.utils.determine_sentences(sentences)
+    single = utila.Single()
+    for window in range(5, 0, -1):
+        equals = decider_textflow.writing.perspective.repeating_sentence_start(
+            sentences,
+            window=window,
+        )
+        for group in equals:
+            if any(single.contains(item[1:3]) for item in group):
+                # already done in a higher window
+                continue
+            first = group[0]
+            sentence_start = ' '.join(first[0])
+            location = iamraw.RangedLocation(page=first[1], line=first[2])
+            linter(
+                sentence_start=sentence_start,
+                repetition=len(group),
+                location=location,
+            )
+
 
 SOLUTION_7616 = """\
 Writing statistics
