@@ -11,9 +11,9 @@ import collections
 import dataclasses
 import statistics
 
-import german
-import iamraw
 import utila
+
+import decider_textflow.writing.utils
 
 
 @dataclasses.dataclass
@@ -35,16 +35,17 @@ SENTENCE_LENGTH_MIN = 7
 
 
 def determine(sentences) -> WritingStatistics:
+    sentences = decider_textflow.writing.utils.determine_sentences(sentences)
+    if not sentences:
+        # no data given, skip analysis
+        return None
     result = WritingStatistics()
     sento = []
     words = collections.defaultdict(int)
-    for sentence in determine_sentences(sentences):
+    for sentence in sentences:
         for word in sentence:
             words[word] += 1
         sento.append(len(sentence))
-    if not words:
-        # no data given, skip analysis
-        return None
     result.words = sum(words.values())
     result.sentences = len(sento)
 
@@ -60,26 +61,3 @@ def determine(sentences) -> WritingStatistics:
     result.word_avg: float = utila.roundme(result.word_avg)
     result.sentence_avg: float = utila.roundme(result.sentence_avg)
     return result
-
-
-def determine_sentences(sentences):
-    for sentence in sentences:
-        if isinstance(sentence, iamraw.Headline):
-            continue
-        txt = sentence[0]
-        if len(txt) < SENTENCE_LENGTH_MIN:
-            continue
-        sento = word_tokenize(txt)
-        if not sento:
-            continue
-        if len(sento) < 3:
-            continue
-        yield sento
-
-
-def word_tokenize(txt: str) -> list:
-    tokens = german.word_tokenize(txt, validate_sentences=False)
-    tokens = [item.lower() for item in tokens if isinstance(item, str)]
-    tokens = [item for item in tokens if utila.char_rate(item) == 1.0]
-    tokens = [item for item in tokens if len(item) >= 2]
-    return tokens

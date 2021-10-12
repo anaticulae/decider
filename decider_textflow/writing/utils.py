@@ -1,0 +1,39 @@
+# =============================================================================
+# C O P Y R I G H T
+# -----------------------------------------------------------------------------
+# Copyright (c) 2021 by Helmut Konrad Fahrendholz. All rights reserved.
+# This file is property of Helmut Konrad Fahrendholz. Any unauthorized copy,
+# use or distribution is an offensive act against international law and may
+# be prosecuted under federal law. Its content is company confidential.
+# =============================================================================
+
+import german
+import iamraw
+import utila
+
+SENTENCE_LENGTH_MIN = 7
+
+
+def determine_sentences(sentences) -> list:
+    result = []
+    for sentence in sentences:
+        if isinstance(sentence, iamraw.Headline):
+            continue
+        txt = sentence[0]
+        if len(txt) < SENTENCE_LENGTH_MIN:
+            continue
+        sento = word_tokenize(txt)
+        if not sento:
+            continue
+        if len(sento) < 3:
+            continue
+        result.append(sento)
+    return result
+
+
+def word_tokenize(txt: str) -> list:
+    tokens = german.word_tokenize(txt, validate_sentences=False)
+    tokens = [item.lower() for item in tokens if isinstance(item, str)]
+    tokens = [item for item in tokens if utila.char_rate(item) == 1.0]
+    tokens = [item for item in tokens if len(item) >= 2]
+    return tokens
