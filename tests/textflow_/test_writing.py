@@ -16,11 +16,13 @@ import decider_textflow.path
 import tests.textflow_
 
 
-def decide_textflow(source, pages, testdir, monkeypatch, msgids=None):
-    tests.textflow_.run(
-        f'--writing -i {source} --pages={pages}',
-        monkeypatch=monkeypatch,
-    )
+def decide_textflow(source, testdir, monkeypatch, pages=None, msgids=None):
+    utilatest.fixture_requires(source)
+    source = power.link(source)
+    cmd = f'--writing -i {source} '
+    if pages:
+        cmd += f'--pages={pages}'
+    tests.textflow_.run(cmd, monkeypatch=monkeypatch)
     path = decider_textflow.path.writing_linted(testdir.tmpdir)
     findings = serializeraw.load_findings(path, msgids=msgids)
     return findings
@@ -28,17 +30,16 @@ def decide_textflow(source, pages, testdir, monkeypatch, msgids=None):
 
 @utilatest.longrun
 def test_dtf_bachelor76_perspective(testdir, monkeypatch):
-    source = power.link(power.BACHELOR076_PDF)
-    pages = ':'
-    findings = decide_textflow(source, pages, testdir, monkeypatch, msgids=7600)
+    source = power.BACHELOR076_PDF
+    findings = decide_textflow(source, testdir, monkeypatch, msgids=7600)
     assert len(findings) == 4  # VALIDATED
 
 
 def test_dtf_master72_writing_quotation(testdir, monkeypatch):
     """Do not detect errors in perspective inside quotations."""
-    source = power.link(power.MASTER072_PDF)
+    source = power.MASTER072_PDF
     pages = '12:15'
-    findings = decide_textflow(source, pages, testdir, monkeypatch, msgids=7600)
+    findings = decide_textflow(source, testdir, monkeypatch, pages, msgids=7600)
     assert not findings
 
 
@@ -49,18 +50,17 @@ Bestätigung aus einem Kollektiv, dem man angehörte, z.B."""
 
 def test_dtf_master72_merge_token_correctly(testdir, monkeypatch):
     """Do not detect errors in perspective inside quotations."""
-    source = power.link(power.MASTER072_PDF)
+    source = power.MASTER072_PDF
     pages = '16'
-    findings = decide_textflow(source, pages, testdir, monkeypatch, msgids=7600)
+    findings = decide_textflow(source, testdir, monkeypatch, pages, msgids=7600)
     assert len(findings) == 1
     description = findings[0].solution.description
     assert EXPECTED in description
 
 
-@utilatest.requires(power.MASTER072_PDF)
 def test_dtf_master72_text_too_long(testdir, monkeypatch):
     """Detect sentence which are too long."""
-    source = power.link(power.MASTER072_PDF)
+    source = power.MASTER072_PDF
     pages = '3:6'
     with monkeypatch.context() as context:
         context.setattr(
@@ -70,21 +70,18 @@ def test_dtf_master72_text_too_long(testdir, monkeypatch):
         )
         findings = decide_textflow(
             source,
-            pages,
             testdir,
             monkeypatch,
+            pages=pages,
             msgids=7605,
         )
     assert len(findings) == 20
 
 
-@utilatest.requires(power.MASTER110_PDF)
 def test_writing_text_statistics(testdir, monkeypatch):
-    source = power.link(power.MASTER110_PDF)
-    pages = None
+    source = power.MASTER110_PDF
     findings = decide_textflow(
         source,
-        pages,
         testdir,
         monkeypatch,
         msgids=7616,
@@ -92,13 +89,10 @@ def test_writing_text_statistics(testdir, monkeypatch):
     assert len(findings) == 1
 
 
-@utilatest.requires(power.MASTER110_PDF)
 def test_writing_repeating_sentence_start(testdir, monkeypatch):
-    source = power.link(power.MASTER110_PDF)
-    pages = None
+    source = power.MASTER110_PDF
     findings = decide_textflow(
         source,
-        pages,
         testdir,
         monkeypatch,
         msgids=7611,
@@ -106,10 +100,8 @@ def test_writing_repeating_sentence_start(testdir, monkeypatch):
     assert len(findings) == 20  # NOT VALIDATED
 
 
-@utilatest.requires(power.MASTER110_PDF)
 def test_writing_repeating_sentence_pattern(testdir, monkeypatch):
-    source = power.link(power.MASTER110_PDF)
-    pages = None
+    source = power.MASTER110_PDF
     with monkeypatch.context() as context:
         context.setattr(
             decider_textflow.features.writing,
@@ -118,7 +110,6 @@ def test_writing_repeating_sentence_pattern(testdir, monkeypatch):
         )
         findings = decide_textflow(
             source,
-            pages,
             testdir,
             monkeypatch,
             msgids=7610,
