@@ -104,3 +104,23 @@ def test_writing_repeating_sentence_start(testdir, monkeypatch):
         msgids=7611,
     )
     assert len(findings) == 20  # NOT VALIDATED
+
+
+@utilatest.requires(power.MASTER110_PDF)
+def test_writing_repeating_sentence_pattern(testdir, monkeypatch):
+    source = power.link(power.MASTER110_PDF)
+    pages = None
+    with monkeypatch.context() as context:
+        context.setattr(
+            decider_textflow.features.writing,
+            'SENTENCE_PATTERN_WINDOW',
+            3,
+        )
+        findings = decide_textflow(
+            source,
+            pages,
+            testdir,
+            monkeypatch,
+            msgids=7610,
+        )
+    assert len(findings) == 9  # NOT VALIDATED

@@ -7,6 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import collections
+
 INVALID_PERSPECTIVE = {'wir', 'man'}
 
 
@@ -42,4 +44,17 @@ def repeating_sentence_start(sentences, window: int = 3):
     # equal sentences on document end
     if len(before) > 1:
         result.append(before)
+    return result
+
+
+def repeating_sentence(sentences, window: int = 3, occurence_min=2):
+    # TODO: EXCLUDE OVERLAPPING?
+    collected = collections.defaultdict(list)
+    for current in sentences:
+        txt = ' '.join(current[0][0:window])
+        collected[txt].append(current[1:3])
+    result = []
+    for key, values in collected.items():
+        if len(values) >= occurence_min:
+            result.append((key, values))
     return result

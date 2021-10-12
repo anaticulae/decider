@@ -164,10 +164,36 @@ def check_7606_text_too_complex(linter: callable, driver):
 
 
 SOLUTION_7610 = """\
-Satzanfänge überprüfen
+Satzmuster wiederholt sich
 
-Duplicated sentence start
+Der Satzteil **{{sentence}}** wird {{occurence}}-mal im Dokument auf den \
+Seiten **{{pages}}** verwendet.
 """
+
+
+def check_7610_sentence_pattern(linter: callable, driver):
+    sentences = driver.sentences
+    if not sentences:
+        return
+    sentences = decider_textflow.writing.utils.determine_sentences(sentences)
+    repeating = decider_textflow.writing.perspective.repeating_sentence(
+        sentences,
+        window=SENTENCE_PATTERN_WINDOW,
+        occurence_min=SENTENCE_PATTERN_OCCURENCE_MIN,
+    )
+    for txt, occurence in repeating:
+        pages = [item[0] for item in occurence]
+        location = iamraw.Location(page=pages[0])
+        linter(
+            sentence=txt,
+            pages=utila.from_tuple(pages, separator=', '),
+            location=location,
+            occurence=len(occurence),
+        )
+
+
+SENTENCE_PATTERN_WINDOW = 5  # TODO: HOLY VALUE
+SENTENCE_PATTERN_OCCURENCE_MIN = 3
 
 SOLUTION_7611 = """\
 Satzanfang wiederholt sich
