@@ -27,7 +27,7 @@ def determine_sentences(sentences) -> list:
             continue
         if len(sento) < 3:
             continue
-        result.append(sento)
+        result.append((sento, sentence[1], sentence[2]))
     return result
 
 

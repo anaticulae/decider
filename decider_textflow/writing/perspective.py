@@ -15,3 +15,10 @@ def invalid_perspective(words) -> list:
     words = [word for word in words if isinstance(word, str)]
     words = [word for word in words if word.lower() in INVALID_PERSPECTIVE]
     return words
+
+
+def sentence_start(sentences: list, window: int = 3):
+    result = []
+    for sentence in sentences:
+        result.append(sentence[0][0:window], sentence[1], sentence[2])
+    return result

@@ -43,9 +43,9 @@ def determine(sentences) -> WritingStatistics:
     sento = []
     words = collections.defaultdict(int)
     for sentence in sentences:
-        for word in sentence:
+        for word in sentence[0]:
             words[word] += 1
-        sento.append(len(sentence))
+        sento.append(len(sentence[0]))
     result.words = sum(words.values())
     result.sentences = len(sento)
 
