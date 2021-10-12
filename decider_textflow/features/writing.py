@@ -8,6 +8,7 @@
 # =============================================================================
 
 import collections
+import dataclasses
 
 import german
 import iamraw
@@ -18,6 +19,7 @@ import utila
 import decider_textflow.features
 import decider_textflow.writing.complexity
 import decider_textflow.writing.perspective
+import decider_textflow.writing.statistics
 
 TEXTUAL = {
     iamraw.PageContentType.TEXT,
@@ -176,15 +178,30 @@ Duplicated sentence start
 SOLUTION_7616 = """\
 Writing statistics
 
-Wordcount:
-Sentencecount:
+Wörter: {{words}}
+Sätze: {{sentences}}
 
-Avg Word
-Avg Sentence
+Wortlänge min: {{word_min}}
+Wortlänge avg: {{word_avg}}
+Wortlänge max: {{word_max}}
 
-Longest Word:
-Longest Sentence:
+Satzlänge min: {{sentence_min}}
+Satzlänge avg: {{sentence_avg}}
+Satzlänge max: {{sentence_max}}
 """
+
+
+def check_7616_writing_statistics(linter: callable, driver):
+    sentences = driver.sentences
+    if not sentences:
+        return
+    statistic = decider_textflow.writing.statistics.determine(sentences)
+    if not statistic:
+        return
+    linter(
+        **dataclasses.asdict(statistic),
+        location=protocol.OVERVIEW,
+    )
 
 
 def groupby_page(text):

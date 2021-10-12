@@ -32,6 +32,6 @@ def create_sentences(
 
 def test_statistics():
     sentences = create_sentences(power.MASTER110_PDF)
-    stats = decider_textflow.writing.statistics.determine_statistics(sentences)
+    stats = decider_textflow.writing.statistics.determine(sentences)
     assert stats.words
     assert stats.word_min

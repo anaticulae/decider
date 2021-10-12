@@ -30,7 +30,7 @@ def decide_textflow(source, pages, testdir, monkeypatch, msgids=None):
 def test_dtf_bachelor76_perspective(testdir, monkeypatch):
     source = power.link(power.BACHELOR076_PDF)
     pages = ':'
-    findings = decide_textflow(source, pages, testdir, monkeypatch)
+    findings = decide_textflow(source, pages, testdir, monkeypatch, msgids=7600)
     assert len(findings) == 4  # VALIDATED
 
 
@@ -76,3 +76,17 @@ def test_dtf_master72_text_too_long(testdir, monkeypatch):
             msgids=7605,
         )
     assert len(findings) == 20
+
+
+@utilatest.requires(power.MASTER110_PDF)
+def test_writing_text_statistics(testdir, monkeypatch):
+    source = power.link(power.MASTER110_PDF)
+    pages = None
+    findings = decide_textflow(
+        source,
+        pages,
+        testdir,
+        monkeypatch,
+        msgids=7616,
+    )
+    assert len(findings) == 1

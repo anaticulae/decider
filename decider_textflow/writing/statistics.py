@@ -34,7 +34,7 @@ class WritingStatistics:
 SENTENCE_LENGTH_MIN = 7
 
 
-def determine_statistics(sentences) -> WritingStatistics:
+def determine(sentences) -> WritingStatistics:
     result = WritingStatistics()
     sento = []
     words = collections.defaultdict(int)
@@ -42,7 +42,9 @@ def determine_statistics(sentences) -> WritingStatistics:
         for word in sentence:
             words[word] += 1
         sento.append(len(sentence))
-
+    if not words:
+        # no data given, skip analysis
+        return None
     result.words = sum(words.values())
     result.sentences = len(sento)
 
