@@ -32,7 +32,7 @@ def decide_textflow(source, testdir, monkeypatch, pages=None, msgids=None):
 def test_dtf_bachelor76_perspective(testdir, monkeypatch):
     source = power.BACHELOR076_PDF
     findings = decide_textflow(source, testdir, monkeypatch, msgids=7600)
-    assert len(findings) == 4  # VALIDATED
+    assert len(findings) == 5  # VALIDATED
 
 
 def test_dtf_master72_writing_quotation(testdir, monkeypatch):

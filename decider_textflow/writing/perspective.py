@@ -9,7 +9,7 @@
 
 import collections
 
-INVALID_PERSPECTIVE = {'wir', 'man'}
+INVALID_PERSPECTIVE = {'wir', 'man', 'ich'}
 
 
 def invalid_perspective(words) -> list:
