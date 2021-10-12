@@ -2,6 +2,18 @@
 
 Every noteable change is logged here.
 
+## v2.15.0
+
+### Feature
+
+* add `ich` as invalid perspective keyword (017a706b7aed)
+* add sentence pattern checker (efe67dac771e)
+* detect equal sentence starts (a1eb939bbec9)
+* add sentence location to sentence preparer (a0975c35a919)
+* integrate statistics into solution (9fd0244bca63)
+* determine writing statistics (196508877461)
+* add new solution templates (8f75d6a12ae4)
+
 ## v2.14.0
 
 ### Feature
