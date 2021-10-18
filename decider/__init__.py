@@ -57,6 +57,8 @@ Ranges
 
 import os
 
+import configo
+
 import decider.__patch__
 
 __version__ = '2.16.0'
@@ -74,3 +76,5 @@ DECIDER_ONELINE_FLAG = 'DECIDER_ONELINE'
 
 from decider.cli import DEVELOPER_LINT_OUTPUT  # isort:skip
 from decider.cli import USER_LINT_OUTPUT  # isort:skip
+
+configo.cloud_lookup(PROCESS)

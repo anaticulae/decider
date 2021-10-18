@@ -7,6 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import configo
+
 import decider
 import decider_smarty.path
 
@@ -16,3 +18,5 @@ __version__ = decider.__version__
 
 PACKAGE = 'decider_smarty'
 PROCESS = 'decider_smarty'
+
+configo.cloud_lookup(PROCESS)
