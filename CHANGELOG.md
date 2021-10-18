@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v2.16.0
+
+### Feature
+
+* add missing holy values (28ad14cb6a6e)
+* replace with real holy values (5ec4a6bd195b)
+
 ## v2.15.0
 
 ### Feature
