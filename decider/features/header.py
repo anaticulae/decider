@@ -19,7 +19,7 @@ import configo
 import protocol
 import serializeraw
 
-MAX_REPEATING_ITEM_RATIO = configo.HV_PERCENT_PLUS(default=30).value
+MAX_REPEATING_ITEM_RATIO = configo.HV_PERCENT_PLUS(default=30)
 
 
 def work(headerfooter: str, pages: tuple = None) -> typing.Tuple[str, str]:

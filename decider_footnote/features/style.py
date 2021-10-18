@@ -19,13 +19,13 @@ import utila
 
 import decider_footnote.footnote
 
-MAX_HIGHNOTE_RISE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
-MAX_HIGHNOTE_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
+MAX_HIGHNOTE_RISE_DIFF = configo.HV_FLOAT_PLUS(default=0.5)
+MAX_HIGHNOTE_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5)
 
-MAX_CONTENT_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5).value
+MAX_CONTENT_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5)
 
 # as a result of bad layout extraction
-MAX_RISE_NOISE = configo.HV_FLOAT_PLUS(default=2.0).value
+MAX_RISE_NOISE = configo.HV_FLOAT_PLUS(default=2.0)
 
 
 def work(

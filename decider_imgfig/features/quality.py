@@ -17,7 +17,7 @@ import decider_imgfig.driver
 MIN_DPI = 96
 MAX_DPI = MIN_DPI * 2
 
-MAX_RESOLUTION_DIFF = configo.HV_PERCENT_PLUS(5).value
+MAX_RESOLUTION_DIFF = configo.HV_PERCENT_PLUS(5)
 
 
 def work(*images: str, pages: tuple = None) -> protocol.ResultType:
