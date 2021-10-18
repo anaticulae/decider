@@ -9,6 +9,7 @@
 
 import typing
 
+import configo
 import iamraw
 import protocol
 import serializeraw
@@ -59,7 +60,9 @@ Der Abschnitt umfasst nur {{lines}} Zeilen und sollte überarbeitet werden.
 {aufbau_gliederung/absatz}
 """
 
-PARAGRAPH_TOO_SHORT = 3
+PARAGRAPH_TOO_SHORT = configo.HV_INT_PLUS(default=3)
+
+TEXT_WIDTH_MIN = configo.HV_INT_PLUS(default=35)
 
 
 def check_7630_paragraph_too_short(linter: callable, driver):
@@ -71,9 +74,7 @@ def check_7630_paragraph_too_short(linter: callable, driver):
     if textstyle.text_width is None:
         utila.debug('no textstyle.text_width, disable 7630')
         return
-
-    min_textwidth = textstyle.text_width - 35  # TODO: HOLY VALUE
-
+    min_textwidth = textstyle.text_width - TEXT_WIDTH_MIN
     collected = []
     for page, line, item in driver.nomagic_text_chunks:
         # TODO: USE VISITOR PATTERN
@@ -82,7 +83,6 @@ def check_7630_paragraph_too_short(linter: callable, driver):
             # no check before list starts.
             collected = []
             continue
-
         if isinstance(item, iamraw.Headline):
             too_short = 2 <= len(collected) <= PARAGRAPH_TOO_SHORT
             if too_short:

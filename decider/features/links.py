@@ -14,6 +14,7 @@
 
 import typing
 
+import configo
 import iamraw
 import protocol
 import serializeraw
@@ -47,7 +48,7 @@ Für den Hyperlink **{{link.href|wordwrap(40)}}** ist kein Aufrufdatum angegeben
 {darstellung/hyperlink}
 """
 
-PARAGRAPH_TOO_SHORT = 3
+PARAGRAPH_TOO_SHORT = configo.HV_INT_PLUS(default=3)
 
 
 def check_10500_hyperlink_require_date(linter: callable, driver):

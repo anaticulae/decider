@@ -14,6 +14,7 @@ Schusterjunge: Single Line at Page End
 import statistics
 import typing
 
+import configo
 import iamraw
 import protocol
 import serializeraw
@@ -49,8 +50,6 @@ def work(
     return result
 
 
-HURENKIND_BEFORE = 120  # TODO: HOLY VALUE
-
 SOLUTION_7620 = """\
 Hurenkind: Einsame Zeile am Seitenanfang
 
@@ -58,11 +57,16 @@ Seite beginnt mit einsamer Zeile: **{{rawline}}**.
 
 {darstellung/schriftbild#hurenkind}
 """
+HURENKIND_BEFORE = configo.HV_INT_PLUS(default=120)
+
+HURENKIND_LINEWIDTH = configo.HV_PERCENT_PLUS(default=90)
+
+SECOND_FULL_LINE_DIFF_MAX = configo.HV_FLOAT_PLUS(default=5.0)
 
 
 def check_7620_lonely_page_start(linter: callable, driver):  # pylint:disable=R1260
     linewidth = textwidth(driver.text_chunks)
-    hurenkind_maxwidth = linewidth * 0.9  # TODO: HOLY VALUE
+    hurenkind_maxwidth = linewidth * HURENKIND_LINEWIDTH
     text = decider_textflow.utils.page_chunks(driver.nomagic_text_chunks)
     for page, content in text:
         if len(content) < 2:
@@ -95,8 +99,11 @@ def check_7620_lonely_page_start(linter: callable, driver):  # pylint:disable=R1
             # no headlines, text only
             first_width = width(content[0])
             second_width = width(content[1])
-            # TODO: HOLY VALUE
-            second_full_line = utila.near(second_width, linewidth, diff=5.0)
+            second_full_line = utila.near(
+                second_width,
+                linewidth,
+                diff=SECOND_FULL_LINE_DIFF_MAX,
+            )
             if first_width <= hurenkind_maxwidth and second_full_line:
                 # hurenkind
                 # SHORT TEXT -> TEXT
@@ -124,6 +131,8 @@ direkt am Seitenanfang stehen.
 
 # TODO: ADD SUPPORT FOR TEXT ABOVE IMAGES/TABLE etc.
 
+FAILSTART_MAX = configo.HV_INT_PLUS(default=100)
+
 
 def check_7625_empty_start(linter: callable, driver):
     text = decider_textflow.utils.page_chunks(driver.nomagic_text_chunks)
@@ -131,7 +140,7 @@ def check_7625_empty_start(linter: callable, driver):
     if startend is None:
         return
     start, _ = startend
-    failstart = start + 100  # TODO: HOLY VALUE
+    failstart = start + FAILSTART_MAX
     for page, content in text:
         if isinstance(content[0], iamraw.Headline):
             # TODO: ADD CHECK TO CHECK HEADLINES
@@ -172,7 +181,7 @@ def textwidth(chunks) -> float:
     return result
 
 
-STARTEND_MIN_PAGES = 5  # TODO: HOLY VALUE
+STARTEND_MIN_PAGES = configo.HV_INT_PLUS(default=5)
 
 
 def page_startend(items):  # pylint:disable=R1260

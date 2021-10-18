@@ -7,7 +7,9 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-MAX_SENTENCE_COMPLEXITY = 7  # TODO: HOLY VALUE
+import configo
+
+MAX_SENTENCE_COMPLEXITY = configo.HV_INT_PLUS(default=7)
 
 
 def too_complex(line: str) -> bool:

@@ -7,13 +7,14 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import configo
 import german
 import iamraw
 import konrad.quotation.german
 import protocol
 import serializeraw
 
-MAX_CITATION_LENGTH = 50  # TODO: HOLY VALUE
+MAX_CITATION_LENGTH = configo.HV_INT_PLUS(default=50)
 
 
 def work(text: str, pages: tuple) -> protocol.ResultType:

@@ -10,6 +10,7 @@
 import collections
 import dataclasses
 
+import configo
 import german
 import iamraw
 import konrad
@@ -112,7 +113,7 @@ Satz *{{line}}* überschreitet Limit. Anzahl der Zeichen({{numbers}}) \
 zu hoch.
 """
 
-MAX_SENTENCE_LENGTH = 400  # TODO: HOLY VALUE
+MAX_SENTENCE_LENGTH = configo.HV_INT_PLUS(default=400)
 
 
 def check_7605_text_too_long(linter: callable, driver):
@@ -192,8 +193,9 @@ def check_7610_sentence_pattern(linter: callable, driver):
         )
 
 
-SENTENCE_PATTERN_WINDOW = 5  # TODO: HOLY VALUE
-SENTENCE_PATTERN_OCCURENCE_MIN = 3
+SENTENCE_PATTERN_WINDOW = configo.HV_INT_PLUS(default=5)
+
+SENTENCE_PATTERN_OCCURENCE_MIN = configo.HV_INT_PLUS(default=3)
 
 SOLUTION_7611 = """\
 Satzanfang wiederholt sich
