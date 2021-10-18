@@ -19,13 +19,13 @@ import utila
 
 import decider_footnote.footnote
 
-MAX_HIGHNOTE_RISE_DIFF = configo.HV_FLOAT_PLUS(default=0.5)
-MAX_HIGHNOTE_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5)
+HIGHNOTE_RISE_DIFF_MAX = configo.HV_FLOAT_PLUS(default=0.5)
+HIGHNOTE_SIZE_DIFF_MAX = configo.HV_FLOAT_PLUS(default=0.5)
 
-MAX_CONTENT_SIZE_DIFF = configo.HV_FLOAT_PLUS(default=0.5)
+CONTENT_SIZE_DIFF_MAX = configo.HV_FLOAT_PLUS(default=0.5)
 
 # as a result of bad layout extraction
-MAX_RISE_NOISE = configo.HV_FLOAT_PLUS(default=2.0)
+RISE_NOISE_MAX = configo.HV_FLOAT_PLUS(default=2.0)
 
 
 def work(
@@ -96,7 +96,7 @@ def check_2003_invalid_highnote_rise(linter, driver):
     if isinstance(expected, list):
         skip_method(f'ambiguous expected highnote rise: {expected}')
         return
-    if utila.near(current, expected, MAX_HIGHNOTE_RISE_DIFF):
+    if utila.near(current, expected, HIGHNOTE_RISE_DIFF_MAX):
         return
 
     linter(number=item.number, current=current, expected=expected)
@@ -123,7 +123,7 @@ def check_2004_invalid_hignote_size(linter, driver):
     if isinstance(expected, list):
         skip_method(f'ambiguous expected highnote size: {expected}')
         return
-    if utila.near(current, expected, MAX_HIGHNOTE_SIZE_DIFF):
+    if utila.near(current, expected, HIGHNOTE_SIZE_DIFF_MAX):
         return
 
     linter(number=item.number, current=current, expected=expected)
@@ -201,10 +201,10 @@ def check_2010_invalid_content_fontsize(linter, driver):
         item for item in footnotestyle if text[item.start:item.end].strip()
     ]
     # not not check highnotes inside footnote
-    sizes = [item.size for item in footnotestyle if item.rise < MAX_RISE_NOISE]
+    sizes = [item.size for item in footnotestyle if item.rise < RISE_NOISE_MAX]
 
     sizes_equal = [
-        utila.near(item, expected, MAX_CONTENT_SIZE_DIFF) for item in sizes
+        utila.near(item, expected, CONTENT_SIZE_DIFF_MAX) for item in sizes
     ]
     if all(sizes_equal):
         return

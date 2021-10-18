@@ -31,7 +31,7 @@ Trennung enthalten auf 3 zu beschränken.
 {darstellung/schriftbild#trennungen}
 """
 
-MAX_FOLLOWING_DIVISION = 3
+FOLLOWING_DIVISION_MAX = 3
 
 
 def check_7000_more_than_three_division(linter: callable, lineendings: list):
@@ -48,7 +48,7 @@ def check_7000_more_than_three_division(linter: callable, lineendings: list):
             else:
                 collected.append([item])
         result = [
-            item for item in collected if len(item) > MAX_FOLLOWING_DIVISION
+            item for item in collected if len(item) > FOLLOWING_DIVISION_MAX
         ]
         return result
 

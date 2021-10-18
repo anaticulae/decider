@@ -63,7 +63,7 @@ def test_footnote_separator_distance(testdir, monkeypatch):
     rules = decider_footnote.path.rules(testdir.tmpdir)
     rules = serializeraw.load_findings(rules)
 
-    # TODO: DECREASE SEPARATOR_FOOTNOTE_MAX_DISTANCE to verify that
+    # TODO: DECREASE SEPARATOR_FOOTNOTE_DISTANCE_MAX to verify that
     # enable after upgrading protocol
     # -hv:separator_footnote_max_distance=0
     # linting works

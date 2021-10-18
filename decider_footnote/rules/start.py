@@ -17,10 +17,10 @@ DISABLE_2002_DOT_END = 0.15
 # minimum number of note to decide if we want to disable function. If we
 # had lower numbers, judging is not possible, cause we can not determine
 # if user follow this rule or not.
-DISABLE_MIN_FOOTNOTE_COUNT = 15
+DISABLE_FOOTNOTE_COUNT_MIN = 15
 
 # To ignore dots, spaces or <>.
-MAX_FOOTENOTE_EXCEPTION_CHARS = 10
+FOOTENOTE_EXCEPTION_CHARS_MAX = 10
 
 
 def judge_active(items, footnote_count: int):
@@ -59,7 +59,7 @@ def send_footnote_pattern_information(linter, items, footnote_count: int):
 
 
 def disabled(items, footnote_count: int):
-    if footnote_count < DISABLE_MIN_FOOTNOTE_COUNT:
+    if footnote_count < DISABLE_FOOTNOTE_COUNT_MIN:
         # disable judeging
         utila.info(f'to few footnotes({footnote_count}) to judge disabling')
         return False, False
@@ -96,4 +96,4 @@ def footnote_exception(text: str) -> bool:
     detected = ''.join(parsed)
     diff = len(text) - len(detected)
     assert diff >= 0, str(diff)
-    return diff <= MAX_FOOTENOTE_EXCEPTION_CHARS
+    return diff <= FOOTENOTE_EXCEPTION_CHARS_MAX

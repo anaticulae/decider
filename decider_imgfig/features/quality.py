@@ -14,10 +14,11 @@ import utila
 
 import decider_imgfig.driver
 
-MIN_DPI = 96
-MAX_DPI = MIN_DPI * 2
+DPI_MIN = 96.0
 
-MAX_RESOLUTION_DIFF = configo.HV_PERCENT_PLUS(5)
+DPI_MAX = DPI_MIN * 2
+
+RESOLUTION_DIFF_MAX = configo.HV_PERCENT_PLUS(default=5)
 
 
 def work(*images: str, pages: tuple = None) -> protocol.ResultType:
@@ -46,9 +47,9 @@ Erwartet: {{expected}}
 def check_4000_min_printing_resolution(linter: callable, driver):
     for imageinfo in driver.images:
         dpi = determine_resolution(imageinfo)
-        if dpi[0] >= MIN_DPI and dpi[1] >= MIN_DPI:
+        if dpi[0] >= DPI_MIN and dpi[1] >= DPI_MIN:
             continue
-        expected = MIN_DPI, MIN_DPI
+        expected = DPI_MIN, DPI_MIN
         location = iamraw.BoundingLocation.fromtuple(
             bounding=imageinfo.bounding,
             page=imageinfo.page,
@@ -81,9 +82,9 @@ Erwartet: kleiner als {{expected}}
 def check_4001_max_printing_resolution(linter, driver):
     for imageinfo in driver.images:
         dpi = determine_resolution(imageinfo)
-        if dpi[0] <= MAX_DPI or dpi[1] <= MAX_DPI:
+        if dpi[0] <= DPI_MAX or dpi[1] <= DPI_MAX:
             continue
-        expected = MAX_DPI, MAX_DPI
+        expected = DPI_MAX, DPI_MAX
         location = iamraw.BoundingLocation.fromtuple(
             bounding=imageinfo.bounding,
             page=imageinfo.page,
@@ -116,7 +117,7 @@ def check_4005_check_relation(linter, driver):
         # pdf
         pdf = utila.roundme(pdfwidth / pdfheight)
         image = utila.roundme(imageinfo.width / imageinfo.height)
-        if utila.pnear(pdf, image, rel_tol=MAX_RESOLUTION_DIFF):
+        if utila.pnear(pdf, image, rel_tol=RESOLUTION_DIFF_MAX):
             continue
         location = iamraw.BoundingLocation.fromtuple(
             bounding=imageinfo.bounding,

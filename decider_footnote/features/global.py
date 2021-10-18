@@ -59,18 +59,18 @@ TODO: ARTICEL ENDNOTE_VS_FOOTNOTE
 
 # TODO: move MIN_CHECK to a decorator?
 # require more than `15` footnote to run this linter
-MIN_ENDNOTE_CHECK_NUMBER = 15
+ENDNOTE_CHECK_NUMBER_MIN = 15
 
 # Decide between endnotes and failing footnotes
-MIN_STARTING = 3
-MIN_STARTING_RATE = 0.8
+STARTING_MIN = 3
+STARTING_RATE_MIN = 0.8
 
 
 def check_2015_endnotes_using(linter, footnotes):
     numbers = [
         item.number for _, item in footnotes if isinstance(item.number, int)
     ]
-    if len(numbers) < MIN_ENDNOTE_CHECK_NUMBER:
+    if len(numbers) < ENDNOTE_CHECK_NUMBER_MIN:
         return
     if utila.isascending(numbers):
         return
@@ -81,7 +81,7 @@ def check_2015_endnotes_using(linter, footnotes):
     started = [item for item in grouped if starting(item)]
     rate = len(started) / len(grouped)
 
-    if rate <= MIN_STARTING_RATE:
+    if rate <= STARTING_RATE_MIN:
         return
 
     linter(location=protocol.OVERVIEW)

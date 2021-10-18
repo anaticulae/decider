@@ -156,7 +156,7 @@ Abstand der horizontalen Linie zur ersten Fußnote zu groß.
 """
 
 # TODO: ADD LOWER LIMIT
-SEPARATOR_FOOTNOTE_MAX_DISTANCE = configo.HV_INT_PLUS(30)
+SEPARATOR_FOOTNOTE_DISTANCE_MAX = configo.HV_INT_PLUS(default=30)
 
 
 def check_2016_footnote_separator_position(linter, driver):
@@ -176,7 +176,7 @@ def check_2016_footnote_separator_position(linter, driver):
         firstfootnote_y0 = page.content[0].bounding[1]
         # judge
         distance = math.fabs(separator_y0 - firstfootnote_y0)
-        if distance < SEPARATOR_FOOTNOTE_MAX_DISTANCE:
+        if distance < SEPARATOR_FOOTNOTE_DISTANCE_MAX:
             continue
         linter(location=iamraw.Location.from_page(pagenumber))
     # TODO: DISABLE TOO OFTEN SEPARATOR AND ADD GENERAL MESSAGE

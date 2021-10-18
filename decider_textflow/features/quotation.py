@@ -14,7 +14,7 @@ import konrad.quotation.german
 import protocol
 import serializeraw
 
-MAX_CITATION_LENGTH = configo.HV_INT_PLUS(default=50)
+CITATION_LENGTH_MAX = configo.HV_INT_PLUS(default=50)
 
 
 def work(text: str, pages: tuple) -> protocol.ResultType:
@@ -145,7 +145,7 @@ Denkleistung in den Vordergrund.
 def check_7110_max_citation_length(linter: callable, driver):
     for quote in driver.quotations:
         tokens = german.split_token(quote.sentence)
-        if len(tokens) <= MAX_CITATION_LENGTH:
+        if len(tokens) <= CITATION_LENGTH_MAX:
             continue
         location = iamraw.Location.from_sentence(
             page=quote.page,

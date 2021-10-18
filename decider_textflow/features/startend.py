@@ -181,11 +181,11 @@ def textwidth(chunks) -> float:
     return result
 
 
-STARTEND_MIN_PAGES = configo.HV_INT_PLUS(default=5)
+STARTEND_PAGES_MIN = configo.HV_INT_PLUS(default=5)
 
 
 def page_startend(items):  # pylint:disable=R1260
-    if len(items) < STARTEND_MIN_PAGES:
+    if len(items) < STARTEND_PAGES_MIN:
         utila.error(f'disable `startend`: too few pages {len(items)}')
         return None
     start, end = [], []

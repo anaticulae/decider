@@ -19,7 +19,7 @@ def mixed(date) -> bool:
     return max(values) <= 1800
 
 
-MIN_MIXED_RATE = 0.6
+MIXED_RATE_MIN = 0.6
 
 
 def is_mixed(dates):
@@ -27,6 +27,6 @@ def is_mixed(dates):
         return False
     mixes = [date for date in dates if mixed(date)]
     rate = len(mixes) / len(dates)
-    if rate >= MIN_MIXED_RATE:
+    if rate >= MIXED_RATE_MIN:
         return True
     return False

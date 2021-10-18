@@ -65,7 +65,7 @@ def test_footnotes_work_highnote_rise(monkeypatch):
     with monkeypatch.context() as context:
         context.setattr(
             decider_footnote.features.style,
-            'MAX_HIGHNOTE_RISE_DIFF',
+            'HIGHNOTE_RISE_DIFF_MAX',
             0.0,
         )
         user, _ = decider_footnote.features.style.work(
@@ -85,7 +85,7 @@ def test_footnotes_work_highnote_size(monkeypatch):
     with monkeypatch.context() as context:
         context.setattr(
             decider_footnote.features.style,
-            'MAX_HIGHNOTE_SIZE_DIFF',
+            'HIGHNOTE_SIZE_DIFF_MAX',
             0.0,
         )
         user, _ = decider_footnote.features.style.work(

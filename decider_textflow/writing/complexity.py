@@ -9,13 +9,13 @@
 
 import configo
 
-MAX_SENTENCE_COMPLEXITY = configo.HV_INT_PLUS(default=7)
+SENTENCE_COMPLEXITY_MAX = configo.HV_INT_PLUS(default=7)
 
 
 def too_complex(line: str) -> bool:
     if ':' in line:
         return False
     subsentence = [item for item in line.split(',;') if len(item.split()) > 3]
-    if len(subsentence) > MAX_SENTENCE_COMPLEXITY:
+    if len(subsentence) > SENTENCE_COMPLEXITY_MAX:
         return True
     return False

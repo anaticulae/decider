@@ -19,7 +19,7 @@ import configo
 import protocol
 import serializeraw
 
-MAX_REPEATING_ITEM_RATIO = configo.HV_PERCENT_PLUS(default=30)
+REPEATING_ITEM_RATIO_MAX = configo.HV_PERCENT_PLUS(default=30)
 
 
 def work(headerfooter: str, pages: tuple = None) -> typing.Tuple[str, str]:
@@ -60,6 +60,6 @@ def check_2110_repeating_header_content(linter, headers):
             collected[raw.text].add(item.page.value)
     for key, value in collected.items():
         percent = len(value) / len(headers) * 100
-        if percent <= MAX_REPEATING_ITEM_RATIO:
+        if percent <= REPEATING_ITEM_RATIO_MAX:
             continue
         linter(content=key.strip())

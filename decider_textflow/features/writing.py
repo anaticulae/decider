@@ -113,7 +113,7 @@ Satz *{{line}}* überschreitet Limit. Anzahl der Zeichen({{numbers}}) \
 zu hoch.
 """
 
-MAX_SENTENCE_LENGTH = configo.HV_INT_PLUS(default=400)
+SENTENCE_LENGTH_MAX = configo.HV_INT_PLUS(default=400)
 
 
 def check_7605_text_too_long(linter: callable, driver):
@@ -129,7 +129,7 @@ def check_7605_text_too_long(linter: callable, driver):
             # Vor allem die sozialen Online-Netzwerke erfreuen sich großer
             # Beliebtheit: Circa zwei Drittel aller Internetnutzer.
             continue
-        if len(line) < MAX_SENTENCE_LENGTH:
+        if len(line) < SENTENCE_LENGTH_MAX:
             continue
         # TODO: CONVERT NUMBER TO LINE
         location = iamraw.RangedLocation(page=page, line=number)

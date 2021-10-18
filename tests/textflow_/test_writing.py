@@ -65,7 +65,7 @@ def test_dtf_master72_text_too_long(testdir, monkeypatch):
     with monkeypatch.context() as context:
         context.setattr(
             decider_textflow.features.writing,
-            'MAX_SENTENCE_LENGTH',
+            'SENTENCE_LENGTH_MAX',
             100,
         )
         findings = decide_textflow(
