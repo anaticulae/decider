@@ -11,6 +11,7 @@ import collections
 import dataclasses
 import statistics
 
+import configo
 import utila
 
 import decider_textflow.writing.utils
@@ -31,7 +32,7 @@ class WritingStatistics:
     sentence_max: int = None
 
 
-SENTENCE_LENGTH_MIN = 7
+SENTENCE_LENGTH_MIN = configo.HV_INT_PLUS(default=7)
 
 
 def determine(sentences) -> WritingStatistics:

@@ -7,20 +7,21 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import configo
 import german
 import protocol
 import utila
 
-DISABLE_2001_UPPER_CASE = 0.15
-DISABLE_2002_DOT_END = 0.15
+DISABLE_2001_UPPER_CASE = configo.HV_PERCENT_PLUS(default=15.0)
+DISABLE_2002_DOT_END = configo.HV_PERCENT_PLUS(default=15.0)
 
 # minimum number of note to decide if we want to disable function. If we
 # had lower numbers, judging is not possible, cause we can not determine
 # if user follow this rule or not.
-DISABLE_FOOTNOTE_COUNT_MIN = 15
+DISABLE_FOOTNOTE_COUNT_MIN = configo.HV_INT_PLUS(default=15)
 
 # To ignore dots, spaces or <>.
-FOOTENOTE_EXCEPTION_CHARS_MAX = 10
+FOOTENOTE_EXCEPTION_CHARS_MAX = configo.HV_INT_PLUS(default=10)
 
 
 def judge_active(items, footnote_count: int):

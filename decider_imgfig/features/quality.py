@@ -14,9 +14,9 @@ import utila
 
 import decider_imgfig.driver
 
-DPI_MIN = 96.0
+DPI_MIN = configo.HV_FLOAT_PLUS(default=96.0)
 
-DPI_MAX = DPI_MIN * 2
+DPI_MAX = configo.HV_FLOAT_PLUS(default=192.0)
 
 RESOLUTION_DIFF_MAX = configo.HV_PERCENT_PLUS(default=5)
 

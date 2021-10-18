@@ -7,6 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import configo
 import iamraw
 import protocol
 import textflow.features.lineending
@@ -31,7 +32,7 @@ Trennung enthalten auf 3 zu beschränken.
 {darstellung/schriftbild#trennungen}
 """
 
-FOLLOWING_DIVISION_MAX = 3
+FOLLOWING_DIVISION_MAX = configo.HV_INT_PLUS(default=3)
 
 
 def check_7000_more_than_three_division(linter: callable, lineendings: list):

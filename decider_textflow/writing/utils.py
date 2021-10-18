@@ -7,11 +7,12 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import configo
 import german
 import iamraw
 import utila
 
-SENTENCE_LENGTH_MIN = 7
+SENTENCE_LENGTH_MIN = configo.HV_INT_PLUS(default=7)
 
 
 def determine_sentences(sentences) -> list:

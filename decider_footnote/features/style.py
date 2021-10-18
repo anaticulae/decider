@@ -20,6 +20,7 @@ import utila
 import decider_footnote.footnote
 
 HIGHNOTE_RISE_DIFF_MAX = configo.HV_FLOAT_PLUS(default=0.5)
+
 HIGHNOTE_SIZE_DIFF_MAX = configo.HV_FLOAT_PLUS(default=0.5)
 
 CONTENT_SIZE_DIFF_MAX = configo.HV_FLOAT_PLUS(default=0.5)

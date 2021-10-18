@@ -9,6 +9,7 @@
 
 import math
 
+import configo
 import iamraw
 import protocol
 import texmex
@@ -109,7 +110,7 @@ def check_4031_image_alignment_per_image(linter: callable, driver):
         linter(location=location, current=current, expected=expected)
 
 
-ALIGNMENT_TRUST_MIN = 0.5
+ALIGNMENT_TRUST_MIN = configo.HV_FLOAT_PLUS(default=0.5)
 
 
 def expected_alignment(images, contentborder, mincount: int = 5):

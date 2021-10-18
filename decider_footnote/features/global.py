@@ -15,6 +15,7 @@ Footnotes
 import functools
 import typing
 
+import configo
 import protocol
 import serializeraw
 import utila
@@ -56,14 +57,14 @@ stringend aufsteigende Fußnoten.
 
 TODO: ARTICEL ENDNOTE_VS_FOOTNOTE
 """
-
 # TODO: move MIN_CHECK to a decorator?
 # require more than `15` footnote to run this linter
-ENDNOTE_CHECK_NUMBER_MIN = 15
+ENDNOTE_CHECK_NUMBER_MIN = configo.HV_INT_PLUS(default=15)
 
 # Decide between endnotes and failing footnotes
-STARTING_MIN = 3
-STARTING_RATE_MIN = 0.8
+STARTING_MIN = configo.HV_INT_PLUS(default=3)
+
+STARTING_RATE_MIN = configo.HV_PERCENT_PLUS(default=80)
 
 
 def check_2015_endnotes_using(linter, footnotes):
