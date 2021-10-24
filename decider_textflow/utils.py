@@ -31,9 +31,7 @@ def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
     magiccontent = magiccontent if magiccontent else []
     # TODO: SO BAD
     headlines = utila.flatten(headlines)
-
     visited = utila.Single()
-
     flat = []
     for headline in headlines:
         # mark contaienr id as visited
@@ -44,7 +42,6 @@ def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
             container_start(headline.container),
         )
         flat.append((*position, headline))
-
     for magicpage in magiccontent:
         for line, content in magicpage.content:
             location = (magicpage.page, line)
@@ -54,24 +51,20 @@ def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
             if visited.contains(location):
                 continue
             flat.append((*location, None))
-
     for navigator in navigators:
         for index, line in enumerate(navigator):
             location = (navigator.page, index)
             if visited.contains(location):
                 continue
             flat.append((*location, line))
-
     # sort by page and line
     flat = sorted(flat, key=operator.itemgetter(0, 1))
-
     if sync:
         # TODO: WHY SHOULD WE DO THIS?
         # TODO: ADD DOCU HERE
         while flat and not isinstance(flat[0][2], iamraw.Headline):
             # sync to first headline
             flat = flat[1:]
-
     if yieldnone:
         flat = [
             item if isinstance(item[2], texmex.style.TextInfo) else
