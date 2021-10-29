@@ -12,7 +12,7 @@ import collections
 INVALID_PERSPECTIVE = {'wir', 'man', 'ich'}
 
 
-def invalid_perspective(words) -> list:
+def invalid(words) -> list:
     # TODO: REPLACE WITH EXTERNAL METHOD
     words = [word for word in words if isinstance(word, str)]
     words = [word for word in words if word.lower() in INVALID_PERSPECTIVE]

@@ -80,7 +80,7 @@ def check_7600_text_perspective(linter: callable, driver):
         text = remove_quotes(text, quotes[page])
         for sentence in german.sentence_tokenize(text):
             tokens = german.word_tokenize(sentence, validate_sentences=False)
-            invalid = decider_textflow.writing.perspective.invalid_perspective(tokens)  # yapf:disable
+            invalid = decider_textflow.writing.perspective.invalid(tokens)
             if not invalid:
                 continue
             # convert token sentence to user sentence with correct spaces
