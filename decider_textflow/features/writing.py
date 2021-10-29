@@ -67,7 +67,6 @@ Fehler in der Perspektive
 
 
 def check_7600_text_perspective(linter: callable, driver):
-    text = driver.text_chunks
     # group quotes by page
     quotes = collections.defaultdict(list)
     for quote in driver.quotations:
