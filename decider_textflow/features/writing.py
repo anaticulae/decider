@@ -13,7 +13,6 @@ import dataclasses
 import configo
 import german
 import iamraw
-import konrad
 import protocol
 import utila
 
@@ -68,42 +67,61 @@ Fehler in der Perspektive
 
 
 def check_7600_text_perspective(linter: callable, driver):
-    # group quotes by page
-    quotes = collections.defaultdict(list)
-    for quote in driver.quotations:
-        quotes[quote.page].append(quote.sentence)
-    # group text content
-    grouped = groupby_page(driver.text_chunks)
-    for page, textraw in grouped.items():
-        # TODO: DO WE ALREADY REQUIRE THIS?
-        text = german.word_tokenize(textraw, validate_sentences=False)
-        text = ' '.join(konrad.mark2str(item) for item in text)
-        text = remove_quotes(text, quotes[page])
-        for sentence in german.sentence_tokenize(text):
-            tokens = german.word_tokenize(sentence, validate_sentences=False)
-            invalid = decider_textflow.writing.perspective.invalid(tokens)
-            if not invalid:
-                continue
-            # convert token sentence to user sentence with correct spaces
-            # and punctuation.
-            # Remove - as a result of word-division
-            tokens = [item for item in tokens if item != konrad.Mark.HYPHEN]
-            sentence = german.sentence_select(textraw, tokens)
-            if not sentence:
-                utila.error(f'could not select sentence: {tokens}')
-                utila.error(textraw)
-                continue
-            # TODO: CENTER SENTENCE TO FINDING, REDUCE SENTENCE LENGTH
-            sentence = utila.normalize_text(sentence, normalize_spaces=True)
-            # TODO: DETERMINE SENTENCE/LINE NUMBER
-            # line = 0
-            # location = iamraw.RangedLocation(page=page, line=line)
-            location = iamraw.RangedLocation(page=page)
-            linter(
-                location=location,
-                invalid=', '.join(invalid),
-                line=sentence,
-            )
+    # TODO: REMOVE QUOTES
+    for sentence in driver.sentences:
+        try:
+            line, page, number = sentence
+        except TypeError:
+            # headline
+            continue
+        # TODO: CHANGE PERSPECTIVE CHECKER FOR LISTS?
+        line, _ = decider_textflow.utils.list_split(line)
+        tokens = german.word_tokenize(line, validate_sentences=False)
+        invalid = decider_textflow.writing.perspective.invalid(tokens)
+        if not invalid:
+            continue
+        location = iamraw.RangedLocation(page=page, line=number)
+        linter(
+            location=location,
+            invalid=', '.join(invalid),
+            line=line,
+        )
+    # # group quotes by page
+    # quotes = collections.defaultdict(list)
+    # for quote in driver.quotations:
+    #     quotes[quote.page].append(quote.sentence)
+    # # group text content
+    # grouped = groupby_page(driver.text_chunks)
+    # for page, textraw in grouped.items():
+    #     # TODO: DO WE ALREADY REQUIRE THIS?
+    #     text = german.word_tokenize(textraw, validate_sentences=False)
+    #     text = ' '.join(konrad.mark2str(item) for item in text)
+    #     text = remove_quotes(text, quotes[page])
+    #     for sentence in german.sentence_tokenize(text):
+    #         tokens = german.word_tokenize(sentence, validate_sentences=False)
+    #         invalid = decider_textflow.writing.perspective.invalid(tokens)
+    #         if not invalid:
+    #             continue
+    #         # convert token sentence to user sentence with correct spaces
+    #         # and punctuation.
+    #         # Remove - as a result of word-division
+    #         tokens = [item for item in tokens if item != konrad.Mark.HYPHEN]
+    #         sentence = german.sentence_select(textraw, tokens)
+    #         if not sentence:
+    #             utila.error(f'could not select sentence: {tokens}')
+    #             utila.error(textraw)
+    #             continue
+    #         # TODO: CENTER SENTENCE TO FINDING, REDUCE SENTENCE LENGTH
+    #         sentence = utila.normalize_text(sentence, normalize_spaces=True)
+    #         # TODO: DETERMINE SENTENCE/LINE NUMBER
+    #         # line = 0
+    #         # location = iamraw.RangedLocation(page=page, line=line)
+    #         location = iamraw.RangedLocation(page=page)
+    #         linter(
+    #             location=location,
+    #             invalid=', '.join(invalid),
+    #             line=sentence,
+    #         )
 
 
 SOLUTION_7605 = """\
