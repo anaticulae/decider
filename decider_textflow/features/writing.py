@@ -18,6 +18,7 @@ import protocol
 import utila
 
 import decider_textflow.features
+import decider_textflow.utils
 import decider_textflow.writing.complexity
 import decider_textflow.writing.perspective
 import decider_textflow.writing.statistics
@@ -123,6 +124,8 @@ def check_7605_text_too_long(linter: callable, driver):
         except TypeError:
             # headline
             continue
+        # TODO: CHANGE SENTENCE_LENGTH_MAX FOR LISTS?
+        line, _ = decider_textflow.utils.list_split(line)
         if ':' in line:
             # TODO: SPLIT LINE AND JUDGE LATER?
             # Vor allem die sozialen Online-Netzwerke erfreuen sich großer
