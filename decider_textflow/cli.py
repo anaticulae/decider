@@ -86,7 +86,7 @@ WORKPLAN = [
         inputs=CONTENT_INPUT + [
             utila.ResultFile('magic', 'content_content'),
             utila.ResultFile('textflow', 'quotation_quotation'),
-            utila.ResultFile('words', 'word_result'),
+            utila.ResultFile('words', 'sentences_sentences'),
         ],
         output=protocol.ResultDefault,
     ),
