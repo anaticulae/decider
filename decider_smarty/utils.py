@@ -11,12 +11,11 @@ import collections
 
 import german
 import utila
-import words.utils
 
 
 def sentence_lookup(text) -> dict:
     lookup = collections.defaultdict(list)
-    for page, sentence in words.utils.sentences(text):
+    for page, sentence in sentences(text):
         lookup[page].append(sentence)
     return dict(lookup)
 
@@ -37,3 +36,19 @@ def selection_plain(items: list) -> str:
     raw = raw.replace('( ', '(')
     raw = raw.replace(' )', ')')
     return raw
+
+
+def sentences(texts, numbers: bool = False):
+    number, current = 0, None
+    for chunk in texts:
+        for section in chunk.content:
+            for page, sentence in zip(section.pages, section.content):
+                if not numbers:
+                    yield page, sentence
+                else:
+                    if current != page:
+                        number = 0
+                        current = page
+                    else:
+                        number += 1
+                    yield page, number, sentence
