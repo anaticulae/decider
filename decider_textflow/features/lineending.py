@@ -12,6 +12,9 @@ import iamraw
 import protocol
 import serializeraw
 import textflow.features.lineending
+import words.feature.sentences
+
+import decider_textflow.features
 
 
 def work(
@@ -90,6 +93,78 @@ def check_7000_more_than_three_division(linter: callable, driver):
             linter(location=location)
 
 
+SOLUTION_7005 = """\
+Satzende vor Aufzählung fehlt
+
+Der Übergang von Text zu Aufzählung sollte durch einen **:** verbunden \
+werden. {{text}}**:**
+
+Passen Sie gegebenenfalls den Text an.
+"""
+
+SENTENCE_ENDING = '.?:'
+
+
+def check_7005_list_not_included(linter: callable, driver):
+    sentences = driver.sentences
+    for current, after in zip(sentences[0:-1], sentences[1:]):
+        if isinstance(current, iamraw.Headline):
+            continue
+        if isinstance(after, iamraw.Headline):
+            continue
+        raw = current[0]
+        if words.feature.sentences.is_list_separator(current[0]):
+            continue
+        if not words.feature.sentences.is_list_separator(after[0]):
+            continue
+        if raw[-1] in SENTENCE_ENDING:
+            continue
+        location = iamraw.Location.from_sentence(
+            sentence=current[1],
+            page=current[1],
+        )
+        linter(
+            text=current,
+            location=location,
+        )
+
+
+SOLUTION_7006 = """\
+Satzende vor Aufzählung anpassen
+
+Ein Doppelpunkt bindet die Liste besser ein. Ersetzen Sie **{{sign}}** \
+durch einen Doppelpunkt und passen Sie gegebenfalls den Text \
+**{{text}}** an.
+
+TODO
+"""
+
+
+def check_7006_list_better_included(linter: callable, driver):
+    sentences = driver.sentences
+    for current, after in zip(sentences[0:-1], sentences[1:]):
+        if isinstance(current, iamraw.Headline):
+            continue
+        if isinstance(after, iamraw.Headline):
+            continue
+        raw = current[0]
+        if words.feature.sentences.is_list_separator(current[0]):
+            continue
+        if not words.feature.sentences.is_list_separator(after[0]):
+            continue
+        if raw[-1] not in '.?':
+            continue
+        location = iamraw.Location.from_sentence(
+            sentence=current[1],
+            page=current[1],
+        )
+        linter(
+            text=current,
+            sign=raw[-1],
+            location=location,
+        )
+
+
 def create_driver(lineendings, sentences, pages: tuple = None):
     # TODO: REMOVE PYLINT LATER
     lineendings = textflow.features.lineending.load_lineendings(  # pylint:disable=E1123
@@ -100,6 +175,7 @@ def create_driver(lineendings, sentences, pages: tuple = None):
         sentences,
         pages=pages,
     )
+    sentences = decider_textflow.features.Sentences(sentences)  # pylint:disable=R0204
     result = protocol.driver(
         lineendings=lineendings,
         sentences=sentences,

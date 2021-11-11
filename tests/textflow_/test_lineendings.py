@@ -29,3 +29,21 @@ def test_lineendings_master83page6_lineending(testdir, monkeypatch):
         7000,
     )
     assert len(result) == 2, str(result)
+
+
+def test_list_not_included_bachelor67page10(testdir, monkeypatch):
+    source = power.link(power.BACHELOR067_PDF)
+    # lint result
+    cmd = f'-i={source} --pages=10 --lineending'
+    tests.textflow_.run(cmd, monkeypatch=monkeypatch)
+    result = serializeraw.findings_from_path(testdir.tmpdir, msgid=7005)
+    assert len(result) == 1, str(result)
+
+
+def test_list_better_included_bachelor67page10(testdir, monkeypatch):
+    source = power.link(power.BACHELOR067_PDF)
+    # lint result
+    cmd = f'-i={source} --pages=10 --lineending'
+    tests.textflow_.run(cmd, monkeypatch=monkeypatch)
+    result = serializeraw.findings_from_path(testdir.tmpdir, msgid=7006)
+    assert len(result) == 1, str(result)
