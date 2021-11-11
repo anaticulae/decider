@@ -2,6 +2,20 @@
 
 Every noteable change is logged here.
 
+## v2.17.0
+
+### Feature
+
+* simplify perspective checker (5361851d412b)
+* replace words with sentences (6f7b131eb546)
+* convert list item to normal sentence (571cec58db0a)
+* add cloud lookup (a56ebcfecb67)
+
+### Fix
+
+* add missing codero step (45dbf4129272)
+* remove magic parameters (4b48d6162f3c)
+
 ## v2.16.0
 
 ### Feature
