@@ -49,6 +49,7 @@ WORKPLAN = [
         'lineending',
         inputs=[
             utila.ResultFile(textflow.PROCESS, 'lineending_lastchar'),
+            utila.ResultFile('words', 'sentences_sentences'),
         ],
         output=protocol.ResultDefault,
     ),

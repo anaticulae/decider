@@ -10,12 +10,18 @@
 import configo
 import iamraw
 import protocol
+import serializeraw
 import textflow.features.lineending
 
 
-def work(lineendings: str, pages: tuple = None) -> protocol.ResultType:
+def work(
+    lineendings: str,
+    sentences: str,
+    pages: tuple = None,
+) -> protocol.ResultType:
     driver = create_driver(
         lineendings=lineendings,
+        sentences=sentences,
         pages=pages,
     )
     result = protocol.run(
@@ -84,11 +90,18 @@ def check_7000_more_than_three_division(linter: callable, driver):
             linter(location=location)
 
 
-def create_driver(lineendings, pages: tuple = None):
+def create_driver(lineendings, sentences, pages: tuple = None):
     # TODO: REMOVE PYLINT LATER
     lineendings = textflow.features.lineending.load_lineendings(  # pylint:disable=E1123
         lineendings,
         pages=pages,
     )
-    result = protocol.driver(lineendings=lineendings)
+    sentences = serializeraw.load_text(
+        sentences,
+        pages=pages,
+    )
+    result = protocol.driver(
+        lineendings=lineendings,
+        sentences=sentences,
+    )
     return result
