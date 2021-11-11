@@ -27,6 +27,7 @@ SELECTED = dict(
     smarty=True,
     spacestation=True,
     words=True,
+    codero=True,
 )
 
 
