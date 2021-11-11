@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v2.18.0
+
+### Feature
+
+* verify list text inclusion (6f1014fe6660)
+* add sentences as another data resource (c2f5fcca751e)
+
 ## v2.17.0
 
 ### Feature
