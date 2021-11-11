@@ -14,12 +14,14 @@ import textflow.features.lineending
 
 
 def work(lineendings: str, pages: tuple = None) -> protocol.ResultType:
-    # TODO: REMOVE PYLINT LATER
-    endings = textflow.features.lineending.load_lineendings(  # pylint:disable=E1123
-        lineendings,
+    driver = create_driver(
+        lineendings=lineendings,
         pages=pages,
     )
-    result = protocol.run(__name__, driver=endings)
+    result = protocol.run(
+        __name__,
+        driver=driver,
+    )
     return result
 
 
@@ -35,7 +37,7 @@ Trennung enthalten auf 3 zu beschränken.
 FOLLOWING_DIVISION_MAX = configo.HV_INT_PLUS(default=3)
 
 
-def check_7000_more_than_three_division(linter: callable, lineendings: list):
+def check_7000_more_than_three_division(linter: callable, driver):
     """Ensure that there are not more than three following line
     divisions(-)."""
 
@@ -70,7 +72,7 @@ def check_7000_more_than_three_division(linter: callable, lineendings: list):
             y1 = max([y1, y11])
         return (x0, y0, x1, y1)
 
-    for page in lineendings:
+    for page in driver.lineendings:
         number = page.page
         failures = more_than_three(page.content)
         for failure in failures:
@@ -80,3 +82,13 @@ def check_7000_more_than_three_division(linter: callable, lineendings: list):
                 page=number,
             )
             linter(location=location)
+
+
+def create_driver(lineendings, pages: tuple = None):
+    # TODO: REMOVE PYLINT LATER
+    lineendings = textflow.features.lineending.load_lineendings(  # pylint:disable=E1123
+        lineendings,
+        pages=pages,
+    )
+    result = protocol.driver(lineendings=lineendings)
+    return result
