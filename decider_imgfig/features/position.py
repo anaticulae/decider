@@ -20,14 +20,14 @@ import decider_imgfig.driver
 
 def work(
     border: str,
-    docinfo: str,
+    xdocinfo: str,
     *images: str,
     pages: tuple = None,
 ) -> protocol.ResultType:
     driver = decider_imgfig.driver.create(
         images=images,
         contentborder=border,
-        docinfo=docinfo,
+        docinfo=xdocinfo,
         pages=pages,
     )
     if not driver.images:  # pylint:disable=E1101

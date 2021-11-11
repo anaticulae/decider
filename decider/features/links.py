@@ -25,10 +25,10 @@ import decider.links.date
 import decider.links.validate
 
 
-def work(links: str, pages: tuple = None) -> typing.Tuple[str, str]:
+def work(xlinks: str, pages: tuple = None) -> typing.Tuple[str, str]:
     linter = protocol.from_module(__name__)
     # load data
-    hyperlinks = serializeraw.load_hyperlinks(links, pages=pages)  # pylint:disable=E1101
+    hyperlinks = serializeraw.load_hyperlinks(xlinks, pages=pages)  # pylint:disable=E1101
     driver = protocol.driver(hyperlinks=hyperlinks)
 
     # run linter
