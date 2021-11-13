@@ -151,6 +151,60 @@ def check_7006_list_better_included(linter: callable, driver):
         )
 
 
+SOLUTION_7010 = """\
+Satzende vor Gleichung fehlt
+
+Der Übergang von Text zur Gleichung sollte durch einen **:** verbunden. \
+Passen Sie gegebenenfalls den Text an.
+"""
+
+
+def check_7010_formula_not_included(linter: callable, driver):
+    sentences = driver.sentences
+    for current in sandwich(
+            sentences,
+            ending_valid=lambda raw: raw[-1] == ':.?;',
+            selector=words.feature.sentences.is_formula,
+    ):
+        utila.log(current)
+        location = iamraw.Location.from_sentence(
+            sentence=current[1],
+            page=current[1],
+        )
+        linter(
+            text=current[0],
+            location=location,
+        )
+
+
+SOLUTION_7011 = """\
+Satzende vor Gleichung anpassen
+
+Ein Doppelpunkt bindet die Gleichung besser ein. Ersetzen Sie **{{sign}}** \
+durch einen Doppelpunkt und passen Sie gegebenfalls den Text \
+**{{text}}** an.
+"""
+
+
+def check_7011_formula_better_included(linter: callable, driver):
+    sentences = driver.sentences
+    for current in sandwich(
+            sentences,
+            ending_valid=lambda raw: raw[-1] not in '.?;',
+            selector=words.feature.sentences.is_formula,
+    ):
+        raw = current[0]
+        location = iamraw.Location.from_sentence(
+            sentence=current[1],
+            page=current[1],
+        )
+        linter(
+            text=current[0],
+            sign=raw[-1],
+            location=location,
+        )
+
+
 def sandwich(sentences, ending_valid: callable, selector: callable):
     for current, after in zip(sentences[0:-1], sentences[1:]):
         if isinstance(current, iamraw.Headline):

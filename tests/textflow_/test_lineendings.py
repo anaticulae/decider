@@ -47,3 +47,11 @@ def test_list_better_included_bachelor67page10(testdir, monkeypatch):
     tests.textflow_.run(cmd, monkeypatch=monkeypatch)
     result = serializeraw.findings_from_path(testdir.tmpdir, msgid=7006)
     assert len(result) == 1, str(result)
+
+
+def test_formula_better_included_home050page31(testdir, monkeypatch):
+    source = power.link(power.HOME050_PDF)
+    cmd = f'-i={source} -o {testdir.tmpdir} --pages=31 --lineending'
+    tests.textflow_.run(cmd, monkeypatch=monkeypatch)
+    result = serializeraw.findings_from_path(testdir.tmpdir, msgid=7011)
+    assert len(result) == 1, str(result)
