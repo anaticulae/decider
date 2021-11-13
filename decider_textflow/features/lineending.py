@@ -102,23 +102,14 @@ werden. {{text}}**:**
 Passen Sie gegebenenfalls den Text an.
 """
 
-SENTENCE_ENDING = '.?:'
-
 
 def check_7005_list_not_included(linter: callable, driver):
     sentences = driver.sentences
-    for current, after in zip(sentences[0:-1], sentences[1:]):
-        if isinstance(current, iamraw.Headline):
-            continue
-        if isinstance(after, iamraw.Headline):
-            continue
-        raw = current[0]
-        if words.feature.sentences.is_list_separator(current[0]):
-            continue
-        if not words.feature.sentences.is_list_separator(after[0]):
-            continue
-        if raw[-1] in SENTENCE_ENDING:
-            continue
+    for current in sandwich(
+            sentences,
+            ending_valid=lambda raw: raw[-1] == ':.?;',
+            selector=words.feature.sentences.is_list_separator,
+    ):
         location = iamraw.Location.from_sentence(
             sentence=current[1],
             page=current[1],
@@ -142,18 +133,12 @@ TODO
 
 def check_7006_list_better_included(linter: callable, driver):
     sentences = driver.sentences
-    for current, after in zip(sentences[0:-1], sentences[1:]):
-        if isinstance(current, iamraw.Headline):
-            continue
-        if isinstance(after, iamraw.Headline):
-            continue
+    for current in sandwich(
+            sentences,
+            ending_valid=lambda raw: raw[-1] not in '.?;',
+            selector=words.feature.sentences.is_list_separator,
+    ):
         raw = current[0]
-        if words.feature.sentences.is_list_separator(current[0]):
-            continue
-        if not words.feature.sentences.is_list_separator(after[0]):
-            continue
-        if raw[-1] not in '.?':
-            continue
         location = iamraw.Location.from_sentence(
             sentence=current[1],
             page=current[1],
@@ -163,6 +148,22 @@ def check_7006_list_better_included(linter: callable, driver):
             sign=raw[-1],
             location=location,
         )
+
+
+def sandwich(sentences, ending_valid: callable, selector: callable):
+    for current, after in zip(sentences[0:-1], sentences[1:]):
+        if isinstance(current, iamraw.Headline):
+            continue
+        if isinstance(after, iamraw.Headline):
+            continue
+        raw = current[0]
+        if selector(current[0]):
+            continue
+        if not selector(after[0]):
+            continue
+        if ending_valid(raw):
+            continue
+        yield current
 
 
 def create_driver(lineendings, sentences, pages: tuple = None):
