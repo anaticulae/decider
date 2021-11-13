@@ -12,6 +12,7 @@ import iamraw
 import protocol
 import serializeraw
 import textflow.features.lineending
+import utila
 import words.feature.sentences
 
 import decider_textflow.features
@@ -167,11 +168,14 @@ def sandwich(sentences, ending_valid: callable, selector: callable):
 
 
 def create_driver(lineendings, sentences, pages: tuple = None):
-    # TODO: REMOVE PYLINT LATER
-    lineendings = textflow.features.lineending.load_lineendings(  # pylint:disable=E1123
-        lineendings,
-        pages=pages,
-    )
+    if utila.exists(lineendings):
+        # TODO: REMOVE PYLINT LATER
+        lineendings = textflow.features.lineending.load_lineendings(  # pylint:disable=E1123
+            lineendings,
+            pages=pages,
+        )
+    else:
+        lineendings = []
     sentences = serializeraw.load_text(
         sentences,
         pages=pages,
