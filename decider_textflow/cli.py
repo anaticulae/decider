@@ -8,7 +8,6 @@
 # =============================================================================
 
 import protocol
-import textflow
 import utila
 
 import decider_textflow
@@ -48,7 +47,7 @@ WORKPLAN = [
     utila.create_step(
         'lineending',
         inputs=[
-            utila.ResultFile(textflow.PROCESS, 'lineending_lastchar'),
+            utila.ResultFile('textflow', 'lineending_lastchar'),
             utila.ResultFile('words', 'sentences_sentences'),
         ],
         output=protocol.ResultDefault,
@@ -71,7 +70,7 @@ WORKPLAN = [
     utila.create_step(
         'quotation',
         inputs=[
-            utila.ResultFile(textflow.PROCESS, 'quotation_quotation'),
+            utila.ResultFile('textflow', 'quotation_quotation'),
         ],
         output=protocol.ResultDefault,
     ),
