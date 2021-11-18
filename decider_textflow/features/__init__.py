@@ -123,7 +123,8 @@ class Sentences:
         for contenttext in words:
             for textsection in contenttext.content:
                 # yield headline
-                if textsection.headline.container != -1:
+                if textsection.headline and textsection.headline.container != -1:
+                    # TODO: IS HEADLINE IMPORTANT? THIS MAY PRODUCE AN ERROR LATER?
                     self.content.append(textsection.headline)
                 merged = list(
                     zip(
