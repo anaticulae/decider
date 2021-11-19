@@ -247,10 +247,28 @@ def check_2019_duplicated_footnote(linter, driver):
             note = current.text.strip()
             if note != after.text.strip():
                 continue
-            if note.lower() in 'ebd ebd.'.split():
+            if ibidem(note):
                 # Ebd. follows by Ebd.
                 continue
             linter(
                 note=note,
                 location=iamraw.Location.from_page(pagenumber),
             )
+
+
+def ibidem(text: str) -> bool:
+    text = text.strip().lower()
+    return text in IBIDEM
+
+
+IBIDEM = utila.splitlines("""
+ebd.
+ebendort
+ib.
+ibid.
+ibidem
+vgl. ebd.
+vgl. ib.
+vgl. ibid.
+vgl. ibidem
+""")
