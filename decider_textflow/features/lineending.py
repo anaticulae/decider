@@ -178,6 +178,7 @@ Passen Sie gegebenenfalls den Text an.
 
 
 def check_7010_formula_not_included(linter: callable, driver):
+    # TODO: INCLUDE FORMULA, <NEWLINE> FORMULA, <NEWLINE>, ....
     sentences = driver.sentences
     for current in sandwich(
             sentences,
@@ -204,6 +205,7 @@ durch einen Doppelpunkt und passen Sie gegebenfalls den Text \
 
 
 def check_7011_formula_better_included(linter: callable, driver):
+    # TODO: INCLUDE FORMULA, <NEWLINE> FORMULA, <NEWLINE>, ....
     sentences = driver.sentences
     for current in sandwich(
             sentences,
