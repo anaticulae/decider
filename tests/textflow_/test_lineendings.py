@@ -55,3 +55,17 @@ def test_formula_better_included_home050page31(testdir, monkeypatch):
     tests.textflow_.run(cmd, monkeypatch=monkeypatch)
     result = serializeraw.findings_from_path(testdir.tmpdir, msgid=7011)
     assert len(result) == 1, str(result)
+
+
+def test_formula_list_diss157page144_included(testdir, monkeypatch):
+    """On page144 the list is included very well.
+
+    This is a regression test, cause before there where false linting
+    inside the list. The implementation before requires list inclusion
+    inside a list what is very senceless.
+    """
+    source = power.link(power.DISS157_PDF)
+    cmd = f'-i={source} -o {testdir.tmpdir} --pages=144 --lineending'
+    tests.textflow_.run(cmd, monkeypatch=monkeypatch)
+    result = serializeraw.findings_from_path(testdir.tmpdir, msgid={7005, 7706})
+    assert not result

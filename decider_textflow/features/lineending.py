@@ -105,10 +105,19 @@ Passen Sie gegebenenfalls den Text an.
 
 
 def check_7005_list_not_included(linter: callable, driver):
-    sentences = driver.sentences
+
+    def valid_inclusion(raw):
+        if raw[-1] == ':.?;':
+            # list is included due sentence ending before
+            return True
+        if words.feature.sentences.is_list_item(raw):
+            # do not check this inside a list
+            return True
+        return False
+
     for current in sandwich(
-            sentences,
-            ending_valid=lambda raw: raw[-1] == ':.?;',
+            driver.sentences,
+            ending_valid=valid_inclusion,
             selector=words.feature.sentences.is_list_separator,
     ):
         location = iamraw.Location.from_sentence(
@@ -133,10 +142,19 @@ TODO
 
 
 def check_7006_list_better_included(linter: callable, driver):
-    sentences = driver.sentences
+
+    def valid_inclusion(raw):
+        if raw[-1] not in '.?;':
+            # list is included due sentence ending before
+            return True
+        if words.feature.sentences.is_list_item(raw):
+            # do not check this inside a list
+            return True
+        return False
+
     for current in sandwich(
-            sentences,
-            ending_valid=lambda raw: raw[-1] not in '.?;',
+            driver.sentences,
+            ending_valid=valid_inclusion,
             selector=words.feature.sentences.is_list_separator,
     ):
         raw = current[0]
