@@ -112,11 +112,11 @@ def check_7005_list_not_included(linter: callable, driver):
             selector=words.feature.sentences.is_list_separator,
     ):
         location = iamraw.Location.from_sentence(
-            sentence=current[1],
+            sentence=current[2],
             page=current[1],
         )
         linter(
-            text=current,
+            text=current[0],
             location=location,
         )
 
@@ -141,11 +141,11 @@ def check_7006_list_better_included(linter: callable, driver):
     ):
         raw = current[0]
         location = iamraw.Location.from_sentence(
-            sentence=current[1],
+            sentence=current[2],
             page=current[1],
         )
         linter(
-            text=current,
+            text=raw,
             sign=raw[-1],
             location=location,
         )
@@ -166,9 +166,8 @@ def check_7010_formula_not_included(linter: callable, driver):
             ending_valid=lambda raw: raw[-1] == ':.?;',
             selector=words.feature.sentences.is_formula,
     ):
-        utila.log(current)
         location = iamraw.Location.from_sentence(
-            sentence=current[1],
+            sentence=current[2],
             page=current[1],
         )
         linter(
@@ -195,11 +194,11 @@ def check_7011_formula_better_included(linter: callable, driver):
     ):
         raw = current[0]
         location = iamraw.Location.from_sentence(
-            sentence=current[1],
+            sentence=current[2],
             page=current[1],
         )
         linter(
-            text=current[0],
+            text=raw,
             sign=raw[-1],
             location=location,
         )
@@ -211,12 +210,11 @@ def sandwich(sentences, ending_valid: callable, selector: callable):
             continue
         if isinstance(after, iamraw.Headline):
             continue
-        raw = current[0]
         if selector(current[0]):
             continue
         if not selector(after[0]):
             continue
-        if ending_valid(raw):
+        if ending_valid(current[0]):
             continue
         yield current
 
