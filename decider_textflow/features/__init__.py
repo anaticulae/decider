@@ -49,6 +49,7 @@ def textdata(  # pylint:disable=R0913,R0914
     words=None,
     pages=None,
 ):
+    assert magiccontent is None or isinstance(magiccontent, str), 'require path'
     if magicvalid is None:
         magicvalid = iamraw.TEXTUAL  # pylint:disable=E1101
     headlines = serializeraw.load_headlines(headlines, pages=pages)

@@ -17,7 +17,6 @@ import typing
 import configo
 import iamraw
 import protocol
-import serializeraw
 import utila
 
 import decider_textflow.features
@@ -33,7 +32,6 @@ def work(
     magiccontent: str,
     pages: tuple = None,
 ) -> typing.Tuple[str, str]:
-    magiccontent = serializeraw.load_types(magiccontent, pages=pages)
     driver = decider_textflow.features.textdata(
         headlines,
         text,
