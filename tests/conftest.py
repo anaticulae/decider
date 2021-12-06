@@ -49,6 +49,7 @@ RESOURCES = [
     (power.BACHELOR067_PDF, '8:11,50:59'),
     (power.HOME050_PDF, '30:40'),
     (power.DISS157_PDF, '140:150'),
+    (power.DISS144_PDF, '10:25'),
 ]
 
 RESOURCES_NOTITLE = [
