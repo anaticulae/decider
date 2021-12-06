@@ -140,6 +140,8 @@ def check_7625_empty_start(linter: callable, driver):
     start, _ = startend
     failstart = start + FAILSTART_MAX
     for page, content in text:
+        if page_empty(content):
+            continue
         if isinstance(content[0], iamraw.Headline):
             # TODO: ADD CHECK TO CHECK HEADLINES
             continue
@@ -154,6 +156,13 @@ def check_7625_empty_start(linter: callable, driver):
                 continue
         location = iamraw.RangedLocation(page=page, line=0)
         linter(location=location)
+
+
+def page_empty(content) -> bool:
+    if all(item is None for item in content):
+        # not all content is replaced with magic data, therefore None
+        return True
+    return False
 
 
 SOLUTION_7626 = """\
