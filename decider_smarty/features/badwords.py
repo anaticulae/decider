@@ -25,9 +25,9 @@ def work(
     pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     # prepare findings
-    invalid_prefix = serializeraw.load_docref(invalid_prefix, pages=pages)
-    phrases = serializeraw.load_docref(phrases, pages=pages)
-    pleonasms = serializeraw.load_docref(pleonasms, pages=pages)
+    invalid_prefix = serializeraw.load_textadvices(invalid_prefix, pages=pages)
+    phrases = serializeraw.load_textadvices(phrases, pages=pages)
+    pleonasms = serializeraw.load_textadvices(pleonasms, pages=pages)
     # content
     headlines = serializeraw.load_headlines(headlines, pages=pages)
     text = serializeraw.load_text(text, headlines=headlines, pages=pages)
@@ -93,6 +93,8 @@ def check_8110_not_required_prefix(linter: callable, driver):
 
 def run_reference_results(linter, text, errors):
     for error in errors:
+        # TODO: REFACTOR LATER
+        error = error.docref
         page, sentenceid, marked = error.page, error.sentence, error.marked
         sentences = decider_smarty.utils.sentence_plain(
             text[page][sentenceid],
