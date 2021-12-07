@@ -2,6 +2,23 @@
 
 Every noteable change is logged here.
 
+## v2.19.0
+
+### Feature
+
+* lint text formula inclusion (7ce407395fdd)
+* make line endings optional (c1d4c58e48ee)
+
+### Fix
+
+* adjust to new interface (4f0e1b9cddac)
+* do lint page start on empty page (743569a13140)
+* ensure to load magic data correctly (20f55c7626da)
+* do not lint line ending inside a list (59c58d040bd0)
+* fix data type inside error message (b1346785e6b5)
+* detects more ebd/ibidem pattern (008d689ecbc6)
+* do not add placeholder headlines (ea5129d4a884)
+
 ## v2.18.0
 
 ### Feature
