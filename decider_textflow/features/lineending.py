@@ -107,7 +107,7 @@ Passen Sie gegebenenfalls den Text an.
 def check_7005_list_not_included(linter: callable, driver):
 
     def valid_inclusion(raw):
-        if raw[-1] == ':.?;':
+        if raw[-1] in ':.?;':
             # list is included due sentence ending before
             return True
         if words.feature.sentences.is_list_item(raw):
@@ -182,7 +182,7 @@ def check_7010_formula_not_included(linter: callable, driver):
     sentences = driver.sentences
     for current in sandwich(
             sentences,
-            ending_valid=lambda raw: raw[-1] == ':.?;',
+            ending_valid=lambda raw: raw[-1] in ':.?;',
             selector=words.feature.sentences.is_formula,
     ):
         location = iamraw.Location.from_sentence(

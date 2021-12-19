@@ -40,6 +40,20 @@ def test_list_not_included_bachelor67page10(testdir, monkeypatch):
     assert len(result) == 1, str(result)
 
 
+def test_list_not_included_master072page7(testdir, monkeypatch):
+    """Regression test that start was detected not correctly.
+
+    O’Reilly nennt in seinem Artikel sieben Hauptpunkte, die das Web 2.0
+    kennzeichnen10:
+    """
+    source = power.link(power.MASTER072_PDF)
+    # lint result
+    cmd = f'-i={source} --pages=7 --lineending'
+    tests.textflow_.run(cmd, monkeypatch=monkeypatch)
+    result = serializeraw.findings_from_path(testdir.tmpdir, msgid=7005)
+    assert not result
+
+
 def test_list_better_included_bachelor67page10(testdir, monkeypatch):
     source = power.link(power.BACHELOR067_PDF)
     # lint result
