@@ -90,6 +90,45 @@ def check_8110_not_required_prefix(linter: callable, driver):
         linter(location=location, phrase=error.raw, better=better)
 
 
+SOLUTION_W8115 = """\
+Ungenaue Formulierung erkannt
+
+Die Formulierung **{{phrase}}** ist sehr unkonret. Besser ist **{{better}}**. \
+{{hint}}
+"""
+
+
+def check_8115_required_improvement(linter: callable, driver):
+    for error in driver.improvement:
+        location = create_location(error)
+        better = f'({error.replacement})' if error.replacement else '???'
+        hint = f'({error.hint})' if error.hint else ''
+        linter(
+            location=location,
+            phrase=error.raw,
+            better=better,
+            hint=hint,
+        )
+
+
+SOLUTION_W8120 = """\
+Adjektiv verbessern
+
+Die Formulierung **{{phrase}}** ist sehr unkonret. Besser ist **{{better}}**.
+"""
+
+
+def check_8120_better_adjective(linter: callable, driver):
+    for error in driver.avoid:
+        location = create_location(error)
+        better = f'({error.replacement})' if error.replacement else '???'
+        linter(
+            location=location,
+            phrase=error.raw,
+            better=better,
+        )
+
+
 def create_location(error):
     location = iamraw.Location.from_sentence(
         page=error.docref.page,
