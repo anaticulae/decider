@@ -9,22 +9,35 @@
 
 import protocol
 import serializeraw
+import utila
 
 import decider_smarty.utils
 
 
 def create(
-    invalid_prefix: str,
-    phrases: str,
-    pleonasms: str,
-    headlines: str,
-    sentences: str,
+    invalid_prefix: str = None,
+    phrases: str = None,
+    pleonasms: str = None,
+    headlines: str = None,
+    sentences: str = None,
     pages: tuple = None,
 ):
     # prepare findings
-    invalid_prefix = serializeraw.load_textadvices(invalid_prefix, pages=pages)
-    phrases = serializeraw.load_textadvices(phrases, pages=pages)
-    pleonasms = serializeraw.load_textadvices(pleonasms, pages=pages)
+    if utila.exists(invalid_prefix):
+        invalid_prefix = serializeraw.load_textadvices(
+            invalid_prefix,
+            pages=pages,
+        )
+    else:
+        invalid_prefix = None
+    if utila.exists(phrases):
+        phrases = serializeraw.load_textadvices(phrases, pages=pages)
+    else:
+        phrases = None
+    if utila.exists(pleonasms):
+        pleonasms = serializeraw.load_textadvices(pleonasms, pages=pages)
+    else:
+        pleonasms = None
     # content
     headlines = serializeraw.load_headlines(headlines, pages=pages)
     sentences = serializeraw.load_text(
