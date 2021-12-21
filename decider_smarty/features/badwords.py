@@ -17,7 +17,7 @@ import decider_smarty.utils
 
 
 def work(
-    invalid_prefix: str,
+    badprefix: str,
     phrases: str,
     pleonasms: str,
     text: str,
@@ -25,7 +25,7 @@ def work(
     pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     driver = decider_smarty.driver.create(
-        invalid_prefix,
+        badprefix,
         phrases,
         pleonasms,
         headlines,
@@ -77,7 +77,7 @@ TODO
 
 
 def check_8110_not_required_prefix(linter: callable, driver):
-    run_reference_results(linter, driver.sentences, driver.invalid_prefix)
+    run_reference_results(linter, driver.sentences, driver.badprefix)
 
 
 def run_reference_results(linter, text, errors):

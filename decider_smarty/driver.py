@@ -15,7 +15,7 @@ import decider_smarty.utils
 
 
 def create(
-    invalid_prefix: str = None,
+    badprefix: str = None,
     phrases: str = None,
     pleonasms: str = None,
     headlines: str = None,
@@ -23,13 +23,10 @@ def create(
     pages: tuple = None,
 ):
     # prepare findings
-    if utila.exists(invalid_prefix):
-        invalid_prefix = serializeraw.load_textadvices(
-            invalid_prefix,
-            pages=pages,
-        )
+    if utila.exists(badprefix):
+        badprefix = serializeraw.load_textadvices(badprefix, pages=pages)
     else:
-        invalid_prefix = None
+        badprefix = None
     if utila.exists(phrases):
         phrases = serializeraw.load_textadvices(phrases, pages=pages)
     else:
@@ -49,7 +46,7 @@ def create(
     sentences = decider_smarty.utils.sentence_lookup(sentences)  # pylint:disable=R0204
     # driver
     driver = protocol.driver(
-        invalid_prefix=invalid_prefix,
+        badprefix=badprefix,
         phrases=phrases,
         pleonasms=pleonasms,
         sentences=sentences,
