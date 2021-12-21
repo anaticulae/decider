@@ -44,7 +44,6 @@ if __name__ == "__main__":
             'decider',
             'decider.features',
             'decider.links',
-            'decider.utils',
             'decider_footnote',
             'decider_footnote.features',
             'decider_footnote.rules',
