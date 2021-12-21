@@ -11,8 +11,8 @@ import typing
 
 import iamraw
 import protocol
-import serializeraw
 
+import decider_smarty.driver
 import decider_smarty.utils
 
 
@@ -24,30 +24,19 @@ def work(
     headlines: str,
     pages: tuple = None,
 ) -> typing.Tuple[str, str]:
-    # prepare findings
-    invalid_prefix = serializeraw.load_textadvices(invalid_prefix, pages=pages)
-    phrases = serializeraw.load_textadvices(phrases, pages=pages)
-    pleonasms = serializeraw.load_textadvices(pleonasms, pages=pages)
-    # content
-    headlines = serializeraw.load_headlines(headlines, pages=pages)
-    text = serializeraw.load_text(text, headlines=headlines, pages=pages)
-    # sentences
-    sentences = decider_smarty.utils.sentence_lookup(text)
-    # driver
-    driver = protocol.driver(
-        invalid_prefix=invalid_prefix,
-        phrases=phrases,
-        pleonasms=pleonasms,
-        sentences=sentences,
-        text=text,
+    driver = decider_smarty.driver.create(
+        invalid_prefix,
+        phrases,
+        pleonasms,
+        headlines,
+        text,
+        pages=pages,
     )
-    # create and run
-    linter = protocol.from_module(__name__)
-    linter.run(driver=driver)
-    # dump
-    result = linter.result(unique=True)
-    user, developer = protocol.dump_result(result)
-    return user, developer
+    result = protocol.run(
+        modulename=__name__,
+        driver=driver,
+    )
+    return result
 
 
 SOLUTION_W8100 = """\
