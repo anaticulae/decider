@@ -20,11 +20,11 @@ WORKPLAN = [
     utila.create_step(
         'badwords',
         inputs=[
-            utila.ResultFile('smarty', 'reduce_reduce'),
+            utila.ResultFile('smarty', 'avoid_avoid'),
+            utila.ResultFile('smarty', 'improvement_improvement'),
             utila.ResultFile('smarty', 'phrases_phrases'),
             utila.ResultFile('smarty', 'pleonasma_pleonasma'),
-            utila.ResultFile('words', 'sentences_sentences'),
-            utila.ResultFile('words', 'headlines_headlines'),
+            utila.ResultFile('smarty', 'reduce_reduce'),
         ],
         output=LINT_OUT,
     ),

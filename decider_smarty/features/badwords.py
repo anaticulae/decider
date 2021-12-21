@@ -17,19 +17,19 @@ import decider_smarty.utils
 
 
 def work(
-    badprefix: str,
+    avoid: str,
+    improvement: str,
     phrases: str,
-    pleonasms: str,
-    text: str,
-    headlines: str,
+    pleonasma: str,
+    reduce: str,
     pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     driver = decider_smarty.driver.create(
-        badprefix,
+        avoid,
+        improvement,
         phrases,
-        pleonasms,
-        headlines,
-        text,
+        pleonasma,
+        reduce,
         pages=pages,
     )
     result = protocol.run(
@@ -50,48 +50,49 @@ förmlichere Formulierung.
 
 
 def check_8100_non_formal_speach(linter: callable, driver):
-    run_reference_results(linter, driver.sentences, driver.phrases)
+    for error in driver.phrases:
+        location = create_location(error)
+        better = f'({error.replacement})' if error.replacement else ''
+        linter(location=location, phrase=error.raw, better=better)
 
 
 SOLUTION_W8105 = """\
 Pleonasma erkannt
 
 Vermeiden Sie **{{phrase}}** und reduzieren Sie diesen auf das \
-Wesentliche.
+Wesentliche {{better}}.
 
 {text/stilkunde/woerter/pleonasmen}
 """
 
 
 def check_8105_pleonasms_detected(linter: callable, driver):
-    run_reference_results(linter, driver.sentences, driver.pleonasms)
+    for error in driver.pleonasma:
+        location = create_location(error)
+        better = f'({error.replacement})' if error.replacement else ''
+        linter(location=location, phrase=error.raw, better=better)
 
 
 SOLUTION_W8110 = """\
 Unnötige Vorsilbe
 
-Reduzieren Sie **{{phrase}}** indem Sie die unnötige Vorsilbe entfernen.
+Reduzieren Sie **{{phrase}}** indem Sie die unnötige Vorsilbe {{better}} \
+entfernen.
 
 TODO
 """
 
 
 def check_8110_not_required_prefix(linter: callable, driver):
-    run_reference_results(linter, driver.sentences, driver.badprefix)
+    for error in driver.reduce:
+        location = create_location(error)
+        better = f'({error.replacement})' if error.replacement else ''
+        linter(location=location, phrase=error.raw, better=better)
 
 
-def run_reference_results(linter, text, errors):
-    for error in errors:
-        # TODO: REFACTOR LATER
-        error = error.docref
-        page, sentenceid, marked = error.page, error.sentence, error.marked
-        sentences = decider_smarty.utils.sentence_plain(
-            text[page][sentenceid],
-            marks=marked,
-        )
-        for single in sentences:
-            location = iamraw.Location.from_sentence(
-                page=page,
-                sentence=sentenceid,
-            )
-            linter(location=location, phrase=single)
+def create_location(error):
+    location = iamraw.Location.from_sentence(
+        page=error.docref.page,
+        sentence=error.docref.sentence,
+    )
+    return location

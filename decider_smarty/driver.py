@@ -11,44 +11,34 @@ import protocol
 import serializeraw
 import utila
 
-import decider_smarty.utils
-
 
 def create(
-    badprefix: str = None,
+    avoid: str = None,
+    improvement: str = None,
     phrases: str = None,
-    pleonasms: str = None,
-    headlines: str = None,
-    sentences: str = None,
+    pleonasma: str = None,
+    reduce: str = None,
     pages: tuple = None,
 ):
     # prepare findings
-    if utila.exists(badprefix):
-        badprefix = serializeraw.load_textadvices(badprefix, pages=pages)
-    else:
-        badprefix = None
-    if utila.exists(phrases):
-        phrases = serializeraw.load_textadvices(phrases, pages=pages)
-    else:
-        phrases = None
-    if utila.exists(pleonasms):
-        pleonasms = serializeraw.load_textadvices(pleonasms, pages=pages)
-    else:
-        pleonasms = None
-    # content
-    headlines = serializeraw.load_headlines(headlines, pages=pages)
-    sentences = serializeraw.load_text(
-        sentences,
-        headlines=headlines,
-        pages=pages,
-    )
-    # sentences
-    sentences = decider_smarty.utils.sentence_lookup(sentences)  # pylint:disable=R0204
+    avoid = load_textadvice(avoid, pages=pages)
+    improvement = load_textadvice(improvement, pages=pages)
+    phrases = load_textadvice(phrases, pages=pages)
+    pleonasma = load_textadvice(pleonasma, pages=pages)
+    reduce = load_textadvice(reduce, pages=pages)
     # driver
     driver = protocol.driver(
-        badprefix=badprefix,
+        avoid=avoid,
+        improvement=improvement,
         phrases=phrases,
-        pleonasms=pleonasms,
-        sentences=sentences,
+        pleonasma=pleonasma,
+        reduce=reduce,
     )
     return driver
+
+
+def load_textadvice(path: str, pages: tuple = None):
+    if not utila.exists(path):
+        return None
+    result = serializeraw.load_textadvices(path, pages=pages)
+    return result
