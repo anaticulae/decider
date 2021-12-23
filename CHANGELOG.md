@@ -2,6 +2,18 @@
 
 Every noteable change is logged here.
 
+## v2.20.0
+
+### Feature
+
+* add improvement with optional hint linter (877b2d824024)
+* use improved linter resource (77f66575ac22)
+* enable selective loading (62de3c3f3418)
+
+### Fix
+
+* detect line ending correctly (5b7f70f3b746)
+
 ## v2.19.0
 
 ### Feature
