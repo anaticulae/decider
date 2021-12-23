@@ -73,8 +73,10 @@ def test_textflow_character_space_before_square_bracket(testdir, monkeypatch):
     assert len(findings) == 2
 
 
+@pytest.mark.xfail(reason='layout parser?')
 @utilatest.longrun
 def test_textflow_character_space_after_square_bracket(testdir, monkeypatch):
+    """[ Hello24]."""
     source = power.link(power.BACHELOR090_PDF)
     pages = ':'
     findings = decider_textflow_character(
