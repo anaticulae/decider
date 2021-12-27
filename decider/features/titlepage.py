@@ -20,8 +20,6 @@ import protocol
 import serializeraw
 import utila
 
-TITLEPAGE_CHECKER_ID = 12
-
 
 def work(titlepage_path: str) -> typing.Tuple[str, str]:
     linter = protocol.from_module(__name__)
