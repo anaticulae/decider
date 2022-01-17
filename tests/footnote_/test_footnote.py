@@ -8,7 +8,6 @@
 # =============================================================================
 
 import iamraw
-import iamraw.path
 import power
 import protocol
 import pytest
