@@ -42,9 +42,8 @@ def test_cli_rules(testdir, monkeypatch):
 def test_cli_footnote_global(testdir, monkeypatch):
     cmd = f'-i {power.link(power.BACHELOR090_PDF)} -o {testdir.tmpdir} --global'
     tests.footnote_.run(cmd, monkeypatch=monkeypatch)
-    global_ = decider_footnote.path.global_(testdir.tmpdir)
-    result = serializeraw.load_findings(global_, 2015)
-    assert len(result) == 1
+    findings = serializeraw.findings_from_path(testdir.tmpdir, msgid=2015)
+    assert len(findings) == 1
 
 
 def test_cli_footnote_disabled_checker(testdir, monkeypatch):
