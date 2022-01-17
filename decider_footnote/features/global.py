@@ -88,6 +88,32 @@ def check_2015_endnotes_using(linter, footnotes):
     linter(location=protocol.OVERVIEW)
 
 
+SOLUTION_2020 = """\
+Fußnote Ziffer verwenden
+
+Mindestens {{count}} Fußnote verwenden keine einfache Ziffer 1, 2, 3. \
+Überdenken Sie den Stil ihrer Fußnoten.
+
+{text/fussnote.html#nummerierung}
+"""
+
+
+def check_2020_special_number(linter, footnotes):
+    numeric, special = utila.partition(  # pylint:disable=unused-variable
+        key=lambda x: x[1].raw_number is None or x[1].raw_number.isnumeric(),
+        items=footnotes,
+    )
+    if len(special) < 15:  # TODO: HOLY VALUE
+        return
+    rate = len(special) / len(footnotes)
+    if rate < 0.3:  # TODO: HOLY VALUE
+        return
+    linter(
+        count=len(special),
+        location=protocol.OVERVIEW,
+    )
+
+
 def group_raising(items: utila.Numbers):
     if not items:
         return []

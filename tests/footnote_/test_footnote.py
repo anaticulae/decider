@@ -136,3 +136,10 @@ def test_footnote_email_exception(testdir, monkeypatch):
 
     loaded = run_linter()
     assert not loaded
+
+
+def test_footnote_special_number(testdir, monkeypatch):
+    cmd = f'-i {power.link(power.DISS273_PDF)} -o {testdir.tmpdir} --global'
+    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
+    findings = serializeraw.findings_from_path(testdir.tmpdir, msgid=2020)
+    assert len(findings) == 1
