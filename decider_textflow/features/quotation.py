@@ -16,6 +16,9 @@ import serializeraw
 
 CITATION_LENGTH_MAX = configo.HV_INT_PLUS(default=50)
 
+# TODO: SENTENCE END
+# Ich kann mit Jugendlichen einen Spielplatz planen, aber nicht große europäische Politik machen.“.
+
 
 def work(text: str, pages: tuple) -> protocol.ResultType:
     quotations = serializeraw.load_quotations(
