@@ -257,6 +257,10 @@ def check_2019_duplicated_footnote(linter, driver):
 
 
 def ibidem(text: str) -> bool:
+    """\
+    >>> ibidem('vgl. ibid.')
+    True
+    """
     text = text.strip().lower()
     return text in IBIDEM
 
