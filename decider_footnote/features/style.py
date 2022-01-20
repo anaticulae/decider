@@ -223,5 +223,5 @@ def skip_method(msg: str = ''):
     caller = [item.function for item in inspect.getouterframes(frame)[0:5]]
     caller = [item for item in caller if 'check_' in item]
     caller = ' '.join(caller)
-    utila.error(msg)
-    utila.error(f'skip: {caller}')
+    utila.debug(msg)
+    utila.debug(f'skip: {caller}')

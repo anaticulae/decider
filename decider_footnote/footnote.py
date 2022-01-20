@@ -74,7 +74,7 @@ def most_common_font(items: iamraw.FootNotes) -> FootNoteStyle:
     content_fontid = []
     for item in items:
         if not item.style:
-            utila.error(f'no footnote style: {item}')
+            utila.debug(f'no footnote style: {item}')
             continue
         highnote, content = item.style
         if highnote:

@@ -171,7 +171,7 @@ def check_2016_footnote_separator_position(linter, driver):
         separator_y0 = separator.box.y0
         bounding = page.content[0].bounding
         if not bounding:
-            utila.error(f'missing bounding: {page.content[0]}')
+            utila.debug(f'missing bounding: {page.content[0]}')
             continue
         firstfootnote_y0 = page.content[0].bounding[1]
         # judge
