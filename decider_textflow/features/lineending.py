@@ -98,7 +98,7 @@ SOLUTION_7005 = """\
 Satzende vor Aufzählung fehlt
 
 Der Übergang von Text zu Aufzählung sollte durch einen **:** verbunden \
-werden. {{text}}**:**
+werden. **{{text}}:**
 
 Passen Sie gegebenenfalls den Text an.
 """
