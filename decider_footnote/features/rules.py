@@ -261,6 +261,7 @@ def ibidem(text: str) -> bool:
     >>> ibidem('vgl. ibid.')
     True
     """
+    # TODO: USE UTILA>SIMILAR TO INCREASE TOLERANCE?
     text = text.strip().lower()
     return text in IBIDEM
 
