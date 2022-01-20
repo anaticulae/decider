@@ -77,9 +77,10 @@ def most_common_font(items: iamraw.FootNotes) -> FootNoteStyle:
             utila.error(f'no footnote style: {item}')
             continue
         highnote, content = item.style
-        highnote_size.append(highnote.size)
-        highnote_rise.append(highnote.rise)
-        highnote_fontid.append(highnote.font)
+        if highnote:
+            highnote_size.append(highnote.size)
+            highnote_rise.append(highnote.rise)
+            highnote_fontid.append(highnote.font)
         content_size.extend(
             utila.flatten([[item.size] * (item.end - item.start)
                            for item in content.content]))

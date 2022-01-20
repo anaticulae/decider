@@ -91,9 +91,10 @@ def check_2003_invalid_highnote_rise(linter, driver):
     item = driver.item
     if not item.style:
         return
+    if not item.style[0]:
+        return
     current = item.style[0].rise
     expected = driver.fontconfig.highnote_rise
-
     if isinstance(expected, list):
         skip_method(f'ambiguous expected highnote rise: {expected}')
         return
@@ -118,9 +119,10 @@ def check_2004_invalid_hignote_size(linter, driver):
     item = driver.item
     if not item.style:
         return
+    if not item.style[0]:
+        return
     current = item.style[0].size
     expected = driver.fontconfig.highnote_size
-
     if isinstance(expected, list):
         skip_method(f'ambiguous expected highnote size: {expected}')
         return
@@ -144,6 +146,8 @@ def check_2005_invalid_highnote_fontfamily(linter, driver):
     """Ensure correct font family of highnote."""
     item = driver.item
     if not item.style:
+        return
+    if not item.style[0]:
         return
     current = item.style[0].font
     expected = driver.fontconfig.highnote_fontid
