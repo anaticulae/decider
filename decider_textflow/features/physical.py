@@ -58,7 +58,7 @@ Leerzeichen.
 {darstellung/schreibweise}
 """
 
-UNITS = r'%|‰|km/h|mmHg|mm|ms|m|cm|V|W|Hz|mW'
+UNITS = r'%|‰|km/h|mmHg|mm|ms|mg/km|m|cm|V|W|Hz|mW'
 MISSING_SPACE_BEFORE_UNIT = r'\W(?P<value>\d+((\.|\,)\d+){0,1})(?P<unit>' + UNITS + r')'
 
 
