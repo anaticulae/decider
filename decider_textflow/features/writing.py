@@ -66,6 +66,7 @@ Fehler in der Perspektive
 """
 
 
+@protocol.german
 def check_7600_text_perspective(linter: callable, driver):
     # TODO: REMOVE QUOTES
     for sentence in driver.sentences:
