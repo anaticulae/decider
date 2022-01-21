@@ -106,6 +106,29 @@ def test_writing_repeating_sentence_start(testdir, monkeypatch):
     assert len(findings) in (23, 24)  # NOT VALIDATED
 
 
+def test_sentence_start_repeat_inside_list_master063p24(testdir, monkeypatch):
+    """Do not detect repeating sentence start inside list.
+
+    banks, those risks are:
+        - Risks to price stability
+        - Risks to financial stability
+        - Risks to payment system stability
+    """
+    source = power.MASTER063_PDF
+    findings = decide_textflow(
+        source,
+        testdir,
+        monkeypatch,
+        pages=24,
+        msgids=7611,
+    )
+    # 'risks to
+    findings = [
+        item for item in findings if 'risks to' in item.solution.description
+    ]
+    assert not findings
+
+
 @utilatest.longrun
 def test_writing_repeating_sentence_pattern(testdir, monkeypatch):
     source = power.MASTER110_PDF
