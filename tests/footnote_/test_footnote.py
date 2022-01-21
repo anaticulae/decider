@@ -76,6 +76,7 @@ def test_footnotes_work_highnote_rise(monkeypatch):
     assert len(result) == 260  # TODO: VERIFY LATER
 
 
+@utilatest.longrun
 def test_footnotes_work_highnote_size(monkeypatch):
     # TODO: LOOK FOR AN EXAMPLE WITH WRONG HIGHNOTE SIZE
     footerheader = iamraw.path.headerfooters(power.link(power.MASTER072_PDF))
@@ -96,6 +97,7 @@ def test_footnotes_work_highnote_size(monkeypatch):
     assert not result
 
 
+@utilatest.longrun
 def test_footnotes_work_highnote_font_family():
     footerheader = iamraw.path.headerfooters(power.link(power.MASTER072_PDF))
     fontheader = iamraw.path.fontheader(power.link(power.MASTER072_PDF))

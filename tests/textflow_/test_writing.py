@@ -37,6 +37,7 @@ def test_dtf_bachelor76_perspective(testdir, monkeypatch):
 
 
 @pytest.mark.xfail(reason='man in quotation')
+@utilatest.longrun
 def test_dtf_master72_writing_quotation(testdir, monkeypatch):
     """Do not detect errors in perspective inside quotations."""
     source = power.MASTER072_PDF
@@ -60,6 +61,7 @@ def test_dtf_master72_merge_token_correctly(testdir, monkeypatch):
     assert EXPECTED in description
 
 
+@utilatest.longrun
 def test_dtf_master72_text_too_long(testdir, monkeypatch):
     """Detect sentence which are too long."""
     source = power.MASTER072_PDF
@@ -80,6 +82,7 @@ def test_dtf_master72_text_too_long(testdir, monkeypatch):
     assert len(findings) == 20
 
 
+@utilatest.longrun
 def test_writing_text_statistics(testdir, monkeypatch):
     source = power.MASTER110_PDF
     findings = decide_textflow(
@@ -91,6 +94,7 @@ def test_writing_text_statistics(testdir, monkeypatch):
     assert len(findings) == 1
 
 
+@utilatest.longrun
 def test_writing_repeating_sentence_start(testdir, monkeypatch):
     source = power.MASTER110_PDF
     findings = decide_textflow(
@@ -102,6 +106,7 @@ def test_writing_repeating_sentence_start(testdir, monkeypatch):
     assert len(findings) in (23, 24)  # NOT VALIDATED
 
 
+@utilatest.longrun
 def test_writing_repeating_sentence_pattern(testdir, monkeypatch):
     source = power.MASTER110_PDF
     with monkeypatch.context() as context:

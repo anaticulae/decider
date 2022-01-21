@@ -10,12 +10,14 @@
 import power
 import pytest
 import serializeraw
+import utilatest
 
 import decider_textflow.path
 import tests.textflow_
 
 
 @pytest.mark.xfail(reason='???')
+@utilatest.longrun
 def test_lineendings_master83page6_lineending(testdir, monkeypatch):
     source = power.link(power.MASTER083_PDF)
     tests.textflow_.run_textflow(
