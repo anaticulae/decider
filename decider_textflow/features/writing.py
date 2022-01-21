@@ -229,7 +229,10 @@ def check_7611_sentence_start(linter: callable, driver):
     sentences = driver.sentences
     if not sentences:
         return
-    sentences = decider_textflow.writing.utils.determine_sentences(sentences)
+    sentences = decider_textflow.writing.utils.determine_sentences(
+        sentences,
+        special_skip=True,
+    )
     single = utila.Single()
     for window in range(5, 0, -1):
         equals = decider_textflow.writing.perspective.repeating_sentence_start(
