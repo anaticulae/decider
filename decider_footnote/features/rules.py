@@ -77,7 +77,6 @@ def check_2001_no_uppercase_at_start(linter, driver):
     for footnote in driver.footnotes:
         text = footnote.text.strip()
         firstchar = text[0]
-
         if firstchar.isupper():
             continue
         if firstchar.isnumeric():
@@ -100,7 +99,7 @@ Die Fußnote {{number}} endet nicht mit einem Punkt
 
 Fügen Sie einen Punkt am Ende der Fußnote {{number}} hinzu.
 
-{text/abkuerzung#abkurzung}
+{text/fussnote#struktur}
 """
 
 
@@ -109,7 +108,6 @@ def check_2002_no_dot_at_end(linter, driver):
     for footnote in driver.footnotes:
         text = footnote.text.strip()
         lastchar = text[-1]
-
         if lastchar == '.':
             continue
         if lastchar in QUOTATION_SIGNS and text[-2] == '.':
