@@ -2,6 +2,29 @@
 
 Every noteable change is logged here.
 
+## v2.21.0
+
+### Feature
+
+* add parameter to skip special sentences (da7719571a12)
+* extend units list (0d96dcfcaa93)
+* add linting to detect special footnote number (fc5319c096a0)
+
+### Fix
+
+* inform developer about empty reference (9a27fd3c3158)
+* add text to increase ticket clarify (3998d53dec0c)
+* do not judge perspective in non german documents (e5883b0f1111)
+* do not judge sentence start inside list items (459f23e80da7)
+* adjust doc link (2c2a043da8b9)
+* reduce logging verbosity (6ee8482055bc)
+* skip empty footnotes without style (9c2075db375e)
+* ease reading due highlighting (9de88443eeb6)
+
+### Documentation
+
+* Happy New Year! (cee9143093e2)
+
 ## v2.20.0
 
 ### Feature
