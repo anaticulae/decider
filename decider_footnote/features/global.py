@@ -99,15 +99,20 @@ def check_2020_special_number(linter, footnotes):
         key=lambda x: x[1].raw_number is None or x[1].raw_number.isnumeric(),
         items=footnotes,
     )
-    if len(special) < 15:  # TODO: HOLY VALUE
+    if len(special) <= FOOTNOTE_SPECIAL_NUMBER_MAX:
         return
     rate = len(special) / len(footnotes)
-    if rate < 0.3:  # TODO: HOLY VALUE
+    if rate < FOOTNOTE_SPECIAL_RATE_MAX:
         return
     linter(
         count=len(special),
         location=protocol.OVERVIEW,
     )
+
+
+FOOTNOTE_SPECIAL_NUMBER_MAX = configo.HV_INT_PLUS(default=15)
+
+FOOTNOTE_SPECIAL_RATE_MAX = configo.HV_PERCENT_PLUS(default=30)
 
 
 def starting(items: list) -> bool:
