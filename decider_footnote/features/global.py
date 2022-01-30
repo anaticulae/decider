@@ -75,16 +75,12 @@ def check_2015_endnotes_using(linter, footnotes):
         return
     if utila.isascending(numbers):
         return
-
-    grouped = group_raising(numbers)
-
+    grouped = utila.groupby_ascending(numbers)
     # TODO : USE CHAINSAW DETECTOR HERE
     started = [item for item in grouped if starting(item)]
     rate = len(started) / len(grouped)
-
     if rate <= STARTING_RATE_MIN:
         return
-
     linter(location=protocol.OVERVIEW)
 
 
@@ -112,19 +108,6 @@ def check_2020_special_number(linter, footnotes):
         count=len(special),
         location=protocol.OVERVIEW,
     )
-
-
-def group_raising(items: utila.Numbers):
-    if not items:
-        return []
-    result = [[items[0]]]
-    for item in items[1:]:
-        if item <= result[-1][-1]:
-            # new group
-            result.append([item])
-        else:
-            result[-1].append(item)
-    return result
 
 
 def starting(items):
