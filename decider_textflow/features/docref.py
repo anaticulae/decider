@@ -69,7 +69,11 @@ def check_7200_figure_reference_exists(linter: callable, driver):
             continue
         location = iamraw.RangedLocation(page=reference.page)
         raw = ', '.join(selected)
-        linter(location=location, reference=raw)
+        assert raw, reference
+        linter(
+            location=location,
+            reference=raw,
+        )
 
 
 SOLUTION_7202 = """\
