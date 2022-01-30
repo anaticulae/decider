@@ -173,7 +173,7 @@ SOLUTION_7010 = """\
 Satzende vor Gleichung fehlt
 
 Der Übergang von Text zur Gleichung sollte durch einen **:** verbunden. \
-Passen Sie gegebenenfalls den Text an.
+Passen Sie gegebenenfalls den Text an. **{{text}}:**
 """
 
 
