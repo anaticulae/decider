@@ -110,8 +110,15 @@ def check_2020_special_number(linter, footnotes):
     )
 
 
-def starting(items):
-    """Footnotes starts with `1, 2, 3, 4, 5`."""
+def starting(items: list) -> bool:
+    """Footnotes starts with `1, 2, 3, 4, 5`.
+
+    >>> starting((1, 2, 3, 4, 5, 6, 7, 8, 10, 11))
+    True
+    >>> starting((3, 4, 5))
+    False
+    """
+    # TODO: USE utila.isascending?
     result = [
         current == expected for current, expected in zip(items, range(1, 5))
     ]
