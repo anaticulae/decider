@@ -62,4 +62,7 @@ def check_2110_repeating_header_content(linter, headers):
         percent = len(value) / len(headers) * 100
         if percent <= REPEATING_ITEM_RATIO_MAX:
             continue
-        linter(content=key.strip())
+        linter(
+            content=key.strip(),
+            location=protocol.OVERVIEW,
+        )
