@@ -36,7 +36,7 @@ def work(headerfooter: str, pages: tuple = None) -> typing.Tuple[str, str]:
 
 
 SOLUTION_I2110 = """\
-Kopfzeile: wiederholdender Inhalt
+Kopfzeile: Redundanter Inhalt
 
 Überprüfen Sie ob redundanter Inhalt:
 
