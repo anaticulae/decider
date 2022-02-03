@@ -197,7 +197,8 @@ def check_2017_ambiguous_reference(linter, driver):
     for page in driver.footnotes_pages:
         content = page.content
         first = content[0].text.lower()
-        if not 'ebd.' in first:
+        if not ibidem(first):
+            # ibidem is not the first footnote
             continue
         linter(
             number=content[0].number,
@@ -258,20 +259,32 @@ def ibidem(text: str) -> bool:
     """\
     >>> ibidem('vgl. ibid.')
     True
+    >>> ibidem('vgl. ebd., s. 221.')
+    True
+    >>> ibidem('gib.')
+    False
     """
     # TODO: USE UTILA>SIMILAR TO INCREASE TOLERANCE?
     text = text.strip().lower()
-    return text in IBIDEM
+    if IBIDEM.search(text):
+        return True
+    return False
 
 
-IBIDEM = utila.splitlines("""
-ebd.
-ebendort
-ib.
-ibid.
-ibidem
-vgl. ebd.
-vgl. ib.
-vgl. ibid.
-vgl. ibidem
+IBIDEM = utila.compiles(r"""
+(
+    ^|
+    \W
+)
+(
+    ebd\.|
+    ebendort|
+    ib\.|
+    ibid\.|
+    ibidem|
+    vgl\.[ ]{0,3}ebd\.|
+    vgl\.[ ]{0,3}ib\.|
+    vgl\.[ ]{0,3}ibid\.|
+    vgl\.[ ]{0,3}ibidem
+)
 """)
