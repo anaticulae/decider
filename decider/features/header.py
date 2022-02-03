@@ -56,8 +56,10 @@ def check_2110_repeating_header_content(linter, headers):
         if not item:
             # no header extracted
             continue
+        # TODO: ENSURE THAT ITEM.PAGE IS NOT NONE
+        pagenumber = item.page.value if item.page is not None else -1
         for raw in item.undefined:
-            collected[raw.text].add(item.page.value)
+            collected[raw.text].add(pagenumber)
     for key, value in collected.items():
         percent = len(value) / len(headers) * 100
         if percent <= REPEATING_ITEM_RATIO_MAX:
