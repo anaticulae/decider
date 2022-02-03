@@ -29,9 +29,15 @@ import typing
 import iamraw
 import protocol
 import serializeraw
+import utila
 
 
 def work(abbreviations: str, text: str) -> typing.Tuple[str, str]:
+    if not utila.exists(abbreviations):
+        utila.error(f'no abbreviation table: {abbreviations}, '
+                    'skip abbreviation_text')
+        return protocol.RESULT_EMPTY
+
     abbreviations = serializeraw.load_abbreviation_table(abbreviations)
     text = serializeraw.load_text_abbreviations(text)
 
