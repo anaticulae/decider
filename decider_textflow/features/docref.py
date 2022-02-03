@@ -69,7 +69,9 @@ def check_7200_figure_reference_exists(linter: callable, driver):
             continue
         location = iamraw.RangedLocation(page=reference.page)
         raw = ', '.join(selected)
-        assert raw, reference
+        if not raw:
+            utila.error(f'7200: could not find figure reference: {reference}')
+            continue
         linter(
             location=location,
             reference=raw,
