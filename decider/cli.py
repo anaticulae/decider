@@ -70,10 +70,11 @@ def main():
         root=decider.ROOT,
         featurepackage='decider.features',
         config=utila.FeaturePackConfig(
+            cli_hook=hook,
             description=DESCRIPTION,
             multiprocessed=True,
             name=decider.PROCESS,
+            pages=True,
             version=decider.__version__,
-            cli_hook=hook,
         ),
     )

@@ -50,10 +50,11 @@ def main():
         root=root,
         featurepackage=features,
         config=utila.FeaturePackConfig(
-            description=DESCRIPTION,
             cli_hook=hook,
+            description=DESCRIPTION,
             multiprocessed=True,
             name=decider_footnote.PROCESS,
+            pages=True,
             version=decider_footnote.__version__,
         ),
     )
