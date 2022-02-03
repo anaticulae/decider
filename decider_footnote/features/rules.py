@@ -15,6 +15,7 @@ Footnotes
 import math
 
 import configo
+import german
 import iamraw
 import protocol
 import serializeraw
@@ -120,6 +121,31 @@ def check_2002_no_dot_at_end(linter, driver):
             number=footnote.number,
             location=iamraw.Location.from_page(footnote.page),
         )
+
+
+SOLUTION_2100 = """\
+Die Fußnote {{number}} enthält unvollständige Seitenangabe
+
+Fußnote: **{{text}}** Seitenzahl fehlerhaft.
+Seitenangabe: **{{pageref}}**
+"""
+
+
+def check_2100_incomplete_pagenumber(linter, driver):
+    pagenumbers = german.TextMachine()
+    for footnote in driver.footnotes:
+        detected = pagenumbers.check_pagenumber_complete(text=footnote.text)
+        if not detected:
+            continue
+        for error in detected:
+            error_location = error.location
+            error_location.page = footnote.page
+            linter(
+                number=footnote.number,
+                text=footnote.text,
+                pageref=error.raw,
+                location=error_location,
+            )
 
 
 SOLUTION_2012 = """\
