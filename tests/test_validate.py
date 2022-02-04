@@ -27,6 +27,10 @@ ARCHIVE = utila.join(decider.ROOT, 'tests/expected', assert_exists=True)
 
 
 @pytest.mark.parametrize('source', [
+    pytest.param(power.BACHELOR063_PDF, id='bachelor063'),
+    pytest.param(power.BACHELOR076_PDF, id='bachelor076'),
+    pytest.param(power.BACHELOR090_PDF, id='bachelor090'),
+    pytest.param(power.MASTER072_PDF, id='master072'),
     pytest.param(power.MASTER075_PDF, id='master075'),
 ])
 @utilatest.nightly

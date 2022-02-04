@@ -1,0 +1,104 @@
+02001 00p16 Fußnote 45 beginnt nicht mit einem Großbuchstaben
+02013 00p-1 Empfehlung: Ende der Fußnote
+02100 p17~c25_29 Die Fußnote 49 enthält unvollständige Seitenangabe
+02100 p19~c12_16 Die Fußnote 54 enthält unvollständige Seitenangabe
+02100 p39~c10_14 Die Fußnote 130 enthält unvollständige Seitenangabe
+02100 p4~c7_11 Die Fußnote 1 enthält unvollständige Seitenangabe
+02100 p58~c13_17 Die Fußnote 198 enthält unvollständige Seitenangabe
+02100 p60~c13_17 Die Fußnote 207 enthält unvollständige Seitenangabe
+04000 b(106.25;93.74;529.35;389.23)p9 Auflösung zu niedrig
+04000 b(115.8;322.53;479.37;422.23)p13 Auflösung zu niedrig
+04000 b(130.05;70.85;465.25;416.0)p15 Auflösung zu niedrig
+04000 b(131.15;405.37;463.55;691.86)p56 Auflösung zu niedrig
+04000 b(70.85;124.48;500.85;426.73)p74 Auflösung zu niedrig
+04000 b(70.85;405.32;524.45;622.97)p54 Auflösung zu niedrig
+04000 b(70.85;405.32;524.45;648.17)p43 Auflösung zu niedrig
+04000 b(70.85;449.05;524.45;586.95)p34 Auflösung zu niedrig
+04000 b(70.85;70.85;524.45;169.55)p0 Auflösung zu niedrig
+04000 b(70.9;446.77;518.5;686.0)p63 Auflösung zu niedrig
+04000 b(91.08;70.85;504.2;319.25)p38 Auflösung zu niedrig
+04000 b(96.65;203.09;498.2;428.08)p41 Auflösung zu niedrig
+04031 b(70.85;124.48;500.85;426.73)p74 Abbildungen nicht einheitlich ausgerichtet
+05110 000p0 Abkürzung wurde nicht im Text verwerdet
+05110 000p0 Abkürzung wurde nicht im Text verwerdet
+05110 000p0 Abkürzung wurde nicht im Text verwerdet
+05110 000p0 Abkürzung wurde nicht im Text verwerdet
+05110 000p0 Abkürzung wurde nicht im Text verwerdet
+05110 000p0 Abkürzung wurde nicht im Text verwerdet
+05110 000p0 Abkürzung wurde nicht im Text verwerdet
+05110 000p0 Abkürzung wurde nicht im Text verwerdet
+05110 000p0 Abkürzung wurde nicht im Text verwerdet
+05110 000p0 Abkürzung wurde nicht im Text verwerdet
+05110 000p0 Abkürzung wurde nicht im Text verwerdet
+05110 000p0 Abkürzung wurde nicht im Text verwerdet
+05110 000p0 Abkürzung wurde nicht im Text verwerdet
+05110 000p0 Abkürzung wurde nicht im Text verwerdet
+05110 000p0 Abkürzung wurde nicht im Text verwerdet
+05110 000p0 Abkürzung wurde nicht im Text verwerdet
+07000 b(503.92999999999995;497.66;544.36;613.25)p58 Zu viele aufeinander folgende Trennungen
+07000 b(504.02;316.08;547.52;390.24)p58 Zu viele aufeinander folgende Trennungen
+07000 b(504.04999999999995;519.5;544.54;614.33)p50 Zu viele aufeinander folgende Trennungen
+07000 b(504.04999999999995;72.45;544.32;167.25)p63 Zu viele aufeinander folgende Trennungen
+07000 b(504.14;595.37;544.32;669.53)p49 Zu viele aufeinander folgende Trennungen
+07000 b(504.17999999999995;121.77;544.38;216.57)p62 Zu viele aufeinander folgende Trennungen
+07000 b(504.17999999999995;183.93;544.47;299.4)p31 Zu viele aufeinander folgende Trennungen
+07000 b(504.19000000000005;483.86;544.45;558.02)p52 Zu viele aufeinander folgende Trennungen
+07000 b(504.21000000000004;419.66;544.44;493.7)p51 Zu viele aufeinander folgende Trennungen
+07000 b(504.22;316.2;544.4;390.24)p63 Zu viele aufeinander folgende Trennungen
+07000 b(504.34000000000003;295.44;544.49;369.48)p48 Zu viele aufeinander folgende Trennungen
+07110 s6p37 Zitat zu lang
+07600 p19~l2 Fehler in der Perspektive
+07600 p26~l11 Fehler in der Perspektive
+07600 p36~l0 Fehler in der Perspektive
+07600 p73~l0 Fehler in der Perspektive
+07600 p9~l6 Fehler in der Perspektive
+07605 p17~l4 Satz zu lang
+07610 Nonep22 Satzmuster wiederholt sich
+07616 00p-1 Writing statistics
+07620 p1~l0 Hurenkind: Einsame Zeile am Seitenanfang
+07620 p3~l0 Hurenkind: Einsame Zeile am Seitenanfang
+07620 p57~l0 Hurenkind: Einsame Zeile am Seitenanfang
+07620 p59~l0 Hurenkind: Einsame Zeile am Seitenanfang
+07620 p61~l0 Hurenkind: Einsame Zeile am Seitenanfang
+07625 p0~l0 Seitenanfang: Seite beginnt nicht mit Text
+07625 p15~l0 Seitenanfang: Seite beginnt nicht mit Text
+07625 p17~l0 Seitenanfang: Seite beginnt nicht mit Text
+07625 p28~l0 Seitenanfang: Seite beginnt nicht mit Text
+07625 p38~l0 Seitenanfang: Seite beginnt nicht mit Text
+07625 p9~l0 Seitenanfang: Seite beginnt nicht mit Text
+07650 p68~l15~c42_44 Unzuläßiges Leerzeichen vor Komma
+07654 p67~l12~c10_12 Leerzeichen vor Semikolon
+07654 p67~l21~c10_12 Leerzeichen vor Semikolon
+07654 p67~l21~c23_25 Leerzeichen vor Semikolon
+07654 p67~l24~c48_50 Leerzeichen vor Semikolon
+07654 p69~l10~c9_11 Leerzeichen vor Semikolon
+07654 p71~l20_21~c34_36 Leerzeichen vor Semikolon
+07661 p25~l12~c32_35 Schrägstrich: Überflüssiges Leerzeichen
+07661 p71~l14~c4_6 Schrägstrich: Überflüssiges Leerzeichen
+08100 0s7p4 Umgangssprache erkannt
+08100 0sp23 Umgangssprache erkannt
+08100 0sp27 Umgangssprache erkannt
+08100 s10p58 Umgangssprache erkannt
+08100 s11p19 Umgangssprache erkannt
+08100 s12p55 Umgangssprache erkannt
+08100 s16p64 Umgangssprache erkannt
+08100 s1p59 Umgangssprache erkannt
+08100 s1p61 Umgangssprache erkannt
+08100 s3p56 Umgangssprache erkannt
+08100 s6p40 Umgangssprache erkannt
+08100 s7p56 Umgangssprache erkannt
+08100 s7p59 Umgangssprache erkannt
+08105 0sp52 Pleonasma erkannt
+08110 s15p31 Unnötige Vorsilbe
+08110 s5p62 Unnötige Vorsilbe
+08115 0s4p6 Ungenaue Formulierung erkannt
+08115 0sp28 Ungenaue Formulierung erkannt
+08115 s3p64 Ungenaue Formulierung erkannt
+08115 s4p61 Ungenaue Formulierung erkannt
+08115 s6p29 Ungenaue Formulierung erkannt
+08115 s8p22 Ungenaue Formulierung erkannt
+08120 s11p47 Adjektiv verbessern
+10500 00p67 Aufrufdatum fehlt
+10500 00p69 Aufrufdatum fehlt
+10500 00p69 Aufrufdatum fehlt
+10500 00p70 Aufrufdatum fehlt

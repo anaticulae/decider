@@ -1,0 +1,134 @@
+01221 000p0 Titelseite enthält keine Matrikelnummer
+02003 000p3 Fußnote 1 falsch formatiert
+02003 00p14 Fußnote 34 falsch formatiert
+02005 000p3 Fußnote 1 falsch formatiert
+02005 00p14 Fußnote 34 falsch formatiert
+02012 00p-1 Empfehlung: Anfang der Fußnote
+02013 00p-1 Empfehlung: Ende der Fußnote
+07600 p13~l1 Fehler in der Perspektive
+07600 p14~l5 Fehler in der Perspektive
+07600 p15~l3 Fehler in der Perspektive
+07600 p16~l0 Fehler in der Perspektive
+07600 p21~l5 Fehler in der Perspektive
+07600 p23~l15 Fehler in der Perspektive
+07600 p23~l16 Fehler in der Perspektive
+07600 p24~l0 Fehler in der Perspektive
+07600 p26~l14 Fehler in der Perspektive
+07600 p31~l7 Fehler in der Perspektive
+07600 p55~l14 Fehler in der Perspektive
+07600 p58~l13 Fehler in der Perspektive
+07600 p65~l42 Fehler in der Perspektive
+07600 p69~l28 Fehler in der Perspektive
+07600 p71~l0 Fehler in der Perspektive
+07610 Nonep67 Satzmuster wiederholt sich
+07610 Nonep68 Satzmuster wiederholt sich
+07616 00p-1 Writing statistics
+07630 p0_0~l6_7 Paragraph zu kurz
+07630 p10_10~l5_6 Paragraph zu kurz
+07630 p12_12~l22_24 Paragraph zu kurz
+07630 p15_15~l4_6 Paragraph zu kurz
+07630 p16_17~l26_0 Paragraph zu kurz
+07630 p24_24~l29_30 Paragraph zu kurz
+07630 p25_25~l16_17 Paragraph zu kurz
+07630 p39_39~l9_10 Paragraph zu kurz
+07630 p54_54~l24_25 Paragraph zu kurz
+07630 p5_5~l13_15 Paragraph zu kurz
+07630 p65_65~l11_12 Paragraph zu kurz
+07630 p65_65~l23_26 Paragraph zu kurz
+07630 p65_65~l29_30 Paragraph zu kurz
+07630 p65_65~l31_33 Paragraph zu kurz
+07630 p65_65~l6_7 Paragraph zu kurz
+07630 p65_65~l8_10 Paragraph zu kurz
+07630 p66_66~l21_23 Paragraph zu kurz
+07630 p66_66~l28_30 Paragraph zu kurz
+07630 p66_66~l32_34 Paragraph zu kurz
+07630 p67_67~l0_2 Paragraph zu kurz
+07630 p67_67~l10_12 Paragraph zu kurz
+07630 p67_67~l13_14 Paragraph zu kurz
+07630 p67_67~l22_25 Paragraph zu kurz
+07630 p67_67~l3_4 Paragraph zu kurz
+07630 p67_67~l8_9 Paragraph zu kurz
+07630 p68_68~l0_2 Paragraph zu kurz
+07630 p68_68~l13_15 Paragraph zu kurz
+07630 p68_68~l16_18 Paragraph zu kurz
+07630 p68_68~l20_22 Paragraph zu kurz
+07630 p68_68~l24_26 Paragraph zu kurz
+07630 p68_68~l28_30 Paragraph zu kurz
+07630 p68_68~l32_33 Paragraph zu kurz
+07630 p68_68~l7_10 Paragraph zu kurz
+07630 p69_69~l17_18 Paragraph zu kurz
+07630 p69_69~l19_21 Paragraph zu kurz
+07630 p69_69~l22_24 Paragraph zu kurz
+07630 p69_69~l26_28 Paragraph zu kurz
+07630 p69_69~l29_30 Paragraph zu kurz
+07630 p69_69~l32_34 Paragraph zu kurz
+07630 p69_69~l4_6 Paragraph zu kurz
+07630 p69_69~l7_9 Paragraph zu kurz
+07630 p6_6~l12_14 Paragraph zu kurz
+07630 p70_70~l19_21 Paragraph zu kurz
+07630 p70_70~l23_24 Paragraph zu kurz
+07630 p70_70~l4_5 Paragraph zu kurz
+07630 p71_71~l1_3 Paragraph zu kurz
+07630 p7_7~l0_1 Paragraph zu kurz
+07630 p9_9~l9_11 Paragraph zu kurz
+07661 p65~l11~c16_19 Schrägstrich: Überflüssiges Leerzeichen
+07661 p65~l11~c35_38 Schrägstrich: Überflüssiges Leerzeichen
+07661 p65~l14~c20_23 Schrägstrich: Überflüssiges Leerzeichen
+07661 p65~l18~c15_18 Schrägstrich: Überflüssiges Leerzeichen
+07661 p65~l18~c39_42 Schrägstrich: Überflüssiges Leerzeichen
+07661 p65~l20~c41_44 Schrägstrich: Überflüssiges Leerzeichen
+07661 p65~l34~c13_16 Schrägstrich: Überflüssiges Leerzeichen
+07661 p67~l10~c12_15 Schrägstrich: Überflüssiges Leerzeichen
+07661 p67~l15~c14_17 Schrägstrich: Überflüssiges Leerzeichen
+07661 p67~l22_23~c13_16 Schrägstrich: Überflüssiges Leerzeichen
+07661 p67~l26~c29_32 Schrägstrich: Überflüssiges Leerzeichen
+07661 p67~l26~c46_49 Schrägstrich: Überflüssiges Leerzeichen
+07661 p68~l10~c14_17 Schrägstrich: Überflüssiges Leerzeichen
+07661 p68~l10~c35_38 Schrägstrich: Überflüssiges Leerzeichen
+07661 p68~l13~c16_19 Schrägstrich: Überflüssiges Leerzeichen
+07661 p68~l13~c38_41 Schrägstrich: Überflüssiges Leerzeichen
+07661 p68~l16~c16_19 Schrägstrich: Überflüssiges Leerzeichen
+07661 p68~l3~c21_24 Schrägstrich: Überflüssiges Leerzeichen
+07661 p69~l0~c17_20 Schrägstrich: Überflüssiges Leerzeichen
+07661 p69~l20~c26_29 Schrägstrich: Überflüssiges Leerzeichen
+07661 p69~l35~c21_23 Schrägstrich: Überflüssiges Leerzeichen
+07661 p69~l9~c13_16 Schrägstrich: Überflüssiges Leerzeichen
+07661 p70~l15~c12_15 Schrägstrich: Überflüssiges Leerzeichen
+07661 p70~l21~c18_21 Schrägstrich: Überflüssiges Leerzeichen
+07661 p70~l21~c41_44 Schrägstrich: Überflüssiges Leerzeichen
+07661 p70~l25~c20_23 Schrägstrich: Überflüssiges Leerzeichen
+07661 p70~l25~c45_48 Schrägstrich: Überflüssiges Leerzeichen
+07661 p70~l8_9~c17_20 Schrägstrich: Überflüssiges Leerzeichen
+07661 p70~l9~c53_56 Schrägstrich: Überflüssiges Leerzeichen
+07670 p3~l5 Fehlendes Leerzeichen
+07670 p3~l5 Fehlendes Leerzeichen
+07670 p49~l3 Fehlendes Leerzeichen
+07670 p49~l3 Fehlendes Leerzeichen
+07670 p56~l32 Fehlendes Leerzeichen
+07670 p57~l10 Fehlendes Leerzeichen
+07670 p57~l12 Fehlendes Leerzeichen
+07670 p57~l14 Fehlendes Leerzeichen
+07670 p58~l16 Fehlendes Leerzeichen
+07670 p58~l18 Fehlendes Leerzeichen
+08100 0sp13 Umgangssprache erkannt
+08100 0sp30 Umgangssprache erkannt
+08100 s10p61 Umgangssprache erkannt
+08100 s11p41 Umgangssprache erkannt
+08100 s12p7 Umgangssprache erkannt
+08100 s13p12 Umgangssprache erkannt
+08100 s1p29 Umgangssprache erkannt
+08100 s6p51 Umgangssprache erkannt
+08110 s5p49 Unnötige Vorsilbe
+08115 0s3p4 Ungenaue Formulierung erkannt
+08115 0s3p5 Ungenaue Formulierung erkannt
+08115 0s4p9 Ungenaue Formulierung erkannt
+08115 0sp34 Ungenaue Formulierung erkannt
+08115 0sp45 Ungenaue Formulierung erkannt
+08115 s11p22 Ungenaue Formulierung erkannt
+08115 s11p30 Ungenaue Formulierung erkannt
+08115 s6p64 Ungenaue Formulierung erkannt
+10500 00p65 Aufrufdatum fehlt
+10500 00p66 Aufrufdatum fehlt
+10500 00p69 Aufrufdatum fehlt
+10500 00p70 Aufrufdatum fehlt
+10500 00p70 Aufrufdatum fehlt

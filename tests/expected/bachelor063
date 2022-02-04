@@ -1,0 +1,147 @@
+02110 00p-1 Kopfzeile: Redundanter Inhalt
+02110 00p-1 Kopfzeile: Redundanter Inhalt
+04000 b(100.8;363.0;546.72;496.8)p21 Auflösung zu niedrig
+04000 b(100.8;624.48;386.76;742.2)p20 Auflösung zu niedrig
+04000 b(100.8;89.16;511.2;289.2)p22 Auflösung zu niedrig
+04000 b(86.64;122.16;503.64;763.68)p56 Auflösung zu niedrig
+04000 b(86.64;126.12;540.12;777.36)p50 Auflösung zu niedrig
+04000 b(86.64;139.92;503.64;778.44)p55 Auflösung zu niedrig
+04000 b(86.64;142.68;502.08;777.36)p57 Auflösung zu niedrig
+04000 b(86.64;225.0;540.36;600.0)p37 Auflösung zu niedrig
+04000 b(86.64;260.4;540.24;590.52)p30 Auflösung zu niedrig
+04000 b(86.64;276.84;466.2;456.84)p13 Auflösung zu niedrig
+04000 b(86.64;277.92;540.36;440.64)p16 Auflösung zu niedrig
+04000 b(86.64;326.16;540.36;561.72)p28 Auflösung zu niedrig
+04000 b(86.64;367.08;390.36;571.08)p12 Auflösung zu niedrig
+04000 b(86.64;411.72;538.8;704.88)p19 Auflösung zu niedrig
+04000 b(86.64;439.68;540.12;731.52)p36 Auflösung zu niedrig
+04000 b(86.64;460.68;457.8;552.96)p14 Auflösung zu niedrig
+04000 b(86.64;482.88;270.36;543.6)p15 Auflösung zu niedrig
+04000 b(86.64;505.08;344.64;770.28)p54 Auflösung zu niedrig
+04000 b(86.64;506.76;490.44;666.72)p0 Auflösung zu niedrig
+04000 b(86.76;267.12;368.64;408.96)p10 Auflösung zu niedrig
+04001 b(55.92;447.84;463.08;752.76)p17 Auflösung unnötig hoch
+04001 b(85.08;89.76;220.2;180.12)p0 Auflösung unnötig hoch
+04001 b(86.64;366.84;252.96;430.44)p33 Auflösung unnötig hoch
+04001 b(86.64;561.84;341.64;737.28)p11 Auflösung unnötig hoch
+04001 b(86.64;89.16;335.4;271.08)p34 Auflösung unnötig hoch
+04031 b(100.8;89.16;511.2;289.2)p22 Abbildungen nicht einheitlich ausgerichtet
+07000 b(518.44;626.68;558.78;686.08)p35 Zu viele aufeinander folgende Trennungen
+07000 b(518.53;247.6;558.8;323.08)p41 Zu viele aufeinander folgende Trennungen
+07000 b(518.65;126.16;558.88;201.76)p31 Zu viele aufeinander folgende Trennungen
+07000 b(518.67;610.0;558.8;669.4)p40 Zu viele aufeinander folgende Trennungen
+07000 b(518.69;142.36;558.7;201.76)p13 Zu viele aufeinander folgende Trennungen
+07000 b(518.69;155.68;558.83;214.96)p10 Zu viele aufeinander folgende Trennungen
+07000 b(518.69;682.96;558.7;742.36)p14 Zu viele aufeinander folgende Trennungen
+07005 0sp27 Satzende vor Aufzählung fehlt
+07005 0sp35 Satzende vor Aufzählung fehlt
+07005 0sp49 Satzende vor Aufzählung fehlt
+07005 s10p20 Satzende vor Aufzählung fehlt
+07005 s11p35 Satzende vor Aufzählung fehlt
+07005 s11p49 Satzende vor Aufzählung fehlt
+07005 s1p46 Satzende vor Aufzählung fehlt
+07005 s7p49 Satzende vor Aufzählung fehlt
+07010 0sp54 Satzende vor Gleichung fehlt
+07010 s11p44 Satzende vor Gleichung fehlt
+07010 s2p26 Satzende vor Gleichung fehlt
+07010 s2p45 Satzende vor Gleichung fehlt
+07010 s3p27 Satzende vor Gleichung fehlt
+07010 s6p49 Satzende vor Gleichung fehlt
+07010 s7p14 Satzende vor Gleichung fehlt
+07010 s7p46 Satzende vor Gleichung fehlt
+07011 s10p42 Satzende vor Gleichung anpassen
+07011 s9p24 Satzende vor Gleichung anpassen
+07200 00p10 Referenz nicht gefunden
+07200 00p13 Referenz nicht gefunden
+07200 00p23 Referenz nicht gefunden
+07200 00p24 Referenz nicht gefunden
+07200 00p28 Referenz nicht gefunden
+07616 00p-1 Writing statistics
+07620 p2~l0 Hurenkind: Einsame Zeile am Seitenanfang
+07620 p3~l0 Hurenkind: Einsame Zeile am Seitenanfang
+07620 p4~l0 Hurenkind: Einsame Zeile am Seitenanfang
+07620 p5~l0 Hurenkind: Einsame Zeile am Seitenanfang
+07620 p6~l0 Hurenkind: Einsame Zeile am Seitenanfang
+07625 p11~l0 Seitenanfang: Seite beginnt nicht mit Text
+07625 p14~l0 Seitenanfang: Seite beginnt nicht mit Text
+07625 p15~l0 Seitenanfang: Seite beginnt nicht mit Text
+07625 p1~l0 Seitenanfang: Seite beginnt nicht mit Text
+07625 p22~l0 Seitenanfang: Seite beginnt nicht mit Text
+07625 p23~l0 Seitenanfang: Seite beginnt nicht mit Text
+07625 p25~l0 Seitenanfang: Seite beginnt nicht mit Text
+07625 p34~l0 Seitenanfang: Seite beginnt nicht mit Text
+07625 p46~l0 Seitenanfang: Seite beginnt nicht mit Text
+07625 p47~l0 Seitenanfang: Seite beginnt nicht mit Text
+07630 p13_13~l12_14 Paragraph zu kurz
+07630 p15_15~l18_20 Paragraph zu kurz
+07630 p19_19~l1_2 Paragraph zu kurz
+07630 p20_20~l11_12 Paragraph zu kurz
+07630 p29_29~l4_6 Paragraph zu kurz
+07630 p35_35~l1_3 Paragraph zu kurz
+07630 p38_38~l1_3 Paragraph zu kurz
+07630 p3_3~l12_13 Paragraph zu kurz
+07630 p3_3~l1_2 Paragraph zu kurz
+07630 p3_3~l4_6 Paragraph zu kurz
+07630 p58_58~l2_3 Paragraph zu kurz
+07630 p59_59~l12_13 Paragraph zu kurz
+07630 p61_61~l11_12 Paragraph zu kurz
+07630 p61_61~l14_15 Paragraph zu kurz
+07630 p61_61~l18_19 Paragraph zu kurz
+07630 p61_61~l1_2 Paragraph zu kurz
+07630 p61_61~l26_27 Paragraph zu kurz
+07630 p61_61~l5_6 Paragraph zu kurz
+07630 p61_61~l8_9 Paragraph zu kurz
+07630 p6_6~l10_12 Paragraph zu kurz
+07630 p6_6~l24_25 Paragraph zu kurz
+07630 p7_7~l0_1 Paragraph zu kurz
+07630 p7_7~l16_17 Paragraph zu kurz
+07630 p7_7~l19_21 Paragraph zu kurz
+07650 p10~l13~c44_46 Unzuläßiges Leerzeichen vor Komma
+07650 p10~l4~c31_33 Unzuläßiges Leerzeichen vor Komma
+07650 p12~l0~c90_92 Unzuläßiges Leerzeichen vor Komma
+07650 p14~l5~c89_91 Unzuläßiges Leerzeichen vor Komma
+07650 p14~l8~c88_90 Unzuläßiges Leerzeichen vor Komma
+07650 p15~l13~c90_92 Unzuläßiges Leerzeichen vor Komma
+07651 p59~l22~c19_28 Fehlendes Leerzeichen nach Komma
+07655 p59~l3~c20_22 Fehlendes Leerzeichen nach Semicolon
+07655 p59~l3~c23_25 Fehlendes Leerzeichen nach Semicolon
+07670 p10~l19 Fehlendes Leerzeichen
+07670 p10~l20 Fehlendes Leerzeichen
+07670 p12~l3 Fehlendes Leerzeichen
+07670 p20~l11 Fehlendes Leerzeichen
+07670 p20~l2 Fehlendes Leerzeichen
+07670 p20~l2 Fehlendes Leerzeichen
+07670 p22~l3 Fehlendes Leerzeichen
+07670 p22~l3 Fehlendes Leerzeichen
+07670 p23~l10 Fehlendes Leerzeichen
+07670 p23~l10 Fehlendes Leerzeichen
+07670 p23~l14 Fehlendes Leerzeichen
+07670 p23~l19 Fehlendes Leerzeichen
+07670 p24~l2 Fehlendes Leerzeichen
+07670 p24~l2 Fehlendes Leerzeichen
+07670 p24~l8 Fehlendes Leerzeichen
+07670 p25~l18 Fehlendes Leerzeichen
+07670 p25~l19 Fehlendes Leerzeichen
+07670 p25~l24 Fehlendes Leerzeichen
+07670 p26~l12 Fehlendes Leerzeichen
+07670 p26~l12 Fehlendes Leerzeichen
+07670 p26~l9 Fehlendes Leerzeichen
+07670 p26~l9 Fehlendes Leerzeichen
+07670 p32~l1 Fehlendes Leerzeichen
+07670 p35~l20 Fehlendes Leerzeichen
+07670 p35~l6 Fehlendes Leerzeichen
+07670 p35~l9 Fehlendes Leerzeichen
+07670 p35~l9 Fehlendes Leerzeichen
+07670 p35~l9 Fehlendes Leerzeichen
+07670 p35~l9 Fehlendes Leerzeichen
+07670 p37~l9 Fehlendes Leerzeichen
+07670 p58~l2 Fehlendes Leerzeichen
+07670 p60~l18 Fehlendes Leerzeichen
+07670 p9~l8 Fehlendes Leerzeichen
+07670 p9~l9 Fehlendes Leerzeichen
+08105 s10p13 Pleonasma erkannt
+08110 s13p35 Unnötige Vorsilbe
+08110 s1p58 Unnötige Vorsilbe
+08110 s5p37 Unnötige Vorsilbe
+08115 s9p40 Ungenaue Formulierung erkannt
+08120 s8p31 Adjektiv verbessern
