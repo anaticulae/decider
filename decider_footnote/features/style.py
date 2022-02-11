@@ -8,7 +8,6 @@
 # =============================================================================
 
 import functools
-import inspect
 import typing
 
 import configo
@@ -96,7 +95,7 @@ def check_2003_invalid_highnote_rise(linter, driver):
     current = item.style[0].rise
     expected = driver.fontconfig.highnote_rise
     if isinstance(expected, list):
-        skip_method(f'ambiguous expected highnote rise: {expected}')
+        protocol.skip_method(f'ambiguous expected highnote rise: {expected}')
         return
     if utila.near(current, expected, HIGHNOTE_RISE_DIFF_MAX):
         return
@@ -124,7 +123,7 @@ def check_2004_invalid_hignote_size(linter, driver):
     current = item.style[0].size
     expected = driver.fontconfig.highnote_size
     if isinstance(expected, list):
-        skip_method(f'ambiguous expected highnote size: {expected}')
+        protocol.skip_method(f'ambiguous expected highnote size: {expected}')
         return
     if utila.near(current, expected, HIGHNOTE_SIZE_DIFF_MAX):
         return
@@ -153,14 +152,14 @@ def check_2005_invalid_highnote_fontfamily(linter, driver):
     expected = driver.fontconfig.highnote_fontid
 
     if isinstance(expected, list):
-        skip_method(f'ambiguous expected highnote fontfamily: {expected}')
+        protocol.skip_method(f'ambiguous expected highnote fontfamily: {expected}')  # yapf:disable
         return
 
     current = driver.fontstore[current]
     expected = driver.fontstore[expected]
 
     if not current or not expected:
-        skip_method('missing font, regenerate resources')
+        protocol.skip_method('missing font, regenerate resources')
         return
 
     current = current.name.lower()
@@ -186,16 +185,14 @@ def check_2010_invalid_content_fontsize(linter, driver):
     """Ensure correct font size of footnote content."""
     item = driver.item
     expected = driver.fontconfig.content_size
-
     if isinstance(expected, list):
-        skip_method(f'ambiguous expected highnote fontsize: {expected}')
+        protocol.skip_method(f'ambiguous expected highnote fontsize:{expected}')
         return
     if not item.style:
-        skip_method('missing style')
+        protocol.skip_method('missing style')
         return
     text = item.text
     footnotestyle = item.style[1]
-
     # The style of the last footnote includes the ending
     # whitespace/newline. This whitespace is formatted as next text token.
     # This is a result of requirements. The next token is the page number
@@ -213,15 +210,4 @@ def check_2010_invalid_content_fontsize(linter, driver):
     ]
     if all(sizes_equal):
         return
-
     linter(number=item.number, current=sizes, expected=expected)
-
-
-def skip_method(msg: str = ''):
-    # TODO: MOVE TO UTILA
-    frame = inspect.currentframe()
-    caller = [item.function for item in inspect.getouterframes(frame)[0:5]]
-    caller = [item for item in caller if 'check_' in item]
-    caller = ' '.join(caller)
-    utila.debug(msg)
-    utila.debug(f'skip: {caller}')
