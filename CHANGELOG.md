@@ -2,6 +2,20 @@
 
 Every noteable change is logged here.
 
+## v2.22.0
+
+### Feature
+
+* harmonize interface (ff5bbe826307)
+* add page complete linter (2f22b18634f3)
+* make footnote start more robust (acac1f997418)
+
+### Fix
+
+* do not fail on missing page number (d4110ae91787)
+* do not fail on missing abbreviation table (7ba0e9cdc84a)
+* add missing finding location (832700aed42b)
+
 ## v2.21.0
 
 ### Feature
