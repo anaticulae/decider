@@ -10,11 +10,10 @@
 import configo
 import german
 import iamraw
+import texmex
 import utila
 
 SENTENCE_LENGTH_MIN = configo.HV_INT_PLUS(default=7)
-"""Skip lists or formulas."""
-SPECIAL = utila.compiles(r'^#$@([a-z]|\_){1,}@#\:')
 
 
 def determine_sentences(
@@ -28,7 +27,7 @@ def determine_sentences(
         txt = sentence[0]
         if len(txt) < SENTENCE_LENGTH_MIN:
             continue
-        if special_skip and SPECIAL.match(txt):
+        if special_skip and texmex.nosentence(txt):
             continue
         sento = word_tokenize(txt)
         if not sento:
