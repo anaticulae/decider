@@ -11,9 +11,9 @@ import configo
 import iamraw
 import protocol
 import serializeraw
+import texmex
 import textflow.features.lineending
 import utila
-import words.feature.sentences
 
 import decider_textflow.features
 
@@ -110,7 +110,7 @@ def check_7005_list_not_included(linter: callable, driver):
         if raw[-1] in ':.?;':
             # list is included due sentence ending before
             return True
-        if words.feature.sentences.is_list_item(raw):
+        if texmex.is_listitem(raw):
             # do not check this inside a list
             return True
         return False
@@ -118,7 +118,7 @@ def check_7005_list_not_included(linter: callable, driver):
     for current in sandwich(
             driver.sentences,
             ending_valid=valid_inclusion,
-            selector=words.feature.sentences.is_list_separator,
+            selector=texmex.is_listsepa,
     ):
         location = iamraw.Location.from_sentence(
             sentence=current[2],
@@ -147,7 +147,7 @@ def check_7006_list_better_included(linter: callable, driver):
         if raw[-1] not in '.?;':
             # list is included due sentence ending before
             return True
-        if words.feature.sentences.is_list_item(raw):
+        if texmex.is_listitem(raw):
             # do not check this inside a list
             return True
         return False
@@ -155,7 +155,7 @@ def check_7006_list_better_included(linter: callable, driver):
     for current in sandwich(
             driver.sentences,
             ending_valid=valid_inclusion,
-            selector=words.feature.sentences.is_list_separator,
+            selector=texmex.is_listsepa,
     ):
         raw = current[0]
         location = iamraw.Location.from_sentence(
@@ -183,7 +183,7 @@ def check_7010_formula_not_included(linter: callable, driver):
     for current in sandwich(
             sentences,
             ending_valid=lambda raw: raw[-1] in ':.?;',
-            selector=words.feature.sentences.is_formula,
+            selector=texmex.is_formula,
     ):
         location = iamraw.Location.from_sentence(
             sentence=current[2],
@@ -210,7 +210,7 @@ def check_7011_formula_better_included(linter: callable, driver):
     for current in sandwich(
             sentences,
             ending_valid=lambda raw: raw[-1] not in '.?;',
-            selector=words.feature.sentences.is_formula,
+            selector=texmex.is_formula,
     ):
         raw = current[0]
         location = iamraw.Location.from_sentence(

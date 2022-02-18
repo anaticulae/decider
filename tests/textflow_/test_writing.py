@@ -79,7 +79,7 @@ def test_dtf_master72_text_too_long(testdir, monkeypatch):
             pages=pages,
             msgids=7605,
         )
-    assert len(findings) == 20
+    assert len(findings) == 26
 
 
 @utilatest.longrun
@@ -144,4 +144,4 @@ def test_writing_repeating_sentence_pattern(testdir, monkeypatch):
             monkeypatch,
             msgids=7610,
         )
-    assert len(findings) in (9, 10)  # NOT VALIDATED
+    assert len(findings) in (9, 10, 11)  # NOT VALIDATED

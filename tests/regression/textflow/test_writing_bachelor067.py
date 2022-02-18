@@ -15,10 +15,19 @@ import tests.textflow_
 
 
 @utilatest.requires(power.BACHELOR067_PDF)
-def test_reg_writing_bachelor067(testdir, monkeypatch):
+def test_reg_writing_bachelor067_too_long_sentence(testdir, monkeypatch):
     """A very long sentence is detected, which is a result of bad parsed
-    list.
-    """
+    list."""
+    source = power.link(power.BACHELOR067_PDF)
+    cmd = f'-i {source} --writing --pages=54'
+    tests.textflow_.run(cmd, monkeypatch=monkeypatch)
+    findings = protocol.findings_from_path(testdir.tmpdir, msgid=7605)
+    assert not findings
+
+
+@utilatest.requires(power.BACHELOR067_PDF)
+def test_reg_writing_bachelor067_perspective(testdir, monkeypatch):
+    """Detect two times `man` inside a list."""
     source = power.link(power.BACHELOR067_PDF)
     cmd = f'-i {source} --writing --pages=54'
     tests.textflow_.run(cmd, monkeypatch=monkeypatch)

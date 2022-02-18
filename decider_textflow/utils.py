@@ -11,9 +11,9 @@ import contextlib
 import operator
 
 import iamraw
+import texmex
 import texmex.style
 import utila
-import words.feature.sentences
 
 
 def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
@@ -98,11 +98,3 @@ def page_chunks(items):
         else:
             result[-1][1].append(item[2])
     return result
-
-
-def list_split(line: str) -> tuple:
-    line = words.feature.sentences.list_split(line)
-    if isinstance(line, tuple):
-        # TODO: CHANGE SENTENCE_LENGTH_MAX FOR LISTS?
-        return line[0], line[1]
-    return line, False

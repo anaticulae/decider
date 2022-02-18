@@ -14,6 +14,7 @@ import configo
 import german
 import iamraw
 import protocol
+import texmex
 import utila
 
 import decider_textflow.features
@@ -75,8 +76,16 @@ def check_7600_text_perspective(linter: callable, driver):
         except TypeError:
             # headline
             continue
-        # TODO: CHANGE PERSPECTIVE CHECKER FOR LISTS?
-        line, _ = decider_textflow.utils.list_split(line)
+        if texmex.nosentence(line):
+            if texmex.is_listsepa(line) or texmex.is_listitem(line):
+                # TODO: ADD MULTIPLE MARKER FOR A SINGLE LINE? LIST AND
+                # QUOTE FOR EXAMPLE.
+                # TODO: QUOTE INSIDE A LIST?
+                line = texmex.list_split(line)[0]
+            else:
+                # formula or something else
+                continue
+        # TODO: ANAYLZE PERSPECTIVE INSIDE LISTS
         tokens = german.word_tokenize(line, validate_sentences=False)
         invalid = decider_textflow.writing.perspective.invalid(tokens)
         if not invalid:
@@ -87,42 +96,6 @@ def check_7600_text_perspective(linter: callable, driver):
             invalid=', '.join(invalid),
             line=line,
         )
-    # # group quotes by page
-    # quotes = collections.defaultdict(list)
-    # for quote in driver.quotations:
-    #     quotes[quote.page].append(quote.sentence)
-    # # group text content
-    # grouped = groupby_page(driver.text_chunks)
-    # for page, textraw in grouped.items():
-    #     # TODO: DO WE ALREADY REQUIRE THIS?
-    #     text = german.word_tokenize(textraw, validate_sentences=False)
-    #     text = ' '.join(konrad.mark2str(item) for item in text)
-    #     text = remove_quotes(text, quotes[page])
-    #     for sentence in german.sentence_tokenize(text):
-    #         tokens = german.word_tokenize(sentence, validate_sentences=False)
-    #         invalid = decider_textflow.writing.perspective.invalid(tokens)
-    #         if not invalid:
-    #             continue
-    #         # convert token sentence to user sentence with correct spaces
-    #         # and punctuation.
-    #         # Remove - as a result of word-division
-    #         tokens = [item for item in tokens if item != konrad.Mark.HYPHEN]
-    #         sentence = german.sentence_select(textraw, tokens)
-    #         if not sentence:
-    #             utila.error(f'could not select sentence: {tokens}')
-    #             utila.error(textraw)
-    #             continue
-    #         # TODO: CENTER SENTENCE TO FINDING, REDUCE SENTENCE LENGTH
-    #         sentence = utila.normalize_text(sentence, normalize_spaces=True)
-    #         # TODO: DETERMINE SENTENCE/LINE NUMBER
-    #         # line = 0
-    #         # location = iamraw.RangedLocation(page=page, line=line)
-    #         location = iamraw.RangedLocation(page=page)
-    #         linter(
-    #             location=location,
-    #             invalid=', '.join(invalid),
-    #             line=sentence,
-    #         )
 
 
 SOLUTION_7605 = """\
@@ -143,13 +116,16 @@ def check_7605_text_too_long(linter: callable, driver):
         except TypeError:
             # headline
             continue
-        # TODO: CHANGE SENTENCE_LENGTH_MAX FOR LISTS?
-        line, _ = decider_textflow.utils.list_split(line)
-        if ':' in line:
-            # TODO: SPLIT LINE AND JUDGE LATER?
-            # Vor allem die sozialen Online-Netzwerke erfreuen sich großer
-            # Beliebtheit: Circa zwei Drittel aller Internetnutzer.
-            continue
+        if texmex.nosentence(line):
+            # TODO: REPLACE WITH IS_LIST
+            if texmex.is_listsepa(line) or texmex.is_listitem(line):
+                # TODO: CHANGE SENTENCE_LENGTH_MAX FOR LISTS?
+                line = texmex.list_split(line)[0]
+            else:
+                # formula or something else
+                continue
+        # checking for ':' in sentence is not required anymore, we split
+        # them in sentence processing before.
         if len(line) < SENTENCE_LENGTH_MAX:
             continue
         # TODO: CONVERT NUMBER TO LINE
