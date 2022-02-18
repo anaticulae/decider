@@ -9,7 +9,9 @@
 
 import collections
 
-INVALID_PERSPECTIVE = {'wir', 'man', 'ich'}
+import utila
+
+INVALID_PERSPECTIVE = utila.splititems('wir man ich')
 
 
 def invalid(words) -> list:
