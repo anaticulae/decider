@@ -17,7 +17,7 @@ import tests.textflow_
 
 
 @pytest.mark.xfail(reason='???')
-@utilatest.longrun
+@utilatest.nightly
 def test_lineendings_master83page6_lineending(testdir, monkeypatch):
     source = power.link(power.MASTER083_PDF)
     tests.textflow_.run_textflow(

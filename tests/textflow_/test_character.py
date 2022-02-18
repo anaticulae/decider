@@ -45,7 +45,7 @@ def test_textflow_character_space_before_comma(testdir, monkeypatch):
     assert len(findings) == 1
 
 
-@utilatest.longrun
+@utilatest.nightly
 def test_textflow_character_missing_space_after_comma(testdir, monkeypatch):
     source = power.link(power.BACHELOR090_PDF)
     pages = ':'

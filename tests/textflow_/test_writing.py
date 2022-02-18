@@ -29,7 +29,7 @@ def decide_textflow(source, testdir, monkeypatch, pages=None, msgids=None):
     return findings
 
 
-@utilatest.longrun
+@utilatest.nightly
 def test_dtf_bachelor76_perspective(testdir, monkeypatch):
     source = power.BACHELOR076_PDF
     findings = decide_textflow(source, testdir, monkeypatch, msgids=7600)
