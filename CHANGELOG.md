@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v2.22.1
+
+### Documentation
+
+* adjust modules path (b8b6dffab6e6)
+
 ## v2.22.0
 
 ### Feature
