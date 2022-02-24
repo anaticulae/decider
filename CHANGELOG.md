@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v2.22.2
+
+### Fix
+
+* remove outdated resources (fb0a3498b006)
+* do not judge perspective inside quotation (2e266bc52fa4)
+
 ## v2.22.1
 
 ### Documentation
