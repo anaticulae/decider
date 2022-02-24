@@ -76,6 +76,8 @@ def check_7600_text_perspective(linter: callable, driver):
         except TypeError:
             # headline
             continue
+        if texmex.is_quote(line):
+            continue
         if texmex.nosentence(line):
             if texmex.is_listsepa(line) or texmex.is_listitem(line):
                 # TODO: ADD MULTIPLE MARKER FOR A SINGLE LINE? LIST AND
