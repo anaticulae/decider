@@ -18,14 +18,9 @@ import texmex
 import utila
 
 import decider_textflow.features
-import decider_textflow.utils
 import decider_textflow.writing.complexity
 import decider_textflow.writing.perspective
 import decider_textflow.writing.statistics
-
-TEXTUAL = {
-    iamraw.PageContentType.TEXT,
-}
 
 
 def work(
@@ -34,8 +29,6 @@ def work(
     textpositions: str,
     sizeandborders: str,
     headerfooter: str,
-    magiccontent: str,
-    quotations: str,
     words: str,
     pages: tuple = None,
 ) -> protocol.ResultType:
@@ -45,9 +38,6 @@ def work(
         textpositions,
         sizeandborders,
         headerfooter,
-        magiccontent=magiccontent,
-        magicvalid=TEXTUAL,
-        quotations=quotations,
         words=words,
         pages=pages,
     )
