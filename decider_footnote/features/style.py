@@ -7,9 +7,6 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import functools
-import typing
-
 import configo
 import iamraw
 import protocol
@@ -27,52 +24,51 @@ CONTENT_SIZE_DIFF_MAX = configo.HV_FLOAT_PLUS(default=0.5)
 # as a result of bad layout extraction
 RISE_NOISE_MAX = configo.HV_FLOAT_PLUS(default=2.0)
 
+skip = protocol.skip_method  # pylint:disable=C0103
+
 
 def work(
     footerheader: str,
     fontheader: str,
     fontcontent: str,
     pages: tuple = None,
-) -> typing.Tuple[str, str]:
-    linter = protocol.from_module(__name__)
+) -> protocol.ResultType:
+    driver = create_driver(
+        headerfooters=footerheader,
+        fontheader=fontheader,
+        fontcontent=fontcontent,
+        pages=pages,
+    )
+    result = protocol.run(
+        __name__,
+        driver=driver,
+    )
+    return result
 
-    headerfooters = serializeraw.load_footnotes(footerheader, pages)
+
+def create_driver(
+    headerfooters: str,
+    fontheader: str,
+    fontcontent: str,
+    pages: tuple = None,
+):
+    headerfooters = serializeraw.load_footnotes(
+        headerfooters,
+        pages=pages,
+    )
     footnotes = utila.flatten([item.content for item in headerfooters if item])
     fontconfig = decider_footnote.footnote.most_common_font(footnotes)
-
-    fontstore = serializeraw.create_fontstore(fontheader, fontcontent)
-
-    for footer in headerfooters:
-        # run linter for every page
-        linting(footer, fontconfig, fontstore, linter)
-
-    result = linter.result(unique=True)
-    user, developer = protocol.dump_result(result)
-    return user, developer
-
-
-def linting(
-    footer,
-    fontconfig: decider_footnote.footnote.FootNoteStyle,
-    fontstore: iamraw.FontStore,
-    linter: protocol.Linter,
-):
-    location = iamraw.Location.from_page(footer.page)
-
-    checkers = protocol.parse_checkers(__name__)
-    for checker in checkers:
-        call = functools.partial(
-            linter.add_finding,
-            msgid=checker.msgid,
-            location=location,
-        )
-        for item in footer.content:
-            datum = protocol.driver(
-                item=item,
-                fontconfig=fontconfig,
-                fontstore=fontstore,
-            )
-            checker(call, datum)
+    fontstore = serializeraw.create_fontstore(
+        fontheader,
+        fontcontent,
+        pages=pages,
+    )
+    result = protocol.driver(
+        footnotes=footnotes,
+        fontconfig=fontconfig,
+        fontstore=fontstore,
+    )
+    return result
 
 
 SOLUTION_2003 = """\
@@ -87,20 +83,24 @@ erwarteten Schriftgröße der Fußnotennummer **{{expected}}** ab.
 
 def check_2003_invalid_highnote_rise(linter, driver):
     """Ensure that footnote fits to `common` footnote highnote numer rise."""
-    item = driver.item
-    if not item.style:
-        return
-    if not item.style[0]:
-        return
-    current = item.style[0].rise
-    expected = driver.fontconfig.highnote_rise
-    if isinstance(expected, list):
-        protocol.skip_method(f'ambiguous expected highnote rise: {expected}')
-        return
-    if utila.near(current, expected, HIGHNOTE_RISE_DIFF_MAX):
-        return
-
-    linter(number=item.number, current=current, expected=expected)
+    for footnote in driver.footnotes:
+        if not footnote.style:
+            continue
+        if not footnote.style[0]:
+            continue
+        current = footnote.style[0].rise
+        expected = driver.fontconfig.highnote_rise
+        if isinstance(expected, list):
+            skip(f'ambiguous expected highnote rise: {expected}')
+            continue
+        if utila.near(current, expected, HIGHNOTE_RISE_DIFF_MAX):
+            continue
+        linter(
+            number=footnote.number,
+            current=current,
+            expected=expected,
+            location=iamraw.Location.from_page(footnote.page),
+        )
 
 
 SOLUTION_2004 = """\
@@ -115,20 +115,24 @@ Die Schriftgröße **{{current}}** weicht von der erwarteten Schriftgröße \
 
 def check_2004_invalid_hignote_size(linter, driver):
     """Ensure correct font size of highnote."""
-    item = driver.item
-    if not item.style:
-        return
-    if not item.style[0]:
-        return
-    current = item.style[0].size
-    expected = driver.fontconfig.highnote_size
-    if isinstance(expected, list):
-        protocol.skip_method(f'ambiguous expected highnote size: {expected}')
-        return
-    if utila.near(current, expected, HIGHNOTE_SIZE_DIFF_MAX):
-        return
-
-    linter(number=item.number, current=current, expected=expected)
+    for footnote in driver.footnotes:
+        if not footnote.style:
+            continue
+        if not footnote.style[0]:
+            continue
+        current = footnote.style[0].size
+        expected = driver.fontconfig.highnote_size
+        if isinstance(expected, list):
+            skip(f'ambiguous expected highnote size: {expected}')
+            continue
+        if utila.near(current, expected, HIGHNOTE_SIZE_DIFF_MAX):
+            continue
+        linter(
+            number=footnote.number,
+            current=current,
+            expected=expected,
+            location=iamraw.Location.from_page(footnote.page),
+        )
 
 
 SOLUTION_2005 = """\
@@ -143,32 +147,31 @@ Die Schriftart **{{current}}** weicht von der erwarteten Schriftart \
 
 def check_2005_invalid_highnote_fontfamily(linter, driver):
     """Ensure correct font family of highnote."""
-    item = driver.item
-    if not item.style:
-        return
-    if not item.style[0]:
-        return
-    current = item.style[0].font
-    expected = driver.fontconfig.highnote_fontid
-
-    if isinstance(expected, list):
-        protocol.skip_method(f'ambiguous expected highnote fontfamily: {expected}')  # yapf:disable
-        return
-
-    current = driver.fontstore[current]
-    expected = driver.fontstore[expected]
-
-    if not current or not expected:
-        protocol.skip_method('missing font, regenerate resources')
-        return
-
-    current = current.name.lower()
-    expected = expected.name.lower()
-
-    if current == expected:
-        return
-
-    linter(number=item.number, current=current, expected=expected)
+    for footnote in driver.footnotes:
+        if not footnote.style:
+            continue
+        if not footnote.style[0]:
+            continue
+        current = footnote.style[0].font
+        expected = driver.fontconfig.highnote_fontid
+        if isinstance(expected, list):
+            skip(f'ambiguous expected highnote fontfamily: {expected}')
+            continue
+        current = driver.fontstore[current]
+        expected = driver.fontstore[expected]
+        if not current or not expected:
+            skip('missing font, regenerate resources')
+            continue
+        current = current.name.lower()
+        expected = expected.name.lower()
+        if current == expected:
+            continue
+        linter(
+            number=footnote.number,
+            current=current,
+            expected=expected,
+            location=iamraw.Location.from_page(footnote.page),
+        )
 
 
 SOLUTION_2010 = """\
@@ -183,31 +186,37 @@ Die Schriftgröße **{{current}}** weicht von der erwarteten Schriftgröße \
 
 def check_2010_invalid_content_fontsize(linter, driver):
     """Ensure correct font size of footnote content."""
-    item = driver.item
-    expected = driver.fontconfig.content_size
-    if isinstance(expected, list):
-        protocol.skip_method(f'ambiguous expected highnote fontsize:{expected}')
-        return
-    if not item.style:
-        protocol.skip_method('missing style')
-        return
-    text = item.text
-    footnotestyle = item.style[1]
-    # The style of the last footnote includes the ending
-    # whitespace/newline. This whitespace is formatted as next text token.
-    # This is a result of requirements. The next token is the page number
-    # with may differ in font size. Therefore we only validate text
-    # positions which are characters.
-    # do not check on whitespace or newline
-    footnotestyle = [
-        item for item in footnotestyle if text[item.start:item.end].strip()
-    ]
-    # not not check highnotes inside footnote
-    sizes = [item.size for item in footnotestyle if item.rise < RISE_NOISE_MAX]
-
-    sizes_equal = [
-        utila.near(item, expected, CONTENT_SIZE_DIFF_MAX) for item in sizes
-    ]
-    if all(sizes_equal):
-        return
-    linter(number=item.number, current=sizes, expected=expected)
+    for footnote in driver.footnotes:
+        expected = driver.fontconfig.content_size
+        if isinstance(expected, list):
+            skip(f'ambiguous expected highnote fontsize:{expected}')
+            continue
+        if not footnote.style:
+            protocol.skip_method('missing style')
+            continue
+        text = footnote.text
+        footnotestyle = footnote.style[1]
+        # The style of the last footnote includes the ending
+        # whitespace/newline. This whitespace is formatted as next text token.
+        # This is a result of requirements. The next token is the page number
+        # with may differ in font size. Therefore we only validate text
+        # positions which are characters.
+        # do not check on whitespace or newline
+        footnotestyle = [
+            item for item in footnotestyle if text[item.start:item.end].strip()
+        ]
+        # not not check highnotes inside footnote
+        sizes = [
+            item.size for item in footnotestyle if item.rise < RISE_NOISE_MAX
+        ]
+        sizes_equal = [
+            utila.near(item, expected, CONTENT_SIZE_DIFF_MAX) for item in sizes
+        ]
+        if all(sizes_equal):
+            continue
+        linter(
+            number=footnote.number,
+            current=sizes,
+            expected=expected,
+            location=iamraw.Location.from_page(footnote.page),
+        )
