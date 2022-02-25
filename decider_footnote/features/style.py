@@ -84,11 +84,9 @@ erwarteten Schriftgröße der Fußnotennummer **{{expected}}** ab.
 def check_2003_invalid_highnote_rise(linter, driver):
     """Ensure that footnote fits to `common` footnote highnote numer rise."""
     for footnote in driver.footnotes:
-        if not footnote.style:
+        if not footnote.style_number:
             continue
-        if not footnote.style[0]:
-            continue
-        current = footnote.style[0].rise
+        current = footnote.style_number.rise
         expected = driver.fontconfig.highnote_rise
         if isinstance(expected, list):
             skip(f'ambiguous expected highnote rise: {expected}')
@@ -116,11 +114,9 @@ Die Schriftgröße **{{current}}** weicht von der erwarteten Schriftgröße \
 def check_2004_invalid_hignote_size(linter, driver):
     """Ensure correct font size of highnote."""
     for footnote in driver.footnotes:
-        if not footnote.style:
+        if not footnote.style_number:
             continue
-        if not footnote.style[0]:
-            continue
-        current = footnote.style[0].size
+        current = footnote.style_number.size
         expected = driver.fontconfig.highnote_size
         if isinstance(expected, list):
             skip(f'ambiguous expected highnote size: {expected}')
@@ -148,11 +144,9 @@ Die Schriftart **{{current}}** weicht von der erwarteten Schriftart \
 def check_2005_invalid_highnote_fontfamily(linter, driver):
     """Ensure correct font family of highnote."""
     for footnote in driver.footnotes:
-        if not footnote.style:
+        if not footnote.style_number:
             continue
-        if not footnote.style[0]:
-            continue
-        current = footnote.style[0].font
+        current = footnote.style_number.font
         expected = driver.fontconfig.highnote_fontid
         if isinstance(expected, list):
             skip(f'ambiguous expected highnote fontfamily: {expected}')
@@ -191,17 +185,17 @@ def check_2010_invalid_content_fontsize(linter, driver):
         if isinstance(expected, list):
             skip(f'ambiguous expected highnote fontsize:{expected}')
             continue
-        if not footnote.style:
+        if not footnote.style_text:
             protocol.skip_method('missing style')
             continue
-        text = footnote.text
-        footnotestyle = footnote.style[1]
+        footnotestyle = footnote.style_text
         # The style of the last footnote includes the ending
         # whitespace/newline. This whitespace is formatted as next text token.
         # This is a result of requirements. The next token is the page number
         # with may differ in font size. Therefore we only validate text
         # positions which are characters.
         # do not check on whitespace or newline
+        text = footnote.text
         footnotestyle = [
             item for item in footnotestyle if text[item.start:item.end].strip()
         ]
