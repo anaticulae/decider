@@ -12,41 +12,32 @@ Footnotes
 =========
 """
 
-import functools
-import typing
-
 import configo
 import protocol
 import serializeraw
 import utila
 
 
-def work(footerheader: str, pages: tuple = None) -> typing.Tuple[str, str]:
-    linter = protocol.from_module(__name__)
+def work(footerheader: str, pages: tuple = None) -> protocol.ResultType:
+    driver = create_driver(
+        footerheader=footerheader,
+        pages=pages,
+    )
+    result = protocol.run(
+        __name__,
+        driver=driver,
+    )
+    return result
 
-    headerfooters = serializeraw.load_footnotes(footerheader, pages)
 
-    linting(headerfooters, linter)
-
-    result = linter.result(unique=True)
-    user, developer = protocol.dump_result(result)
-    return user, developer
-
-
-def linting(footer, linter: protocol.Linter):
-    checkers = protocol.parse_checkers(__name__)
-
-    flat = []
-    for page in footer:
+def create_driver(footerheader: str, pages: tuple = None):
+    headerfooters = serializeraw.load_footnotes(footerheader, pages=pages)
+    footnotes = []
+    for page in headerfooters:
         for item in page.content:
-            flat.append((page.page, item))
-
-    for checker in checkers:
-        call = functools.partial(
-            linter.add_finding,
-            msgid=checker.msgid,
-        )
-        checker(call, flat)
+            footnotes.append((page.page, item))
+    result = protocol.driver(footnotes=footnotes)
+    return result
 
 
 SOLUTION_2015 = """\
@@ -67,9 +58,11 @@ STARTING_MIN = configo.HV_INT_PLUS(default=3)
 STARTING_RATE_MIN = configo.HV_PERCENT_PLUS(default=80)
 
 
-def check_2015_endnotes_using(linter, footnotes):
+def check_2015_endnotes_using(linter, driver):
     numbers = [
-        item.number for _, item in footnotes if isinstance(item.number, int)
+        item.number
+        for _, item in driver.footnotes
+        if isinstance(item.number, int)
     ]
     if len(numbers) < ENDNOTE_CHECK_NUMBER_MIN:
         return
@@ -94,14 +87,14 @@ Mindestens {{count}} Fußnote verwenden keine einfache Ziffer 1, 2, 3. \
 """
 
 
-def check_2020_special_number(linter, footnotes):
+def check_2020_special_number(linter, driver):
     numeric, special = utila.partition(  # pylint:disable=unused-variable
         key=lambda x: x[1].raw_number is None or x[1].raw_number.isnumeric(),
-        items=footnotes,
+        items=driver.footnotes,
     )
     if len(special) <= FOOTNOTE_SPECIAL_NUMBER_MAX:
         return
-    rate = len(special) / len(footnotes)
+    rate = len(special) / len(driver.footnotes)
     if rate < FOOTNOTE_SPECIAL_RATE_MAX:
         return
     linter(
