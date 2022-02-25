@@ -24,3 +24,14 @@ def test_footnote_incomplete_page(testdir, monkeypatch):
     tests.footnote_.run(cmd, monkeypatch=monkeypatch)
     rules = protocol.findings_from_path(testdir.tmpdir, msgid=2100)
     assert len(rules) == 1
+
+
+def test_footnote_missing_space(testdir, monkeypatch):
+    """\
+    243Vgl.: al-Mubarrad
+    """
+    source = power.link(power.MASTER193_PDF)
+    cmd = f'-i {source} -o {testdir.tmpdir} --rules --pages=80:100'
+    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
+    rules = protocol.findings_from_path(testdir.tmpdir, msgid=2105)
+    assert len(rules) == 5
