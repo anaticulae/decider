@@ -40,7 +40,7 @@ def test_highnote_inside_master89_page45(testdir, monkeypatch):
     assert not result
 
 
-def test_footnote_bachelor39_page9(testdir, monkeypatch, capsys):
+def test_footnote_bachelor37page9(testdir, monkeypatch, capsys):
     cmd = f'-i {power.link(power.BACHELOR037_PDF)} -o {testdir.tmpdir} --style'
     tests.footnote_.run(cmd, monkeypatch=monkeypatch)
     assert 'ambiguous expected' not in utilatest.stderr(capsys)
