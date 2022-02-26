@@ -148,6 +148,35 @@ def check_2100_incomplete_pagenumber(linter, driver):
             )
 
 
+SOLUTION_2105 = """\
+Fußnote {{number}}: Fehlendes Leerzeichen
+
+Fußnote: **{{text}}**
+"""
+
+
+def check_2105_missing_space(linter, driver):
+    for footnote in driver.footnotes:
+        try:
+            raw = footnote.raw
+        except AttributeError:
+            # FooteNoteMerged
+            continue
+        if not MISSING_SPACE.match(raw):
+            continue
+        linter(
+            number=footnote.number,
+            text=raw,
+            location=iamraw.Location.from_page(footnote.page),
+        )
+
+
+MISSING_SPACE = utila.compiles(r"""
+    ^
+    \d{1,4}
+    [a-z]
+""")
+
 SOLUTION_2012 = """\
 Empfehlung: Anfang der Fußnote
 
