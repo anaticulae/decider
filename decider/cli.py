@@ -30,6 +30,13 @@ WORKPLAN = [
         protocol.ResultDefault,
     ),
     utila.create_step(
+        'color',
+        [
+            utila.ResultFile('color', 'statistics_statistics'),
+        ],
+        protocol.ResultDefault,
+    ),
+    utila.create_step(
         'header',
         [
             utila.ResultFile('groupme', 'footer_footerheader'),
