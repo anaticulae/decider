@@ -12,32 +12,35 @@
 10500: date of hyperlink access
 """
 
-import typing
-
 import configo
 import iamraw
 import protocol
 import serializeraw
 import utila
 
-import decider
 import decider.links.date
 import decider.links.validate
 
 
-def work(xlinks: str, pages: tuple = None) -> typing.Tuple[str, str]:
-    linter = protocol.from_module(__name__)
-    # load data
-    hyperlinks = serializeraw.load_hyperlinks(xlinks, pages=pages)  # pylint:disable=E1101
-    driver = protocol.driver(hyperlinks=hyperlinks)
+def work(xlinks: str, pages: tuple = None) -> protocol.ResultType:
+    driver = create_driver(
+        xlinks,
+        pages=pages,
+    )
+    dumped = protocol.run(
+        modulename=__name__,
+        driver=driver,
+    )
+    return dumped
 
-    # run linter
-    linter.run(driver=driver)
 
-    # write result
-    result = linter.result(unique=True)
-    user, developer = protocol.dump_result(result)
-    return user, developer
+def create_driver(hyperlinks, pages: tuple = None):
+    hyperlinks = serializeraw.load_hyperlinks(
+        hyperlinks,
+        pages=pages,
+    )
+    result = protocol.driver(hyperlinks=hyperlinks)
+    return result
 
 
 SOLUTION_E10500 = """\
