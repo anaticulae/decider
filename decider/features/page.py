@@ -12,8 +12,6 @@ PageOrder
 =========
 """
 
-import typing
-
 import protocol
 import serializeraw
 
@@ -24,17 +22,26 @@ import decider.page
 # FOOTER, NOT MIXED OR BOTH
 
 
-def work(headerfooter: str, pages: tuple = None) -> typing.Tuple[str, str]:
-    headerfooter = serializeraw.load_headerfooter(headerfooter, pages=pages)
-
-    linter = protocol.from_module(__name__)
-
-    linter.run(driver=headerfooter)
+def work(headerfooter: str, pages: tuple = None) -> protocol.ResultType:
+    driver = create_driver(
+        headerfooter,
+        pages=pages,
+    )
     # TODO: ADD PROCESS TO VALIDATE PAGE NUMBERS IN HEADER
+    result = protocol.run(
+        __name__,
+        driver=driver,
+    )
+    return result
 
-    result = linter.result(unique=True)
-    user, developer = protocol.dump_result(result)
-    return user, developer
+
+def create_driver(headerfooter: str, pages: tuple = None):
+    headerfooter = serializeraw.load_headerfooter(
+        headerfooter,
+        pages=pages,
+    )
+    result = protocol.driver(headerfooter=headerfooter)
+    return result
 
 
 SOLUTION_E1960 = """\
@@ -50,9 +57,8 @@ Seite {{current}} folgt auf {{before}}.
 """
 
 
-def check_1960_ascending_pages(linter, headerfooter):
-    footers = [item.footer for item in headerfooter]
+def check_1960_ascending_pages(linter, driver):
+    footers = [item.footer for item in driver.headerfooter]
     validated_footer = decider.page.validate(footers)
-
     for item in validated_footer:
         linter(current=item.current, before=item.before, text=item.text)
