@@ -22,9 +22,16 @@ import decider.links.date
 import decider.links.validate
 
 
-def work(xlinks: str, pages: tuple = None) -> protocol.ResultType:
+def work(
+    biblio: str,
+    footer: str,
+    sentence: str,
+    pages: tuple = None,
+) -> protocol.ResultType:
     driver = create_driver(
-        xlinks,
+        biblio,
+        footer,
+        sentence,
         pages=pages,
     )
     dumped = protocol.run(
@@ -34,11 +41,17 @@ def work(xlinks: str, pages: tuple = None) -> protocol.ResultType:
     return dumped
 
 
-def create_driver(hyperlinks, pages: tuple = None):
-    hyperlinks = serializeraw.load_hyperlinks(
-        hyperlinks,
-        pages=pages,
-    )
+def create_driver(biblio: str, footer: str, sentence: str, pages: tuple = None):
+    hyperlinks = []
+    for path in (biblio, footer, sentence):
+        if not utila.exists(path):
+            utila.error(f'missing: {path}')
+            continue
+        loaded = serializeraw.load_hyperlinks(
+            path,
+            pages=pages,
+        )
+        hyperlinks.extend(loaded)
     result = protocol.driver(hyperlinks=hyperlinks)
     return result
 

@@ -39,7 +39,9 @@ WORKPLAN = [
     utila.create_step(
         'links',
         [
-            utila.ResultFile('words', 'links_links'),
+            utila.ResultFile('weblink', 'biblio_biblio'),
+            utila.ResultFile('weblink', 'footer_footer'),
+            utila.ResultFile('weblink', 'sentence_sentence'),
         ],
         protocol.ResultDefault,
     ),
