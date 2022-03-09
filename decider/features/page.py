@@ -15,7 +15,6 @@ PageOrder
 import protocol
 import serializeraw
 
-import decider
 import decider.page
 
 # TODO: ADD PROCESS TO CHECK THAT PAGE NUMER IS LOCATED ONLY IN HEADER OR
