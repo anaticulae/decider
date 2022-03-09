@@ -12,7 +12,7 @@ import os
 import power
 import pytest
 import serializeraw
-import words.path
+import weblink.path
 
 import decider
 import decider.features.links
@@ -20,8 +20,13 @@ import tests
 
 
 def test_links_work():
-    linkpath = words.path.links(power.link(power.MASTER075_PDF))
-    links = decider.features.links.work(linkpath)
+    source = power.link(power.MASTER075_PDF)
+    linkpath = weblink.path.weblink_sentence(source)
+    links = decider.features.links.work(
+        biblio=None,
+        footer=None,
+        sentence=linkpath,
+    )
     findings = serializeraw.load_findings(links[0])
     assert findings
 
