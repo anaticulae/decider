@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v2.23.0
+
+### Feature
+
+* extend unit checker (31183be90934)
+* ensure space between number and note (a963bfa1ec65)
+
 ## v2.22.3
 
 ## v2.22.2
