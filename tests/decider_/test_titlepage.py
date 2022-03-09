@@ -15,15 +15,12 @@ import utila
 import tests
 
 
-@pytest.mark.parametrize(
-    'src, expected',
-    [
-        pytest.param(power.MASTER116_PDF, 1210, id='master116'),
-        pytest.param(power.MASTER072_PDF, 1221, id='master072'),
-        pytest.param(power.MASTER078_PDF, [], id='master078'),
-        pytest.param((power.DOCU035_PDF, 'notitle'), 1200, id='docu035'),
-    ],
-)
+@pytest.mark.parametrize('src, expected', [
+    pytest.param(power.MASTER116_PDF, 1210, id='master116'),
+    pytest.param(power.MASTER072_PDF, 1221, id='master072'),
+    pytest.param(power.MASTER078_PDF, [], id='master078'),
+    pytest.param((power.DOCU035_PDF, 'notitle'), 1200, id='docu035'),
+])
 def test_titlepage_extraction(src, expected, testdir, monkeypatch):
     src = power.link(*src) if isinstance(src, tuple) else power.link(src)
     if isinstance(expected, int):

@@ -42,26 +42,10 @@ def test_cli_decider_example(source, testdir, monkeypatch):
 
 
 @pytest.mark.parametrize('source, pages', [
-    pytest.param(
-        power.link(power.TECH024_PDF),
-        '1',
-        id='technical24',
-    ),
-    pytest.param(
-        power.link(power.TECH024_PDF),
-        '0:5',
-        id='technical24',
-    ),
-    pytest.param(
-        power.link(power.MASTER078_PDF),
-        '0:5',
-        id='master78',
-    ),
-    pytest.param(
-        power.link(power.MASTER072_PDF),
-        '0:5',
-        id='master72',
-    ),
+    pytest.param(power.TECH024_PDF, '1', id='technical24'),
+    pytest.param(power.TECH024_PDF, '0:5', id='technical24'),
+    pytest.param(power.MASTER078_PDF, '0:5', id='master78'),
+    pytest.param(power.MASTER072_PDF, '0:5', id='master72'),
 ])
 @utilatest.nightly
 def test_cli_detector_and_decider(source, pages, testdir, monkeypatch):
@@ -69,9 +53,9 @@ def test_cli_detector_and_decider(source, pages, testdir, monkeypatch):
 
     pages = 1 - Non titlepage example
     """
+    source = power.link(source)
     cmd = f'detector -i {source} -o {testdir.tmpdir} --pages={pages}'
     completed = utila.run(cmd)
     assert completed.returncode == utila.SUCCESS, str(completed)
-
     cmd = f'-i {testdir.tmpdir} -i {source} -o {testdir.tmpdir}'
     tests.run_decider(cmd, monkeypatch)
