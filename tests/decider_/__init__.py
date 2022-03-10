@@ -6,3 +6,9 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
+
+import utilatest
+
+import decider
+
+run, fail = utilatest.create_cli_runner(decider)
