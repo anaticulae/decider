@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v2.24.1
+
+### Fix
+
+* adjust colors cli name (6ad34f1e1850)
+
 ## v2.24.0
 
 ### Feature
