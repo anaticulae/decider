@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v2.24.0
+
+### Feature
+
+* add color page decider (5c7837460ada)
+* use weblink as source for hyperlink checker (eed313ff8906)
+
 ## v2.23.0
 
 ### Feature
