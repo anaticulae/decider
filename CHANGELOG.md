@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v2.24.2
+
+### Fix
+
+* skip invalid reference (52ced02029f2)
+* remove outdated figure caption (4b0ef02b722c)
+
 ## v2.24.1
 
 ### Fix
