@@ -32,7 +32,7 @@ WORKPLAN = [
     utila.create_step(
         'color',
         [
-            utila.ResultFile('color', 'statistics_statistics'),
+            utila.ResultFile('colors', 'statistics_statistics'),
         ],
         protocol.ResultDefault,
     ),
