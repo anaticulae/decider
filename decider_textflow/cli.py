@@ -36,7 +36,6 @@ WORKPLAN = [
             utila.ResultFile('docref', 'figure_parsed'),
             utila.ResultFile('docref', 'section_parsed'),
             utila.ResultFile('docref', 'table_parsed'),
-            utila.ResultFile('caption', 'figure_caption'),
             utila.ResultFile('caption', 'image_caption'),
             utila.ResultFile('caption', 'table_caption'),
             utila.ResultFile('words', 'text_text'),

@@ -21,7 +21,6 @@ def work(
     figure: str,
     section: str,
     table: str,
-    caption_figure: str,
     caption_image: str,
     caption_table: str,
     text: str,
@@ -33,7 +32,6 @@ def work(
     table = serializeraw.load_docref(table, pages=pages)
     headlines = serializeraw.load_headlines(headlines, pages=pages)
     text = serializeraw.load_text(text, headlines=headlines, pages=pages)
-    caption_figure = serializeraw.load_captions(caption_figure, pages=pages)
     caption_image = serializeraw.load_captions(caption_image, pages=pages)
     caption_table = serializeraw.load_captions(caption_table, pages=pages)
     # prepare
@@ -43,7 +41,6 @@ def work(
         table=table,
         headlines=headlines,
         text=text,
-        caption_figure=caption_figure,
         caption_image=caption_image,
         caption_table=caption_table,
     )
@@ -62,7 +59,7 @@ Der Abbildungs-Verweis **{{reference}}** kann nicht gefunden werden.
 
 
 def check_7200_figure_reference_exists(linter: callable, driver):
-    captions = caption_numbers(driver.caption_figure + driver.caption_image)
+    captions = caption_numbers(driver.caption_image)
     for reference in driver.figure:
         selected = determine_reference(reference, driver.text)
         if reference_exists(selected, captions):
