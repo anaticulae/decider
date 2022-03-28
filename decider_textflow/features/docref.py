@@ -62,6 +62,8 @@ def check_7200_figure_reference_exists(linter: callable, driver):
     captions = caption_numbers(driver.caption_image)
     for reference in driver.figure:
         selected = determine_reference(reference, driver.text)
+        if selected is None:
+            utila.error(f'invalid reference: {reference}')
         if reference_exists(selected, captions):
             continue
         location = iamraw.RangedLocation(page=reference.page)
@@ -86,6 +88,8 @@ def check_7202_table_reference_exists(linter: callable, driver):
     captions = caption_numbers(driver.caption_table)
     for reference in driver.table:
         selected = determine_reference(reference, driver.text)
+        if selected is None:
+            utila.error(f'invalid reference: {reference}')
         if reference_exists(selected, captions):
             continue
         location = iamraw.RangedLocation(page=reference.page)
@@ -128,6 +132,9 @@ def caption_numbers(items):
 
 
 def reference_exists(reference: list, captions: set) -> bool:
+    if reference is None:
+        utila.error(f'invalid reference: {reference}, {captions}')
+        return True
     refnumber = {reference_number(item) for item in reference}
     diff = refnumber - captions
     # all references are linked if `diff` is empty
