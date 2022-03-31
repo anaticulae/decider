@@ -23,7 +23,7 @@ import tests.imgfig_
 import tests.smarty_
 import tests.textflow_
 
-ARCHIVE = utila.join(decider.ROOT, 'tests/expected', assert_exists=True)
+ARCHIVE = utila.join(decider.ROOT, 'tests/expected', exist=True)
 
 
 @pytest.mark.parametrize('source', [
