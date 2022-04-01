@@ -119,6 +119,8 @@ SOLUTION_7652 = """\
 Unzuläßiges Leerzeichen vor eckiger Klammer
 
 Ungültiges Leerzeichen vor einer eckigen Klammer erkannt.
+
+{darstellung/satzzeichen#klammer}
 """
 
 SPACE_BEFORE_SQUARE_BRACKET = r"""
@@ -232,9 +234,7 @@ Siehe Duden:
 Hinweis: Ziffern werden bei exakten Werten verwendet - ausgeschrieben \
 wird die Zahl wenn sie eine ungefähre Zahl beinhaltet.
 
-Siehe GUGELHUPF
-
-TODO ADD LINK
+{darstellung/satzzeichen#divis}
 """
 
 MISSING_MINUS_BETWEEN_VALUE_AND_SIGN = r'\d+(mal)'
@@ -309,7 +309,7 @@ Siehe Duden:
 * Fünfjähriger
 * die 4- bis 5-Jährigen
 
-TODO ADD LINK
+{darstellung/satzzeichen#divis}
 """
 
 MISSING_MINUS_BETWEEN = r'\d+(jährig)(en){0,1}'
