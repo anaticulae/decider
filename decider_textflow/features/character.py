@@ -256,7 +256,7 @@ Schrägstrich: Überflüssiges Leerzeichen
 
 Vor und nach einem Schrägstrich wird kein Leerzeichen gesetzt.
 
-{darstellung/satzzeichen#divis}
+{darstellung/satzzeichen#schragstrich}
 """
 
 SPACE_BEFORE_OR_AFTER_SLASH = r'([ ]\/[ ]|[ ]\/|\/[ ])'
