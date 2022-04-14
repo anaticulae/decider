@@ -101,6 +101,13 @@ def create_driver(  # pylint:disable=R0913,R0914
             pages=pages,
         )
         sentences: Sentences = Sentences(words)
+    headlines_confidence = 1.0
+    if headlines:
+        try:
+            # TODO: REMOVE LATER AFTER UPGRADING IAMRAW
+            headlines_confidence = headlines.confidence
+        except AttributeError:
+            utila.error('require headlines.confidence, use 1.0')
     if textstyle:
         return protocol.driver(
             text_chunks=chunks,
@@ -108,12 +115,14 @@ def create_driver(  # pylint:disable=R0913,R0914
             doctextstyle=textstyle,
             quotations=quotations,
             sentences=sentences,
+            headlines_confidence=headlines_confidence,
         )
     return protocol.driver(
         text_chunks=chunks,
         nomagic_text_chunks=nomagic,
         quotations=quotations,
         sentences=sentences,
+        headlines_confidence=headlines_confidence,
     )
 
 

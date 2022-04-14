@@ -57,8 +57,21 @@ Seite beginnt mit einsamer Zeile: **{{rawline}}**.
 {darstellung/schriftbild#hurenkind}
 """
 
+HURENKIND_HEADLINES_CONFIDENCE_MIN = configo.HV_PERCENT_PLUS(default=80)
+
 
 def check_7620_lonely_page_start(linter: callable, driver):  # pylint:disable=R1260
+    """\
+    This check requires a high headline confidence to avoid a lot of
+    false postive headlines detected as `Hurenkind`.
+    """
+    if driver.headlines_confidence is None:
+        protocol.skip_method('headline confidence is None')
+        return
+    if driver.headlines_confidence < HURENKIND_HEADLINES_CONFIDENCE_MIN:
+        protocol.skip_method('headlines confidence too '
+                             f'low: {driver.headlines_confidence}')
+        return
     linewidth = textwidth(driver.text_chunks)
     text = decider_textflow.utils.page_chunks(driver.nomagic_text_chunks)
     for hurenkind in decider_textflow.startend.hurenkind.hurenkinds(
