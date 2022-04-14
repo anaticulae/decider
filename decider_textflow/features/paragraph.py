@@ -34,7 +34,7 @@ def work(
     pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     textstyle = serializeraw.load_doctextstyle(textstyle)
-    driver = decider_textflow.features.textdata(
+    driver = decider_textflow.features.create_driver(
         headlines,
         text,
         textpositions,

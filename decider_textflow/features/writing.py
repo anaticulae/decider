@@ -32,7 +32,7 @@ def work(
     words: str,
     pages: tuple = None,
 ) -> protocol.ResultType:
-    driver = decider_textflow.features.textdata(
+    driver = decider_textflow.features.create_driver(
         headlines,
         text,
         textpositions,

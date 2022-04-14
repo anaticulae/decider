@@ -32,7 +32,7 @@ def work(
     magiccontent: str,
     pages: tuple = None,
 ) -> typing.Tuple[str, str]:
-    driver = decider_textflow.features.textdata(
+    driver = decider_textflow.features.create_driver(
         headlines,
         text,
         textpositions,
