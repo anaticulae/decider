@@ -2,6 +2,16 @@
 
 Every noteable change is logged here.
 
+## v2.24.3
+
+### Feature
+
+* add missing links to docs (35589d02d639)
+
+### Fix
+
+* adjust hyperlink (09de56db273b)
+
 ## v2.24.2
 
 ### Fix
