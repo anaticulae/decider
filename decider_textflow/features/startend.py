@@ -20,6 +20,7 @@ import protocol
 import utila
 
 import decider_textflow.features
+import decider_textflow.startend.hurenkind
 import decider_textflow.utils
 
 
@@ -55,61 +56,20 @@ Seite beginnt mit einsamer Zeile: **{{rawline}}**.
 
 {darstellung/schriftbild#hurenkind}
 """
-HURENKIND_BEFORE = configo.HV_INT_PLUS(default=120)
-
-HURENKIND_LINEWIDTH = configo.HV_PERCENT_PLUS(default=90)
-
-SECOND_FULL_LINE_DIFF_MAX = configo.HV_FLOAT_PLUS(default=5.0)
 
 
 def check_7620_lonely_page_start(linter: callable, driver):  # pylint:disable=R1260
     linewidth = textwidth(driver.text_chunks)
-    hurenkind_maxwidth = linewidth * HURENKIND_LINEWIDTH
     text = decider_textflow.utils.page_chunks(driver.nomagic_text_chunks)
-    for page, content in text:
-        if len(content) < 2:
-            continue
-        if content[0] is None or content[1] is None:
-            continue
-        first_headline = isinstance(content[0], iamraw.Headline)
-        second_headline = isinstance(content[1], iamraw.Headline)
-        if first_headline and second_headline:
-            continue
-        if not first_headline:
-            if content[0].bounding.y0 > HURENKIND_BEFORE:
-                # this page does not start with text line, there is may a
-                # figure, table or something before.
-                continue
-        if second_headline and not first_headline:
-            if content[1].decoration is not None:
-                # CHAPTER-X-Pattern
-                # Title
-                continue
-            # hurenkind
-            # TEXT -> HEADLINE
-            location = iamraw.RangedLocation(page=page, line=0)
-            linter(
-                location=location,
-                rawline=content[0].text.strip(),
-            )
-            continue
-        if not first_headline and not second_headline:
-            # no headlines, text only
-            first_width = width(content[0])
-            second_width = width(content[1])
-            second_full_line = utila.near(
-                second_width,
-                linewidth,
-                diff=SECOND_FULL_LINE_DIFF_MAX,
-            )
-            if first_width <= hurenkind_maxwidth and second_full_line:
-                # hurenkind
-                # SHORT TEXT -> TEXT
-                location = iamraw.RangedLocation(page=page, line=0)
-                linter(
-                    location=location,
-                    rawline=content[0].text.strip(),
-                )
+    for hurenkind in decider_textflow.startend.hurenkind.hurenkinds(
+            text,
+            linewidth,
+    ):
+        rawline, location = hurenkind
+        linter(
+            rawline=rawline,
+            location=location,
+        )
 
 
 SOLUTION_7621 = """\
