@@ -104,6 +104,22 @@ def check_10510_hyperlink_existence(linter: callable, driver):
         linter(location=location, link=hyperlink)
 
 
+SOLUTION_E10515 = """\
+Hyperlink verweist auf lokale Datei
+
+Der Hyperlink **{{link.href|wordwrap(40)}}** verweist of die lokale
+Festplatte.
+"""
+
+
+def check_10515_hyperlink_local(linter: callable, driver):
+    for hyperlink in driver.hyperlinks:
+        if not decider.links.validate.hyperlink_local(hyperlink.href):
+            continue
+        location = iamraw.Location.from_page(hyperlink.page)
+        linter(link=hyperlink, location=location)
+
+
 SOLUTION_W10520 = """\
 Uneindeutige Zugriffsdaten erkannt
 
