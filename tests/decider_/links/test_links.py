@@ -73,3 +73,13 @@ def test_links_single_access_date_mixed(testdir, monkeypatch):
         msgids=10521,
     )
     assert not findings  # TODO: CHANGE AFTER PARSING ALL DOCUMENT LINKS
+
+
+def test_local_link_bachelor028(testdir, monkeypatch):
+    findings = run_links(
+        power.BACHELOR028_PDF,
+        testdir,
+        monkeypatch,
+        msgids=10515,
+    )
+    assert len(findings) == 2
