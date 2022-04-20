@@ -36,22 +36,3 @@ def visit(hyperlinks: list) -> list:
     outpath = os.path.join(directory, 'linkify__verify_verified.yaml')
     result = linkify.serialize.load_links(outpath)
     return result
-
-
-LOCAL_HYPERLINK = utila.compiles(r"""
-    file[:]
-    [\/]{2,3}
-    C
-    [:]
-    User
-""")
-
-
-def hyperlink_local(hyperlink: str) -> bool:
-    """\
-    >>> hyperlink_local('file:///C:User/documents')
-    True
-    """
-    if LOCAL_HYPERLINK.search(hyperlink):
-        return True
-    return False

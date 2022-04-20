@@ -13,6 +13,7 @@
 """
 
 import configo
+import german
 import iamraw
 import protocol
 import serializeraw
@@ -114,7 +115,7 @@ Festplatte.
 
 def check_10515_hyperlink_local(linter: callable, driver):
     for hyperlink in driver.hyperlinks:
-        if not decider.links.validate.hyperlink_local(hyperlink.href):
+        if not german.locallink(hyperlink.href):
             continue
         location = iamraw.Location.from_page(hyperlink.page)
         linter(link=hyperlink, location=location)
