@@ -60,20 +60,16 @@ def create_driver(  # pylint:disable=R0913,R0914
         headerfooterpath=headerfooter,
         pages=pages,
     )
+    if not navigators:
+        utila.error('no navigators given')
+        return None
     lists = serializeraw.load_lists(lists, pages=pages) if lists else []
     if not headlines:
         utila.error('no headlines given')
-    if not navigators:
-        utila.error('no navigators given')
     if utila.exists(magiccontent):
         magiccontent = serializeraw.load_magic_types(magiccontent, pages=pages)
     else:
         magiccontent = None
-    # TODO: DO WE REQUIRE HEADLINES?
-    # if not headlines or not navigators:
-    #     return None
-    if not navigators:
-        return None
     chunks = decider_textflow.utils.text_chunks(
         headlines,
         navigators,
