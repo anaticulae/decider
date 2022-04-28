@@ -37,7 +37,7 @@ RESOURCES = [
     (power.MASTER091B_PDF, '0:50'),
     (power.MASTER155_PDF, '0:30'),
     (power.BACHELOR037_PDF, '0:20'),
-    genex.todo(power.BACHELOR051_PDF, '0:30', color=True),
+    (power.BACHELOR051_PDF, '0:30'),
     (power.BACHELOR056_PDF, '0:20'),
     (power.BACHELOR128_PDF, '0:20,50:70'),
     (power.MASTER193_PDF, '80:100'),
