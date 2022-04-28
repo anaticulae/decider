@@ -28,6 +28,7 @@ SELECTED = dict(
     spacestation=True,
     words=True,
     codero=True,
+    headlines=True,
 )
 
 
