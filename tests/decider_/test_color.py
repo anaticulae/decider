@@ -9,10 +9,12 @@
 
 import power
 import protocol
+import utilatest
 
 import tests.decider_
 
 
+@utilatest.requires(power.BACHELOR051_PDF)
 def test_color_bachelor051(testdir, monkeypatch):
     source = power.link(power.BACHELOR051_PDF)
     cmd = f'-i {source} --color --pages=20'
