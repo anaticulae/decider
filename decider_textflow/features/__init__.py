@@ -56,8 +56,8 @@ def create_driver(  # pylint:disable=R0913,R0914
     navigators = serializeraw.create_pagetextcontentnavigators_fromfile(
         text=text,
         textpositions=textpositions,
-        sizeandborderpath=sizeandborders,
-        headerfooterpath=headerfooter,
+        sizeandborder=sizeandborders,
+        headerfooter=headerfooter,
         pages=pages,
     )
     if not navigators:
