@@ -104,6 +104,7 @@ def create_driver(  # pylint:disable=R0913,R0914
             doctextstyle=textstyle,
             quotations=quotations,
             sentences=sentences,
+            navigators=navigators,
             headlines_confidence=confidence(headlines),
         )
     return protocol.driver(
@@ -111,6 +112,7 @@ def create_driver(  # pylint:disable=R0913,R0914
         nomagic_text_chunks=nomagic,
         quotations=quotations,
         sentences=sentences,
+        navigators=navigators,
         headlines_confidence=confidence(headlines),
     )
 

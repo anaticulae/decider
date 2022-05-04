@@ -104,6 +104,8 @@ direkt am Seitenanfang stehen.
 
 FAILSTART_MAX = configo.HV_INT_PLUS(default=100)
 
+FAILSTART_HEADLINE_MAX = configo.HV_INT_PLUS(default=150)
+
 
 def check_7625_empty_start(linter: callable, driver):
     text = decider_textflow.utils.page_chunks(driver.nomagic_text_chunks)
@@ -112,9 +114,13 @@ def check_7625_empty_start(linter: callable, driver):
         protocol.skip_method('could not detect start/end')
         return
     start, _ = startend
-    failstart = start + FAILSTART_MAX
     for page, content in text:
-        if valid_pagestart(content, failstart=failstart):
+        navigator = utila.select_page(driver.navigators, page=page)
+        if valid_pagestart(
+                content,
+                start=start,
+                navigator=navigator,
+        ):
             continue
         location = iamraw.RangedLocation(
             page=page,
@@ -123,21 +129,28 @@ def check_7625_empty_start(linter: callable, driver):
         linter(location=location)
 
 
-def valid_pagestart(content, failstart: float) -> bool:
+def valid_pagestart(content, start: float, navigator) -> bool:
     if page_empty(content):
         return True
-    if isinstance(content[0], iamraw.Headline):
-        # TODO: ADD CHECK TO CHECK HEADLINES
-        return True
-    # if not content[0]:
-    #     # page starts with math content
-    #     continue
-    # TODO: HANDLE SINGLE ITEM ON PAGE
-    if content[0]:
-        # page starts with content, table, caption etc. will yield none
-        first = content[0]
+    first = content[0]
+    if isinstance(first, iamraw.Headline):
+        startindex = first.container
+        if isinstance(startindex, tuple):
+            startindex = startindex[0]
+        # TODO: REMOVE AFTER IMPROVING HEADLINE DATA STRUCTURE
+        first = navigator[startindex]
+        failstart = start + FAILSTART_HEADLINE_MAX
         if first.bounding.y0 <= failstart:
             return True
+        return False
+    if not content[0]:
+        # page starts with math, table etc.
+        return False
+    # TODO: HANDLE SINGLE ITEM ON PAGE
+    # page starts with content, table, caption etc. will yield none
+    failstart = start + FAILSTART_MAX
+    if first.bounding.y0 <= failstart:
+        return True
     return False
 
 
