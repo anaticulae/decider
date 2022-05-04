@@ -142,3 +142,20 @@ def test_character_missing_space_after_comma_master116_page23(
         msgids=7651,
     )
     assert not findings
+
+
+def test_bachelor028_highnote_space(testdir, monkeypatch):
+    """\
+    page:17
+    Dabei geht die Anti-BEPS-Richtlinie zum Teil auch inhaltlich
+    deutlich über die OECDEmpfehlungen hinaus. 60 Erstens,
+    """
+    source = power.link(power.BACHELOR028_PDF)
+    findings = decider_textflow_character(
+        source,
+        '17',
+        testdir,
+        monkeypatch,
+        msgids=7666,
+    )
+    assert len(findings) == 3  # VALIDATED
