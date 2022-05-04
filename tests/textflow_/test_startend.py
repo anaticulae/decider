@@ -52,13 +52,13 @@ def test_startend_hurenkind_bachelor90_page18(testdir, monkeypatch):
 
 
 @utilatest.longrun
-def test_startend_figure_start_bachelor90_page40_55(testdir, monkeypatch):
+def test_startend_figure_start_bachelor90p40p55(testdir, monkeypatch):
     with startend(power.BACHELOR090_PDF, '40:55', 7625, monkeypatch) as result:
         pages = sorted([finding.location.page for finding in result])
     assert pages == [41, 47, 50]
 
 
-def test_startend_figure_start_bachelor90_page34(testdir, monkeypatch):
+def test_startend_figure_start_bachelor90p34(testdir, monkeypatch):
     """Ensure to detect page starts with an image instead of text."""
     with startend(power.BACHELOR090_PDF, '34:40', 7625, monkeypatch) as result:
         assert len(result) == 1, str(result)
@@ -79,7 +79,7 @@ def test_startswith_figureonly_page(testdir, monkeypatch):
     assert not page18
 
 
-def test_startend_hurenkind_bachelor128_page7(testdir, monkeypatch):
+def test_startend_hurenkind_bachelor128p7(testdir, monkeypatch):
     with startend(power.BACHELOR128_PDF, '7', 7620, monkeypatch) as result:
         assert not result
 
