@@ -62,77 +62,70 @@
 04000 b(70.85;97.11;521.22;232.46)p27 Auflösung zu niedrig
 04001 b(70.85;340.03;522.7;662.63)p14 Auflösung unnötig hoch
 04001 b(70.85;97.11;524.45;435.41)p8 Auflösung unnötig hoch
-07005 0sp74 Satzende vor Aufzählung fehlt
 07005 s3p10 Satzende vor Aufzählung fehlt
-07010 s15p70 Satzende vor Gleichung fehlt
-07010 s18p70 Satzende vor Gleichung fehlt
-07010 s1p43 Satzende vor Gleichung fehlt
-07010 s1p52 Satzende vor Gleichung fehlt
-07010 s1p62 Satzende vor Gleichung fehlt
-07010 s6p11 Satzende vor Gleichung fehlt
+07010 s1p17 Satzende vor Gleichung fehlt
+07010 s2p43 Satzende vor Gleichung fehlt
+07010 s2p62 Satzende vor Gleichung fehlt
+07010 s4p53 Satzende vor Gleichung fehlt
+07010 s9p11 Satzende vor Gleichung fehlt
 07011 0sp20 Satzende vor Gleichung anpassen
-07011 0sp24 Satzende vor Gleichung anpassen
 07011 0sp29 Satzende vor Gleichung anpassen
-07011 0sp30 Satzende vor Gleichung anpassen
 07011 0sp34 Satzende vor Gleichung anpassen
-07011 0sp53 Satzende vor Gleichung anpassen
-07011 s11p15 Satzende vor Gleichung anpassen
-07011 s12p70 Satzende vor Gleichung anpassen
-07011 s15p59 Satzende vor Gleichung anpassen
-07011 s1p28 Satzende vor Gleichung anpassen
-07011 s1p29 Satzende vor Gleichung anpassen
-07011 s1p37 Satzende vor Gleichung anpassen
-07011 s1p39 Satzende vor Gleichung anpassen
+07011 0sp52 Satzende vor Gleichung anpassen
+07011 s11p57 Satzende vor Gleichung anpassen
+07011 s11p63 Satzende vor Gleichung anpassen
+07011 s12p27 Satzende vor Gleichung anpassen
+07011 s13p58 Satzende vor Gleichung anpassen
+07011 s19p59 Satzende vor Gleichung anpassen
+07011 s1p23 Satzende vor Gleichung anpassen
+07011 s1p24 Satzende vor Gleichung anpassen
 07011 s1p40 Satzende vor Gleichung anpassen
 07011 s1p40 Satzende vor Gleichung anpassen
 07011 s1p41 Satzende vor Gleichung anpassen
 07011 s1p41 Satzende vor Gleichung anpassen
-07011 s1p45 Satzende vor Gleichung anpassen
 07011 s1p55 Satzende vor Gleichung anpassen
-07011 s1p63 Satzende vor Gleichung anpassen
-07011 s1p64 Satzende vor Gleichung anpassen
-07011 s1p65 Satzende vor Gleichung anpassen
-07011 s2p22 Satzende vor Gleichung anpassen
-07011 s2p23 Satzende vor Gleichung anpassen
 07011 s2p25 Satzende vor Gleichung anpassen
 07011 s2p25 Satzende vor Gleichung anpassen
-07011 s2p26 Satzende vor Gleichung anpassen
-07011 s2p35 Satzende vor Gleichung anpassen
+07011 s2p29 Satzende vor Gleichung anpassen
+07011 s2p30 Satzende vor Gleichung anpassen
 07011 s2p36 Satzende vor Gleichung anpassen
 07011 s2p38 Satzende vor Gleichung anpassen
 07011 s2p42 Satzende vor Gleichung anpassen
-07011 s2p42 Satzende vor Gleichung anpassen
-07011 s2p46 Satzende vor Gleichung anpassen
+07011 s2p45 Satzende vor Gleichung anpassen
 07011 s2p56 Satzende vor Gleichung anpassen
-07011 s2p61 Satzende vor Gleichung anpassen
-07011 s2p66 Satzende vor Gleichung anpassen
-07011 s3p21 Satzende vor Gleichung anpassen
-07011 s3p24 Satzende vor Gleichung anpassen
+07011 s2p65 Satzende vor Gleichung anpassen
+07011 s3p22 Satzende vor Gleichung anpassen
 07011 s3p26 Satzende vor Gleichung anpassen
+07011 s3p28 Satzende vor Gleichung anpassen
+07011 s3p35 Satzende vor Gleichung anpassen
 07011 s3p44 Satzende vor Gleichung anpassen
-07011 s3p55 Satzende vor Gleichung anpassen
+07011 s3p61 Satzende vor Gleichung anpassen
+07011 s3p64 Satzende vor Gleichung anpassen
+07011 s4p21 Satzende vor Gleichung anpassen
 07011 s4p22 Satzende vor Gleichung anpassen
-07011 s4p31 Satzende vor Gleichung anpassen
-07011 s4p34 Satzende vor Gleichung anpassen
-07011 s4p38 Satzende vor Gleichung anpassen
+07011 s4p26 Satzende vor Gleichung anpassen
+07011 s4p37 Satzende vor Gleichung anpassen
+07011 s4p42 Satzende vor Gleichung anpassen
 07011 s4p54 Satzende vor Gleichung anpassen
-07011 s4p57 Satzende vor Gleichung anpassen
+07011 s4p55 Satzende vor Gleichung anpassen
 07011 s4p60 Satzende vor Gleichung anpassen
-07011 s4p62 Satzende vor Gleichung anpassen
-07011 s5p33 Satzende vor Gleichung anpassen
-07011 s6p52 Satzende vor Gleichung anpassen
+07011 s4p63 Satzende vor Gleichung anpassen
+07011 s4p66 Satzende vor Gleichung anpassen
+07011 s5p31 Satzende vor Gleichung anpassen
+07011 s5p34 Satzende vor Gleichung anpassen
+07011 s5p38 Satzende vor Gleichung anpassen
+07011 s5p39 Satzende vor Gleichung anpassen
+07011 s5p52 Satzende vor Gleichung anpassen
+07011 s5p57 Satzende vor Gleichung anpassen
+07011 s5p62 Satzende vor Gleichung anpassen
+07011 s6p24 Satzende vor Gleichung anpassen
+07011 s6p33 Satzende vor Gleichung anpassen
 07011 s7p32 Satzende vor Gleichung anpassen
-07011 s7p44 Satzende vor Gleichung anpassen
-07011 s7p58 Satzende vor Gleichung anpassen
-07011 s8p57 Satzende vor Gleichung anpassen
-07011 s8p63 Satzende vor Gleichung anpassen
-07011 s9p27 Satzende vor Gleichung anpassen
-07110 s10p11 Zitat zu lang
+07011 s7p46 Satzende vor Gleichung anpassen
+07011 s8p44 Satzende vor Gleichung anpassen
+07110 s13p11 Zitat zu lang
 07200 00p42 Referenz nicht gefunden
-07200 00p42 Referenz nicht gefunden
-07200 00p44 Referenz nicht gefunden
 07200 00p57 Referenz nicht gefunden
-07200 00p58 Referenz nicht gefunden
 07202 00p15 Referenz nicht gefunden
 07202 00p26 Referenz nicht gefunden
 07202 00p40 Referenz nicht gefunden
@@ -144,39 +137,61 @@
 07202 00p58 Referenz nicht gefunden
 07600 p10~l5 Fehler in der Perspektive
 07600 p20~l0 Fehler in der Perspektive
-07600 p21~l0 Fehler in der Perspektive
-07600 p23~l1 Fehler in der Perspektive
 07600 p24~l0 Fehler in der Perspektive
-07600 p24~l2 Fehler in der Perspektive
-07600 p27~l3 Fehler in der Perspektive
+07600 p24~l3 Fehler in der Perspektive
 07600 p32~l7 Fehler in der Perspektive
 07600 p36~l7 Fehler in der Perspektive
 07600 p37~l2 Fehler in der Perspektive
 07600 p38~l4 Fehler in der Perspektive
+07600 p39~l2 Fehler in der Perspektive
 07600 p43~l1 Fehler in der Perspektive
 07600 p46~l0 Fehler in der Perspektive
-07600 p46~l2 Fehler in der Perspektive
+07600 p46~l7 Fehler in der Perspektive
 07600 p48~l2 Fehler in der Perspektive
-07600 p52~l3 Fehler in der Perspektive
-07600 p53~l0 Fehler in der Perspektive
+07600 p52~l1 Fehler in der Perspektive
+07600 p53~l4 Fehler in der Perspektive
 07600 p56~l0 Fehler in der Perspektive
-07600 p58~l3 Fehler in der Perspektive
 07600 p60~l0 Fehler in der Perspektive
-07600 p68~l8 Fehler in der Perspektive
+07600 p68~l9 Fehler in der Perspektive
 07600 p69~l5 Fehler in der Perspektive
 07600 p69~l8 Fehler in der Perspektive
-07600 p74~l0 Fehler in der Perspektive
-07600 p74~l1 Fehler in der Perspektive
-07600 p74~l2 Fehler in der Perspektive
 07605 p12~l12 Satz zu lang
+07605 p15~l5 Satz zu lang
 07605 p32~l7 Satz zu lang
-07605 p48~l1 Satz zu lang
+07605 p48~l2 Satz zu lang
+07605 p6~l13 Satz zu lang
 07610 Nonep10 Satzmuster wiederholt sich
 07610 Nonep10 Satzmuster wiederholt sich
 07610 Nonep10 Satzmuster wiederholt sich
 07610 Nonep10 Satzmuster wiederholt sich
 07610 Nonep10 Satzmuster wiederholt sich
 07610 Nonep10 Satzmuster wiederholt sich
+07610 Nonep10 Satzmuster wiederholt sich
+07610 Nonep10 Satzmuster wiederholt sich
+07610 Nonep25 Satzmuster wiederholt sich
+07611 p11~l1 Satzanfang wiederholt sich
+07611 p12~l11 Satzanfang wiederholt sich
+07611 p13~l0 Satzanfang wiederholt sich
+07611 p21~l8 Satzanfang wiederholt sich
+07611 p22~l7 Satzanfang wiederholt sich
+07611 p23~l5 Satzanfang wiederholt sich
+07611 p25~l1 Satzanfang wiederholt sich
+07611 p25~l6 Satzanfang wiederholt sich
+07611 p26~l8 Satzanfang wiederholt sich
+07611 p27~l9 Satzanfang wiederholt sich
+07611 p31~l0 Satzanfang wiederholt sich
+07611 p32~l5 Satzanfang wiederholt sich
+07611 p33~l1 Satzanfang wiederholt sich
+07611 p35~l2 Satzanfang wiederholt sich
+07611 p42~l0 Satzanfang wiederholt sich
+07611 p46~l6 Satzanfang wiederholt sich
+07611 p57~l4 Satzanfang wiederholt sich
+07611 p58~l10 Satzanfang wiederholt sich
+07611 p58~l12 Satzanfang wiederholt sich
+07611 p58~l4 Satzanfang wiederholt sich
+07611 p59~l5 Satzanfang wiederholt sich
+07611 p63~l11 Satzanfang wiederholt sich
+07611 p68~l3 Satzanfang wiederholt sich
 07616 00p-1 Writing statistics
 07620 p15~l0 Hurenkind: Einsame Zeile am Seitenanfang
 07620 p2~l0 Hurenkind: Einsame Zeile am Seitenanfang
@@ -195,32 +210,44 @@
 07625 p60~l0 Seitenanfang: Seite beginnt nicht mit Text
 07625 p61~l0 Seitenanfang: Seite beginnt nicht mit Text
 07625 p64~l0 Seitenanfang: Seite beginnt nicht mit Text
-07661 p0~l0_1~c12_15 Schrägstrich: Überflüssiges Leerzeichen
-07661 p0~l13~c32_34 Schrägstrich: Überflüssiges Leerzeichen
-07661 p0~l18~c11_14 Schrägstrich: Überflüssiges Leerzeichen
-07661 p0~l4~c12_15 Schrägstrich: Überflüssiges Leerzeichen
-07661 p0~l6~c30_33 Schrägstrich: Überflüssiges Leerzeichen
-07661 p0~l8_9~c10_13 Schrägstrich: Überflüssiges Leerzeichen
-07661 p10~l22~c50_53 Schrägstrich: Überflüssiges Leerzeichen
-07661 p10~l22~c63_66 Schrägstrich: Überflüssiges Leerzeichen
-07661 p10~l22~c73_76 Schrägstrich: Überflüssiges Leerzeichen
-07661 p10~l29~c55_58 Schrägstrich: Überflüssiges Leerzeichen
-07661 p3~l19~c52_55 Schrägstrich: Überflüssiges Leerzeichen
-07661 p3~l19~c65_68 Schrägstrich: Überflüssiges Leerzeichen
-07661 p3~l19~c75_78 Schrägstrich: Überflüssiges Leerzeichen
-07661 p3~l25~c57_60 Schrägstrich: Überflüssiges Leerzeichen
-07661 p48~l11~c50_53 Schrägstrich: Überflüssiges Leerzeichen
-07661 p48~l11~c63_66 Schrägstrich: Überflüssiges Leerzeichen
-07661 p48~l11~c73_76 Schrägstrich: Überflüssiges Leerzeichen
-07661 p48~l18~c55_58 Schrägstrich: Überflüssiges Leerzeichen
-07661 p58~l1~c52_55 Schrägstrich: Überflüssiges Leerzeichen
-07661 p58~l1~c65_68 Schrägstrich: Überflüssiges Leerzeichen
-07661 p58~l1~c75_78 Schrägstrich: Überflüssiges Leerzeichen
-07662 p11~l19~c39_41 Fehlendes Leerzeichen nach Paragraf
+07630 p0_0~l0_2 Paragraph zu kurz
+07630 p0_0~l6_7 Paragraph zu kurz
+07630 p10_10~l11_12 Paragraph zu kurz
+07630 p11_11~l24_26 Paragraph zu kurz
+07630 p11_11~l7_8 Paragraph zu kurz
+07630 p12_12~l15_17 Paragraph zu kurz
+07630 p13_13~l5_8 Paragraph zu kurz
+07630 p15_15~l5_6 Paragraph zu kurz
+07630 p28_28~l3_5 Paragraph zu kurz
+07630 p29_29~l1_3 Paragraph zu kurz
+07630 p37_37~l0_2 Paragraph zu kurz
+07630 p37_37~l14_16 Paragraph zu kurz
+07630 p38_38~l13_14 Paragraph zu kurz
+07630 p3_3~l18_20 Paragraph zu kurz
+07630 p3_3~l22_24 Paragraph zu kurz
+07630 p40_40~l0_2 Paragraph zu kurz
+07630 p4_4~l31_33 Paragraph zu kurz
+07630 p52_52~l1_3 Paragraph zu kurz
+07630 p54_54~l0_2 Paragraph zu kurz
+07630 p57_57~l0_1 Paragraph zu kurz
+07630 p59_59~l0_2 Paragraph zu kurz
+07630 p59_59~l4_6 Paragraph zu kurz
+07630 p63_63~l0_1 Paragraph zu kurz
+07630 p70_70~l1_2 Paragraph zu kurz
+07630 p70_70~l27_28 Paragraph zu kurz
+07630 p70_70~l30_31 Paragraph zu kurz
+07630 p70_70~l6_7 Paragraph zu kurz
+07630 p70_71~l35_0 Paragraph zu kurz
+07630 p72_74~l27_0 Paragraph zu kurz
+07661 p58~l0~c17_20 Schrägstrich: Überflüssiges Leerzeichen
+07661 p58~l0~c27_30 Schrägstrich: Überflüssiges Leerzeichen
+07661 p58~l0~c4_7 Schrägstrich: Überflüssiges Leerzeichen
+07661 p63~l0~c52_55 Schrägstrich: Überflüssiges Leerzeichen
+07662 p11~l0~c15_17 Fehlendes Leerzeichen nach Paragraf
 08115 0sp65 Ungenaue Formulierung erkannt
-08115 0sp66 Ungenaue Formulierung erkannt
-08115 s1p65 Ungenaue Formulierung erkannt
-08115 s5p33 Ungenaue Formulierung erkannt
+08115 s1p66 Ungenaue Formulierung erkannt
+08115 s2p65 Ungenaue Formulierung erkannt
+08115 s6p33 Ungenaue Formulierung erkannt
 10500 000p9 Aufrufdatum fehlt
 10500 00p11 Aufrufdatum fehlt
 10500 00p27 Aufrufdatum fehlt
