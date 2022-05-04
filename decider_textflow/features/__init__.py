@@ -53,7 +53,7 @@ def create_driver(  # pylint:disable=R0913,R0914
     if magicvalid is None:
         magicvalid = iamraw.TEXTUAL  # pylint:disable=E1101
     headlines = serializeraw.load_headlines(headlines, pages=pages)
-    navigators = serializeraw.create_pagetextcontentnavigators_fromfile(
+    navigators = serializeraw.ptcn_fromfile(
         text=text,
         textpositions=textpositions,
         sizeandborder=sizeandborders,
