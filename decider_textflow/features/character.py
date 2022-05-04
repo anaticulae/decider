@@ -344,6 +344,43 @@ WRONG_ACCURACY = r'(etwa|circa|\bca\.?\b)[ ]{0,4}\d+'
 #     TODO: INVESTIGATE LATER
 #     check_character(linter, driver, WRONG_ACCURACY)
 
+SOLUTION_7666 = """\
+Überflüßiges Leerzeichen
+
+vor der Fußnote.
+"""
+
+HIGHNOTE_SPACE_BEFORE = r'[ ]{1,4}{{hn:\d{1,4}:nh}}'
+
+
+def check_7666_highnote_space_error(linter: callable, driver):
+    """\
+    >>> message('Dies ist eine Fußnote{{hn:3:nh}}', 7666)
+    0
+    >>> message('Dies ist eine Fußnote  {{hn:3:nh}}', 7666)
+    1
+    >>> message('hinaus. {{hn:60:nh}}')
+    1
+    """
+    check_character(linter, driver, HIGHNOTE_SPACE_BEFORE)
+
+
+SOLUTION_7667 = """\
+Überflüßiges Leerzeichen
+
+vor der Fußnote.
+"""
+
+HIGHNOTE_SPACE_TOO_MANY_AFTER = r'{{hn:\d{1,4}:nh}}[ ]{2,6}'
+
+
+def check_7667_highnote_space_error(linter: callable, driver):
+    """\
+    >>> message('Dies ist eine Fußnote{{hn:4:nh}}   zu viel Platz danach.', 7667)
+    1
+    """
+    check_character(linter, driver, HIGHNOTE_SPACE_TOO_MANY_AFTER)
+
 
 def message(lines: list, msgid=None, page=0):
     if isinstance(lines, str):
