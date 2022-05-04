@@ -43,8 +43,10 @@ def test_startend_hurenkind_bachelor90_page16(testdir, monkeypatch):
 
 def test_startend_hurenkind_bachelor90_page18(testdir, monkeypatch):
     """After a short line a full line follow, which marks a `Hurenkind`.
+
     Load one page before and one page after to load required
-    headlines."""
+    headlines.
+    """
     with startend(power.BACHELOR090_PDF, '17:19', 7620, monkeypatch) as result:
         assert len(result) == 1, str(result)
 
