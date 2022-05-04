@@ -122,6 +122,8 @@ def confidence(headlines) -> float:
     try:
         # TODO: REMOVE LATER AFTER UPGRADING IAMRAW
         headlines_confidence = headlines.confidence
+        if headlines_confidence is None:
+            return 1.0
     except AttributeError:
         utila.error('require headlines.confidence, use 1.0')
     return headlines_confidence
