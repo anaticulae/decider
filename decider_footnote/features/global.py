@@ -66,6 +66,8 @@ def check_2015_endnotes_using(linter, driver):
     ]
     if len(numbers) < ENDNOTE_CHECK_NUMBER_MIN:
         return
+    # remove part of footnote without number
+    numbers = [item for item in numbers if item != -1]
     if utila.isascending(numbers):
         return
     grouped = utila.groupby_ascending(numbers)
