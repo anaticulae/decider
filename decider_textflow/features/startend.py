@@ -114,22 +114,31 @@ def check_7625_empty_start(linter: callable, driver):
     start, _ = startend
     failstart = start + FAILSTART_MAX
     for page, content in text:
-        if page_empty(content):
+        if valid_pagestart(content, failstart=failstart):
             continue
-        if isinstance(content[0], iamraw.Headline):
-            # TODO: ADD CHECK TO CHECK HEADLINES
-            continue
-        # if not content[0]:
-        #     # page starts with math content
-        #     continue
-        # TODO: HANDLE SINGLE ITEM ON PAGE
-        if content[0]:
-            # page starts with content, table, caption etc. will yield none
-            first = content[0]
-            if first.bounding.y0 <= failstart:
-                continue
-        location = iamraw.RangedLocation(page=page, line=0)
+        location = iamraw.RangedLocation(
+            page=page,
+            line=0,
+        )
         linter(location=location)
+
+
+def valid_pagestart(content, failstart: float) -> bool:
+    if page_empty(content):
+        return True
+    if isinstance(content[0], iamraw.Headline):
+        # TODO: ADD CHECK TO CHECK HEADLINES
+        return True
+    # if not content[0]:
+    #     # page starts with math content
+    #     continue
+    # TODO: HANDLE SINGLE ITEM ON PAGE
+    if content[0]:
+        # page starts with content, table, caption etc. will yield none
+        first = content[0]
+        if first.bounding.y0 <= failstart:
+            return True
+    return False
 
 
 def page_empty(content) -> bool:
