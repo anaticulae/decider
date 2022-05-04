@@ -109,6 +109,7 @@ def check_7625_empty_start(linter: callable, driver):
     text = decider_textflow.utils.page_chunks(driver.nomagic_text_chunks)
     startend = page_startend(text)
     if startend is None:
+        protocol.skip_method('could not detect start/end')
         return
     start, _ = startend
     failstart = start + FAILSTART_MAX
