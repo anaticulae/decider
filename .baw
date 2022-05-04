@@ -7,6 +7,3 @@ source = decider_footnote
     decider_smarty
     decider_textflow
     fonts
-
-[release]
-fail_on_finding = True
