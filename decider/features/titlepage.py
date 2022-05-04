@@ -12,7 +12,6 @@ Titlepage
 =========
 """
 
-import functools
 import typing
 
 import iamraw
@@ -21,33 +20,25 @@ import serializeraw
 import utila
 
 
-def work(titlepage: str) -> typing.Tuple[str, str]:
-    linter = protocol.from_module(__name__)
+def work(titles: str) -> typing.Tuple[str, str]:
+    driver = create_driver(titlepage=titles)
+    location = 0
+    if driver.titlepage:  # pylint:disable=E1101
+        location = utila.ifnone(driver.titlepage.pageraw, default=0)  # pylint:disable=E1101
+    result = protocol.run(
+        modulename=__name__,
+        driver=driver,
+        location=iamraw.Location.from_page(location),
+    )
+    return result
+
+
+def create_driver(titlepage: str):
     if utila.exists(titlepage):
         titlepage: iamraw.TitlePage = serializeraw.load_titlepage(titlepage)
     else:
         titlepage = None
-    # run linter
-    linting(titlepage, linter)
-    result = linter.result(unique=True)
-    user, developer = protocol.dump_result(result, unique=True)
-    return user, developer
-
-
-def linting(
-    titlepage: iamraw.TitlePage,
-    linter: protocol.Linter,
-):
-    pdflocation = utila.ifnone(titlepage.pageraw, default=0) if titlepage else 0
-    location = iamraw.Location.from_page(pdflocation)
-    checkers = protocol.parse_checkers(__name__)
-    for checker in checkers:
-        call = functools.partial(
-            linter.add_finding,
-            msgid=checker.msgid,
-            location=location,
-        )
-        checker(call, titlepage)
+    return protocol.driver(titlepage=titlepage)
 
 
 SOLUTION_E1200 = """\
@@ -59,8 +50,8 @@ Fügen Sie eine Titelseite zum Dokument hinzu.
 """
 
 
-def check_1200_titlepage_existence(linter, titlepage):
-    if titlepage is not None:
+def check_1200_titlepage_existence(linter, driver):
+    if driver.titlepage:
         return
     linter(location=protocol.OVERVIEW)
 
@@ -75,10 +66,10 @@ der Titelseite hinzu.
 """
 
 
-def check_1220_author_existence(linter, titlepage):
-    if titlepage is None:
+def check_1220_author_existence(linter, driver):
+    if not driver.titlepage:
         return
-    if titlepage.author:
+    if driver.titlepage.author:
         return
     linter()
 
@@ -92,10 +83,10 @@ Fügen Sie ihre Matrikelnummer auf der Titelseite hinzu.
 """
 
 
-def check_1221_author_matrikel_existence(linter, titlepage):
-    if titlepage is None:
+def check_1221_author_matrikel_existence(linter, driver):
+    if not driver.titlepage:
         return
-    if titlepage.matrikel:
+    if driver.titlepage.matrikel:
         return
     linter()
 
@@ -110,10 +101,10 @@ Titelseite hinzu.
 """
 
 
-def check_1230_author_matrikel_existence(linter, titlepage):
-    if titlepage is None:
+def check_1230_author_matrikel_existence(linter, driver):
+    if not driver.titlepage:
         return
-    if titlepage.examiner:
+    if driver.titlepage.examiner:
         return
     linter()
 
@@ -128,9 +119,9 @@ Doktorarbeit oder Dissertation) auf der Titelseite hinzu.
 """
 
 
-def check_1210_thesis_type_existence(linter, titlepage):
-    if titlepage is None:
+def check_1210_thesis_type_existence(linter, driver):
+    if not driver.titlepage:
         return
-    if titlepage.thesis:
+    if driver.titlepage.thesis:
         return
     linter()
