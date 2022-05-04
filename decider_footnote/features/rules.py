@@ -111,6 +111,9 @@ def check_2002_no_dot_at_end(linter, driver):
         lastchar = text[-1]
         if lastchar == '.':
             continue
+        if len(text) == 1:
+            utila.error(f'invalid footnote: {footnote}')
+            continue
         if lastchar in QUOTATION_SIGNS and text[-2] == '.':
             # end with quotation .“
             continue
