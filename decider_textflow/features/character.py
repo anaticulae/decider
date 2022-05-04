@@ -7,7 +7,6 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import re
 import typing
 
 import iamraw
@@ -41,11 +40,7 @@ def check_character(linter, driver, regex):
         sentences, pagenumbers = page.content, page.pages
         for sentence, pagenumber in zip(sentences, pagenumbers):
             # TODO: SUPPORT MULTIPLE ERRORS IN ONE LINE
-            matched = re.finditer(
-                regex,
-                sentence,
-                flags=re.VERBOSE | re.IGNORECASE,
-            )
+            matched = regex.finditer(sentence)
             if not matched:
                 continue
             for match in matched:
@@ -70,7 +65,7 @@ Ungültiges Leerzeichen vor einem Komma erkannt.
 {darstellung/satzzeichen#komma}
 """
 
-SPACE_BEFORE_COMMA = r'\s+\,'
+SPACE_BEFORE_COMMA = utila.compiles(r'\s+\,')
 
 
 @protocol.disable_perpage(morethan=MORETHAN)
@@ -91,7 +86,7 @@ Fehlendes Leerzeichen nach einem Komma erkannt.
 """
 
 # TODO: ADD RISE to DISTINGUISH OF NORMAL NUMBERS
-MISSING_SPACE_AFTER_COMMA = r'\,[a-zA-Z]{3,}'
+MISSING_SPACE_AFTER_COMMA = utila.compiles(r'\,[a-zA-Z]{3,}')
 
 
 @protocol.disable_perpage(morethan=MORETHAN)
@@ -117,11 +112,11 @@ Ungültiges Leerzeichen vor einer eckigen Klammer erkannt.
 {darstellung/satzzeichen#klammer}
 """
 
-SPACE_BEFORE_SQUARE_BRACKET = r"""
+SPACE_BEFORE_SQUARE_BRACKET = utila.compiles(r"""
     [^\[\s]     # no open square bracket or space
     \s+         # white space(s) before closing bracket
     \]          # close with square bracket
-"""
+""")
 
 
 @protocol.disable_perpage(morethan=MORETHAN)
@@ -141,12 +136,12 @@ Unzuläßiges Leerzeichen nach eckiger Klammer
 Ungültiges Leerzeichen nach einer eckigen Klammer erkannt.
 """
 
-SPACE_AFTER_SQUARE_BRACKET = r"""
+SPACE_AFTER_SQUARE_BRACKET = utila.compiles(r"""
     \[          # start with open square bracket
     \s+?        # one or more space after open square bracket
     (?!\s*\])   # do not end with spaces and ] to distinguish from
                 # [ ] error message
-"""
+""")
 
 
 @protocol.disable_perpage(morethan=MORETHAN)
@@ -170,7 +165,7 @@ Unzuläßiges Leerzeichen vor Semikolon erkannt.
 {darstellung/satzzeichen#semikolon}
 """
 
-SPACE_BEFORE_SEMICOLON = r'\s+\;'
+SPACE_BEFORE_SEMICOLON = utila.compiles(r'\s+\;')
 
 
 @protocol.disable_perpage(morethan=MORETHAN)
@@ -186,7 +181,7 @@ Fehlendes Leerzeichen nach Semicolon erkannt.
 {darstellung/satzzeichen#semikolon}
 """
 
-MISSING_SPACE_AFTER_SEMICOLON = r'\;[^\s]'
+MISSING_SPACE_AFTER_SEMICOLON = utila.compiles(r'\;[^\s]')
 
 
 @protocol.disable_perpage(morethan=MORETHAN)
@@ -202,7 +197,7 @@ Gefunden **[ ]** ersetzen Sie es durch **[...]**
 {darstellung/satzzeichen#auslassungspunkte}
 """
 
-MISSING_DOTS_BETWEEN_ANGLE_BRACKETS = r'\[\s*\]'
+MISSING_DOTS_BETWEEN_ANGLE_BRACKETS = utila.compiles(r'\[\s*\]')
 
 
 @protocol.disable_perpage(morethan=MORETHAN)
@@ -231,7 +226,7 @@ wird die Zahl wenn sie eine ungefähre Zahl beinhaltet.
 {darstellung/satzzeichen#divis}
 """
 
-MISSING_MINUS_BETWEEN_VALUE_AND_SIGN = r'\d+(mal)'
+MISSING_MINUS_BETWEEN_VALUE_AND_SIGN = utila.compiles(r'\d+(mal)')
 
 
 @protocol.disable_perpage(morethan=MORETHAN)
@@ -253,7 +248,7 @@ Vor und nach einem Schrägstrich wird kein Leerzeichen gesetzt.
 {darstellung/satzzeichen#schragstrich}
 """
 
-SPACE_BEFORE_OR_AFTER_SLASH = r'([ ]\/[ ]|[ ]\/|\/[ ])'
+SPACE_BEFORE_OR_AFTER_SLASH = utila.compiles(r'([ ]\/[ ]|[ ]\/|\/[ ])')
 
 
 @protocol.disable_perpage(morethan=MORETHAN)
@@ -279,7 +274,7 @@ Zwischen Paragrafzeichen und der Paragrafnummer wird ein Festabstand gesetzt.
 {darstellung/satzzeichen#paragrafzeichen}
 """
 
-SPACE_AFTER_PARAGRAPH = r'§\d+[a-z]?'
+SPACE_AFTER_PARAGRAPH = utila.compiles(r'§\d+[a-z]?')
 
 
 @protocol.disable_perpage(morethan=MORETHAN)
@@ -306,7 +301,7 @@ Siehe Duden:
 {darstellung/satzzeichen#divis}
 """
 
-MISSING_MINUS_BETWEEN = r'\d+(jährig)(en){0,1}'
+MISSING_MINUS_BETWEEN = utila.compiles(r'\d+(jährig)(en){0,1}')
 
 
 @protocol.disable_perpage(morethan=MORETHAN)
@@ -328,7 +323,7 @@ relativiert. Schreiben Sie die Zahl aus um dies deutlich zu machen.
 {darstellung/schreibweise#zahlen}
 """
 
-WRONG_ACCURACY = r'(etwa|circa|\bca\.?\b)[ ]{0,4}\d+'
+WRONG_ACCURACY = utila.compiles(r'(etwa|circa|\bca\.?\b)[ ]{0,4}\d+')
 
 # def check_7665_wrong_accuracy(linter: callable, driver):
 #     """\
@@ -344,7 +339,7 @@ SOLUTION_7666 = """\
 vor hochgestellter Zahl **{{text}}**.
 """
 
-HIGHNOTE_SPACE_BEFORE = r'[ ]{1,4}{{hn:\d{1,4}:nh}}'
+HIGHNOTE_SPACE_BEFORE = utila.compiles(r'[ ]{1,4}{{hn:\d{1,4}:nh}}')
 
 
 def check_7666_highnote_space_error(linter: callable, driver):
@@ -365,7 +360,7 @@ SOLUTION_7667 = """\
 nach hochgestellter Zahl **{{text}}**.
 """
 
-HIGHNOTE_SPACE_TOO_MANY_AFTER = r'{{hn:\d{1,4}:nh}}[ ]{2,6}'
+HIGHNOTE_SPACE_TOO_MANY_AFTER = utila.compiles(r'{{hn:\d{1,4}:nh}}[ ]{2,6}')
 
 
 def check_7667_highnote_space_error(linter: callable, driver):
