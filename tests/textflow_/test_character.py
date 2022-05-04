@@ -89,6 +89,7 @@ def test_textflow_character_space_after_square_bracket(testdir, monkeypatch):
     assert len(findings) == 2
 
 
+@pytest.mark.xfail(reason='ana is changed from all to sentence only')
 @utilatest.longrun
 def test_textflow_character_missing_space_before_semicolon(testdir, monkeypatch): # yapf:disable
     source = power.link(power.BACHELOR090_PDF)
