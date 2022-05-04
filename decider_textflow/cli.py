@@ -25,8 +25,8 @@ CONTENT_INPUT = [
 WORKPLAN = [
     utila.create_step(
         'character',
-        inputs=CONTENT_INPUT + [
-            utila.ResultFile('magic', 'content_content'),
+        inputs=[
+            utila.ResultFile('words', 'sentences_sentences'),
         ],
         output=protocol.ResultDefault,
     ),

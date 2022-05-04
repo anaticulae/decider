@@ -13,7 +13,7 @@ import typing
 import iamraw
 import protocol
 import serializeraw
-import texmex
+import utila
 
 import decider_textflow.features
 
@@ -21,23 +21,14 @@ MORETHAN = 10
 
 
 def work(
-    headlines: str,
-    text: str,
-    textpositions: str,
-    sizeandborders: str,
-    headerfooter: str,
-    magiccontent: str,
+    sentences: str,
     pages: tuple = None,
 ) -> typing.Tuple[str, str]:
-    driver = decider_textflow.features.create_driver(
-        headlines,
-        text,
-        textpositions,
-        sizeandborders,
-        headerfooter,
-        magiccontent=magiccontent,
+    sentences = serializeraw.load_text(
+        sentences,
         pages=pages,
     )
+    driver = protocol.driver(sentences=sentences)
     result = protocol.run(
         modulename=__name__,
         driver=driver,
@@ -46,26 +37,29 @@ def work(
 
 
 def check_character(linter, driver, regex):
-    text = driver.nomagic_text_chunks
-    for page, line, item in text:
-        if isinstance(item, iamraw.Headline):
-            continue
-        if not item:
-            # magic content
-            continue
-        text = item.text
-        # TODO: SUPPORT MULTIPLE ERRORS IN ONE LINE
-        matched = re.finditer(regex, text, flags=re.VERBOSE | re.IGNORECASE)
-        if not matched:
-            continue
-        for match in matched:
-            location = iamraw.RangedLocation(
-                page=page,
-                line=line,
-                char=match.start(),
-                char_end=match.end(),
+    for page in utila.flatten_content(driver.sentences):
+        sentences, pagenumbers = page.content, page.pages
+        for sentence, pagenumber in zip(sentences, pagenumbers):
+            # TODO: SUPPORT MULTIPLE ERRORS IN ONE LINE
+            matched = re.finditer(
+                regex,
+                sentence,
+                flags=re.VERBOSE | re.IGNORECASE,
             )
-            linter(location=location)
+            if not matched:
+                continue
+            for match in matched:
+                # TODO: ADJUST LINE LATER
+                location = iamraw.RangedLocation(
+                    page=pagenumber,
+                    line=0,
+                    char=match.start(),
+                    char_end=match.end(),
+                )
+                linter(
+                    location=location,
+                    text=utila.extract_match(match),
+                )
 
 
 SOLUTION_7650 = """\
@@ -347,7 +341,7 @@ WRONG_ACCURACY = r'(etwa|circa|\bca\.?\b)[ ]{0,4}\d+'
 SOLUTION_7666 = """\
 Überflüßiges Leerzeichen
 
-vor der Fußnote.
+vor hochgestellter Zahl **{{text}}**.
 """
 
 HIGHNOTE_SPACE_BEFORE = r'[ ]{1,4}{{hn:\d{1,4}:nh}}'
@@ -368,7 +362,7 @@ def check_7666_highnote_space_error(linter: callable, driver):
 SOLUTION_7667 = """\
 Überflüßiges Leerzeichen
 
-vor der Fußnote.
+nach hochgestellter Zahl **{{text}}**.
 """
 
 HIGHNOTE_SPACE_TOO_MANY_AFTER = r'{{hn:\d{1,4}:nh}}[ ]{2,6}'
@@ -385,13 +379,18 @@ def check_7667_highnote_space_error(linter: callable, driver):
 def message(lines: list, msgid=None, page=0):
     if isinstance(lines, str):
         lines = [lines]
-    # page, line, text
-    lines = [(
-        page,
-        line,
-        texmex.TextBoundsInfo(text=content, bounds=None),
-    ) for line, content in enumerate(lines)]
-    driver = protocol.driver(text_chunks=lines, nomagic_text_chunks=lines)
+    sentences = [
+        iamraw.PageContentText(
+            page=page,
+            content=[
+                iamraw.TextSection(
+                    content=lines,
+                    pages=[page] * len(lines),
+                )
+            ],
+        )
+    ]
+    driver = protocol.driver(sentences=sentences)
     user, _ = decider_textflow.features.linting(__name__, driver)
     result = serializeraw.load_findings(user, msgid)
     return len(result)
