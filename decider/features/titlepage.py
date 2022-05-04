@@ -21,17 +21,16 @@ import serializeraw
 import utila
 
 
-def work(titlepage_path: str) -> typing.Tuple[str, str]:
+def work(titlepage: str) -> typing.Tuple[str, str]:
     linter = protocol.from_module(__name__)
-
-    titlepage: iamraw.TitlePage = serializeraw.load_titlepage(titlepage_path)
-
+    if utila.exists(titlepage):
+        titlepage: iamraw.TitlePage = serializeraw.load_titlepage(titlepage)
+    else:
+        titlepage = None
     # run linter
     linting(titlepage, linter)
-
     result = linter.result(unique=True)
     user, developer = protocol.dump_result(result, unique=True)
-
     return user, developer
 
 
