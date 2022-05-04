@@ -12,6 +12,7 @@ import typing
 import iamraw
 import protocol
 import serializeraw
+import texmex
 import utila
 
 import decider_textflow.features
@@ -39,6 +40,9 @@ def check_character(linter, driver, regex):
     for page in utila.flatten_content(driver.sentences):
         sentences, pagenumbers = page.content, page.pages
         for sentence, pagenumber in zip(sentences, pagenumbers):
+            if texmex.nosentence(sentence):
+                # do not judge list, formula etc.
+                continue
             # TODO: SUPPORT MULTIPLE ERRORS IN ONE LINE
             matched = regex.finditer(sentence)
             if not matched:
