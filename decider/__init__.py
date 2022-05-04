@@ -61,7 +61,7 @@ import configo
 
 import decider.__patch__
 
-__version__ = '2.24.3'
+__version__ = '2.25.0'
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 

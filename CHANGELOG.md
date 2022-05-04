@@ -2,6 +2,28 @@
 
 Every noteable change is logged here.
 
+## v2.25.0
+
+### Feature
+
+* introduce start check for headlines (314359da0533)
+* extend debugging information (26f9f137922a)
+* compile pattern (7c1f6833b718)
+* use higher extracted data source to reduce complexity (8ffebc96ae04)
+* add highnote space linter error (5412a6e933f2)
+* add hyperlink local checker (2a5f276852b7)
+* add method to find local hyperlink (bdcb78ecef97)
+* disable check on low headline confidence (70115585cf59)
+
+### Fix
+
+* skip non sentences (1de9bd104a78)
+* do not skip missing headlines confidence (fb4773207a68)
+* improve endnote checker on bad quality footnotes (589416c0f555)
+* skip invalid footnote (5b746dec9eba)
+* do not fail on missing title page (59432d1d670a)
+* add missing headlines extractor (ec19446e8453)
+
 ## v2.24.3
 
 ### Feature
