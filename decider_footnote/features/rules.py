@@ -30,16 +30,17 @@ def work(
     pages: tuple = None,
 ) -> protocol.ResultType:
     # load data
-    footnotes = serializeraw.load_footnotes(footerheader, pages)
-    footnotes_flat = utila.flatten_content(footnotes)
-    horizontals = serializeraw.load_horizontals(horizontals, pages=pages)
-    driver = protocol.driver(
-        footnotes=footnotes_flat,
-        footnotes_pages=footnotes,
-        horizontals=horizontals,
+    driver = create_driver(
+        footerheader,
+        horizontals,
+        pages=pages,
     )
     # run linting
-    result = protocol.run(__name__, driver=driver, before_dump=before_dump)
+    result = protocol.run(
+        __name__,
+        driver=driver,
+        before_dump=before_dump,
+    )
     return result
 
 
@@ -56,6 +57,18 @@ def before_dump(result, driver, linter):
         result = linter.result()
     result = decider_footnote.rules.start.judge_active(result, footnote_count)
     return result
+
+
+def create_driver(footerheader: str, horizontals: str, pages: tuple):
+    footnotes = serializeraw.load_footnotes(footerheader, pages)
+    footnotes_flat = utila.flatten_content(footnotes)
+    horizontals = serializeraw.load_horizontals(horizontals, pages=pages)
+    driver = protocol.driver(
+        footnotes=footnotes_flat,
+        footnotes_pages=footnotes,
+        horizontals=horizontals,
+    )
+    return driver
 
 
 SOLUTION_2001 = """\
