@@ -12,8 +12,10 @@ PageOrder
 =========
 """
 
+import iamraw
 import protocol
 import serializeraw
+import utila
 
 import decider.page
 
@@ -21,9 +23,16 @@ import decider.page
 # FOOTER, NOT MIXED OR BOTH
 
 
-def work(headerfooter: str, pages: tuple = None) -> protocol.ResultType:
+def work(
+    headerfooter: str,
+    sections: str,
+    pagenumbers: str = None,
+    pages: tuple = None,
+) -> protocol.ResultType:
     driver = create_driver(
         headerfooter,
+        sections,
+        pagenumbers,
         pages=pages,
     )
     # TODO: ADD PROCESS TO VALIDATE PAGE NUMBERS IN HEADER
@@ -34,12 +43,37 @@ def work(headerfooter: str, pages: tuple = None) -> protocol.ResultType:
     return result
 
 
-def create_driver(headerfooter: str, pages: tuple = None):
+def create_driver(
+    headerfooter: str,
+    sections: str,
+    pagenumbers: str,
+    pages: tuple = None,
+):
     headerfooter = serializeraw.load_headerfooter(
         headerfooter,
         pages=pages,
     )
-    result = protocol.driver(headerfooter=headerfooter)
+    if utila.exists(sections):
+        sections = serializeraw.load_sections(
+            sections,
+            pages=pages,
+        )
+    else:
+        utila.error(f'missing: {sections}')
+        sections = None
+    if utila.exists(pagenumbers):
+        pagenumbers = serializeraw.load_pagenumbers(
+            pagenumbers,
+            pages=pages,
+        )
+    else:
+        utila.error(f'missing: {pagenumbers}')
+        pagenumbers = None
+    result = protocol.driver(
+        headerfooter=headerfooter,
+        sections=sections,
+        pagenumbers=pagenumbers,
+    )
     return result
 
 

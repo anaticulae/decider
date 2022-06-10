@@ -16,7 +16,7 @@ import decider.features.page
 
 def user_work(path: str):
     headerfooter = iamraw.path.headerfooters(path)
-    user, _ = decider.features.page.work(headerfooter)
+    user, _ = decider.features.page.work(headerfooter, sections=None)
     loaded = serializeraw.load_findings(user)
     return loaded
 

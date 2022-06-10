@@ -56,6 +56,8 @@ WORKPLAN = [
         'page',
         [
             utila.ResultFile('groupme', 'footer_footerheader'),
+            utila.ResultFile('sections', 'section_result'),
+            utila.ResultFile('groupme', 'pagenumbers_pagenumbers'),
         ],
         protocol.ResultDefault,
     ),
