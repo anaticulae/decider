@@ -99,3 +99,41 @@ def check_1960_ascending_pages(linter, driver):
             before=item.before,
             text=item.text,
         )
+
+
+SOLUTION_1965 = """\
+Eidesstattliche Erklärung enthält Seitenzahl
+
+Die eidesstattliche Erklärung ist kein Teil des Dokuments und enthält
+ somit keine Seitenzahl und ist auch nicht Teil der Seitenzählung.
+
+Seitenzahl: **{{userpage}}** erkannt.
+
+# TODO: ADD DOCS
+"""
+
+
+def check_1965_legal_with_pagenumber(linter, driver):
+    sections = driver.sections
+    pagenumbers = driver.pagenumbers
+    if not sections or not pagenumbers:
+        protocol.skip_method(f'missing: {sections} {pagenumbers}')
+        return
+    sections = [
+        item for item in utila.flatten_content(sections)
+        if isinstance(item, iamraw.sections.LegalInformation)
+    ]
+    if not sections:
+        return
+    legal_pdfpage = int(sections[0].start)
+    pagenumbers = [
+        item for item in pagenumbers if item.pdfpage == legal_pdfpage
+    ]
+    if not pagenumbers:
+        return
+    location = iamraw.Location.from_page(page=legal_pdfpage)
+    userpage = pagenumbers[0].detected
+    linter(
+        location=location,
+        userpage=userpage,
+    )
