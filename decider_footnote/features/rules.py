@@ -171,7 +171,9 @@ def check_2100_incomplete_pagenumber(linter, driver):
 SOLUTION_2105 = """\
 Fußnote {{number}}: Fehlendes Leerzeichen
 
-Fußnote: **{{text}}**
+Fügen Sie ein Leerzeichen zwischen Ziffer und Text hinzu:
+
+{{text}}
 """
 
 
