@@ -50,9 +50,11 @@ def work(
 
 
 SOLUTION_7620 = """\
-Hurenkind: Einsame Zeile am Seitenanfang
+Einsame Zeile am Seitenanfang
 
-Seite beginnt mit einsamer Zeile: **{{rawline}}**.
+Seite beginnt mit einsamer Zeile:
+
+**{{rawline}}**.
 
 {darstellung/schriftbild#hurenkind}
 """

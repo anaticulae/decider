@@ -194,9 +194,9 @@
 07611 p63~l11 Satzanfang wiederholt sich
 07611 p68~l3 Satzanfang wiederholt sich
 07616 00p-1 Writing statistics
-07620 p15~l0 Hurenkind: Einsame Zeile am Seitenanfang
-07620 p2~l0 Hurenkind: Einsame Zeile am Seitenanfang
-07620 p4~l0 Hurenkind: Einsame Zeile am Seitenanfang
+07620 p15~l0 Einsame Zeile am Seitenanfang
+07620 p2~l0 Einsame Zeile am Seitenanfang
+07620 p4~l0 Einsame Zeile am Seitenanfang
 07625 p21~l0 Seitenanfang: Seite beginnt nicht mit Text
 07625 p23~l0 Seitenanfang: Seite beginnt nicht mit Text
 07625 p27~l0 Seitenanfang: Seite beginnt nicht mit Text
