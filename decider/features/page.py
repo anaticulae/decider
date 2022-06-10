@@ -60,4 +60,8 @@ def check_1960_ascending_pages(linter, driver):
     footers = [item.footer for item in driver.headerfooter]
     validated_footer = decider.page.validate(footers)
     for item in validated_footer:
-        linter(current=item.current, before=item.before, text=item.text)
+        linter(
+            current=item.current,
+            before=item.before,
+            text=item.text,
+        )
