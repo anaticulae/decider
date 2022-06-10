@@ -341,6 +341,8 @@ SOLUTION_7666 = """\
 Überflüßiges Leerzeichen
 
 vor hochgestellter Zahl **{{text}}**.
+
+{darstellung/satzzeichen}
 """
 
 HIGHNOTE_SPACE_BEFORE = utila.compiles(r'[ ]{1,4}{{hn:\d{1,4}:nh}}')
@@ -362,6 +364,8 @@ SOLUTION_7667 = """\
 Überflüßiges Leerzeichen
 
 nach hochgestellter Zahl **{{text}}**.
+
+{darstellung/satzzeichen}
 """
 
 HIGHNOTE_SPACE_TOO_MANY_AFTER = utila.compiles(r'{{hn:\d{1,4}:nh}}[ ]{2,6}')
