@@ -125,3 +125,26 @@ def check_1210_thesis_type_existence(linter, driver):
     if driver.titlepage.thesis:
         return
     linter()
+
+
+SOLUTION_1211 = """\
+Seitenzahl auf Titelblatt
+
+Das Titelblatt einhält eine Seitenzahl: **{{pagenumber}}**.
+ Es wird empfohlen keine Seitenzahl auf dem Titelblatt anzugeben.
+
+{elemente/titelblatt}
+"""
+
+
+def check_1211_titlepage_no_pagenumber(linter, driver):
+    if not driver.titlepage:
+        return
+    try:
+        pagenumber = driver.titlepage.pagenumber
+    except AttributeError:
+        # TODO: REMOVE AFTER UPGRADING IAMRAW
+        pagenumber = None
+    if not pagenumber:
+        return
+    linter(pagenumber=pagenumber)
