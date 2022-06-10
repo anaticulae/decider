@@ -93,8 +93,9 @@ def check_7600_text_perspective(linter: callable, driver):
 SOLUTION_7605 = """\
 Satz zu lang
 
-Satz *{{line}}* überschreitet Limit. Anzahl der Zeichen({{numbers}}) \
-zu hoch.
+**{{line}}**
+
+Anzahl {{numbers}} der Zeichen ist zu hoch.
 """
 
 SENTENCE_LENGTH_MAX = configo.HV_INT_PLUS(default=400)
