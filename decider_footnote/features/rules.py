@@ -99,6 +99,8 @@ def check_2001_no_uppercase_at_start(linter, driver):
         if firstchar in QUOTATION_SIGNS:
             # start with quotation
             continue
+        if href_only(text):
+            continue
         if decider_footnote.rules.start.footnote_exception(text):
             # disable for mails and hyperlinks
             continue
@@ -123,6 +125,8 @@ def check_2002_no_dot_at_end(linter, driver):
         text = footnote.text.strip()
         lastchar = text[-1]
         if lastchar == '.':
+            continue
+        if href_only(text):
             continue
         if len(text) == 1:
             utila.error(f'invalid footnote: {footnote}')
@@ -359,3 +363,23 @@ IBIDEM = utila.compiles(r"""
     vgl\.[ ]{0,3}ibidem
 )
 """)
+
+
+def href_only(text: str) -> bool:
+    """Check that the complete text is covered by a hyperlink.
+
+    >>> href_only('https://git.imp.fu-berlin.de/besendorf/android-security-scanner/')
+    True
+    """
+    text = text.strip()
+    if len(text.split()) > 1:
+        # more than one word
+        return False
+    hypers = german.hyperlink(text)
+    if not hypers:
+        return False
+    if len(hypers) == 1:
+        if len(hypers[0]) == len(text):
+            # all text is covered by hyperlink
+            return True
+    return False
