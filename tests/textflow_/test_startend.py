@@ -35,8 +35,10 @@ def startend(source, pages, findingid, monkeypatch):
 
 
 def test_startend_hurenkind_bachelor90_page16(testdir, monkeypatch):
-    """After oneline a headline follow which marks a `Hurenkind`. Load
-    one page before and one page after to load required headlines."""
+    """After oneline a headline follow which marks a `Hurenkind`.
+
+    Load one page before and one page after to load required headlines.
+    """
     with startend(power.BACHELOR090_PDF, '15:17', 7620, monkeypatch) as result:
         assert len(result) == 1, str(result)
 
