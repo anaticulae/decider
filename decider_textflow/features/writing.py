@@ -177,6 +177,7 @@ def check_7610_sentence_pattern(linter: callable, driver):
     for txt, occurence in repeating:
         pages = [item[0] for item in occurence]
         location = iamraw.Location(page=pages[0])
+        pages = [driver.pagenumbers_magic.get(pdfpage) for pdfpage in pages]
         linter(
             sentence=txt,
             pages=utila.from_tuple(pages, separator=', '),
