@@ -23,12 +23,11 @@ import tests
     ),
 ])
 @utilatest.longrun
-def test_cli_groupme_abbreviation_text(source, pages, testdir, monkeypatch):
+def test_cli_reftable_abbreviation_text(source, pages, testdir, monkeypatch):
     """Run decider"""
     root = testdir.tmpdir
-    cmd = f'groupme -i {source} -o {root} --abbreviation --pages={pages}'
+    cmd = f'reftable -i {source} -o {root} --abbrev --pages={pages}'
     completed = utila.run(cmd)
     assert completed.returncode == utila.SUCCESS, str(completed)
-
     cmd = f'-i {root} -i {source} -o {root} --abbreviation_text'
     tests.run_decider(cmd, monkeypatch)
