@@ -7,26 +7,12 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import functools
-
 import utila
 import utilatest
 
-import decider_textflow.cli
+import decider_textflow
 
-# pylint:disable=C0103
-run = functools.partial(
-    utilatest.run_command,
-    main=decider_textflow.cli.main,
-    process=decider_textflow.PROCESS,
-    success=True,
-)
-fail = functools.partial(
-    utilatest.run_command,
-    main=decider_textflow.cli.main,
-    process=decider_textflow.PROCESS,
-    success=False,
-)
+run, fail = utilatest.create_cli_runner(decider_textflow)
 
 
 def run_textflow(

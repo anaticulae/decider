@@ -7,23 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import functools
-
-import utila
 import utilatest
 
-import decider_smarty.cli
+import decider_smarty
 
-# pylint:disable=C0103
-run = functools.partial(
-    utilatest.run_command,
-    main=decider_smarty.cli.main,
-    process=decider_smarty.PROCESS,
-    success=True,
-)
-fail = functools.partial(
-    utilatest.run_command,
-    main=decider_smarty.cli.main,
-    process=decider_smarty.PROCESS,
-    success=False,
-)
+run, fail = utilatest.create_cli_runner(decider_smarty)

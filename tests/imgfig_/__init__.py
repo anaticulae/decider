@@ -7,24 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import functools
-import os
-
-import utila
 import utilatest
 
-import decider_imgfig.cli
+import decider_imgfig
 
-# pylint:disable=C0103
-run = functools.partial(
-    utilatest.run_command,
-    main=decider_imgfig.cli.main,
-    process=decider_imgfig.PROCESS,
-    success=True,
-)
-fail = functools.partial(
-    utilatest.run_command,
-    main=decider_imgfig.cli.main,
-    process=decider_imgfig.PROCESS,
-    success=False,
-)
+run, fail = utilatest.create_cli_runner(decider_imgfig)
