@@ -83,7 +83,7 @@ def check_5100_used_before_defined(
     text: iamraw.ExtractedTextAbbreviations,
 ):
     # TODO: Use table to verify lintings?
-    flat = flat_abbreviation(text)
+    flat = utila.flatten_content(text)
     grouped = itertools.groupby(flat, key=lambda x: x.short)
     for key, values in grouped:
         values = list(values)
@@ -108,13 +108,6 @@ def check_5100_used_before_defined(
             )
 
 
-def flat_abbreviation(items):
-    result = []
-    for item in items:
-        result.extend(item.content)
-    return result
-
-
 SOLUTION_E5110 = """\
 Abkürzung wurde nicht im Text verwerdet
 
@@ -127,7 +120,7 @@ def check_5110_unused_abbreviation(
     table: iamraw.AbbreviationResult,
     text: iamraw.ExtractedTextAbbreviations,
 ):
-    flat = flat_abbreviation(text)
+    flat = utila.flatten_content(text)
     unique = {item.short for item in flat}
     for item in table:
         if item.short in unique:
