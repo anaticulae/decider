@@ -1,5 +1,4 @@
 01220 000p1 Titelseite enthält keinen Autor
-02001 00p34 Fußnote -1 beginnt nicht mit einem Großbuchstaben
 02010 00p23 Fußnote 8 falsch formatiert
 02013 00p-1 Empfehlung: Ende der Fußnote
 02015 00p-1 Endnoten verwendet
@@ -29,9 +28,6 @@
 02105 00p62 Fußnote 7: Fehlendes Leerzeichen
 02105 00p63 Fußnote 8: Fehlendes Leerzeichen
 02105 00p77 Fußnote 1: Fehlendes Leerzeichen
-02110 00p-1 Kopfzeile: Redundanter Inhalt
-02110 00p-1 Kopfzeile: Redundanter Inhalt
-02110 00p-1 Kopfzeile: Redundanter Inhalt
 04000 b(115.39;124.73;476.89;279.23)p64 Auflösung zu niedrig
 04000 b(131.98;214.37;460.3;521.57)p35 Auflösung zu niedrig
 04000 b(131.98;76.53;460.3;239.74)p41 Auflösung zu niedrig
