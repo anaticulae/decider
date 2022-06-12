@@ -30,4 +30,4 @@ def test_cli_reftable_abbreviation_text(source, pages, testdir, monkeypatch):
     completed = utila.run(cmd)
     assert completed.returncode == utila.SUCCESS, str(completed)
     cmd = f'-i {root} -i {source} -o {root} --abbreviation_text'
-    tests.run_decider(cmd, monkeypatch)
+    tests.run(cmd, monkeypatch=monkeypatch)

@@ -9,7 +9,6 @@
 
 import iamraw
 import power
-import protocol
 import serializeraw
 import utila
 import utilatest
@@ -18,16 +17,7 @@ import decider
 
 power.setup(decider.ROOT)
 
-
-def run_decider(cmd: str, monkeypatch) -> int:
-    returncode = utilatest.run_command(
-        cmd,
-        decider.PROCESS,
-        decider.cli.main,
-        success=True,
-        monkeypatch=monkeypatch,
-    )
-    return returncode
+run, fail = utilatest.create_cli_runner(decider)
 
 
 def tableofcontent(path: str) -> iamraw.Toc:

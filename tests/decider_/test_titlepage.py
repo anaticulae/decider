@@ -27,7 +27,7 @@ def test_titlepage_extraction(src, expected, testdir, monkeypatch):
         expected = [expected]
     # run decider
     cmd = f'-i {src} -o {testdir.tmpdir} --titlepage'
-    tests.run_decider(cmd, monkeypatch)
+    tests.run(cmd, monkeypatch=monkeypatch)
     # validate result
     failures = [
         item.msgid for item in utila.flatten_content(

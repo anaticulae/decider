@@ -47,7 +47,7 @@ def test_validate_huge(source, testdir, monkeypatch):
 
 
 def run_extraction(cmd, monkeypatch):  # pylint:disable=W0613
-    tests.run_decider(cmd, monkeypatch=monkeypatch)
+    tests.run(cmd, monkeypatch=monkeypatch)
     tests.footnote_.run(cmd, monkeypatch=monkeypatch)
     tests.imgfig_.run(cmd, monkeypatch=monkeypatch)
     tests.smarty_.run(cmd, monkeypatch=monkeypatch)

@@ -35,7 +35,7 @@ def run_links(source, testdir, monkeypatch, online: bool = False, msgids=None):
     linkpath = power.link(source)
     # disable connecting to www
     monkeypatch.setenv(decider.DECIDER_ONELINE_FLAG, str(online))
-    tests.run_decider(f'-i {linkpath} --links', monkeypatch)
+    tests.run(f'-i {linkpath} --links', monkeypatch=monkeypatch)
     findings = serializeraw.load_findings(
         os.path.join(testdir.tmpdir, 'decider__links_user.yaml'),
         msgids=msgids,

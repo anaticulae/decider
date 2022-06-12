@@ -20,7 +20,7 @@ import tests
 ])
 def test_cli_decider(cmd, testdir, monkeypatch):
     """Run decider"""
-    tests.run_decider(cmd, monkeypatch=monkeypatch)
+    tests.run(cmd, monkeypatch=monkeypatch)
 
 
 @pytest.mark.parametrize('source', [
@@ -38,7 +38,7 @@ def test_cli_decider_example(source, testdir, monkeypatch):
     """Run decider"""
     source = power.link(source)
     cmd = f'-i {source}'
-    tests.run_decider(cmd, monkeypatch=monkeypatch)
+    tests.run(cmd, monkeypatch=monkeypatch)
 
 
 @pytest.mark.parametrize('source, pages', [
@@ -58,4 +58,4 @@ def test_cli_detector_and_decider(source, pages, testdir, monkeypatch):
     completed = utila.run(cmd)
     assert completed.returncode == utila.SUCCESS, str(completed)
     cmd = f'-i {testdir.tmpdir} -i {source} -o {testdir.tmpdir}'
-    tests.run_decider(cmd, monkeypatch)
+    tests.run(cmd, monkeypatch=monkeypatch)
