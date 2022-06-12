@@ -84,6 +84,7 @@ WORKPLAN = [
         'writing',
         inputs=CONTENT_INPUT + [
             utila.ResultFile('words', 'sentences_sentences'),
+            utila.ResultFile('groupme', 'pagenumbers_magic'),
         ],
         output=protocol.ResultDefault,
     ),

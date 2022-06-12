@@ -47,6 +47,7 @@ def create_driver(  # pylint:disable=R0913,R0914
     magicvalid=None,
     quotations=None,
     words=None,
+    pagenumbers_magic=None,
     pages=None,
 ):
     assert magiccontent is None or isinstance(magiccontent, str), 'require path'
@@ -97,6 +98,13 @@ def create_driver(  # pylint:disable=R0913,R0914
             pages=pages,
         )
         sentences: Sentences = Sentences(words)
+    if pagenumbers_magic and utila.exists(pagenumbers_magic):
+        pagenumbers_magic = serializeraw.load_pagenumbers_magic(
+            pagenumbers_magic,
+            pages=pages,
+        )
+    else:
+        pagenumbers_magic = None
     if textstyle:
         return protocol.driver(
             text_chunks=chunks,
@@ -106,6 +114,7 @@ def create_driver(  # pylint:disable=R0913,R0914
             sentences=sentences,
             navigators=navigators,
             headlines_confidence=confidence(headlines),
+            pagenumbers_magic=pagenumbers_magic,
         )
     return protocol.driver(
         text_chunks=chunks,
@@ -114,6 +123,7 @@ def create_driver(  # pylint:disable=R0913,R0914
         sentences=sentences,
         navigators=navigators,
         headlines_confidence=confidence(headlines),
+        pagenumbers_magic=pagenumbers_magic,
     )
 
 

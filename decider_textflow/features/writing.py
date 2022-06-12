@@ -30,6 +30,7 @@ def work(
     sizeandborders: str,
     headerfooter: str,
     words: str,
+    pagenumbers_magic: str,
     pages: tuple = None,
 ) -> protocol.ResultType:
     driver = decider_textflow.features.create_driver(
@@ -39,6 +40,7 @@ def work(
         sizeandborders,
         headerfooter,
         words=words,
+        pagenumbers_magic=pagenumbers_magic,
         pages=pages,
     )
     result = protocol.run(
