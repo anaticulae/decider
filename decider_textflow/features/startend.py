@@ -66,6 +66,8 @@ def check_7620_lonely_page_start(linter: callable, driver):  # pylint:disable=R1
     """\
     This check requires a high headline confidence to avoid a lot of
     false postive headlines detected as `Hurenkind`.
+
+    TODO: USE SENTENCE END SIGN TO REDUCE FALSE POSITIVE RATE.
     """
     if driver.headlines_confidence is None:
         protocol.skip_method('headline confidence is None')
