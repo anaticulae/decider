@@ -2,6 +2,24 @@
 
 Every noteable change is logged here.
 
+## v2.26.0
+
+### Feature
+
+* use magic pages to give better user hints (31640a76cb72)
+* add magic pages source (4dc07f76320c)
+* add external link to white space error (2597cb65bf05)
+* add pagenumber on legal page linter (96f59e62defc)
+* add sections as page source (571958422da1)
+* add pagenumber on title page linter (21ef04f8230d)
+* skip start and end in hyperlink only footnote (aea0525a148b)
+
+### Fix
+
+* clarify error message (48601a28f262)
+* improve error message (5ac36a953bc7)
+* improve error message format (41eb6c993df2)
+
 ## v2.25.0
 
 ### Feature
