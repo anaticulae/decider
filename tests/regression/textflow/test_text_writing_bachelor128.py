@@ -15,7 +15,7 @@ import tests.textflow_
 
 
 @utilatest.requires(power.BACHELOR128_PDF)
-def test_reg_writing_bachelor128page69(testdir, monkeypatch):
+def test_writing_bachelor128page69(testdir, monkeypatch):
     """Regression that replaced quote was detected as finding.
 
     `**Wir** im Satz: **** sollte vermieden werden.`

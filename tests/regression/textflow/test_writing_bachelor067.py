@@ -16,7 +16,7 @@ import tests.textflow_
 
 
 @utilatest.requires(power.BACHELOR067_PDF)
-def test_reg_writing_bachelor067_too_long_sentence(testdir, monkeypatch):
+def test_writing_bachelor067_too_long_sentence(testdir, monkeypatch):
     """A very long sentence is detected, which is a result of bad parsed
     list."""
     source = power.link(power.BACHELOR067_PDF)
@@ -28,7 +28,7 @@ def test_reg_writing_bachelor067_too_long_sentence(testdir, monkeypatch):
 
 @pytest.mark.xfail(reason='upgrade resources')
 @utilatest.requires(power.BACHELOR067_PDF)
-def test_reg_writing_bachelor067_perspective(testdir, monkeypatch):
+def test_writing_bachelor067_perspective(testdir, monkeypatch):
     """Detect two times `man` inside a list."""
     source = power.link(power.BACHELOR067_PDF)
     cmd = f'-i {source} --writing --pages=54'
