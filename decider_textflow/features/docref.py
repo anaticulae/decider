@@ -18,9 +18,9 @@ import utila
 
 
 def work(  # pylint:disable=W0613
-    figure: str,
-    section: str,
-    table: str,
+    ref_figure: str,
+    ref_section: str,
+    ref_table: str,
     caption_image: str,
     caption_table: str,
     text: str,
@@ -36,27 +36,27 @@ def work(  # pylint:disable=W0613
 
 
 def create_driver(
-    figure: str,
-    section: str,
-    table: str,
+    ref_figure: str,
+    ref_section: str,
+    ref_table: str,
     caption_image: str,
     caption_table: str,
     text: str,
     headlines: str,
     pages: tuple = None,
 ) -> 'Driver':
-    figure = serializeraw.load_docref(figure, pages=pages)
-    section = serializeraw.load_docref(section, pages=pages)
-    table = serializeraw.load_docref(table, pages=pages)
+    ref_figure = serializeraw.load_docref(ref_figure, pages=pages)
+    ref_section = serializeraw.load_docref(ref_section, pages=pages)
+    ref_table = serializeraw.load_docref(ref_table, pages=pages)
     headlines = serializeraw.load_headlines(headlines, pages=pages)
     text = serializeraw.load_text(text, headlines=headlines, pages=pages)
     caption_image = serializeraw.load_captions(caption_image, pages=pages)
     caption_table = serializeraw.load_captions(caption_table, pages=pages)
     # prepare
     driver = protocol.driver(
-        figure=figure,
-        section=section,
-        table=table,
+        ref_figure=ref_figure,
+        ref_section=ref_section,
+        ref_table=ref_table,
         headlines=headlines,
         text=text,
         caption_image=caption_image,
@@ -74,7 +74,7 @@ Der Abbildungs-Verweis **{{reference}}** kann nicht gefunden werden.
 
 def check_7200_figure_reference_exists(linter: callable, driver):
     captions = caption_numbers(driver.caption_image)
-    for reference in driver.figure:
+    for reference in driver.ref_figure:
         selected = determine_reference(reference, driver.text)
         if selected is None:
             utila.error(f'invalid reference: {reference}')
@@ -100,7 +100,7 @@ Der Tabellen-Verweis **{{reference}}** kann nicht gefunden werden.
 
 def check_7202_table_reference_exists(linter: callable, driver):
     captions = caption_numbers(driver.caption_table)
-    for reference in driver.table:
+    for reference in driver.ref_table:
         selected = determine_reference(reference, driver.text)
         if selected is None:
             utila.error(f'invalid reference: {reference}')
