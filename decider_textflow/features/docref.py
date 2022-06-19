@@ -17,7 +17,7 @@ import serializeraw
 import utila
 
 
-def work(
+def work(  # pylint:disable=W0613
     figure: str,
     section: str,
     table: str,
@@ -27,6 +27,24 @@ def work(
     headlines: str,
     pages: tuple = None,
 ) -> typing.Tuple[str, str]:
+    driver = create_driver(**locals())
+    result = protocol.run(
+        modulename=__name__,
+        driver=driver,
+    )
+    return result
+
+
+def create_driver(
+    figure: str,
+    section: str,
+    table: str,
+    caption_image: str,
+    caption_table: str,
+    text: str,
+    headlines: str,
+    pages: tuple = None,
+) -> 'Driver':
     figure = serializeraw.load_docref(figure, pages=pages)
     section = serializeraw.load_docref(section, pages=pages)
     table = serializeraw.load_docref(table, pages=pages)
@@ -44,11 +62,7 @@ def work(
         caption_image=caption_image,
         caption_table=caption_table,
     )
-    result = protocol.run(
-        modulename=__name__,
-        driver=driver,
-    )
-    return result
+    return driver
 
 
 SOLUTION_7200 = """\
