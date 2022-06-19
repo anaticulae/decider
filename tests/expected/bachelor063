@@ -34,7 +34,6 @@
 07000 b(518.69;142.36;558.7;201.76)p13 Zu viele aufeinander folgende Trennungen
 07000 b(518.69;155.68;558.83;214.96)p10 Zu viele aufeinander folgende Trennungen
 07000 b(518.69;682.96;558.7;742.36)p14 Zu viele aufeinander folgende Trennungen
-07005 0sp38 Satzende vor Aufzählung fehlt
 07005 s11p20 Satzende vor Aufzählung fehlt
 07005 s13p35 Satzende vor Aufzählung fehlt
 07005 s15p31 Satzende vor Aufzählung fehlt
@@ -42,9 +41,7 @@
 07005 s1p27 Satzende vor Aufzählung fehlt
 07005 s1p35 Satzende vor Aufzählung fehlt
 07005 s23p31 Satzende vor Aufzählung fehlt
-07005 s3p38 Satzende vor Aufzählung fehlt
-07005 s7p37 Satzende vor Aufzählung fehlt
-07006 0sp37 Satzende vor Aufzählung anpassen
+07005 s27p31 Satzende vor Aufzählung fehlt
 07006 s8p33 Satzende vor Aufzählung anpassen
 07010 s2p26 Satzende vor Gleichung fehlt
 07010 s3p27 Satzende vor Gleichung fehlt
@@ -68,7 +65,7 @@
 07611 p30~l0 Satzanfang wiederholt sich
 07611 p33~l1 Satzanfang wiederholt sich
 07611 p35~l1 Satzanfang wiederholt sich
-07611 p38~l0 Satzanfang wiederholt sich
+07611 p37~l3 Satzanfang wiederholt sich
 07611 p41~l1 Satzanfang wiederholt sich
 07611 p41~l7 Satzanfang wiederholt sich
 07611 p42~l1 Satzanfang wiederholt sich
@@ -97,10 +94,9 @@
 07630 p25_25~l13_14 Paragraph zu kurz
 07630 p29_29~l4_6 Paragraph zu kurz
 07630 p35_35~l1_3 Paragraph zu kurz
-07630 p3_3~l10_12 Paragraph zu kurz
+07630 p37_37~l8_9 Paragraph zu kurz
 07630 p3_3~l1_2 Paragraph zu kurz
 07630 p3_3~l4_6 Paragraph zu kurz
-07630 p3_3~l7_8 Paragraph zu kurz
 07630 p58_58~l2_3 Paragraph zu kurz
 07630 p59_59~l12_13 Paragraph zu kurz
 07630 p61_61~l11_12 Paragraph zu kurz
@@ -157,7 +153,7 @@
 07670 p9~l9 Fehlendes Leerzeichen
 08105 s10p13 Pleonasma erkannt
 08110 s15p35 Unnötige Vorsilbe
-08110 s6p37 Unnötige Vorsilbe
+08110 s5p37 Unnötige Vorsilbe
 08115 s9p40 Ungenaue Formulierung erkannt
 08120 s25p31 Adjektiv verbessern
 10500 00p59 Aufrufdatum fehlt

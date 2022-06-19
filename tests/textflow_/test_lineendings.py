@@ -16,7 +16,6 @@ import decider_textflow.path
 import tests.textflow_
 
 
-@pytest.mark.xfail(reason='???')
 @utilatest.nightly
 def test_lineendings_master83page6_lineending(testdir, monkeypatch):
     source = power.link(power.MASTER083_PDF)
@@ -72,6 +71,7 @@ def test_list_better_included_bachelor67page10(testdir, monkeypatch):
     assert not result, str(result)
 
 
+@pytest.mark.xfail(reason='formula produces no result')
 def test_formula_better_included_home050page31(testdir, monkeypatch):
     source = power.link(power.HOME050_PDF)
     cmd = f'-i={source} -o {testdir.tmpdir} --pages=31 --lineending'

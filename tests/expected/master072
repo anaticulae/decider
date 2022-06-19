@@ -11,22 +11,19 @@
 07600 p13~l3 Fehler in der Perspektive
 07600 p14~l5 Fehler in der Perspektive
 07600 p14~l9 Fehler in der Perspektive
-07600 p15~l6 Fehler in der Perspektive
+07600 p15~l8 Fehler in der Perspektive
 07600 p16~l0 Fehler in der Perspektive
 07600 p21~l6 Fehler in der Perspektive
 07600 p23~l18 Fehler in der Perspektive
 07600 p23~l19 Fehler in der Perspektive
 07600 p24~l0 Fehler in der Perspektive
 07600 p26~l1 Fehler in der Perspektive
-07600 p26~l16 Fehler in der Perspektive
+07600 p26~l17 Fehler in der Perspektive
 07600 p31~l8 Fehler in der Perspektive
 07600 p55~l15 Fehler in der Perspektive
 07600 p58~l14 Fehler in der Perspektive
-07605 p15~l8 Satz zu lang
-07605 p17~l0 Satz zu lang
-07605 p26~l1 Satz zu lang
 07611 p11~l10 Satzanfang wiederholt sich
-07611 p17~l2 Satzanfang wiederholt sich
+07611 p17~l3 Satzanfang wiederholt sich
 07611 p22~l8 Satzanfang wiederholt sich
 07611 p23~l19 Satzanfang wiederholt sich
 07611 p25~l6 Satzanfang wiederholt sich
@@ -137,3 +134,4 @@
 08115 s6p64 Ungenaue Formulierung erkannt
 10500 00p21 Aufrufdatum fehlt
 10500 00p66 Aufrufdatum fehlt
+10500 00p67 Aufrufdatum fehlt

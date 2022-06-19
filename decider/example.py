@@ -18,17 +18,18 @@ RUNNER = [
 
 SELECTED = dict(
     caption=True,
+    codero=True,
     detector=True,
     docref=True,
     doctextstyle=True,
     groupme=True,
+    headlines=True,
+    lists=True,
     magic=True,
     sections=True,
     smarty=True,
     spacestation=True,
     words=True,
-    codero=True,
-    headlines=True,
 )
 
 

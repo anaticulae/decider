@@ -9,17 +9,16 @@
 
 import power
 import protocol
-import pytest
 import utilatest
 
 import tests.textflow_
 
 
-@pytest.mark.xfail(reason='enable later')
 @utilatest.requires(power.BACHELOR128_PDF)
 def test_reg_writing_bachelor128page69(testdir, monkeypatch):
-    """Regression that replaced quote was detected as finding: `**Wir**
-    im Satz: **** sollte vermieden werden.`
+    """Regression that replaced quote was detected as finding.
+
+    `**Wir** im Satz: **** sollte vermieden werden.`
     """
     source = power.link(power.BACHELOR128_PDF)
     cmd = f'-i {source} --writing --pages=69'
