@@ -39,7 +39,7 @@ WORKPLAN = [
             utila.ResultFile('caption', 'image_caption'),
             utila.ResultFile('caption', 'table_caption'),
             utila.ResultFile('words', 'text_text'),
-            utila.ResultFile('words', 'headlines_headlines'),
+            utila.ResultFile('headlines', 'result_result'),
         ],
         output=protocol.ResultDefault,
     ),
