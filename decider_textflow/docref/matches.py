@@ -15,18 +15,20 @@ IoI: Item of interest
 >>> matcher.add_ioi(page=5, number='3.1')           # Abbildung 3.1: Man oh man, was schreibe ich hier?
 
 The holiest mother can be see in Fig. 15.
->>> matcher.add_reference(5, 15, 'in Fig. 15.', sentence=3, start=31)
+>>> matcher.add_reference(5, 15, 'in Fig. 15.', sentence=3, char=31)
 
 Missing fig reference
->>> matcher.add_reference(4, 20, 'in Fig. 20.', sentence=1, start=1)
+>>> matcher.add_reference(4, 20, 'in Fig. 20.', sentence=1, char=1)
 >>> matcher.match()
-([(5, ('15', 'in Fig. 15.', 3, 31))], [(4, ('20', 'in Fig. 20.', 1, 1))], [(12, '16'), (5, '3.1')])
+([(5, IntextRef(ref='15', raw='in Fig. 15.', sentence=3, char=31))],\
+ [(4, IntextRef(ref='20', raw='in Fig. 20.', sentence=1, char=1))],\
+ [(12, '16'), (5, '3.1')])
 
 >>> matcher.validate()
 ReferenceMatched(not_referenced=[(12, '16'), (5, '3.1')],\
- invalid=[(4, ('20', 'in Fig. 20.', 1, 1))],\
+ invalid=[(4, IntextRef(ref='20', raw='in Fig. 20.', sentence=1, char=1))],\
  backward=[],\
- good=[(5, ('15', 'in Fig. 15.', 3, 31))])
+ good=[(5, IntextRef(ref='15', raw='in Fig. 15.', sentence=3, char=31))])
 """
 
 import collections
@@ -45,6 +47,9 @@ class ReferenceMatched:
     backward: list = dataclasses.field(default_factory=list)
     # valid reference
     good: list = dataclasses.field(default_factory=list)
+
+
+IntextRef = collections.namedtuple('IntextRef', 'ref raw sentence char')
 
 
 class ReferenceMatcher:
@@ -67,10 +72,10 @@ class ReferenceMatcher:
         ref: str,
         raw: str = None,
         sentence: int = None,
-        start: int = None,
+        char: int = None,
     ):
         ref = str(ref)
-        data = (ref, raw, sentence, start)
+        data = IntextRef(ref, raw, sentence, char)
         self.references[page].append(data)
 
     def validate(self) -> ReferenceMatched:
@@ -103,11 +108,10 @@ class ReferenceMatcher:
         matched, not_matched, referenced = [], [], []
         while todos:
             todo = todos.pop()
-            todo_ref = todo[1][0]
             done = False
             for ioi in iois:
                 ioi_ref = ioi[1]
-                if ioi_ref == todo_ref:
+                if ioi_ref == todo[1].ref:
                     matched.append(todo)
                     referenced.append(ioi)
                     done = True
