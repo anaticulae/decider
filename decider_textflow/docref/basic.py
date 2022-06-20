@@ -22,7 +22,7 @@ Der Abbildungs-Verweis **{{reference}}** kann nicht gefunden werden.
 def check_7200_figure_reference_exists(linter: callable, driver):
     captions = caption_numbers(driver.caption_image)
     for reference in driver.ref_figure:
-        selected = determine_reference(reference, driver.text)
+        selected = determine_reference(reference, driver.sentences)
         if selected is None:
             utila.error(f'invalid reference: {reference}')
         if reference_exists(selected, captions):
@@ -48,7 +48,7 @@ Der Tabellen-Verweis **{{reference}}** kann nicht gefunden werden.
 def check_7202_table_reference_exists(linter: callable, driver):
     captions = caption_numbers(driver.caption_table)
     for reference in driver.ref_table:
-        selected = determine_reference(reference, driver.text)
+        selected = determine_reference(reference, driver.sentences)
         if selected is None:
             utila.error(f'invalid reference: {reference}')
         if reference_exists(selected, captions):

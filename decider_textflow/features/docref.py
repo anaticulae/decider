@@ -19,7 +19,7 @@ def work(  # pylint:disable=W0613
     ref_table: str,
     caption_image: str,
     caption_table: str,
-    text: str,
+    sentences: str,
     headlines: str,
     pages: tuple = None,
 ) -> protocol.ResultType:
@@ -39,7 +39,7 @@ def create_driver(
     ref_table: str,
     caption_image: str,
     caption_table: str,
-    text: str,
+    sentences: str,
     headlines: str,
     pages: tuple = None,
 ) -> 'Driver':
@@ -47,7 +47,11 @@ def create_driver(
     ref_section = serializeraw.load_docref(ref_section, pages=pages)
     ref_table = serializeraw.load_docref(ref_table, pages=pages)
     headlines = serializeraw.load_headlines(headlines, pages=pages)
-    text = serializeraw.load_text(text, headlines=headlines, pages=pages)
+    sentences = serializeraw.load_text(
+        sentences,
+        headlines=headlines,
+        pages=pages,
+    )
     caption_image = serializeraw.load_captions(caption_image, pages=pages)
     caption_table = serializeraw.load_captions(caption_table, pages=pages)
     # prepare
@@ -56,7 +60,7 @@ def create_driver(
         ref_section=ref_section,
         ref_table=ref_table,
         headlines=headlines,
-        text=text,
+        sentences=sentences,
         caption_image=caption_image,
         caption_table=caption_table,
     )

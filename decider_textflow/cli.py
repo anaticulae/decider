@@ -38,7 +38,7 @@ WORKPLAN = [
             utila.ResultFile('docref', 'table_parsed'),
             utila.ResultFile('caption', 'image_caption'),
             utila.ResultFile('caption', 'table_caption'),
-            utila.ResultFile('words', 'text_text'),
+            utila.ResultFile('words', 'sentences_sentences'),
             utila.ResultFile('headlines', 'result_result'),
         ],
         output=protocol.ResultDefault,

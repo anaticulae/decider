@@ -8,7 +8,6 @@
 # =============================================================================
 
 import power
-import pytest
 import serializeraw
 
 import decider_textflow.path
@@ -35,7 +34,6 @@ def test_dtf_bachelor76_docref_negative(testdir, monkeypatch):
     assert not findings
 
 
-@pytest.mark.xfail(reason='broken test')
 def test_dtf_master75_docref(testdir, monkeypatch):
     # TODO: DESCRIBE PURPOSE OF TEST
     source = power.link(power.MASTER075_PDF)
