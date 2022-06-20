@@ -47,16 +47,21 @@ Der Tabellen-Verweis **{{reference}}** kann nicht gefunden werden.
 
 
 def check_7202_table_reference_exists(linter: callable, driver):
-    captions = caption_numbers(driver.caption_table)
-    for reference in driver.ref_table:
-        selected = determine_reference(reference, driver.sentences)
-        if selected is None:
-            utila.error(f'invalid reference: {reference}')
-        if reference_exists(selected, captions):
-            continue
-        location = iamraw.RangedLocation(page=reference.page)
-        raw = ', '.join(selected)
-        linter(location=location, reference=raw)
+    matcher = decider_textflow.docref.matches.create_matcher(
+        references=driver.ref_table,
+        iois=driver.caption_table,
+    )
+    validated = matcher.validate()
+    for invalid in validated.invalid:
+        page, data = invalid
+        location = iamraw.Location.from_sentence(
+            page=page,
+            sentence=data.sentence,
+        )
+        linter(
+            location=location,
+            reference=data.raw,
+        )
 
 
 def determine_reference(reference, text) -> str:
