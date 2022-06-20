@@ -22,7 +22,7 @@ Der Abbildungs-Verweis **{{reference}}** kann nicht gefunden werden.
 
 
 def check_7200_figure_reference_exists(linter: callable, driver):
-    matcher = create_matcher(
+    matcher = decider_textflow.docref.matches.create_matcher(
         references=driver.ref_figure,
         iois=driver.caption_image,
     )
@@ -126,39 +126,3 @@ def reference_number(reference: str) -> int:
         except ValueError:
             numbers.append(float(item))
     return numbers[0] if numbers else None
-
-
-def create_matcher(references, iois) -> 'ReferenceMatcher':
-    result = decider_textflow.docref.matches.ReferenceMatcher()
-    for ioi in utila.flatten_content(iois):
-        result.add_ioi(page=ioi.pdfpage, number=ioi.number)
-    for reference in references:
-        for start, raw in zip(reference.marked, reference.raw):
-            ref = parse_reference(raw)
-            # TODO: CHAR IS NOT WORD
-            result.add_reference(
-                page=reference.page,
-                ref=ref,
-                raw=raw,
-                sentence=reference.sentence,
-                char=start,
-            )
-    return result
-
-
-LEVEL = utila.compiles(r"""
-    (
-        \d{1,2}
-        (\.\d{1,3}){0,3}
-        \.{0,1}
-    )
-""")
-
-
-def parse_reference(raw: str) -> str:
-    parsed = LEVEL.search(raw)
-    if not parsed:
-        utila.error(f'invalid reference: {raw}')
-        return None
-    result = parsed[0]
-    return result

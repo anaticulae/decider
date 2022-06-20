@@ -120,3 +120,39 @@ class ReferenceMatcher:
                 not_matched.append(todo)
         not_referenced = [item for item in iois if item not in referenced]
         return matched, not_matched, not_referenced
+
+
+def create_matcher(references, iois) -> ReferenceMatcher:
+    result = ReferenceMatcher()
+    for ioi in utila.flatten_content(iois):
+        result.add_ioi(page=ioi.pdfpage, number=ioi.number)
+    for reference in references:
+        for start, raw in zip(reference.marked, reference.raw):
+            ref = parse_reference(raw)
+            # TODO: CHAR IS NOT WORD
+            result.add_reference(
+                page=reference.page,
+                ref=ref,
+                raw=raw,
+                sentence=reference.sentence,
+                char=start,
+            )
+    return result
+
+
+LEVEL = utila.compiles(r"""
+    (
+        \d{1,2}
+        (\.\d{1,3}){0,3}
+        \.{0,1}
+    )
+""")
+
+
+def parse_reference(raw: str) -> str:
+    parsed = LEVEL.search(raw)
+    if not parsed:
+        utila.error(f'invalid reference: {raw}')
+        return None
+    result = parsed[0]
+    return result
