@@ -1,0 +1,118 @@
+# =============================================================================
+# C O P Y R I G H T
+# -----------------------------------------------------------------------------
+# Copyright (c) 2022 by Helmut Konrad Fahrendholz. All rights reserved.
+# This file is property of Helmut Konrad Fahrendholz. Any unauthorized copy,
+# use or distribution is an offensive act against international law and may
+# be prosecuted under federal law. Its content is company confidential.
+# =============================================================================
+"""\
+IoI: Item of interest
+
+>>> matcher = ReferenceMatcher()
+>>> matcher.add_ioi(page=10, number=15)             # Figure 15: The mother of Susej
+>>> matcher.add_ioi(page=12, number=16)             # Figure 16: The brother of Sesom
+>>> matcher.add_ioi(page=5, number='3.1')           # Abbildung 3.1: Man oh man, was schreibe ich hier?
+
+The holiest mother can be see in Fig. 15.
+>>> matcher.add_reference(5, 15, 'in Fig. 15.', sentence=3, start=31)
+
+Missing fig reference
+>>> matcher.add_reference(4, 20, 'in Fig. 20.', sentence=1, start=1)
+>>> matcher.match()
+([(5, ('15', 'in Fig. 15.', 3, 31))], [(4, ('20', 'in Fig. 20.', 1, 1))], [(12, '16'), (5, '3.1')])
+
+>>> matcher.validate()
+ReferenceMatched(not_referenced=[(12, '16'), (5, '3.1')],\
+ invalid=[(4, ('20', 'in Fig. 20.', 1, 1))],\
+ backward=[],\
+ good=[(5, ('15', 'in Fig. 15.', 3, 31))])
+"""
+
+import collections
+import dataclasses
+
+import utila
+
+
+@dataclasses.dataclass
+class ReferenceMatched:
+    # ioi not referenced
+    not_referenced: list = dataclasses.field(default_factory=list)
+    # no goal
+    invalid: list = dataclasses.field(default_factory=list)
+    # reference page before
+    backward: list = dataclasses.field(default_factory=list)
+    # valid reference
+    good: list = dataclasses.field(default_factory=list)
+
+
+class ReferenceMatcher:
+
+    def __init__(self):
+        self.iois = collections.defaultdict(list)
+        self.iois_page = dict()
+        self.references = collections.defaultdict(list)
+
+    def add_ioi(self, page: int, number: str):
+        number = str(number)
+        if number in self.iois[page]:
+            utila.error(f'duplicated ioi number: {number} on page {page}')
+        self.iois[page].append(number)
+        self.iois_page[number] = page
+
+    def add_reference(
+        self,
+        page: int,
+        ref: str,
+        raw: str = None,
+        sentence: int = None,
+        start: int = None,
+    ):
+        ref = str(ref)
+        data = (ref, raw, sentence, start)
+        self.references[page].append(data)
+
+    def validate(self) -> ReferenceMatched:
+        matched, not_matched, not_referenced = self.match()
+        backward = []
+        for match in matched:
+            page = match[0]
+            reference = match[1][0]
+            if page <= self.iois_page[reference]:
+                # reference before ioi, everything fine here
+                continue
+            # reference after occurence
+            backward.append(match)
+        good = [item for item in matched if item not in backward]
+        result = ReferenceMatched(
+            not_referenced=not_referenced,
+            invalid=not_matched,
+            backward=backward,
+            good=good,
+        )
+        return result
+
+    def match(self):
+        iois = utila.flat([(page, value)
+                           for value in values]
+                          for page, values in self.iois.items())
+        todos = utila.flat([(page, value)
+                            for value in values]
+                           for page, values in self.references.items())
+        matched, not_matched, referenced = [], [], []
+        while todos:
+            todo = todos.pop()
+            todo_ref = todo[1][0]
+            done = False
+            for ioi in iois:
+                ioi_ref = ioi[1]
+                if ioi_ref == todo_ref:
+                    matched.append(todo)
+                    referenced.append(ioi)
+                    done = True
+                    break
+            if not done:
+                not_matched.append(todo)
+        not_referenced = [item for item in iois if item not in referenced]
+        return matched, not_matched, not_referenced
