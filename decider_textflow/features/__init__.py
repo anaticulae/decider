@@ -7,6 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import collections
 import functools
 
 import iamraw
@@ -161,3 +162,24 @@ class Sentences:
 
     def __getitem__(self, index):
         return self.content[index]
+
+
+class SentenceLookup:
+
+    def __init__(self, words):
+        self.content = collections.defaultdict(list)
+        for contenttext in words:
+            for textsection in contenttext.content:
+                merged = list(
+                    zip(
+                        textsection.content,
+                        textsection.pages,
+                        range(len(textsection.pages)),
+                    ))
+                for sentence, page, _ in merged:
+                    self.content[page].append(sentence)
+        # enable KeyError
+        self.content: dict = dict(self.content)
+
+    def __call__(self, page, sentence) -> str:
+        return self.content[page][sentence]
