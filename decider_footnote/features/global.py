@@ -46,7 +46,7 @@ Endnoten verwendet
 Im Dokument werden Endnoten verwendet. Ersetzen Sie diese durch \
 stringend aufsteigende Fußnoten.
 
-TODO: ARTICEL ENDNOTE_VS_FOOTNOTE
+TODO: ARTICLE ENDNOTE_VS_FOOTNOTE
 """
 # TODO: move MIN_CHECK to a decorator?
 # require more than `15` footnote to run this linter
