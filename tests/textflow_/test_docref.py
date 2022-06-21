@@ -77,5 +77,11 @@ def test_bachelor56page15_tableref(testdir, monkeypatch):
     """Verify that `s. Tab. 1` matches with `Tabelle 1`"""
     source = power.link(power.BACHELOR056_PDF)
     pages = '15'
-    findings = decide_textflow(source, pages, testdir, monkeypatch)
+    findings = decide_textflow(
+        source,
+        pages,
+        testdir,
+        monkeypatch,
+        msgids={7202},
+    )
     assert not findings

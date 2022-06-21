@@ -15,7 +15,7 @@ SOLUTION_7230 = """\
 Rückwärtsreferenz Abbildung
 
 Die Referenz **{{intext}}** auf Seite {{page}} verweist auf eine \
- davorliegende Abbildung.
+davorliegende Abbildung.
 
 Verbessern Sie die innere Logik/Argumentation des Textes und verwenden \
 Sie nur Referenzen nach vorne um ein besseres Verständnis der Arbeit zu \
@@ -45,7 +45,7 @@ SOLUTION_7231 = """\
 Rückwärtsreferenz Tabelle
 
 Die Referenz **{{intext}}** auf Seite {{page}} verweist auf eine \
- davorliegende Tabelle.
+davorliegende Tabelle.
 
 Verbessern Sie die innere Logik/Argumentation des Textes und verwenden \
 Sie nur Referenzen nach vorne um ein besseres Verständnis der Arbeit zu \
