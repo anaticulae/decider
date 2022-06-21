@@ -9,24 +9,12 @@
 
 import protocol
 import utila
-import words
 
 import decider
 
 DESCRIPTION = ''
 
-TOC = 'toc'
-FOOTNOTE = 'footnote'
-
 WORKPLAN = [
-    utila.create_step(
-        'abbreviation_text',
-        [
-            utila.ResultFile('reftable', 'abbrev_abbrev'),
-            utila.ResultFile(words.PROCESS, 'abbreviation_detected'),
-        ],
-        protocol.ResultDefault,
-    ),
     utila.create_step(
         'color',
         [
