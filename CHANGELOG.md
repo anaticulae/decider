@@ -2,6 +2,23 @@
 
 Every noteable change is logged here.
 
+## v2.27.0
+
+### Feature
+
+* use new abbreviation data (f9f06ca78cb6)
+* add table ref intext missing linter (d33c6f3af3b4)
+* add table reference backward linter (97fab933d9c4)
+* add backward figure linter (5fe293258df3)
+* add non referenced figure error (00b89ae1e801)
+* extend IoI data type (89a55b86839b)
+* use improve table reference checker (6f0c5a0a1fb8)
+* use improved reference matcher (ea3120736895)
+* add sentence lookup (a2a5eadcbbca)
+* use sentence to improve results (ebb65e74960f)
+* add docref package to verify doc references (84ca6ec8bf3c)
+* use headlines instead of words source (7eec7d07e3e1)
+
 ## v2.26.0
 
 ### Feature
