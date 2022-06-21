@@ -27,19 +27,49 @@ def decide_textflow(source, pages, testdir, monkeypatch, msgids=None):
 
 
 def test_dtf_bachelor76_docref_negative(testdir, monkeypatch):
-    """This document contains only valid references, therefore we do not
-    detect any missing references.
+    """This document contains only valid references.
+
+    Therefore we do not detect any missing references.
     """
     source = power.link(power.BACHELOR076_PDF)
     pages = '0:30'
-    findings = decide_textflow(source, pages, testdir, monkeypatch)
+    findings = decide_textflow(
+        source,
+        pages,
+        testdir,
+        monkeypatch,
+        msgids={7200, 7202},
+    )
+    assert not findings
+
+
+def test_dtf_bachelor76_figure_missing_intext_ref(testdir, monkeypatch):
+    """Remove this test after extending docref intext parser.
+
+    Pattern: 'Die folgende Abbildung soll durch' not supported yet.
+    """
+    source = power.link(power.BACHELOR076_PDF)
+    pages = '0:30'
+    findings = decide_textflow(
+        source,
+        pages,
+        testdir,
+        monkeypatch,
+        msgids={7200, 7202},
+    )
     assert not findings
 
 
 def test_dtf_master75_docref(testdir, monkeypatch):
     # TODO: DESCRIBE PURPOSE OF TEST
     source = power.link(power.MASTER075_PDF)
-    findings = decide_textflow(source, ':', testdir, monkeypatch)
+    findings = decide_textflow(
+        source,
+        ':',
+        testdir,
+        monkeypatch,
+        msgids={7200, 7202},
+    )
     assert not findings  # may changes later
 
 

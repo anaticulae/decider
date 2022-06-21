@@ -36,6 +36,29 @@ def check_7200_figure_reference_exists(linter: callable, driver):
         )
 
 
+SOLUTION_E7201 = """\
+Abbildung nicht referenziert
+
+Im Text wurde kein Bezug auf die Abbildung **{{caption}}** gefunden. \
+Überprüfen Sie, ob eine Erwähnung im Text nötig ist.
+"""
+
+
+def check_7201_figure_missing_intext_ref(linter: callable, driver):
+    matcher = decider_textflow.docref.matches.create_matcher(
+        references=driver.ref_figure,
+        iois=driver.caption_image,
+    )
+    validated = matcher.validate()
+    for invalid in validated.not_referenced:
+        page, data = invalid
+        location = iamraw.Location.from_page(page=page)
+        linter(
+            location=location,
+            caption=data.raw,
+        )
+
+
 SOLUTION_7202 = """\
 Referenz nicht gefunden
 
