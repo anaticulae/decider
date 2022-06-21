@@ -19,7 +19,7 @@ PACKAGE = decider.PACKAGE
 
 pytest_plugins = ['pytester', 'xdist']  # pylint: disable=invalid-name
 
-WORKER = 6
+WORKER = 4
 
 RESOURCES = [
     (power.BACHELOR037_PDF, '0:20'),
