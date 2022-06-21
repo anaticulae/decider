@@ -9,12 +9,14 @@
 
 import power
 import serializeraw
+import utilatest
 
 import decider_textflow.path
 import tests.textflow_
 
 
 def decide_textflow(source, pages, testdir, monkeypatch, msgids=None):
+    utilatest.fixture_requires(source)
     tests.textflow_.run(
         f'--docref -i {source} --pages={pages}',
         monkeypatch=monkeypatch,
