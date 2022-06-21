@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v3.0.0
+
+### Feature
+
+* remove smarty and textflow (5e799f7ae7c1)
+
 ## v2.27.0
 
 ### Feature
