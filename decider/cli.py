@@ -7,8 +7,6 @@
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
 
-import groupme
-import groupme.cli
 import protocol
 import utila
 import words
@@ -24,7 +22,7 @@ WORKPLAN = [
     utila.create_step(
         'abbreviation_text',
         [
-            utila.ResultFile(groupme.PROCESS, 'abbreviation_abbreviation'),
+            utila.ResultFile('reftable', 'abbrev_abbrev'),
             utila.ResultFile(words.PROCESS, 'abbreviation_detected'),
         ],
         protocol.ResultDefault,
