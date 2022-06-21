@@ -29,7 +29,6 @@ if __name__ == "__main__":
         author='Helmut Konrad Fahrendholz',
         author_email='info@checkitweg.de',
         description='top or flop',
-        include_package_data=True,
         install_requires=REQUIRES,
         long_description=README,
         name='decider',
