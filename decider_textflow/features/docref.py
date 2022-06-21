@@ -11,6 +11,7 @@ import protocol
 import serializeraw
 
 import decider_textflow.docref.basic
+import decider_textflow.docref.style
 
 
 def work(  # pylint:disable=W0613
@@ -27,6 +28,7 @@ def work(  # pylint:disable=W0613
     result = protocol.run(
         modulename=[
             decider_textflow.docref.basic,
+            decider_textflow.docref.style,
         ],
         driver=driver,
     )
