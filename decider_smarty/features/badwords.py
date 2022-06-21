@@ -13,7 +13,6 @@ import iamraw
 import protocol
 
 import decider_smarty.driver
-import decider_smarty.utils
 
 
 def work(
