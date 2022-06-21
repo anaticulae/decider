@@ -15,7 +15,7 @@ import utilatest
 import tests.textflow_
 
 
-def test_dtf_cli_help(monkeypatch):
+def test_cli_help(monkeypatch):
     tests.textflow_.run('--help', monkeypatch=monkeypatch)
 
 

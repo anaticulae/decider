@@ -30,7 +30,7 @@ def decide_textflow(source, testdir, monkeypatch, pages=None, msgids=None):
 
 
 @utilatest.nightly
-def test_dtf_bachelor76_perspective(testdir, monkeypatch):
+def test_bachelor76_perspective(testdir, monkeypatch):
     source = power.BACHELOR076_PDF
     findings = decide_textflow(source, testdir, monkeypatch, msgids=7600)
     assert len(findings) == 5  # VALIDATED
@@ -38,7 +38,7 @@ def test_dtf_bachelor76_perspective(testdir, monkeypatch):
 
 @pytest.mark.xfail(reason='man in quotation')
 @utilatest.longrun
-def test_dtf_master72_writing_quotation(testdir, monkeypatch):
+def test_master72_writing_quotation(testdir, monkeypatch):
     """Do not detect errors in perspective inside quotations."""
     source = power.MASTER072_PDF
     pages = '12:15'
@@ -51,7 +51,7 @@ den Medien als Folge einer Individualisierung und als Ersatz für die verlorene 
 Bestätigung aus einem Kollektiv, dem man angehörte, z.B."""
 
 
-def test_dtf_master72_merge_token_correctly(testdir, monkeypatch):
+def test_master72_merge_token_correctly(testdir, monkeypatch):
     """Do not detect errors in perspective inside quotations."""
     source = power.MASTER072_PDF
     pages = '16'
@@ -62,7 +62,7 @@ def test_dtf_master72_merge_token_correctly(testdir, monkeypatch):
 
 
 @utilatest.longrun
-def test_dtf_master72_text_too_long(testdir, monkeypatch):
+def test_master72_text_too_long(testdir, monkeypatch):
     """Detect sentence which are too long."""
     source = power.MASTER072_PDF
     pages = '3:6'
