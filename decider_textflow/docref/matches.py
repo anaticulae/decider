@@ -41,7 +41,7 @@ import utila
 class ReferenceMatched:
     # ioi not referenced
     not_referenced: list = dataclasses.field(default_factory=list)
-    # no goal
+    # no ioi detected
     invalid: list = dataclasses.field(default_factory=list)
     # reference page before
     backward: list = dataclasses.field(default_factory=list)
