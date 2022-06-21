@@ -4,6 +4,4 @@ name = top or flop
 
 source = decider_footnote
     decider_imgfig
-    decider_smarty
-    decider_textflow
     fonts
