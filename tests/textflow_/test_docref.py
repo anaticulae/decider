@@ -14,13 +14,13 @@ import decider_textflow.path
 import tests.textflow_
 
 
-def decide_textflow(source, pages, testdir, monkeypatch):
+def decide_textflow(source, pages, testdir, monkeypatch, msgids=None):
     tests.textflow_.run(
         f'--docref -i {source} --pages={pages}',
         monkeypatch=monkeypatch,
     )
     path = decider_textflow.path.docref_linted(testdir.tmpdir)
-    findings = serializeraw.load_findings(path)
+    findings = serializeraw.load_findings(path, msgids=msgids)
     return findings
 
 
