@@ -16,7 +16,7 @@ detector>=0.38.0<1.0.0
 words>=1.19.0<2.0.0
 texas>=0.11.0<1.0.0
 
-groupme>=0.34.0<1.0.0
+groupme>=0.34.1<1.0.0
 smarty>=1.1.1<2.0.0
 
 # define holy values
