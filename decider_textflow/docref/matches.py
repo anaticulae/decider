@@ -10,9 +10,9 @@
 IoI: Item of interest
 
 >>> matcher = ReferenceMatcher()
->>> matcher.add_ioi(page=10, number=15)             # Figure 15: The mother of Susej
->>> matcher.add_ioi(page=12, number=16)             # Figure 16: The brother of Sesom
->>> matcher.add_ioi(page=5, number='3.1')           # Abbildung 3.1: Man oh man, was schreibe ich hier?
+>>> matcher.add_ioi(page=10, number=15, raw='Figure 15: The mother of Susej')
+>>> matcher.add_ioi(page=12, number=16, raw='Figure 16: The brother of Sesom')
+>>> matcher.add_ioi(page=5, number='3.1', raw='Abbildung 3.1: Man oh man, was schreibe ich hier?')
 
 The holiest mother can be see in Fig. 15.
 >>> matcher.add_reference(5, 15, 'in Fig. 15.', sentence=3, char=31)
@@ -22,10 +22,11 @@ Missing fig reference
 >>> matcher.match()
 ([(5, IntextRef(ref='15', raw='in Fig. 15.', sentence=3, char=31))],\
  [(4, IntextRef(ref='20', raw='in Fig. 20.', sentence=1, char=1))],\
- [(12, '16'), (5, '3.1')])
+ [(12, IoI(number='16', raw='Figure 16: The brother of Sesom', page=12)),\
+ (5, IoI(number='3.1', raw='Abbildung 3.1: ...', page=5))])
 
 >>> matcher.validate()
-ReferenceMatched(not_referenced=[(12, '16'), (5, '3.1')],\
+ReferenceMatched(not_referenced=[(12, IoI(number='16'...)), (5, IoI(number='3.1'...))],\
  invalid=[(4, IntextRef(ref='20', raw='in Fig. 20.', sentence=1, char=1))],\
  backward=[],\
  good=[(5, IntextRef(ref='15', raw='in Fig. 15.', sentence=3, char=31))])
@@ -51,6 +52,8 @@ class ReferenceMatched:
 
 IntextRef = collections.namedtuple('IntextRef', 'ref raw sentence char')
 
+IoI = collections.namedtuple('IoI', 'number, raw, page')
+
 
 class ReferenceMatcher:
 
@@ -59,11 +62,12 @@ class ReferenceMatcher:
         self.iois_page = dict()
         self.references = collections.defaultdict(list)
 
-    def add_ioi(self, page: int, number: str):
+    def add_ioi(self, page: int, number: str, raw: str = None):
         number = str(number)
-        if number in self.iois[page]:
+        ioi = IoI(number, raw, page)
+        if number in [ioi.number for ioi in self.iois[page]]:
             utila.error(f'duplicated ioi number: {number} on page {page}')
-        self.iois[page].append(number)
+        self.iois[page].append(ioi)
         self.iois_page[number] = page
 
     def add_reference(
@@ -110,7 +114,7 @@ class ReferenceMatcher:
             todo = todos.pop()
             done = False
             for ioi in iois:
-                ioi_ref = ioi[1]
+                ioi_ref = ioi[1].number
                 if ioi_ref == todo[1].ref:
                     matched.append(todo)
                     referenced.append(ioi)
@@ -125,7 +129,7 @@ class ReferenceMatcher:
 def create_matcher(references, iois) -> ReferenceMatcher:
     result = ReferenceMatcher()
     for ioi in utila.flatten_content(iois):
-        result.add_ioi(page=ioi.pdfpage, number=ioi.number)
+        result.add_ioi(page=ioi.pdfpage, number=ioi.number, raw=ioi.raw)
     for reference in references:
         for start, raw in zip(reference.marked, reference.raw):
             ref = parse_reference(raw)
