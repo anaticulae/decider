@@ -17,4 +17,4 @@ power==2.8.0
 jam==0.4.0
 
 # required to run runner
-decider_con==0.5.0
+decider_con==0.6.0
