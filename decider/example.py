@@ -41,6 +41,7 @@ def extract(
     base: str = None,
     morefeatures: list = None,
     selected: dict = None,
+    full: bool = False,
 ):
     """Run rawmaker, groupme, sections, words, detector, decider for
     given `files` and write result to `destination`.
@@ -54,6 +55,7 @@ def extract(
         base(str): resource repository
         morefeatures(list): add list to run additional runner
         selected(dict): select runner to execute
+        full(bool): run all generator
     Raises:
         Exception: if Exception occurs while extracting file
     """
@@ -71,5 +73,6 @@ def extract(
         rawmaker=genex.CONFIG,
         worker=worker,
         base=base,
+        full=full,
         **selected,
     )
