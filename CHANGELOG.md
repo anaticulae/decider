@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v3.1.0
+
+### Feature
+
+* add full flag to run all generator (5d248af01ec6)
+
 ## v3.0.0
 
 ### Feature
