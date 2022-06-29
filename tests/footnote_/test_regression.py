@@ -19,6 +19,7 @@ import tests.footnote_
 REGRESSION = """\
 HOME018_PDF 16 !2019 # Ebd. follows Ebd. which is not a problem
 MASTER155_PDF 16 !1337 # TODO REMOVE LATER
+BACHELOR077_PDF : !2100 #  Vgl. Dixon, S.: unvollstandige Seitenangabe
 """
 
 
