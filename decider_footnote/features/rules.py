@@ -173,7 +173,7 @@ Fußnote {{number}}: Fehlendes Leerzeichen
 
 Fügen Sie ein Leerzeichen zwischen Ziffer und Text hinzu:
 
-{{text}}
+**{{text}}**
 """
 
 
@@ -286,7 +286,7 @@ def check_2017_ambiguous_reference(linter, driver):
 SOLUTION_R2018 = """\
 Fußnote verstreut
 
-Vermeiden Sie die Fußnoten über mehrere Seiten zu verteilen.
+Vermeiden Sie Fußnoten über mehrere Seiten zu verteilen.
 
 # TODO: IF WORD, ADD LINK TO ARTICLE
 
@@ -308,8 +308,11 @@ def check_2018_footnote_over_pages(linter, driver):
 SOLUTION_R2019 = """\
 Fußnote dupliziert, vermeiden Sie Redundanz
 
-Identisch, aufeinander folgende Fußnoten erkannt: {{note}}. Verwenden \
-Sie **ebd. oder ???** um identische Fußnoten darzustellen.
+Identisch, aufeinander folgende Fußnoten erkannt: \
+**{{note}}**
+
+Verwenden Sie **ebd., ebendort, ibid. oder ibidem** um identische \
+Fußnoten darzustellen.
 
 {text/fussnote#struktur}
 """
