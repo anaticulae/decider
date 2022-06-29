@@ -2,6 +2,18 @@
 
 Every noteable change is logged here.
 
+## v3.2.0
+
+### Feature
+
+* add page number in footnote linter (5dec93cfd491)
+
+### Fix
+
+* clarify error message (6f0e980ff337)
+* normalize newlines in finding view (57dac3433520)
+* clarify error message (7016cd4052ce)
+
 ## v3.1.0
 
 ### Feature
