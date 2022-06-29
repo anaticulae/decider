@@ -419,6 +419,8 @@ def href_only(text: str) -> bool:
 
     >>> href_only('https://git.imp.fu-berlin.de/besendorf/android-security-scanner/')
     True
+    >>> href_only('https://news.linkedin.com/about-us#Statistics')
+    True
     """
     text = text.strip()
     if len(text.split()) > 1:
