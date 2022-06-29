@@ -221,6 +221,7 @@ Es wird empfohlen sämtliche Fußnoten durch einen Punkt abzuschließen.
 {text/fussnote#struktur}
 """
 
+# TODO: CHECK DUPLICATON, see: check_2015_endnotes_using
 SOLUTION_R2015 = """\
 Fußnoten Separator zu klein/groß
 
