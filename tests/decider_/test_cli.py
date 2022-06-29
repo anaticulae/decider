@@ -15,12 +15,9 @@ import utilatest
 import tests
 
 
-@pytest.mark.parametrize('cmd', [
-    '--help',
-])
-def test_cli_decider(cmd, testdir, monkeypatch):
-    """Run decider"""
-    tests.run(cmd, monkeypatch=monkeypatch)
+def test_cli_decider_help(monkeypatch):
+    """Run help decider"""
+    tests.run('--help', monkeypatch=monkeypatch)
 
 
 @pytest.mark.parametrize('source', [
