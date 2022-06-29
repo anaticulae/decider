@@ -113,7 +113,9 @@ def check_2001_no_uppercase_at_start(linter, driver):
 SOLUTION_2002 = """\
 Die Fußnote {{number}} endet nicht mit einem Punkt
 
-Fügen Sie einen Punkt am Ende der Fußnote {{number}} hinzu.
+**{{text}}**
+
+Fügen Sie einen Punkt am Ende der Fußnote hinzu.
 
 {text/fussnote#struktur}
 """
@@ -140,6 +142,7 @@ def check_2002_no_dot_at_end(linter, driver):
         linter(
             number=footnote.number,
             location=iamraw.Location.from_page(footnote.page),
+            text=text,
         )
 
 
