@@ -102,7 +102,7 @@ SOLUTION_4005 = """\
 Grafik verzerrt
 
 Das Seitenverhältnis der Grafik im Dokument entspricht nicht dem \
-Ausgangzverhältnis und wird daher verzerrt dargestellt.
+Ausgangsverhältnis und wird daher verzerrt dargestellt.
 
 Druck: {{pdf}}
 Quelle: {{image}}
