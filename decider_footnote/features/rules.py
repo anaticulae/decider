@@ -171,6 +171,44 @@ def check_2100_incomplete_pagenumber(linter, driver):
             )
 
 
+SOLUTION_2101 = """\
+Fußnote {{number}}: Fehlendes Leerzeichen vor Seitenzahl
+
+Fügen Sie ein Leerzeichen vor die Seitenzahl hinzu.
+
+**{{text}}**
+"""
+
+
+def check_2101_missing_space_before_pagenumber(linter, driver):
+    for footnote in driver.footnotes:
+        try:
+            raw = footnote.raw
+        except AttributeError:
+            # TODO: EXTEND VALIDATION
+            # FooteNoteMerged
+            continue
+        if not MISSING_SPACE_BEFORE_PAGENUMBER.search(raw):
+            continue
+        # remove newlines in finding view
+        no_newline = utila.normalize_text(raw, normalize_spaces=True)
+        linter(
+            number=footnote.number,
+            text=no_newline,
+            location=iamraw.Location.from_page(footnote.page),
+        )
+
+
+MISSING_SPACE_BEFORE_PAGENUMBER = utila.compiles(r"""
+    (
+        Seite|
+        S\.|
+        page|
+        p\.
+    )
+    \d{1,4}
+""")
+
 SOLUTION_2105 = """\
 Fußnote {{number}}: Fehlendes Leerzeichen
 

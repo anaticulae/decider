@@ -7,6 +7,13 @@
 02100 p4~c7_11 Die Fußnote 1 enthält unvollständige Seitenangabe
 02100 p58~c13_17 Die Fußnote 198 enthält unvollständige Seitenangabe
 02100 p60~c13_17 Die Fußnote 207 enthält unvollständige Seitenangabe
+02101 000p7 Fußnote 10: Fehlendes Leerzeichen vor Seitenzahl
+02101 000p8 Fußnote 16: Fehlendes Leerzeichen vor Seitenzahl
+02101 00p16 Fußnote 43: Fehlendes Leerzeichen vor Seitenzahl
+02101 00p16 Fußnote 46: Fehlendes Leerzeichen vor Seitenzahl
+02101 00p19 Fußnote 57: Fehlendes Leerzeichen vor Seitenzahl
+02101 00p21 Fußnote 62: Fehlendes Leerzeichen vor Seitenzahl
+02101 00p22 Fußnote 63: Fehlendes Leerzeichen vor Seitenzahl
 04000 b(106.25;93.74;529.35;389.23)p9 Auflösung zu niedrig
 04000 b(115.8;322.53;479.37;422.23)p13 Auflösung zu niedrig
 04000 b(130.05;70.85;465.25;416.0)p15 Auflösung zu niedrig
