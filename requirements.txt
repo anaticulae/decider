@@ -24,7 +24,7 @@ configo>=0.19.1<1.0.0
 # docs
 writers>=1.4.0<2.0.0
 
-german>=1.22.0<2.0.0
+german>=1.23.0<2.0.0
 konrad>=0.7.2<1.0.0
 
 linkify>=0.2.3<1.0.0
