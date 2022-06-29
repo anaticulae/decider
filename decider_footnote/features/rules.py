@@ -186,9 +186,11 @@ def check_2105_missing_space(linter, driver):
             continue
         if not MISSING_SPACE.match(raw):
             continue
+        # remove newlines in finding view
+        no_newline = utila.normalize_text(raw, normalize_spaces=True)
         linter(
             number=footnote.number,
-            text=raw,
+            text=no_newline,
             location=iamraw.Location.from_page(footnote.page),
         )
 
