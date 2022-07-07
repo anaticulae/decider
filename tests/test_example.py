@@ -17,11 +17,14 @@ import decider.example
 
 @utilatest.nightly
 def test_example_extract(testdir):
-    root = str(testdir)
-    generated = os.path.join(root, 'generated')
+    generated = os.path.join(testdir.tmpdir, 'generated')
     pdfs = [
         power.DOCU035_PDF,
         power.TECH024_PDF,
     ]
-    decider.example.extract(pdfs, generated, pages='0:3')
+    decider.example.extract(
+        pdfs,
+        generated,
+        pages='0:3',
+    )
     assert os.path.exists(generated), str(generated)

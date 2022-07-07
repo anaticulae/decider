@@ -1,66 +1,66 @@
-01220 000p1 Titelseite enthält keinen Autor
-02010 00p23 Fußnote 8 falsch formatiert
-02013 00p-1 Empfehlung: Ende der Fußnote
-02015 00p-1 Endnoten verwendet
-02105 00p18 Fußnote 1: Fehlendes Leerzeichen vor Text
-02105 00p18 Fußnote 2: Fehlendes Leerzeichen vor Text
-02105 00p19 Fußnote 3: Fehlendes Leerzeichen vor Text
-02105 00p21 Fußnote 4: Fehlendes Leerzeichen vor Text
-02105 00p22 Fußnote 5: Fehlendes Leerzeichen vor Text
-02105 00p22 Fußnote 6: Fehlendes Leerzeichen vor Text
-02105 00p22 Fußnote 7: Fehlendes Leerzeichen vor Text
-02105 00p23 Fußnote 10: Fehlendes Leerzeichen vor Text
-02105 00p23 Fußnote 11: Fehlendes Leerzeichen vor Text
-02105 00p23 Fußnote 8: Fehlendes Leerzeichen vor Text
-02105 00p25 Fußnote 1: Fehlendes Leerzeichen vor Text
-02105 00p25 Fußnote 2: Fehlendes Leerzeichen vor Text
-02105 00p25 Fußnote 3: Fehlendes Leerzeichen vor Text
-02105 00p26 Fußnote 4: Fehlendes Leerzeichen vor Text
-02105 00p27 Fußnote 5: Fehlendes Leerzeichen vor Text
-02105 00p34 Fußnote 6: Fehlendes Leerzeichen vor Text
-02105 00p38 Fußnote 7: Fehlendes Leerzeichen vor Text
-02105 00p50 Fußnote 1: Fehlendes Leerzeichen vor Text
-02105 00p53 Fußnote 2: Fehlendes Leerzeichen vor Text
-02105 00p53 Fußnote 3: Fehlendes Leerzeichen vor Text
-02105 00p54 Fußnote 4: Fehlendes Leerzeichen vor Text
-02105 00p55 Fußnote 5: Fehlendes Leerzeichen vor Text
-02105 00p61 Fußnote 6: Fehlendes Leerzeichen vor Text
-02105 00p62 Fußnote 7: Fehlendes Leerzeichen vor Text
-02105 00p63 Fußnote 8: Fehlendes Leerzeichen vor Text
-02105 00p77 Fußnote 1: Fehlendes Leerzeichen vor Text
-04000 b(115.39;124.73;476.89;279.23)p64 Auflösung zu niedrig
-04000 b(131.98;214.37;460.3;521.57)p35 Auflösung zu niedrig
-04000 b(131.98;76.53;460.3;239.74)p41 Auflösung zu niedrig
-04000 b(136.39;232.3;455.89;317.05)p37 Auflösung zu niedrig
-04000 b(136.39;492.89;455.89;620.39)p58 Auflösung zu niedrig
-04000 b(139.02;121.55;453.27;231.05)p61 Auflösung zu niedrig
-04000 b(139.66;352.89;452.62;518.97)p31 Auflösung zu niedrig
-04000 b(144.62;382.7;447.68;517.02)p21 Auflösung zu niedrig
-04000 b(166.26;214.37;426.03;657.27)p52 Auflösung zu niedrig
-04000 b(169.02;344.9;423.27;439.4)p62 Auflösung zu niedrig
-04000 b(186.94;76.53;405.34;227.25)p34 Auflösung zu niedrig
-04000 b(187.91;155.49;404.39;300.75)p22 Auflösung zu niedrig
-04000 b(187.91;178.51;404.37;325.37)p33 Auflösung zu niedrig
-04000 b(187.91;222.78;404.38;290.87)p68 Auflösung zu niedrig
-04000 b(187.91;394.91;404.39;543.97)p34 Auflösung zu niedrig
-04000 b(209.56;185.71;382.73;240.68)p21 Auflösung zu niedrig
-04000 b(238.54;76.53;353.74;251.25)p50 Auflösung zu niedrig
-04000 b(81.17;106.81;514.12;489.73)p42 Auflösung zu niedrig
-04000 b(81.17;160.59;514.11;299.85)p29 Auflösung zu niedrig
-04000 b(81.17;227.77;514.13;347.49)p53 Auflösung zu niedrig
-04000 b(81.17;370.81;514.11;561.15)p80 Auflösung zu niedrig
-04000 b(81.17;382.41;514.1;535.93)p28 Auflösung zu niedrig
-04000 b(81.17;425.51;514.12;611.84)p67 Auflösung zu niedrig
-04000 b(81.17;482.06;514.13;618.15)p18 Auflösung zu niedrig
-04000 b(81.17;513.02;514.1;618.15)p20 Auflösung zu niedrig
-04000 b(81.17;76.53;514.11;573.89)p66 Auflösung zu niedrig
-04000 b(81.17;76.53;514.13;356.88)p47 Auflösung zu niedrig
-04000 b(81.17;76.53;514.13;407.97)p70 Auflösung zu niedrig
-04000 b(81.17;76.54;514.1;249.14)p69 Auflösung zu niedrig
-04000 b(81.64;76.53;513.64;360.69)p60 Auflösung zu niedrig
-10500 00p77 Aufrufdatum fehlt
-10500 00p85 Aufrufdatum fehlt
-10500 00p86 Aufrufdatum fehlt
-10500 00p86 Aufrufdatum fehlt
-10500 00p86 Aufrufdatum fehlt
-10500 00p87 Aufrufdatum fehlt
+01220 p1 Titelseite enthält keinen Autor
+02010 p23 Fußnote 8 falsch formatiert
+02013 p-1 Empfehlung: Ende der Fußnote
+02015 p-1 Endnoten verwendet
+02105 p18 Fußnote 1: Fehlendes Leerzeichen vor Text
+02105 p18 Fußnote 2: Fehlendes Leerzeichen vor Text
+02105 p19 Fußnote 3: Fehlendes Leerzeichen vor Text
+02105 p21 Fußnote 4: Fehlendes Leerzeichen vor Text
+02105 p22 Fußnote 5: Fehlendes Leerzeichen vor Text
+02105 p22 Fußnote 6: Fehlendes Leerzeichen vor Text
+02105 p22 Fußnote 7: Fehlendes Leerzeichen vor Text
+02105 p23 Fußnote 10: Fehlendes Leerzeichen vor Text
+02105 p23 Fußnote 11: Fehlendes Leerzeichen vor Text
+02105 p23 Fußnote 8: Fehlendes Leerzeichen vor Text
+02105 p25 Fußnote 1: Fehlendes Leerzeichen vor Text
+02105 p25 Fußnote 2: Fehlendes Leerzeichen vor Text
+02105 p25 Fußnote 3: Fehlendes Leerzeichen vor Text
+02105 p26 Fußnote 4: Fehlendes Leerzeichen vor Text
+02105 p27 Fußnote 5: Fehlendes Leerzeichen vor Text
+02105 p34 Fußnote 6: Fehlendes Leerzeichen vor Text
+02105 p38 Fußnote 7: Fehlendes Leerzeichen vor Text
+02105 p50 Fußnote 1: Fehlendes Leerzeichen vor Text
+02105 p53 Fußnote 2: Fehlendes Leerzeichen vor Text
+02105 p53 Fußnote 3: Fehlendes Leerzeichen vor Text
+02105 p54 Fußnote 4: Fehlendes Leerzeichen vor Text
+02105 p55 Fußnote 5: Fehlendes Leerzeichen vor Text
+02105 p61 Fußnote 6: Fehlendes Leerzeichen vor Text
+02105 p62 Fußnote 7: Fehlendes Leerzeichen vor Text
+02105 p63 Fußnote 8: Fehlendes Leerzeichen vor Text
+02105 p77 Fußnote 1: Fehlendes Leerzeichen vor Text
+04000 p18b(81.17;482.06;514.13;618.15) Auflösung zu niedrig
+04000 p20b(81.17;513.02;514.1;618.15) Auflösung zu niedrig
+04000 p21b(144.62;382.7;447.68;517.02) Auflösung zu niedrig
+04000 p21b(209.56;185.71;382.73;240.68) Auflösung zu niedrig
+04000 p22b(187.91;155.49;404.39;300.75) Auflösung zu niedrig
+04000 p28b(81.17;382.41;514.1;535.93) Auflösung zu niedrig
+04000 p29b(81.17;160.59;514.11;299.85) Auflösung zu niedrig
+04000 p31b(139.66;352.89;452.62;518.97) Auflösung zu niedrig
+04000 p33b(187.91;178.51;404.37;325.37) Auflösung zu niedrig
+04000 p34b(186.94;76.53;405.34;227.25) Auflösung zu niedrig
+04000 p34b(187.91;394.91;404.39;543.97) Auflösung zu niedrig
+04000 p35b(131.98;214.37;460.3;521.57) Auflösung zu niedrig
+04000 p37b(136.39;232.3;455.89;317.05) Auflösung zu niedrig
+04000 p41b(131.98;76.53;460.3;239.74) Auflösung zu niedrig
+04000 p42b(81.17;106.81;514.12;489.73) Auflösung zu niedrig
+04000 p47b(81.17;76.53;514.13;356.88) Auflösung zu niedrig
+04000 p50b(238.54;76.53;353.74;251.25) Auflösung zu niedrig
+04000 p52b(166.26;214.37;426.03;657.27) Auflösung zu niedrig
+04000 p53b(81.17;227.77;514.13;347.49) Auflösung zu niedrig
+04000 p58b(136.39;492.89;455.89;620.39) Auflösung zu niedrig
+04000 p60b(81.64;76.53;513.64;360.69) Auflösung zu niedrig
+04000 p61b(139.02;121.55;453.27;231.05) Auflösung zu niedrig
+04000 p62b(169.02;344.9;423.27;439.4) Auflösung zu niedrig
+04000 p64b(115.39;124.73;476.89;279.23) Auflösung zu niedrig
+04000 p66b(81.17;76.53;514.11;573.89) Auflösung zu niedrig
+04000 p67b(81.17;425.51;514.12;611.84) Auflösung zu niedrig
+04000 p68b(187.91;222.78;404.38;290.87) Auflösung zu niedrig
+04000 p69b(81.17;76.54;514.1;249.14) Auflösung zu niedrig
+04000 p70b(81.17;76.53;514.13;407.97) Auflösung zu niedrig
+04000 p80b(81.17;370.81;514.11;561.15) Auflösung zu niedrig
+10500 p77 Aufrufdatum fehlt
+10500 p85 Aufrufdatum fehlt
+10500 p86 Aufrufdatum fehlt
+10500 p86 Aufrufdatum fehlt
+10500 p86 Aufrufdatum fehlt
+10500 p87 Aufrufdatum fehlt

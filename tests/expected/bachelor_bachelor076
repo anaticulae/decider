@@ -1,48 +1,48 @@
-01965 00p73 Eidesstattliche Erklärung enthält Seitenzahl
-02001 00p16 Fußnote 45 beginnt nicht mit einem Großbuchstaben
-02013 00p-1 Empfehlung: Ende der Fußnote
+01965 p73 Eidesstattliche Erklärung enthält Seitenzahl
+02001 p16 Fußnote 45 beginnt nicht mit einem Großbuchstaben
+02013 p-1 Empfehlung: Ende der Fußnote
 02100 p4~c7_11 Die Fußnote 1 enthält unvollständige Seitenangabe
 02100 p58~c13_17 Die Fußnote 198 enthält unvollständige Seitenangabe
 02100 p60~c13_17 Die Fußnote 207 enthält unvollständige Seitenangabe
-02101 000p7 Fußnote 10: Fehlendes Leerzeichen vor Seitenzahl
-02101 000p8 Fußnote 16: Fehlendes Leerzeichen vor Seitenzahl
-02101 00p16 Fußnote 43: Fehlendes Leerzeichen vor Seitenzahl
-02101 00p16 Fußnote 46: Fehlendes Leerzeichen vor Seitenzahl
-02101 00p19 Fußnote 57: Fehlendes Leerzeichen vor Seitenzahl
-02101 00p21 Fußnote 62: Fehlendes Leerzeichen vor Seitenzahl
-02101 00p22 Fußnote 63: Fehlendes Leerzeichen vor Seitenzahl
-04000 b(106.25;93.74;529.35;389.23)p9 Auflösung zu niedrig
-04000 b(115.8;322.53;479.37;422.23)p13 Auflösung zu niedrig
-04000 b(130.05;70.85;465.25;416.0)p15 Auflösung zu niedrig
-04000 b(131.15;405.37;463.55;691.86)p56 Auflösung zu niedrig
-04000 b(70.85;124.48;500.85;426.73)p74 Auflösung zu niedrig
-04000 b(70.85;405.32;524.45;622.97)p54 Auflösung zu niedrig
-04000 b(70.85;405.32;524.45;648.17)p43 Auflösung zu niedrig
-04000 b(70.85;449.05;524.45;586.95)p34 Auflösung zu niedrig
-04000 b(70.85;70.85;524.45;169.55)p0 Auflösung zu niedrig
-04000 b(70.9;446.77;518.5;686.0)p63 Auflösung zu niedrig
-04000 b(91.08;70.85;504.2;319.25)p38 Auflösung zu niedrig
-04000 b(96.65;203.09;498.2;428.08)p41 Auflösung zu niedrig
-04031 b(70.85;124.48;500.85;426.73)p74 Abbildungen nicht einheitlich ausgerichtet
-10500 00p14 Aufrufdatum fehlt
-10500 00p15 Aufrufdatum fehlt
-10500 00p17 Aufrufdatum fehlt
-10500 00p18 Aufrufdatum fehlt
-10500 00p22 Aufrufdatum fehlt
-10500 00p23 Aufrufdatum fehlt
-10500 00p23 Aufrufdatum fehlt
-10500 00p29 Aufrufdatum fehlt
-10500 00p32 Aufrufdatum fehlt
-10500 00p36 Aufrufdatum fehlt
-10500 00p40 Aufrufdatum fehlt
-10500 00p48 Aufrufdatum fehlt
-10500 00p50 Aufrufdatum fehlt
-10500 00p51 Aufrufdatum fehlt
-10500 00p57 Aufrufdatum fehlt
-10500 00p67 Aufrufdatum fehlt
-10500 00p69 Aufrufdatum fehlt
-10500 00p69 Aufrufdatum fehlt
-10500 00p70 Aufrufdatum fehlt
-10500 00p71 Aufrufdatum fehlt
-10500 00p71 Aufrufdatum fehlt
-10500 00p72 Aufrufdatum fehlt
+02101 p16 Fußnote 43: Fehlendes Leerzeichen vor Seitenzahl
+02101 p16 Fußnote 46: Fehlendes Leerzeichen vor Seitenzahl
+02101 p19 Fußnote 57: Fehlendes Leerzeichen vor Seitenzahl
+02101 p21 Fußnote 62: Fehlendes Leerzeichen vor Seitenzahl
+02101 p22 Fußnote 63: Fehlendes Leerzeichen vor Seitenzahl
+02101 p7 Fußnote 10: Fehlendes Leerzeichen vor Seitenzahl
+02101 p8 Fußnote 16: Fehlendes Leerzeichen vor Seitenzahl
+04000 p0b(70.85;70.85;524.45;169.55) Auflösung zu niedrig
+04000 p13b(115.8;322.53;479.37;422.23) Auflösung zu niedrig
+04000 p15b(130.05;70.85;465.25;416.0) Auflösung zu niedrig
+04000 p34b(70.85;449.05;524.45;586.95) Auflösung zu niedrig
+04000 p38b(91.08;70.85;504.2;319.25) Auflösung zu niedrig
+04000 p41b(96.65;203.09;498.2;428.08) Auflösung zu niedrig
+04000 p43b(70.85;405.32;524.45;648.17) Auflösung zu niedrig
+04000 p54b(70.85;405.32;524.45;622.97) Auflösung zu niedrig
+04000 p56b(131.15;405.37;463.55;691.86) Auflösung zu niedrig
+04000 p63b(70.9;446.77;518.5;686.0) Auflösung zu niedrig
+04000 p74b(70.85;124.48;500.85;426.73) Auflösung zu niedrig
+04000 p9b(106.25;93.74;529.35;389.23) Auflösung zu niedrig
+04031 p74b(70.85;124.48;500.85;426.73) Abbildungen nicht einheitlich ausgerichtet
+10500 p14 Aufrufdatum fehlt
+10500 p15 Aufrufdatum fehlt
+10500 p17 Aufrufdatum fehlt
+10500 p18 Aufrufdatum fehlt
+10500 p22 Aufrufdatum fehlt
+10500 p23 Aufrufdatum fehlt
+10500 p23 Aufrufdatum fehlt
+10500 p29 Aufrufdatum fehlt
+10500 p32 Aufrufdatum fehlt
+10500 p36 Aufrufdatum fehlt
+10500 p40 Aufrufdatum fehlt
+10500 p48 Aufrufdatum fehlt
+10500 p50 Aufrufdatum fehlt
+10500 p51 Aufrufdatum fehlt
+10500 p57 Aufrufdatum fehlt
+10500 p67 Aufrufdatum fehlt
+10500 p69 Aufrufdatum fehlt
+10500 p69 Aufrufdatum fehlt
+10500 p70 Aufrufdatum fehlt
+10500 p71 Aufrufdatum fehlt
+10500 p71 Aufrufdatum fehlt
+10500 p72 Aufrufdatum fehlt

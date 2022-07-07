@@ -1,11 +1,11 @@
-01221 000p0 Titelseite enthält keine Matrikelnummer
-01965 00p71 Eidesstattliche Erklärung enthält Seitenzahl
-02003 000p3 Fußnote 1 falsch formatiert
-02003 00p14 Fußnote 34 falsch formatiert
-02005 000p3 Fußnote 1 falsch formatiert
-02005 00p14 Fußnote 34 falsch formatiert
-02012 00p-1 Empfehlung: Anfang der Fußnote
-02013 00p-1 Empfehlung: Ende der Fußnote
-10500 00p21 Aufrufdatum fehlt
-10500 00p66 Aufrufdatum fehlt
-10500 00p67 Aufrufdatum fehlt
+01221 p0 Titelseite enthält keine Matrikelnummer
+01965 p71 Eidesstattliche Erklärung enthält Seitenzahl
+02003 p14 Fußnote 34 falsch formatiert
+02003 p3 Fußnote 1 falsch formatiert
+02005 p14 Fußnote 34 falsch formatiert
+02005 p3 Fußnote 1 falsch formatiert
+02012 p-1 Empfehlung: Anfang der Fußnote
+02013 p-1 Empfehlung: Ende der Fußnote
+10500 p21 Aufrufdatum fehlt
+10500 p66 Aufrufdatum fehlt
+10500 p67 Aufrufdatum fehlt

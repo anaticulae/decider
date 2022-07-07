@@ -1,30 +1,30 @@
-01965 000p2 Eidesstattliche Erklärung enthält Seitenzahl
-02002 000p7 Die Fußnote 1 endet nicht mit einem Punkt
-02110 00p-1 Kopfzeile: Redundanter Inhalt
-04000 b(100.8;363.0;546.72;496.8)p21 Auflösung zu niedrig
-04000 b(100.8;624.48;386.76;742.2)p20 Auflösung zu niedrig
-04000 b(100.8;89.16;511.2;289.2)p22 Auflösung zu niedrig
-04000 b(86.64;122.16;503.64;763.68)p56 Auflösung zu niedrig
-04000 b(86.64;126.12;540.12;777.36)p50 Auflösung zu niedrig
-04000 b(86.64;139.92;503.64;778.44)p55 Auflösung zu niedrig
-04000 b(86.64;142.68;502.08;777.36)p57 Auflösung zu niedrig
-04000 b(86.64;225.0;540.36;600.0)p37 Auflösung zu niedrig
-04000 b(86.64;260.4;540.24;590.52)p30 Auflösung zu niedrig
-04000 b(86.64;276.84;466.2;456.84)p13 Auflösung zu niedrig
-04000 b(86.64;277.92;540.36;440.64)p16 Auflösung zu niedrig
-04000 b(86.64;326.16;540.36;561.72)p28 Auflösung zu niedrig
-04000 b(86.64;367.08;390.36;571.08)p12 Auflösung zu niedrig
-04000 b(86.64;411.72;538.8;704.88)p19 Auflösung zu niedrig
-04000 b(86.64;439.68;540.12;731.52)p36 Auflösung zu niedrig
-04000 b(86.64;460.68;457.8;552.96)p14 Auflösung zu niedrig
-04000 b(86.64;482.88;270.36;543.6)p15 Auflösung zu niedrig
-04000 b(86.64;505.08;344.64;770.28)p54 Auflösung zu niedrig
-04000 b(86.64;506.76;490.44;666.72)p0 Auflösung zu niedrig
-04000 b(86.76;267.12;368.64;408.96)p10 Auflösung zu niedrig
-04001 b(55.92;447.84;463.08;752.76)p17 Auflösung unnötig hoch
-04001 b(85.08;89.76;220.2;180.12)p0 Auflösung unnötig hoch
-04001 b(86.64;366.84;252.96;430.44)p33 Auflösung unnötig hoch
-04001 b(86.64;561.84;341.64;737.28)p11 Auflösung unnötig hoch
-04001 b(86.64;89.16;335.4;271.08)p34 Auflösung unnötig hoch
-04031 b(100.8;89.16;511.2;289.2)p22 Abbildungen nicht einheitlich ausgerichtet
-10500 00p59 Aufrufdatum fehlt
+01965 p2 Eidesstattliche Erklärung enthält Seitenzahl
+02002 p7 Die Fußnote 1 endet nicht mit einem Punkt
+02110 p-1 Kopfzeile: Redundanter Inhalt
+04000 p0b(86.64;506.76;490.44;666.72) Auflösung zu niedrig
+04000 p10b(86.76;267.12;368.64;408.96) Auflösung zu niedrig
+04000 p12b(86.64;367.08;390.36;571.08) Auflösung zu niedrig
+04000 p13b(86.64;276.84;466.2;456.84) Auflösung zu niedrig
+04000 p14b(86.64;460.68;457.8;552.96) Auflösung zu niedrig
+04000 p15b(86.64;482.88;270.36;543.6) Auflösung zu niedrig
+04000 p16b(86.64;277.92;540.36;440.64) Auflösung zu niedrig
+04000 p19b(86.64;411.72;538.8;704.88) Auflösung zu niedrig
+04000 p20b(100.8;624.48;386.76;742.2) Auflösung zu niedrig
+04000 p21b(100.8;363.0;546.72;496.8) Auflösung zu niedrig
+04000 p22b(100.8;89.16;511.2;289.2) Auflösung zu niedrig
+04000 p28b(86.64;326.16;540.36;561.72) Auflösung zu niedrig
+04000 p30b(86.64;260.4;540.24;590.52) Auflösung zu niedrig
+04000 p36b(86.64;439.68;540.12;731.52) Auflösung zu niedrig
+04000 p37b(86.64;225.0;540.36;600.0) Auflösung zu niedrig
+04000 p50b(86.64;126.12;540.12;777.36) Auflösung zu niedrig
+04000 p54b(86.64;505.08;344.64;770.28) Auflösung zu niedrig
+04000 p55b(86.64;139.92;503.64;778.44) Auflösung zu niedrig
+04000 p56b(86.64;122.16;503.64;763.68) Auflösung zu niedrig
+04000 p57b(86.64;142.68;502.08;777.36) Auflösung zu niedrig
+04001 p0b(85.08;89.76;220.2;180.12) Auflösung unnötig hoch
+04001 p11b(86.64;561.84;341.64;737.28) Auflösung unnötig hoch
+04001 p17b(55.92;447.84;463.08;752.76) Auflösung unnötig hoch
+04001 p33b(86.64;366.84;252.96;430.44) Auflösung unnötig hoch
+04001 p34b(86.64;89.16;335.4;271.08) Auflösung unnötig hoch
+04031 p22b(100.8;89.16;511.2;289.2) Abbildungen nicht einheitlich ausgerichtet
+10500 p59 Aufrufdatum fehlt
