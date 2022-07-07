@@ -210,7 +210,7 @@ MISSING_SPACE_BEFORE_PAGENUMBER = utila.compiles(r"""
 """)
 
 SOLUTION_2105 = """\
-Fußnote {{number}}: Fehlendes Leerzeichen
+Fußnote {{number}}: Fehlendes Leerzeichen vor Text
 
 Fügen Sie ein Leerzeichen zwischen Ziffer und Text hinzu:
 
