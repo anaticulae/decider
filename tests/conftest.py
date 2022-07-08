@@ -66,7 +66,6 @@ def extract(resources):
     genex.extract(
         files=resources,
         full=True,
-        base=power.REPOSITORY,
         worker=WORKER,
     )
 
