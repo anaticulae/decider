@@ -33,8 +33,15 @@ def run_titlepage(src, expected, td, mp):
     pytest.param(power.MASTER116_PDF, 1210, id='master116'),
     pytest.param(power.MASTER072_PDF, 1221, id='master072'),
     pytest.param(power.MASTER078_PDF, [], id='master078'),
-    pytest.param((power.DOCU035_PDF, 'notitle'), 1200, id='docu035'),
 ])
-def test_titlepage_extraction(src, expected, td, mp):
-    src = power.link(*src) if isinstance(src, tuple) else power.link(src)
+def test_titlepage_extraction_default(src, expected, td, mp):
+    src = power.link(src)
+    run_titlepage(src, expected, td, mp)
+
+
+@pytest.mark.parametrize('src, expected', [
+    pytest.param(power.DOCU035_PDF, 1200, id='docu035'),
+])
+def test_titlepage_extraction_notitle(src, expected, td, mp):
+    src = power.link(src, folder='notitle')
     run_titlepage(src, expected, td, mp)
