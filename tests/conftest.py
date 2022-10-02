@@ -11,6 +11,7 @@ import genex
 import power
 import pytest
 import utila
+import utilatest
 import writers
 from utilatest import mp  # pylint:disable=W0611
 from utilatest import td  # pylint:disable=W0611
@@ -20,8 +21,6 @@ import decider
 PACKAGE = decider.PACKAGE
 
 pytest_plugins = ['pytester', 'xdist']  # pylint: disable=invalid-name
-
-WORKER = 4
 
 RESOURCES = [
     (power.BACHELOR037_PDF, '0:20'),
@@ -51,6 +50,7 @@ RESOURCES = [
     power.MASTER072_PDF,
     power.MASTER075_PDF,
 ]
+WORKER = utilatest.worker_count(4, onci=len(RESOURCES))
 
 RESOURCES_NOTITLE = [
     (power.BOOK007_PDF, ':'),
