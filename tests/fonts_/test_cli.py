@@ -29,7 +29,7 @@ def test_main_fonts(td, mp):  # pylint:disable=W0621
         process=fonts.cli.PROCESS,
         main=fonts.cli.main,
         mp=mp,
-        success=True,
+        expect=True,
     )
     outpath = os.path.join(root, fonts.cli.UGLY_STEP_OUTPUT_FILE)
     assert os.path.exists(outpath), outpath

@@ -31,7 +31,7 @@ def test_cli_decider_help(mp):
     pytest.param(power.MASTER099_PDF, id='master99'),
 ])
 @utilatest.nightly
-def test_cli_decider_example(source, td, mp):
+def test_cli_decider_example(source, td, mp):  # pylint:disable=W0613
     """Run decider"""
     source = power.link(source)
     cmd = f'-i {source}'
