@@ -16,8 +16,8 @@ import decider.example
 
 
 @utilatest.nightly
-def test_example_extract(testdir):
-    generated = os.path.join(testdir.tmpdir, 'generated')
+def test_example_extract(td):
+    generated = os.path.join(td.tmpdir, 'generated')
     pdfs = [
         power.DOCU035_PDF,
         power.TECH024_PDF,

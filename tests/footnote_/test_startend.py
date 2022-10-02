@@ -14,24 +14,24 @@ import decider_footnote.path
 import tests.footnote_
 
 
-def test_footnote_uppercase_start_master89_page40(testdir, monkeypatch):
+def test_footnote_uppercase_start_master89_page40(td, mp):
     """Support quotation start char, see: 2001"""
-    cmd = f'-i {power.link(power.MASTER089_PDF)} -o {testdir.tmpdir} --rules'
-    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
+    cmd = f'-i {power.link(power.MASTER089_PDF)} -o {td.tmpdir} --rules'
+    tests.footnote_.run(cmd, mp=mp)
 
-    rules = decider_footnote.path.rules(testdir.tmpdir)
+    rules = decider_footnote.path.rules(td.tmpdir)
     result = serializeraw.load_findings(rules, 2001)
 
     result = [finding for finding in result if finding.location.page == 40]
     assert not result
 
 
-def test_footnote_dot_end_master89_page46(testdir, monkeypatch):
+def test_footnote_dot_end_master89_page46(td, mp):
     """Support quotation end char, see: 2002"""
-    cmd = f'-i {power.link(power.MASTER089_PDF)} -o {testdir.tmpdir} --rules'
-    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
+    cmd = f'-i {power.link(power.MASTER089_PDF)} -o {td.tmpdir} --rules'
+    tests.footnote_.run(cmd, mp=mp)
 
-    rules = decider_footnote.path.rules(testdir.tmpdir)
+    rules = decider_footnote.path.rules(td.tmpdir)
     result = serializeraw.load_findings(rules, 2002)
 
     result = [finding for finding in result if finding.location.page == 46]

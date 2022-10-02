@@ -18,15 +18,15 @@ import decider_footnote.path
 import tests.footnote_
 
 
-def test_decider_footnote_cli_help(monkeypatch):
-    tests.footnote_.run('--help', monkeypatch=monkeypatch)
+def test_decider_footnote_cli_help(mp):
+    tests.footnote_.run('--help', mp=mp)
 
 
-def test_cli_rules(testdir, monkeypatch):
-    cmd = f'-i {power.link(power.MASTER072_PDF)} -o {testdir.tmpdir} --rules'
-    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
+def test_cli_rules(td, mp):
+    cmd = f'-i {power.link(power.MASTER072_PDF)} -o {td.tmpdir} --rules'
+    tests.footnote_.run(cmd, mp=mp)
 
-    outpath = decider_footnote.path.rules(testdir.tmpdir)
+    outpath = decider_footnote.path.rules(td.tmpdir)
     assert os.path.exists(outpath), outpath
 
     dumped = utila.file_read(outpath)
@@ -39,18 +39,18 @@ def test_cli_rules(testdir, monkeypatch):
     assert utila.istemplate_replaced(dumped), dumped
 
 
-def test_cli_footnote_global(testdir, monkeypatch):
-    cmd = f'-i {power.link(power.BACHELOR090_PDF)} -o {testdir.tmpdir} --global'
-    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
-    findings = serializeraw.findings_from_path(testdir.tmpdir, msgid=2015)
+def test_cli_footnote_global(td, mp):
+    cmd = f'-i {power.link(power.BACHELOR090_PDF)} -o {td.tmpdir} --global'
+    tests.footnote_.run(cmd, mp=mp)
+    findings = serializeraw.findings_from_path(td.tmpdir, msgid=2015)
     assert len(findings) == 1
 
 
-def test_cli_footnote_disabled_checker(testdir, monkeypatch):
-    cmd = f'-i {power.link(power.BACHELOR076_PDF)} -o {testdir.tmpdir} --rules'
-    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
+def test_cli_footnote_disabled_checker(td, mp):
+    cmd = f'-i {power.link(power.BACHELOR076_PDF)} -o {td.tmpdir} --rules'
+    tests.footnote_.run(cmd, mp=mp)
 
-    rules = decider_footnote.path.rules(testdir.tmpdir)
+    rules = decider_footnote.path.rules(td.tmpdir)
     rules = serializeraw.load_findings(rules)
 
     result = protocol.count_findings(rules, 2001)

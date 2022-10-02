@@ -21,16 +21,16 @@ import tests
     pytest.param(power.MASTER078_PDF, [], id='master078'),
     pytest.param((power.DOCU035_PDF, 'notitle'), 1200, id='docu035'),
 ])
-def test_titlepage_extraction(src, expected, testdir, monkeypatch):
+def test_titlepage_extraction(src, expected, td, mp):
     src = power.link(*src) if isinstance(src, tuple) else power.link(src)
     if isinstance(expected, int):
         expected = [expected]
     # run decider
-    cmd = f'-i {src} -o {testdir.tmpdir} --titlepage'
-    tests.run(cmd, monkeypatch=monkeypatch)
+    cmd = f'-i {src} -o {td.tmpdir} --titlepage'
+    tests.run(cmd, mp=mp)
     # validate result
     failures = [
         item.msgid for item in utila.flatten_content(
-            protocol.findings_from_path(testdir.tmpdir))
+            protocol.findings_from_path(td.tmpdir))
     ]
     assert failures == expected, str(failures)

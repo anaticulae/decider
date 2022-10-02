@@ -21,7 +21,7 @@ def user_work(path: str):
     return loaded
 
 
-def test_pages_work(monkeypatch):
+def test_pages_work(mp):
     loader = serializeraw.load_headerfooter
 
     def scrumble_load(path: str, pages: tuple = None):
@@ -30,7 +30,7 @@ def test_pages_work(monkeypatch):
         loaded[4].footer.page.raw = '10'
         return loaded
 
-    with monkeypatch.context() as context:
+    with mp.context() as context:
         context.setattr(serializeraw, 'load_headerfooter', scrumble_load)
         result = user_work(power.link(power.TECH024_PDF))
     assert len(result) == 1, result

@@ -13,25 +13,25 @@ import protocol
 import tests
 
 
-def test_footnote_incomplete_page(testdir, monkeypatch):
+def test_footnote_incomplete_page(td, mp):
     """Footnote contains incomplete page number at the end.
 
     Diss480p5:
         2  T. Hoffmann, Das letzte Kommando – Ein Minister erinnert sich, Berlin, Bonn, Herford 1993, S.
     """
     source = power.link(power.DISS480_PDF)
-    cmd = f'-i {source} -o {testdir.tmpdir} --rules'
-    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
-    rules = protocol.findings_from_path(testdir.tmpdir, msgid=2100)
+    cmd = f'-i {source} -o {td.tmpdir} --rules'
+    tests.footnote_.run(cmd, mp=mp)
+    rules = protocol.findings_from_path(td.tmpdir, msgid=2100)
     assert len(rules) == 1
 
 
-def test_footnote_missing_space(testdir, monkeypatch):
+def test_footnote_missing_space(td, mp):
     """\
     243Vgl.: al-Mubarrad
     """
     source = power.link(power.MASTER193_PDF)
-    cmd = f'-i {source} -o {testdir.tmpdir} --rules --pages=80:100'
-    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
-    rules = protocol.findings_from_path(testdir.tmpdir, msgid=2105)
+    cmd = f'-i {source} -o {td.tmpdir} --rules --pages=80:100'
+    tests.footnote_.run(cmd, mp=mp)
+    rules = protocol.findings_from_path(td.tmpdir, msgid=2105)
     assert len(rules) == 5

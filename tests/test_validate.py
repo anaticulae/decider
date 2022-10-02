@@ -31,28 +31,28 @@ ARCHIVE = utila.join(decider.ROOT, 'tests/expected', exist=True)
     pytest.param(power.MASTER075_PDF, id='master075'),
 ])
 @utilatest.nightly
-def test_validate_all(source, testdir, monkeypatch):
+def test_validate_all(source, td, mp):
     utilatest.fixture_requires(source)
     Evaluate(
         source=source,
-        workdir=testdir.tmpdir,
-        monkeypatch=monkeypatch,
+        workdir=td.tmpdir,
+        mp=mp,
     ).evaluate()
 
 
-def run_extraction(cmd, monkeypatch):  # pylint:disable=W0613
-    tests.run(cmd, monkeypatch=monkeypatch)
-    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
-    tests.imgfig_.run(cmd, monkeypatch=monkeypatch)
+def run_extraction(cmd, mp):  # pylint:disable=W0613
+    tests.run(cmd, mp=mp)
+    tests.footnote_.run(cmd, mp=mp)
+    tests.imgfig_.run(cmd, mp=mp)
 
 
 class Evaluate(utilatest.BaseLiner):
 
-    def __init__(self, source, workdir, monkeypatch):
+    def __init__(self, source, workdir, mp):
         super().__init__(
             program=functools.partial(
                 run_extraction,
-                monkeypatch=monkeypatch,
+                mp=mp,
             ),
             step=None,
             pages=':',

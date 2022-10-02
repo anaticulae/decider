@@ -42,11 +42,11 @@ def bachelor076(findings):
     pytest.param(power.BACHELOR076_PDF, bachelor076, id='bachelor076'),
     pytest.param(power.BACHELOR128_PDF, bachelor128, id='bachelor128'),
 ])
-def test_footnote_rules_improvement(source, expected, testdir, monkeypatch):
+def test_footnote_rules_improvement(source, expected, td, mp):
     """Run decider"""
     source = power.link(source)
     cmd = f'-i {source} --rules'
-    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
-    loaded = protocol.findings_from_path(testdir.tmpdir)
+    tests.footnote_.run(cmd, mp=mp)
+    loaded = protocol.findings_from_path(td.tmpdir)
     findings = protocol.flat(loaded)
     expected(findings)

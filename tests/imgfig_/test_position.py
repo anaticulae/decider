@@ -16,23 +16,23 @@ import decider_imgfig.path
 import tests.imgfig_
 
 
-def test_imgfig_position_alignment(testdir, monkeypatch):
+def test_imgfig_position_alignment(td, mp):
     source = power.link(power.MASTER091B_PDF)
     tests.imgfig_.run(
         f'-i {source} --position --pages=0:50',
-        monkeypatch=monkeypatch,
+        mp=mp,
     )
     loaded = serializeraw.load_findings(
-        decider_imgfig.path.position(testdir.tmpdir),
+        decider_imgfig.path.position(td.tmpdir),
         msgids={4031},
     )
     # -1: skip title page adjustment error
     assert len(loaded) == 6 - 1  # TODO: VALIDATE LATER
 
 
-def test_imgfig_position_unclear(testdir, monkeypatch):
+def test_imgfig_position_unclear(td, mp):
     source = power.link(power.MASTER091B_PDF)
-    with monkeypatch.context() as context:
+    with mp.context() as context:
         # use high required trust to invoke error
         context.setattr(
             decider_imgfig.features.position,
@@ -41,25 +41,25 @@ def test_imgfig_position_unclear(testdir, monkeypatch):
         )
         tests.imgfig_.run(
             f'-i {source} --position --pages=0:50',
-            monkeypatch=monkeypatch,
+            mp=mp,
         )
     loaded = serializeraw.load_findings(
-        decider_imgfig.path.position(testdir.tmpdir),
+        decider_imgfig.path.position(td.tmpdir),
         msgids={4030},
     )
     assert len(loaded) == 1
 
 
 @pytest.mark.xfail(reason='improve image/figure detector')
-def test_imgfig_skip_title_legal_etc(testdir, monkeypatch):
+def test_imgfig_skip_title_legal_etc(td, mp):
     """Do not judge image position on title page or legal information."""
     source = power.link(power.MASTER031_PDF)
     tests.imgfig_.run(
         f'-i {source} --position',
-        monkeypatch=monkeypatch,
+        mp=mp,
     )
     loaded = serializeraw.load_findings(
-        decider_imgfig.path.position(testdir.tmpdir),
+        decider_imgfig.path.position(td.tmpdir),
         msgids={4031},
     )
     # TODO: ADD SUPPORT FOR TEXT INLINED IMAGES

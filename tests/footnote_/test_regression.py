@@ -43,12 +43,11 @@ def prepare(todo):
     'source, pages, finding, nofinding',
     list(prepare(REGRESSION)),
 )
-def test_footnote_regression(source, pages, finding, nofinding, testdir,
-                             monkeypatch):
-    cmd = f'-i {source} -o {testdir.tmpdir} --rules'
-    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
+def test_footnote_regression(source, pages, finding, nofinding, td, mp):
+    cmd = f'-i {source} -o {td.tmpdir} --rules'
+    tests.footnote_.run(cmd, mp=mp)
 
-    rules = decider_footnote.path.rules(testdir.tmpdir)
+    rules = decider_footnote.path.rules(td.tmpdir)
     rules = serializeraw.load_findings(rules, pages=pages)
 
     finding_current = protocol.count_findings(rules, finding)
@@ -57,11 +56,11 @@ def test_footnote_regression(source, pages, finding, nofinding, testdir,
     assert not nofinding_current
 
 
-def test_footnote_separator_distance(testdir, monkeypatch):
-    cmd = f'-i {power.link(power.MASTER155_PDF)} -o {testdir.tmpdir} --rules'
-    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
+def test_footnote_separator_distance(td, mp):
+    cmd = f'-i {power.link(power.MASTER155_PDF)} -o {td.tmpdir} --rules'
+    tests.footnote_.run(cmd, mp=mp)
 
-    rules = decider_footnote.path.rules(testdir.tmpdir)
+    rules = decider_footnote.path.rules(td.tmpdir)
     rules = serializeraw.load_findings(rules)
 
     # TODO: DECREASE SEPARATOR_FOOTNOTE_DISTANCE_MAX to verify that

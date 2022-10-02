@@ -15,9 +15,9 @@ import utilatest
 import tests
 
 
-def test_cli_decider_help(monkeypatch):
+def test_cli_decider_help(mp):
     """Run help decider"""
-    tests.run('--help', monkeypatch=monkeypatch)
+    tests.run('--help', mp=mp)
 
 
 @pytest.mark.parametrize('source', [
@@ -31,11 +31,11 @@ def test_cli_decider_help(monkeypatch):
     pytest.param(power.MASTER099_PDF, id='master99'),
 ])
 @utilatest.nightly
-def test_cli_decider_example(source, testdir, monkeypatch):
+def test_cli_decider_example(source, td, mp):
     """Run decider"""
     source = power.link(source)
     cmd = f'-i {source}'
-    tests.run(cmd, monkeypatch=monkeypatch)
+    tests.run(cmd, mp=mp)
 
 
 @pytest.mark.parametrize('source, pages', [
@@ -45,14 +45,14 @@ def test_cli_decider_example(source, testdir, monkeypatch):
     pytest.param(power.MASTER072_PDF, '0:5', id='master72'),
 ])
 @utilatest.nightly
-def test_cli_detector_and_decider(source, pages, testdir, monkeypatch):
+def test_cli_detector_and_decider(source, pages, td, mp):
     """Run decider
 
     pages = 1 - Non titlepage example
     """
     source = power.link(source)
-    cmd = f'detector -i {source} -o {testdir.tmpdir} --pages={pages}'
+    cmd = f'detector -i {source} -o {td.tmpdir} --pages={pages}'
     completed = utila.run(cmd)
     assert completed.returncode == utila.SUCCESS, str(completed)
-    cmd = f'-i {testdir.tmpdir} -i {source} -o {testdir.tmpdir}'
-    tests.run(cmd, monkeypatch=monkeypatch)
+    cmd = f'-i {td.tmpdir} -i {source} -o {td.tmpdir}'
+    tests.run(cmd, mp=mp)

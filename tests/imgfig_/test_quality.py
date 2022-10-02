@@ -15,12 +15,12 @@ import decider_imgfig.path
 import tests.imgfig_
 
 
-def test_imgfig_min_quality(testdir, monkeypatch):
+def test_imgfig_min_quality(td, mp):
     source = power.link(power.BACHELOR076_PDF)
-    tests.imgfig_.run(f'-i {source} --quality', monkeypatch=monkeypatch)
+    tests.imgfig_.run(f'-i {source} --quality', mp=mp)
 
     loaded = serializeraw.load_findings(
-        decider_imgfig.path.quality(testdir.tmpdir),
+        decider_imgfig.path.quality(td.tmpdir),
         msgids={4000},
     )
     # min dpi 96
@@ -29,12 +29,12 @@ def test_imgfig_min_quality(testdir, monkeypatch):
 
 
 @pytest.mark.xfail(reason='broken rawmaker image extractor')
-def test_imgfig_max_quality(testdir, monkeypatch):
+def test_imgfig_max_quality(td, mp):
     source = power.link(power.BACHELOR076_PDF)
-    tests.imgfig_.run(f'-i {source} --quality', monkeypatch=monkeypatch)
+    tests.imgfig_.run(f'-i {source} --quality', mp=mp)
 
     loaded = serializeraw.load_findings(
-        decider_imgfig.path.quality(testdir.tmpdir),
+        decider_imgfig.path.quality(td.tmpdir),
         msgids={4001},
     )
     # max dpi = 2 * min dpi
@@ -42,12 +42,12 @@ def test_imgfig_max_quality(testdir, monkeypatch):
 
 
 @pytest.mark.xfail(reason='broken rawmaker image extractor')
-def test_imgfig_relation(testdir, monkeypatch):
+def test_imgfig_relation(td, mp):
     source = power.link(power.BACHELOR063_PDF)
-    tests.imgfig_.run(f'-i {source} --quality', monkeypatch=monkeypatch)
+    tests.imgfig_.run(f'-i {source} --quality', mp=mp)
 
     loaded = serializeraw.load_findings(
-        decider_imgfig.path.quality(testdir.tmpdir),
+        decider_imgfig.path.quality(td.tmpdir),
         msgids={4005},
     )
     assert len(loaded) == 1

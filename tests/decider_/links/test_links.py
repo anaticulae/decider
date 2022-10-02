@@ -31,55 +31,55 @@ def test_links_work():
     assert findings
 
 
-def run_links(source, testdir, monkeypatch, online: bool = False, msgids=None):
+def run_links(source, td, mp, online: bool = False, msgids=None):
     linkpath = power.link(source)
     # disable connecting to www
-    monkeypatch.setenv(decider.DECIDER_ONELINE_FLAG, str(online))
-    tests.run(f'-i {linkpath} --links', monkeypatch=monkeypatch)
+    mp.setenv(decider.DECIDER_ONELINE_FLAG, str(online))
+    tests.run(f'-i {linkpath} --links', mp=mp)
     findings = serializeraw.load_findings(
-        os.path.join(testdir.tmpdir, 'decider__links_user.yaml'),
+        os.path.join(td.tmpdir, 'decider__links_user.yaml'),
         msgids=msgids,
     )
     return findings
 
 
 @pytest.mark.parametrize('online', [True, False])
-def test_links_validate(testdir, monkeypatch, online):
+def test_links_validate(td, mp, online):
     findings = run_links(
         power.MASTER075_PDF,
-        testdir,
-        monkeypatch,
+        td,
+        mp,
         online=online,
         msgids=10510,
     )
     assert findings if online else not findings
 
 
-def test_links_date_mixed(testdir, monkeypatch):
+def test_links_date_mixed(td, mp):
     findings = run_links(
         power.MASTER098_PDF,
-        testdir,
-        monkeypatch,
+        td,
+        mp,
         msgids=10520,
     )
     assert not findings
 
 
-def test_links_single_access_date_mixed(testdir, monkeypatch):
+def test_links_single_access_date_mixed(td, mp):
     findings = run_links(
         power.MASTER098_PDF,
-        testdir,
-        monkeypatch,
+        td,
+        mp,
         msgids=10521,
     )
     assert not findings  # TODO: CHANGE AFTER PARSING ALL DOCUMENT LINKS
 
 
-def test_local_link_bachelor028(testdir, monkeypatch):
+def test_local_link_bachelor028(td, mp):
     findings = run_links(
         power.BACHELOR028_PDF,
-        testdir,
-        monkeypatch,
+        td,
+        mp,
         msgids=10515,
     )
     assert len(findings) == 2

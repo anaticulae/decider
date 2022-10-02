@@ -17,9 +17,9 @@ import fonts.cli
 import tests.resources
 
 
-def test_main_fonts(testdir, monkeypatch):  # pylint:disable=W0621
+def test_main_fonts(td, mp):  # pylint:disable=W0621
     """Run decider with rawmaker_result to get hits output"""
-    root = str(testdir)
+    root = str(td)
     # copy ugly font config
     utila.copy_content(tests.resources.DECIDER_FONTS, root)
 
@@ -28,7 +28,7 @@ def test_main_fonts(testdir, monkeypatch):  # pylint:disable=W0621
         command,
         process=fonts.cli.PROCESS,
         main=fonts.cli.main,
-        monkeypatch=monkeypatch,
+        mp=mp,
         success=True,
     )
     outpath = os.path.join(root, fonts.cli.UGLY_STEP_OUTPUT_FILE)

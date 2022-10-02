@@ -57,11 +57,11 @@ def test_footnotes_most_common_font_empty():
 
 
 @utilatest.longrun
-def test_footnotes_work_highnote_rise(monkeypatch):
+def test_footnotes_work_highnote_rise(mp):
     footerheader = iamraw.path.headerfooters(power.link(power.MASTER072_PDF))
     fontheader = iamraw.path.fontheader(power.link(power.MASTER072_PDF))
     fontcontent = iamraw.path.fontcontent(power.link(power.MASTER072_PDF))
-    with monkeypatch.context() as context:
+    with mp.context() as context:
         context.setattr(
             decider_footnote.features.style,
             'HIGHNOTE_RISE_DIFF_MAX',
@@ -77,12 +77,12 @@ def test_footnotes_work_highnote_rise(monkeypatch):
 
 
 @utilatest.longrun
-def test_footnotes_work_highnote_size(monkeypatch):
+def test_footnotes_work_highnote_size(mp):
     # TODO: LOOK FOR AN EXAMPLE WITH WRONG HIGHNOTE SIZE
     footerheader = iamraw.path.headerfooters(power.link(power.MASTER072_PDF))
     fontheader = iamraw.path.fontheader(power.link(power.MASTER072_PDF))
     fontcontent = iamraw.path.fontcontent(power.link(power.MASTER072_PDF))
-    with monkeypatch.context() as context:
+    with mp.context() as context:
         context.setattr(
             decider_footnote.features.style,
             'HIGHNOTE_SIZE_DIFF_MAX',
@@ -111,21 +111,21 @@ def test_footnotes_work_highnote_font_family():
     assert len(result) == 2
 
 
-def test_footnote_email_exception(testdir, monkeypatch):
+def test_footnote_email_exception(td, mp):
     source = power.link(power.HOME025_PDF)
     cmd = f'--rules -i {source}'
 
     def run_linter():
-        tests.footnote_.run(cmd, monkeypatch=monkeypatch)
+        tests.footnote_.run(cmd, mp=mp)
         loaded = utila.select_content(
-            protocol.findings_from_path(testdir.tmpdir),
+            protocol.findings_from_path(td.tmpdir),
             page=0,
             default=[],
         )
         loaded = protocol.select_findings(loaded, {2001, 2002})
         return loaded
 
-    with monkeypatch.context() as context:
+    with mp.context() as context:
         # disable exception to verify that this method is required
         context.setattr(
             decider_footnote.rules.start,
@@ -139,8 +139,8 @@ def test_footnote_email_exception(testdir, monkeypatch):
     assert not loaded
 
 
-def test_footnote_special_number(testdir, monkeypatch):
-    cmd = f'-i {power.link(power.DISS273_PDF)} -o {testdir.tmpdir} --global'
-    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
-    findings = serializeraw.findings_from_path(testdir.tmpdir, msgid=2020)
+def test_footnote_special_number(td, mp):
+    cmd = f'-i {power.link(power.DISS273_PDF)} -o {td.tmpdir} --global'
+    tests.footnote_.run(cmd, mp=mp)
+    findings = serializeraw.findings_from_path(td.tmpdir, msgid=2020)
     assert len(findings) == 1

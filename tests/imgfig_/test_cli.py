@@ -10,5 +10,5 @@
 import tests.imgfig_
 
 
-def test_imgfig_cli_help(monkeypatch):
-    tests.imgfig_.run('--help', monkeypatch=monkeypatch)
+def test_imgfig_cli_help(mp):
+    tests.imgfig_.run('--help', mp=mp)

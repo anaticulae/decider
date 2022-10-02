@@ -15,37 +15,37 @@ import decider_footnote.path
 import tests.footnote_
 
 
-def test_highnote_inside_master89_page40(testdir, monkeypatch):
+def test_highnote_inside_master89_page40(td, mp):
     """See 2010."""
-    cmd = f'-i {power.link(power.MASTER089_PDF)} -o {testdir.tmpdir} --style'
-    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
+    cmd = f'-i {power.link(power.MASTER089_PDF)} -o {td.tmpdir} --style'
+    tests.footnote_.run(cmd, mp=mp)
 
-    style = decider_footnote.path.style(testdir.tmpdir)
+    style = decider_footnote.path.style(td.tmpdir)
     result = serializeraw.load_findings(style, 2010)
 
     result = [finding for finding in result if finding.location.page == 40]
     assert not result
 
 
-def test_highnote_inside_master89_page45(testdir, monkeypatch):
+def test_highnote_inside_master89_page45(td, mp):
     """Regression: Font size error on last footnote white space which is
     defined as following page number which differs in font size."""
-    cmd = f'-i {power.link(power.MASTER089_PDF)} -o {testdir.tmpdir} --style'
-    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
+    cmd = f'-i {power.link(power.MASTER089_PDF)} -o {td.tmpdir} --style'
+    tests.footnote_.run(cmd, mp=mp)
 
-    style = decider_footnote.path.style(testdir.tmpdir)
+    style = decider_footnote.path.style(td.tmpdir)
     result = serializeraw.load_findings(style, 2010)
 
     result = [finding for finding in result if finding.location.page == 45]
     assert not result
 
 
-def test_footnote_bachelor37page9(testdir, monkeypatch, capsys):
-    cmd = f'-i {power.link(power.BACHELOR037_PDF)} -o {testdir.tmpdir} --style'
-    tests.footnote_.run(cmd, monkeypatch=monkeypatch)
+def test_footnote_bachelor37page9(td, mp, capsys):
+    cmd = f'-i {power.link(power.BACHELOR037_PDF)} -o {td.tmpdir} --style'
+    tests.footnote_.run(cmd, mp=mp)
     assert 'ambiguous expected' not in utilatest.stderr(capsys)
 
-    style = decider_footnote.path.style(testdir.tmpdir)
+    style = decider_footnote.path.style(td.tmpdir)
     result = serializeraw.load_findings(style, msgids=2005, pages=9)
 
     # do not detect invalid `Arial` error
