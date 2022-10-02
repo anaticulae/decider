@@ -33,6 +33,7 @@ def test_cli_decider_help(mp):
 @utilatest.nightly
 def test_cli_decider_example(source, td, mp):  # pylint:disable=W0613
     """Run decider"""
+    utilatest.fixture_requires(source)
     source = power.link(source)
     cmd = f'-i {source}'
     tests.run(cmd, mp=mp)
@@ -50,6 +51,7 @@ def test_cli_detector_and_decider(source, pages, td, mp):
 
     pages = 1 - Non titlepage example
     """
+    utilatest.fixture_requires(source)
     source = power.link(source)
     cmd = f'detector -i {source} -o {td.tmpdir} --pages={pages}'
     completed = utila.run(cmd)

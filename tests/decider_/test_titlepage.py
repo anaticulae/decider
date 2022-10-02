@@ -11,6 +11,7 @@ import power
 import protocol
 import pytest
 import utila
+import utilatest
 
 import tests
 
@@ -35,6 +36,7 @@ def run_titlepage(src, expected, td, mp):
     pytest.param(power.MASTER078_PDF, [], id='master078'),
 ])
 def test_titlepage_extraction_default(src, expected, td, mp):
+    utilatest.fixture_requires(src)
     src = power.link(src)
     run_titlepage(src, expected, td, mp)
 
@@ -43,5 +45,6 @@ def test_titlepage_extraction_default(src, expected, td, mp):
     pytest.param(power.DOCU035_PDF, 1200, id='docu035'),
 ])
 def test_titlepage_extraction_notitle(src, expected, td, mp):
+    utilatest.fixture_requires(src, folder='notitle')
     src = power.link(src, folder='notitle')
     run_titlepage(src, expected, td, mp)

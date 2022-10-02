@@ -10,6 +10,7 @@
 import iamraw.path
 import power
 import serializeraw
+import utilatest
 
 import decider.features.page
 
@@ -21,6 +22,7 @@ def user_work(path: str):
     return loaded
 
 
+@utilatest.requires(power.TECH024_PDF)
 def test_pages_work(mp):
     loader = serializeraw.load_headerfooter
 

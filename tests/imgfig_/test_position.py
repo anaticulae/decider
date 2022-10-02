@@ -10,12 +10,14 @@
 import power
 import pytest
 import serializeraw
+import utilatest
 
 import decider_imgfig.features.position
 import decider_imgfig.path
 import tests.imgfig_
 
 
+@utilatest.requires(power.MASTER091B_PDF)
 def test_imgfig_position_alignment(td, mp):
     source = power.link(power.MASTER091B_PDF)
     tests.imgfig_.run(
@@ -30,6 +32,7 @@ def test_imgfig_position_alignment(td, mp):
     assert len(loaded) == 6 - 1  # TODO: VALIDATE LATER
 
 
+@utilatest.requires(power.MASTER091B_PDF)
 def test_imgfig_position_unclear(td, mp):
     source = power.link(power.MASTER091B_PDF)
     with mp.context() as context:
@@ -51,6 +54,7 @@ def test_imgfig_position_unclear(td, mp):
 
 
 @pytest.mark.xfail(reason='improve image/figure detector')
+@utilatest.requires(power.MASTER031_PDF)
 def test_imgfig_skip_title_legal_etc(td, mp):
     """Do not judge image position on title page or legal information."""
     source = power.link(power.MASTER031_PDF)

@@ -23,6 +23,7 @@ import tests.footnote_
 
 @pytest.fixture
 def example():
+    utilatest.fixture_requires(power.MASTER072_PDF)
     loaded = serializeraw.load_footnotes(
         power.link(power.MASTER072_PDF),
         pages=(3),
@@ -57,6 +58,7 @@ def test_footnotes_most_common_font_empty():
 
 
 @utilatest.longrun
+@utilatest.requires(power.MASTER072_PDF)
 def test_footnotes_work_highnote_rise(mp):
     footerheader = iamraw.path.headerfooters(power.link(power.MASTER072_PDF))
     fontheader = iamraw.path.fontheader(power.link(power.MASTER072_PDF))
@@ -77,6 +79,7 @@ def test_footnotes_work_highnote_rise(mp):
 
 
 @utilatest.longrun
+@utilatest.requires(power.MASTER072_PDF)
 def test_footnotes_work_highnote_size(mp):
     # TODO: LOOK FOR AN EXAMPLE WITH WRONG HIGHNOTE SIZE
     footerheader = iamraw.path.headerfooters(power.link(power.MASTER072_PDF))
@@ -98,6 +101,7 @@ def test_footnotes_work_highnote_size(mp):
 
 
 @utilatest.longrun
+@utilatest.requires(power.MASTER072_PDF)
 def test_footnotes_work_highnote_font_family():
     footerheader = iamraw.path.headerfooters(power.link(power.MASTER072_PDF))
     fontheader = iamraw.path.fontheader(power.link(power.MASTER072_PDF))
@@ -111,6 +115,7 @@ def test_footnotes_work_highnote_font_family():
     assert len(result) == 2
 
 
+@utilatest.requires(power.HOME025_PDF)
 def test_footnote_email_exception(td, mp):
     source = power.link(power.HOME025_PDF)
     cmd = f'--rules -i {source}'
@@ -139,6 +144,7 @@ def test_footnote_email_exception(td, mp):
     assert not loaded
 
 
+@utilatest.requires(power.DISS273_PDF)
 def test_footnote_special_number(td, mp):
     cmd = f'-i {power.link(power.DISS273_PDF)} -o {td.tmpdir} --global'
     tests.footnote_.run(cmd, mp=mp)

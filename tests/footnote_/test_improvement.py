@@ -10,6 +10,7 @@
 import power
 import protocol
 import pytest
+import utilatest
 
 import tests.footnote_
 
@@ -44,6 +45,7 @@ def bachelor076(findings):
 ])
 def test_footnote_rules_improvement(source, expected, td, mp):
     """Run decider"""
+    utilatest.fixture_requires(source)
     source = power.link(source)
     cmd = f'-i {source} --rules'
     tests.footnote_.run(cmd, mp=mp)

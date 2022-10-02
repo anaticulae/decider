@@ -12,6 +12,7 @@ import os
 import power
 import pytest
 import serializeraw
+import utilatest
 import weblink.path
 
 import decider
@@ -19,6 +20,7 @@ import decider.features.links
 import tests
 
 
+@utilatest.requires(power.MASTER075_PDF)
 def test_links_work():
     source = power.link(power.MASTER075_PDF)
     linkpath = weblink.path.weblink_sentence(source)
@@ -32,6 +34,7 @@ def test_links_work():
 
 
 def run_links(source, td, mp, online: bool = False, msgids=None):
+    utilatest.fixture_requires(source)
     linkpath = power.link(source)
     # disable connecting to www
     mp.setenv(decider.DECIDER_ONELINE_FLAG, str(online))

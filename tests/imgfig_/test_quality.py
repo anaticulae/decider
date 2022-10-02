@@ -10,11 +10,13 @@
 import power
 import pytest
 import serializeraw
+import utilatest
 
 import decider_imgfig.path
 import tests.imgfig_
 
 
+@utilatest.requires(power.BACHELOR076_PDF)
 def test_imgfig_min_quality(td, mp):
     source = power.link(power.BACHELOR076_PDF)
     tests.imgfig_.run(f'-i {source} --quality', mp=mp)
@@ -29,6 +31,7 @@ def test_imgfig_min_quality(td, mp):
 
 
 @pytest.mark.xfail(reason='broken rawmaker image extractor')
+@utilatest.requires(power.BACHELOR076_PDF)
 def test_imgfig_max_quality(td, mp):
     source = power.link(power.BACHELOR076_PDF)
     tests.imgfig_.run(f'-i {source} --quality', mp=mp)
@@ -42,6 +45,7 @@ def test_imgfig_max_quality(td, mp):
 
 
 @pytest.mark.xfail(reason='broken rawmaker image extractor')
+@utilatest.requires(power.BACHELOR063_PDF)
 def test_imgfig_relation(td, mp):
     source = power.link(power.BACHELOR063_PDF)
     tests.imgfig_.run(f'-i {source} --quality', mp=mp)

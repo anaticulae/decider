@@ -17,6 +17,7 @@ import fonts.cli
 import tests.resources
 
 
+@utilatest.requires(power.DOCU035_PDF)
 def test_main_fonts(td, mp):  # pylint:disable=W0621
     """Run decider with rawmaker_result to get hits output"""
     root = str(td)

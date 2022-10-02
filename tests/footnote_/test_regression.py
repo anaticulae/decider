@@ -12,6 +12,7 @@ import protocol
 import pytest
 import serializeraw
 import utila
+import utilatest
 
 import decider_footnote.path
 import tests.footnote_
@@ -44,6 +45,7 @@ def prepare(todo):
     list(prepare(REGRESSION)),
 )
 def test_footnote_regression(source, pages, finding, nofinding, td, mp):
+    utilatest.fixture_requires(source)
     cmd = f'-i {source} -o {td.tmpdir} --rules'
     tests.footnote_.run(cmd, mp=mp)
 
@@ -56,6 +58,7 @@ def test_footnote_regression(source, pages, finding, nofinding, td, mp):
     assert not nofinding_current
 
 
+@utilatest.requires(power.MASTER155_PDF)
 def test_footnote_separator_distance(td, mp):
     cmd = f'-i {power.link(power.MASTER155_PDF)} -o {td.tmpdir} --rules'
     tests.footnote_.run(cmd, mp=mp)

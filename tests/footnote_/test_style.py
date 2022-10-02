@@ -15,6 +15,7 @@ import decider_footnote.path
 import tests.footnote_
 
 
+@utilatest.requires(power.MASTER089_PDF)
 def test_highnote_inside_master89_page40(td, mp):
     """See 2010."""
     cmd = f'-i {power.link(power.MASTER089_PDF)} -o {td.tmpdir} --style'
@@ -27,6 +28,7 @@ def test_highnote_inside_master89_page40(td, mp):
     assert not result
 
 
+@utilatest.requires(power.MASTER089_PDF)
 def test_highnote_inside_master89_page45(td, mp):
     """Regression: Font size error on last footnote white space which is
     defined as following page number which differs in font size."""
@@ -40,6 +42,7 @@ def test_highnote_inside_master89_page45(td, mp):
     assert not result
 
 
+@utilatest.requires(power.BACHELOR037_PDF)
 def test_footnote_bachelor37page9(td, mp, capsys):
     cmd = f'-i {power.link(power.BACHELOR037_PDF)} -o {td.tmpdir} --style'
     tests.footnote_.run(cmd, mp=mp)

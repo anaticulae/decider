@@ -10,10 +10,12 @@
 import iamraw.path
 import power
 import serializeraw
+import utilatest
 
 import decider.features.header
 
 
+@utilatest.requires(power.TECH024_PDF)
 def test_header_work():
     source = power.link(power.TECH024_PDF)
     headerfooter = iamraw.path.headerfooters(source)

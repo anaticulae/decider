@@ -13,6 +13,7 @@ import power
 import protocol
 import serializeraw
 import utila
+import utilatest
 
 import decider_footnote.path
 import tests.footnote_
@@ -22,6 +23,7 @@ def test_decider_footnote_cli_help(mp):
     tests.footnote_.run('--help', mp=mp)
 
 
+@utilatest.requires(power.MASTER072_PDF)
 def test_cli_rules(td, mp):
     cmd = f'-i {power.link(power.MASTER072_PDF)} -o {td.tmpdir} --rules'
     tests.footnote_.run(cmd, mp=mp)
@@ -39,6 +41,7 @@ def test_cli_rules(td, mp):
     assert utila.istemplate_replaced(dumped), dumped
 
 
+@utilatest.requires(power.BACHELOR090_PDF)
 def test_cli_footnote_global(td, mp):
     cmd = f'-i {power.link(power.BACHELOR090_PDF)} -o {td.tmpdir} --global'
     tests.footnote_.run(cmd, mp=mp)
@@ -46,6 +49,7 @@ def test_cli_footnote_global(td, mp):
     assert len(findings) == 1
 
 
+@utilatest.requires(power.BACHELOR076_PDF)
 def test_cli_footnote_disabled_checker(td, mp):
     cmd = f'-i {power.link(power.BACHELOR076_PDF)} -o {td.tmpdir} --rules'
     tests.footnote_.run(cmd, mp=mp)
