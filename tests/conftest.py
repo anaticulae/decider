@@ -79,6 +79,10 @@ def extract_notitle(resources):
         folder='notitle',
         worker=len(resources),
         groupme=True,
+        footnote=True,
+        headnote=True,
+        pagenumber=True,
+        cleanup=True,
         sections=True,
         detector=True,
     )
