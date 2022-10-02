@@ -18,6 +18,7 @@ pipeline{
             steps{
                 sh 'baw sync all'
                 sh 'baw sh "pip install ."'
+                sh 'baw sh "writers --build"'
             }
         }
         stage('doctest'){
