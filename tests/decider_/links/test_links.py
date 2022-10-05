@@ -78,6 +78,7 @@ def test_links_single_access_date_mixed(td, mp):
     assert not findings  # TODO: CHANGE AFTER PARSING ALL DOCUMENT LINKS
 
 
+@pytest.mark.xfail(reason='software integration')
 def test_local_link_bachelor028(td, mp):
     findings = run_links(
         power.BACHELOR028_PDF,

@@ -26,5 +26,6 @@ def test_example_extract(td):
         pdfs,
         generated,
         pages='0:3',
+        full=True,
     )
     assert os.path.exists(generated), str(generated)

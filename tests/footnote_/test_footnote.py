@@ -31,6 +31,7 @@ def example():
     return loaded[0]
 
 
+@pytest.mark.xfail(reason='software integration')
 def test_footnotes_example(example):  # pylint:disable=W0621
     assert example.page == 3
     assert len(example.content) == 6
@@ -45,6 +46,7 @@ def test_footnotes_example(example):  # pylint:disable=W0621
 #     assert valid == expected
 
 
+@pytest.mark.xfail(reason='software integration')
 def test_footnotes_most_common_font(example):  # pylint:disable=W0621
     data = example.content
     fontconfig = decider_footnote.footnote.most_common_font(data)
@@ -57,6 +59,7 @@ def test_footnotes_most_common_font_empty():
     assert fontconfig is None
 
 
+@pytest.mark.xfail(reason='software integration')
 @utilatest.longrun
 @utilatest.requires(power.MASTER072_PDF)
 def test_footnotes_work_highnote_rise(mp):
@@ -100,6 +103,7 @@ def test_footnotes_work_highnote_size(mp):
     assert not result
 
 
+@pytest.mark.xfail(reason='software integration')
 @utilatest.longrun
 @utilatest.requires(power.MASTER072_PDF)
 def test_footnotes_work_highnote_font_family():
@@ -115,6 +119,7 @@ def test_footnotes_work_highnote_font_family():
     assert len(result) == 2
 
 
+@pytest.mark.xfail(reason='software integration')
 @utilatest.requires(power.HOME025_PDF)
 def test_footnote_email_exception(td, mp):
     source = power.link(power.HOME025_PDF)
@@ -144,6 +149,7 @@ def test_footnote_email_exception(td, mp):
     assert not loaded
 
 
+@pytest.mark.xfail(reason='software integration')
 @utilatest.requires(power.DISS273_PDF)
 def test_footnote_special_number(td, mp):
     cmd = f'-i {power.link(power.DISS273_PDF)} -o {td.tmpdir} --global'

@@ -11,6 +11,7 @@ import os
 
 import power
 import protocol
+import pytest
 import serializeraw
 import utila
 import utilatest
@@ -23,6 +24,7 @@ def test_decider_footnote_cli_help(mp):
     tests.footnote_.run('--help', mp=mp)
 
 
+@pytest.mark.xfail(reason='software integration')
 @utilatest.requires(power.MASTER072_PDF)
 def test_cli_rules(td, mp):
     cmd = f'-i {power.link(power.MASTER072_PDF)} -o {td.tmpdir} --rules'
@@ -41,6 +43,7 @@ def test_cli_rules(td, mp):
     assert utila.istemplate_replaced(dumped), dumped
 
 
+@pytest.mark.xfail(reason='software integration')
 @utilatest.requires(power.BACHELOR090_PDF)
 def test_cli_footnote_global(td, mp):
     cmd = f'-i {power.link(power.BACHELOR090_PDF)} -o {td.tmpdir} --global'
@@ -49,6 +52,7 @@ def test_cli_footnote_global(td, mp):
     assert len(findings) == 1
 
 
+@pytest.mark.xfail(reason='software integration')
 @utilatest.requires(power.BACHELOR076_PDF)
 def test_cli_footnote_disabled_checker(td, mp):
     cmd = f'-i {power.link(power.BACHELOR076_PDF)} -o {td.tmpdir} --rules'

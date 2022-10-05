@@ -9,6 +9,7 @@
 
 import iamraw.path
 import power
+import pytest
 import serializeraw
 import utilatest
 
@@ -22,6 +23,7 @@ def user_work(path: str):
     return loaded
 
 
+@pytest.mark.xfail(reason='software integration')
 @utilatest.requires(power.TECH024_PDF)
 def test_pages_work(mp):
     loader = serializeraw.load_headerfooter
