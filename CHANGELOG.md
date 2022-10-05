@@ -2,6 +2,31 @@
 
 Every noteable change is logged here.
 
+## v3.3.0 (2022-10-05)
+
+### Feature
+
+* cleanup example interface (ec5f7cb15833)
+* clarify error message (97c9f41088ae)
+
+### Fix
+
+* adjust unit test (c76b444a3d87)
+
+### Chore
+
+* use all, dont skip longrun generated (96f057c0e56a)
+* privileged run is not required (e98dd5357468)
+* adjust resource generator (02fcb9c2301c)
+* upgrade requirements.txt (c3e11a970c8e)
+* do not use too many executor (71e291be838e)
+* build documentation (87f7c47c6109)
+* upload generated data if nightly fails (84bf872a566d)
+* increase worker count on CI (f0af0ec5ba00)
+* add Jenkinsfile (63a79d781f02)
+* upgrade requirements.txt (ede452083e40)
+* upgrade requirements.txt (f9a973916cc7)
+
 ## v3.2.0
 
 ### Feature
