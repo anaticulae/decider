@@ -33,10 +33,10 @@ def create(images, contentborder=None, docinfo=None, pages: tuple = None):
         if image.figure:
             # do not judge figures with decider_imgfig
             continue
-        if not utila.rectangle_width(image.bounding):
+        if not utila.rect_width(image.bounding):
             utila.error(f'skip zero-width image: {image.bounding}')
             continue
-        if not utila.rectangle_height(image.bounding):
+        if not utila.rect_height(image.bounding):
             utila.error(f'skip zero-height image: {image.bounding}')
             continue
         result.append(image)

@@ -8,8 +8,6 @@
 # =============================================================================
 """This is the uGLy-font detector"""
 
-from typing import Set
-
 from serializeraw import load_font_content
 from serializeraw import load_font_header
 from utila import Flag
@@ -29,7 +27,7 @@ def work(uglypath: str, header: str, content: str) -> str:
     return dumped
 
 
-def ugly(header, ugly_fonts: Set[str]):
+def ugly(header, ugly_fonts: set[str]):
     result = []
     for item in header:
         fontname = item.name

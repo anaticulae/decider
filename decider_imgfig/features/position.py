@@ -149,7 +149,7 @@ def alignment(bounding, leftright: tuple):
     left, right = leftright
     leftdist, rightdist = bounding[0] - left, right - bounding[2]
     pagewidth = right - left
-    imagewidth = utila.rectangle_width(bounding)
+    imagewidth = utila.rect_width(bounding)
     if imagewidth > (pagewidth - 25):
         # image covers complete page or more than complete page
         return texmex.TextAlignment.BLOCK

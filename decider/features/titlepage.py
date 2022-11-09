@@ -12,15 +12,13 @@ Titlepage
 =========
 """
 
-import typing
-
 import iamraw
 import protocol
 import serializeraw
 import utila
 
 
-def work(titles: str) -> typing.Tuple[str, str]:
+def work(titles: str) -> tuple[str, str]:
     driver = create_driver(titlepage=titles)
     location = 0
     if driver.titlepage:  # pylint:disable=E1101

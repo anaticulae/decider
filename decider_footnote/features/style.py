@@ -56,7 +56,7 @@ def create_driver(
         headerfooters,
         pages=pages,
     )
-    footnotes = utila.flatten([item.content for item in headerfooters if item])
+    footnotes = utila.flat([item.content for item in headerfooters if item])
     fontconfig = decider_footnote.footnote.most_common_font(footnotes)
     fontstore = serializeraw.create_fontstore(
         fontheader,

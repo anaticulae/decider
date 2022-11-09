@@ -58,8 +58,8 @@ def check_4000_min_printing_resolution(linter: callable, driver):
 
 
 def determine_resolution(imageinfo):
-    pdfwidth = utila.inch(utila.rectangle_width(imageinfo.bounding))
-    pdfheight = utila.inch(utila.rectangle_height(imageinfo.bounding))
+    pdfwidth = utila.inch(utila.rect_width(imageinfo.bounding))
+    pdfheight = utila.inch(utila.rect_height(imageinfo.bounding))
 
     width_dpi = utila.roundme(imageinfo.width / pdfwidth)
     height_dpi = utila.roundme(imageinfo.height / pdfheight)
@@ -112,8 +112,8 @@ Quelle: {{image}}
 def check_4005_check_relation(linter, driver):
     for imageinfo in driver.images:
         # inch
-        pdfwidth = utila.inch(utila.rectangle_width(imageinfo.bounding))
-        pdfheight = utila.inch(utila.rectangle_height(imageinfo.bounding))
+        pdfwidth = utila.inch(utila.rect_width(imageinfo.bounding))
+        pdfheight = utila.inch(utila.rect_height(imageinfo.bounding))
         # pdf
         pdf = utila.roundme(pdfwidth / pdfheight)
         image = utila.roundme(imageinfo.width / imageinfo.height)

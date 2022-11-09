@@ -21,8 +21,8 @@ regression test
 
 Ensure that FootNoteMerged merge styles:
 >>> most_common_font([iamraw.FootNoteMerged(number=2, page=-1, bounding=None,
-... notes=[iamraw.FootRawNote(number=2, page=22, text='In einer Häufigkeit',
-... raw=None, style=[]), iamraw.FootRawNote(number=-1, page=23,
+... notes=[iamraw.FootNoteRaw(number=2, page=22, text='In einer Häufigkeit',
+... raw=None, style=[]), iamraw.FootNoteRaw(number=-1, page=23,
 ... text='eines Zufallsergebnisses[27].', raw=None, style=[])])])
 FootNoteStyle(...)
 """
@@ -82,11 +82,11 @@ def most_common_font(items: iamraw.FootNotes) -> FootNoteStyle:
             highnote_rise.append(highnote.rise)
             highnote_fontid.append(highnote.font)
         content_size.extend(
-            utila.flatten([[item.size] * (item.end - item.start)
-                           for item in content.content]))
+            utila.flat([[item.size] * (item.end - item.start)
+                        for item in content.content]))
         content_fontid.extend(
-            utila.flatten([[item.font] * (item.end - item.start)
-                           for item in content.content]))
+            utila.flat([[item.font] * (item.end - item.start)
+                        for item in content.content]))
     # round result
     highnote_rise: float = utila.roundme(highnote_rise, digits=1, convert=False)
     content_size: float = utila.roundme(content_size, digits=1, convert=False)

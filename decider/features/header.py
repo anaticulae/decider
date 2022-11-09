@@ -13,7 +13,6 @@ Header
 """
 
 import collections
-import typing
 
 import configo
 import protocol
@@ -22,7 +21,7 @@ import serializeraw
 REPEATING_ITEM_RATIO_MAX = configo.HV_PERCENT_PLUS(default=30)
 
 
-def work(headerfooter: str, pages: tuple = None) -> typing.Tuple[str, str]:
+def work(headerfooter: str, pages: tuple = None) -> tuple[str, str]:
     linter = protocol.from_module(__name__)
 
     loaded = serializeraw.load_headerfooter(headerfooter, pages=pages)

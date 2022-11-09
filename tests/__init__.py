@@ -30,7 +30,7 @@ def select(items, selected=None):
     if isinstance(selected, int):
         selected = [selected]
     content = [item.content for item in items]
-    flatten = utila.flatten(content)
+    flatten = utila.flat(content)
     ids = [item.msgid for item in flatten]
     if selected:
         ids = [item for item in ids if item in selected]
