@@ -25,7 +25,7 @@ WORKPLAN = [
     utila.create_step(
         'header',
         [
-            utila.ResultFile('groupme', 'footer_footerheader'),
+            utila.ResultFile('headnote', 'result_result'),
         ],
         protocol.ResultDefault,
     ),
@@ -43,7 +43,7 @@ WORKPLAN = [
         [
             utila.ResultFile('groupme', 'footer_footerheader'),
             utila.ResultFile('sections', 'section_result'),
-            utila.ResultFile('groupme', 'pagenumbers_pagenumbers'),
+            utila.ResultFile('pagenumber', 'result_result'),
         ],
         protocol.ResultDefault,
     ),
