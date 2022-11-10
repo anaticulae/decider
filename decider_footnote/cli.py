@@ -18,14 +18,14 @@ WORKPLAN = [
     utila.create_step(
         'global',
         [
-            utila.ResultFile('groupme', 'footer_footerheader'),
+            utila.ResultFile('footnote', 'result_result'),
         ],
         protocol.ResultDefault,
     ),
     utila.create_step(
         'rules',
         [
-            utila.ResultFile('groupme', 'footer_footerheader'),
+            utila.ResultFile('footnote', 'result_result'),
             utila.ResultFile('rawmaker', 'horizontals_horizontals'),
         ],
         protocol.ResultDefault,
@@ -33,7 +33,7 @@ WORKPLAN = [
     utila.create_step(
         'style',
         [
-            utila.ResultFile('groupme', 'footer_footerheader'),
+            utila.ResultFile('footnote', 'result_result'),
             utila.ResultFile('rawmaker', 'fonts_header'),
             utila.ResultFile('rawmaker', 'fonts_content'),
         ],
