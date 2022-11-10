@@ -31,7 +31,6 @@ def example():
     return loaded[0]
 
 
-@pytest.mark.xfail(reason='software integration')
 def test_footnotes_example(example):  # pylint:disable=W0621
     assert example.page == 3
     assert len(example.content) == 6
@@ -106,9 +105,10 @@ def test_footnotes_work_highnote_size(mp):
 @utilatest.longrun
 @utilatest.requires(power.MASTER072_PDF)
 def test_footnotes_work_highnote_font_family():
-    footerheader = iamraw.path.headerfooters(power.link(power.MASTER072_PDF))
-    fontheader = iamraw.path.fontheader(power.link(power.MASTER072_PDF))
-    fontcontent = iamraw.path.fontcontent(power.link(power.MASTER072_PDF))
+    source = power.link(power.MASTER072_PDF)
+    footerheader = iamraw.path.footnote_result(source)
+    fontheader = iamraw.path.fontheader(source)
+    fontcontent = iamraw.path.fontcontent(source)
     user, _ = decider_footnote.features.style.work(
         footerheader,
         fontheader,
@@ -118,7 +118,6 @@ def test_footnotes_work_highnote_font_family():
     assert len(result) == 2
 
 
-@pytest.mark.xfail(reason='software integration')
 @utilatest.requires(power.HOME025_PDF)
 def test_footnote_email_exception(td, mp):
     source = power.link(power.HOME025_PDF)
@@ -148,7 +147,6 @@ def test_footnote_email_exception(td, mp):
     assert not loaded
 
 
-@pytest.mark.xfail(reason='software integration')
 @utilatest.requires(power.DISS273_PDF)
 def test_footnote_special_number(td, mp):
     cmd = f'-i {power.link(power.DISS273_PDF)} -o {td.tmpdir} --global'

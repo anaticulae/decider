@@ -21,3 +21,4 @@ decider_con==0.11.0
 
 # TODO: REMOVE LATER
 lists>=0.2.1<1.0.0
+footnote>=0.2.5<1.0.0

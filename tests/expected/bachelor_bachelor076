@@ -1,6 +1,24 @@
 01965 p73 Eidesstattliche Erklärung enthält Seitenzahl
-02002 p61 Die Fußnote 209 endet nicht mit einem Punkt
+02001 p16 Fußnote 45 beginnt nicht mit einem Großbuchstaben
+02003 p61 Fußnote 209 falsch formatiert
+02004 p61 Fußnote 209 falsch formatiert
+02010 p33 Fußnote -1 falsch formatiert
+02010 p57 Fußnote -1 falsch formatiert
+02010 p61 Fußnote -1 falsch formatiert
+02010 p61 Fußnote 209 falsch formatiert
+02013 p-1 Empfehlung: Ende der Fußnote
+02018 p33 Fußnote verstreut
+02018 p57 Fußnote verstreut
 02018 p61 Fußnote verstreut
+02100 p4~c7_11 Die Fußnote 1 enthält unvollständige Seitenangabe
+02100 p58~c13_17 Die Fußnote 198 enthält unvollständige Seitenangabe
+02100 p60~c13_17 Die Fußnote 207 enthält unvollständige Seitenangabe
+02101 p16 Fußnote 43: Fehlendes Leerzeichen vor Seitenzahl
+02101 p16 Fußnote 46: Fehlendes Leerzeichen vor Seitenzahl
+02101 p19 Fußnote 57: Fehlendes Leerzeichen vor Seitenzahl
+02101 p21 Fußnote 62: Fehlendes Leerzeichen vor Seitenzahl
+02101 p22 Fußnote 63: Fehlendes Leerzeichen vor Seitenzahl
+02101 p7 Fußnote 10: Fehlendes Leerzeichen vor Seitenzahl
 04000 p0b(70.85;70.85;524.45;169.55) Auflösung zu niedrig
 04000 p13b(115.8;322.53;479.37;422.23) Auflösung zu niedrig
 04000 p15b(130.05;70.85;465.25;416.0) Auflösung zu niedrig
@@ -14,6 +32,21 @@
 04000 p74b(70.85;124.48;500.85;426.73) Auflösung zu niedrig
 04000 p9b(106.25;93.74;529.35;389.23) Auflösung zu niedrig
 04031 p74b(70.85;124.48;500.85;426.73) Abbildungen nicht einheitlich ausgerichtet
+10500 p14 Aufrufdatum fehlt
+10500 p15 Aufrufdatum fehlt
+10500 p17 Aufrufdatum fehlt
+10500 p18 Aufrufdatum fehlt
+10500 p22 Aufrufdatum fehlt
+10500 p23 Aufrufdatum fehlt
+10500 p23 Aufrufdatum fehlt
+10500 p29 Aufrufdatum fehlt
+10500 p32 Aufrufdatum fehlt
+10500 p36 Aufrufdatum fehlt
+10500 p40 Aufrufdatum fehlt
+10500 p48 Aufrufdatum fehlt
+10500 p50 Aufrufdatum fehlt
+10500 p51 Aufrufdatum fehlt
+10500 p57 Aufrufdatum fehlt
 10500 p67 Aufrufdatum fehlt
 10500 p69 Aufrufdatum fehlt
 10500 p69 Aufrufdatum fehlt

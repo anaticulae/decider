@@ -9,13 +9,11 @@
 
 import power
 import protocol
-import pytest
 import utilatest
 
 import tests
 
 
-@pytest.mark.xfail(reason='software integration')
 @utilatest.requires(power.DISS480_PDF)
 def test_footnote_incomplete_page(td, mp):
     """Footnote contains incomplete page number at the end.
@@ -30,7 +28,6 @@ def test_footnote_incomplete_page(td, mp):
     assert len(rules) == 1
 
 
-@pytest.mark.xfail(reason='software integration')
 @utilatest.requires(power.MASTER193_PDF)
 def test_footnote_missing_space(td, mp):
     """\

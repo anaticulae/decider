@@ -39,13 +39,9 @@ def bachelor076(findings):
 
 
 @pytest.mark.parametrize('source, expected', [
-    pytest.param(
-        power.HOME018_PDF, home18, id='home18', marks=pytest.mark.xfail),
+    pytest.param(power.HOME018_PDF, home18, id='home18'),
     pytest.param(power.BACHELOR076_PDF, bachelor076, id='bachelor076'),
-    pytest.param(power.BACHELOR128_PDF,
-                 bachelor128,
-                 id='bachelor128',
-                 marks=pytest.mark.xfail),
+    pytest.param(power.BACHELOR128_PDF, bachelor128, id='bachelor128'),
 ])
 def test_footnote_rules_improvement(source, expected, td, mp):
     """Run decider"""
