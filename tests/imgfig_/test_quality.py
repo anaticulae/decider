@@ -47,6 +47,10 @@ def test_imgfig_max_quality(td, mp):
 @pytest.mark.xfail(reason='broken rawmaker image extractor')
 @utilatest.requires(power.BACHELOR063_PDF)
 def test_imgfig_relation(td, mp):
+    """I think beautify images overwrites required data.
+
+    TODO: VERIFY LATER
+    """
     source = power.link(power.BACHELOR063_PDF)
     tests.imgfig_.run(f'-i {source} --quality', mp=mp)
 
