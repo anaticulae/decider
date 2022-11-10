@@ -9,13 +9,11 @@
 
 import power
 import protocol
-import pytest
 import utilatest
 
 import tests.decider_
 
 
-@pytest.mark.xfail(reason='software integration')
 @utilatest.requires(power.BACHELOR051_PDF)
 def test_color_bachelor051(td, mp):
     source = power.link(power.BACHELOR051_PDF)

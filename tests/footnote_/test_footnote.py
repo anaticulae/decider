@@ -59,7 +59,6 @@ def test_footnotes_most_common_font_empty():
     assert fontconfig is None
 
 
-@pytest.mark.xfail(reason='software integration')
 @utilatest.longrun
 @utilatest.requires(power.MASTER072_PDF)
 def test_footnotes_work_highnote_rise(mp):
