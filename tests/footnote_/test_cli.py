@@ -27,18 +27,14 @@ def test_decider_footnote_cli_help(mp):
 @pytest.mark.xfail(reason='software integration')
 @utilatest.requires(power.MASTER072_PDF)
 def test_cli_rules(td, mp):
-    cmd = f'-i {power.link(power.MASTER072_PDF)} -o {td.tmpdir} --rules'
+    source = power.link(power.MASTER072_PDF)
+    cmd = f'-i {source} -o {td.tmpdir} --rules'
     tests.footnote_.run(cmd, mp=mp)
-
     outpath = decider_footnote.path.rules(td.tmpdir)
     assert os.path.exists(outpath), outpath
-
     dumped = utila.file_read(outpath)
-
     findings = serializeraw.load_findings(dumped)
-
     assert len(findings) >= 2  # result contains some findings
-
     # ensure that template is replaced
     assert utila.istemplate_replaced(dumped), dumped
 
