@@ -2,6 +2,21 @@
 
 Every noteable change is logged here.
 
+## v3.4.0 (2022-11-11)
+
+### Feature
+
+* use footnote source (f869c0141a60)
+* use more modern data (dcbe381677ae)
+
+### Chore
+
+* upgrade footnote (8a2147ee6f1c)
+* upgrade requirements.txt (cbb1e833225b)
+* upgrade environment (b10c27960f71)
+* upgrade pipe library (066e2a219350)
+* upgrade requirements.txt (7d841b16fb0d)
+
 ## v3.3.0 (2022-10-05)
 
 ### Feature
