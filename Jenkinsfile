@@ -3,67 +3,72 @@
 pipeline{
     agent{
         docker{
-            image '169.254.149.20:6001/arch_python_baw_ghost_opencv:0.15.1'
-            args  '-v $WORKSPACE:/var/workdir'
+            image '169.254.149.20:6001/arch_python_git_ghost_opencv_baw:v1.37.3'
         }
     }
-
-    parameters{
-        string(name: 'BRANCH', defaultValue: 'master')
-        booleanParam(name: 'RELEASE', defaultValue: false)
-    }
-
     stages{
-        stage('sync'){
-            steps{
-                sh 'baw sync all'
-                sh 'baw sh "pip install ."'
-                sh 'baw sh "writers --build"'
-            }
+        stage('integrate'){
+            steps{script{baw.integrate()}}
         }
-        stage('doctest'){
-            steps{
-                sh 'baw test docs -n1'
-            }
+        stage('setup'){
+            steps{script{baw.setup()}}
         }
-        stage('fast'){
-            steps{
-                sh 'baw test fast -n5'
-            }
-        }
-        stage('long'){
-            steps{
-                sh 'baw test long -n8'
-            }
-        }
-        stage('lint'){
-            steps{
-                sh 'baw lint'
+        stage('test'){
+            failFast true
+            parallel{
+                stage('doc'){
+                    steps{
+                        script{baw.doctest()}
+                    }
+                }
+                stage('fast'){
+                    steps{
+                        script{baw.fast()}
+                    }
+                }
+                stage('long'){
+                    steps{
+                        script{baw.longrun()}
+                    }
+                }
             }
         }
         stage('generate'){
             steps{
-                sh 'baw test skip --generate'
+                sh 'baw --docken generate all'
             }
         }
-        stage('nightly'){
+        stage('all'){
             steps{
-                sh 'baw test all --cov --junit_xml=report.xml'
-                junit '**/report.xml'
+                sh 'baw --docken test all -n32'
+                //script{baw.all()}
             }
-            post{
-                failure{
-                    script{publish.resource_generated()}
+        }
+        stage('quality'){
+            failFast true
+            parallel{
+                stage('lint'){
+                    steps{
+                        script{baw.lint()}
+                    }
+                }
+                stage('format'){
+                    steps{
+                        script{baw.format()}
+                    }
                 }
             }
         }
+        stage('pre-release'){
+            when{not{branch 'master'}}
+            steps{sh 'baw publish --pre'}
+        }
         stage('release'){
-            when {
-                expression { return params.RELEASE }
-            }
             steps{
-                sh 'baw install && baw release && baw publish'
-                // TODO: GIT COMMIT?
+                script{
+                    publish.release()
+                    baw.rebase()
+                }
             }
         }
     }
