@@ -33,17 +33,6 @@ pipeline{
                 }
             }
         }
-        stage('generate'){
-            steps{
-                sh 'baw --docken generate all'
-            }
-        }
-        stage('all'){
-            steps{
-                sh 'baw --docken test all -n32'
-                //script{baw.all()}
-            }
-        }
         stage('quality'){
             failFast true
             parallel{
@@ -62,6 +51,17 @@ pipeline{
         stage('pre-release'){
             when{not{branch 'master'}}
             steps{sh 'baw publish --pre'}
+        }
+        stage('generate'){
+            steps{
+                sh 'baw --docken generate all'
+            }
+        }
+        stage('all'){
+            steps{
+                sh 'baw --docken test all -n32'
+                //script{baw.all()}
+            }
         }
         stage('release'){
             steps{
