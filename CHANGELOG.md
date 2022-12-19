@@ -2,6 +2,16 @@
 
 Every noteable change is logged here.
 
+## v3.4.1 (2022-12-19)
+
+### Chore
+
+* quick steps first (59be68191962)
+* use quick install (1bd3803b73f3)
+* upgrade requirements.txt (77fb0dee8189)
+* upgrade pipeline (a8f65931a904)
+* upgrade pipe library (3074c5b28924)
+
 ## v3.4.0 (2022-11-11)
 
 ### Feature
