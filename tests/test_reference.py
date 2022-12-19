@@ -17,12 +17,17 @@ import glob
 import os
 
 import protocol
+import pytest
 import utila
 import writers
 
 import decider
 
 
+@pytest.mark.skipif(
+    not utila.exists(writers.build()),
+    reason='run writers --build',
+)
 def test_all_references_exists():
     """Parse all files to extract invalid references out of templates."""
     error = False
