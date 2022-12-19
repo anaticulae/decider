@@ -7,8 +7,6 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import os
-
 import power
 import pytest
 import serializeraw
@@ -40,7 +38,7 @@ def run_links(source, td, mp, online: bool = False, msgids=None):
     mp.setenv(decider.DECIDER_ONELINE_FLAG, str(online))
     tests.run(f'-i {linkpath} --links', mp=mp)
     findings = serializeraw.load_findings(
-        os.path.join(td.tmpdir, 'decider__links_user.yaml'),
+        td.tmpdir.join('decider__links_user.yaml'),
         msgids=msgids,
     )
     return findings
