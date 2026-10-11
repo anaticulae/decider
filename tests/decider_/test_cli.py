@@ -41,7 +41,7 @@ def test_cli_decider_example(source, td, mp):  # pylint:disable=W0613
 
 @pytest.mark.parametrize('source, pages', [
     pytest.param(hoverpower.TECH024_PDF, '1', id='technical24'),
-    pytest.param(hoverpower.TECH024_PDF, '0:5', id='technical24'),
+    pytest.param(hoverpower.TECH024_PDF, '0:5', id='technical24_'),
     pytest.param(hoverpower.MASTER078_PDF, '0:5', id='master78'),
     pytest.param(hoverpower.MASTER072_PDF, '0:5', id='master72'),
 ])
