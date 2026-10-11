@@ -7,48 +7,48 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
-import protocol
+import hoverpower
+import protoerror
 import pytest
-import utilatest
+import utilotest
 
 import tests.footnote_
 
 
 def home18(findings):
-    assert protocol.count_findings(findings, 2017) == 8
-    # assert protocol.count_findings(findings, 2018) == 1
-    assert not protocol.count_findings(findings, 2018)  # TODO CHANGE LATER
+    assert protoerror.count_findings(findings, 2017) == 8
+    # assert protoerror.count_findings(findings, 2018) == 1
+    assert not protoerror.count_findings(findings, 2018)  # TODO CHANGE LATER
 
 
 def bachelor128(findings):
     # TODO: MERGE THIS FINDING?
-    assert protocol.count_findings(findings, 2016) == 26
+    assert protoerror.count_findings(findings, 2016) == 26
 
 
 def bachelor076(findings):
     assert findings
     # regression
-    ebd_duplicated = protocol.count_findings(findings, 2019)
+    ebd_duplicated = protoerror.count_findings(findings, 2019)
     assert not ebd_duplicated
 
 
 # def bachelor85(findings):
 #     # TODO: ENABLE AFTER FIXING RAWMAKER
-#     assert protocol.count_findings(findings, 2019)
+#     assert protoerror.count_findings(findings, 2019)
 
 
 @pytest.mark.parametrize('source, expected', [
-    pytest.param(power.HOME018_PDF, home18, id='home18'),
-    pytest.param(power.BACHELOR076_PDF, bachelor076, id='bachelor076'),
-    pytest.param(power.BACHELOR128_PDF, bachelor128, id='bachelor128'),
+    pytest.param(hoverpower.HOME018_PDF, home18, id='home18'),
+    pytest.param(hoverpower.BACHELOR076_PDF, bachelor076, id='bachelor076'),
+    pytest.param(hoverpower.BACHELOR128_PDF, bachelor128, id='bachelor128'),
 ])
 def test_footnote_rules_improvement(source, expected, td, mp):
     """Run decider"""
-    utilatest.fixture_requires(source)
-    source = power.link(source)
+    utilotest.fixture_requires(source)
+    source = hoverpower.link(source)
     cmd = f'-i {source} --rules'
     tests.footnote_.run(cmd, mp=mp)
-    loaded = protocol.findings_from_path(td.tmpdir)
-    findings = protocol.flat(loaded)
+    loaded = protoerror.findings_from_path(td.tmpdir)
+    findings = protoerror.flat(loaded)
     expected(findings)

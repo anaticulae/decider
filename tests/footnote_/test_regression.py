@@ -7,12 +7,12 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
-import protocol
+import hoverpower
+import protoerror
 import pytest
 import serializeraw
-import utila
-import utilatest
+import utilo
+import utilotest
 
 import decider_footnote.path
 import tests.footnote_
@@ -28,9 +28,9 @@ def prepare(todo):
     for line in todo.strip().splitlines():
         content, message = line.split('#')
         source, pages, findings = content.split()
-        pages = utila.parse_pages(pages)
-        source = power.link(getattr(power, source))
-        finding, nofinding = utila.partition(
+        pages = utilo.parse_pages(pages)
+        source = hoverpower.link(getattr(hoverpower, source))
+        finding, nofinding = utilo.partition(
             lambda x: x[0] != '!',
             findings.split(),
         )
@@ -45,30 +45,30 @@ def prepare(todo):
     list(prepare(REGRESSION)),
 )
 def test_footnote_regression(source, pages, finding, nofinding, td, mp):
-    utilatest.fixture_requires(source)
+    utilotest.fixture_requires(source)
     cmd = f'-i {source} -o {td.tmpdir} --rules'
     tests.footnote_.run(cmd, mp=mp)
 
     rules = decider_footnote.path.rules(td.tmpdir)
     rules = serializeraw.load_findings(rules, pages=pages)
 
-    finding_current = protocol.count_findings(rules, finding)
-    nofinding_current = protocol.select_findings(rules, nofinding)
+    finding_current = protoerror.count_findings(rules, finding)
+    nofinding_current = protoerror.select_findings(rules, nofinding)
     assert finding_current == len(finding)
     assert not nofinding_current
 
 
-@utilatest.requires(power.MASTER155_PDF)
+@utilotest.requires(hoverpower.MASTER155_PDF)
 def test_footnote_separator_distance(td, mp):
-    cmd = f'-i {power.link(power.MASTER155_PDF)} -o {td.tmpdir} --rules'
+    cmd = f'-i {hoverpower.link(hoverpower.MASTER155_PDF)} -o {td.tmpdir} --rules'
     tests.footnote_.run(cmd, mp=mp)
 
     rules = decider_footnote.path.rules(td.tmpdir)
     rules = serializeraw.load_findings(rules)
 
     # TODO: DECREASE SEPARATOR_FOOTNOTE_DISTANCE_MAX to verify that
-    # enable after upgrading protocol
+    # enable after upgrading protoerror
     # -hv:separator_footnote_max_distance=0
     # linting works
-    result = protocol.count_findings(rules, 2016)
+    result = protoerror.count_findings(rules, 2016)
     assert not result

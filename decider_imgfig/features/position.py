@@ -9,11 +9,11 @@
 
 import math
 
-import configo
+import configos
 import iamraw
-import protocol
+import protoerror
 import texmex
-import utila
+import utilo
 
 import decider_imgfig.driver
 
@@ -23,7 +23,7 @@ def work(
     xdocinfo: str,
     *images: str,
     pages: tuple = None,
-) -> protocol.ResultType:
+) -> protoerror.ResultType:
     driver = decider_imgfig.driver.create(
         images=images,
         contentborder=border,
@@ -32,8 +32,8 @@ def work(
     )
     if not driver.images:  # pylint:disable=E1101
         # document without images, nothing to lint, return empty result
-        return protocol.RESULT_EMPTY
-    result = protocol.run(
+        return protoerror.RESULT_EMPTY
+    result = protoerror.run(
         modulename=__name__,
         driver=driver,
         document=driver.docinfo,  # pylint:disable=E1101
@@ -56,13 +56,13 @@ def check_4030_image_alignment_selection(linter: callable, driver):
         contentborder=driver.contentborder,
     )
     if expected is None:
-        utila.debug(f'too few images: {len(driver.images)}, disable 4030')
+        utilo.debug(f'too few images: {len(driver.images)}, disable 4030')
         return
     if expected != texmex.TextAlignment.UNDEFINED:
         # everything is fine
         return
     linter(
-        location=protocol.OVERVIEW,
+        location=protoerror.OVERVIEW,
         count=len(driver.images),
     )
 
@@ -75,9 +75,9 @@ Gefundene Ausrichtung: {{current}}
 """
 
 
-@protocol.section_skip(iamraw.sections.Abstract)
-@protocol.section_skip(iamraw.sections.LegalInformation)
-@protocol.section_skip(iamraw.sections.TitlePage)
+@protoerror.section_skip(iamraw.sections.Abstract)
+@protoerror.section_skip(iamraw.sections.LegalInformation)
+@protoerror.section_skip(iamraw.sections.TitlePage)
 def check_4031_image_alignment_per_image(linter: callable, driver):
     """Do not judge image positon in abstract, legal etc. There are
     often signatures or logos."""
@@ -86,45 +86,45 @@ def check_4031_image_alignment_per_image(linter: callable, driver):
         contentborder=driver.contentborder,
     )
     if expected is None:
-        utila.debug(f'too few images: {len(driver.images)}, disable 4030')
+        utilo.debug(f'too few images: {len(driver.images)}, disable 4030')
         return
     if expected == texmex.TextAlignment.UNDEFINED:
-        utila.debug('undefined image alignment, disable 4030')
+        utilo.debug('undefined image alignment, disable 4030')
         return
     for imageinfo in driver.images:
         location = iamraw.BoundingLocation.fromtuple(
             bounding=imageinfo.bounding,
             page=imageinfo.page,
         )
-        border = utila.select_page(driver.contentborder, page=imageinfo.page)
+        border = utilo.select_page(driver.contentborder, page=imageinfo.page)
         leftright = (border.border.left, border.border.right)
         current = alignment(imageinfo.bounding, leftright)
         if current == texmex.TextAlignment.BLOCK:
             # block is always right
             continue
         if current == texmex.TextAlignment.UNDEFINED:
-            utila.log(f'undefined image alignment: {imageinfo}, skip 4031')
+            utilo.log(f'undefined image alignment: {imageinfo}, skip 4031')
             continue
         if current == expected:
             continue
         linter(location=location, current=current, expected=expected)
 
 
-ALIGNMENT_TRUST_MIN = configo.HV_FLOAT_PLUS(default=0.5)
+ALIGNMENT_TRUST_MIN = configos.HV_FLOAT_PLUS(default=0.5)
 
 
 def expected_alignment(images, contentborder, mincount: int = 5):
     textstyle = texmex.TextAlignment
     alignments = []
     for item in images:
-        border = utila.select_page(contentborder, page=item.page)
+        border = utilo.select_page(contentborder, page=item.page)
         leftright = (border.border.left, border.border.right)
         current = alignment(item.bounding, leftright)
         alignments.append(current.value)
     alignments = [item for item in alignments if item != textstyle.BLOCK.value]
     if len(alignments) < mincount:
         return None
-    left, center, right = utila.roundme([
+    left, center, right = utilo.roundme([
         len([item for item in alignments if item == current]) /
         len(alignments) for current in range(3)
     ])
@@ -149,7 +149,7 @@ def alignment(bounding, leftright: tuple):
     left, right = leftright
     leftdist, rightdist = bounding[0] - left, right - bounding[2]
     pagewidth = right - left
-    imagewidth = utila.rect_width(bounding)
+    imagewidth = utilo.rect_width(bounding)
     if imagewidth > (pagewidth - 25):
         # image covers complete page or more than complete page
         return texmex.TextAlignment.BLOCK
@@ -159,7 +159,7 @@ def alignment(bounding, leftright: tuple):
         rate = leftdist / rightdist
     else:
         rate = 0.0
-    leftdist, rightdist, rate = utila.roundme((leftdist, rightdist, rate))
+    leftdist, rightdist, rate = utilo.roundme((leftdist, rightdist, rate))
     maxed = max((leftdist, rightdist))
     if maxed > 10.0:
         dist = math.fabs(leftdist - rightdist)

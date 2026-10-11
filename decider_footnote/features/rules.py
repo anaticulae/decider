@@ -14,12 +14,12 @@ Footnotes
 
 import math
 
-import configo
-import german
+import configos
+import germania
 import iamraw
-import protocol
+import protoerror
 import serializeraw
-import utila
+import utilo
 
 import decider_footnote.rules.start
 
@@ -28,7 +28,7 @@ def work(
     footerheader: str,
     horizontals: str,
     pages: tuple = None,
-) -> protocol.ResultType:
+) -> protoerror.ResultType:
     # load data
     driver = create_driver(
         footerheader,
@@ -36,7 +36,7 @@ def work(
         pages=pages,
     )
     # run linting
-    result = protocol.run(
+    result = protoerror.run(
         __name__,
         driver=driver,
         before_dump=before_dump,
@@ -47,7 +47,7 @@ def work(
 def before_dump(result, driver, linter):
     footnote_count = len(driver.footnotes)
     if not footnote_count:
-        utila.info('no headerfooters')
+        utilo.info('no headerfooters')
     else:
         decider_footnote.rules.start.send_footnote_pattern_information(
             linter.add_finding,
@@ -61,9 +61,9 @@ def before_dump(result, driver, linter):
 
 def create_driver(footerheader: str, horizontals: str, pages: tuple):
     footnotes = serializeraw.load_footnotes(footerheader, pages)
-    footnotes_flat = utila.flatten_content(footnotes)
+    footnotes_flat = utilo.flatten_content(footnotes)
     horizontals = serializeraw.load_horizontals(horizontals, pages=pages)
-    driver = protocol.driver(
+    driver = protoerror.driver(
         footnotes=footnotes_flat,
         footnotes_pages=footnotes,
         horizontals=horizontals,
@@ -131,7 +131,7 @@ def check_2002_no_dot_at_end(linter, driver):
         if href_only(text):
             continue
         if len(text) == 1:
-            utila.error(f'invalid footnote: {footnote}')
+            utilo.error(f'invalid footnote: {footnote}')
             continue
         if lastchar in QUOTATION_SIGNS and text[-2] == '.':
             # end with quotation .“
@@ -155,7 +155,7 @@ Seitenangabe: **{{pageref}}**
 
 
 def check_2100_incomplete_pagenumber(linter, driver):
-    pagenumbers = german.TextMachine()
+    pagenumbers = germania.TextMachine()
     for footnote in driver.footnotes:
         detected = pagenumbers.check_pagenumber_complete(text=footnote.text)
         if not detected:
@@ -191,7 +191,7 @@ def check_2101_missing_space_before_pagenumber(linter, driver):
         if not MISSING_SPACE_BEFORE_PAGENUMBER.search(raw):
             continue
         # remove newlines in finding view
-        no_newline = utila.normalize_text(raw, normalize_spaces=True)
+        no_newline = utilo.normalize_text(raw, normalize_spaces=True)
         linter(
             number=footnote.number,
             text=no_newline,
@@ -199,7 +199,7 @@ def check_2101_missing_space_before_pagenumber(linter, driver):
         )
 
 
-MISSING_SPACE_BEFORE_PAGENUMBER = utila.compiles(r"""
+MISSING_SPACE_BEFORE_PAGENUMBER = utilo.compiles(r"""
     (
         Seite|
         S\.|
@@ -228,7 +228,7 @@ def check_2105_missing_space(linter, driver):
         if not MISSING_SPACE.match(raw):
             continue
         # remove newlines in finding view
-        no_newline = utila.normalize_text(raw, normalize_spaces=True)
+        no_newline = utilo.normalize_text(raw, normalize_spaces=True)
         linter(
             number=footnote.number,
             text=no_newline,
@@ -236,7 +236,7 @@ def check_2105_missing_space(linter, driver):
         )
 
 
-MISSING_SPACE = utila.compiles(r"""
+MISSING_SPACE = utilo.compiles(r"""
     ^
     \d{1,4}
     [a-z]
@@ -275,14 +275,14 @@ Abstand der horizontalen Linie zur ersten Fußnote zu groß.
 """
 
 # TODO: ADD LOWER LIMIT
-SEPARATOR_FOOTNOTE_DISTANCE_MAX = configo.HV_INT_PLUS(default=30)
+SEPARATOR_FOOTNOTE_DISTANCE_MAX = configos.HV_INT_PLUS(default=30)
 
 
 def check_2016_footnote_separator_position(linter, driver):
     horizontals = driver.horizontals
     for page in driver.footnotes_pages:
         pagenumber = page.page
-        current = utila.select_content(horizontals, pagenumber)
+        current = utilo.select_content(horizontals, pagenumber)
         if not current:
             # TODO: ADD MISSING HORIZONTAL LINE?
             continue
@@ -290,7 +290,7 @@ def check_2016_footnote_separator_position(linter, driver):
         separator_y0 = separator.box.y0
         bounding = page.content[0].bounding
         if not bounding:
-            utila.debug(f'missing bounding: {page.content[0]}')
+            utilo.debug(f'missing bounding: {page.content[0]}')
             continue
         firstfootnote_y0 = page.content[0].bounding[1]
         # judge
@@ -318,8 +318,8 @@ def check_2017_ambiguous_reference(linter, driver):
     for page in driver.footnotes_pages:
         content = page.content
         first = content[0].text.lower()
-        if not ibidem(first):
-            # ibidem is not the first footnote
+        if not footnote(first):
+            # footnote is not the first footnote
             continue
         linter(
             number=content[0].number,
@@ -355,7 +355,7 @@ Fußnote dupliziert, vermeiden Sie Redundanz
 Identisch, aufeinander folgende Fußnoten erkannt: \
 **{{note}}**
 
-Verwenden Sie **ebd., ebendort, ibid. oder ibidem** um identische \
+Verwenden Sie **ebd., ebendort, ibid. oder footnote** um identische \
 Fußnoten darzustellen.
 
 {text/fussnote#struktur}
@@ -370,7 +370,7 @@ def check_2019_duplicated_footnote(linter, driver):
             note = current.text.strip()
             if note != after.text.strip():
                 continue
-            if ibidem(note):
+            if footnote(note):
                 # Ebd. follows by Ebd.
                 continue
             linter(
@@ -379,23 +379,23 @@ def check_2019_duplicated_footnote(linter, driver):
             )
 
 
-def ibidem(text: str) -> bool:
+def footnote(text: str) -> bool:
     """\
-    >>> ibidem('vgl. ibid.')
+    >>> footnote('vgl. ibid.')
     True
-    >>> ibidem('vgl. ebd., s. 221.')
+    >>> footnote('vgl. ebd., s. 221.')
     True
-    >>> ibidem('gib.')
+    >>> footnote('gib.')
     False
     """
-    # TODO: USE UTILA>SIMILAR TO INCREASE TOLERANCE?
+    # TODO: USE utilo>SIMILAR TO INCREASE TOLERANCE?
     text = text.strip().lower()
     if IBIDEM.search(text):
         return True
     return False
 
 
-IBIDEM = utila.compiles(r"""
+IBIDEM = utilo.compiles(r"""
 (
     ^|
     \W
@@ -405,11 +405,11 @@ IBIDEM = utila.compiles(r"""
     ebendort|
     ib\.|
     ibid\.|
-    ibidem|
+    footnote|
     vgl\.[ ]{0,3}ebd\.|
     vgl\.[ ]{0,3}ib\.|
     vgl\.[ ]{0,3}ibid\.|
-    vgl\.[ ]{0,3}ibidem
+    vgl\.[ ]{0,3}footnote
 )
 """)
 
@@ -426,7 +426,7 @@ def href_only(text: str) -> bool:
     if len(text.split()) > 1:
         # more than one word
         return False
-    hypers = german.hyperlink(text)
+    hypers = germania.hyperlink(text)
     if not hypers:
         return False
     if len(hypers) == 1:

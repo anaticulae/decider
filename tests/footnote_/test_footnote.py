@@ -7,13 +7,13 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import hoverpower
 import iamraw
-import power
-import protocol
+import protoerror
 import pytest
 import serializeraw
-import utila
-import utilatest
+import utilo
+import utilotest
 
 import decider_footnote.features.style
 import decider_footnote.footnote
@@ -23,9 +23,9 @@ import tests.footnote_
 
 @pytest.fixture
 def example():
-    utilatest.fixture_requires(power.MASTER072_PDF)
+    utilotest.fixture_requires(hoverpower.MASTER072_PDF)
     loaded = serializeraw.load_footnotes(
-        power.link(power.MASTER072_PDF),
+        hoverpower.link(hoverpower.MASTER072_PDF),
         pages=(3),
     )
     return loaded[0]
@@ -58,12 +58,15 @@ def test_footnotes_most_common_font_empty():
     assert fontconfig is None
 
 
-@utilatest.longrun
-@utilatest.requires(power.MASTER072_PDF)
+@utilotest.longrun
+@utilotest.requires(hoverpower.MASTER072_PDF)
 def test_footnotes_work_highnote_rise(mp):
-    footerheader = iamraw.path.headerfooters(power.link(power.MASTER072_PDF))
-    fontheader = iamraw.path.fontheader(power.link(power.MASTER072_PDF))
-    fontcontent = iamraw.path.fontcontent(power.link(power.MASTER072_PDF))
+    footerheader = iamraw.path.headerfooters(
+        hoverpower.link(hoverpower.MASTER072_PDF))
+    fontheader = iamraw.path.fontheader(
+        hoverpower.link(hoverpower.MASTER072_PDF))
+    fontcontent = iamraw.path.fontcontent(
+        hoverpower.link(hoverpower.MASTER072_PDF))
     with mp.context() as context:
         context.setattr(
             decider_footnote.features.style,
@@ -79,13 +82,16 @@ def test_footnotes_work_highnote_rise(mp):
     assert len(result) == 260  # TODO: VERIFY LATER
 
 
-@utilatest.longrun
-@utilatest.requires(power.MASTER072_PDF)
+@utilotest.longrun
+@utilotest.requires(hoverpower.MASTER072_PDF)
 def test_footnotes_work_highnote_size(mp):
     # TODO: LOOK FOR AN EXAMPLE WITH WRONG HIGHNOTE SIZE
-    footerheader = iamraw.path.headerfooters(power.link(power.MASTER072_PDF))
-    fontheader = iamraw.path.fontheader(power.link(power.MASTER072_PDF))
-    fontcontent = iamraw.path.fontcontent(power.link(power.MASTER072_PDF))
+    footerheader = iamraw.path.headerfooters(
+        hoverpower.link(hoverpower.MASTER072_PDF))
+    fontheader = iamraw.path.fontheader(
+        hoverpower.link(hoverpower.MASTER072_PDF))
+    fontcontent = iamraw.path.fontcontent(
+        hoverpower.link(hoverpower.MASTER072_PDF))
     with mp.context() as context:
         context.setattr(
             decider_footnote.features.style,
@@ -102,10 +108,10 @@ def test_footnotes_work_highnote_size(mp):
 
 
 @pytest.mark.xfail(reason='software integration')
-@utilatest.longrun
-@utilatest.requires(power.MASTER072_PDF)
+@utilotest.longrun
+@utilotest.requires(hoverpower.MASTER072_PDF)
 def test_footnotes_work_highnote_font_family():
-    source = power.link(power.MASTER072_PDF)
+    source = hoverpower.link(hoverpower.MASTER072_PDF)
     footerheader = iamraw.path.footnote_result(source)
     fontheader = iamraw.path.fontheader(source)
     fontcontent = iamraw.path.fontcontent(source)
@@ -118,19 +124,19 @@ def test_footnotes_work_highnote_font_family():
     assert len(result) == 2
 
 
-@utilatest.requires(power.HOME025_PDF)
+@utilotest.requires(hoverpower.HOME025_PDF)
 def test_footnote_email_exception(td, mp):
-    source = power.link(power.HOME025_PDF)
+    source = hoverpower.link(hoverpower.HOME025_PDF)
     cmd = f'--rules -i {source}'
 
     def run_linter():
         tests.footnote_.run(cmd, mp=mp)
-        loaded = utila.select_content(
-            protocol.findings_from_path(td.tmpdir),
+        loaded = utilo.select_content(
+            protoerror.findings_from_path(td.tmpdir),
             page=0,
             default=[],
         )
-        loaded = protocol.select_findings(loaded, {2001, 2002})
+        loaded = protoerror.select_findings(loaded, {2001, 2002})
         return loaded
 
     with mp.context() as context:
@@ -147,9 +153,9 @@ def test_footnote_email_exception(td, mp):
     assert not loaded
 
 
-@utilatest.requires(power.DISS273_PDF)
+@utilotest.requires(hoverpower.DISS273_PDF)
 def test_footnote_special_number(td, mp):
-    cmd = f'-i {power.link(power.DISS273_PDF)} -o {td.tmpdir} --global'
+    cmd = f'-i {hoverpower.link(hoverpower.DISS273_PDF)} -o {td.tmpdir} --global'
     tests.footnote_.run(cmd, mp=mp)
     findings = serializeraw.findings_from_path(td.tmpdir, msgid=2020)
     assert len(findings) == 1

@@ -10,8 +10,8 @@
 
 from serializeraw import load_font_content
 from serializeraw import load_font_header
-from utila import Flag
-from utila import file_read
+from utilo import Flag
+from utilo import file_read
 from yaml import dump
 
 

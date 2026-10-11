@@ -7,10 +7,10 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import hoverpower
 import iamraw.path
-import power
 import serializeraw
-import utilatest
+import utilotest
 
 import decider.features.page
 
@@ -22,7 +22,7 @@ def user_work(path: str):
     return loaded
 
 
-@utilatest.requires(power.TECH024_PDF)
+@utilotest.requires(hoverpower.TECH024_PDF)
 def test_pages_work(mp):
     loader = serializeraw.load_headerfooter
 
@@ -34,7 +34,7 @@ def test_pages_work(mp):
 
     with mp.context() as context:
         context.setattr(serializeraw, 'load_headerfooter', scrumble_load)
-        result = user_work(power.link(power.TECH024_PDF))
+        result = user_work(hoverpower.link(hoverpower.TECH024_PDF))
     assert len(result) == 1, result
     assert result[0].solution.title
     assert result[0].solution.description

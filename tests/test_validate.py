@@ -9,30 +9,30 @@
 
 import functools
 
-import power
-import protocol
+import hoverpower
+import protoerror
 import pytest
-import utila
-import utilatest
+import utilo
+import utilotest
 
 import decider
 import tests
 import tests.footnote_
 import tests.imgfig_
 
-ARCHIVE = utila.join(decider.ROOT, 'tests/expected', exist=True)
+ARCHIVE = utilo.join(decider.ROOT, 'tests/expected', exist=True)
 
 
 @pytest.mark.parametrize('source', [
-    pytest.param(power.BACHELOR063_PDF, id='bachelor063'),
-    pytest.param(power.BACHELOR076_PDF, id='bachelor076'),
-    pytest.param(power.BACHELOR090_PDF, id='bachelor090'),
-    pytest.param(power.MASTER072_PDF, id='master072'),
-    pytest.param(power.MASTER075_PDF, id='master075'),
+    pytest.param(hoverpower.BACHELOR063_PDF, id='bachelor063'),
+    pytest.param(hoverpower.BACHELOR076_PDF, id='bachelor076'),
+    pytest.param(hoverpower.BACHELOR090_PDF, id='bachelor090'),
+    pytest.param(hoverpower.MASTER072_PDF, id='master072'),
+    pytest.param(hoverpower.MASTER075_PDF, id='master075'),
 ])
-@utilatest.nightly
+@utilotest.nightly
 def test_validate_all(source, td, mp):
-    utilatest.fixture_requires(source)
+    utilotest.fixture_requires(source)
     Evaluate(
         source=source,
         workdir=td.tmpdir,
@@ -46,7 +46,7 @@ def run_extraction(cmd, mp):  # pylint:disable=W0613
     tests.imgfig_.run(cmd, mp=mp)
 
 
-class Evaluate(utilatest.BaseLiner):
+class Evaluate(utilotest.BaseLiner):
 
     def __init__(self, source, workdir, mp):
         super().__init__(
@@ -56,22 +56,22 @@ class Evaluate(utilatest.BaseLiner):
             ),
             step=None,
             pages=':',
-            source=power.link(source),
+            source=hoverpower.link(source),
             workdir=workdir,
             archive=ARCHIVE,
             loader=self.frompath,
             convert_source=False,
         )
-        self.headlines = power.link(source)
+        self.headlines = hoverpower.link(source)
 
     def frompath(self, path):  # pylint:disable=R0201
-        return protocol.findings_from_path(path)
+        return protoerror.findings_from_path(path)
 
     def raw(self, value) -> str:
-        findings = utila.flatten_content(value)
+        findings = utilo.flatten_content(value)
         findings = [line(item) for item in findings]
-        findings = sorted(findings, key=utila.alphabetically)
-        result = utila.NEWLINE.join(findings)
+        findings = sorted(findings, key=utilo.alphabetically)
+        result = utilo.NEWLINE.join(findings)
         return result
 
 

@@ -9,18 +9,18 @@
 
 import os
 
-import power
-import utilatest
+import hoverpower
+import utilotest
 
 import decider.example
 
 
-@utilatest.nightly
+@utilotest.nightly
 def test_example_extract(td):
     generated = td.tmpdir.join('generated')
     pdfs = [
-        power.DOCU035_PDF,
-        power.TECH024_PDF,
+        hoverpower.DOCU035_PDF,
+        hoverpower.TECH024_PDF,
     ]
     decider.example.extract(
         pdfs,

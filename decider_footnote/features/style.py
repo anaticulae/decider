@@ -7,24 +7,24 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import configo
+import configos
 import iamraw
-import protocol
+import protoerror
 import serializeraw
-import utila
+import utilo
 
 import decider_footnote.footnote
 
-HIGHNOTE_RISE_DIFF_MAX = configo.HV_FLOAT_PLUS(default=0.5)
+HIGHNOTE_RISE_DIFF_MAX = configos.HV_FLOAT_PLUS(default=0.5)
 
-HIGHNOTE_SIZE_DIFF_MAX = configo.HV_FLOAT_PLUS(default=0.5)
+HIGHNOTE_SIZE_DIFF_MAX = configos.HV_FLOAT_PLUS(default=0.5)
 
-CONTENT_SIZE_DIFF_MAX = configo.HV_FLOAT_PLUS(default=0.5)
+CONTENT_SIZE_DIFF_MAX = configos.HV_FLOAT_PLUS(default=0.5)
 
 # as a result of bad layout extraction
-RISE_NOISE_MAX = configo.HV_FLOAT_PLUS(default=2.0)
+RISE_NOISE_MAX = configos.HV_FLOAT_PLUS(default=2.0)
 
-skip = protocol.skip_method  # pylint:disable=C0103
+skip = protoerror.skip_method  # pylint:disable=C0103
 
 
 def work(
@@ -32,14 +32,14 @@ def work(
     fontheader: str,
     fontcontent: str,
     pages: tuple = None,
-) -> protocol.ResultType:
+) -> protoerror.ResultType:
     driver = create_driver(
         headerfooters=footerheader,
         fontheader=fontheader,
         fontcontent=fontcontent,
         pages=pages,
     )
-    result = protocol.run(
+    result = protoerror.run(
         __name__,
         driver=driver,
     )
@@ -56,14 +56,14 @@ def create_driver(
         headerfooters,
         pages=pages,
     )
-    footnotes = utila.flat([item.content for item in headerfooters if item])
+    footnotes = utilo.flat([item.content for item in headerfooters if item])
     fontconfig = decider_footnote.footnote.most_common_font(footnotes)
     fontstore = serializeraw.create_fontstore(
         fontheader,
         fontcontent,
         pages=pages,
     )
-    result = protocol.driver(
+    result = protoerror.driver(
         footnotes=footnotes,
         fontconfig=fontconfig,
         fontstore=fontstore,
@@ -91,7 +91,7 @@ def check_2003_invalid_highnote_rise(linter, driver):
         if isinstance(expected, list):
             skip(f'ambiguous expected highnote rise: {expected}')
             continue
-        if utila.near(current, expected, HIGHNOTE_RISE_DIFF_MAX):
+        if utilo.near(current, expected, HIGHNOTE_RISE_DIFF_MAX):
             continue
         linter(
             number=footnote.number,
@@ -121,7 +121,7 @@ def check_2004_invalid_hignote_size(linter, driver):
         if isinstance(expected, list):
             skip(f'ambiguous expected highnote size: {expected}')
             continue
-        if utila.near(current, expected, HIGHNOTE_SIZE_DIFF_MAX):
+        if utilo.near(current, expected, HIGHNOTE_SIZE_DIFF_MAX):
             continue
         linter(
             number=footnote.number,
@@ -186,7 +186,7 @@ def check_2010_invalid_content_fontsize(linter, driver):
             skip(f'ambiguous expected highnote fontsize:{expected}')
             continue
         if not footnote.style_text:
-            protocol.skip_method('missing style')
+            protoerror.skip_method('missing style')
             continue
         footnotestyle = footnote.style_text
         # The style of the last footnote includes the ending
@@ -204,7 +204,7 @@ def check_2010_invalid_content_fontsize(linter, driver):
             item.size for item in footnotestyle if item.rise < RISE_NOISE_MAX
         ]
         sizes_equal = [
-            utila.near(item, expected, CONTENT_SIZE_DIFF_MAX) for item in sizes
+            utilo.near(item, expected, CONTENT_SIZE_DIFF_MAX) for item in sizes
         ]
         if all(sizes_equal):
             continue

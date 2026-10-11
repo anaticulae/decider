@@ -7,7 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import configo
+import configos
 
 import decider
 import decider_footnote.path
@@ -18,4 +18,4 @@ __version__ = decider.__version__
 
 PROCESS = 'decider_footnote'
 
-configo.cloud_lookup(PROCESS)
+configos.cloud_lookup(PROCESS)

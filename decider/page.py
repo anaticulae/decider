@@ -7,7 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import elements
+import elementae
 
 
 def validate(footers):
@@ -17,5 +17,5 @@ def validate(footers):
     pages = [
         (item.page.value, item.page.raw, 1024) for item in footers if item.page
     ]
-    validated = elements.validate_pageorder(pages)
+    validated = elementae.validate_pageorder(pages)
     return validated

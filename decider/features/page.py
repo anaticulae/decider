@@ -13,9 +13,9 @@ PageOrder
 """
 
 import iamraw
-import protocol
+import protoerror
 import serializeraw
-import utila
+import utilo
 
 import decider.page
 
@@ -28,7 +28,7 @@ def work(
     sections: str,
     pagenumbers: str = None,
     pages: tuple = None,
-) -> protocol.ResultType:
+) -> protoerror.ResultType:
     driver = create_driver(
         headerfooter,
         sections,
@@ -36,7 +36,7 @@ def work(
         pages=pages,
     )
     # TODO: ADD PROCESS TO VALIDATE PAGE NUMBERS IN HEADER
-    result = protocol.run(
+    result = protoerror.run(
         __name__,
         driver=driver,
     )
@@ -53,23 +53,23 @@ def create_driver(
         headerfooter,
         pages=pages,
     )
-    if utila.exists(sections):
+    if utilo.exists(sections):
         sections = serializeraw.load_sections(
             sections,
             pages=pages,
         )
     else:
-        utila.error(f'missing: {sections}')
+        utilo.error(f'missing: {sections}')
         sections = None
-    if utila.exists(pagenumbers):
+    if utilo.exists(pagenumbers):
         pagenumbers = serializeraw.load_pagenumbers(
             pagenumbers,
             pages=pages,
         )
     else:
-        utila.error(f'missing: {pagenumbers}')
+        utilo.error(f'missing: {pagenumbers}')
         pagenumbers = None
-    result = protocol.driver(
+    result = protoerror.driver(
         headerfooter=headerfooter,
         sections=sections,
         pagenumbers=pagenumbers,
@@ -117,10 +117,10 @@ def check_1965_legal_with_pagenumber(linter, driver):
     sections = driver.sections
     pagenumbers = driver.pagenumbers
     if not sections or not pagenumbers:
-        protocol.skip_method(f'missing: {sections} {pagenumbers}')
+        protoerror.skip_method(f'missing: {sections} {pagenumbers}')
         return
     sections = [
-        item for item in utila.flatten_content(sections)
+        item for item in utilo.flatten_content(sections)
         if isinstance(item, iamraw.sections.LegalInformation)
     ]
     if not sections:

@@ -7,7 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import configo
+import configos
 
 
 def mixed(date) -> bool:
@@ -21,7 +21,7 @@ def mixed(date) -> bool:
     return max(values) <= 1800
 
 
-MIXED_RATE_MIN = configo.HV_FLOAT_PLUS(default=0.6)
+MIXED_RATE_MIN = configos.HV_FLOAT_PLUS(default=0.6)
 
 
 def is_mixed(dates):

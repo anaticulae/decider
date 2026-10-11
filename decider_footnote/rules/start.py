@@ -7,21 +7,21 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import configo
-import german
-import protocol
-import utila
+import configos
+import germania
+import protoerror
+import utilo
 
-DISABLE_2001_UPPER_CASE = configo.HV_PERCENT_PLUS(default=15.0)
-DISABLE_2002_DOT_END = configo.HV_PERCENT_PLUS(default=15.0)
+DISABLE_2001_UPPER_CASE = configos.HV_PERCENT_PLUS(default=15.0)
+DISABLE_2002_DOT_END = configos.HV_PERCENT_PLUS(default=15.0)
 
 # minimum number of note to decide if we want to disable function. If we
 # had lower numbers, judging is not possible, cause we can not determine
 # if user follow this rule or not.
-DISABLE_FOOTNOTE_COUNT_MIN = configo.HV_INT_PLUS(default=15)
+DISABLE_FOOTNOTE_COUNT_MIN = configos.HV_INT_PLUS(default=15)
 
 # To ignore dots, spaces or <>.
-FOOTENOTE_EXCEPTION_CHARS_MAX = configo.HV_INT_PLUS(default=10)
+FOOTENOTE_EXCEPTION_CHARS_MAX = configos.HV_INT_PLUS(default=10)
 
 
 def judge_active(items, footnote_count: int):
@@ -50,29 +50,29 @@ def send_footnote_pattern_information(linter, items, footnote_count: int):
     if disable_2001:
         linter(
             msgid=2012,
-            location=protocol.OVERVIEW,
+            location=protoerror.OVERVIEW,
         )
     if disable_2002:
         linter(
             msgid=2013,
-            location=protocol.OVERVIEW,
+            location=protoerror.OVERVIEW,
         )
 
 
 def disabled(items, footnote_count: int):
     if footnote_count < DISABLE_FOOTNOTE_COUNT_MIN:
         # disable judeging
-        utila.info(f'to few footnotes({footnote_count}) to judge disabling')
+        utilo.info(f'to few footnotes({footnote_count}) to judge disabling')
         return False, False
-    count_2001 = protocol.count_findings(items, 2001)
-    count_2002 = protocol.count_findings(items, 2002)
+    count_2001 = protoerror.count_findings(items, 2001)
+    count_2002 = protoerror.count_findings(items, 2002)
 
-    not_uppercased = utila.roundme(count_2001 / footnote_count)
-    not_dotted = utila.roundme(count_2002 / footnote_count)
+    not_uppercased = utilo.roundme(count_2001 / footnote_count)
+    not_dotted = utilo.roundme(count_2002 / footnote_count)
 
-    utila.log(f'footnote count: {footnote_count}')
-    utila.log(f'not uppercased: {not_uppercased}')  # TODO :DECREASE LOG LEVEL
-    utila.log(f'not dotted: {not_dotted}')
+    utilo.log(f'footnote count: {footnote_count}')
+    utilo.log(f'not uppercased: {not_uppercased}')  # TODO :DECREASE LOG LEVEL
+    utilo.log(f'not dotted: {not_dotted}')
 
     disable_2001 = not_uppercased > DISABLE_2001_UPPER_CASE
     disable_2002 = not_dotted > DISABLE_2002_DOT_END
@@ -93,7 +93,7 @@ def footnote_exception(text: str) -> bool:
     text = text.strip()
     if not text:
         return False
-    parsed = german.hyperlink(text) + german.mails(text)  # pylint:disable=E1101
+    parsed = germania.hyperlink(text) + germania.mails(text)  # pylint:disable=E1101
     detected = ''.join(parsed)
     diff = len(text) - len(detected)
     assert diff >= 0, str(diff)

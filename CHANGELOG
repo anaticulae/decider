@@ -91,7 +91,7 @@ Every noteable change is logged here.
 * add sentence lookup (a2a5eadcbbca)
 * use sentence to improve results (ebb65e74960f)
 * add docref package to verify doc references (84ca6ec8bf3c)
-* use headlines instead of words source (7eec7d07e3e1)
+* use headlines instead of verbo source (7eec7d07e3e1)
 
 ## v2.26.0
 
@@ -211,7 +211,7 @@ Every noteable change is logged here.
 
 * inform developer about empty reference (9a27fd3c3158)
 * add text to increase ticket clarify (3998d53dec0c)
-* do not judge perspective in non german documents (e5883b0f1111)
+* do not judge perspective in non germania documents (e5883b0f1111)
 * do not judge sentence start inside list items (459f23e80da7)
 * adjust doc link (2c2a043da8b9)
 * reduce logging verbosity (6ee8482055bc)
@@ -248,7 +248,7 @@ Every noteable change is logged here.
 * ensure to load magic data correctly (20f55c7626da)
 * do not lint line ending inside a list (59c58d040bd0)
 * fix data type inside error message (b1346785e6b5)
-* detects more ebd/ibidem pattern (008d689ecbc6)
+* detects more ebd/footnote pattern (008d689ecbc6)
 * do not add placeholder headlines (ea5129d4a884)
 
 ## v2.18.0
@@ -263,7 +263,7 @@ Every noteable change is logged here.
 ### Feature
 
 * simplify perspective checker (5361851d412b)
-* replace words with sentences (6f7b131eb546)
+* replace verbo with sentences (6f7b131eb546)
 * convert list item to normal sentence (571cec58db0a)
 * add cloud lookup (a56ebcfecb67)
 
@@ -327,7 +327,7 @@ Every noteable change is logged here.
 
 ### Feature
 
-* replace with new protocol feature (66a5b2ba0c41)
+* replace with new protoerror feature (66a5b2ba0c41)
 
 ### Fix
 
@@ -513,13 +513,13 @@ Every noteable change is logged here.
 ### Fix
 
 * adjust outdated import (fd74bdbab0f2)
-* use elements code (616412e6fcb8)
+* use elementae code (616412e6fcb8)
 
 ## v2.0.0
 
 ### Feature
 
-* enable genex base feature (69458e79a4d7)
+* enable gennex base feature (69458e79a4d7)
 * remove moved border and decider_textstyle (95abc28ced47)
 
 ### Fix
@@ -575,7 +575,7 @@ Every noteable change is logged here.
 ### Feature
 
 * add invalid prefix and pleonasm detection (a7eaa67edc3e)
-* add badwords step (72350140029c)
+* add badverbo step (72350140029c)
 * add decider_smarty client interface (aa385dcb1408)
 
 ## v0.36.0
@@ -651,7 +651,7 @@ Every noteable change is logged here.
 * skip included pdf page (a22cce8cb7b9)
 * add method to determine path of extracted hits (75b450739880)
 * add method to judge line coverage of headline (722b8156a87d)
-* add preview of multiple linter creator from protocol module (32f10e8e1b0b)
+* add preview of multiple linter creator from protoerror module (32f10e8e1b0b)
 
 ### Fix
 
@@ -812,7 +812,7 @@ Every noteable change is logged here.
 * remove unnecessary list after introducing magic content (26934f4511ec)
 * use general magic line look up to determine pure text lines (5e24ce4692a7)
 * use magic content to exclude from text style check (2ec227b8e9ae)
-* add option to yield non textual elements with none (8f3e325ca748)
+* add option to yield non textual elementae with none (8f3e325ca748)
 * do not check paragraph length in lists (d426415748ac)
 
 ### Fix
@@ -912,7 +912,7 @@ Every noteable change is logged here.
 
 * extend linter to display out ranged chapters (769a12088fdc)
 * add toc balance extractor out of headline level (1a8d53141849)
-* improve duplicated words checker (33e9b76d9ded)
+* improve duplicated verbo checker (33e9b76d9ded)
 * split rules by meaning into different features (dec586ea477a)
 * move toc rules to separate runner `decider_toc` (ef1b2d7139c8)
 
@@ -1311,7 +1311,7 @@ Every noteable change is logged here.
 
 ### Feature
 
-* use new saveme-wrapper form utila (53abf71f6ff6)
+* use new saveme-wrapper form utilo (53abf71f6ff6)
 
 ### Fix
 

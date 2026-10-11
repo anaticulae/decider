@@ -7,52 +7,52 @@
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
 
-import protocol
-import utila
+import protoerror
+import utilo
 
 import decider
 
 DESCRIPTION = ''
 
 WORKPLAN = [
-    utila.create_step(
+    utilo.create_step(
         'color',
         [
-            utila.ResultFile('colors', 'statistics_statistics'),
+            utilo.ResultFile('colors', 'statistics_statistics'),
         ],
-        protocol.ResultDefault,
+        protoerror.ResultDefault,
     ),
-    utila.create_step(
+    utilo.create_step(
         'header',
         [
-            utila.ResultFile('headnote', 'result_result'),
+            utilo.ResultFile('headnote', 'result_result'),
         ],
-        protocol.ResultDefault,
+        protoerror.ResultDefault,
     ),
-    utila.create_step(
+    utilo.create_step(
         'links',
         [
-            utila.ResultFile('weblink', 'biblio_biblio'),
-            utila.ResultFile('weblink', 'footer_footer'),
-            utila.ResultFile('weblink', 'sentence_sentence'),
+            utilo.ResultFile('weblink', 'biblio_biblio'),
+            utilo.ResultFile('weblink', 'footer_footer'),
+            utilo.ResultFile('weblink', 'sentence_sentence'),
         ],
-        protocol.ResultDefault,
+        protoerror.ResultDefault,
     ),
-    utila.create_step(
+    utilo.create_step(
         'page',
         [
-            utila.ResultFile('groupme', 'footer_footerheader'),
-            utila.ResultFile('sections', 'section_result'),
-            utila.ResultFile('pagenumber', 'result_result'),
+            utilo.ResultFile('groupmes', 'footer_footerheader'),
+            utilo.ResultFile('sections', 'section_result'),
+            utilo.ResultFile('pagenumber', 'result_result'),
         ],
-        protocol.ResultDefault,
+        protoerror.ResultDefault,
     ),
-    utila.create_step(
+    utilo.create_step(
         'titlepage',
         [
-            utila.ResultFile('detector', 'titlepage_detected'),
+            utilo.ResultFile('detector', 'titlepage_detected'),
         ],
-        protocol.ResultDefault,
+        protoerror.ResultDefault,
     ),
 ]
 
@@ -61,12 +61,12 @@ DEVELOPER_LINT_OUTPUT = f'{decider.PROCESS}__titlepage_developer.yaml'
 
 
 def main():
-    hook = protocol.integrate(root=decider.ROOT, features='decider.features')
-    utila.featurepack(
+    hook = protoerror.integrate(root=decider.ROOT, features='decider.features')
+    utilo.featurepack(
         workplan=WORKPLAN,
         root=decider.ROOT,
         featurepackage='decider.features',
-        config=utila.FeaturePackConfig(
+        config=utilo.FeaturePackConfig(
             cli_hook=hook,
             description=DESCRIPTION,
             multiprocessed=True,

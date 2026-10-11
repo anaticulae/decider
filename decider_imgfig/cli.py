@@ -7,41 +7,41 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import protocol
-import utila
+import protoerror
+import utilo
 
 import decider_imgfig
 
 DESCRIPTION = ''
 
 WORKPLAN = [
-    utila.create_step(
+    utilo.create_step(
         'quality',
         [
-            utila.Pattern('rawmaker__images_images/*', 'yaml'),
+            utilo.Pattern('rawmaker__images_images/*', 'yaml'),
         ],
-        protocol.ResultDefault,
+        protoerror.ResultDefault,
     ),
-    utila.create_step(
+    utilo.create_step(
         'position',
         [
-            utila.Pattern('rawmaker__border_pages', 'yaml'),
-            utila.ResultFile('sections', 'docinfo_docinfo'),
-            utila.Pattern('rawmaker__images_images/*', 'yaml'),
+            utilo.Pattern('rawmaker__border_pages', 'yaml'),
+            utilo.ResultFile('sections', 'docinfo_docinfo'),
+            utilo.Pattern('rawmaker__images_images/*', 'yaml'),
         ],
-        protocol.ResultDefault,
+        protoerror.ResultDefault,
     ),
 ]
 
 
 def main():
     root, features = decider_imgfig.ROOT, 'decider_imgfig.features'
-    hook = protocol.integrate(root=root, features=features)
-    utila.featurepack(
+    hook = protoerror.integrate(root=root, features=features)
+    utilo.featurepack(
         workplan=WORKPLAN,
         root=root,
         featurepackage=features,
-        config=utila.FeaturePackConfig(
+        config=utilo.FeaturePackConfig(
             description=DESCRIPTION,
             cli_hook=hook,
             multiprocessed=True,

@@ -7,8 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import genex
-import utila
+import gennex
+import utilo
 
 RUNNER = [
     'textflow',
@@ -34,7 +34,7 @@ SELECTED = dict(
 )
 
 
-@utila.rename(destination='dest')
+@utilo.rename(destination='dest')
 def extract(
     files: list,
     dest: str,
@@ -44,7 +44,7 @@ def extract(
     selected: dict = None,
     full: bool = False,
 ):
-    """Run rawmaker, groupme, sections, words, detector, decider for
+    """Run rawmaker, groupmes, sections, verbo, detector, decider for
     given `files` and write result to `dest`.
 
     Args:
@@ -61,13 +61,13 @@ def extract(
     """
     morefeatures = morefeatures + RUNNER if morefeatures is not None else RUNNER
     selected = selected if selected is not None else SELECTED
-    genex.extract(
+    gennex.extract(
         files=files,
         dest=dest,
         pages=pages,
         morefeatures=morefeatures,
-        oneline=genex.ONELINE,
-        rawmaker=genex.CONFIG,
+        oneline=gennex.ONELINE,
+        rawmaker=gennex.CONFIG,
         worker=worker,
         full=full,
         **selected,

@@ -7,26 +7,26 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import configo
+import configos
 import iamraw
-import protocol
-import utila
+import protoerror
+import utilo
 
 import decider_imgfig.driver
 
-DPI_MIN = configo.HV_FLOAT_PLUS(default=96.0)
+DPI_MIN = configos.HV_FLOAT_PLUS(default=96.0)
 
-DPI_MAX = configo.HV_FLOAT_PLUS(default=192.0)
+DPI_MAX = configos.HV_FLOAT_PLUS(default=192.0)
 
-RESOLUTION_DIFF_MAX = configo.HV_PERCENT_PLUS(default=5)
+RESOLUTION_DIFF_MAX = configos.HV_PERCENT_PLUS(default=5)
 
 
-def work(*images: str, pages: tuple = None) -> protocol.ResultType:
+def work(*images: str, pages: tuple = None) -> protoerror.ResultType:
     driver = decider_imgfig.driver.create(images=images, pages=pages)
     if not driver.images:  # pylint:disable=E1101
         # document without images, nothing to lint, return empty result
-        return protocol.RESULT_EMPTY
-    result = protocol.run(
+        return protoerror.RESULT_EMPTY
+    result = protoerror.run(
         modulename=__name__,
         driver=driver,
     )
@@ -58,11 +58,11 @@ def check_4000_min_printing_resolution(linter: callable, driver):
 
 
 def determine_resolution(imageinfo):
-    pdfwidth = utila.inch(utila.rect_width(imageinfo.bounding))
-    pdfheight = utila.inch(utila.rect_height(imageinfo.bounding))
+    pdfwidth = utilo.inch(utilo.rect_width(imageinfo.bounding))
+    pdfheight = utilo.inch(utilo.rect_height(imageinfo.bounding))
 
-    width_dpi = utila.roundme(imageinfo.width / pdfwidth)
-    height_dpi = utila.roundme(imageinfo.height / pdfheight)
+    width_dpi = utilo.roundme(imageinfo.width / pdfwidth)
+    height_dpi = utilo.roundme(imageinfo.height / pdfheight)
 
     dpi = (width_dpi, height_dpi)
     return dpi
@@ -112,12 +112,12 @@ Quelle: {{image}}
 def check_4005_check_relation(linter, driver):
     for imageinfo in driver.images:
         # inch
-        pdfwidth = utila.inch(utila.rect_width(imageinfo.bounding))
-        pdfheight = utila.inch(utila.rect_height(imageinfo.bounding))
+        pdfwidth = utilo.inch(utilo.rect_width(imageinfo.bounding))
+        pdfheight = utilo.inch(utilo.rect_height(imageinfo.bounding))
         # pdf
-        pdf = utila.roundme(pdfwidth / pdfheight)
-        image = utila.roundme(imageinfo.width / imageinfo.height)
-        if utila.pnear(pdf, image, rel_tol=RESOLUTION_DIFF_MAX):
+        pdf = utilo.roundme(pdfwidth / pdfheight)
+        image = utilo.roundme(imageinfo.width / imageinfo.height)
+        if utilo.pnear(pdf, image, rel_tol=RESOLUTION_DIFF_MAX):
             continue
         location = iamraw.BoundingLocation.fromtuple(
             bounding=imageinfo.bounding,

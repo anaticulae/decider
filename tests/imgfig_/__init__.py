@@ -7,8 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import utilatest
+import utilotest
 
 import decider_imgfig
 
-run, fail = utilatest.create_cli_runner(decider_imgfig)
+run, fail = utilotest.create_cli_runner(decider_imgfig)

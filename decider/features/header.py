@@ -14,15 +14,15 @@ Header
 
 import collections
 
-import configo
-import protocol
+import configos
+import protoerror
 import serializeraw
 
-REPEATING_ITEM_RATIO_MAX = configo.HV_PERCENT_PLUS(default=30)
+REPEATING_ITEM_RATIO_MAX = configos.HV_PERCENT_PLUS(default=30)
 
 
 def work(headerfooter: str, pages: tuple = None) -> tuple[str, str]:
-    linter = protocol.from_module(__name__)
+    linter = protoerror.from_module(__name__)
 
     loaded = serializeraw.load_headerfooter(headerfooter, pages=pages)
     headers = [item.header for item in loaded]
@@ -30,7 +30,7 @@ def work(headerfooter: str, pages: tuple = None) -> tuple[str, str]:
     linter.run(driver=headers)
 
     result = linter.result(unique=True)
-    user, developer = protocol.dump_result(result)
+    user, developer = protoerror.dump_result(result)
     return user, developer
 
 
@@ -65,5 +65,5 @@ def check_2110_repeating_header_content(linter, headers):
             continue
         linter(
             content=key.strip(),
-            location=protocol.OVERVIEW,
+            location=protoerror.OVERVIEW,
         )

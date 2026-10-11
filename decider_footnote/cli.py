@@ -7,49 +7,49 @@
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
 
-import protocol
-import utila
+import protoerror
+import utilo
 
 import decider_footnote
 
 DESCRIPTION = ''
 
 WORKPLAN = [
-    utila.create_step(
+    utilo.create_step(
         'global',
         [
-            utila.ResultFile('footnote', 'result_result'),
+            utilo.ResultFile('footnote', 'result_result'),
         ],
-        protocol.ResultDefault,
+        protoerror.ResultDefault,
     ),
-    utila.create_step(
+    utilo.create_step(
         'rules',
         [
-            utila.ResultFile('footnote', 'result_result'),
-            utila.ResultFile('rawmaker', 'horizontals_horizontals'),
+            utilo.ResultFile('footnote', 'result_result'),
+            utilo.ResultFile('rawmaker', 'horizontals_horizontals'),
         ],
-        protocol.ResultDefault,
+        protoerror.ResultDefault,
     ),
-    utila.create_step(
+    utilo.create_step(
         'style',
         [
-            utila.ResultFile('footnote', 'result_result'),
-            utila.ResultFile('rawmaker', 'fonts_header'),
-            utila.ResultFile('rawmaker', 'fonts_content'),
+            utilo.ResultFile('footnote', 'result_result'),
+            utilo.ResultFile('rawmaker', 'fonts_header'),
+            utilo.ResultFile('rawmaker', 'fonts_content'),
         ],
-        protocol.ResultDefault,
+        protoerror.ResultDefault,
     ),
 ]
 
 
 def main():
     root, features = decider_footnote.ROOT, 'decider_footnote.features'
-    hook = protocol.integrate(root=root, features=features)
-    utila.featurepack(
+    hook = protoerror.integrate(root=root, features=features)
+    utilo.featurepack(
         workplan=WORKPLAN,
         root=root,
         featurepackage=features,
-        config=utila.FeaturePackConfig(
+        config=utilo.FeaturePackConfig(
             cli_hook=hook,
             description=DESCRIPTION,
             multiprocessed=True,

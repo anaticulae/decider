@@ -30,7 +30,7 @@ FootNoteStyle(...)
 import dataclasses
 
 import iamraw
-import utila
+import utilo
 
 
 @dataclasses.dataclass
@@ -74,7 +74,7 @@ def most_common_font(items: iamraw.FootNotes) -> FootNoteStyle:
     content_fontid = []
     for item in items:
         if not item.style:
-            utila.debug(f'no footnote style: {item}')
+            utilo.debug(f'no footnote style: {item}')
             continue
         highnote, content = item.style
         if highnote:
@@ -82,20 +82,20 @@ def most_common_font(items: iamraw.FootNotes) -> FootNoteStyle:
             highnote_rise.append(highnote.rise)
             highnote_fontid.append(highnote.font)
         content_size.extend(
-            utila.flat([[item.size] * (item.end - item.start)
+            utilo.flat([[item.size] * (item.end - item.start)
                         for item in content.content]))
         content_fontid.extend(
-            utila.flat([[item.font] * (item.end - item.start)
+            utilo.flat([[item.font] * (item.end - item.start)
                         for item in content.content]))
     # round result
-    highnote_rise: float = utila.roundme(highnote_rise, digits=1, convert=False)
-    content_size: float = utila.roundme(content_size, digits=1, convert=False)
+    highnote_rise: float = utilo.roundme(highnote_rise, digits=1, convert=False)
+    content_size: float = utilo.roundme(content_size, digits=1, convert=False)
     # TODO: Add more information when returning multiple sizes?
-    highnote_size = utila.modes(highnote_size) if highnote_size else None
-    highnote_rise = utila.modes(highnote_rise) if highnote_rise else None
-    highnote_fontid = utila.modes(highnote_fontid) if highnote_fontid else None
-    content_size = utila.modes(content_size) if content_size else None
-    content_fontid = utila.modes(content_fontid) if content_fontid else None
+    highnote_size = utilo.modes(highnote_size) if highnote_size else None
+    highnote_rise = utilo.modes(highnote_rise) if highnote_rise else None
+    highnote_fontid = utilo.modes(highnote_fontid) if highnote_fontid else None
+    content_size = utilo.modes(content_size) if content_size else None
+    content_fontid = utilo.modes(content_fontid) if content_fontid else None
     result = FootNoteStyle(
         content_fontid=content_fontid,
         content_size=content_size,

@@ -7,19 +7,19 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
+import hoverpower
 import pytest
 import serializeraw
-import utilatest
+import utilotest
 
 import decider_imgfig.features.position
 import decider_imgfig.path
 import tests.imgfig_
 
 
-@utilatest.requires(power.MASTER091B_PDF)
+@utilotest.requires(hoverpower.MASTER091B_PDF)
 def test_imgfig_position_alignment(td, mp):
-    source = power.link(power.MASTER091B_PDF)
+    source = hoverpower.link(hoverpower.MASTER091B_PDF)
     tests.imgfig_.run(
         f'-i {source} --position --pages=0:50',
         mp=mp,
@@ -32,9 +32,9 @@ def test_imgfig_position_alignment(td, mp):
     assert len(loaded) == 6 - 1  # TODO: VALIDATE LATER
 
 
-@utilatest.requires(power.MASTER091B_PDF)
+@utilotest.requires(hoverpower.MASTER091B_PDF)
 def test_imgfig_position_unclear(td, mp):
-    source = power.link(power.MASTER091B_PDF)
+    source = hoverpower.link(hoverpower.MASTER091B_PDF)
     with mp.context() as context:
         # use high required trust to invoke error
         context.setattr(
@@ -54,10 +54,10 @@ def test_imgfig_position_unclear(td, mp):
 
 
 @pytest.mark.xfail(reason='improve image/figure detector')
-@utilatest.requires(power.MASTER031_PDF)
+@utilotest.requires(hoverpower.MASTER031_PDF)
 def test_imgfig_skip_title_legal_etc(td, mp):
     """Do not judge image position on title page or legal information."""
-    source = power.link(power.MASTER031_PDF)
+    source = hoverpower.link(hoverpower.MASTER031_PDF)
     tests.imgfig_.run(
         f'-i {source} --position',
         mp=mp,

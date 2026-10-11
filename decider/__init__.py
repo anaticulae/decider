@@ -52,12 +52,12 @@ Ranges
     Info:           5000 - 5999
 
 
-.. note:: see `protocol` for more information.
+.. note:: see `protoerror` for more information.
 """
 
 import os
 
-import configo
+import configos
 
 import decider.__patch__
 
@@ -77,4 +77,4 @@ DECIDER_ONELINE_FLAG = 'DECIDER_ONELINE'
 from decider.cli import DEVELOPER_LINT_OUTPUT  # isort:skip
 from decider.cli import USER_LINT_OUTPUT  # isort:skip
 
-configo.cloud_lookup(PROCESS)
+configos.cloud_lookup(PROCESS)

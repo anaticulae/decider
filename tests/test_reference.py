@@ -16,16 +16,16 @@ Test references in linter solutions message that they exists in
 import glob
 import os
 
-import protocol
+import protoerror
 import pytest
-import utila
+import utilo
 import writers
 
 import decider
 
 
 @pytest.mark.skipif(
-    not utila.exists(writers.build()),
+    not utilo.exists(writers.build()),
     reason='run writers --build',
 )
 def test_all_references_exists():
@@ -36,8 +36,8 @@ def test_all_references_exists():
         invalid = writers.validate_template(template)
         error |= bool(invalid)
         if invalid:
-            utila.error(path)
-            utila.error(invalid)
+            utilo.error(path)
+            utilo.error(invalid)
     assert not error
 
 
@@ -46,7 +46,7 @@ def pyfiles():
     projects = ['decider']
     for item in projects:
         source = os.path.join(decider.ROOT, item)
-        with utila.chdir(source):
+        with utilo.chdir(source):
             collected = glob.glob('**/*.py', recursive=True)
             collected = [os.path.join(item, it) for it in collected]
             result.extend(collected)
@@ -57,12 +57,12 @@ def collect_message():
     result = []
     for pyfile in pyfiles():
         path = pyfile.replace('.py', '')
-        path = utila.forward_slash(path)
+        path = utilo.forward_slash(path)
         path = path.replace('/', '.')
         if '__' in path:
             # no messages in __init__ and __main__ packages
             continue
-        parsed = protocol.parse_solutions(path)
+        parsed = protoerror.parse_solutions(path)
         if not parsed:
             continue
         for item in parsed:

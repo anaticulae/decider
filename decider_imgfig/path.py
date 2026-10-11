@@ -7,12 +7,12 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import utila
+import utilo
 
 
 def quality(path: str, prefix: str = '') -> str:
-    return utila.pathconnector(path, 'decider_imgfig', 'quality_user', prefix)
+    return utilo.pathconnector(path, 'decider_imgfig', 'quality_user', prefix)
 
 
 def position(path: str, prefix: str = '') -> str:
-    return utila.pathconnector(path, 'decider_imgfig', 'position_user', prefix)
+    return utilo.pathconnector(path, 'decider_imgfig', 'position_user', prefix)

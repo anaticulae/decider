@@ -8,7 +8,7 @@ toc
 
 * [x] validate length of toc entry
 
-* [x] validate different words in toc (don't repeat yourself)
+* [x] validate different verbo in toc (don't repeat yourself)
 
 * [x] mark quotation in in toc
 

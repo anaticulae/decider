@@ -10,27 +10,27 @@
 import os
 
 import linkify.serialize
-import utila
+import utilo
 
 import decider
 
 
 def visit(hyperlinks: list) -> list:
-    hyperlinks = utila.NEWLINE.join(hyperlinks)
+    hyperlinks = utilo.NEWLINE.join(hyperlinks)
 
-    directory = utila.tmpdir(decider.ROOT)
+    directory = utilo.tmpdir(decider.ROOT)
     todo = os.path.join(directory, 'links__todo.yaml')
-    utila.file_create(todo, hyperlinks)
+    utilo.file_create(todo, hyperlinks)
 
     online = os.getenv(decider.DECIDER_ONELINE_FLAG, 'False')
-    online = utila.str2bool(online)
+    online = utilo.str2bool(online)
     offline = '--offline' if not online else ''
-    done = utila.run(
+    done = utilo.run(
         f'linkify -i {directory} -o {directory} {offline}',
         expect=None,
     )
-    if done.returncode != utila.SUCCESS:
-        utila.error(f'{done.stdout}\n{done.stderr}')
+    if done.returncode != utilo.SUCCESS:
+        utilo.error(f'{done.stdout}\n{done.stderr}')
         return None
 
     outpath = os.path.join(directory, 'linkify__verify_verified.yaml')

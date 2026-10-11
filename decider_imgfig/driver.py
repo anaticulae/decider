@@ -7,9 +7,9 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import protocol
+import protoerror
 import serializeraw
-import utila
+import utilo
 
 
 def create(images, contentborder=None, docinfo=None, pages: tuple = None):
@@ -27,21 +27,21 @@ def create(images, contentborder=None, docinfo=None, pages: tuple = None):
         pages=pages,
         skip_hidden=True,
     )
-    loaded = utila.flatten_content(loaded)
+    loaded = utilo.flatten_content(loaded)
     result = []
     for image in loaded:
         if image.figure:
             # do not judge figures with decider_imgfig
             continue
-        if not utila.rect_width(image.bounding):
-            utila.error(f'skip zero-width image: {image.bounding}')
+        if not utilo.rect_width(image.bounding):
+            utilo.error(f'skip zero-width image: {image.bounding}')
             continue
-        if not utila.rect_height(image.bounding):
-            utila.error(f'skip zero-height image: {image.bounding}')
+        if not utilo.rect_height(image.bounding):
+            utilo.error(f'skip zero-height image: {image.bounding}')
             continue
         result.append(image)
     # create driver
-    driver = protocol.driver(
+    driver = protoerror.driver(
         images=result,
         contentborder=contentborder,
         docinfo=docinfo,

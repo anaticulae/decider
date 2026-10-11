@@ -7,13 +7,13 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import protocol
+import protoerror
 
 import decider_footnote.features.rules
 
 
 def test_parsing_solution_definition():
-    parsed = protocol.parse_solutions(decider_footnote.features.rules)
+    parsed = protoerror.parse_solutions(decider_footnote.features.rules)
     assert len(parsed) >= 1, parsed
 
     first = parsed[0]
@@ -23,5 +23,5 @@ def test_parsing_solution_definition():
 
 
 def test_parsing_validators_definition():
-    parsed = protocol.parse_checkers(decider_footnote.features.rules)
+    parsed = protoerror.parse_checkers(decider_footnote.features.rules)
     assert len(parsed) >= 2, parsed

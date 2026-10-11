@@ -7,17 +7,17 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import hoverpower
 import iamraw.path
-import power
 import serializeraw
-import utilatest
+import utilotest
 
 import decider.features.header
 
 
-@utilatest.requires(power.TECH024_PDF)
+@utilotest.requires(hoverpower.TECH024_PDF)
 def test_header_work():
-    source = power.link(power.TECH024_PDF)
+    source = hoverpower.link(hoverpower.TECH024_PDF)
     headerfooter = iamraw.path.headerfooters(source)
 
     user, _ = decider.features.header.work(headerfooter)

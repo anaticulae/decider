@@ -7,8 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import utilatest
+import utilotest
 
 import decider_footnote
 
-run, fail = utilatest.create_cli_runner(decider_footnote)
+run, fail = utilotest.create_cli_runner(decider_footnote)

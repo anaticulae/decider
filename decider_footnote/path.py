@@ -7,13 +7,13 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import utila
+import utilo
 
 import decider_footnote
 
 
 def global_(path: str, prefix: str = '') -> str:
-    return utila.pathconnector(
+    return utilo.pathconnector(
         path,
         decider_footnote.PROCESS,
         'global_user',
@@ -22,7 +22,7 @@ def global_(path: str, prefix: str = '') -> str:
 
 
 def rules(path: str, prefix: str = '') -> str:
-    return utila.pathconnector(
+    return utilo.pathconnector(
         path,
         decider_footnote.PROCESS,
         'rules_user',
@@ -31,7 +31,7 @@ def rules(path: str, prefix: str = '') -> str:
 
 
 def style(path: str, prefix: str = '') -> str:
-    return utila.pathconnector(
+    return utilo.pathconnector(
         path,
         decider_footnote.PROCESS,
         'style_user',

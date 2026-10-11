@@ -12,12 +12,12 @@
 10500: date of hyperlink access
 """
 
-import configo
-import german
+import configos
+import germania
 import iamraw
-import protocol
+import protoerror
 import serializeraw
-import utila
+import utilo
 
 import decider.links.date
 import decider.links.validate
@@ -28,14 +28,14 @@ def work(
     footer: str,
     sentence: str,
     pages: tuple = None,
-) -> protocol.ResultType:
+) -> protoerror.ResultType:
     driver = create_driver(
         biblio,
         footer,
         sentence,
         pages=pages,
     )
-    dumped = protocol.run(
+    dumped = protoerror.run(
         modulename=__name__,
         driver=driver,
     )
@@ -45,15 +45,15 @@ def work(
 def create_driver(biblio: str, footer: str, sentence: str, pages: tuple = None):
     hyperlinks = []
     for path in (biblio, footer, sentence):
-        if not utila.exists(path):
-            utila.error(f'missing: {path}')
+        if not utilo.exists(path):
+            utilo.error(f'missing: {path}')
             continue
         loaded = serializeraw.load_hyperlinks(
             path,
             pages=pages,
         )
         hyperlinks.extend(loaded)
-    result = protocol.driver(hyperlinks=hyperlinks)
+    result = protoerror.driver(hyperlinks=hyperlinks)
     return result
 
 
@@ -65,7 +65,7 @@ Für den Hyperlink **{{link.href|wordwrap(40)}}** ist kein Aufrufdatum angegeben
 {darstellung/hyperlink}
 """
 
-PARAGRAPH_TOO_SHORT = configo.HV_INT_PLUS(default=3)
+PARAGRAPH_TOO_SHORT = configos.HV_INT_PLUS(default=3)
 
 
 def check_10500_hyperlink_require_date(linter: callable, driver):
@@ -115,7 +115,7 @@ Festplatte.
 
 def check_10515_hyperlink_local(linter: callable, driver):
     for hyperlink in driver.hyperlinks:
-        if not german.locallink(hyperlink.href):
+        if not germania.locallink(hyperlink.href):
             continue
         location = iamraw.Location.from_page(hyperlink.page)
         linter(link=hyperlink, location=location)
@@ -139,7 +139,7 @@ def check_10520_hyperlink_mixed_date_exists(linter: callable, driver):
     dates = [item.visited for item in driver.hyperlinks if item.visited]
     if not decider.links.date.is_mixed(dates):
         return
-    linter(location=protocol.OVERVIEW)
+    linter(location=protoerror.OVERVIEW)
 
 
 SOLUTION_W6016 = """\
@@ -166,6 +166,6 @@ def check_10521_hyperlink_mixed_access_date(linter: callable, driver):
             continue
         location = iamraw.Location.from_page(hyperlink.page)
         linter(
-            date=utila.from_tuple(hyperlink.visited, separator='.'),
+            date=utilo.from_tuple(hyperlink.visited, separator='.'),
             location=location,
         )

@@ -9,23 +9,23 @@
 
 import os
 
-import power
-import utila
-import utilatest
+import hoverpower
+import utilo
+import utilotest
 
 import fonts.cli
 import tests.resources
 
 
-@utilatest.requires(power.DOCU035_PDF)
+@utilotest.requires(hoverpower.DOCU035_PDF)
 def test_main_fonts(td, mp):  # pylint:disable=W0621
     """Run decider with rawmaker_result to get hits output"""
     root = str(td)
     # copy ugly font config
-    utila.copy_content(tests.resources.DECIDER_FONTS, root)
+    utilo.copy_content(tests.resources.DECIDER_FONTS, root)
 
-    command = ['-i', power.link(power.DOCU035_PDF), '-o', root]
-    utilatest.run_command(
+    command = ['-i', hoverpower.link(hoverpower.DOCU035_PDF), '-o', root]
+    utilotest.run_command(
         command,
         process=fonts.cli.PROCESS,
         main=fonts.cli.main,
@@ -35,5 +35,5 @@ def test_main_fonts(td, mp):  # pylint:disable=W0621
     outpath = os.path.join(root, fonts.cli.UGLY_STEP_OUTPUT_FILE)
     assert os.path.exists(outpath), outpath
 
-    dumped = utila.file_read(outpath)
+    dumped = utilo.file_read(outpath)
     assert len(dumped) > 10  # result contains some content

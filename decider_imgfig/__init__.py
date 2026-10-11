@@ -7,7 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import configo
+import configos
 
 import decider
 
@@ -17,4 +17,4 @@ __version__ = decider.__version__
 
 PROCESS = 'decider_imgfig'
 
-configo.cloud_lookup(PROCESS)
+configos.cloud_lookup(PROCESS)

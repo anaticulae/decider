@@ -7,18 +7,18 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
+import hoverpower
 import serializeraw
-import utilatest
+import utilotest
 
 import decider_footnote.path
 import tests.footnote_
 
 
-@utilatest.requires(power.MASTER089_PDF)
+@utilotest.requires(hoverpower.MASTER089_PDF)
 def test_footnote_uppercase_start_master89_page40(td, mp):
     """Support quotation start char, see: 2001"""
-    cmd = f'-i {power.link(power.MASTER089_PDF)} -o {td.tmpdir} --rules'
+    cmd = f'-i {hoverpower.link(hoverpower.MASTER089_PDF)} -o {td.tmpdir} --rules'
     tests.footnote_.run(cmd, mp=mp)
 
     rules = decider_footnote.path.rules(td.tmpdir)
@@ -28,10 +28,10 @@ def test_footnote_uppercase_start_master89_page40(td, mp):
     assert not result
 
 
-@utilatest.requires(power.MASTER089_PDF)
+@utilotest.requires(hoverpower.MASTER089_PDF)
 def test_footnote_dot_end_master89_page46(td, mp):
     """Support quotation end char, see: 2002"""
-    cmd = f'-i {power.link(power.MASTER089_PDF)} -o {td.tmpdir} --rules'
+    cmd = f'-i {hoverpower.link(hoverpower.MASTER089_PDF)} -o {td.tmpdir} --rules'
     tests.footnote_.run(cmd, mp=mp)
 
     rules = decider_footnote.path.rules(td.tmpdir)

@@ -7,17 +7,17 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import hoverpower
 import iamraw
-import power
 import serializeraw
-import utila
-import utilatest
+import utilo
+import utilotest
 
 import decider
 
-power.setup(decider.ROOT)
+hoverpower.setup(decider.ROOT)
 
-run, fail = utilatest.create_cli_runner(decider)
+run, fail = utilotest.create_cli_runner(decider)
 
 
 def tableofcontent(path: str) -> iamraw.Toc:
@@ -25,12 +25,12 @@ def tableofcontent(path: str) -> iamraw.Toc:
     return result
 
 
-# TODO: MOVE TO PROTOCOL
+# TODO: MOVE TO protoerror
 def select(items, selected=None):
     if isinstance(selected, int):
         selected = [selected]
     content = [item.content for item in items]
-    flatten = utila.flat(content)
+    flatten = utilo.flat(content)
     ids = [item.msgid for item in flatten]
     if selected:
         ids = [item for item in ids if item in selected]

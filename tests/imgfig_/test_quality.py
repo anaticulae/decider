@@ -7,18 +7,18 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
+import hoverpower
 import pytest
 import serializeraw
-import utilatest
+import utilotest
 
 import decider_imgfig.path
 import tests.imgfig_
 
 
-@utilatest.requires(power.BACHELOR076_PDF)
+@utilotest.requires(hoverpower.BACHELOR076_PDF)
 def test_imgfig_min_quality(td, mp):
-    source = power.link(power.BACHELOR076_PDF)
+    source = hoverpower.link(hoverpower.BACHELOR076_PDF)
     tests.imgfig_.run(f'-i {source} --quality', mp=mp)
 
     loaded = serializeraw.load_findings(
@@ -31,9 +31,9 @@ def test_imgfig_min_quality(td, mp):
 
 
 @pytest.mark.xfail(reason='broken rawmaker image extractor')
-@utilatest.requires(power.BACHELOR076_PDF)
+@utilotest.requires(hoverpower.BACHELOR076_PDF)
 def test_imgfig_max_quality(td, mp):
-    source = power.link(power.BACHELOR076_PDF)
+    source = hoverpower.link(hoverpower.BACHELOR076_PDF)
     tests.imgfig_.run(f'-i {source} --quality', mp=mp)
 
     loaded = serializeraw.load_findings(
@@ -45,13 +45,13 @@ def test_imgfig_max_quality(td, mp):
 
 
 @pytest.mark.xfail(reason='broken rawmaker image extractor')
-@utilatest.requires(power.BACHELOR063_PDF)
+@utilotest.requires(hoverpower.BACHELOR063_PDF)
 def test_imgfig_relation(td, mp):
     """I think beautify images overwrites required data.
 
     TODO: VERIFY LATER
     """
-    source = power.link(power.BACHELOR063_PDF)
+    source = hoverpower.link(hoverpower.BACHELOR063_PDF)
     tests.imgfig_.run(f'-i {source} --quality', mp=mp)
 
     loaded = serializeraw.load_findings(
