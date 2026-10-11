@@ -14,18 +14,19 @@ authors = [
     { name = "Helmut Konrad Schewe", email = "helmutus@outlook.com" },
 ]
 dependencies = [
-    "utilo>=2.101.0,<3.0.0",
-    "protoerror>=3.20.1,<4.0.0",
-    "iamraw>=4.88.13,<5.0.0",
-    "indagator>=1.0.1,<2.0.0",
-    "verbo>=1.23.3,<2.0.0",
-    "texes>=1.0.1,<2.0.0",
-    "groupmes>=1.1.3,<2.0.0",
     "callidus>=1.7.1,<2.0.0",
     "configos>=1.0.4,<2.0.0",
-    "germania>=1.28.1,<2.0.0",
-    "konradus>=1.0.1,<2.0.0",
     "elementae>=1.0.0,<2.0.0",
+    "germania>=1.28.1,<2.0.0",
+    "groupmes>=1.1.3,<2.0.0",
+    "iamraw>=4.88.13,<5.0.0",
+    "indagator>=1.0.1,<2.0.0",
+    "konradus>=1.0.1,<2.0.0",
+    "ligare>=1.0.0,<2.0.0",
+    "protoerror>=3.20.1,<4.0.0",
+    "texes>=1.0.1,<2.0.0",
+    "utilo>=2.101.0,<3.0.0",
+    "verbo>=1.23.3,<2.0.0",
 ]
 keyverbo = []
 classifiers = [

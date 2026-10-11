@@ -9,7 +9,7 @@
 
 import os
 
-import linkify.serialize
+import ligare.serialize
 import utilo
 
 import decider
@@ -34,5 +34,5 @@ def visit(hyperlinks: list) -> list:
         return None
 
     outpath = os.path.join(directory, 'linkify__verify_verified.yaml')
-    result = linkify.serialize.load_links(outpath)
+    result = ligare.serialize.load_links(outpath)
     return result
