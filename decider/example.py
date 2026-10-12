@@ -17,21 +17,21 @@ RUNNER = [
     'decider_smarty',
 ]
 
-SELECTED = dict(
-    caption=True,
-    codero=True,
-    detector=True,
-    docref=True,
-    doctextstyle=True,
-    groupme=True,
-    headlines=True,
-    lists=True,
-    magic=True,
-    sections=True,
-    smarty=True,
-    spacestation=True,
-    words=True,
-)
+SELECTED = {
+    "caption": True,
+    "codero": True,
+    "detector": True,
+    "docref": True,
+    "doctextstyle": True,
+    "groupme": True,
+    "headlines": True,
+    "lists": True,
+    "magic": True,
+    "sections": True,
+    "smarty": True,
+    "spacestation": True,
+    "words": True,
+}
 
 
 @utilo.rename(destination='dest')
