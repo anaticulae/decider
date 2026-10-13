@@ -41,7 +41,7 @@ WORKPLAN = [
     utilo.create_step(
         'page',
         [
-            utilo.ResultFile('groupmes', 'footer_footerheader'),
+            utilo.ResultFile('groupme', 'footer_footerheader'),
             utilo.ResultFile('sections', 'section_result'),
             utilo.ResultFile('pagenumber', 'result_result'),
         ],
