@@ -78,7 +78,7 @@ def extract_notitle(resources):
         removepages='0',
         folder='notitle',
         worker=len(resources),
-        groupmes=True,
+        groupme=True,
         footnote=True,
         headnote=True,
         pagenumber=True,
