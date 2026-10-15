@@ -62,7 +62,10 @@
 04000 p65b(70.85;214.45;524.95;471.75) Auflösung zu niedrig
 04000 p66b(70.85;214.45;523.05;475.1) Auflösung zu niedrig
 04001 p14b(70.85;340.03;522.7;662.63) Auflösung unnötig hoch
+04001 p17b(325.37;135.41;429.73;184.22) Auflösung unnötig hoch
 04001 p8b(70.85;97.11;524.45;435.41) Auflösung unnötig hoch
+04005 p17b(325.37;135.41;429.73;184.22) Grafik verzerrt
+04031 p17b(325.37;135.41;429.73;184.22) Abbildungen nicht einheitlich ausgerichtet
 10500 p11 Aufrufdatum fehlt
 10500 p27 Aufrufdatum fehlt
 10500 p62 Aufrufdatum fehlt
