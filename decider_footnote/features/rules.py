@@ -88,8 +88,8 @@ def check_2001_no_uppercase_at_start(linter, driver):
 
     Quotation character before first uppercase letter are allowed.
     """
-    for footnote in driver.footnotes:
-        text = footnote.text.strip()
+    for item in driver.footnotes:
+        text = item.text.strip()
         firstchar = text[0]
         if firstchar.isupper():
             continue
@@ -105,8 +105,8 @@ def check_2001_no_uppercase_at_start(linter, driver):
             # disable for mails and hyperlinks
             continue
         linter(
-            number=footnote.number,
-            location=iamraw.Location.from_page(footnote.page),
+            number=item.number,
+            location=iamraw.Location.from_page(item.page),
         )
 
 
@@ -123,15 +123,15 @@ Fügen Sie einen Punkt am Ende der Fußnote hinzu.
 
 def check_2002_no_dot_at_end(linter, driver):
     """Ensure that footnote is closed with an dot '.'."""
-    for footnote in driver.footnotes:
-        text = footnote.text.strip()
+    for item in driver.footnotes:
+        text = item.text.strip()
         lastchar = text[-1]
         if lastchar == '.':
             continue
         if href_only(text):
             continue
         if len(text) == 1:
-            utilo.error(f'invalid footnote: {footnote}')
+            utilo.error(f'invalid footnote: {item}')
             continue
         if lastchar in QUOTATION_SIGNS and text[-2] == '.':
             # end with quotation .“
@@ -140,8 +140,8 @@ def check_2002_no_dot_at_end(linter, driver):
             # disable for mails and hyperlinks
             continue
         linter(
-            number=footnote.number,
-            location=iamraw.Location.from_page(footnote.page),
+            number=item.number,
+            location=iamraw.Location.from_page(item.page),
             text=text,
         )
 
@@ -156,16 +156,16 @@ Seitenangabe: **{{pageref}}**
 
 def check_2100_incomplete_pagenumber(linter, driver):
     pagenumbers = germania.TextMachine()
-    for footnote in driver.footnotes:
-        detected = pagenumbers.check_pagenumber_complete(text=footnote.text)
+    for item in driver.footnotes:
+        detected = pagenumbers.check_pagenumber_complete(text=item.text)
         if not detected:
             continue
         for error in detected:
             error_location = error.location
-            error_location.page = footnote.page
+            error_location.page = item.page
             linter(
-                number=footnote.number,
-                text=footnote.text,
+                number=item.number,
+                text=item.text,
                 pageref=error.raw,
                 location=error_location,
             )
@@ -181,9 +181,9 @@ Fügen Sie ein Leerzeichen vor die Seitenzahl hinzu.
 
 
 def check_2101_missing_space_before_pagenumber(linter, driver):
-    for footnote in driver.footnotes:
+    for item in driver.footnotes:
         try:
-            raw = footnote.raw
+            raw = item.raw
         except AttributeError:
             # TODO: EXTEND VALIDATION
             # FooteNoteMerged
@@ -193,9 +193,9 @@ def check_2101_missing_space_before_pagenumber(linter, driver):
         # remove newlines in finding view
         no_newline = utilo.normalize_text(raw, normalize_spaces=True)
         linter(
-            number=footnote.number,
+            number=item.number,
             text=no_newline,
-            location=iamraw.Location.from_page(footnote.page),
+            location=iamraw.Location.from_page(item.page),
         )
 
 
@@ -219,9 +219,9 @@ Fügen Sie ein Leerzeichen zwischen Ziffer und Text hinzu:
 
 
 def check_2105_missing_space(linter, driver):
-    for footnote in driver.footnotes:
+    for item in driver.footnotes:
         try:
-            raw = footnote.raw
+            raw = item.raw
         except AttributeError:
             # FooteNoteMerged
             continue
@@ -230,9 +230,9 @@ def check_2105_missing_space(linter, driver):
         # remove newlines in finding view
         no_newline = utilo.normalize_text(raw, normalize_spaces=True)
         linter(
-            number=footnote.number,
+            number=item.number,
             text=no_newline,
-            location=iamraw.Location.from_page(footnote.page),
+            location=iamraw.Location.from_page(item.page),
         )
 
 
