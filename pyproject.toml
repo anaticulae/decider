@@ -45,14 +45,15 @@ content-type = "text/markdown"
 
 [project.optional-dependencies]
 dev = [
-    "writers>=1.7.1,<2.0.0",
-    "utilotest==1.1.1",
+    "decider-con>=1.0.1,<2.0.0",
     "gennex==1.1.0",
     "genref==1.4.4",
     "hoverpower==1.7.0",
-    "jamer==1.0.2",
-    "indicibus>=1.0.2,<2.0.0",
     "ibidem>=1.0.2,<2.0.0",
+    "indicibus>=1.0.2,<2.0.0",
+    "jamer==1.0.2",
+    "utilotest==1.1.1",
+    "writers>=1.7.1,<2.0.0",
 ]
 
 [project.urls]
