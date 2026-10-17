@@ -1,6 +1,17 @@
 # CHANGELOG
 
 
+## v3.4.3 (2026-10-17)
+
+### Chores
+
+- **pyproject**: Add missing test data generator
+  ([`796a02e`](https://github.com/anaticulae/decider/commit/796a02ec45bdc8dc0f4429302fc3a25f090fc87f))
+
+- **requirements**: Upgrade pyproject.toml
+  ([`254f88a`](https://github.com/anaticulae/decider/commit/254f88a061e32562663efe5a2c1b40be7f4f4fb1))
+
+
 ## v3.4.2 (2026-10-16)
 
 ### Bug Fixes
